@@ -25,7 +25,6 @@ import {
 import { useAppForm } from "@/hooks/use-form";
 import { Link } from "@/i18n/navigation";
 import { getDashboardPath } from "@/lib/auth/auth.util";
-import { getCurrentUser } from "@/lib/auth/session";
 import { clientEnv } from "@/lib/env/client-env";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
@@ -48,13 +47,16 @@ export function LoginForm({
 		const parseError = () => {
 			const code = searchParams.get("errorCode");
 			const msg = searchParams.get("errorMsg");
-			console.log("code", code, msg);
 			if (code) {
-				toast.error(t(`common.${code}`));
-			} else if (msg) toast.error(msg);
+				const key = `common.${code}` as const;
+				toast.error(t.has(key) ? t(key) : msg || code);
+			} else if (msg) {
+				toast.error(msg);
+			}
 		};
-		setTimeout(parseError, 500);
-	}, [searchParams]);
+		const timer = setTimeout(parseError, 500);
+		return () => clearTimeout(timer);
+	}, [searchParams, t]);
 
 	const form = useAppForm({
 		defaultValues: { email: "", password: "" },

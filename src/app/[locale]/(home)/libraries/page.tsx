@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { BOOK_SELECT, LibraryCatalog } from "@/components/blocks/libraries";
+import { LibraryCatalog } from "@/components/blocks/libraries/library-catalog";
+import { BOOK_SELECT } from "@/components/blocks/libraries/types";
 import { getQueryFilterData } from "@/hooks/filter/filter.server";
 import { BaseParams } from "@/types/common.types";
 

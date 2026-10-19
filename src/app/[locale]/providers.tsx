@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { useState } from "react";
 import { Toaster } from "sonner";
 import { PushMessageListener } from "@/components/blocks/notifications/push-message-listener";
 import { PWAProvider } from "@/components/blocks/pwa/pwa-provider";
@@ -10,17 +11,21 @@ import { DirectionProvider } from "@/components/ui/direction";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/providers/auth.provider";
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			staleTime: 30 * 1000,
-		},
-	},
-});
 export const Providers = ({
 	children,
 	dir,
 }: React.PropsWithChildren<{ dir: "rtl" | "ltr" }>) => {
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						staleTime: 30 * 1000,
+					},
+				},
+			})
+	);
+
 	return (
 		<JotaiProvider>
 			<QueryClientProvider client={queryClient}>
@@ -34,8 +39,10 @@ export const Providers = ({
 						<DirectionProvider dir={dir}>
 							<TooltipProvider>
 								<PWAProvider>
-									<AuthProvider>{children}</AuthProvider>
-									<PushMessageListener />
+									<AuthProvider>
+										{children}
+										<PushMessageListener />
+									</AuthProvider>
 								</PWAProvider>
 							</TooltipProvider>
 						</DirectionProvider>

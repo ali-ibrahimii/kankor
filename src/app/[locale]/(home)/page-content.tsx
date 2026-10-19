@@ -120,12 +120,12 @@ export default async function HomeContent({ locale }: { locale: string }) {
 						style={{ animationDelay: "400ms" }}
 					>
 						{t("hero.signInPrompt")}{" "}
-						<a
+						<Link
 							href={signInUrl}
-							className="text-white/70 underline underline-offset-2 transition-colors hover:text-white"
+							className="text-white/80 underline underline-offset-2 transition-colors hover:text-white"
 						>
 							{t("hero.signInLink")}
-						</a>
+						</Link>
 					</p>
 				</div>
 			</section>
@@ -227,42 +227,55 @@ export default async function HomeContent({ locale }: { locale: string }) {
 									Icon: BookOpen,
 									bg: "bg-blue-100",
 									color: "text-blue-600",
-									border: "border-blue-100",
+									border: "border-blue-100 hover:border-blue-300",
 									key: "school",
+									href: routes.courses.page(),
 								},
 								{
 									Icon: Zap,
 									bg: "bg-amber-100",
 									color: "text-amber-600",
-									border: "border-amber-100",
+									border: "border-amber-100 hover:border-amber-300",
 									key: "flashcards",
+									href: routes.decks.page(),
 								},
 								{
 									Icon: FileText,
 									bg: "bg-violet-100",
 									color: "text-violet-600",
-									border: "border-violet-100",
+									border: "border-violet-100 hover:border-violet-300",
 									key: "tests",
+									href: routes.quizzes.page(),
 								},
 								{
 									Icon: Library,
 									bg: "bg-emerald-100",
 									color: "text-emerald-600",
-									border: "border-emerald-100",
+									border: "border-emerald-100 hover:border-emerald-300",
 									key: "library",
+									href: routes.libraries.page(),
 								},
 							] as const
-						).map(({ Icon, bg, color, border, key }, i) => (
-							<div
+						).map(({ Icon, bg, color, border, key, href }, i) => (
+							<Link
 								key={i}
+								href={href}
 								className={cn(
-									"reveal-item rounded-2xl border bg-white p-7 shadow-sm transition-shadow hover:shadow-md",
+									"reveal-item group flex flex-col rounded-2xl border bg-white p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md",
 									border
 								)}
 								style={{ transitionDelay: `${(i + 1) * 100}ms` }}
 							>
-								<div className={cn("mb-5 inline-flex rounded-xl p-3", bg)}>
-									<Icon className={cn("size-6", color)} />
+								<div className="mb-5 flex items-center justify-between">
+									<div className={cn("inline-flex rounded-xl p-3", bg)}>
+										<Icon className={cn("size-6", color)} />
+									</div>
+									<Arrow
+										className={cn(
+											"size-4 opacity-0 transition-all duration-200 group-hover:opacity-100",
+											color
+										)}
+									/>
 								</div>
 								<h3 className="mb-3 text-base font-semibold text-gray-900">
 									{t(`app.${key}.title`)}
@@ -270,7 +283,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								<p className="text-sm leading-relaxed text-gray-500">
 									{t(`app.${key}.description`)}
 								</p>
-							</div>
+							</Link>
 						))}
 					</div>
 				</RevealGroup>

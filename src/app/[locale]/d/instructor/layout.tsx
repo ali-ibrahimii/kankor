@@ -11,7 +11,6 @@ import {
 	Wallet,
 	Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import * as React from "react";
@@ -32,6 +31,7 @@ import {
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { Link } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
 import { NewCourseButton } from "./_components/new-course-button";

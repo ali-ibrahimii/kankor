@@ -23,10 +23,10 @@ export default async function VerifyPage({
 	const t = await getTranslations({ locale, namespace: "certificates.verify" });
 
 	return (
-		<div className="container mx-auto flex max-w-xl flex-col gap-4 px-4 py-12">
+		<div className="container mx-auto flex max-w-xl flex-col gap-6 px-4 pt-28 pb-16">
 			<div className="text-center">
-				<h1 className="text-2xl font-bold">{t("title")}</h1>
-				<p className="mt-1 text-sm text-muted-foreground">{t("description")}</p>
+				<h1 className="text-2xl font-bold sm:text-3xl">{t("title")}</h1>
+				<p className="mt-2 text-sm text-muted-foreground">{t("description")}</p>
 			</div>
 
 			<VerifyForm />

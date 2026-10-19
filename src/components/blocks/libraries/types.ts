@@ -16,3 +16,6 @@ export type LibraryFilterOption = {
 	id: string;
 	name: string;
 };
+
+export const BOOK_SELECT =
+	"id, slug, title, desc, uri, file_path, book_id, category_id, grade_id, subject_id, created_at, updated_at, books ( id, name, full_name ), categories ( id, name, slug ), grades ( id, name ), subjects ( id, name )";

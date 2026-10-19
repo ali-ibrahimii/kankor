@@ -10,6 +10,7 @@ import {
 	Sparkles,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 
 export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
@@ -22,7 +23,7 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 			<div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(148,163,184,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.2)_1px,transparent_1px)] [background-size:36px_36px]" />
 			<div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/35 to-transparent" />
 
-			<div className="relative mx-auto grid max-w-7xl gap-14 px-6  lg:grid-cols-[1fr_0.92fr] lg:items-center lg:py-28">
+			<div className="relative mx-auto grid max-w-7xl gap-14 px-6 py-16 sm:py-20 lg:grid-cols-[1fr_0.92fr] lg:items-center lg:py-28">
 				<div>
 					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-semibold text-slate-100 backdrop-blur">
 						<GraduationCap className="h-4 w-4 text-cyan-300" />
@@ -40,14 +41,14 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 					</p>
 
 					<div className="mt-10 flex flex-wrap gap-4">
-						<a
+						<Link
 							href={routes.courses.page()}
 							className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-7 py-3.5 font-semibold text-slate-950 transition-all hover:-translate-y-0.5 hover:bg-cyan-200"
 						>
 							{t("hero.cta.primary")}
 							<Arrow className="h-4 w-4" />
-						</a>
-						<a
+						</Link>
+						<Link
 							href={routes.home.page()}
 							className="group inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/15"
 						>
@@ -55,7 +56,7 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 								<Play className="h-3.5 w-3.5 fill-current" />
 							</span>
 							{t("hero.cta.secondary")}
-						</a>
+						</Link>
 					</div>
 
 					<div className="mt-10 flex flex-wrap gap-3 text-sm">
@@ -89,23 +90,29 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 
 							<div className="absolute -left-2 top-5 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-start shadow-xl">
 								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
+									{t("stats.students")}
+								</p>
+								<p className="mt-1 text-xl font-bold text-cyan-100">
 									{t("stats.value.students")}
 								</p>
-								<p className="mt-1 text-xl font-bold text-cyan-100">1M+</p>
 							</div>
 
 							<div className="absolute -right-2 top-1/2 -translate-y-1/2 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-start shadow-xl">
 								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
+									{t("stats.courses")}
+								</p>
+								<p className="mt-1 text-xl font-bold text-indigo-100">
 									{t("stats.value.courses")}
 								</p>
-								<p className="mt-1 text-xl font-bold text-indigo-100">50K+</p>
 							</div>
 
 							<div className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-center shadow-xl">
 								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
-									{t("stats.value.rating")}
+									{t("stats.rating")}
 								</p>
-								<p className="mt-1 text-xl font-bold text-emerald-100">4.9★</p>
+								<p className="mt-1 text-xl font-bold text-emerald-100">
+									{t("stats.value.rating")} ★
+								</p>
 							</div>
 						</div>
 

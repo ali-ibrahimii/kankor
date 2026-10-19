@@ -12,7 +12,6 @@ import {
 	Wallet,
 	Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import * as React from "react";

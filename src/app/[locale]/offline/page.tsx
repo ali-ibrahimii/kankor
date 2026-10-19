@@ -1,10 +1,10 @@
 "use client";
 
 import { BookOpen, Layers, RotateCw, WifiOff } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 
 export default function OfflinePage() {

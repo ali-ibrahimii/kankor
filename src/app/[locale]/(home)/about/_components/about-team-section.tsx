@@ -11,6 +11,7 @@ import {
 	MapPin,
 	Phone,
 } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
@@ -124,10 +125,12 @@ export function AboutTeamSection() {
 								<div className="grid lg:grid-cols-2">
 									{/* Image Side */}
 									<div className="relative h-[400px] lg:h-[600px] overflow-hidden">
-										<img
+										<Image
 											src={members[0].imageUrl}
 											alt={members[0].name}
-											className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+											fill
+											sizes="(max-width: 1024px) 100vw, 50vw"
+											className="object-cover transition-transform duration-700 group-hover:scale-105"
 										/>
 										<div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
 										<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-transparent to-fuchsia-500/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -170,7 +173,7 @@ export function AboutTeamSection() {
 												)}
 												{members[0].phone && (
 													<div className="flex items-center gap-3 text-sm text-slate-400">
-														<MapPin className="h-4 w-4" />
+														<Phone className="h-4 w-4" />
 														{members[0].phone}
 													</div>
 												)}
@@ -239,10 +242,12 @@ export function AboutTeamSection() {
 									<div className="relative overflow-hidden rounded-[1.4rem] bg-slate-950/60">
 										{/* Image */}
 										<div className="relative h-72 overflow-hidden">
-											<img
+											<Image
 												src={member.imageUrl}
 												alt={member.name}
-												className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+												fill
+												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+												className="object-cover transition-transform duration-700 group-hover:scale-110"
 											/>
 											<div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
 

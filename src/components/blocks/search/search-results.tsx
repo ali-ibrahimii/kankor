@@ -2,36 +2,38 @@
 
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import type { CourseMeta } from "@/components/blocks/course";
+import type { CourseMeta } from "@/components/blocks/course/course-card";
+import { CatalogCourseCard } from "@/components/blocks/course/course-card";
 import {
-	CatalogCourseCard,
 	CourseGrid,
 	CourseGridEmpty,
 	CourseGridSkeleton,
 	CoursePagination,
-	publishedCoursesQueryFn,
-} from "@/components/blocks/course";
-import type { PublicDeck } from "@/components/blocks/decks";
+} from "@/components/blocks/course/course-grid";
+import { publishedCoursesQueryFn } from "@/components/blocks/course/public-course-query";
+import type { PublicDeck } from "@/components/blocks/decks/public-deck-card";
 import {
 	PublicDeckCard,
 	PublicDeckCardSkeleton,
-	publicDecksQueryFn,
-} from "@/components/blocks/decks";
-import type { LibraryBook } from "@/components/blocks/libraries";
+} from "@/components/blocks/decks/public-deck-card";
+import { publicDecksQueryFn } from "@/components/blocks/decks/public-deck-query";
+import { LibraryCard } from "@/components/blocks/libraries/library-card";
 import {
-	BOOK_SELECT,
-	LibraryCard,
 	LibraryGrid,
 	LibraryGridEmpty,
 	LibraryGridSkeleton,
 	LibraryPagination,
-} from "@/components/blocks/libraries";
-import type { PublicQuiz } from "@/components/blocks/quizzes";
+} from "@/components/blocks/libraries/library-grid";
+import {
+	BOOK_SELECT,
+	type LibraryBook,
+} from "@/components/blocks/libraries/types";
 import {
 	PublicQuizCard,
 	PublicQuizCardSkeleton,
-	publicQuizzesQueryFn,
-} from "@/components/blocks/quizzes";
+} from "@/components/blocks/quizzes/public-quiz-card";
+import { publicQuizzesQueryFn } from "@/components/blocks/quizzes/public-quiz-query";
+import type { PublicQuiz } from "@/components/blocks/quizzes/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useQueryFilters } from "@/hooks/filter/filter.hooks";
 import { useSearchSuggestions } from "@/hooks/use-search-suggestions";

@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PublicCourseCatalog } from "@/components/blocks/course";
+import { PublicCourseCatalog } from "@/components/blocks/course/public-course-catalog";
 import { publishedCoursesQueryFn } from "@/components/blocks/course/public-course-query";
 import { getQueryFilterData } from "@/hooks/filter/filter.server";
 import { BaseParams } from "@/types/common.types";

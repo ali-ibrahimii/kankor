@@ -103,7 +103,7 @@ export function AboutContactSection() {
 	};
 
 	return (
-		<section className="relative overflow-hidden  py-20 text-white lg:py-28">
+		<section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28">
 			{/* Animated background orbs */}
 			<div className="absolute inset-0 overflow-hidden">
 				{/* <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />

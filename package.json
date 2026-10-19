@@ -3,7 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "NODE_OPTIONS='--inspect' next dev --webpack",
+		"dev": "next dev",
+		"dev:debug": "NODE_OPTIONS='--inspect' next dev --webpack",
 		"build": "next build",
 		"analyze": "next experimental-analyze",
 		"start": "next start",

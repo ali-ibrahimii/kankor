@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { Apple, Play, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { clientEnv } from "@/lib/env/client-env";
 import { useAboutMotion } from "./about-motion";
 
 export function AboutDownloadSection() {
 	const t = useTranslations("aboutUs");
 	const aboutMotion = useAboutMotion();
+	const playStoreUrl = clientEnv.app.playStoreUrl;
 
 	return (
 		<motion.section
@@ -58,7 +60,10 @@ export function AboutDownloadSection() {
 								</p>
 							</div>
 						</motion.button>
-						<motion.button
+						<motion.a
+							href={playStoreUrl}
+							target="_blank"
+							rel="noopener noreferrer"
 							variants={aboutMotion.item}
 							className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white px-6 py-3.5 font-semibold text-slate-950 shadow-lg shadow-black/10 transition-transform hover:-translate-y-0.5 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
 						>
@@ -71,7 +76,7 @@ export function AboutDownloadSection() {
 									{t("download.stores.googlePlay.name")}
 								</p>
 							</div>
-						</motion.button>
+						</motion.a>
 					</motion.div>
 				</motion.div>
 			</div>

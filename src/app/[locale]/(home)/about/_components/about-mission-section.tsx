@@ -3,11 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Target } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { DotsBackground } from "@/components/global-background/background-variants";
-import { GlobalBackground } from "@/components/global-background/global-background";
-import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { useAboutMotion } from "./about-motion";
-import { OrbitingCirclesDemo } from "./orbiting-circle";
 
 export function AboutMissionSection() {
 	const t = useTranslations("aboutUs");

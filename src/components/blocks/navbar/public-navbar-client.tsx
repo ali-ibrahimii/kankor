@@ -89,7 +89,7 @@ export function PublicNavbarAuthButton({
 			className={buttonVariants({
 				variant: isAuthenticated ? "ghost" : "default",
 				class: cn(
-					"hidden border rounded-full! text-sm font-medium  transition-colors",
+					"hidden md:inline-flex border rounded-full! text-sm font-medium transition-colors",
 					{
 						"rounded-md border-gray-800 bg-slate-900 px-4 py-2 hover:bg-gray-800 text-gray-200":
 							!isAuthenticated,
