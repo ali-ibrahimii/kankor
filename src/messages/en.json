@@ -510,7 +510,9 @@
 			"minutesShort": "{count} min",
 			"sectionCount": "{count} sections",
 			"completedOfTotal": "{completed}/{total} completed",
-			"hoursMinutes": "{hours}h {minutes}m"
+			"hoursMinutes": "{hours}h {minutes}m",
+			"visitInstructor": "View instructor profile",
+			"visitSchool": "View school profile"
 		},
 		"learn": {
 			"markComplete": "Mark as complete",
@@ -1008,7 +1010,9 @@
 			"quizzes": "Quizzes",
 			"aboutUs": "About Us",
 			"openMenu": "Open menu",
-			"closeMenu": "Close menu"
+			"closeMenu": "Close menu",
+			"roadmap": "Roadmap",
+			"themeToggle": "Toggle light or dark theme"
 		},
 		"hero": {
 			"badge": "For Afghan students",
@@ -1101,6 +1105,16 @@
 			"schoolSignup": "School signup",
 			"privacy": "Privacy Policy",
 			"terms": "Terms of Use"
+		},
+		"coursesMenu": {
+			"eyebrow": "Find your next course",
+			"title": "Learn with a clear plan",
+			"description": "Explore structured lessons, expert guidance and exam-focused practice—all in one place.",
+			"all": "Browse all courses",
+			"subjects": "Popular study paths",
+			"paths": ["Mathematics", "Physics", "Biology", "Chemistry"],
+			"cardTitle": "Prepare with confidence",
+			"cardText": "Pick a subject, follow lessons at your pace, and keep track of your progress."
 		}
 	},
 	"quizBuilder": {
@@ -2102,8 +2116,14 @@
 					"shortBio": "Besmillah founded 'Abzar Kankor' with the goal of providing every Afghan student with access to quality education.",
 					"fullBio": "Besmillah Ibrahimi is the founder and CEO of Abzar Kankor. With over 10 years of experience in education and technology, he graduated from Kabul University with a degree in Computer Science. He believes technology can bridge the education gap and create equal opportunities for all students.",
 					"socialLinks": [
-						{ "platform": "Twitter", "url": "https://twitter.com/besmillah" },
-						{ "platform": "Facebook", "url": "https://facebook.com/besmillah" },
+						{
+							"platform": "Twitter",
+							"url": "https://twitter.com/besmillah"
+						},
+						{
+							"platform": "Facebook",
+							"url": "https://facebook.com/besmillah"
+						},
 						{
 							"platform": "Instagram",
 							"url": "https://instagram.com/besmillah"
@@ -2120,9 +2140,18 @@
 					"shortBio": "Fatema leads our engineering team and architects scalable systems for millions of learners.",
 					"fullBio": "Fatema Ahmadi is our Chief Technology Officer with 8+ years of software development experience. She specializes in scalable architecture and user experience optimization.",
 					"socialLinks": [
-						{ "platform": "Twitter", "url": "https://twitter.com/fatema" },
-						{ "platform": "Instagram", "url": "https://instagram.com/fatema" },
-						{ "platform": "Facebook", "url": "https://facebook.com/fatema" }
+						{
+							"platform": "Twitter",
+							"url": "https://twitter.com/fatema"
+						},
+						{
+							"platform": "Instagram",
+							"url": "https://instagram.com/fatema"
+						},
+						{
+							"platform": "Facebook",
+							"url": "https://facebook.com/fatema"
+						}
 					]
 				},
 				{
@@ -2135,9 +2164,18 @@
 					"shortBio": "Nadia combines creativity with user research to build simple, delightful learning experiences.",
 					"fullBio": "Nadia Rahimi is our Product Lead, specializing in educational digital products. She conducts regular user research with Afghan students to understand their real needs.",
 					"socialLinks": [
-						{ "platform": "Facebook", "url": "https://facebook.com/nadia" },
-						{ "platform": "Instagram", "url": "https://instagram.com/nadia" },
-						{ "platform": "Twitter", "url": "https://twitter.com/nadia" }
+						{
+							"platform": "Facebook",
+							"url": "https://facebook.com/nadia"
+						},
+						{
+							"platform": "Instagram",
+							"url": "https://instagram.com/nadia"
+						},
+						{
+							"platform": "Twitter",
+							"url": "https://twitter.com/nadia"
+						}
 					]
 				},
 				{
@@ -2150,9 +2188,18 @@
 					"shortBio": "Ali oversees educational content quality and works with top teachers across Afghanistan.",
 					"fullBio": "Ali Hosseini has a Master's degree in Education and over 12 years of teaching experience. He collaborates with a wide network of teachers to produce high-quality, up-to-date content.",
 					"socialLinks": [
-						{ "platform": "Facebook", "url": "https://facebook.com/ali" },
-						{ "platform": "Instagram", "url": "https://instagram.com/ali" },
-						{ "platform": "Twitter", "url": "https://twitter.com/ali" }
+						{
+							"platform": "Facebook",
+							"url": "https://facebook.com/ali"
+						},
+						{
+							"platform": "Instagram",
+							"url": "https://instagram.com/ali"
+						},
+						{
+							"platform": "Twitter",
+							"url": "https://twitter.com/ali"
+						}
 					]
 				}
 			]
@@ -3613,6 +3660,72 @@
 			"forCompleting": "For successfully completing the course",
 			"qrAlt": "Certificate check QR code",
 			"demoWatermark": "Educational sample · Not an official certificate"
+		}
+	},
+	"roadmap": {
+		"title": "A clear path to your Kankor goal",
+		"subtitle": "A practical roadmap that turns a big exam goal into small, steady wins. Start where you are and move at your own pace.",
+		"steps": [
+			[
+				"01",
+				"Know your starting point",
+				"Take a short diagnostic quiz and identify the subjects that need the most attention."
+			],
+			[
+				"02",
+				"Build a weekly study plan",
+				"Choose a realistic routine, set weekly targets, and balance lessons with revision."
+			],
+			[
+				"03",
+				"Learn with focused lessons",
+				"Follow structured courses and ask your teacher or school for guidance when you need it."
+			],
+			[
+				"04",
+				"Practice and remember",
+				"Use flashcards and short quizzes to strengthen recall and revisit difficult topics."
+			],
+			[
+				"05",
+				"Track progress and adjust",
+				"Review your results every week, celebrate progress, and focus your next study sessions."
+			]
+		],
+		"cta": "Explore courses",
+		"note": "Your roadmap is flexible. Adjust the pace around your school schedule and keep showing up."
+	},
+	"publicProfile": {
+		"teacherLabel": "Instructor",
+		"schoolLabel": "School",
+		"about": "About",
+		"noBio": "This instructor has not added a biography yet.",
+		"teacherCourses": "Courses by this instructor",
+		"schoolCourses": "Courses from this school",
+		"coursesCount": "published courses",
+		"learners": "learners",
+		"website": "Visit website",
+		"free": "Free",
+		"credits": "credits",
+		"lessons": "lessons",
+		"emptyCourses": "No published courses are available yet.",
+		"schoolIntro": "Explore learning opportunities and courses published by {name}.",
+		"contactSchool": "Contact this school",
+		"learning": "LEARN WITH US",
+		"hours": "hours"
+	},
+	"catalogHeroes": {
+		"courses": {
+			"badge": "Discover learning paths",
+			"chips": ["Expert-led", "Self-paced", "Exam ready"]
+		},
+		"decks": {
+			"badge": "Smart flashcards",
+			"chips": ["Active recall", "Quick review", "Remember more"]
+		},
+		"libraries": {
+			"badge": "Your study library",
+			"chips": ["Books & notes", "Organized resources", "Learn anywhere"]
 		}
 	}
 }
