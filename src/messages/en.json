@@ -1,0 +1,3233 @@
+{
+	"app": {
+		"name": "Abzar Kankor"
+	},
+	"discussions": {
+		"new_thread": "New Thread",
+		"create_thread_title": "Create a Discussion Thread",
+		"create_thread_subtitle": "Ask questions, share study tips, or start a topic with fellow students and instructors.",
+		"search_placeholder": "Search discussions by keyword, title, tag...",
+		"thread_type": "Thread Type",
+		"title_label": "Title",
+		"title_placeholder": "e.g. How to solve quadratic equations efficiently?",
+		"content_label": "Content (Markdown)",
+		"content_placeholder": "Describe your query or discussion in detail...",
+		"tags_label": "Tags (comma-separated)",
+		"tags_placeholder": "math, kankor, algebra",
+		"posting": "Posting...",
+		"post_thread": "Post Thread",
+		"cancel": "Cancel",
+		"reply_placeholder": "Write a reply or answer...",
+		"submit_reply": "Submit Reply",
+		"markdown_supported": "Markdown styling supported",
+		"editor_text_sample": "text",
+		"anonymous": "Anonymous",
+		"author_default": "User",
+		"replies": "replies",
+		"views": "views",
+		"bookmarked": "Bookmarked",
+		"bookmark": "Bookmark",
+		"subscribed": "Subscribed",
+		"subscribe": "Subscribe",
+		"accepted_solution_title": "Accepted Solution",
+		"mark_as_solution": "Mark as Solution",
+		"reply": "Reply",
+		"leave_reply": "Leave a Reply",
+		"replies_count_title": "Replies ({count})",
+		"no_replies_yet": "No replies yet. Be the first to start the conversation!",
+		"thread_not_found": "Discussion thread not found.",
+		"duplicate_check_title": "Similar Discussions Found",
+		"duplicate_check_desc": "Before creating a new thread, check if your question has already been answered below:",
+		"view_thread": "View Thread",
+		"moderation_queue_title": "Discussion Moderation Queue",
+		"moderation_queue_subtitle": "Review reported threads and posts across all learning resources.",
+		"pending": "Pending",
+		"no_pending_reports": "No pending moderation reports.",
+		"reported_by": "Reported by",
+		"dismiss": "Dismiss",
+		"soft_delete": "Soft Delete",
+		"status": {
+			"open": "Open",
+			"answered": "Answered",
+			"solved": "Solved",
+			"closed": "Closed"
+		},
+		"types": {
+			"question": "Question",
+			"discussion": "Discussion",
+			"tip": "Study Tip",
+			"announcement": "Announcement",
+			"report_mistake": "Report Mistake"
+		},
+		"badges": {
+			"pinned": "Pinned",
+			"locked": "Locked",
+			"instructor_only": "Instructor Only"
+		},
+		"roles": {
+			"instructor": "Instructor",
+			"admin": "Admin",
+			"student": "Student"
+		},
+		"filters": {
+			"status": "Status",
+			"all_statuses": "All Statuses"
+		},
+		"empty": {
+			"title": "No discussions yet",
+			"public_subtitle": "Enroll or join this resource to create a new discussion thread.",
+			"dashboard_subtitle": "Start the conversation by asking a question or sharing a study tip!"
+		},
+		"errors": {
+			"create_failed": "Failed to create thread",
+			"reply_failed": "Failed to post reply",
+			"solution_failed": "Failed to mark solution",
+			"fetch_failed": "Failed to load discussions",
+			"mod_failed": "Moderation action failed"
+		},
+		"loading": "Loading...",
+		"retry": "Retry"
+	},
+	"metadata": {
+		"description": "An offline-first educational mobile application for students in Afghanistan, providing comprehensive learning tools including video courses, spaced repetition flashcards, mock exams, and a digital library.",
+		"keywords": [
+			"Abzar Kankor",
+			"Kankor",
+			"Afghanistan education",
+			"offline learning",
+			"Afghan students",
+			"university entrance exam",
+			"mock Kankor",
+			"spaced repetition flashcards",
+			"video courses",
+			"school curriculum Afghanistan",
+			"digital library",
+			"کانکور",
+			"افغانستان"
+		]
+	},
+	"seo": {
+		"home": "Home",
+		"courses": "Courses",
+		"decks": "Decks",
+		"libraries": "Library",
+		"quizzes": "Quizzes",
+		"discussions": "Discussions",
+		"verify": "Verification",
+		"relatedResources": "Related Resources",
+		"relatedCourses": "Related Courses",
+		"relatedDecks": "Related Decks",
+		"relatedBooks": "Related Books",
+		"relatedQuizzes": "Related Quizzes",
+		"faq": "Frequently Asked Questions",
+		"faqPrerequisites": "What are the prerequisites for this course?",
+		"faqObjectives": "What will I learn in this course?",
+		"faqStudy": "How should I study this deck?",
+		"faqStudyAnswer": "We recommend studying these flashcards daily using spaced repetition to build long-term memory for the Kankor exam.",
+		"passingCriteria": "Passing Criteria",
+		"passingCriteriaText": "To pass this quiz, you need a score of {percent}% or higher. You have a maximum of {count} attempts.",
+		"timeLimitText": "The time limit is {count} minutes."
+	},
+	"dashboard": {
+		"notifications": "Notifications",
+		"student": {
+			"roleLabel": "Student",
+			"overview": "Overview",
+			"school": "School",
+			"grades": {
+				"10": "Grade 10",
+				"11": "Grade 11",
+				"12": "Grade 12"
+			},
+			"courses": "Courses",
+			"allCourses": "All Courses",
+			"myCourses": "My Courses",
+			"flashcards": "Flashcards",
+			"decks": "Decks",
+			"myDecks": "My Decks",
+			"practice": "Practice",
+			"tests": "Tests",
+			"testTypes": {
+				"kankor": "Kankor Test",
+				"subject": "Subject Test",
+				"quiz": "Practice Quiz",
+				"passed": "Passed Quizzes",
+				"registered": "Registered Quizzes"
+			},
+			"library": "Library",
+			"librarySections": {
+				"fields": "Fields",
+				"studies": "Studies",
+				"more": "More"
+			},
+			"passedQuizzes": {
+				"title": "Passed Quizzes",
+				"description": "Quizzes you've taken and passed.",
+				"score": "{score}/{max}",
+				"completedOn": "Completed {date}",
+				"empty": {
+					"title": "No passed quizzes yet",
+					"subtitle": "Quizzes you pass will show up here."
+				}
+			},
+			"registeredQuizzes": {
+				"title": "Registered Quizzes",
+				"description": "Quizzes you're registered to take.",
+				"timeLimitMinutes": "{count, plural, =1 {# minute} other {# minutes}}",
+				"registeredOn": "Registered {date}",
+				"empty": {
+					"title": "No registered quizzes",
+					"subtitle": "Ask your instructor or school to register you for a quiz."
+				}
+			},
+			"personal": "Personal",
+			"notes": "Notes",
+			"bookmarks": "Bookmarks",
+			"wallet": "Wallet",
+			"notifications": "Notifications",
+			"classrooms": "Classrooms"
+		},
+		"admin": {
+			"roleLabel": "Super Admin",
+			"overview": "Overview",
+			"users": {
+				"label": "Users",
+				"allUsers": "All Users",
+				"students": "Students",
+				"instructors": "Instructors",
+				"staff": "School Staff",
+				"schools": "Schools",
+				"agencies": "Agencies"
+			},
+			"content": {
+				"label": "Content",
+				"courses": "Courses",
+				"flashcards": "Flashcards",
+				"decks": "Decks",
+				"cards": "Cards",
+				"tests": "Tests & Quizzes",
+				"library": "Library",
+				"discounts": "Discounts"
+			},
+			"kankor": {
+				"label": "Kankor",
+				"forms": "Exam Papers",
+				"universities": "Universities",
+				"faculties": "Faculties",
+				"departments": "Departments",
+				"codes": "Score Codes"
+			},
+			"platform": {
+				"label": "Platform",
+				"grades": "Grades & Subjects",
+				"provinces": "Provinces",
+				"settings": "Settings"
+			},
+			"notifications": "Notifications"
+		},
+		"instructor": {
+			"roleLabel": "Instructor",
+			"newCourse": "New Course",
+			"overview": "Overview",
+			"myCourses": "My Courses",
+			"courses": {
+				"published": "Published",
+				"drafts": "Drafts",
+				"archived": "Archived"
+			},
+			"decks": "My Decks",
+			"quizBuilder": "Quiz Builder",
+			"classrooms": "Classrooms",
+			"students": "Students",
+			"reports": "Reports",
+			"analytics": "Analytics",
+			"earnings": "Earnings",
+			"discounts": "Discounts",
+			"settings": "Settings",
+			"notifications": "Notifications"
+		},
+		"school": {
+			"roleLabel": "School Admin",
+			"defaultName": "School Dashboard",
+			"overview": "Overview",
+			"members": {
+				"label": "Members",
+				"students": "Students",
+				"teachers": "Teachers",
+				"staff": "Staff"
+			},
+			"decks": "Decks",
+			"quizzes": "Quizzes",
+			"results": "Results",
+			"reports": "Reports",
+			"analytics": "Analytics",
+			"attendance": "Attendance",
+			"earnings": "Earnings",
+			"discounts": "Discounts",
+			"settings": "Settings",
+			"notifications": "Notifications"
+		},
+		"agency": {
+			"nav": {
+				"overview": "Overview",
+				"chargeStudent": "Charge student",
+				"transactions": "Transactions",
+				"settlements": "Settlements",
+				"disputes": "Disputes",
+				"members": "Members",
+				"notifications": "Notifications",
+				"schools": "Schools",
+				"instructors": "Instructors",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes"
+			},
+			"overview": {
+				"title": "Agency overview",
+				"subtitle": "A summary of your agency's activity and account",
+				"chargedTotal": "Total charged",
+				"outstanding": "Outstanding / limit",
+				"studentsCharged": "Students charged",
+				"chargedLast30d": "Charged (last 30 days)",
+				"commissionEarned": "Commission earned",
+				"openDisputes": "Open disputes",
+				"recentTopups": "Recent top-ups",
+				"salesTotal": "Content sales (count)"
+			},
+			"charge": {
+				"title": "Charge a student",
+				"subtitle": "Enter the student's email and the cash amount received (1 credit = 1 AFN)",
+				"studentEmail": "Student email",
+				"studentEmailPlaceholder": "student@example.com",
+				"amount": "Amount (AFN)",
+				"note": "Note (optional)",
+				"submit": "Charge account",
+				"receipt": {
+					"title": "Charge successful",
+					"student": "Student",
+					"amount": "Amount",
+					"newBalance": "New balance",
+					"reference": "Reference",
+					"date": "Date",
+					"currency": "AFN",
+					"chargeAnother": "Charge another student"
+				},
+				"validation": {
+					"invalidEmail": "Invalid email",
+					"invalidAmount": "Invalid amount"
+				},
+				"errors": {
+					"studentNotFound": "No student found with this email",
+					"permissionDenied": "You are not allowed to perform this action",
+					"liabilityLimitExceeded": "The agency's liability limit is reached; please settle first",
+					"invalidAmount": "Invalid amount"
+				}
+			},
+			"transactions": {
+				"title": "Transactions",
+				"subtitle": "All top-ups performed by your agency"
+			},
+			"settlements": {
+				"title": "Settlements",
+				"subtitle": "History of transfers to Abzar Kankor"
+			},
+			"disputes": {
+				"title": "Disputes",
+				"subtitle": "Student disputes on your agency's transactions"
+			},
+			"members": {
+				"title": "Members",
+				"subtitle": "Manage your agency's staff"
+			},
+			"moderation": {
+				"reason": "Reason",
+				"reasonPlaceholder": "Why is this account being suspended?",
+				"cancel": "Cancel",
+				"confirmSuspend": "Suspend",
+				"suspend": "Suspend",
+				"reactivate": "Reactivate",
+				"suspended": "Account suspended",
+				"reactivated": "Account reactivated",
+				"suspendSchoolTitle": "Suspend school?",
+				"suspendSchoolDescription": "Suspending {name} immediately hides its content and locks its dashboard. You can reverse suspensions made by your agency.",
+				"suspendInstructorTitle": "Suspend instructor?",
+				"suspendInstructorDescription": "Suspending {name} immediately hides their published content. You can reverse suspensions made by your agency."
+			},
+			"schools": {
+				"title": "Schools",
+				"subtitle": "Schools within your agency's moderation scope",
+				"searchPlaceholder": "Search schools...",
+				"empty": "No schools in your scope",
+				"edit": "Edit",
+				"editTitle": "Edit school details",
+				"updated": "School updated",
+				"address": "Address",
+				"adminEmail": "Admin email",
+				"save": "Save",
+				"table": {
+					"name": "School",
+					"province": "Province",
+					"status": "Status"
+				},
+				"validation": {
+					"nameRequired": "Name is required",
+					"invalidEmail": "Invalid email"
+				}
+			},
+			"instructors": {
+				"title": "Instructors",
+				"subtitle": "Instructors within your agency's moderation scope",
+				"searchPlaceholder": "Search instructors...",
+				"empty": "No instructors in your scope",
+				"table": {
+					"instructor": "Instructor",
+					"province": "Province",
+					"status": "Status"
+				}
+			},
+			"resources": {
+				"quizzesTitle": "Agency quizzes",
+				"quizzesSubtitle": "Quizzes owned and published by your agency"
+			}
+		}
+	},
+	"nav": {
+		"openMenu": "Open menu",
+		"closeMenu": "Close menu",
+		"dashboard": "Dashboard",
+		"students": "Students",
+		"courses": "Courses",
+		"quizzes": "Quizzes",
+		"members": "Members",
+		"settings": "Settings",
+		"schools": "Schools",
+		"instructors": "Instructors",
+		"exams": "Exams",
+		"user": {
+			"home": "Home",
+			"aboutUs": "About Us",
+			"contact": "Contact",
+			"locales": {
+				"en": "English",
+				"fa": "Dari",
+				"ps": "Pashto"
+			},
+			"signIn": "Sign In",
+			"signUp": "Sign Up",
+			"phone": "+98-901-223-5586",
+			"email": "info@abzarkankor.com",
+			"search": "Search",
+			"searchPlaceholder": "Search exams, services...",
+			"quickLinks": "Quick Links",
+			"language": "Language",
+			"aboutUsDesc": "Learn about our platform and mission",
+			"ourTeam": "Our Team",
+			"ourTeamDesc": "Meet the people behind Abzar Kankor",
+			"ourMission": "Our Mission",
+			"ourMissionDesc": "What drives us every day",
+			"services": "Services",
+			"mockExams": "Mock Exams",
+			"mockExamsDesc": "Practice with realistic Kankor-style tests",
+			"studyPlans": "Study Plans",
+			"studyPlansDesc": "Structured plans tailored to your goals",
+			"gpaCalculator": "GPA Calculator",
+			"gpaCalculatorDesc": "Calculate your grade point average",
+			"faq": "FAQ",
+			"faqDesc": "Answers to commonly asked questions"
+		}
+	},
+	"courses": {
+		"title": "Courses",
+		"discussions": "Course Discussions",
+		"newCourse": "New Course",
+		"myCourses": "My Courses",
+		"enrolledCourses": "Enrolled Courses",
+		"allCourses": "All Courses",
+		"searchPlaceholder": "Search courses…",
+		"filters": "Filters",
+		"clearAll": "Clear all",
+		"noCoursesFound": "No courses found",
+		"noCoursesDescription": "Try adjusting your search or filters.",
+		"noEnrolledCourses": "No enrolled courses",
+		"noEnrolledCoursesDescription": "Browse the catalog and enroll in a course to get started.",
+		"browseCatalog": "Browse Catalog",
+		"showing": "Showing {from}–{to} of {total} courses",
+		"previous": "Previous",
+		"next": "Next",
+		"manage": "Manage",
+		"publish": "Publish",
+		"unpublish": "Unpublish",
+		"resume": "Continue",
+		"startLearning": "Start Learning",
+		"reviewCourse": "Review Course",
+		"enroll": "Enroll Now",
+		"loginToEnroll": "Login to Enroll",
+		"enrolled": "Enrolled",
+		"completed": "Completed",
+		"notStarted": "Not started",
+		"percentComplete": "{percent}% complete",
+		"lessons": "{count} lessons",
+		"duration": "{hours}h",
+		"enrollments": "{count} students",
+		"filters_level": "Level",
+		"filters_language": "Language",
+		"filters_status": "Status",
+		"filters_pricing": "Pricing",
+		"level_beginner": "Beginner",
+		"level_intermediate": "Intermediate",
+		"level_advanced": "Advanced",
+		"level_all_levels": "All Levels",
+		"language_fa": "دری",
+		"language_ps": "پښتو",
+		"language_en": "English",
+		"status_published": "Published",
+		"status_draft": "Draft",
+		"status_live": "Live",
+		"free": "Free",
+		"detail": {
+			"about": "About this course",
+			"objectives": "What you'll learn",
+			"prerequisites": "Prerequisites",
+			"instructor": "Instructor",
+			"curriculum": "Curriculum",
+			"overview": "Overview",
+			"students": "Students",
+			"reviews": "Reviews",
+			"totalLessons": "{count} lessons",
+			"totalDuration": "{hours} hours total",
+			"totalEnrollments": "{count} students enrolled",
+			"averageRating": "{rating} out of 5",
+			"totalReviews": "{count} reviews",
+			"lastUpdated": "Last updated {date}",
+			"language": "Language",
+			"level": "Level",
+			"certificate": "Certificate of completion",
+			"publishedStatus": "Published",
+			"draftStatus": "Draft",
+			"editInBuilder": "Edit in Builder",
+			"preview": "Preview",
+			"minutesShort": "{count} min",
+			"sectionCount": "{count} sections",
+			"completedOfTotal": "{completed}/{total} completed",
+			"hoursMinutes": "{hours}h {minutes}m"
+		},
+		"learn": {
+			"markComplete": "Mark as complete",
+			"completed": "Completed",
+			"nextLesson": "Next lesson",
+			"previousLesson": "Previous lesson",
+			"courseContent": "Course Content",
+			"lessonOf": "Lesson {current} of {total}",
+			"videoNotSupported": "Your browser does not support the video element.",
+			"assetUnavailable": "This file isn't available right now.",
+			"contentTypes": {
+				"video": "Video",
+				"text": "Article",
+				"audio": "Audio",
+				"quiz": "Quiz",
+				"assignment": "Assignment",
+				"pdf_document": "PDF",
+				"slide_presentation": "Slides",
+				"external_resource": "Resource",
+				"code_playground": "Code"
+			}
+		},
+		"view": "View Course",
+		"sortBy": "Sort by",
+		"sort_newest": "Newest",
+		"sort_oldest": "Oldest",
+		"sort_titleAsc": "Title (A–Z)",
+		"courseCount": "{count, plural, =1 {# course} other {# courses}}",
+		"courseNotFound": "Course not found.",
+		"enrollSuccess": "Enrolled successfully!",
+		"enrollFailed": "Failed to enroll. Please try again.",
+		"priceCredits": "{count, plural, one {# credit} other {# credits}}",
+		"buyForCredits": "Buy for {count, plural, one {# credit} other {# credits}}",
+		"insufficientCredits": "You don't have enough credits. Please top up your balance.",
+		"learning": {
+			"continueLearning": "Continue learning",
+			"upNext": "Up next",
+			"notEnrolledTitle": "You're not enrolled in this course",
+			"notEnrolledDescription": "Enroll to start learning and track your progress.",
+			"allComplete": "You've completed all lessons — great work!",
+			"markCompleteFailed": "Failed to mark lesson complete.",
+			"lessonNotFound": "Lesson not found."
+		},
+		"filters_subject": "Subject",
+		"filters_grade": "Grade",
+		"filters_book": "Book",
+		"filterAll": "All",
+		"description": "Browse and enroll in video courses across every subject and grade.",
+		"loadError": "Unable to load courses",
+		"loadErrorDescription": "Please try again in a moment.",
+		"tryAgain": "Try again",
+		"filters_instructor": "Instructor",
+		"pricing_paid": "Paid",
+		"agencyTitle": "Agency courses",
+		"agencySubtitle": "Courses owned and published by your agency",
+		"published": "Course published.",
+		"unpublished": "Course unpublished.",
+		"publishToggleFailed": "Failed to update publish status."
+	},
+	"certificates": {
+		"pdf": {
+			"platform": "Abzar Kankor",
+			"title": "Certificate of Completion",
+			"presentedTo": "This certificate is proudly presented to",
+			"bodyLine": "for successfully completing the course",
+			"dateLine": "Issued on {date}",
+			"verificationLabel": "Verification code",
+			"verifyHint": "Verify authenticity at {url}",
+			"signatureRole": "Issuing platform"
+		},
+		"claim": {
+			"eligibleTitle": "Certificate ready",
+			"eligibleDescription": "You've completed this course — claim your certificate of completion.",
+			"claim": "Claim certificate",
+			"download": "Download certificate",
+			"generating": "Preparing your certificate…",
+			"claimFailed": "Could not generate your certificate. Please try again.",
+			"notEligible": "Finish all lessons and pass the quizzes to unlock your certificate."
+		},
+		"verify": {
+			"metaTitle": "Verify certificate",
+			"title": "Certificate verification",
+			"description": "Check the authenticity of an Abzar Kankor certificate.",
+			"validTitle": "Valid certificate",
+			"validDescription": "This certificate was issued by {platform}.",
+			"invalidTitle": "Certificate not found",
+			"invalidDescription": "No certificate matches the code {code}. Check the code and try again.",
+			"student": "Student",
+			"course": "Course",
+			"issuedAt": "Issued on",
+			"completedAt": "Completed on",
+			"code": "Verification code",
+			"codePlaceholder": "e.g. CERT-1234-5678",
+			"verifyButton": "Verify",
+			"codeRequired": "Verification code is required",
+			"scanQrTitle": "Scan QR code",
+			"scanQrPlaceholder": "Drop or click to capture/upload the certificate's QR code",
+			"scanQrSuccess": "QR code scanned successfully!",
+			"scanQrError": "Could not find a valid certificate code in the image.",
+			"scanQrLoading": "Decoding QR code...",
+			"scanWithCamera": "Scan with camera",
+			"cameraPermissionError": "Camera access denied or not supported on this device.",
+			"cameraLoading": "Starting camera...",
+			"cameraError": "An error occurred starting the camera.",
+			"close": "Close"
+		}
+	},
+	"libraries": {
+		"title": "Library",
+		"discussions": "Book Discussions",
+		"description": "Browse books and learning resources by grade and subject.",
+		"searchPlaceholder": "Search books…",
+		"clearSearch": "Clear search",
+		"filters": "Filters",
+		"clearAll": "Clear all",
+		"allGrades": "All grades",
+		"allSubjects": "All subjects",
+		"allBooks": "All books",
+		"allCategories": "All categories",
+		"sort": "Sort",
+		"sortRecent": "Recently updated",
+		"sortNameAsc": "Name A–Z",
+		"sortNameDesc": "Name Z–A",
+		"open": "Open",
+		"downloadBook": "Download {title}",
+		"noBooksFound": "No books found",
+		"noBooksDescription": "Try adjusting your search or filters.",
+		"showing": "Showing {from}–{to} of {total} books",
+		"previous": "Previous",
+		"next": "Next",
+		"loadError": "Unable to load books",
+		"loadErrorDescription": "Please try again in a moment.",
+		"tryAgain": "Try again",
+		"author": "Author",
+		"publisher": "Publisher",
+		"isbn": "ISBN",
+		"download": "Download",
+		"details": "Book Details",
+		"backToList": "Back to Library",
+		"unknownAuthor": "Unknown Author",
+		"unknownPublisher": "Unknown Publisher",
+		"viewPdf": "View PDF",
+		"grade": "Grade",
+		"category": "Category",
+		"subject": "Subject",
+		"type": "Book Type",
+		"noPdfViewer": "Your browser does not support embedding PDFs.",
+		"admin": {
+			"title": "Library Books",
+			"subtitle": "{count, plural, =1 {# library book} other {# library books}}",
+			"searchPlaceholder": "Search by title, description, file path or URI…",
+			"loading": "Loading library books…",
+			"empty": "No library books found.",
+			"newLibrary": "New Library Book",
+			"newLibraryDesc": "Create a new study guide or resource for students.",
+			"editLibrary": "Edit Library Book",
+			"editLibraryDesc": "Modify resource configuration.",
+			"import": "Import Books",
+			"importComplete": "Import completed successfully",
+			"deleteConfirm": "Are you sure you want to delete this library book?",
+			"deleteSuccess": "Library book deleted successfully",
+			"saveSuccess": "Library book saved successfully",
+			"createSuccess": "Library book created successfully",
+			"fields": {
+				"title": "Title",
+				"desc": "Description",
+				"filePath": "File Path",
+				"uri": "URI",
+				"slug": "Slug",
+				"book": "Linked Book",
+				"category": "Category",
+				"grade": "Grade",
+				"subject": "Subject",
+				"seoTitle": "SEO Title",
+				"seoDescription": "SEO Description"
+			},
+			"validation": {
+				"titleRequired": "Title is required",
+				"filePathRequired": "File path is required",
+				"uriRequired": "URI is required",
+				"uriInvalid": "Must be a valid URL"
+			},
+			"tabs": {
+				"preview": "Preview",
+				"edit": "Edit"
+			},
+			"actions": {
+				"edit": "Edit",
+				"view": "View",
+				"delete": "Delete"
+			},
+			"uploader": {
+				"title": "Upload Textbook File to Cloudflare R2",
+				"description": "Supports PDF and EPUB up to 150MB. Filename is sanitized automatically.",
+				"selectFile": "Select File",
+				"uploading": "Uploading ({progress}%)",
+				"success": "File uploaded to R2 successfully!",
+				"errorInvalidType": "Only PDF and EPUB files are allowed.",
+				"errorTooLarge": "File is too large (max 150MB).",
+				"errorUpload": "Failed to upload file"
+			},
+			"seoSection": "SEO Metadata",
+			"buttons": {
+				"cancel": "Cancel",
+				"save": "Save",
+				"create": "Create Book",
+				"saveChanges": "Save Changes"
+			}
+		}
+	},
+	"provinces": {
+		"admin": {
+			"title": "Provinces",
+			"subtitle": "{count, plural, =1 {# province} other {# provinces}}",
+			"searchPlaceholder": "Search provinces…",
+			"loading": "Loading provinces…",
+			"empty": "No provinces found.",
+			"newProvince": "New Province",
+			"newProvinceDesc": "Create a new geographical province for student profiles.",
+			"editProvince": "Edit Province",
+			"editProvinceDesc": "Modify province configuration.",
+			"deleteConfirm": "Are you sure you want to delete this province?",
+			"deleteSuccess": "Province deleted successfully",
+			"saveSuccess": "Province saved successfully",
+			"createSuccess": "Province created successfully",
+			"fields": {
+				"name": "Province Name"
+			},
+			"validation": {
+				"nameRequired": "Province name is required"
+			},
+			"buttons": {
+				"cancel": "Cancel",
+				"save": "Save",
+				"create": "Create Province",
+				"saveChanges": "Save Changes"
+			}
+		}
+	},
+	"grades": {
+		"admin": {
+			"title": "Grades & Subjects",
+			"gradesTab": "Grades",
+			"subjectsTab": "Subjects",
+			"booksTab": "Books",
+			"grades": {
+				"title": "Grades",
+				"subtitle": "{count, plural, =1 {# grade} other {# grades}}",
+				"searchPlaceholder": "Search grades…",
+				"loading": "Loading grades…",
+				"empty": "No grades found.",
+				"newGrade": "New Grade",
+				"newGradeDesc": "Create a school grade.",
+				"editGrade": "Edit Grade",
+				"editGradeDesc": "Modify grade configuration.",
+				"deleteConfirm": "Are you sure you want to delete this grade?",
+				"deleteSuccess": "Grade deleted successfully",
+				"saveSuccess": "Grade saved successfully",
+				"createSuccess": "Grade created successfully"
+			},
+			"subjects": {
+				"title": "Subjects",
+				"subtitle": "{count, plural, =1 {# subject} other {# subjects}}",
+				"searchPlaceholder": "Search subjects…",
+				"loading": "Loading subjects…",
+				"empty": "No subjects found.",
+				"newSubject": "New Subject",
+				"newSubjectDesc": "Create a general subject like Mathematics or Biology.",
+				"editSubject": "Edit Subject",
+				"editSubjectDesc": "Modify subject configuration.",
+				"deleteConfirm": "Are you sure you want to delete this subject?",
+				"deleteSuccess": "Subject deleted successfully",
+				"saveSuccess": "Subject saved successfully",
+				"createSuccess": "Subject created successfully"
+			},
+			"books": {
+				"title": "Books",
+				"subtitle": "{count, plural, =1 {# book} other {# books}}",
+				"searchPlaceholder": "Search books…",
+				"loading": "Loading books…",
+				"empty": "No books found.",
+				"newBook": "New Book",
+				"newBookDesc": "Link a specific curriculum book to a grade and subject.",
+				"editBook": "Edit Book",
+				"editBookDesc": "Modify book configuration.",
+				"deleteConfirm": "Are you sure you want to delete this book?",
+				"deleteSuccess": "Book deleted successfully",
+				"saveSuccess": "Book saved successfully",
+				"createSuccess": "Book created successfully"
+			},
+			"fields": {
+				"name": "Name",
+				"fullName": "Full Name",
+				"filePath": "File Path",
+				"ordering": "Ordering",
+				"category": "Category",
+				"grade": "Grade",
+				"subject": "Subject"
+			},
+			"validation": {
+				"nameRequired": "Name is required",
+				"fullNameRequired": "Full name is required",
+				"filePathRequired": "File path is required",
+				"orderingRequired": "Ordering is required"
+			},
+			"buttons": {
+				"cancel": "Cancel",
+				"save": "Save",
+				"createGrade": "Create Grade",
+				"createSubject": "Create Subject",
+				"createBook": "Create Book",
+				"saveChanges": "Save Changes"
+			}
+		}
+	},
+	"auth": {
+		"login": "Log in",
+		"registerStudent": "Register as Student",
+		"registerSchool": "Register your school",
+		"registerInstructor": "Become an instructor",
+		"email": "Email",
+		"password": "Password",
+		"pendingReviewTitle": "Account pending review",
+		"pendingReviewBody": "Your account is awaiting approval. We'll email you once it's reviewed.",
+		"common": {
+			"42501": "You have limited access. Please contact support.",
+			"orDivider": "OR",
+			"emailLabel": "Email Address",
+			"emailPlaceholder": "hello@example.com",
+			"passwordLabel": "Password",
+			"confirmPasswordLabel": "Confirm Password",
+			"fullNameLabel": "Full Name",
+			"fullNamePlaceholder": "James Brown",
+			"schoolNameLabel": "School Name",
+			"schoolNamePlaceholder": "Kankor Academy",
+			"schoolAddressLabel": "School Address",
+			"schoolAddressPlaceholder": "Kabul, Afghanistan",
+			"provinceLabel": "Province",
+			"provincePlaceholder": "Select province...",
+			"successTitle": "Check your email",
+			"user_already_exists": "An account with this email already exists. Please sign in instead.",
+			"email_not_confirmed": "Please confirm your email address before continuing.",
+			"over_email_send_rate_limit": "Too many attempts. Please wait a moment and try again.",
+			"weak_password": "Your password is too weak. Please choose a stronger password.",
+			"email_address_not_authorized": "This email address is not authorized for registration.",
+			"signup_disabled": "New registrations are currently disabled.",
+			"unknown_error": "Something went wrong. Please try again.",
+			"otp_expired": "The code has expired. Please request a new one."
+		},
+		"validation": {
+			"invalidEmail": "Invalid email address",
+			"required": "This field is required",
+			"passwordTooShort": "Password must be at least 8 characters",
+			"passwordWeak": "Must contain 1 uppercase letter and 1 number",
+			"passwordMismatch": "Passwords do not match"
+		},
+		"header": {
+			"login": {
+				"prompt": "Don't have an account?",
+				"linkText": "Register"
+			},
+			"register": {
+				"prompt": "Already have an account?",
+				"linkText": "Sign in"
+			},
+			"resetPassword": {
+				"prompt": "Changed your mind?",
+				"linkText": "Go back"
+			}
+		},
+		"footer": {
+			"copyright": "© {year} Abzar Kankor. All rights reserved.",
+			"agreeToTerms": "By continuing, you agree to our <termsLink>Terms of Use</termsLink> and <privacyLink>Privacy Policy</privacyLink>."
+		},
+		"loginPage": {
+			"title": "Login to your account",
+			"subtitle": "Enter your details to login.",
+			"googleButton": "Continue with Google",
+			"rememberMe": "Keep me logged in",
+			"forgotPassword": "Forgot password?",
+			"submit": "Login",
+			"submitting": "Logging in…"
+		},
+		"registerStudentPage": {
+			"title": "Create your Account",
+			"subtitle": "Enter your details to get started.",
+			"passwordHint": "Must contain 1 uppercase letter, 1 number, min. 8 characters.",
+			"submit": "Create Account",
+			"submitting": "Creating account…",
+			"successBody": "We've sent a confirmation link to your inbox. Click the link to activate your account."
+		},
+		"registerInstructorPage": {
+			"title": "Register as Instructor",
+			"subtitle": "Enter your details to register.",
+			"passwordHint": "Must contain 1 uppercase letter, 1 number, min. 8 characters.",
+			"submit": "Register",
+			"submitting": "Creating account…",
+			"successBody": "We've sent a confirmation link to your inbox. Click the link to activate your instructor account."
+		},
+		"registerSchoolPage": {
+			"title": "Register your School",
+			"subtitle": "Enter your details to create a school account.",
+			"schoolNameLabel": "School Name",
+			"schoolNamePlaceholder": "Kankor Academy",
+			"passwordHint": "Must contain 1 uppercase letter, 1 number, min. 8 characters.",
+			"submit": "Register",
+			"submitting": "Creating account…",
+			"successBody": "We've sent a confirmation link to your inbox. Click the link to activate your school account."
+		},
+		"resetPasswordPage": {
+			"title": "Reset Password",
+			"subtitle": "Enter your email to reset your password.",
+			"emailHint": "Enter the email with which you've registered.",
+			"noAccess": "Don't have access anymore?",
+			"tryAnotherMethod": "Try another method",
+			"submit": "Reset Password",
+			"submitting": "Sending…",
+			"successBody": "We've sent a password reset link to your inbox. Follow the link to set a new password."
+		},
+		"updatePasswordPage": {
+			"title": "Set New Password",
+			"subtitle": "Enter and confirm your new password below.",
+			"passwordHint": "Must contain 1 uppercase letter, 1 number, min. 8 characters.",
+			"submit": "Update Password",
+			"submitting": "Updating…",
+			"successTitle": "Password updated",
+			"successBody": "Your password has been updated. You can now log in with your new password."
+		},
+		"confirmEmailPage": {
+			"title": "Confirm your email",
+			"subtitle": "Your email address has not been confirmed yet.",
+			"emailHint": "We'll send a new confirmation link to this address.",
+			"submit": "Resend Confirmation Email",
+			"submitting": "Sending…",
+			"successBody": "We've sent a new confirmation link to your inbox. Click the link to activate your account."
+		}
+	},
+	"landing": {
+		"user": {
+			"signIn": "Sign In",
+			"signUp": "Sign Up",
+			"searchPlaceholder": "Search exams, services..."
+		},
+		"header": {
+			"signIn": "Sign in",
+			"dashboard": "Dashboard",
+			"libraries": "Library",
+			"courses": "Courses",
+			"decks": "Decks",
+			"quizzes": "Quizzes",
+			"aboutUs": "About Us",
+			"openMenu": "Open menu",
+			"closeMenu": "Close menu"
+		},
+		"hero": {
+			"badge": "For Afghan students",
+			"heading": "Study anywhere. <accent>Pass the Kankor.</accent>",
+			"subtitle": "The complete offline learning app — curriculum-aligned school courses, 13,000+ flashcards, mock Kankor exams, and a full digital library. No internet required.",
+			"ctaPrimary": "Explore the App",
+			"ctaSecondary": "For Schools & Instructors",
+			"signInPrompt": "Already have an account?",
+			"signInLink": "Sign in"
+		},
+		"download": {
+			"heading": "Get Abzar Kankor",
+			"subtitle": "Free to download. Study offline, anywhere.",
+			"getItOn": "Get it on",
+			"downloadOn": "Download on the",
+			"comingSoon": "Coming soon"
+		},
+		"stats": {
+			"flashcards": "13,000+",
+			"flashcardsLabel": "Flashcards",
+			"offline": "100%",
+			"offlineLabel": "Offline first",
+			"modules": "4",
+			"modulesLabel": "Learning modules"
+		},
+		"app": {
+			"heading": "Four modules. One app.",
+			"subtitle": "Everything an Afghan student needs — from daily lessons to Kankor university entrance exam preparation.",
+			"school": {
+				"title": "School Courses",
+				"description": "Video lessons aligned with Afghanistan's official curriculum for all grade levels, complete with PDF presentations and built-in note-taking."
+			},
+			"flashcards": {
+				"title": "Smart Flashcards",
+				"description": "Over 13,000 flashcards sourced directly from official school textbooks, powered by the Leitner spaced-repetition system for lasting memorization."
+			},
+			"tests": {
+				"title": "Mock Kankor",
+				"description": "Realistic simulations of the university entrance exam and book-based practice tests with instant automatic scoring and review."
+			},
+			"library": {
+				"title": "Digital Library",
+				"description": "Thousands of categorized educational books and study resources — all downloadable for fully offline reading, anytime, anywhere."
+			}
+		},
+		"offline": {
+			"heading": "Built for Afghanistan",
+			"subtitle": "Designed for areas with limited or no connectivity. Download once and study forever — no internet required.",
+			"badgeLabel": "100% offline",
+			"point1Title": "Study without internet",
+			"point1Desc": "All lessons, flashcards, and exams work completely offline once downloaded to your device.",
+			"point2Title": "Content lives on your device",
+			"point2Desc": "Videos, PDFs, and flashcard decks are stored locally so a slow connection never blocks your learning.",
+			"point3Title": "Progress syncs automatically",
+			"point3Desc": "Your study history and scores sync to the cloud the moment you reconnect."
+		},
+		"educators": {
+			"heading": "Built for educators too",
+			"subtitle": "Schools and instructors can publish courses, build exams, and manage students through the Abzar Kankor admin platform."
+		},
+		"instructor": {
+			"title": "For Instructors",
+			"description": "Publish and manage your courses, build exams, and grow your student base from a dedicated instructor dashboard.",
+			"cta": "Register as Instructor"
+		},
+		"school": {
+			"title": "For Schools",
+			"description": "Manage your school, staff, course catalog, and student enrollments from one central admin panel.",
+			"cta": "Register your School"
+		},
+		"locales": {
+			"en": "English",
+			"fa": "دری",
+			"ps": "پښتو"
+		},
+		"privacy": {
+			"heading": "Transparent about your data",
+			"subtitle": "We believe you should know exactly what information we request and why — no surprises.",
+			"googleTitle": "Google Sign-In data",
+			"googleDesc": "When you sign in with Google, we receive only your email address and display name. These are used solely to create and identify your account within Abzar Kankor.",
+			"syncTitle": "Learning progress",
+			"syncDesc": "Your study history, flashcard progress, and test scores are stored locally on your device first, then synced to our secure servers so you never lose your work.",
+			"noSaleTitle": "Never sold",
+			"noSaleDesc": "Your personal data is never sold to advertisers or third parties. We collect only what is strictly necessary to provide the Abzar Kankor service.",
+			"policyLink": "Read our full Privacy Policy"
+		},
+		"footer": {
+			"copyright": "© {year} Abzar Kankor. All rights reserved.",
+			"instructorSignup": "Instructor signup",
+			"schoolSignup": "School signup",
+			"privacy": "Privacy Policy",
+			"terms": "Terms of Use"
+		}
+	},
+	"quizBuilder": {
+		"title": "Quiz Builder",
+		"description": "Create and manage quizzes linked to your course lessons.",
+		"actions": {
+			"newQuiz": "New Quiz",
+			"importQuizzes": "Import",
+			"createQuiz": "Create Quiz",
+			"saveChanges": "Save Changes",
+			"delete": "Delete",
+			"cancel": "Cancel",
+			"editQuiz": "Edit Quiz",
+			"printAndScan": "Print & Scan",
+			"copyCode": "Copy Entrance Code",
+			"addQuestion": "Add Question",
+			"addOption": "Add Option",
+			"addPair": "Add Pair",
+			"addBlankAnswer": "Add Blank Answer",
+			"addItem": "Add Item"
+		},
+		"status": {
+			"editing": "Editing"
+		},
+		"toast": {
+			"quizCreated": "Quiz created.",
+			"quizUpdated": "Quiz updated.",
+			"quizDeleted": "\"{title}\" deleted.",
+			"codeCopied": "Entrance code copied.",
+			"loadError": "Could not load quiz: {error}",
+			"deleteError": "Failed to delete quiz.",
+			"importSuccess": "Imported {count} quiz(zes).",
+			"importPartial": "Imported {inserted}, {failed} row(s) failed or were skipped."
+		},
+		"validation": {
+			"titleRequired": "Quiz title is required.",
+			"questionNoText": "Question {n} has no text.",
+			"questionNoAnswer": "Question {n} has no correct answer marked.",
+			"fixIssues": "Please fix the issues before saving.",
+			"fixIssuesTitle": "Please fix the following issues:"
+		},
+		"tabs": {
+			"settings": "Settings",
+			"questions": "Questions",
+			"totalPts": "{count} total pts"
+		},
+		"sheet": {
+			"newTitle": "New Quiz",
+			"editTitle": "Edit Quiz",
+			"newDescription": "Create a new quiz. Fill in the settings and add questions.",
+			"editDescription": "Editing \"{title}\""
+		},
+		"deleteDialog": {
+			"title": "Delete quiz?",
+			"description": "This will permanently delete \"{title}\" and all its questions and student attempts. This cannot be undone.",
+			"confirm": "Delete Quiz",
+			"cancel": "Cancel"
+		},
+		"settings": {
+			"basicInfo": "Basic Information",
+			"titleLabel": "Title",
+			"titlePlaceholder": "e.g. Chapter 3 Assessment",
+			"description": "Description",
+			"descriptionPlaceholder": "Brief description shown to students before starting…",
+			"instructions": "Instructions",
+			"instructionsPlaceholder": "Read each question carefully. You have one attempt…",
+			"entranceCode": "Entrance Code",
+			"entranceCodeHint": "Share this code with students to access the standalone quiz.",
+			"timingAndAttempts": "Timing & Attempts",
+			"timeLimit": "Time Limit (minutes)",
+			"timeLimitPlaceholder": "No limit",
+			"maxAttempts": "Max Attempts",
+			"maxAttemptsPlaceholder": "Unlimited",
+			"passingScore": "Passing Score (%)",
+			"behavior": "Behavior",
+			"shuffleQuestions": "Shuffle Questions",
+			"shuffleQuestionsDesc": "Randomize question order for each attempt.",
+			"showAnswers": "Show Correct Answers",
+			"showAnswersHint": "When students can see the correct answers.",
+			"showAnswersAfterAttempt": "After each attempt",
+			"showAnswersAfterClose": "After quiz closes",
+			"showAnswersNever": "Never",
+			"pricing": "Pricing",
+			"isFreeLabel": "Free quiz",
+			"isFreeDescription": "Students can register without paying.",
+			"priceCreditsLabel": "Price (credits)"
+		},
+		"questionTypes": {
+			"multiple_choice_single_correct": "Multiple Choice (Single)",
+			"multiple_choice_multiple_correct": "Multiple Choice (Multiple)",
+			"true_false": "True / False",
+			"yes_no": "Yes / No",
+			"short_answer_text": "Short Answer",
+			"long_answer_text": "Long Answer",
+			"fill_in_the_blanks": "Fill in the Blanks",
+			"matching": "Matching",
+			"ordering": "Ordering",
+			"image_based_question": "Image Based"
+		},
+		"question": {
+			"label": "Question {n}",
+			"untitled": "Untitled question",
+			"noCorrectAnswer": "No correct answer",
+			"placeholder": "Type your question here…",
+			"fillBlanksPlaceholder": "Type the question text. Use {marker} for each blank.",
+			"typeLabel": "Question Type",
+			"points": "Points",
+			"pt": "{count} pt",
+			"pts": "{count} pts",
+			"hint": "Hint",
+			"optional": "(optional)",
+			"hintPlaceholder": "Shown when student requests a hint…",
+			"explanation": "Explanation",
+			"explanationPlaceholder": "Shown after answering…",
+			"sections": {
+				"matchingPairs": "Matching Pairs",
+				"ordering": "Items (in correct order)",
+				"fillBlanks": "Correct Answers",
+				"default": "Answer Options"
+			},
+			"hints": {
+				"multipleCorrect": "Mark all options that are correct.",
+				"fillBlanksPrefix": "Use",
+				"fillBlanksSuffix": "in the question text for each blank. Add the correct answers below in order.",
+				"ordering": "Add items in their correct order. Students must arrange them in the same order.",
+				"manualGrading": "This question type requires manual grading. No options needed."
+			},
+			"option": {
+				"placeholder": "Option text…",
+				"leftPlaceholder": "Left side term…",
+				"rightPlaceholder": "Right side match…",
+				"blankPlaceholder": "Blank {n} answer…",
+				"correct": "Correct",
+				"incorrect": "Incorrect",
+				"feedbackSet": "Feedback set",
+				"addFeedback": "Add feedback",
+				"feedbackPlaceholder": "Feedback shown when student picks this option…"
+			},
+			"emptyList": {
+				"title": "No questions yet",
+				"description": "Add your first question to get started."
+			}
+		},
+		"list": {
+			"defaultDescription": "Create and manage quizzes for your students.",
+			"stats": {
+				"total": "Total Quizzes",
+				"questions": "Total Questions",
+				"avgPassing": "Avg. Passing Score",
+				"withLimit": "With Time Limit"
+			},
+			"table": {
+				"quiz": "Quiz",
+				"code": "Code",
+				"questions": "Questions",
+				"timeLimit": "Time Limit",
+				"maxAttempts": "Max Attempts",
+				"passScore": "Pass Score",
+				"showAnswers": "Show Answers",
+				"noLimit": "No limit",
+				"unlimited": "∞",
+				"shuffled": "Shuffled"
+			},
+			"showAnswersLabels": {
+				"attempt": "After attempt",
+				"quiz_end_time": "After closing",
+				"never": "Never"
+			},
+			"empty": {
+				"title": "No quizzes yet",
+				"description": "Create your first quiz to get started."
+			},
+			"filters": {
+				"searchPlaceholder": "Search quizzes...",
+				"filters": "Filters",
+				"visibility": "Visibility",
+				"visibilityPublic": "Public",
+				"visibilityPrivate": "Private",
+				"visibilityClassmate": "Classmates",
+				"pricing": "Pricing",
+				"free": "Free",
+				"paid": "Paid",
+				"standalone": "Standalone (not school-owned)",
+				"clearAll": "Clear all"
+			}
+		}
+	},
+	"quizOmr": {
+		"questionCount": "{count, plural, one {# question} other {# questions}}",
+		"notFound": "Quiz not found.",
+		"back": "Back",
+		"noQuestionsWarning": "This quiz has no questions yet — add questions before printing answer sheets.",
+		"lock": {
+			"bannerText": "This quiz is locked (print v{version}) — questions and options can't be edited until you unlock it.",
+			"unlockAction": "Unlock to edit",
+			"confirmTitle": "Unlock this quiz for editing?",
+			"confirmDescription": "Editing questions after this point means already-printed sheets will be out of date. You'll need to print again for every registered student before collecting more scans.",
+			"confirmCancel": "Cancel",
+			"confirmAction": "Unlock",
+			"unlocked": "Quiz unlocked for editing."
+		},
+		"tabs": {
+			"roster": "Roster",
+			"print": "Print & Variants",
+			"scans": "Scans",
+			"results": "Results"
+		},
+		"roster": {
+			"addTitle": "Add a student",
+			"addDescription": "Look up a student by email and add them to this quiz's roster.",
+			"emailPlaceholder": "student@example.com",
+			"addAction": "Add",
+			"notFound": "No student found with that email.",
+			"alreadyRegistered": "That student is already registered.",
+			"added": "Added {name} to the roster.",
+			"deadlinePassedOwnerNote": "Registration deadline has passed — students can no longer self-register, but you can still add students manually.",
+			"empty": {
+				"title": "No students registered yet",
+				"description": "Add a student above, or share the quiz so students can register themselves."
+			},
+			"table": {
+				"student": "Student",
+				"source": "Source",
+				"printed": "Printed"
+			},
+			"sourceSelf": "Self-registered",
+			"sourceOwner": "Added by you",
+			"printed": "Printed",
+			"notPrinted": "Not printed yet",
+			"unknownStudent": "Unknown student"
+		},
+		"print": {
+			"printTitle": "Print answer sheets",
+			"reprintTitle": "Reprint answer sheets",
+			"printDescription": "Generates one bubble sheet per registered student and locks the quiz's questions.",
+			"downloadPdf": "Download PDF",
+			"printAction": "Print",
+			"reprintAction": "Reprint",
+			"confirmTitle": "Print answer sheets?",
+			"confirmDescription": "This creates one variant per currently registered student.",
+			"shuffleLabel": "Shuffle question order",
+			"shuffleDescription": "Each student gets a different question order (bubble positions stay the same).",
+			"lockConfirmLabel": "I understand this locks the quiz — editing questions or options afterward will require reprinting for every student.",
+			"cancel": "Cancel",
+			"confirmAction": "Confirm & print",
+			"printed": "{count, plural, one {# sheet} other {# sheets}} printed.",
+			"empty": {
+				"title": "No sheets printed yet",
+				"description": "Register students on the Roster tab, then print."
+			},
+			"table": {
+				"student": "Student",
+				"version": "Version",
+				"shuffled": "Shuffled",
+				"scanStatus": "Scan status"
+			},
+			"shuffledYes": "Shuffled",
+			"shuffledNo": "Original order",
+			"notScanned": "Not scanned yet",
+			"unknownStudent": "Unknown student"
+		},
+		"scans": {
+			"uploadTitle": "Upload a completed answer sheet",
+			"dropzoneLabel": "Drag a photo here, or click to choose",
+			"dropzoneHint": "On mobile, this opens your camera directly.",
+			"variantPlaceholder": "Select the student this sheet belongs to",
+			"uploadAction": "Upload",
+			"qrDecoded": "QR code decoded — student matched automatically.",
+			"qrDecodedUnknownVariant": "QR code decoded, but it doesn't match any printed sheet for this quiz.",
+			"qrNotDecoded": "Couldn't read a QR code from this photo — pick the student manually.",
+			"uploaded": "Uploaded — scoring in progress.",
+			"empty": {
+				"title": "No scans uploaded yet"
+			},
+			"table": {
+				"student": "Student",
+				"status": "Status",
+				"score": "Score"
+			},
+			"status": {
+				"pending": "Pending",
+				"processing": "Processing",
+				"scored": "Scored",
+				"needs_review": "Needs review",
+				"error": "Error"
+			},
+			"reviewAction": "Review",
+			"retryAction": "Retry",
+			"viewImageAction": "View image",
+			"unknownStudent": "Unknown student",
+			"review": {
+				"title": "Review scan",
+				"description": "Confirm or correct low-confidence detected answers.",
+				"scanImageAlt": "Uploaded answer sheet scan",
+				"noImage": "Image not available",
+				"questionN": "Question {n}",
+				"lowConfidence": "{pct}% confidence",
+				"noAnswerDetected": "No answer detected",
+				"saved": "Correction saved."
+			}
+		},
+		"results": {
+			"stats": {
+				"scored": "Scored",
+				"average": "Average score",
+				"total": "Total sheets"
+			},
+			"scoresTitle": "Scores",
+			"noScores": "No scores yet.",
+			"table": {
+				"student": "Student",
+				"status": "Status",
+				"score": "Score",
+				"question": "Question",
+				"answered": "Answered",
+				"wrongPct": "% wrong"
+			},
+			"unknownStudent": "Unknown student",
+			"difficultyTitle": "Question difficulty",
+			"noQuestions": "No question data yet.",
+			"questionN": "Question {n}"
+		}
+	},
+	"courseBuilder": {
+		"meta": {
+			"newCourse": "New Course",
+			"editCourse": "Edit Course"
+		},
+		"common": {
+			"cancel": "Cancel",
+			"save": "Save",
+			"delete": "Delete",
+			"creating": "Creating…",
+			"dragToReorder": "Drag to reorder",
+			"collapse": "Collapse",
+			"expand": "Expand"
+		},
+		"validation": {
+			"titleRequired": "Course title is required."
+		},
+		"newCourse": {
+			"title": "New Course",
+			"description": "Fill in the basic details to create your course. You can edit everything later.",
+			"courseTitle": "Course Title",
+			"courseTitlePlaceholder": "e.g. Physics — Grade 12",
+			"subtitle": "Subtitle",
+			"subtitlePlaceholder": "A brief one-line description",
+			"courseDescription": "Description",
+			"descriptionPlaceholder": "What will students learn in this course?",
+			"language": "Language",
+			"level": "Level",
+			"isFree": "Free course",
+			"isFreeDescription": "Students can enroll without paying.",
+			"priceCredits": "Price (credits)",
+			"create": "Create & Build",
+			"visibility": "Visibility",
+			"visibilityDescription": "Should this course be visible to all students?"
+		},
+		"editCourse": {
+			"title": "Edit Course Details",
+			"description": "Update your course's basic details.",
+			"save": "Save Changes",
+			"saving": "Saving…",
+			"saved": "Course details updated."
+		},
+		"header": {
+			"back": "Back to courses",
+			"draft": "Draft",
+			"published": "Published",
+			"preview": "Preview",
+			"saveDraft": "Save Draft",
+			"publishBtn": "Publish",
+			"unpublishBtn": "Unpublish",
+			"savedDraft": "Draft saved.",
+			"unpublished": "Course unpublished.",
+			"unsavedChanges": "Unsaved changes",
+			"autoSaving": "Saving...",
+			"autoSaved": "Saved",
+			"autoSaveFailed": "Auto-save failed",
+			"editDetails": "Edit course details"
+		},
+		"tree": {
+			"title": "Curriculum",
+			"emptyTitle": "No modules yet",
+			"emptyDescription": "Add your first module to start building."
+		},
+		"module": {
+			"add": "Add Module",
+			"untitled": "Untitled Module",
+			"editDetails": "Edit Module Details",
+			"titleLabel": "Module Title",
+			"titlePlaceholder": "e.g. Chapter 1: Introduction",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "What does this module cover?",
+			"startPage": "Start Page",
+			"endPage": "End Page"
+		},
+		"lesson": {
+			"addLesson": "Add Lesson",
+			"untitled": "Untitled Lesson",
+			"editDetails": "Edit Lesson Details",
+			"titleLabel": "Lesson Title",
+			"titlePlaceholder": "e.g. Newton's First Law",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "Brief description of this lesson…",
+			"contentType": "Content Type",
+			"estimatedDuration": "Duration (minutes)",
+			"previewable": "Free preview",
+			"previewableDescription": "Non-enrolled students can preview this lesson.",
+			"mandatory": "Mandatory",
+			"mandatoryDescription": "Required for course completion.",
+			"previewBadge": "Preview"
+		},
+		"contentType": {
+			"video": "Video",
+			"text": "Text",
+			"audio": "Audio",
+			"pdf_document": "PDF Document",
+			"slide_presentation": "Slide Presentation",
+			"quiz": "Quiz",
+			"assignment": "Assignment",
+			"external_resource": "External Resource",
+			"code_playground": "Code Playground"
+		},
+		"level": {
+			"all_levels": "All Levels",
+			"beginner": "Beginner",
+			"intermediate": "Intermediate",
+			"advanced": "Advanced"
+		},
+		"content": {
+			"noLessonTitle": "No lesson selected",
+			"noLessonDescription": "Select a lesson from the curriculum on the left to edit its content.",
+			"noBlocksTitle": "No content blocks",
+			"noBlocksDescription": "Add a block to start building this lesson."
+		},
+		"block": {
+			"addBlock": "Add Content Block",
+			"chooseType": "Choose block type",
+			"textContent": "Content (Markdown supported)",
+			"textPlaceholder": "Start writing…",
+			"videoUrl": "Video URL",
+			"videoProvider": "Provider",
+			"providerPlaceholder": "Select provider",
+			"customProvider": "Custom / Direct",
+			"transcript": "Transcript",
+			"transcriptPlaceholder": "Paste the transcript here…",
+			"audioUrl": "Audio URL",
+			"documentUrl": "PDF URL",
+			"slidesUrl": "Slides URL",
+			"resourceTitle": "Resource Title",
+			"resourceTitlePlaceholder": "e.g. Official Documentation",
+			"resourceUrl": "Resource URL",
+			"codeLanguage": "Language",
+			"languagePlaceholder": "Select language",
+			"defaultCode": "Starter Code",
+			"codePlaceholder": "// Write starter code here…",
+			"solutionCode": "Solution Code",
+			"solutionPlaceholder": "// Solution code shown after submission…",
+			"quizManagedSeparately": "Quiz content is managed via the Quiz Builder.",
+			"upload": {
+				"modeLink": "Link",
+				"modeUpload": "Upload",
+				"dropzoneLabel": "Drag & drop a file, or click to browse",
+				"dropzoneHint": "Max size {max}",
+				"uploading": "Uploading… {pct}%",
+				"verifying": "Verifying upload…",
+				"uploadSuccess": "File uploaded.",
+				"uploadFailed": "Upload failed. Please try again.",
+				"invalidType": "This file type is not supported.",
+				"tooLarge": "File is too large (max {max}).",
+				"open": "Open file",
+				"remove": "Remove file"
+			},
+			"type": {
+				"text": "Text / Article",
+				"video": "Video",
+				"audio": "Audio",
+				"pdf_document": "PDF Document",
+				"slide_presentation": "Slide Presentation",
+				"external_resource": "External Resource",
+				"code_playground": "Code Playground",
+				"quiz": "Quiz",
+				"assignment": "Assignment"
+			}
+		}
+	},
+	"flashcardBuilder": {
+		"meta": {
+			"newDeck": "New Deck",
+			"editDeck": "Edit Deck"
+		},
+		"common": {
+			"cancel": "Cancel",
+			"save": "Save",
+			"delete": "Delete",
+			"edit": "Edit",
+			"actions": "Actions",
+			"creating": "Creating…"
+		},
+		"list": {
+			"title": "Decks",
+			"myDecks": "My Decks",
+			"allDecks": "All Decks",
+			"subtitle": "{count, plural, one {# deck} other {# decks}}",
+			"newDeck": "New Deck",
+			"cardCount": "{count, plural, one {# card} other {# cards}}",
+			"priceCredits": "{count, plural, one {# credit} other {# credits}}",
+			"dailyLimit": "{count}/day",
+			"emptyTitle": "No decks found",
+			"emptyDescription": "Create your first deck to start studying.",
+			"emptyAction": "Create Deck",
+			"searchPlaceholder": "Search decks…",
+			"filters": "Filters",
+			"clearAll": "Clear all",
+			"previous": "Previous",
+			"next": "Next",
+			"showing": "Showing {from}–{to} of {total} decks",
+			"algorithmFilter": "Algorithm",
+			"visibilityFilter": "Visibility",
+			"onlyMyDecks": "Only my decks",
+			"deckDeleted": "Deck deleted.",
+			"deleteFailed": "Failed to delete deck."
+		},
+		"validation": {
+			"nameRequired": "Deck name is required.",
+			"questionRequired": "Question is required.",
+			"oneCorrectRequired": "At least one answer must be marked correct.",
+			"allAnswersFilled": "All answer fields must be filled in."
+		},
+		"visibility": {
+			"public": "Public",
+			"private": "Private",
+			"classmate": "Classmates"
+		},
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "Leitner"
+		},
+		"newDeck": {
+			"title": "New Deck",
+			"description": "Create a new flashcard deck to start studying.",
+			"nameLabel": "Deck Name",
+			"namePlaceholder": "e.g. Biology Chapter 3",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "What is this deck about?",
+			"visibilityLabel": "Visibility",
+			"algorithmLabel": "Algorithm",
+			"isFreeLabel": "Free Access",
+			"isFreeDescription": "Allow all users to study this deck for free.",
+			"priceCreditsLabel": "Price (credits)",
+			"dailyLimitLabel": "Daily Limit",
+			"dailyLimitDescription": "Max cards to study per day. Leave empty for unlimited.",
+			"dailyLimitPlaceholder": "e.g. 50",
+			"create": "Create Deck"
+		},
+		"deckEdit": {
+			"title": "Deck Settings",
+			"description": "Update the details of this flashcard deck.",
+			"save": "Save Changes",
+			"savedSuccess": "Deck updated."
+		},
+		"advancedSettings": {
+			"title": "Advanced Settings",
+			"fsrsSection": "FSRS Settings",
+			"sm2Section": "SM-2 Settings",
+			"leitnerNote": "The Leitner system uses fixed box intervals. No additional settings are available.",
+			"fsrsMaxIntervalLabel": "Maximum Interval (days)",
+			"fsrsMaxIntervalDescription": "Hard cap on review intervals. Default is 36500 (≈100 years).",
+			"fsrsRetentionLabel": "Target Retention",
+			"fsrsRetentionDescription": "Desired recall probability at review time (0.70–0.99). Default is 0.9.",
+			"sm2EasyBonusLabel": "Easy Bonus",
+			"sm2EasyBonusDescription": "Multiplier applied when answering Easy (≥ 1.0). Default is 1.3.",
+			"sm2IntervalModifierLabel": "Interval Modifier",
+			"sm2IntervalModifierDescription": "Scales all intervals. Increase to review less often. Default is 1.0.",
+			"sm2StartingEaseLabel": "Starting Ease",
+			"sm2StartingEaseDescription": "Initial ease factor for new cards (≥ 1.3). Default is 2.5."
+		},
+		"header": {
+			"back": "Back to decks",
+			"settings": "Settings",
+			"addCard": "Add Card"
+		},
+		"builder": {
+			"cardCount": "{count} cards",
+			"emptyTitle": "No flashcards yet",
+			"emptyDescription": "Add your first card to start building this deck.",
+			"addFirst": "Add First Card",
+			"addCard": "Add Card"
+		},
+		"card": {
+			"fact": "Fact",
+			"hint": "Hint",
+			"answers": "{count, plural, one {answer} other {answers}}",
+			"deleted": "Flashcard deleted.",
+			"deleteTitle": "Delete this flashcard?",
+			"deleteDescription": "This action cannot be undone. The flashcard will be permanently removed from this deck."
+		},
+		"dialog": {
+			"addTitle": "Add Flashcard",
+			"addDescription": "Fill in the question and answers for this flashcard.",
+			"editTitle": "Edit Flashcard",
+			"editDescription": "Update the question and answers.",
+			"questionLabel": "Question",
+			"questionPlaceholder": "What is the question?",
+			"answersLabel": "Answers",
+			"answerLabel": "Answer {number}",
+			"answerPlaceholder": "Answer {number}",
+			"markCorrect": "Mark as correct",
+			"markIncorrect": "Mark as incorrect",
+			"addAnswer": "Add Answer",
+			"removeAnswer": "Remove answer",
+			"factLabel": "Fact / Explanation",
+			"factDescription": "Optional note shown after answering.",
+			"factPlaceholder": "Add an interesting fact or explanation…",
+			"hintLabel": "Hint",
+			"hintDescription": "Optional clue shown before answering.",
+			"hintPlaceholder": "Give a clue…",
+			"add": "Add Card",
+			"update": "Save Changes",
+			"addedSuccess": "Flashcard added.",
+			"updatedSuccess": "Flashcard updated."
+		}
+	},
+	"spacedRepetition": {
+		"meta": {
+			"title": "Practice"
+		},
+		"myDecks": {
+			"title": "My Decks",
+			"deckCount": "{count, plural, =1 {# deck} other {# decks}}"
+		},
+		"page": {
+			"title": "Practice",
+			"subtitle": "Review your flashcards with spaced repetition to lock them into long-term memory.",
+			"addDeck": "Add deck",
+			"study": "Study",
+			"noDeckSelected": "Select a deck to start practicing."
+		},
+		"deckSwitcher": {
+			"label": "Active deck",
+			"placeholder": "Select a deck",
+			"due": "{count} due"
+		},
+		"enroll": {
+			"title": "Set up a deck",
+			"description": "Choose a deck and how many new cards to learn each day.",
+			"deckLabel": "Deck",
+			"deckPlaceholder": "Select a deck…",
+			"loading": "Loading decks…",
+			"noDecks": "No decks available to enroll in.",
+			"cardCount": "{count} cards",
+			"dailyLimitLabel": "New cards per day",
+			"dailyLimitHint": "How many new cards are introduced each day. You can change this later.",
+			"cancel": "Cancel",
+			"submit": "Start learning",
+			"submitting": "Enrolling…",
+			"enrolled": "Deck added — happy studying!",
+			"failed": "Could not enroll in this deck.",
+			"loadFailed": "Could not load decks.",
+			"priceCredits": "{count, plural, one {# credit} other {# credits}}",
+			"buyForCredits": "Buy for {count, plural, one {# credit} other {# credits}}",
+			"insufficientCredits": "You don't have enough credits. Please top up your balance."
+		},
+		"settings": {
+			"label": "Deck settings",
+			"dailyLimit": "New cards per day",
+			"update": "Save",
+			"updating": "Saving…",
+			"updated": "Daily limit updated.",
+			"updateFailed": "Could not update the daily limit."
+		},
+		"card": {
+			"question": "Question",
+			"answer": "Answer",
+			"hint": "Hint",
+			"fact": "Good to know",
+			"tapToReveal": "Click or press Space to reveal the answer",
+			"flipLabel": "Flip card",
+			"status": {
+				"new": "New",
+				"learning": "Learning",
+				"review": "Review",
+				"relearning": "Relearning"
+			}
+		},
+		"grades": {
+			"prompt": "How well did you remember?",
+			"again": "Again",
+			"hard": "Hard",
+			"good": "Good",
+			"easy": "Easy",
+			"gradedAs": "Answered: {grade}",
+			"intervalMinutes": "{count}m",
+			"intervalDays": "{count}d",
+			"intervalMonths": "{count}mo",
+			"saveFailed": "Could not save your review. Please try again."
+		},
+		"nav": {
+			"previous": "Previous",
+			"next": "Next"
+		},
+		"stats": {
+			"progress": "{done} of {total} reviewed",
+			"progressLabel": "Session progress",
+			"new": "New",
+			"learning": "Learning",
+			"review": "Review"
+		},
+		"complete": {
+			"title": "Session complete!",
+			"subtitle": "You reviewed {count} cards today. Come back tomorrow for the next batch.",
+			"backToDecks": "Browse decks"
+		},
+		"caughtUp": {
+			"title": "All caught up",
+			"subtitle": "No cards are due right now. Come back later or raise your daily limit."
+		},
+		"empty": {
+			"title": "No active decks yet",
+			"subtitle": "Enroll in a deck to start building a daily review habit.",
+			"action": "Add your first deck"
+		}
+	},
+	"classroomBuilder": {
+		"common": {
+			"cancel": "Cancel",
+			"save": "Save",
+			"delete": "Delete",
+			"remove": "Remove",
+			"actions": "Actions"
+		},
+		"validation": {
+			"nameRequired": "Name is required.",
+			"titleRequired": "Title is required.",
+			"messageRequired": "Message is required.",
+			"joinCodeRequired": "Join code is required.",
+			"joinCodeLength": "Join code must be a 6-digit number."
+		},
+		"list": {
+			"myClassrooms": "My Classrooms",
+			"subtitle": "{count, plural, one {# classroom} other {# classrooms}}",
+			"newClassroom": "New Classroom",
+			"emptyTitle": "No classrooms yet",
+			"emptyDescription": "Create a classroom to share resources with a group of students.",
+			"emptyAction": "Create Classroom"
+		},
+		"newClassroom": {
+			"title": "New Classroom",
+			"description": "Create a classroom to share decks, courses, and materials with students.",
+			"nameLabel": "Classroom Name",
+			"namePlaceholder": "e.g. Grade 12 — Physics",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "What is this classroom for?",
+			"joinCodeLabel": "Join Code",
+			"joinCodePlaceholder": "e.g. 123456",
+			"create": "Create Classroom"
+		},
+		"card": {
+			"actions": "Actions",
+			"manage": "Manage",
+			"copyJoinCode": "Copy join code",
+			"joinCodeCopied": "Join code copied!",
+			"delete": "Delete",
+			"archived": "Archived",
+			"noDescription": "No description",
+			"members": "{count, plural, one {# member} other {# members}}"
+		},
+		"header": {
+			"back": "Back to classrooms",
+			"settings": "Settings",
+			"memberCount": "{count, plural, one {# member} other {# members}}"
+		},
+		"settings": {
+			"title": "Classroom Settings",
+			"description": "Update the classroom name and description.",
+			"nameLabel": "Name",
+			"namePlaceholder": "Classroom name",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "Brief description",
+			"saved": "Settings saved."
+		},
+		"tabs": {
+			"resources": "Resources",
+			"materials": "Materials",
+			"announcements": "Announcements",
+			"members": "Members"
+		},
+		"resources": {
+			"subtitle": "{count, plural, one {# resource} other {# resources}} shared",
+			"add": "Add Resource",
+			"added": "Resource added.",
+			"emptyTitle": "No resources yet",
+			"emptyDescription": "Share decks and courses with this classroom.",
+			"type": {
+				"deck": "Flashcard Deck",
+				"course": "Course",
+				"library": "Library",
+				"quiz": "Quiz"
+			},
+			"addDialog": {
+				"title": "Add Resource",
+				"typeLabel": "Resource Type",
+				"resourceLabel": "Select Resource",
+				"selectRequired": "Please select a resource.",
+				"noItems": "No items found. Create some first.",
+				"add": "Add"
+			}
+		},
+		"materials": {
+			"subtitle": "{count, plural, one {# material} other {# materials}}",
+			"add": "Add Material",
+			"added": "Material added.",
+			"published": "Published",
+			"emptyTitle": "No materials yet",
+			"emptyDescription": "Upload files, links, or documents for your students.",
+			"type": {
+				"lesson": "Lesson",
+				"pdf": "PDF",
+				"video": "Video",
+				"document": "Document",
+				"link": "Link",
+				"practice": "Practice",
+				"exam": "Exam",
+				"other": "Other"
+			},
+			"addDialog": {
+				"title": "Add Material",
+				"titleLabel": "Title",
+				"titlePlaceholder": "Material title",
+				"descriptionLabel": "Description",
+				"descriptionPlaceholder": "Brief description",
+				"typeLabel": "Type",
+				"add": "Add Material"
+			}
+		},
+		"announcements": {
+			"emptyTitle": "No announcements",
+			"emptyDescription": "Post an announcement to notify your students.",
+			"newLabel": "Write an announcement",
+			"placeholder": "Share something with your students…",
+			"post": "Post",
+			"unknownAuthor": "Unknown"
+		},
+		"members": {
+			"subtitle": "{count, plural, one {# member} other {# members}}",
+			"joinCodeLabel": "Join Code",
+			"joinCodeDescription": "Share this code with students so they can join the classroom.",
+			"copyCode": "Copy code",
+			"regenerateCode": "Regenerate code",
+			"joinCodeRegenerated": "Join code regenerated.",
+			"unknownUser": "Unknown user",
+			"emptyTitle": "No members yet",
+			"emptyDescription": "Share the join code above with students.",
+			"role": {
+				"owner": "Owner",
+				"instructor": "Instructor",
+				"assistant": "Assistant",
+				"student": "Student"
+			},
+			"invite": {
+				"button": "Invite Student",
+				"title": "Invite Student",
+				"emailLabel": "Student Email",
+				"emailPlaceholder": "student@example.com",
+				"submit": "Send Invite",
+				"sent": "Invite sent."
+			},
+			"requests": {
+				"title": "Join Requests",
+				"subtitle": "{count, plural, one {# pending request} other {# pending requests}}",
+				"emptyTitle": "No pending requests",
+				"emptyDescription": "Requests from students joining with your code will show up here.",
+				"approve": "Approve",
+				"decline": "Decline",
+				"approved": "Request approved.",
+				"declined": "Request declined.",
+				"cancel": "Cancel Invite",
+				"canceled": "Invite canceled.",
+				"invitedAwaiting": "Invited — awaiting their response.",
+				"wantsToJoin": "Wants to join using your classroom code."
+			}
+		}
+	},
+	"aboutUs": {
+		"title": "About Us",
+		"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
+		"hero": {
+			"title": "Empowering Learners Everywhere",
+			"badge": "About Our Platform",
+			"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
+			"subtitle": "High-quality education: accessible, engaging, and always with you — online or offline, on any device",
+			"cta": {
+				"primary": "Get Started",
+				"secondary": "Watch Demo"
+			}
+		},
+		"stats": {
+			"students": "Active Students",
+			"courses": "Courses",
+			"schools": "Active Schools",
+			"rating": "App Rating",
+			"value": {
+				"students": "1M+",
+				"courses": "100+",
+				"schools": "120+",
+				"rating": "4.9★"
+			}
+		},
+		"mission": {
+			"title": "Our Mission",
+			"body": "We believe learning should have no boundaries. Our platform combines modern technology with proven teaching methods to help millions of students reach their goals — wherever they are, whenever they're ready.",
+			"points": [
+				"Deliver high-quality lessons to every learner.",
+				"Make learning inclusive across languages and devices.",
+				"Support long-term progress with practical tools."
+			]
+		},
+		"features": {
+			"title": "Why Choose Us",
+			"subtitle": "Everything you need for a seamless learning experience.",
+			"offline": {
+				"title": "Offline Access",
+				"desc": "Download lessons and learn without an internet connection."
+			},
+			"sync": {
+				"title": "Cloud Sync",
+				"desc": "Your progress syncs instantly across all your devices."
+			},
+			"secure": {
+				"title": "Safe & Secure",
+				"desc": "Your data is encrypted and protected at every step."
+			},
+			"fast": {
+				"title": "Lightning Fast",
+				"desc": "A smooth, optimized experience on web and mobile."
+			},
+			"library": {
+				"title": "Rich Library",
+				"desc": "Thousands of courses across every subject and level."
+			},
+			"certified": {
+				"title": "Certified Courses",
+				"desc": "Earn recognized certificates as you complete courses."
+			}
+		},
+		"values": {
+			"title": "Our Core Values",
+			"subtitle": "The principles that shape everything we build.",
+			"accessible": {
+				"title": "Accessible",
+				"desc": "Education open to everyone, everywhere."
+			},
+			"learner": {
+				"title": "Learner-First",
+				"desc": "Every decision starts with our students."
+			},
+			"quality": {
+				"title": "Quality",
+				"desc": "Trusted content from expert educators."
+			}
+		},
+		"video": {
+			"badge": "Watch Demo",
+			"title": "See Abzar Kankor in Action",
+			"subtitle": "Discover how our platform transforms learning for thousands of students across Afghanistan.",
+			"playButton": "Play video",
+			"closeButton": "Close video",
+			"duration": "2:30 min",
+			"feature1Title": "Easy to Use",
+			"feature1Desc": "Intuitive interface designed for students of all levels.",
+			"feature2Title": "Offline Access",
+			"feature2Desc": "Download lessons and learn anywhere, anytime.",
+			"feature3Title": "Progress Tracking",
+			"feature3Desc": "Monitor your learning journey with detailed analytics."
+		},
+		"team": {
+			"badge": "Our Team",
+			"title": "Our Team",
+			"subtitle": "Meet the people building Abzar Kankor.",
+			"highlight": "Meet Our Dedicated Team of Professionals",
+			"panelTitle": "Built by people who ship with care",
+			"panelDesc": "A compact group of product, design, and engineering minds focused on learning outcomes, speed, and trust.",
+			"members": [
+				{
+					"id": "besmillah-ibrhimi",
+					"name": "Besmillah Ibrhimi",
+					"role": "CEO & Founder",
+					"imageUrl": "/team-ali.png",
+					"email": "besmillah@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"location": "Kabul, Afghanistan",
+					"shortBio": "Besmillah founded 'Abzar Kankor' with the goal of providing every Afghan student with access to quality education.",
+					"fullBio": "Besmillah Ibrahimi is the founder and CEO of Abzar Kankor. With over 10 years of experience in education and technology, he graduated from Kabul University with a degree in Computer Science. He believes technology can bridge the education gap and create equal opportunities for all students.",
+					"socialLinks": [
+						{ "platform": "Twitter", "url": "https://twitter.com/besmillah" },
+						{ "platform": "Facebook", "url": "https://facebook.com/besmillah" },
+						{
+							"platform": "Instagram",
+							"url": "https://instagram.com/besmillah"
+						}
+					]
+				},
+				{
+					"id": "fatema-ahmadi",
+					"name": "Fatema Ahmadi",
+					"role": "CTO",
+					"imageUrl": "/team-nilo.png",
+					"email": "fatema@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "Fatema leads our engineering team and architects scalable systems for millions of learners.",
+					"fullBio": "Fatema Ahmadi is our Chief Technology Officer with 8+ years of software development experience. She specializes in scalable architecture and user experience optimization.",
+					"socialLinks": [
+						{ "platform": "Twitter", "url": "https://twitter.com/fatema" },
+						{ "platform": "Instagram", "url": "https://instagram.com/fatema" },
+						{ "platform": "Facebook", "url": "https://facebook.com/fatema" }
+					]
+				},
+				{
+					"id": "nadia-rahimi",
+					"name": "Nadia Rahimi",
+					"role": "Product Lead",
+					"imageUrl": "/team-sara.jpg",
+					"email": "nadia@abzarkankor.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "Nadia combines creativity with user research to build simple, delightful learning experiences.",
+					"fullBio": "Nadia Rahimi is our Product Lead, specializing in educational digital products. She conducts regular user research with Afghan students to understand their real needs.",
+					"socialLinks": [
+						{ "platform": "Facebook", "url": "https://facebook.com/nadia" },
+						{ "platform": "Instagram", "url": "https://instagram.com/nadia" },
+						{ "platform": "Twitter", "url": "https://twitter.com/nadia" }
+					]
+				},
+				{
+					"id": "ali-hosseini",
+					"name": "Ali Hosseini",
+					"role": "Content Manager",
+					"imageUrl": "/img/team/4.jpg",
+					"email": "ali@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "Ali oversees educational content quality and works with top teachers across Afghanistan.",
+					"fullBio": "Ali Hosseini has a Master's degree in Education and over 12 years of teaching experience. He collaborates with a wide network of teachers to produce high-quality, up-to-date content.",
+					"socialLinks": [
+						{ "platform": "Facebook", "url": "https://facebook.com/ali" },
+						{ "platform": "Instagram", "url": "https://instagram.com/ali" },
+						{ "platform": "Twitter", "url": "https://twitter.com/ali" }
+					]
+				}
+			]
+		},
+		"download": {
+			"title": "Start Learning Today",
+			"subtitle": "Join over a million learners on our app and web platform.",
+			"ios": "Download on the App Store",
+			"android": "Get it on Google Play",
+			"stores": {
+				"appStore": {
+					"label": "Download on the",
+					"name": "App Store"
+				},
+				"googlePlay": {
+					"label": "GET IT ON",
+					"name": "Google Play"
+				}
+			}
+		},
+		"contact": {
+			"email": "Email Address",
+			"phone": "Phone Number",
+			"address": "Office Address",
+			"hours": "Working Hours",
+			"hoursValue": "Saturday - Thursday, 8:00 AM - 5:00 PM",
+			"badge": "Get in Touch",
+			"title": "Contact Our Team",
+			"subtitle": "Have questions or need support? We are here to help.",
+			"socialTitle": "Follow Us on Social Media",
+			"socialSubtitle": "Stay updated with our latest news and announcements.",
+			"responseTime": "We typically respond within 24 hours."
+		}
+	},
+	"search": {
+		"tabs": {
+			"all": "All",
+			"courses": "Courses",
+			"libraries": "Library",
+			"decks": "Decks",
+			"quizzes": "Quizzes"
+		},
+		"groups": {
+			"courses": "Courses",
+			"libraries": "Library",
+			"decks": "Decks",
+			"quizzes": "Quizzes"
+		},
+		"seeAll": "See all",
+		"loadError": "Unable to load search results",
+		"tryAgain": "Try again",
+		"searching": "Searching…",
+		"noResults": "No results found",
+		"noResultsDescription": "Try a different search term.",
+		"showingResults": "Showing {from}–{to} of {total} results",
+		"previous": "Previous",
+		"next": "Next",
+		"resultsFor": "Results for \"{query}\"",
+		"resultsTitle": "Search results",
+		"emptyQuery": "Type something to search Abzar Kankor.",
+		"viewAllResults": "View all results for \"{query}\""
+	},
+	"decks": {
+		"title": "Decks",
+		"discussions": "Deck Discussions",
+		"description": "Practice pre-built and community flashcard decks.",
+		"backToHome": "Back to home",
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "Leitner"
+		},
+		"free": "Free",
+		"practiceNow": "Practice now",
+		"continueStudying": "Continue studying",
+		"signUpToPractice": "Sign up to practice",
+		"searchPlaceholder": "Search decks…",
+		"clearSearch": "Clear search",
+		"freeOnly": "Free only",
+		"deckCount": "{count, plural, =1 {# deck} other {# decks}}",
+		"cardCount": "{count, plural, =1 {# card} other {# cards}}",
+		"priceCredits": "{count, plural, one {# credit} other {# credits}}",
+		"buyForCredits": "Buy for {count, plural, one {# credit} other {# credits}}"
+	},
+	"quizzes": {
+		"title": "Quizzes",
+		"discussions": "Quiz Discussions",
+		"description": "Practice quizzes and exam simulations across every subject.",
+		"backToList": "Back to quizzes",
+		"searchPlaceholder": "Search quizzes…",
+		"clearSearch": "Clear search",
+		"noQuizzesFound": "No quizzes found",
+		"noQuizzesDescription": "Try adjusting your search.",
+		"showing": "Showing {from}–{to} of {total} quizzes",
+		"previous": "Previous",
+		"next": "Next",
+		"loadError": "Unable to load quizzes",
+		"loadErrorDescription": "Please try again in a moment.",
+		"tryAgain": "Try again",
+		"view": "View Quiz",
+		"instructions": "Instructions",
+		"timeLimitMinutes": "{count, plural, =1 {# minute} other {# minutes}}",
+		"passingScore": "{percent}% to pass",
+		"maxAttempts": "{count, plural, =1 {# attempt} other {# attempts}}",
+		"signUpToTake": "Sign up to take this quiz",
+		"askInstructorForCode": "Ask your instructor or school for the entrance code to take this quiz.",
+		"free": "Free",
+		"priceCredits": "{count, plural, one {# credit} other {# credits}}",
+		"register": "Register",
+		"registerForCredits": "Register for {count, plural, one {# credit} other {# credits}}",
+		"alreadyRegistered": "You're registered for this quiz.",
+		"registrationClosed": "Registration for this quiz is closed.",
+		"registrationSuccess": "Registered successfully!",
+		"registrationFailed": "Registration failed. Please try again.",
+		"insufficientCredits": "You don't have enough credits. Please top up your balance."
+	},
+	"bookmarks": {
+		"title": "Bookmarks",
+		"description": "Everything you've saved for later, all in one place.",
+		"searchPlaceholder": "Search bookmarks…",
+		"clearSearch": "Clear search",
+		"allTypes": "All types",
+		"type_course": "Course",
+		"type_deck": "Deck",
+		"type_library": "Library",
+		"type_quiz": "Quiz",
+		"open": "Open",
+		"remove": "Remove bookmark",
+		"untitled": "Untitled",
+		"noBookmarksFound": "No bookmarks found",
+		"noBookmarksDescription": "Try adjusting your search or filters.",
+		"noBookmarksYet": "No bookmarks yet",
+		"noBookmarksYetDescription": "Save courses, decks, library books, and quizzes to find them here later.",
+		"showing": "Showing {from}–{to} of {total} bookmarks",
+		"previous": "Previous",
+		"next": "Next",
+		"loadError": "Unable to load bookmarks",
+		"loadErrorDescription": "Please try again in a moment.",
+		"tryAgain": "Try again",
+		"bookmark": "Bookmark",
+		"bookmarked": "Bookmarked",
+		"bookmarkAdded": "Bookmark added.",
+		"bookmarkRemoved": "Bookmark removed.",
+		"bookmarkFailed": "Failed to update bookmark.",
+		"removeFailed": "Failed to remove bookmark."
+	},
+	"notifications": {
+		"title": "Notifications",
+		"description": "Everything that needs your attention, all in one place.",
+		"markAllRead": "Mark all as read",
+		"markAsRead": "Mark as read",
+		"viewAll": "View all",
+		"unread": "Unread",
+		"all": "All",
+		"noNotifications": "No notifications",
+		"noNotificationsDescription": "You're all caught up. New notifications will show up here.",
+		"noUnreadNotifications": "No unread notifications",
+		"loadError": "Unable to load notifications",
+		"loadErrorDescription": "Please try again in a moment.",
+		"tryAgain": "Try again",
+		"showing": "Showing {from}–{to} of {total} notifications",
+		"previous": "Previous",
+		"next": "Next",
+		"justNow": "Just now",
+		"type": {
+			"new_course_enrollment": "New enrollment",
+			"course_completion": "Course completed",
+			"new_lesson_available": "New lesson available",
+			"quiz_due_reminder": "Quiz due soon",
+			"quiz_graded": "Quiz graded",
+			"new_assignment_submission": "New submission",
+			"assignment_graded": "Assignment graded",
+			"new_discussion_post": "New discussion post",
+			"new_reply_to_post": "New reply",
+			"course_announcement": "Announcement",
+			"system_update": "System update",
+			"badge_awarded": "Badge awarded",
+			"classroom_invite": "Classroom invite",
+			"classroom_join_request": "Classroom join request",
+			"classroom_invite_response": "Classroom invite response",
+			"school_invite": "School invite",
+			"school_invite_response": "School invite response"
+		},
+		"telegramTitle": "Telegram notifications",
+		"telegramDescription": "Connect your Telegram account to also get notified there, instantly.",
+		"telegramConnectedDescription": "Connected — notifications are also sent to your Telegram.",
+		"telegramConnect": "Connect Telegram",
+		"telegramDisconnect": "Disconnect",
+		"telegramDisconnected": "Telegram disconnected.",
+		"pushTitle": "Browser push notifications",
+		"pushDescription": "Get notified instantly in your browser, even when this tab isn't open.",
+		"pushEnabledDescription": "Enabled on this device.",
+		"pushDeniedDescription": "Blocked for this site — enable notifications in your browser settings to turn this on.",
+		"pushEnable": "Enable",
+		"pushDisable": "Disable",
+		"pushDisabled": "Push notifications disabled on this device.",
+		"pushEnableError": "Could not enable push notifications. Please try again.",
+		"accept": "Accept",
+		"decline": "Decline",
+		"respondError": "Could not respond. Please try again.",
+		"requestApproved": "Approved.",
+		"requestDeclined": "Declined."
+	},
+	"importDialog": {
+		"title": "Import data",
+		"description": "Import rows into {table} from a CSV, Excel, Google Sheets, or PDF file.",
+		"steps": {
+			"upload": "Upload",
+			"mapping": "Map fields",
+			"preview": "Preview"
+		},
+		"footer": {
+			"back": "Back",
+			"continue": "Continue",
+			"importCount": "{count, plural, =1 {Import # row} other {Import # rows}}",
+			"done": "Done"
+		},
+		"upload": {
+			"fileTab": "File",
+			"googleSheetTab": "Google Sheets",
+			"dropzoneIdle": "Drag & drop a file, or click to browse",
+			"dropzoneParsing": "Parsing file…",
+			"supports": "Supports {extensions}",
+			"googleSheetHint": "Paste the link to a Google Sheet shared as \"Anyone with the link\".",
+			"googleSheetPlaceholder": "https://docs.google.com/spreadsheets/d/...",
+			"submit": "Import",
+			"errorTitle": "Couldn't read this file"
+		},
+		"mapping": {
+			"requiredAlertTitle": "Required fields need a source or default value",
+			"destinationColumn": "Destination column",
+			"sourceColumn": "Source column",
+			"defaultValue": "Default value",
+			"required": "required",
+			"dontImport": "Don't import",
+			"defaultPlaceholder": "Optional default"
+		},
+		"preview": {
+			"showingRows": "Showing {shown, plural, =1 {# row} other {# rows}} of {total, plural, =1 {# row} other {# rows}}",
+			"rowsSkipped": "{count, plural, =1 {# row will be skipped} other {# rows will be skipped}}",
+			"issuesAlertTitle": "Some rows have validation issues",
+			"issuesAlertDescription": "Rows with issues are highlighted below and will be skipped on import. Go back to Mapping to fix them, or continue to import the valid rows only."
+		},
+		"result": {
+			"importing": "Importing {processed} of {total} rows…",
+			"importedSummary": "{count, plural, =1 {# row imported} other {# rows imported}}",
+			"importedWithFailures": "{count, plural, =1 {# row imported} other {# rows imported}}, {failed, plural, =1 {# skipped or failed} other {# skipped or failed}}",
+			"errorsAlertTitle": "Some rows couldn't be imported",
+			"errorsAlertDescription": "Review the details below, fix the source file, and re-run the import for just those rows if needed.",
+			"rowColumn": "Row",
+			"reasonColumn": "Reason"
+		}
+	},
+	"credits": {
+		"admin": {
+			"title": "Students",
+			"subtitle": "{count, plural, =1 {# student} other {# students}}",
+			"searchPlaceholder": "Search by name, email, or phone…",
+			"loading": "Loading students…",
+			"empty": "No students found.",
+			"unnamedStudent": "Unnamed student",
+			"balanceCredits": "{count, plural, one {# credit} other {# credits}}",
+			"charge": "Charge",
+			"backToStudents": "Back to students",
+			"previous": "Previous",
+			"next": "Next",
+			"showing": "Showing {from}–{to} of {total}",
+			"table": {
+				"name": "Name",
+				"contact": "Contact",
+				"balance": "Balance",
+				"status": "Status"
+			},
+			"tabs": {
+				"ledger": "Ledger",
+				"purchases": "Purchases"
+			},
+			"ledgerTable": {
+				"date": "Date",
+				"type": "Type",
+				"amount": "Amount",
+				"balanceAfter": "Balance after",
+				"note": "Note",
+				"empty": "No transactions yet."
+			},
+			"purchasesTable": {
+				"date": "Date",
+				"item": "Item",
+				"type": "Type",
+				"price": "Price",
+				"empty": "No purchases yet."
+			},
+			"type": {
+				"topup": "Top-up",
+				"purchase": "Purchase",
+				"refund": "Refund",
+				"adjustment": "Adjustment"
+			},
+			"itemType": {
+				"course": "Course",
+				"deck": "Deck",
+				"quiz": "Quiz"
+			}
+		},
+		"chargeDialog": {
+			"title": "Charge credits",
+			"description": "Add credits to this student's account.",
+			"descriptionNamed": "Add credits to {name}'s account.",
+			"amountLabel": "Amount (credits)",
+			"noteLabel": "Note (optional)",
+			"notePlaceholder": "e.g. Cash top-up at office",
+			"cancel": "Cancel",
+			"charge": "Charge",
+			"charging": "Charging…",
+			"success": "Charged {amount} credits successfully.",
+			"invalidAmount": "Enter a valid amount greater than 0."
+		},
+		"wallet": {
+			"title": "Wallet",
+			"subtitle": "Your credit balance and transaction history.",
+			"balanceLabel": "Balance",
+			"balanceCredits": "{count, plural, one {# credit} other {# credits}}",
+			"tabs": {
+				"ledger": "Ledger",
+				"purchases": "Purchases",
+				"sales": "Sales",
+				"discounts": "Discounts"
+			},
+			"ledgerTable": {
+				"date": "Date",
+				"type": "Type",
+				"amount": "Amount",
+				"balanceAfter": "Balance after",
+				"empty": "No transactions yet."
+			},
+			"purchasesTable": {
+				"date": "Date",
+				"item": "Item",
+				"type": "Type",
+				"price": "Price",
+				"empty": "You haven't bought anything yet."
+			},
+			"salesDescription": "Credits you've earned selling your own decks.",
+			"totalEarned": "Total earned",
+			"salesTable": {
+				"date": "Date",
+				"item": "Item",
+				"price": "Price",
+				"empty": "No sales yet."
+			},
+			"type": {
+				"topup": "Top-up",
+				"purchase": "Purchase",
+				"refund": "Refund",
+				"adjustment": "Adjustment"
+			},
+			"itemType": {
+				"course": "Course",
+				"deck": "Deck",
+				"quiz": "Quiz"
+			}
+		},
+		"earnings": {
+			"title": "Earnings",
+			"subtitle": "Credits you've earned from selling courses, decks, and quizzes.",
+			"totalEarned": "Total earned",
+			"balanceCredits": "{count, plural, one {# credit} other {# credits}}",
+			"table": {
+				"date": "Date",
+				"item": "Item",
+				"type": "Type",
+				"price": "Price",
+				"empty": "No sales yet."
+			},
+			"itemType": {
+				"course": "Course",
+				"deck": "Deck",
+				"quiz": "Quiz"
+			}
+		}
+	},
+	"discounts": {
+		"page": {
+			"title": "Discounts",
+			"subtitle": "Create and manage discount codes for your courses, decks, and quizzes.",
+			"adminSubtitle": "Manage platform-wide discounts, and review every discount created on Abzar Kankor."
+		},
+		"picker": {
+			"searchPlaceholder": "Search your items…",
+			"empty": "No items found.",
+			"itemType": {
+				"course": "Courses",
+				"deck": "Decks",
+				"quiz": "Quizzes"
+			},
+			"singleHint": "Select one item this discount applies to.",
+			"multiHint": "Select one or more items this discount applies to."
+		},
+		"dialog": {
+			"createTitle": "New discount",
+			"createDescription": "Create a coupon code buyers can redeem at checkout.",
+			"editTitle": "Edit discount",
+			"editDescription": "Update this discount's code, value, and availability.",
+			"codeLabel": "Code",
+			"codePlaceholder": "e.g. SUMMER20",
+			"typeLabel": "Type",
+			"type": {
+				"percentage": "Percentage off",
+				"fixed": "Fixed amount off"
+			},
+			"valueLabelPercentage": "Percentage (%)",
+			"valueLabelFixed": "Amount (credits)",
+			"scopeLabel": "Applies to",
+			"scope": {
+				"item": "A single item",
+				"group": "A group of items",
+				"all": "Everything on the platform"
+			},
+			"startsAtLabel": "Starts at (optional)",
+			"endsAtLabel": "Ends at (optional)",
+			"activeLabel": "Active",
+			"activeDescription": "Inactive discounts can't be redeemed.",
+			"cancel": "Cancel",
+			"saving": "Saving…",
+			"save": "Save changes",
+			"create": "Create discount",
+			"created": "Discount created.",
+			"updated": "Discount updated.",
+			"validation": {
+				"codeRequired": "A code is required.",
+				"valueRequired": "Enter a value greater than 0.",
+				"targetsRequired": "Select at least one item."
+			}
+		},
+		"list": {
+			"newDiscount": "New discount",
+			"table": {
+				"code": "Code",
+				"scope": "Applies to",
+				"value": "Value",
+				"window": "Active window",
+				"status": "Status",
+				"owner": "Owner"
+			},
+			"loading": "Loading discounts…",
+			"empty": "No discounts yet.",
+			"scope": {
+				"item": "Single item",
+				"group": "Group",
+				"all": "Platform-wide"
+			},
+			"status": {
+				"active": "Active",
+				"inactive": "Inactive"
+			},
+			"ownerType": {
+				"platform": "Abzar Kankor",
+				"instructor": "Instructor",
+				"school": "School",
+				"student": "Student"
+			},
+			"edit": "Edit",
+			"delete": "Delete",
+			"deleted": "Discount deleted.",
+			"deleteConfirmTitle": "Delete this discount?",
+			"deleteConfirmDescription": "“{code}” will stop working immediately. This can't be undone.",
+			"cancel": "Cancel",
+			"valuePercentage": "{value}% off",
+			"valueFixed": "{value} credits off",
+			"alwaysOn": "Always on",
+			"startsOn": "From {date}",
+			"endsOn": "Until {date}"
+		},
+		"field": {
+			"haveCode": "Have a discount code?",
+			"codePlaceholder": "Enter code",
+			"apply": "Apply",
+			"applied": "Discount applied!",
+			"appliedLabel": "Code “{code}” applied — new price: {price, plural, one {# credit} other {# credits}}",
+			"invalidCode": "That code isn't valid or has expired.",
+			"notApplicable": "That code doesn't apply to this item.",
+			"applyFailed": "Couldn't apply that code. Please try again.",
+			"remove": "Remove code"
+		}
+	},
+	"overview": {
+		"student": {
+			"kankorCountdown": "Days until Kankor",
+			"daysRemaining": "days remaining",
+			"reviewCards": "Review cards",
+			"takeTest": "Take a test",
+			"stats": {
+				"enrolledCourses": "Enrolled courses",
+				"activeDecks": "Active decks",
+				"cardsDueToday": "Cards due today",
+				"testsCompleted": "Tests completed",
+				"testsPassed": "Tests passed",
+				"bookmarks": "Bookmarks",
+				"notes": "Notes",
+				"creditBalance": "Credit balance"
+			},
+			"continueLearning": "Continue Learning",
+			"resume": "Resume",
+			"noActiveCourse": "No course in progress",
+			"noActiveCourseSubtitle": "Enroll in a course to start learning.",
+			"browseCourses": "Browse Courses",
+			"recentTests": "Recent Tests",
+			"viewAll": "View all",
+			"noRecentTests": "No tests taken yet",
+			"noRecentTestsSubtitle": "Tests you complete will show up here.",
+			"recentNotes": "Recent Notes",
+			"noRecentNotes": "No notes yet",
+			"noRecentNotesSubtitle": "Notes you take during lessons will show up here.",
+			"studyActivity": "Study Activity",
+			"studyActivitySubtitle": "Cards reviewed over the last 14 days",
+			"cardsReviewed": "Cards reviewed",
+			"passed": "Passed",
+			"failed": "Failed"
+		},
+		"instructor": {
+			"stats": {
+				"publishedCourses": "Published courses",
+				"draftCourses": "Draft courses",
+				"totalStudents": "Total students",
+				"totalDecks": "Decks",
+				"totalQuizzes": "Quizzes",
+				"averageRating": "Average rating",
+				"totalEarnings": "Total earnings",
+				"earningsThisMonth": "Earnings this month"
+			},
+			"recentEnrollments": "Recent Enrollments",
+			"noRecentEnrollments": "No enrollments yet",
+			"noRecentEnrollmentsSubtitle": "Students who enroll in your courses will show up here.",
+			"recentQuizAttempts": "Recent Quiz Attempts",
+			"noRecentQuizAttempts": "No quiz attempts yet",
+			"noRecentQuizAttemptsSubtitle": "Attempts on your quizzes will show up here.",
+			"earningsTrend": "Earnings",
+			"earningsTrendSubtitle": "Credits earned over the last 14 days",
+			"viewAll": "View all",
+			"enrolledIn": "Enrolled in {course}",
+			"credits": "{count, plural, one {# credit} other {# credits}}",
+			"noRating": "No ratings yet"
+		},
+		"school": {
+			"stats": {
+				"students": "Students",
+				"teachers": "Teachers",
+				"staff": "Staff",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"totalEarnings": "Total earnings",
+				"earningsThisMonth": "Earnings this month"
+			},
+			"recentMembers": "Recent Members",
+			"noRecentMembers": "No members yet",
+			"noRecentMembersSubtitle": "Staff and teachers who join your school will show up here.",
+			"recentQuizAttempts": "Recent Quiz Attempts",
+			"noRecentQuizAttempts": "No quiz attempts yet",
+			"noRecentQuizAttemptsSubtitle": "Attempts on your school's quizzes will show up here.",
+			"earningsTrend": "Earnings",
+			"earningsTrendSubtitle": "Credits earned over the last 14 days",
+			"viewAll": "View all",
+			"joined": "Joined {date}",
+			"memberRoles": {
+				"owner": "Owner",
+				"admin": "Admin",
+				"instructor": "Instructor",
+				"manager": "Manager",
+				"staff": "Staff",
+				"viewer": "Viewer"
+			}
+		},
+		"admin": {
+			"stats": {
+				"students": "Students",
+				"instructors": "Instructors",
+				"activeSchools": "Active schools",
+				"pendingSchools": "Pending schools",
+				"pendingInstructors": "Pending instructor approvals",
+				"publishedCourses": "Published courses",
+				"draftCourses": "Draft courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"totalRevenue": "Total revenue",
+				"revenueThisMonth": "Revenue this month"
+			},
+			"recentSignups": "Recent Signups",
+			"noRecentSignups": "No signups yet",
+			"noRecentSignupsSubtitle": "New students, instructors, and schools will show up here.",
+			"revenueTrend": "Revenue",
+			"revenueTrendSubtitle": "Credits earned over the last 14 days",
+			"signupTrend": "Signups",
+			"signupTrendSubtitle": "New accounts over the last 14 days",
+			"viewAll": "View all",
+			"roleLabels": {
+				"student": "Student",
+				"instructor": "Instructor",
+				"admin": "Admin"
+			}
+		}
+	},
+	"admin": {
+		"common": {
+			"all": "All",
+			"loading": "Loading…",
+			"empty": "No results found.",
+			"viewDetails": "View details",
+			"previous": "Previous",
+			"next": "Next",
+			"showing": "Showing {from}–{to} of {total}",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"actions": "Actions",
+			"role": "Role",
+			"userRoles": {
+				"student": "Student",
+				"instructor": "Instructor",
+				"admin": "Admin"
+			},
+			"changeRoleConfirmTitle": "Change Role?",
+			"changeRoleConfirmDescription": "Are you sure you want to change the role of {name} from {oldRole} to {newRole}?",
+			"roleChangedSuccess": "User role updated successfully.",
+			"doubleClickToEdit": "Double-click to edit"
+		},
+		"status": {
+			"pending": "Pending",
+			"active": "Active",
+			"rejected": "Rejected",
+			"suspended": "Suspended",
+			"disabled": "Disabled"
+		},
+		"actions": {
+			"openMenu": "Open actions menu",
+			"statusLabel": "Change status",
+			"statusChanged": "Status updated.",
+			"verify": "Verify",
+			"activate": "Activate",
+			"suspend": "Suspend",
+			"disable": "Disable",
+			"reject": "Reject"
+		},
+		"instructors": {
+			"title": "Instructors",
+			"subtitle": "Manage instructor accounts, verification, and content.",
+			"searchPlaceholder": "Search by name, email, or phone…",
+			"provinceFilter": "Province",
+			"allProvinces": "All provinces",
+			"empty": "No instructors found.",
+			"unnamed": "Unnamed instructor",
+			"backToList": "Back to instructors",
+			"about": "About",
+			"recentEnrollments": "Recent enrollments",
+			"noEnrollments": "No enrollments yet.",
+			"table": {
+				"name": "Name",
+				"province": "Province",
+				"courses": "Courses (published / all)",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"status": "Status",
+				"joined": "Joined"
+			},
+			"tabs": {
+				"info": "Info",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes"
+			},
+			"stats": {
+				"publishedCourses": "Published courses",
+				"draftCourses": "Draft courses",
+				"students": "Students",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"totalEarnings": "Total earnings (credits)",
+				"earningsThisMonth": "Earnings this month",
+				"averageRating": "Average rating"
+			},
+			"fields": {
+				"email": "Email",
+				"phone": "Phone",
+				"website": "Website",
+				"province": "Province",
+				"joined": "Joined"
+			}
+		},
+		"schools": {
+			"title": "Schools",
+			"subtitle": "Manage school accounts, members, and content.",
+			"searchPlaceholder": "Search by school name, email, or owner…",
+			"empty": "No schools found.",
+			"unnamed": "Unnamed school",
+			"backToList": "Back to schools",
+			"about": "About",
+			"recentMembers": "Recent members",
+			"noMembers": "No members yet.",
+			"table": {
+				"name": "Name",
+				"owner": "Owner",
+				"members": "Members",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"status": "Status",
+				"created": "Created"
+			},
+			"tabs": {
+				"info": "Info",
+				"members": "Members",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes"
+			},
+			"stats": {
+				"students": "Students",
+				"teachers": "Teachers",
+				"staff": "Staff",
+				"courses": "Courses",
+				"decks": "Decks",
+				"quizzes": "Quizzes",
+				"totalEarnings": "Total earnings (credits)",
+				"earningsThisMonth": "Earnings this month"
+			},
+			"fields": {
+				"owner": "Owner",
+				"adminEmail": "Admin email",
+				"address": "Address",
+				"created": "Created"
+			}
+		},
+		"members": {
+			"searchPlaceholder": "Search members by name or email…",
+			"empty": "No members found.",
+			"unnamed": "Unnamed member",
+			"openMenu": "Open member actions",
+			"changeRole": "Change role",
+			"roleChanged": "Member role updated.",
+			"remove": "Remove from school",
+			"removed": "Member removed.",
+			"removeTitle": "Remove member?",
+			"removeDescription": "{name} will lose access to this school. This cannot be undone.",
+			"table": {
+				"member": "Member",
+				"role": "Role",
+				"joined": "Joined"
+			},
+			"roles": {
+				"owner": "Owner",
+				"admin": "Admin",
+				"instructor": "Instructor",
+				"manager": "Manager",
+				"staff": "Staff",
+				"viewer": "Viewer"
+			}
+		},
+		"content": {
+			"updated": "Updated.",
+			"deleted": "Deleted.",
+			"view": "View",
+			"edit": "Edit",
+			"delete": "Delete",
+			"publish": "Publish",
+			"unpublish": "Unpublish",
+			"published": "Published",
+			"draft": "Draft",
+			"free": "Free",
+			"credits": "{count, plural, one {# credit} other {# credits}}",
+			"searchCourses": "Search courses…",
+			"searchDecks": "Search decks…",
+			"searchQuizzes": "Search quizzes…",
+			"emptyCourses": "No courses found.",
+			"emptyDecks": "No decks found.",
+			"emptyQuizzes": "No quizzes found.",
+			"deleteTitle": "Delete item?",
+			"deleteDescription": "\"{title}\" will be permanently deleted. This cannot be undone.",
+			"table": {
+				"title": "Title",
+				"status": "Status",
+				"price": "Price",
+				"created": "Created",
+				"visibility": "Visibility"
+			}
+		},
+		"agencies": {
+			"title": "Agencies",
+			"subtitle": "Manage partner agencies, their permissions, and settlements",
+			"create": "New agency",
+			"createTitle": "Create agency",
+			"created": "Agency created",
+			"searchPlaceholder": "Search agencies...",
+			"empty": "No agencies found",
+			"table": {
+				"name": "Name",
+				"status": "Status",
+				"commission": "Commission",
+				"charged": "Charged",
+				"settled": "Settled",
+				"outstanding": "Outstanding",
+				"lastTopup": "Last top-up"
+			},
+			"tabs": {
+				"grants": "Permissions",
+				"members": "Members",
+				"topups": "Top-ups",
+				"settlements": "Settlements",
+				"disputes": "Disputes"
+			},
+			"detail": {
+				"back": "Back to agencies",
+				"edit": "Edit",
+				"editTitle": "Edit agency",
+				"updated": "Agency updated",
+				"suspend": "Suspend",
+				"reactivate": "Reactivate",
+				"suspended": "Agency suspended",
+				"reactivated": "Agency reactivated",
+				"suspendTitle": "Suspend agency?",
+				"suspendDescription": "Suspending {name} immediately blocks all of its actions, including charging student accounts.",
+				"commission": "Commission: {percent}%",
+				"liabilityLimit": "Liability limit: {limit}"
+			},
+			"form": {
+				"name": "Name",
+				"province": "Province",
+				"contactEmail": "Contact email",
+				"contactPhone": "Contact phone",
+				"address": "Address",
+				"commissionPercent": "Commission (%)",
+				"liabilityLimit": "Liability limit (AFN)",
+				"save": "Save",
+				"cancel": "Cancel",
+				"validation": {
+					"nameRequired": "Name is required",
+					"invalidEmail": "Invalid email",
+					"invalidCommission": "Invalid commission",
+					"invalidLiabilityLimit": "Invalid liability limit"
+				}
+			},
+			"grants": {
+				"granted": "Permission granted",
+				"revoked": "Permission revoked",
+				"scope": {
+					"global": "Global",
+					"province": "By province",
+					"entities": "Specific entities"
+				},
+				"permissions": {
+					"students": {
+						"charge": "Charge student accounts"
+					},
+					"schools": {
+						"suspend": "Suspend schools",
+						"manage": "Manage schools"
+					},
+					"instructors": {
+						"suspend": "Suspend instructors"
+					},
+					"courses": {
+						"manage_own": "Manage own courses",
+						"manage_any": "Manage any course"
+					},
+					"decks": {
+						"manage_own": "Manage own decks",
+						"manage_any": "Manage any deck"
+					},
+					"quizzes": {
+						"manage_own": "Manage own quizzes",
+						"manage_any": "Manage any quiz"
+					}
+				},
+				"entityPicker": {
+					"searchSchools": "Search schools...",
+					"searchInstructors": "Search instructors...",
+					"noResults": "No results",
+					"unsupported": "Entity scope is not applicable to this permission."
+				}
+			},
+			"members": {
+				"add": "Add member",
+				"addTitle": "Add a member",
+				"added": "Member added",
+				"removed": "Member removed",
+				"remove": "Remove",
+				"removeTitle": "Remove member?",
+				"removeDescription": "{name} will be removed from the agency.",
+				"disable": "Disable",
+				"enable": "Enable",
+				"makeRole": "Make {role}",
+				"email": "Email",
+				"empty": "No members yet",
+				"table": {
+					"member": "Member",
+					"role": "Role",
+					"status": "Status",
+					"joined": "Joined"
+				},
+				"roles": {
+					"owner": "Owner",
+					"admin": "Admin",
+					"staff": "Staff"
+				},
+				"status": {
+					"active": "Active",
+					"disabled": "Disabled"
+				},
+				"validation": {
+					"invalidEmail": "Invalid email"
+				}
+			},
+			"topups": {
+				"searchPlaceholder": "Search top-ups...",
+				"empty": "No top-ups yet",
+				"table": {
+					"student": "Student",
+					"amount": "Amount",
+					"member": "Staff member",
+					"dispute": "Dispute",
+					"date": "Date"
+				},
+				"disputeStatus": {
+					"open": "Open",
+					"resolved": "Resolved",
+					"rejected": "Rejected"
+				}
+			},
+			"settlements": {
+				"record": "Record settlement",
+				"recordTitle": "Record a settlement",
+				"recorded": "Settlement recorded",
+				"grossAmount": "Gross amount (AFN)",
+				"empty": "No settlements yet",
+				"table": {
+					"date": "Date",
+					"gross": "Gross",
+					"commission": "Commission",
+					"net": "Net received",
+					"method": "Method",
+					"note": "Note"
+				},
+				"methods": {
+					"cash": "Cash",
+					"bank": "Bank",
+					"hawala": "Hawala",
+					"other": "Other"
+				},
+				"validation": {
+					"invalidAmount": "Invalid amount"
+				}
+			},
+			"disputes": {
+				"empty": "No disputes",
+				"view": "View",
+				"detailTitle": "Dispute details",
+				"studentNote": "Student note",
+				"agencyResponse": "Agency response",
+				"resolutionNote": "Resolution note",
+				"adjustment": "Credit adjustment",
+				"adjustmentHint": "e.g. 200 to credit the student",
+				"respond": "Send response",
+				"responded": "Response recorded",
+				"resolve": "Resolve",
+				"reject": "Reject",
+				"resolvedToast": "Dispute resolved",
+				"table": {
+					"student": "Student",
+					"amount": "Amount",
+					"status": "Status",
+					"created": "Created"
+				},
+				"status": {
+					"open": "Open",
+					"resolved": "Resolved",
+					"rejected": "Rejected"
+				}
+			}
+		}
+	},
+	"classrooms": {
+		"title": "Classrooms",
+		"description": "Classrooms you're a part of.",
+		"join": "Join a classroom",
+		"joinDialog": {
+			"title": "Join a Classroom",
+			"description": "Enter the join code your instructor shared with you.",
+			"codeLabel": "Join Code",
+			"codePlaceholder": "e.g. 123456",
+			"submit": "Request to Join",
+			"requested": "Request sent. Your instructor needs to approve it.",
+			"cancel": "Cancel"
+		},
+		"emptyTitle": "No classrooms yet",
+		"emptyDescription": "Join a classroom using a code from your instructor.",
+		"role": {
+			"owner": "Owner",
+			"instructor": "Instructor",
+			"assistant": "Assistant",
+			"student": "Student"
+		},
+		"pendingTitle": "Pending",
+		"invitedDescription": "You've been invited to join.",
+		"awaitingApproval": "Awaiting instructor approval.",
+		"pendingBadge": "Pending",
+		"accept": "Accept",
+		"decline": "Decline",
+		"requestApproved": "Approved.",
+		"requestDeclined": "Declined.",
+		"detail": {
+			"resources": "Resources",
+			"materials": "Materials",
+			"announcements": "Announcements",
+			"noResources": "No resources shared yet.",
+			"noMaterials": "No materials published yet.",
+			"noAnnouncements": "No announcements yet.",
+			"loadError": "Unable to load this classroom.",
+			"unknownAuthor": "Unknown"
+		}
+	},
+	"schoolMembers": {
+		"title": "Members",
+		"description": "Manage who has access to this school's dashboard.",
+		"inviteButton": "Invite Member",
+		"inviteDialog": {
+			"title": "Invite Member",
+			"emailLabel": "Email",
+			"emailPlaceholder": "member@example.com",
+			"roleLabel": "Role",
+			"submit": "Send Invite",
+			"sent": "Invite sent.",
+			"cancel": "Cancel"
+		},
+		"pendingTitle": "Pending Invites",
+		"pendingEmpty": "No pending invites",
+		"currentTitle": "Current Members",
+		"role": {
+			"owner": "Owner",
+			"admin": "Admin",
+			"manager": "Manager",
+			"instructor": "Instructor",
+			"staff": "Staff",
+			"viewer": "Viewer"
+		},
+		"accept": "Accept",
+		"decline": "Decline"
+	},
+	"instructorStudents": {
+		"title": "Students",
+		"subtitle": "{count, plural, =0 {No students} one {# student} other {# students}}",
+		"searchPlaceholder": "Search students...",
+		"classroomFilterAll": "All Classrooms",
+		"table": {
+			"name": "Name",
+			"contact": "Contact",
+			"classrooms": "Classrooms",
+			"joinedAt": "Joined Date"
+		},
+		"empty": "No students found.",
+		"loading": "Loading students...",
+		"unnamedStudent": "Unnamed Student",
+		"showing": "Showing {from} to {to} of {total}",
+		"previous": "Previous",
+		"next": "Next"
+	},
+	"verificationPending": {
+		"instructor": {
+			"title": "Your instructor account is under review",
+			"body": "Thanks for signing up as an instructor. Our team is reviewing your account and will approve it shortly. You'll be able to access your dashboard once it's verified."
+		},
+		"school": {
+			"title": "Your school is under review",
+			"body": "Thanks for registering your school. Our team is reviewing it and will approve it shortly. You'll be able to access the school dashboard once it's verified."
+		},
+		"default": {
+			"title": "Account pending review",
+			"body": "Your account is awaiting approval. We'll notify you once it's been reviewed."
+		},
+		"statusBadge": "Pending approval",
+		"backHome": "Back to home",
+		"signOut": "Sign out"
+	},
+	"reviews": {
+		"title": "{count, plural, one {# Review} other {# Reviews}}",
+		"basedOn": "Based on {count, plural, one {# review} other {# reviews}}",
+		"yourRating": "Your rating",
+		"ratingValue": "{rating} out of 5 stars",
+		"commentPlaceholder": "Share your experience (optional)",
+		"cancel": "Cancel",
+		"submit": "Submit review",
+		"ratingRequired": "Please select a rating.",
+		"submitSuccess": "Review submitted.",
+		"submitFailed": "Failed to submit review.",
+		"deleteSuccess": "Review deleted.",
+		"deleteFailed": "Failed to delete review.",
+		"writeReview": "Write a review",
+		"editReview": "Edit review",
+		"youReviewedThis": "You reviewed this",
+		"anonymous": "Anonymous",
+		"you": "You",
+		"delete": "Delete",
+		"noReviewsYet": "No reviews yet. Be the first to share your experience.",
+		"loadMore": "Load more",
+		"signInPrompt": "Sign in to write a review.",
+		"signIn": "Sign in",
+		"enrollPrompt": "Enroll to write a review once you've experienced it."
+	},
+	"pwa": {
+		"installTitle": "Install Abzar Kankor",
+		"installDescription": "Install our application on your device for fast access, offline study support, and a seamless native app experience.",
+		"installButton": "Install App",
+		"maybeLater": "Maybe Later",
+		"feature1": "Access lessons & library offline",
+		"feature2": "Spaced repetition flashcards",
+		"feature3": "Instant performance & fast loading",
+		"iosInstructionsTitle": "How to Install on iOS",
+		"iosStep1": "Tap the Share button",
+		"iosStep2": "Scroll down and tap 'Add to Home Screen'"
+	},
+	"offline": {
+		"bannerText": "You are currently offline. Showing cached content.",
+		"bannerRestored": "Internet connection restored!",
+		"title": "No Internet Connection",
+		"subtitle": "You are currently offline. Don't worry, you can still study saved flashcards and read downloaded materials.",
+		"retryButton": "Retry Connection",
+		"goFlashcards": "Go to Flashcards",
+		"goLibrary": "Go to Library",
+		"statusOffline": "Offline Mode",
+		"statusOnline": "Back Online"
+	}
+}

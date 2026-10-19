@@ -1,0 +1,3233 @@
+{
+	"app": {
+		"name": "ابزار کانکور"
+	},
+	"discussions": {
+		"new_thread": "نوې بحث",
+		"create_thread_title": "د بحث موضوع جوړول",
+		"create_thread_subtitle": "پوښتنې وپوښتئ، درسي ټکي شریک کړئ یا له نورو زده کوونکو او استادانو سره خبرې وکړئ.",
+		"search_placeholder": "د کلمې، عنوان، یا ټاګ له لارې بحثونه وپلټئ...",
+		"thread_type": "د موضوع ډول",
+		"title_label": "عنوان",
+		"title_placeholder": "مثلاً: د دویمې درجې مساواتو چټک حل څنګه کیږي؟",
+		"content_label": "متن (مارک‌ډاون)",
+		"content_placeholder": "د خپلې پوښتنې یا بحث تفصیل ولیکئ...",
+		"tags_label": "ټاګونه (په کامه جلا کړئ)",
+		"tags_placeholder": "ریاضي، کانکور، جبر",
+		"posting": "د لېږلو په حال کې...",
+		"post_thread": "موضوع لېږل",
+		"cancel": "لغوه کول",
+		"reply_placeholder": "خپل ځواب یا نظر ولیکئ...",
+		"submit_reply": "ځواب لېږل",
+		"markdown_supported": "د مارک‌ډاون ملاتړ شتون لري",
+		"editor_text_sample": "متن",
+		"anonymous": "نامعلوم",
+		"author_default": "کاروونکی",
+		"replies": "ځوابونه",
+		"views": "لیدنې",
+		"bookmarked": "نښه شوی",
+		"bookmark": "نښه کول",
+		"subscribed": "اشتراک شوی",
+		"subscribe": "اشتراک",
+		"accepted_solution_title": "تایید شوی ځواب",
+		"mark_as_solution": "د ځواب په توګه تاییدول",
+		"reply": "ځواب ورکول",
+		"leave_reply": "ځواب لېږل",
+		"replies_count_title": "ځوابونه ({count})",
+		"no_replies_yet": "تر اوسه کوم ځواب نشته. لومړی کس اوسئ چې ځواب ورکوئ!",
+		"thread_not_found": "د بحث موضوع ونه موندل شوه.",
+		"duplicate_check_title": "ورته بحثونه وپېژندل شول",
+		"duplicate_check_desc": "تر لېږلو وړاندې وگورئ چې آیا ستاسو پوښتنې ته مخکې ځواب ورکړل شوی دی:",
+		"view_thread": "بحث کتل",
+		"moderation_queue_title": "د بحثونو د څارنې قطار",
+		"moderation_queue_subtitle": "د بحثونو او ځوابونو په اړه د کاروونکو راپورونه وڅارئ.",
+		"pending": "په تمه",
+		"no_pending_reports": "کوم راپور په تمه نشته.",
+		"reported_by": "راپور ورکوونکی",
+		"dismiss": "ردول",
+		"soft_delete": "مؤقت ړنګول",
+		"status": {
+			"open": "پلاستی",
+			"answered": "ځواب شوی",
+			"solved": "حل شوی",
+			"closed": "بند شوی"
+		},
+		"types": {
+			"question": "پوښتنه",
+			"discussion": "بحث",
+			"tip": "درسي ټکی",
+			"announcement": "خبرتیا",
+			"report_mistake": "د تېروتنې راپور"
+		},
+		"badges": {
+			"pinned": "نښلول شوی",
+			"locked": "قفل شوی",
+			"instructor_only": "یوازې د استاد لپاره"
+		},
+		"roles": {
+			"instructor": "استاد",
+			"admin": "مدیر",
+			"student": "زده کوونکی"
+		},
+		"filters": {
+			"status": "حالت",
+			"all_statuses": "ټول حالتونه"
+		},
+		"empty": {
+			"title": "تر اوسه کوم بحث نشته",
+			"public_subtitle": "د نوي بحث د جوړولو لپاره، لومړی ننوتل یا نوم لیکنه وکړئ.",
+			"dashboard_subtitle": "د یوې پوښتنې په کولو یا د درسي ټکي په شریکولو سره بحث پیل کړئ!"
+		},
+		"errors": {
+			"create_failed": "د بحث موضوع په جوړولو کې تېروتنه",
+			"reply_failed": "د ځواب په لېږلو کې تېروتنه",
+			"solution_failed": "د ځواب په تاییدولو کې تېروتنه",
+			"fetch_failed": "د بحثونو په رااخیستلو کې تېروتنه",
+			"mod_failed": "په څارنه کې تېروتنه"
+		},
+		"loading": "د رااخیستلو په حال کې...",
+		"retry": "بیا هڅه وکړئ"
+	},
+	"metadata": {
+		"description": "د افغانستان د زده‌کوونکو لپاره یو آفلاین ښوونیز موبایل اپ، چې هراړخیزه د زده‌کړې وسیلې وړاندې کوي لکه ویډیو کورسونه، د تکرار فلش‌کارتونه، د کانکور مجازي ازموینې او ډیجیټل کتابتون.",
+		"keywords": [
+			"ابزار کانکور",
+			"کانکور",
+			"د افغانستان ښوونه",
+			"آفلاین زده‌کړه",
+			"د افغانستان زده‌کوونکي",
+			"د پوهنتون د ننوتلو ازموینه",
+			"مجازي کانکور",
+			"د تکرار فلش‌کارتونه",
+			"ویډیو کورسونه",
+			"د افغانستان نصاب",
+			"ډیجیټل کتابتون",
+			"Abzar Kankor",
+			"Kankor"
+		]
+	},
+	"seo": {
+		"home": "کورپاڼه",
+		"courses": "کورسونه",
+		"decks": "ډیکونه",
+		"libraries": "کتابتون",
+		"quizzes": "آزموینې",
+		"discussions": "بحثونه او خبرې",
+		"verify": "د سند تصدیق",
+		"relatedResources": "اړوند سرچینې",
+		"relatedCourses": "اړوند کورسونه",
+		"relatedDecks": "اړوند فلش‌کارت ډیکونه",
+		"relatedBooks": "اړوند کتابونه",
+		"relatedQuizzes": "اړوندې ازموینې",
+		"faq": "پرله پسې پوښتنې",
+		"faqPrerequisites": "د دې کورس لپاره شرایط څه دي؟",
+		"faqObjectives": "په دې کورس کې به څه زده کړم؟",
+		"faqStudy": "زه څنګه باید دا ډیک مطالعه کړم؟",
+		"faqStudyAnswer": "موږ سپارښتنه کوو چې دا فلش کارتونه هره ورځ د فاصلې تکرار سیسټم په کارولو سره د کانکور ازموینې لپاره چمتو کولو لپاره مطالعه کړئ.",
+		"passingCriteria": "د بریالیتوب معیارونه",
+		"passingCriteriaText": "د دې ازموینې پاس کولو لپاره، تاسو نمرې ته {percent}٪ یا ډیر اړتیا لرئ. تاسو اعظمي حد د {count} ځله هڅه کولی شئ.",
+		"timeLimitText": "د ازموینې وخت محدودیت {count} دقیقې دی."
+	},
+	"dashboard": {
+		"notifications": "خبرتیاوې",
+		"student": {
+			"roleLabel": "زده‌کوونکی",
+			"overview": "لنډه کتنه",
+			"school": "ښوونځی",
+			"grades": {
+				"10": "ولسم ټولګی",
+				"11": "یووالسم ټولګی",
+				"12": "دولسم ټولګی"
+			},
+			"courses": "کورسونه",
+			"allCourses": "ټول کورسونه",
+			"myCourses": "زما کورسونه",
+			"flashcards": "فلش‌کارتونه",
+			"decks": "دیکونه",
+			"myDecks": "زما دیکونه",
+			"practice": "تمرین",
+			"tests": "ازموینې",
+			"testTypes": {
+				"kankor": "د کانکور ازموینه",
+				"subject": "درسي ازموینه",
+				"quiz": "د تمرین ازموینه",
+				"passed": "بریالۍ ازموینې",
+				"registered": "ثبت شوې ازموینې"
+			},
+			"library": "کتابتون",
+			"librarySections": {
+				"fields": "څانګې",
+				"studies": "مطالعې",
+				"more": "نور"
+			},
+			"passedQuizzes": {
+				"title": "بریالۍ ازموینې",
+				"description": "هغه ازموینې چې ورکړې دي او بریالی شوی یاست.",
+				"score": "{score}/{max}",
+				"completedOn": "بشپړه شوې په {date}",
+				"empty": {
+					"title": "تر اوسه هیڅ بریالۍ ازموینه نشته",
+					"subtitle": "هغه ازموینې چې بریالي شئ به دلته ښکاره شي."
+				}
+			},
+			"registeredQuizzes": {
+				"title": "ثبت شوې ازموینې",
+				"description": "هغه ازموینې چې د ورکولو لپاره ثبت شوي یاست.",
+				"timeLimitMinutes": "{count, plural, =1 {# دقیقه} other {# دقیقې}}",
+				"registeredOn": "ثبت شوی په {date}",
+				"empty": {
+					"title": "هیڅ ثبت شوې ازموینه نشته",
+					"subtitle": "له خپل استاد یا ښوونځي وغواړئ چې تاسو یوې ازموینې ته ثبت کړي."
+				}
+			},
+			"personal": "شخصي",
+			"notes": "یادښتونه",
+			"bookmarks": "نښه‌ګانې",
+			"wallet": "کیسه",
+			"notifications": "خبرتیاوې",
+			"classrooms": "ټولګي"
+		},
+		"admin": {
+			"roleLabel": "اصلي ادمین",
+			"overview": "لنډه کتنه",
+			"users": {
+				"label": "کاروونکي",
+				"allUsers": "ټول کاروونکي",
+				"students": "زده‌کوونکي",
+				"instructors": "استادان",
+				"staff": "د ښوونځي کارمندان",
+				"schools": "ښوونځي",
+				"agencies": "نمایندګۍ"
+			},
+			"content": {
+				"label": "مینځپانګه",
+				"courses": "کورسونه",
+				"flashcards": "فلش‌کارتونه",
+				"decks": "ډیکونه",
+				"cards": "کارتونه",
+				"tests": "ازموینې او تمرینونه",
+				"library": "کتابتون",
+				"discounts": "تخفیفونه"
+			},
+			"kankor": {
+				"label": "کانکور",
+				"forms": "د ازموینې اوراق",
+				"universities": "پوهنتونونه",
+				"faculties": "پوهنځي",
+				"departments": "ډیپارتمنتونه",
+				"codes": "د نمرې کوډونه"
+			},
+			"platform": {
+				"label": "پلیټفارم",
+				"grades": "ټولګي او مضامین",
+				"provinces": "ولایتونه",
+				"settings": "ترتیبات"
+			},
+			"notifications": "خبرتیاوې"
+		},
+		"instructor": {
+			"roleLabel": "استاد",
+			"newCourse": "نوی کورس",
+			"overview": "لنډه کتنه",
+			"myCourses": "زما کورسونه",
+			"courses": {
+				"published": "خپور شوي",
+				"drafts": "مسوده",
+				"archived": "آرشیف"
+			},
+			"decks": "زما ډګونه",
+			"quizBuilder": "د ازموینې جوړونکی",
+			"classrooms": "ټولګي",
+			"students": "زده‌کوونکي",
+			"reports": "راپورونه",
+			"analytics": "تحلیلونه",
+			"earnings": "عاید",
+			"discounts": "تخفیفونه",
+			"settings": "ترتیبات",
+			"notifications": "خبرتیاوې"
+		},
+		"school": {
+			"roleLabel": "د ښوونځي ادمین",
+			"defaultName": "د ښوونځي ډشبورډ",
+			"overview": "لنډه کتنه",
+			"members": {
+				"label": "غړي",
+				"students": "زده‌کوونکي",
+				"teachers": "ښوونکي",
+				"staff": "کارمندان"
+			},
+			"decks": "ډګونه",
+			"quizzes": "ازموینې",
+			"results": "پایلې",
+			"reports": "راپورونه",
+			"analytics": "تحلیلونه",
+			"attendance": "حاضري",
+			"earnings": "ګټه",
+			"discounts": "تخفیفونه",
+			"settings": "ترتیبات",
+			"notifications": "خبرتیاوې"
+		},
+		"agency": {
+			"nav": {
+				"overview": "عمومي کتنه",
+				"chargeStudent": "د زده‌کوونکي حساب شارژ",
+				"transactions": "راکړې ورکړې",
+				"settlements": "تصفیه حسابونه",
+				"disputes": "اعتراضونه",
+				"members": "غړي",
+				"notifications": "خبرتیاوې",
+				"schools": "ښوونځي",
+				"instructors": "ښوونکي",
+				"courses": "کورسونه",
+				"decks": "فلش‌کارت ډیکونه",
+				"quizzes": "ازموینې"
+			},
+			"overview": {
+				"title": "د نمایندګۍ عمومي کتنه",
+				"subtitle": "ستاسو د نمایندګۍ د فعالیت او حساب لنډیز",
+				"chargedTotal": "ټول شارژ",
+				"outstanding": "پور / سقف",
+				"studentsCharged": "شارژ شوي زده‌کوونکي",
+				"chargedLast30d": "د تېرو ۳۰ ورځو شارژ",
+				"commissionEarned": "ترلاسه شوی کمیشن",
+				"openDisputes": "پرانیستي اعتراضونه",
+				"recentTopups": "وروستي شارژونه",
+				"salesTotal": "د منځپانګې پلور (شمېر)"
+			},
+			"charge": {
+				"title": "د زده‌کوونکي حساب شارژ",
+				"subtitle": "د زده‌کوونکي ایمیل ولیکئ او ترلاسه شوې نغدې پیسې یې حساب ته شارژ کړئ (۱ کریډیټ = ۱ افغانۍ)",
+				"studentEmail": "د زده‌کوونکي ایمیل",
+				"studentEmailPlaceholder": "student@example.com",
+				"amount": "مبلغ (افغانۍ)",
+				"note": "یادښت (اختیاري)",
+				"submit": "حساب شارژ کړئ",
+				"receipt": {
+					"title": "شارژ بریالی شو",
+					"student": "زده‌کوونکی",
+					"amount": "مبلغ",
+					"newBalance": "نوې موجودي",
+					"reference": "د تعقیب کوډ",
+					"date": "نېټه",
+					"currency": "افغانۍ",
+					"chargeAnother": "بل زده‌کوونکی شارژ کړئ"
+				},
+				"validation": {
+					"invalidEmail": "ناسم ایمیل",
+					"invalidAmount": "ناسم مبلغ"
+				},
+				"errors": {
+					"studentNotFound": "په دې ایمیل زده‌کوونکی ونه موندل شو",
+					"permissionDenied": "تاسو د دې کار اجازه نه لرئ",
+					"liabilityLimitExceeded": "د نمایندګۍ د پور سقف ډک شوی؛ لومړی تصفیه وکړئ",
+					"invalidAmount": "ناسم مبلغ"
+				}
+			},
+			"transactions": {
+				"title": "راکړې ورکړې",
+				"subtitle": "ستاسو د نمایندګۍ ټول شارژونه"
+			},
+			"settlements": {
+				"title": "تصفیه حسابونه",
+				"subtitle": "ابزار کانکور ته د پیسو د لېږد تاریخچه"
+			},
+			"disputes": {
+				"title": "اعتراضونه",
+				"subtitle": "ستاسو د نمایندګۍ پر راکړو ورکړو د زده‌کوونکو اعتراضونه"
+			},
+			"members": {
+				"title": "غړي",
+				"subtitle": "د نمایندګۍ د کارکوونکو مدیریت"
+			},
+			"moderation": {
+				"reason": "دلیل",
+				"reasonPlaceholder": "دا حساب ولې ځنډول کیږي؟",
+				"cancel": "لغوه کول",
+				"confirmSuspend": "ځنډول",
+				"suspend": "ځنډول",
+				"reactivate": "بیا فعالول",
+				"suspended": "حساب وځنډول شو",
+				"reactivated": "حساب بیا فعال شو",
+				"suspendSchoolTitle": "ښوونځی وځنډول شي؟",
+				"suspendSchoolDescription": "د {name} په ځنډولو سره یې منځپانګه سمدلاسه پټیږي او ډشبورډ یې بندیږي. ستاسو د نمایندګۍ ځنډونې بېرته اخیستل کیدی شي.",
+				"suspendInstructorTitle": "ښوونکی وځنډول شي؟",
+				"suspendInstructorDescription": "د {name} په ځنډولو سره یې خپره شوې منځپانګه سمدلاسه پټیږي. ستاسو د نمایندګۍ ځنډونې بېرته اخیستل کیدی شي."
+			},
+			"schools": {
+				"title": "ښوونځي",
+				"subtitle": "ستاسو د نمایندګۍ د څارنې په ساحه کې ښوونځي",
+				"searchPlaceholder": "د ښوونځیو لټون...",
+				"empty": "ستاسو په ساحه کې ښوونځی نشته",
+				"edit": "سمون",
+				"editTitle": "د ښوونځي د جزئیاتو سمون",
+				"updated": "ښوونځی تازه شو",
+				"address": "پته",
+				"adminEmail": "د مدیر ایمیل",
+				"save": "خوندي کول",
+				"table": {
+					"name": "ښوونځی",
+					"province": "ولایت",
+					"status": "حالت"
+				},
+				"validation": {
+					"nameRequired": "نوم اړین دی",
+					"invalidEmail": "ناسم ایمیل"
+				}
+			},
+			"instructors": {
+				"title": "ښوونکي",
+				"subtitle": "ستاسو د نمایندګۍ د څارنې په ساحه کې ښوونکي",
+				"searchPlaceholder": "د ښوونکو لټون...",
+				"empty": "ستاسو په ساحه کې ښوونکی نشته",
+				"table": {
+					"instructor": "ښوونکی",
+					"province": "ولایت",
+					"status": "حالت"
+				}
+			},
+			"resources": {
+				"quizzesTitle": "د نمایندګۍ ازموینې",
+				"quizzesSubtitle": "هغه ازموینې چې ستاسو نمایندګي یې مالکه او خپروونکې ده"
+			}
+		}
+	},
+	"nav": {
+		"openMenu": "منو خلاصول",
+		"closeMenu": "منو تړل",
+		"dashboard": "ډشبورډ",
+		"students": "زده‌کوونکي",
+		"courses": "کورسونه",
+		"quizzes": "ازموینې",
+		"members": "غړي",
+		"settings": "ترتیبات",
+		"schools": "ښوونځي",
+		"instructors": "استادان",
+		"exams": "امتحانات",
+		"user": {
+			"home": "کور",
+			"aboutUs": "زموږ په اړه",
+			"contact": "اړیکه",
+			"locales": {
+				"en": "English",
+				"fa": "دری",
+				"ps": "پښتو"
+			},
+			"signIn": "ننوتل",
+			"signUp": "نوم لیکنه",
+			"phone": "۰۰۹۸-۹۰۱-۲۲۳-۵۵۸۶",
+			"email": "info@abzarkankor.com",
+			"search": "لټون",
+			"searchPlaceholder": "ازموینې، خدمات ولټول...",
+			"quickLinks": "چټک لینکونه",
+			"language": "ژبه",
+			"aboutUsDesc": "زموږ پلاتفارم او ماموریت سره اشنا شئ",
+			"ourTeam": "زموږ ټیم",
+			"ourTeamDesc": "د ابزار کنکور خلک سره آشنا شئ",
+			"ourMission": "زموږ ماموریت",
+			"ourMissionDesc": "هغه څه چې موږ هره ورځ هدایت کوي",
+			"services": "خدمات",
+			"mockExams": "ازموینې",
+			"mockExamsDesc": "د کنکور ورته ازموینو سره تمرین",
+			"studyPlans": "د زده‌کړې پلانونه",
+			"studyPlansDesc": "ستاسو اهدافو ته مطابق ساختار شوي پلانونه",
+			"gpaCalculator": "د نمرو محاسبه",
+			"gpaCalculatorDesc": "خپل عامه نمره اسانه محاسبه کړئ",
+			"faq": "عامه پوښتنې",
+			"faqDesc": "د عامه پوښتنو ځوابونه"
+		}
+	},
+	"courses": {
+		"title": "کورسونه",
+		"discussions": "د کورس بحثونه او خبرې",
+		"newCourse": "نوی کورس",
+		"myCourses": "زما کورسونه",
+		"enrolledCourses": "ثبت‌شوي کورسونه",
+		"allCourses": "ټول کورسونه",
+		"searchPlaceholder": "د کورسونو لټون…",
+		"filters": "فیلترونه",
+		"clearAll": "ټول پاک کړئ",
+		"noCoursesFound": "هیڅ کورس ونه موند",
+		"noCoursesDescription": "خپله لټون یا فیلترونه تنظیم کړئ.",
+		"noEnrolledCourses": "هیڅ ثبت‌شوی کورس نشته",
+		"noEnrolledCoursesDescription": "کاتالوګ وپلټئ او یو کورس کې شامل شئ.",
+		"browseCatalog": "کاتالوګ وپلټئ",
+		"showing": "{from}–{to} له {total} کورسونو نه ښودنه",
+		"previous": "مخکینی",
+		"next": "بعدی",
+		"manage": "اداره",
+		"publish": "خپرول",
+		"unpublish": "د خپرولو لغوه",
+		"resume": "دوام",
+		"startLearning": "د زده‌کړې پیل",
+		"reviewCourse": "د کورس بیاکتنه",
+		"enroll": "ثبت‌نام",
+		"loginToEnroll": "وریدیدل",
+		"enrolled": "ثبت‌شوی",
+		"completed": "بشپړ شوی",
+		"notStarted": "نه پیل شوی",
+		"percentComplete": "{percent}٪ بشپړ",
+		"lessons": "{count} لوست",
+		"duration": "{hours} ساعته",
+		"enrollments": "{count} زده‌کوونکي",
+		"filters_level": "کچه",
+		"filters_language": "ژبه",
+		"filters_status": "حالت",
+		"filters_pricing": "بیه ټاکنه",
+		"level_beginner": "پیل‌کوونکی",
+		"level_intermediate": "منځنی",
+		"level_advanced": "پرمختللی",
+		"level_all_levels": "ټولې کچې",
+		"language_fa": "دری",
+		"language_ps": "پښتو",
+		"language_en": "English",
+		"status_published": "خپور شوی",
+		"status_draft": "مسوده",
+		"status_live": "فعال",
+		"free": "وړیا",
+		"detail": {
+			"about": "د دې کورس په اړه",
+			"objectives": "تاسو به څه زده کړئ",
+			"prerequisites": "مخکیني اړتیاوې",
+			"instructor": "استاد",
+			"curriculum": "نصاب",
+			"overview": "لنډیز",
+			"students": "زده‌کوونکي",
+			"reviews": "نظرونه",
+			"totalLessons": "{count} لوست",
+			"totalDuration": "{hours} ساعته ټول",
+			"totalEnrollments": "{count} زده‌کوونکي ثبت‌شوي",
+			"averageRating": "{rating} له ۵ نه",
+			"totalReviews": "{count} نظر",
+			"lastUpdated": "وروستی تازه‌کول {date}",
+			"language": "ژبه",
+			"level": "کچه",
+			"certificate": "د پایلې سند",
+			"publishedStatus": "خپور شوی",
+			"draftStatus": "مسوده",
+			"editInBuilder": "د جوړونکي سره سمون",
+			"preview": "مخکتنه",
+			"minutesShort": "{count} دقیقې",
+			"sectionCount": "{count} څپرکي",
+			"completedOfTotal": "{completed}/{total} بشپړ شوي",
+			"hoursMinutes": "{hours} ساعته او {minutes} دقیقې"
+		},
+		"learn": {
+			"markComplete": "د بشپړ شوي نښه‌ولو",
+			"completed": "بشپړ شوی",
+			"nextLesson": "بعدی لوست",
+			"previousLesson": "مخکینی لوست",
+			"courseContent": "د کورس منځپانګه",
+			"lessonOf": "لوست {current} له {total} نه",
+			"videoNotSupported": "ستاسو براوزر د ویډیو عنصر ملاتړ نه کوي.",
+			"assetUnavailable": "دا فایل اوس مهال شتون نلري.",
+			"contentTypes": {
+				"video": "ویډیو",
+				"text": "مقاله",
+				"audio": "غږیز",
+				"quiz": "ازموینه",
+				"assignment": "دنده",
+				"pdf_document": "PDF",
+				"slide_presentation": "سلایدونه",
+				"external_resource": "سرچینه",
+				"code_playground": "کوډ"
+			}
+		},
+		"view": "کورس وګورئ",
+		"sortBy": "ترتیب",
+		"sort_newest": "تر ټولو نوي",
+		"sort_oldest": "تر ټولو زاړه",
+		"sort_titleAsc": "سرلیک (الف تر ی)",
+		"courseCount": "{count} کورسونه",
+		"courseNotFound": "کورس ونه موندل شو.",
+		"enrollSuccess": "په بریالیتوب سره نوم لیکنه وشوه!",
+		"enrollFailed": "نوم لیکنه پاتې راغله. بیا هڅه وکړئ.",
+		"priceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+		"buyForCredits": "د {count, plural, one {# کریډیټ} other {# کریډیټ}} په بیه یې واخلئ",
+		"insufficientCredits": "ستاسو سره کافي کریډیټ نشته. مهرباني وکړئ حساب مو بشپړ کړئ.",
+		"learning": {
+			"continueLearning": "زده کړې ته دوام ورکړئ",
+			"upNext": "راتلونکی لوست",
+			"notEnrolledTitle": "تاسو په دې کورس کې نوم لیکنه نه ده کړې",
+			"notEnrolledDescription": "د زده کړې پیل او د پرمختګ تعقیب لپاره نوم لیکنه وکړئ.",
+			"allComplete": "تاسو ټول لوستونه بشپړ کړل — ښه کار!",
+			"markCompleteFailed": "د لوست بشپړول ثبت نشول.",
+			"lessonNotFound": "لوست ونه موندل شو."
+		},
+		"filters_subject": "مضمون",
+		"filters_grade": "ټولګی",
+		"filters_book": "کتاب",
+		"filterAll": "ټول",
+		"description": "په ټولو مضمونونو او ټولګیو کې د ویډیویي کورسونو کتنه او نوم لیکنه وکړئ.",
+		"loadError": "کورسونه نشي بارېدلی",
+		"loadErrorDescription": "مهرباني وکړئ یو څه وروسته بیا هڅه وکړئ.",
+		"tryAgain": "بیا هڅه وکړئ",
+		"filters_instructor": "استاد",
+		"pricing_paid": "پیسه لرونکی",
+		"agencyTitle": "د نمایندګۍ کورسونه",
+		"agencySubtitle": "هغه کورسونه چې ستاسو نمایندګي یې مالکه او خپروونکې ده",
+		"published": "کورس خپور شو.",
+		"unpublished": "د کورس خپرول لغوه شول.",
+		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول."
+	},
+	"certificates": {
+		"pdf": {
+			"platform": "ابزار کانکور",
+			"title": "د دورې د بشپړولو سند",
+			"presentedTo": "دا سند په ویاړ سره وړاندې کیږي",
+			"bodyLine": "د دورې د بریالي بشپړولو له امله",
+			"dateLine": "د صدور نېټه: {date}",
+			"verificationLabel": "د تایید کوډ",
+			"verifyHint": "د اعتبار د تایید لپاره {url} ته مراجعه وکړئ",
+			"signatureRole": "صادروونکی پلیټفارم"
+		},
+		"claim": {
+			"eligibleTitle": "سند چمتو دی",
+			"eligibleDescription": "تاسو دا دوره بشپړه کړې ده — خپل سند ترلاسه کړئ.",
+			"claim": "سند ترلاسه کړئ",
+			"download": "سند ډاونلوډ کړئ",
+			"generating": "ستاسو سند چمتو کیږي…",
+			"claimFailed": "د سند جوړول ناکام شول. مهرباني وکړئ بیا هڅه وکړئ.",
+			"notEligible": "د سند د ترلاسه کولو لپاره ټول درسونه بشپړ او ازموینې په بریالیتوب سره تېرې کړئ."
+		},
+		"verify": {
+			"metaTitle": "د سند تایید",
+			"title": "د سند تایید",
+			"description": "د ابزار کانکور د سند اعتبار وګورئ.",
+			"validTitle": "سند معتبر دی",
+			"validDescription": "دا سند د {platform} لخوا صادر شوی دی.",
+			"invalidTitle": "سند ونه موندل شو",
+			"invalidDescription": "له {code} کوډ سره هیڅ سند سمون نه خوري. کوډ وګورئ او بیا هڅه وکړئ.",
+			"student": "زده کوونکی",
+			"course": "دوره",
+			"issuedAt": "د صدور نېټه",
+			"completedAt": "د بشپړولو نېټه",
+			"code": "د تایید کوډ",
+			"codePlaceholder": "لکه CERT-1234-5678",
+			"verifyButton": "تایید",
+			"codeRequired": "د تایید کوډ داخلول اړین دي",
+			"scanQrTitle": "د QR کوډ سکین کول",
+			"scanQrPlaceholder": "د سند د QR کوډ عکس غوره کولو یا ثبتولو لپاره کلیک یا ډراپ کړئ",
+			"scanQrSuccess": "QR کوډ په بریالیتوب سره سکین شو!",
+			"scanQrError": "په عکس کې د سند هیڅ معتبر کوډ ونه موندل شو.",
+			"scanQrLoading": "د QR کوډ د خلاصولو په حال کې...",
+			"scanWithCamera": "په کمره سکین کول",
+			"cameraPermissionError": "کمرې ته لاسرسی رد شوی دی یا په دې وسیله کې نه ملاتړ کیږي.",
+			"cameraLoading": "د کمرې د فعالولو په حال کې...",
+			"cameraError": "د کمرې په فعالولو کې تېروتنه رامنځته شوه.",
+			"close": "بندول"
+		}
+	},
+	"libraries": {
+		"title": "کتابتون",
+		"discussions": "د کتاب بحثونه او خبرې",
+		"description": "کتابونه او د زده‌کړې سرچینې د ټولګي او مضمون له مخې وپلټئ.",
+		"searchPlaceholder": "د کتابونو لټون…",
+		"clearSearch": "لټون پاک کړئ",
+		"filters": "فیلترونه",
+		"clearAll": "ټول پاک کړئ",
+		"allGrades": "ټول ټولګي",
+		"allSubjects": "ټول مضمونونه",
+		"allBooks": "ټول کتابونه",
+		"allCategories": "ټولې کټګورۍ",
+		"sort": "ترتیب",
+		"sortRecent": "وروستي تازه شوي",
+		"sortNameAsc": "نوم الف تر ی",
+		"sortNameDesc": "نوم ی تر الف",
+		"open": "خلاصول",
+		"downloadBook": "{title} ښکته کول",
+		"noBooksFound": "هیڅ کتاب ونه موندل شو",
+		"noBooksDescription": "خپله لټون یا فیلترونه تنظیم کړئ.",
+		"showing": "{from}–{to} له {total} کتابونو نه ښودنه",
+		"previous": "مخکینی",
+		"next": "بعدی",
+		"loadError": "کتابونه پورته نه شول",
+		"loadErrorDescription": "مهرباني وکړئ لږ وروسته بیا هڅه وکړئ.",
+		"tryAgain": "بیا هڅه",
+		"author": "لیکوال",
+		"publisher": "خپرندوی",
+		"isbn": "ISBN",
+		"download": "ډاونلوډ",
+		"details": "د کتاب جزییات",
+		"backToList": "کتابتون ته د بیرته تګ",
+		"unknownAuthor": "ناپیژندل شوی لیکوال",
+		"unknownPublisher": "ناپیژندل شوی خپرندوی",
+		"viewPdf": "PDF ښودل",
+		"grade": "ټولګی",
+		"category": "کټګوري",
+		"subject": "مضمون",
+		"type": "د کتاب ډول",
+		"noPdfViewer": "ستاسو براوزر د PDF فایلونو ښودلو ملاتړ نه کوي.",
+		"admin": {
+			"title": "د کتابتون کتابونه",
+			"subtitle": "{count, plural, =1 {# کتابتون کتاب} other {# کتابتون کتابونه}}",
+			"searchPlaceholder": "د عنوان، توضیحاتو، فایل لارې یا URI په واسطه لټون…",
+			"loading": "د کتابونو پورته کول…",
+			"empty": "په کتابتون کې هیڅ کتاب ونه موندل شو.",
+			"newLibrary": "په کتابتون کې نوی کتاب",
+			"newLibraryDesc": "د زده کونکو لپاره نوی کتاب یا درسي سرچینه جوړه کړئ.",
+			"editLibrary": "د کتابتون کتاب سمول",
+			"editLibraryDesc": "د سرچینې بڼه سمه کړئ.",
+			"import": "د کتابونو واردول",
+			"importComplete": "کتابونه په بریالیتوب سره وارد شول",
+			"deleteConfirm": "ایا تاسو ډاډه یاست چې غواړئ د کتابتون دا کتاب حذف کړئ؟",
+			"deleteSuccess": "د کتابتون کتاب په بریالیتوب سره حذف شو",
+			"saveSuccess": "د کتابتون کتاب په بریالیتوب سره خوندي شو",
+			"createSuccess": "د کتابتون کتاب په بریالیتوب سره جوړ شو",
+			"fields": {
+				"title": "عنوان",
+				"desc": "توضیحات",
+				"filePath": "د فایل لاره",
+				"uri": "URI پته",
+				"slug": "سلاګ",
+				"book": "اړوند کتاب",
+				"category": "کټګوري",
+				"grade": "ټولګی",
+				"subject": "مضمون",
+				"seoTitle": "SEO عنوان",
+				"seoDescription": "SEO توضیحات"
+			},
+			"validation": {
+				"titleRequired": "عنوان اړین دی",
+				"filePathRequired": "د فایل لاره اړینه ده",
+				"uriRequired": "URI پته اړینه ده",
+				"uriInvalid": "URI پته باید معتبره وي"
+			},
+			"tabs": {
+				"preview": "مخکتنه",
+				"edit": "سمول"
+			},
+			"actions": {
+				"edit": "سمول",
+				"view": "ښودل",
+				"delete": "حذف"
+			},
+			"uploader": {
+				"title": "کتاب فایل Cloudflare R2 ته اپلوډ کړئ",
+				"description": "تر ۱۵۰ ام بی پورې د PDF او EPUB ملاتړ کوي. د فایل نوم په اوتومات ډول پاکیږي.",
+				"selectFile": "فایل غوره کړئ",
+				"uploading": "اپلوډ کیږي ({progress}%)",
+				"success": "فایل په بریالیتوب سره په R2 کې اپلوډ شو!",
+				"errorInvalidType": "یوازې د PDF او EPUB فایلونو اجازه شته.",
+				"errorTooLarge": "فایل خورا لوی دی (تر ۱۵۰ ایم بی پورې).",
+				"errorUpload": "فایل اپلوډ نه شو"
+			},
+			"seoSection": "سئو (SEO) مېټاډاټا",
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "خوندي کول",
+				"create": "کتاب جوړول",
+				"saveChanges": "بدلونونه خوندي کول"
+			}
+		}
+	},
+	"provinces": {
+		"admin": {
+			"title": "ولایتونه",
+			"subtitle": "{count, plural, =1 {# ولایت} other {# ولایتونه}}",
+			"searchPlaceholder": "د ولایتونو لټون…",
+			"loading": "د ولایتونو پورته کول…",
+			"empty": "هیڅ ولایت ونه موندل شو.",
+			"newProvince": "نوی ولایت",
+			"newProvinceDesc": "د زده کونکو پروفایلونو لپاره جغرافیایی ولایت جوړ کړئ.",
+			"editProvince": "ولایت سمول",
+			"editProvinceDesc": "د ولایت بڼه بدله کړئ.",
+			"deleteConfirm": "ایا تاسو ډاډه یاست چې غواړئ دا ولایت حذف کړئ؟",
+			"deleteSuccess": "ولایت په بریالیتوب سره حذف شو",
+			"saveSuccess": "ولایت په بریالیتوب سره خوندي شو",
+			"createSuccess": "ولایت په بریالیتوب سره جوړ شو",
+			"fields": {
+				"name": "د ولایت نوم"
+			},
+			"validation": {
+				"nameRequired": "د ولایت نوم اړین دی"
+			},
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "خوندي کول",
+				"create": "ولایت جوړول",
+				"saveChanges": "بدلونونه خوندي کول"
+			}
+		}
+	},
+	"grades": {
+		"admin": {
+			"title": "صنفونه او مضامین",
+			"gradesTab": "صنفونه",
+			"subjectsTab": "مضامین",
+			"booksTab": "کتابونه",
+			"grades": {
+				"title": "صنفونه",
+				"subtitle": "{count, plural, =1 {# صنف} other {# صنفونه}}",
+				"searchPlaceholder": "د صنفونو لټون…",
+				"loading": "د صنفونو پورته کول…",
+				"empty": "هیڅ صنف ونه موندل شو.",
+				"newGrade": "نوی صنف",
+				"newGradeDesc": "نوی صنف جوړ کړئ.",
+				"editGrade": "صنف سمول",
+				"editGradeDesc": "د صنف بڼه بدله کړئ.",
+				"deleteConfirm": "ایا تاسو ډاډه یاست چې غواړئ دا صنف حذف کړئ؟",
+				"deleteSuccess": "صنف په بریالیتوب سره حذف شو",
+				"saveSuccess": "صنف په بریالیتوب سره خوندي شو",
+				"createSuccess": "صنف په بریالیتوب سره جوړ شو"
+			},
+			"subjects": {
+				"title": "مضامین",
+				"subtitle": "{count, plural, =1 {# مضمون} other {# مضامین}}",
+				"searchPlaceholder": "د مضامینو لټون…",
+				"loading": "د مضامینو پورته کول…",
+				"empty": "هیڅ مضمون ونه موندل شو.",
+				"newSubject": "نوی مضمون",
+				"newSubjectDesc": "عمومي مضمون جوړ کړئ لکه ریاضی یا بیولوژي.",
+				"editSubject": "مضمون سمول",
+				"editSubjectDesc": "د مضمون بڼه بدله کړئ.",
+				"deleteConfirm": "ایا تاسو ډاډه یاست چې غواړئ دا مضمون حذف کړئ؟",
+				"deleteSuccess": "مضمون په بریالیتوب سره حذف شو",
+				"saveSuccess": "مضمون په بریالیتوب سره خوندي شو",
+				"createSuccess": "مضمون په بریالیتوب سره جوړ شو"
+			},
+			"books": {
+				"title": "کتابونه",
+				"subtitle": "{count, plural, =1 {# کتاب} other {# کتابونه}}",
+				"searchPlaceholder": "د کتابونو لټون…",
+				"loading": "د کتابونو پورته کول…",
+				"empty": "هیڅ کتاب ونه موندل شو.",
+				"newBook": "نوی کتاب",
+				"newBookDesc": "یو مشخص کتاب صنف او مضمون پورې وتړئ.",
+				"editBook": "کتاب سمول",
+				"editBookDesc": "د کتاب بڼه بدله کړئ.",
+				"deleteConfirm": "ایا تاسو ډاډه یاست چې غواړئ دا کتاب حذف کړئ؟",
+				"deleteSuccess": "کتاب په بریالیتوب سره حذف شو",
+				"saveSuccess": "کتاب په بریالیتوب سره خوندي شو",
+				"createSuccess": "کتاب په بریالیتوب سره جوړ شو"
+			},
+			"fields": {
+				"name": "نوم",
+				"fullName": "بشپړ نوم",
+				"filePath": "د فایل لاره",
+				"ordering": "ترتیب ښودنه",
+				"category": "کټګوري",
+				"grade": "صنف",
+				"subject": "مضمون"
+			},
+			"validation": {
+				"nameRequired": "نوم اړین دی",
+				"fullNameRequired": "بشپړ نوم اړین دی",
+				"filePathRequired": "د فایل لاره اړینه ده",
+				"orderingRequired": "ترتیب اړین دی"
+			},
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "خوندي کول",
+				"createGrade": "صنف جوړول",
+				"createSubject": "مضمون جوړول",
+				"createBook": "کتاب جوړول",
+				"saveChanges": "بدلونونه خوندي کول"
+			}
+		}
+	},
+	"auth": {
+		"login": "ننوتل",
+		"registerSchool": "د ښوونځي ثبت",
+		"registerStudent": "د زده کوونکي ثبت",
+		"registerInstructor": "د استاد په توګه ثبت",
+		"email": "بریښنالیک",
+		"password": "پټنوم",
+		"pendingReviewTitle": "حساب تر بیاکتنې لاندې دی",
+		"pendingReviewBody": "ستاسو حساب تر بیاکتنې لاندې دی. تر تایید وروسته به مو خبر کړئ.",
+		"common": {
+			"42501": "ستاسو لاسرسی محدود دی. مهرباني وکړئ له ملاتړ سره اړیکه ونیسئ.",
+			"orDivider": "یا",
+			"emailLabel": "د بریښنالیک پته",
+			"emailPlaceholder": "hello@example.com",
+			"passwordLabel": "پټنوم",
+			"confirmPasswordLabel": "د پټنوم تأیید",
+			"fullNameLabel": "بشپړ نوم",
+			"fullNamePlaceholder": "احمد شاه",
+			"schoolNameLabel": "د ښوونځي نوم",
+			"schoolNamePlaceholder": "د کانکور اکاډمي",
+			"schoolAddressLabel": "د ښوونځي پته",
+			"schoolAddressPlaceholder": "کابل، افغانستان",
+			"provinceLabel": "ولایت",
+			"provincePlaceholder": "خپل ولایت غوره کړئ...",
+			"successTitle": "خپل بریښنالیک وګورئ",
+			"user_already_exists": "ستاسو حساب دمخه جوړ دی. مهرباني وکړئ ننوتل وکړئ.",
+			"email_not_confirmed": "مهرباني وکړئ لومړی خپل بریښنالیک پته تأیید کړئ.",
+			"over_email_send_rate_limit": "ډیرې هڅې. مهرباني وکړئ یو شیبه صبر وکړئ او بیا هڅه وکړئ.",
+			"weak_password": "ستاسو پټنوم کمزوری دی. مهرباني وکړئ قوي پټنوم غوره کړئ.",
+			"email_address_not_authorized": "دا بریښنالیک پته د ثبت‌نام لپاره اجازه نه لري.",
+			"signup_disabled": "نوي ثبت‌نامونه اوس مهال بند دي.",
+			"unknown_error": "یوه ستونزه رامنځته شوه. مهرباني وکړئ بیا هڅه وکړئ.",
+			"otp_expired": "کوډ ختم شوی دی. مهرباني وکړئ نوی کوډ وغواړئ."
+		},
+		"validation": {
+			"invalidEmail": "د بریښنالیک پته سمه نه ده",
+			"required": "دا ډګر اړین دی",
+			"passwordTooShort": "پټنوم باید لږ تر لږه ۸ توري ولري",
+			"passwordWeak": "باید ۱ لوی توری او ۱ عدد ولري",
+			"passwordMismatch": "پټنومونه سره مطابقت نه لري"
+		},
+		"header": {
+			"login": {
+				"prompt": "حساب نه لرئ؟",
+				"linkText": "ثبت‌نام"
+			},
+			"register": {
+				"prompt": "دمخه حساب لرئ؟",
+				"linkText": "ننوتل"
+			},
+			"resetPassword": {
+				"prompt": "نظر مو بدل شو؟",
+				"linkText": "بیرته ورتلل"
+			}
+		},
+		"footer": {
+			"copyright": "© {year} ابزار کانکور. ټول حقوق خوندي دي.",
+			"agreeToTerms": "د دوام ورکولو سره، تاسو موافقت کوئ له <termsLink>د کارونې شرایطو</termsLink> او <privacyLink>د رازداري سیاست</privacyLink> سره."
+		},
+		"loginPage": {
+			"title": "خپل حساب ته ننوتل",
+			"subtitle": "د ننوتلو لپاره خپل توضیحات دننه کړئ.",
+			"googleButton": "د ګوګل سره ننوتل",
+			"rememberMe": "ما ننوتی وساتئ",
+			"forgotPassword": "پټنوم مو هیر شو؟",
+			"submit": "ننوتل",
+			"submitting": "ننوتل جاري دي…"
+		},
+		"registerStudentPage": {
+			"title": "خپل حساب جوړ کړئ",
+			"subtitle": "د پیل لپاره خپل توضیحات دننه کړئ.",
+			"passwordHint": "باید ۱ لوی توری، ۱ عدد او لږ تر لږه ۸ توري ولري.",
+			"submit": "حساب جوړ کړئ",
+			"submitting": "حساب جوړیږي…",
+			"successBody": "موږ ستاسو د بریښنالیک بکس ته د تأیید لینک واستاوه. د خپل حساب فعالولو لپاره لینک کلیک کړئ."
+		},
+		"registerInstructorPage": {
+			"title": "د استاد په توګه ثبت‌نام",
+			"subtitle": "د ثبت‌نام لپاره خپل توضیحات دننه کړئ.",
+			"passwordHint": "باید ۱ لوی توری، ۱ عدد او لږ تر لږه ۸ توري ولري.",
+			"submit": "ثبت‌نام",
+			"submitting": "حساب جوړیږي…",
+			"successBody": "موږ ستاسو د بریښنالیک بکس ته د تأیید لینک واستاوه. د استاد حساب فعالولو لپاره لینک کلیک کړئ."
+		},
+		"registerSchoolPage": {
+			"title": "خپل ښوونځی ثبت کړئ",
+			"subtitle": "د ښوونځي حساب جوړولو لپاره خپل توضیحات دننه کړئ.",
+			"schoolNameLabel": "د ښوونځي نوم",
+			"schoolNamePlaceholder": "د کانکور اکاډمي",
+			"passwordHint": "باید ۱ لوی توری، ۱ عدد او لږ تر لږه ۸ توري ولري.",
+			"submit": "ثبت‌نام",
+			"submitting": "حساب جوړیږي…",
+			"successBody": "موږ ستاسو د بریښنالیک بکس ته د تأیید لینک واستاوه. د ښوونځي حساب فعالولو لپاره لینک کلیک کړئ."
+		},
+		"resetPasswordPage": {
+			"title": "پټنوم بیا ترلاسه کول",
+			"subtitle": "د پټنوم بیا ترلاسه کولو لپاره خپل بریښنالیک دننه کړئ.",
+			"emailHint": "هغه بریښنالیک دننه کړئ چې پرې ثبت‌نام مو کړی دی.",
+			"noAccess": "نور لاسرسی نلرئ؟",
+			"tryAnotherMethod": "بله لار هڅه وکړئ",
+			"submit": "پټنوم بیا ترلاسه کول",
+			"submitting": "لیږل کیږي…",
+			"successBody": "موږ ستاسو د بریښنالیک بکس ته د پټنوم بیا ترلاسه کولو لینک واستاوه. د نوي پټنوم تنظیم لپاره لینک کلیک کړئ."
+		},
+		"updatePasswordPage": {
+			"title": "نوی پټنوم",
+			"subtitle": "خپل نوی پټنوم دننه او تأیید کړئ.",
+			"passwordHint": "باید ۱ لوی توری، ۱ عدد او لږ تر لږه ۸ توري ولري.",
+			"submit": "پټنوم تازه کړئ",
+			"submitting": "تازه کیږي…",
+			"successTitle": "پټنوم تازه شو",
+			"successBody": "ستاسو پټنوم بریالیتوب سره تازه شو. اوس کولای شئ د نوي پټنوم سره ننوتل وکړئ."
+		},
+		"confirmEmailPage": {
+			"title": "خپل بریښنالیک تأیید کړئ",
+			"subtitle": "ستاسو د بریښنالیک پته لاهم تأیید نه ده شوې.",
+			"emailHint": "موږ به دې پتې ته نوی تأیید لینک واستوو.",
+			"submit": "د تأیید بریښنالیک بیا واستوئ",
+			"submitting": "لیږل کیږي…",
+			"successBody": "موږ ستاسو د بریښنالیک بکس ته نوی تأیید لینک واستاوه. د حساب فعالولو لپاره لینک کلیک کړئ."
+		}
+	},
+	"landing": {
+		"user": {
+			"signIn": "ننوتل",
+			"signUp": "نوم لیکنه",
+			"searchPlaceholder": "ازموینې، خدمات ولټول..."
+		},
+		"header": {
+			"signIn": "ننوتل",
+			"dashboard": "ډشبورډ",
+			"libraries": "کتابتون",
+			"courses": "کورسونه",
+			"decks": "ډېکونه",
+			"quizzes": "ازموینې",
+			"aboutUs": "درباره ما",
+			"openMenu": "منو خلاصول",
+			"closeMenu": "منو تړل"
+		},
+		"hero": {
+			"badge": "د افغانستان د زده‌کوونکو لپاره",
+			"heading": "چیرې چې وئ درس وکړئ. <accent>کانکور ومنئ.</accent>",
+			"subtitle": "بشپړ آفلاین د زده‌کړې اپ — د نصاب سره سم دروس، +۱۳٬۰۰۰ فلش‌کارتونه، د کانکور مجازي ازموینې او ډیجیټل کتابتون. پرته له انټرنته.",
+			"ctaPrimary": "اپ وپلټئ",
+			"ctaSecondary": "د ښوونځیو او استادانو لپاره",
+			"signInPrompt": "دمخه حساب لرئ؟",
+			"signInLink": "ننوتل"
+		},
+		"download": {
+			"heading": "ابزار کانکور ډاونلوډ کړئ",
+			"subtitle": "وړیا. پرته له انټرنته. هر چیرې.",
+			"getItOn": "له دې ترلاسه کړئ",
+			"downloadOn": "له دې ډاونلوډ کړئ",
+			"comingSoon": "ډیر ژر"
+		},
+		"stats": {
+			"flashcards": "+۱۳٬۰۰۰",
+			"flashcardsLabel": "فلش‌کارتونه",
+			"offline": "۱۰۰٪",
+			"offlineLabel": "بشپړ آفلاین",
+			"modules": "۴",
+			"modulesLabel": "د زده‌کړې ماډلونه"
+		},
+		"app": {
+			"heading": "۴ ماډلونه. یو اپ.",
+			"subtitle": "د افغانستان د زده‌کوونکو لپاره اړین هر شی — له ورځنیو لوستونو تر د کانکور چمتووالي پورې.",
+			"school": {
+				"title": "د ښوونځي کورسونه",
+				"description": "د افغانستان د رسمي نصاب سره سم ویډیو لوستونه د ټولو ټولګیو لپاره، د PDF وړاندې کولو او یوځای شوي یادښت اخیستلو سره."
+			},
+			"flashcards": {
+				"title": "هوښیار فلش‌کارتونه",
+				"description": "د رسمي ښوونیزو کتابونو +۱۳٬۰۰۰ فلش‌کارتونه، د لایتنر د تکراري سیستم له لارې د دوامداره حفظ لپاره."
+			},
+			"tests": {
+				"title": "د کانکور ازموینه",
+				"description": "د پوهنتون د ننوتلو ازموینې واقعي شبیه‌سازي او د کتاب پر بنسټ تمرینونه، د فوري خودکار نمرو سره."
+			},
+			"library": {
+				"title": "ډیجیټل کتابتون",
+				"description": "زرګونه طبقه‌بندي شوي ښوونیز کتابونه او سرچینې — ټول د ډاونلوډ وړ دي، هر وخت، هر چیرې بشپړ آفلاین لوستلو لپاره."
+			}
+		},
+		"offline": {
+			"heading": "د افغانستان لپاره جوړ شوی",
+			"subtitle": "د محدود یا صفر انټرنت لرونکو سیمو لپاره ډیزاین شوی. یو ځل ډاونلوډ کړئ او تل درس وکړئ — پرته له انټرنته.",
+			"badgeLabel": "۱۰۰٪ آفلاین",
+			"point1Title": "پرته له انټرنته درس وکړئ",
+			"point1Desc": "ټول لوستونه، فلش‌کارتونه او ازموینې د ډاونلوډ وروسته بشپړ آفلاین کار کوي.",
+			"point2Title": "محتوا ستاسو وسیله کې",
+			"point2Desc": "ویډیوګانې، PDFګانې او فلش‌کارتونه ستاسو وسیله کې ذخیره کیږي نو ورو انټرنت هیڅکله ستاسو زده‌کړه نه بندوي.",
+			"point3Title": "پرمختګ خودکاره همغږي کیږي",
+			"point3Desc": "ستاسو د مطالعې تاریخچه او نمرې کله چې بیا وصل شئ سمدستي همغږي کیږي."
+		},
+		"educators": {
+			"heading": "د استادانو لپاره هم جوړ شوی",
+			"subtitle": "ښوونځي او استادان کولی شي کورسونه خپاره کړي، ازموینې جوړ کړي، او زده‌کوونکي د ابزار کانکور د اداري پینل له لارې اداره کړي."
+		},
+		"instructor": {
+			"title": "د استادانو لپاره",
+			"description": "خپل کورسونه خپاره او اداره کړئ، ازموینې جوړ کړئ، او د زده‌کوونکو لیست د اختصاصي داشبورډ له لارې پراخ کړئ.",
+			"cta": "د استاد په توګه ثبت‌نام"
+		},
+		"school": {
+			"title": "د ښوونځیو لپاره",
+			"description": "ستاسو ښوونځی، کارمندان، د کورسونو لیست او د زده‌کوونکو ثبت‌نامونه د یو مرکزي پینل له لارې اداره کړئ.",
+			"cta": "د ښوونځي ثبت"
+		},
+		"locales": {
+			"en": "English",
+			"fa": "دری",
+			"ps": "پښتو"
+		},
+		"privacy": {
+			"heading": "د ستاسو معلوماتو شفافیت",
+			"subtitle": "موږ باور لرو چې باید دقیقاً پوه شئ چې موږ کوم معلومات غواړو او ولې — هیڅ پټ شی نشته.",
+			"googleTitle": "د ګوګل د ننوتلو معلومات",
+			"googleDesc": "کله چې د ګوګل سره ننوځئ، موږ یوازې ستاسو د بریښنالیک پته او ښکاره نوم ترلاسه کوو. دا معلومات یوازې د ابزار کانکور کې ستاسو حساب رامینځته او پیژندلو لپاره کارول کیږي.",
+			"syncTitle": "د زده‌کړې پرمختګ",
+			"syncDesc": "ستاسو د مطالعې تاریخچه، د فلش‌کارت پرمختګ، او د ازموینې نمرې لومړی ستاسو وسیله کې ذخیره کیږي، بیا زموږ خوندي سرورونو سره همغږي کیږي.",
+			"noSaleTitle": "هیڅکله نه پلورل کیږي",
+			"noSaleDesc": "ستاسو شخصي معلومات هیڅکله اعلاناتي شرکتونو یا درېیمو اړخونو ته نه پلورل کیږي. موږ یوازې هغه معلومات راټولوو چې د ابزار کانکور د خدماتو لپاره اړین دي.",
+			"policyLink": "د بشپړ رازداري سیاست لوستل"
+		},
+		"footer": {
+			"copyright": "© {year} ابزار کانکور. ټول حقوق خوندي دي.",
+			"instructorSignup": "د استاد ثبت‌نام",
+			"schoolSignup": "د ښوونځي ثبت",
+			"privacy": "د رازداري سیاست",
+			"terms": "د کارونې شرایط"
+		}
+	},
+	"quizBuilder": {
+		"title": "د ازموینې جوړونکی",
+		"description": "د خپل کورس مضامینو سره اړوند ازموینې جوړ او اداره کړئ.",
+		"actions": {
+			"newQuiz": "نوې ازموینه",
+			"importQuizzes": "واردول",
+			"createQuiz": "ازموینه جوړول",
+			"saveChanges": "بدلونونه خوندي کول",
+			"delete": "ړنګول",
+			"cancel": "لغوه",
+			"editQuiz": "ازموینه سمول",
+			"printAndScan": "چاپول او سکېن کول",
+			"copyCode": "د ننوتلو کوډ کاپي کول",
+			"addQuestion": "پوښتنه زياتول",
+			"addOption": "انتخاب زياتول",
+			"addPair": "جوړه زياتول",
+			"addBlankAnswer": "د خالي ځای ځواب زياتول",
+			"addItem": "توکی زياتول"
+		},
+		"status": {
+			"editing": "سمول"
+		},
+		"toast": {
+			"quizCreated": "ازموینه جوړه شوه.",
+			"quizUpdated": "ازموینه تازه شوه.",
+			"quizDeleted": "«{title}» ړنګ شو.",
+			"codeCopied": "د ننوتلو کوډ کاپي شو.",
+			"loadError": "ازموینه پورته نه شوه: {error}",
+			"deleteError": "د ازموینې ړنګول ناکام شو.",
+			"importSuccess": "{count} ازموینې واردې شوې.",
+			"importPartial": "{inserted} واردې شوې، {failed} ناکامې یا پریښودل شوې."
+		},
+		"validation": {
+			"titleRequired": "د ازموینې سرلیک اړین دی.",
+			"questionNoText": "پوښتنه {n} متن نه لري.",
+			"questionNoAnswer": "پوښتنه {n} سم ځواب نه لري.",
+			"fixIssues": "مهرباني وکړئ خوندي کولو دمخه ستونزې حل کړئ.",
+			"fixIssuesTitle": "مهرباني وکړئ لاندې ستونزې حل کړئ:"
+		},
+		"tabs": {
+			"settings": "ترتیبات",
+			"questions": "پوښتنې",
+			"totalPts": "{count} ټولې نمرې"
+		},
+		"sheet": {
+			"newTitle": "نوې ازموینه",
+			"editTitle": "ازموینه سمول",
+			"newDescription": "نوې ازموینه جوړه کړئ. ترتیبات ډک کړئ او پوښتنې زياتې کړئ.",
+			"editDescription": "«{title}» سمول"
+		},
+		"deleteDialog": {
+			"title": "ازموینه ړنګه کړئ؟",
+			"description": "دا عمل به «{title}» او د هغې ټولې پوښتنې او د زده‌کوونکو هڅې تل لپاره ړنګ کړي. دا عمل بیرته نه شي کیدی.",
+			"confirm": "ازموینه ړنګول",
+			"cancel": "لغوه"
+		},
+		"settings": {
+			"basicInfo": "اساسي معلومات",
+			"titleLabel": "سرلیک",
+			"titlePlaceholder": "لکه: د درسي فصل ۳ ارزونه",
+			"description": "توضیح",
+			"descriptionPlaceholder": "لنډه توضیح چې د پیل دمخه زده‌کوونکو ته ښودل کیږي…",
+			"instructions": "لارښوونې",
+			"instructionsPlaceholder": "هره پوښتنه پوه پوه ولولئ. یوه هڅه لرئ…",
+			"entranceCode": "د ننوتلو کوډ",
+			"entranceCodeHint": "دا کوډ له زده‌کوونکو سره شریک کړئ ترڅو خپلواکه ازموینې ته لاسرسی ومومي.",
+			"timingAndAttempts": "وخت او هڅې",
+			"timeLimit": "د وخت محدودیت (دقیقې)",
+			"timeLimitPlaceholder": "محدودیت نشته",
+			"maxAttempts": "اعظمي هڅه",
+			"maxAttemptsPlaceholder": "نامحدوده",
+			"passingScore": "د قبلولو نمره (%)",
+			"behavior": "د ازموینې چلند",
+			"shuffleQuestions": "د پوښتنو ګډول",
+			"shuffleQuestionsDesc": "د هرې هڅې لپاره د پوښتنو ترتیب بدل کړئ.",
+			"showAnswers": "سمو ځوابونو ښودل",
+			"showAnswersHint": "کله چې زده‌کوونکي کولای شي سم ځوابونه وووني.",
+			"showAnswersAfterAttempt": "د هرې هڅې وروسته",
+			"showAnswersAfterClose": "د ازموینې بندیدو وروسته",
+			"showAnswersNever": "هیڅکله",
+			"pricing": "قیمت ټاکل",
+			"isFreeLabel": "وړیا ازموینه",
+			"isFreeDescription": "زده‌کوونکي کولای شي پرته له تادیې ثبت نوم وکړي.",
+			"priceCreditsLabel": "قیمت (کریډیټ)"
+		},
+		"questionTypes": {
+			"multiple_choice_single_correct": "ډیر انتخابي (یو ځواب)",
+			"multiple_choice_multiple_correct": "ډیر انتخابي (ډیر ځوابونه)",
+			"true_false": "سم / غلط",
+			"yes_no": "هو / نه",
+			"short_answer_text": "لنډ ځواب",
+			"long_answer_text": "اوږد ځواب",
+			"fill_in_the_blanks": "خالي ځای ډکول",
+			"matching": "سره سمول",
+			"ordering": "ترتیبول",
+			"image_based_question": "د انځور پر بنسټ"
+		},
+		"question": {
+			"label": "پوښتنه {n}",
+			"untitled": "بې سرلیکه پوښتنه",
+			"noCorrectAnswer": "سم ځواب نشته",
+			"placeholder": "خپله پوښتنه دلته ولیکئ…",
+			"fillBlanksPlaceholder": "د پوښتنې متن ولیکئ. د هر خالي ځای لپاره {marker} وکاروئ.",
+			"typeLabel": "د پوښتنې ډول",
+			"points": "نمرې",
+			"pt": "{count} نمره",
+			"pts": "{count} نمرې",
+			"hint": "لارښوونه",
+			"optional": "(اختیاري)",
+			"hintPlaceholder": "کله چې زده‌کوونکی غوښتنه وکړي ښودل کیږي…",
+			"explanation": "توضیح",
+			"explanationPlaceholder": "د ځواب ورکولو وروسته ښودل کیږي…",
+			"sections": {
+				"matchingPairs": "د سمولو جوړې",
+				"ordering": "توکي (سم ترتیب کې)",
+				"fillBlanks": "سم ځوابونه",
+				"default": "د ځواب انتخابونه"
+			},
+			"hints": {
+				"multipleCorrect": "ټول سم انتخابونه نښه کړئ.",
+				"fillBlanksPrefix": "له",
+				"fillBlanksSuffix": "د پوښتنې متن کې د هر خالي ځای لپاره وکاروئ. سم ځوابونه به ترتیب زياتې کړئ.",
+				"ordering": "توکي د سم ترتیب سره زياتې کړئ. زده‌کوونکي باید هغوی ورته ترتیب کې تنظیم کړي.",
+				"manualGrading": "د پوښتنې دا ډول لاسي نمره ورکول غواړي. هیڅ انتخاب اړین نه دی."
+			},
+			"option": {
+				"placeholder": "د انتخاب متن…",
+				"leftPlaceholder": "د کیڼ اړخ عبارت…",
+				"rightPlaceholder": "د ښي اړخ سمول…",
+				"blankPlaceholder": "د خالي ځای {n} ځواب…",
+				"correct": "سم",
+				"incorrect": "غلط",
+				"feedbackSet": "فیډبیک تنظیم شوی",
+				"addFeedback": "فیډبیک زياتول",
+				"feedbackPlaceholder": "هغه فیډبیک چې د دې انتخاب د غوره کولو پر مهال ښودل کیږي…"
+			},
+			"emptyList": {
+				"title": "لاهم پوښتنه نشته",
+				"description": "د پیل لپاره خپله لومړۍ پوښتنه زياته کړئ."
+			}
+		},
+		"list": {
+			"defaultDescription": "د خپلو زده‌کوونکو لپاره ازموینې جوړ او اداره کړئ.",
+			"stats": {
+				"total": "ټولې ازموینې",
+				"questions": "ټولې پوښتنې",
+				"avgPassing": "اوسط د قبلولو نمره",
+				"withLimit": "د وخت محدودیت سره"
+			},
+			"table": {
+				"quiz": "ازموینه",
+				"code": "کوډ",
+				"questions": "پوښتنې",
+				"timeLimit": "د وخت محدودیت",
+				"maxAttempts": "اعظمي هڅه",
+				"passScore": "د قبلولو نمره",
+				"showAnswers": "ځوابونه ښودل",
+				"noLimit": "محدودیت نشته",
+				"unlimited": "∞",
+				"shuffled": "ګډ شوي"
+			},
+			"showAnswersLabels": {
+				"attempt": "د هڅې وروسته",
+				"quiz_end_time": "د بندیدو وروسته",
+				"never": "هیڅکله"
+			},
+			"empty": {
+				"title": "لاهم ازموینه نشته",
+				"description": "د پیل لپاره خپله لومړۍ ازموینه جوړه کړئ."
+			},
+			"filters": {
+				"searchPlaceholder": "د آزموینو لټون...",
+				"filters": "فلترونه",
+				"visibility": "لیدنه",
+				"visibilityPublic": "عامه",
+				"visibilityPrivate": "شخصي",
+				"visibilityClassmate": "همټولګیوال",
+				"pricing": "قیمت",
+				"free": "وړیا",
+				"paid": "پیسې لرونکی",
+				"standalone": "خپلواک (پرته له ښوونځي)",
+				"clearAll": "ټول پاک کړئ"
+			}
+		}
+	},
+	"quizOmr": {
+		"questionCount": "{count, plural, one {# پوښتنه} other {# پوښتنې}}",
+		"notFound": "ازموینه ونه موندل شوه.",
+		"back": "شاته",
+		"noQuestionsWarning": "دا ازموینه لاهم پوښتنه نلري — د ځواب پاڼو چاپولو دمخه پوښتنې زیاتې کړئ.",
+		"lock": {
+			"bannerText": "دا ازموینه بند ده (چاپ نسخه {version}) — تر هغه چې يې پرانیزئ، پوښتنې او انتخابونه سمول کیدای نشي.",
+			"unlockAction": "د سمون لپاره پرانیستل",
+			"confirmTitle": "دا ازموینه د سمون لپاره پرانیستل شي؟",
+			"confirmDescription": "له دې وروسته د پوښتنو سمول به مخکینۍ چاپ شوې پاڼې زړې کړي. تاسو به اړتیا ولرئ چې د ټولو ثبت شویو زده کوونکو لپاره بیا چاپ کړئ.",
+			"confirmCancel": "لغوه",
+			"confirmAction": "پرانیستل",
+			"unlocked": "ازموینه د سمون لپاره پرانیستل شوه."
+		},
+		"tabs": {
+			"roster": "د زده کوونکو لیست",
+			"print": "چاپ او نسخې",
+			"scans": "سکېنونه",
+			"results": "پایلې"
+		},
+		"roster": {
+			"addTitle": "زده کوونکی زیاتول",
+			"addDescription": "د بریښنالیک په مرسته زده کوونکی ولټوئ او دې ازموینې ته یې زیات کړئ.",
+			"emailPlaceholder": "student@example.com",
+			"addAction": "زیاتول",
+			"notFound": "له دې بریښنالیک سره زده کوونکی ونه موندل شو.",
+			"alreadyRegistered": "دا زده کوونکی مخکې ثبت شوی دی.",
+			"added": "{name} لیست ته زیات شو.",
+			"deadlinePassedOwnerNote": "د ثبت نوم نیټه تیره شوې ده — زده کوونکي نور نشي کولی پخپله ثبت نوم وکړي، خو تاسو لاهم کولی شئ په لاسي ډول زده کوونکي زیات کړئ.",
+			"empty": {
+				"title": "لاهم هیڅ زده کوونکی ثبت شوی نه دی",
+				"description": "پورته یو زده کوونکی زیات کړئ، یا ازموینه شریکه کړئ ترڅو زده کوونکي پخپله ثبت نوم وکړي."
+			},
+			"table": {
+				"student": "زده کوونکی",
+				"source": "سرچینه",
+				"printed": "چاپ شوی"
+			},
+			"sourceSelf": "پخپله ثبت شوی",
+			"sourceOwner": "ستاسو لخوا زیات شوی",
+			"printed": "چاپ شوی",
+			"notPrinted": "لاهم چاپ نه دی شوی",
+			"unknownStudent": "ناڅرګند زده کوونکی"
+		},
+		"print": {
+			"printTitle": "د ځواب پاڼو چاپول",
+			"reprintTitle": "د ځواب پاڼو بیا چاپول",
+			"printDescription": "د هر ثبت شوي زده کوونکي لپاره یوه بلبل پاڼه جوړوي او د ازموینې پوښتنې بندوي.",
+			"downloadPdf": "PDF ډاونلوډ کول",
+			"printAction": "چاپول",
+			"reprintAction": "بیا چاپول",
+			"confirmTitle": "د ځواب پاڼې چاپ شي؟",
+			"confirmDescription": "دا کار د هر اوسني ثبت شوي زده کوونکي لپاره یوه نسخه جوړوي.",
+			"shuffleLabel": "د پوښتنو ترتیب په تصادفي ډول",
+			"shuffleDescription": "د هر زده کوونکي لپاره د پوښتنو ترتیب مختلف وي (د انتخابونو ځای ثابت پاتې کیږي).",
+			"lockConfirmLabel": "زه پوهیږم چې دا کار ازموینه بندوي — له دې وروسته د پوښتنو یا انتخابونو سمول به د ټولو زده کوونکو لپاره بیا چاپ ته اړتیا لري.",
+			"cancel": "لغوه",
+			"confirmAction": "تایید او چاپول",
+			"printed": "{count, plural, one {# پاڼه} other {# پاڼې}} چاپ شوې.",
+			"empty": {
+				"title": "لاهم هیڅ پاڼه چاپ شوې نه ده",
+				"description": "لومړی د زده کوونکو لیست ټب کې زده کوونکي ثبت کړئ، بیا یې چاپ کړئ."
+			},
+			"table": {
+				"student": "زده کوونکی",
+				"version": "نسخه",
+				"shuffled": "تصادفي",
+				"scanStatus": "د سکېن حالت"
+			},
+			"shuffledYes": "تصادفي",
+			"shuffledNo": "اصلي ترتیب",
+			"notScanned": "لاهم سکېن نه دی شوی",
+			"unknownStudent": "ناڅرګند زده کوونکی"
+		},
+		"scans": {
+			"uploadTitle": "بشپړ شوې ځواب پاڼه اپلوډول",
+			"dropzoneLabel": "انځور دلته کش کړئ یا کلیک وکړئ",
+			"dropzoneHint": "په موبایل کې، دا کار مستقیم کیمره پرانیزي.",
+			"variantPlaceholder": "هغه زده کوونکی وټاکئ چې دا پاڼه ورسره تړاو لري",
+			"uploadAction": "اپلوډول",
+			"qrDecoded": "د QR کوډ ولوستل شو — زده کوونکی په اوتومات ډول وپیژندل شو.",
+			"qrDecodedUnknownVariant": "د QR کوډ ولوستل شو، خو د دې ازموینې د هیڅ چاپ شوې پاڼې سره سمون نلري.",
+			"qrNotDecoded": "له دې انځور څخه د QR کوډ ونه لوستل شو — زده کوونکی په لاسي ډول وټاکئ.",
+			"uploaded": "اپلوډ شو — د نمرو ورکولو په حال کې دی.",
+			"empty": {
+				"title": "لاهم هیڅ سکېن اپلوډ شوی نه دی"
+			},
+			"table": {
+				"student": "زده کوونکی",
+				"status": "حالت",
+				"score": "نمره"
+			},
+			"status": {
+				"pending": "په تمه",
+				"processing": "د پروسس په حال کې",
+				"scored": "نمره ورکړل شوې",
+				"needs_review": "بیاکتنې ته اړتیا لري",
+				"error": "تېروتنه"
+			},
+			"reviewAction": "بیاکتنه",
+			"retryAction": "بیا هڅه",
+			"viewImageAction": "انځور کتل",
+			"unknownStudent": "ناڅرګند زده کوونکی",
+			"review": {
+				"title": "د سکېن بیاکتنه",
+				"description": "د ټیټ باور لرونکي ځوابونه تایید یا سم کړئ.",
+				"scanImageAlt": "د ځواب پاڼې د سکېن انځور",
+				"noImage": "انځور شتون نلري",
+				"questionN": "پوښتنه {n}",
+				"lowConfidence": "{pct}٪ باور",
+				"noAnswerDetected": "هیڅ ځواب ونه موندل شو",
+				"saved": "سمون خوندي شو."
+			}
+		},
+		"results": {
+			"stats": {
+				"scored": "نمره ورکړل شوې",
+				"average": "منځنۍ نمره",
+				"total": "ټولې پاڼې"
+			},
+			"scoresTitle": "نمرې",
+			"noScores": "لاهم هیڅ نمره نشته.",
+			"table": {
+				"student": "زده کوونکی",
+				"status": "حالت",
+				"score": "نمره",
+				"question": "پوښتنه",
+				"answered": "ځواب ورکړل شوی",
+				"wrongPct": "٪ ناسم"
+			},
+			"unknownStudent": "ناڅرګند زده کوونکی",
+			"difficultyTitle": "د پوښتنو ستونزمنتیا",
+			"noQuestions": "لاهم د پوښتنو معلومات نشته.",
+			"questionN": "پوښتنه {n}"
+		}
+	},
+	"courseBuilder": {
+		"meta": {
+			"newCourse": "نوی کورس",
+			"editCourse": "کورس سمبالول"
+		},
+		"common": {
+			"cancel": "لغوه",
+			"save": "خوندي کول",
+			"delete": "ړنګول",
+			"creating": "جوړیږي…",
+			"dragToReorder": "د ترتیب لپاره کش کړئ",
+			"collapse": "پټول",
+			"expand": "خلاصول"
+		},
+		"validation": {
+			"titleRequired": "د کورس سرلیک اړین دی."
+		},
+		"newCourse": {
+			"title": "نوی کورس",
+			"description": "اساسي توضیحات ډک کړئ. وروسته کولای شئ هر څه سمبال کړئ.",
+			"courseTitle": "د کورس سرلیک",
+			"courseTitlePlaceholder": "لکه فزیک — دوولسم ټولګی",
+			"subtitle": "فرعي سرلیک",
+			"subtitlePlaceholder": "لنډه یوه کرښه توضیح",
+			"courseDescription": "توضیحات",
+			"descriptionPlaceholder": "زده‌کوونکي به پدې کورس کې څه زده کړي؟",
+			"language": "ژبه",
+			"level": "کچه",
+			"isFree": "وړیا کورس",
+			"isFreeDescription": "زده‌کوونکي کولای شي پرته له تادیې ثبت‌نام وکړي.",
+			"priceCredits": "قیمت (کریډیټ)",
+			"create": "جوړول او جوړیدل",
+			"visibility": "لیدوالیت",
+			"visibilityDescription": "آیا دا کورس به د ټولو لیدو وړ وي؟"
+		},
+		"editCourse": {
+			"title": "د کورس جزئیاتو ایډیټ",
+			"description": "د خپل کورس بنسټیز جزئیات نوي کړئ.",
+			"save": "بدلونونه خوندي کړئ",
+			"saving": "خوندي کیږي…",
+			"saved": "د کورس جزئیات نوي شول."
+		},
+		"header": {
+			"back": "کورسونو ته بیرته",
+			"draft": "مسوده",
+			"published": "خپور شوی",
+			"preview": "مخکتنه",
+			"saveDraft": "مسوده خوندي کول",
+			"publishBtn": "خپرول",
+			"unpublishBtn": "د خپرولو لغوه",
+			"savedDraft": "مسوده خوندي شوه.",
+			"unpublished": "کورس له خپرولو وتاو شو.",
+			"unsavedChanges": "نه خوندي شوي بدلونونه",
+			"autoSaving": "خوندي کیږي...",
+			"autoSaved": "خوندي شو",
+			"autoSaveFailed": "اتوماتیک خوندي کول ناکام شول",
+			"editDetails": "د کورس جزئیات ایډیټ کړئ"
+		},
+		"tree": {
+			"title": "نصاب",
+			"emptyTitle": "لاهم هیڅ ماژول نشته",
+			"emptyDescription": "لومړی ماژول اضافه کړئ چې جوړول پیل کړئ."
+		},
+		"module": {
+			"add": "ماژول اضافه کول",
+			"untitled": "بې‌سرلیکه ماژول",
+			"editDetails": "د ماژول توضیحات سمبالول",
+			"titleLabel": "د ماژول سرلیک",
+			"titlePlaceholder": "لکه فصل ۱: پیژندنه",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "دا ماژول څه پوښي؟",
+			"startPage": "د پیل پاڼه",
+			"endPage": "د پای پاڼه"
+		},
+		"lesson": {
+			"addLesson": "لوست اضافه کول",
+			"untitled": "بې‌سرلیکه لوست",
+			"editDetails": "د لوست توضیحات سمبالول",
+			"titleLabel": "د لوست سرلیک",
+			"titlePlaceholder": "لکه د نیوټن لومړی قانون",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "د دې لوست لنډه توضیح…",
+			"contentType": "د محتوا ډول",
+			"estimatedDuration": "موده (دقیقې)",
+			"previewable": "وړیا مخکتنه",
+			"previewableDescription": "ثبت‌نام نشوي زده‌کوونکي کولای شي دا لوست وګوري.",
+			"mandatory": "اجباري",
+			"mandatoryDescription": "د کورس د بشپړولو لپاره اړین دی.",
+			"previewBadge": "مخکتنه"
+		},
+		"contentType": {
+			"video": "ویډیو",
+			"text": "متن",
+			"audio": "غږ",
+			"pdf_document": "PDF سند",
+			"slide_presentation": "سلاید وړاندینه",
+			"quiz": "ازموینه",
+			"assignment": "دنده",
+			"external_resource": "بهرنی سرچینه",
+			"code_playground": "کود لیکلو چاپیریال"
+		},
+		"level": {
+			"all_levels": "ټولې کچې",
+			"beginner": "پیل‌کوونکی",
+			"intermediate": "منځنی",
+			"advanced": "پرمختللی"
+		},
+		"content": {
+			"noLessonTitle": "هیڅ لوست نه دی انتخاب شوی",
+			"noLessonDescription": "د ښي خوا نصاب کې یو لوست انتخاب کړئ چې محتوا یې سمبال کړئ.",
+			"noBlocksTitle": "لاهم هیڅ محتوا بلاک نشته",
+			"noBlocksDescription": "یو بلاک اضافه کړئ چې دا لوست جوړول پیل کړئ."
+		},
+		"block": {
+			"addBlock": "محتوا بلاک اضافه کول",
+			"chooseType": "د بلاک ډول انتخاب کړئ",
+			"textContent": "محتوا (Markdown ملاتړ کیږي)",
+			"textPlaceholder": "لیکل پیل کړئ…",
+			"videoUrl": "د ویډیو لینک",
+			"videoProvider": "چمتو کوونکی",
+			"providerPlaceholder": "چمتو کوونکی انتخاب کړئ",
+			"customProvider": "دودیز / مستقیم",
+			"transcript": "د ویناوو متن",
+			"transcriptPlaceholder": "د ویناوو متن دلته ولیکئ…",
+			"audioUrl": "د غږ لینک",
+			"documentUrl": "د PDF لینک",
+			"slidesUrl": "د سلایډونو لینک",
+			"resourceTitle": "د سرچینې سرلیک",
+			"resourceTitlePlaceholder": "لکه رسمي اسناد",
+			"resourceUrl": "د سرچینې لینک",
+			"codeLanguage": "برنامه‌لیکنې ژبه",
+			"languagePlaceholder": "ژبه انتخاب کړئ",
+			"defaultCode": "پیش‌فرض کود",
+			"codePlaceholder": "// پیش‌فرض کود دلته ولیکئ…",
+			"solutionCode": "د حل کود",
+			"solutionPlaceholder": "// د حل کود د سپارلو وروسته ښکاره کیږي…",
+			"quizManagedSeparately": "د ازموینې محتوا د ازموینې جوړوونکي له لارې اداره کیږي.",
+			"upload": {
+				"modeLink": "لینک",
+				"modeUpload": "بارول",
+				"dropzoneLabel": "فایل دلته کش او خوشې کړئ یا د انتخاب لپاره کلیک وکړئ",
+				"dropzoneHint": "اعظمي اندازه {max}",
+				"uploading": "بارول کیږي… {pct}%",
+				"verifying": "د بارونې تایید کیږي…",
+				"uploadSuccess": "فایل بار شو.",
+				"uploadFailed": "بارول ناکام شول. بیا هڅه وکړئ.",
+				"invalidType": "دا د فایل ډول ملاتړ نه کیږي.",
+				"tooLarge": "فایل ډیر لوی دی (اعظمي {max}).",
+				"open": "فایل خلاص کړئ",
+				"remove": "فایل لرې کړئ"
+			},
+			"type": {
+				"text": "متن / مقاله",
+				"video": "ویډیو",
+				"audio": "غږ",
+				"pdf_document": "PDF سند",
+				"slide_presentation": "سلاید وړاندینه",
+				"external_resource": "بهرنی سرچینه",
+				"code_playground": "کود لیکلو چاپیریال",
+				"quiz": "ازموینه",
+				"assignment": "دنده"
+			}
+		}
+	},
+	"flashcardBuilder": {
+		"meta": {
+			"newDeck": "نوی ډګ",
+			"editDeck": "ډګ سمبالول"
+		},
+		"common": {
+			"cancel": "لغوه",
+			"save": "خوندي کول",
+			"delete": "ړنګول",
+			"edit": "سمبالول",
+			"actions": "کړنې",
+			"creating": "جوړیږي…"
+		},
+		"list": {
+			"title": "ډګونه",
+			"myDecks": "زما ډګونه",
+			"allDecks": "ټول ډګونه",
+			"subtitle": "{count} ډګونه",
+			"newDeck": "نوی ډګ",
+			"cardCount": "{count} کارتونه",
+			"priceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"dailyLimit": "{count}/ورځ",
+			"emptyTitle": "هیڅ ډګ ونه موندل شو",
+			"emptyDescription": "خپل لومړی ډګ جوړ کړه ترڅو زده کړه پیل کړې.",
+			"emptyAction": "ډګ جوړول",
+			"searchPlaceholder": "د ډګونو لټون…",
+			"filters": "چاڼونه",
+			"clearAll": "ټول پاکول",
+			"previous": "مخکینی",
+			"next": "بله",
+			"showing": "{from}–{to} د {total} ډګونو څخه ښودنه",
+			"algorithmFilter": "الګوریتم",
+			"visibilityFilter": "لیدوالیت",
+			"onlyMyDecks": "یوازې زما ډګونه",
+			"deckDeleted": "ډګ ړنګ شو.",
+			"deleteFailed": "د ډګ ړنګولو ناکام شو."
+		},
+		"validation": {
+			"nameRequired": "د ډګ نوم اړین دی.",
+			"questionRequired": "پوښتنه اړینه ده.",
+			"oneCorrectRequired": "لږ تر لږه یو ځواب باید سم وي.",
+			"allAnswersFilled": "ټول د ځواب ساحې باید ډک شي."
+		},
+		"visibility": {
+			"public": "عامه",
+			"private": "خصوصي",
+			"classmate": "ټولګیوالان"
+		},
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "لایتنر"
+		},
+		"newDeck": {
+			"title": "نوی ډګ",
+			"description": "د مطالعې پیل لپاره یو نوی فلش‌کارت ډګ جوړ کړئ.",
+			"nameLabel": "د ډګ نوم",
+			"namePlaceholder": "لکه د بیولوژۍ دریم فصل",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "دا ډګ د چا د پاره دی؟",
+			"visibilityLabel": "لیدل کیدل",
+			"algorithmLabel": "الګوریتم",
+			"isFreeLabel": "وړیا لاسرسی",
+			"isFreeDescription": "دا ډګ د ټولو کاربرانو لپاره وړیا پریږدئ.",
+			"priceCreditsLabel": "قیمت (کریډیټ)",
+			"dailyLimitLabel": "ورځني حد",
+			"dailyLimitDescription": "د ورځني کارتونو اعظمي شمیر. د نا محدود لپاره خالي پریږدئ.",
+			"dailyLimitPlaceholder": "لکه ۵۰",
+			"create": "ډګ جوړول"
+		},
+		"advancedSettings": {
+			"title": "پرمختللي ترتیبات",
+			"fsrsSection": "د FSRS ترتیبات",
+			"sm2Section": "د SM-2 ترتیبات",
+			"leitnerNote": "د لایتنر سیستم د ثابتو بکسونو وقفو کاروي. نور اضافي ترتیبات شتون نلري.",
+			"fsrsMaxIntervalLabel": "اعظمي وقفه (ورځې)",
+			"fsrsMaxIntervalDescription": "د مرور وقفو سخت سقف. ډیفالټ ۳۶۵۰۰ (≈۱۰۰ کاله).",
+			"fsrsRetentionLabel": "د یادولو هدف",
+			"fsrsRetentionDescription": "د مرور پر وخت د یادولو احتمال (۰.۷۰–۰.۹۹). ډیفالټ ۰.۹.",
+			"sm2EasyBonusLabel": "اسانه بونس",
+			"sm2EasyBonusDescription": "د اسانه ځواب پر مهال ضریب (≥ ۱.۰). ډیفالټ ۱.۳.",
+			"sm2IntervalModifierLabel": "د وقفې بدلونکی",
+			"sm2IntervalModifierDescription": "ټولې وقفې اندازه کوي. لوړ کړئ چې لږ مرور وکړئ. ډیفالټ ۱.۰.",
+			"sm2StartingEaseLabel": "پیل اسانتیا",
+			"sm2StartingEaseDescription": "د نویو کارتونو لپاره لومړنی اسانتیا ضریب (≥ ۱.۳). ډیفالټ ۲.۵."
+		},
+		"deckEdit": {
+			"title": "د ډګ ترتیبات",
+			"description": "د دې فلش‌کارت ډګ توضیحات سمبال کړئ.",
+			"save": "بدلونونه خوندي کول",
+			"savedSuccess": "ډګ تازه شو."
+		},
+		"header": {
+			"back": "ډګونو ته بیرته",
+			"settings": "ترتیبات",
+			"addCard": "کارت اضافه کول"
+		},
+		"builder": {
+			"cardCount": "{count} کارتونه",
+			"emptyTitle": "لاهم فلش‌کارت نشته",
+			"emptyDescription": "د دې ډګ د جوړولو لپاره لومړی کارت اضافه کړئ.",
+			"addFirst": "لومړی کارت اضافه کول",
+			"addCard": "کارت اضافه کول"
+		},
+		"card": {
+			"fact": "حقیقت",
+			"hint": "لارښوونه",
+			"answers": "{count} ځوابونه",
+			"deleted": "فلش‌کارت ړنګ شو.",
+			"deleteTitle": "دا فلش‌کارت ړنګ کړئ؟",
+			"deleteDescription": "دا کار بیرته نه شي کیدی. فلش‌کارت به له دې ډګ نه تل لپاره لرې شي."
+		},
+		"dialog": {
+			"addTitle": "فلش‌کارت اضافه کول",
+			"addDescription": "د دې فلش‌کارت پوښتنه او ځوابونه ډک کړئ.",
+			"editTitle": "فلش‌کارت سمبالول",
+			"editDescription": "پوښتنه او ځوابونه تازه کړئ.",
+			"questionLabel": "پوښتنه",
+			"questionPlaceholder": "پوښتنه څه ده؟",
+			"answersLabel": "ځوابونه",
+			"answerLabel": "ځواب {number}",
+			"answerPlaceholder": "ځواب {number}",
+			"markCorrect": "د سم په توګه نښان کول",
+			"markIncorrect": "د غلط په توګه نښان کول",
+			"addAnswer": "ځواب اضافه کول",
+			"removeAnswer": "ځواب لرې کول",
+			"factLabel": "حقیقت / توضیح",
+			"factDescription": "اختیاري یادداشت چې د ځواب وروسته ښکاره کیږي.",
+			"factPlaceholder": "یو جالب حقیقت یا توضیح اضافه کړئ…",
+			"hintLabel": "لارښوونه",
+			"hintDescription": "اختیاري سرنخ چې د ځواب دمخه ښکاره کیږي.",
+			"hintPlaceholder": "یو سرنخ ورکړئ…",
+			"add": "کارت اضافه کول",
+			"update": "بدلونونه خوندي کول",
+			"addedSuccess": "فلش‌کارت اضافه شو.",
+			"updatedSuccess": "فلش‌کارت تازه شو."
+		}
+	},
+	"spacedRepetition": {
+		"meta": {
+			"title": "تمرین"
+		},
+		"myDecks": {
+			"title": "زما دیکونه",
+			"deckCount": "{count, plural, =1 {# دیک} other {# دیکونه}}"
+		},
+		"page": {
+			"title": "تمرین",
+			"subtitle": "خپل فلش‌کارتونه د فاصله‌لرونکي تکرار په مرسته بیاکتنه کړئ ترڅو په اوږدمهاله حافظه کې ثبت شي.",
+			"addDeck": "ډګ اضافه کول",
+			"study": "تمرین",
+			"noDeckSelected": "د تمرین د پیل لپاره یو ډګ وټاکئ."
+		},
+		"deckSwitcher": {
+			"label": "فعال ډګ",
+			"placeholder": "ډګ وټاکئ",
+			"due": "{count} په وار"
+		},
+		"enroll": {
+			"title": "د ډګ تنظیمول",
+			"description": "یو ډګ وټاکئ او مشخص کړئ چې هره ورځ څو نوي کارتونه زده کوئ.",
+			"deckLabel": "ډګ",
+			"deckPlaceholder": "ډګ وټاکئ…",
+			"loading": "ډګونه بارېږي…",
+			"noDecks": "د نوم‌لیکنې لپاره کوم ډګ نشته.",
+			"cardCount": "{count} کارتونه",
+			"dailyLimitLabel": "نوي کارتونه په ورځ کې",
+			"dailyLimitHint": "هره ورځ څو نوي کارتونه معرفي کیږي. وروسته یې بدلولی شئ.",
+			"cancel": "لغوه",
+			"submit": "زده‌کړه پیل کړئ",
+			"submitting": "نوم‌لیکنه کیږي…",
+			"enrolled": "ډګ اضافه شو — بریالي اوسئ!",
+			"failed": "په دې ډګ کې نوم‌لیکنه ونه شوه.",
+			"loadFailed": "د ډګونو بارول ونه شول.",
+			"priceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"buyForCredits": "د {count, plural, one {# کریډیټ} other {# کریډیټ}} په بیه یې واخلئ",
+			"insufficientCredits": "ستاسو سره کافي کریډیټ نشته. مهرباني وکړئ حساب مو بشپړ کړئ."
+		},
+		"settings": {
+			"label": "د ډګ تنظیمات",
+			"dailyLimit": "نوي کارتونه په ورځ کې",
+			"update": "خوندي کول",
+			"updating": "خوندي کیږي…",
+			"updated": "ورځنی حد تازه شو.",
+			"updateFailed": "د ورځني حد تازه کول ونه شول."
+		},
+		"card": {
+			"question": "پوښتنه",
+			"answer": "ځواب",
+			"hint": "لارښوونه",
+			"fact": "د پوهېدو وړ",
+			"tapToReveal": "د ځواب لیدو لپاره کلیک وکړئ یا Space کېکاږئ",
+			"flipLabel": "کارت اړول",
+			"status": {
+				"new": "نوی",
+				"learning": "زده‌کړه",
+				"review": "بیاکتنه",
+				"relearning": "بیا زده‌کړه"
+			}
+		},
+		"grades": {
+			"prompt": "څومره ښه مو په یاد و؟",
+			"again": "بیا",
+			"hard": "سخت",
+			"good": "ښه",
+			"easy": "اسان",
+			"gradedAs": "ستاسو ځواب: {grade}",
+			"intervalMinutes": "{count} دقیقې",
+			"intervalDays": "{count} ورځې",
+			"intervalMonths": "{count} میاشتې",
+			"saveFailed": "ستاسو بیاکتنه خوندي نه شوه. بیا هڅه وکړئ."
+		},
+		"nav": {
+			"previous": "پخوانی",
+			"next": "راتلونکی"
+		},
+		"stats": {
+			"progress": "{done} له {total} بیاکتل شوي",
+			"progressLabel": "د ناستې پرمختګ",
+			"new": "نوي",
+			"learning": "زده‌کړه",
+			"review": "بیاکتنه"
+		},
+		"complete": {
+			"title": "ناسته بشپړه شوه!",
+			"subtitle": "نن مو {count} کارتونه بیاکتنه کړل. سبا د راتلونکې ډلې لپاره راشئ.",
+			"backToDecks": "ډګونه وګورئ"
+		},
+		"caughtUp": {
+			"title": "هرڅه بیاکتل شوي",
+			"subtitle": "اوس مهال کوم کارت په وار کې نشته. وروسته راشئ یا خپل ورځنی حد لوړ کړئ."
+		},
+		"empty": {
+			"title": "تر اوسه کوم فعال ډګ نلرئ",
+			"subtitle": "د ورځنۍ بیاکتنې عادت جوړولو لپاره په یوه ډګ کې نوم‌لیکنه وکړئ.",
+			"action": "خپل لومړی ډګ اضافه کړئ"
+		}
+	},
+	"classroomBuilder": {
+		"common": {
+			"cancel": "لغوول",
+			"save": "خوندي کول",
+			"delete": "ړنګول",
+			"remove": "لرې کول",
+			"actions": "عملونه"
+		},
+		"validation": {
+			"nameRequired": "نوم اړین دی.",
+			"titleRequired": "سرلیک اړین دی.",
+			"messageRequired": "پیغام اړین دی.",
+			"joinCodeRequired": "د ګډون کوډ اړین دی.",
+			"joinCodeLength": "د ګډون کوډ باید ۶ رقمه وي."
+		},
+		"list": {
+			"myClassrooms": "زما ټولګي",
+			"subtitle": "{count} ټولګی",
+			"newClassroom": "نوی ټولګی",
+			"emptyTitle": "لا ټولګی نه لرئ",
+			"emptyDescription": "د زده‌کوونکو ډلې سره د سرچینو شریکولو لپاره ټولګی جوړ کړئ.",
+			"emptyAction": "ټولګی جوړ کړئ"
+		},
+		"newClassroom": {
+			"title": "نوی ټولګی",
+			"description": "د ډګونو او کورسونو د شریکولو لپاره ټولګی جوړ کړئ.",
+			"nameLabel": "د ټولګي نوم",
+			"namePlaceholder": "لکه: فیزیک — صنف ۱۲",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "دا ټولګی د کوم هدف لپاره دی؟",
+			"joinCodeLabel": "د ګډون کوډ",
+			"joinCodePlaceholder": "لکه: 123456",
+			"create": "ټولګی جوړ کړئ"
+		},
+		"card": {
+			"actions": "عملونه",
+			"manage": "مدیریت",
+			"copyJoinCode": "د ګډون کوډ کاپي کول",
+			"joinCodeCopied": "کوډ کاپي شو!",
+			"delete": "ړنګول",
+			"archived": "آرشیف",
+			"noDescription": "توضیحات نشته",
+			"members": "{count} غړی"
+		},
+		"header": {
+			"back": "ټولګیو ته بیرته",
+			"settings": "ترتیبات",
+			"memberCount": "{count} غړی"
+		},
+		"settings": {
+			"title": "د ټولګي ترتیبات",
+			"description": "د ټولګي نوم او توضیحات بدل کړئ.",
+			"nameLabel": "نوم",
+			"namePlaceholder": "د ټولګي نوم",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "لنډه توضیح",
+			"saved": "ترتیبات خوندي شو."
+		},
+		"tabs": {
+			"resources": "سرچینې",
+			"materials": "مواد",
+			"announcements": "اعلانونه",
+			"members": "غړي"
+		},
+		"resources": {
+			"subtitle": "{count} سرچینه",
+			"add": "سرچینه اضافه کړئ",
+			"added": "سرچینه اضافه شوه.",
+			"emptyTitle": "لا سرچینه نشته",
+			"emptyDescription": "ډګونه او کورسونه له دې ټولګي سره شریک کړئ.",
+			"type": {
+				"deck": "د فلش‌کارت ډګ",
+				"course": "کورس",
+				"library": "کتابتون",
+				"quiz": "ازموینه"
+			},
+			"addDialog": {
+				"title": "سرچینه اضافه کړئ",
+				"typeLabel": "د سرچینې ډول",
+				"resourceLabel": "سرچینه غوره کړئ",
+				"selectRequired": "یوه سرچینه غوره کړئ.",
+				"noItems": "هیڅ مورد ونه موندل شو.",
+				"add": "اضافه کول"
+			}
+		},
+		"materials": {
+			"subtitle": "{count} مواد",
+			"add": "مواد اضافه کړئ",
+			"added": "مواد اضافه شول.",
+			"published": "خپور شوی",
+			"emptyTitle": "لا مواد نشته",
+			"emptyDescription": "د زده‌کوونکو لپاره فایلونه، لینکونه یا اسناد اضافه کړئ.",
+			"type": {
+				"lesson": "درس",
+				"pdf": "PDF",
+				"video": "ویډیو",
+				"document": "سند",
+				"link": "لینک",
+				"practice": "تمرین",
+				"exam": "ازموینه",
+				"other": "نور"
+			},
+			"addDialog": {
+				"title": "مواد اضافه کړئ",
+				"titleLabel": "سرلیک",
+				"titlePlaceholder": "د موادو سرلیک",
+				"descriptionLabel": "توضیحات",
+				"descriptionPlaceholder": "لنډه توضیح",
+				"typeLabel": "ډول",
+				"add": "اضافه کول"
+			}
+		},
+		"announcements": {
+			"emptyTitle": "لا اعلان نشته",
+			"emptyDescription": "اعلان خپور کړئ ترڅو زده‌کوونکي خبر شي.",
+			"newLabel": "اعلان ولیکئ",
+			"placeholder": "له زده‌کوونکو سره یو شی شریک کړئ…",
+			"post": "خپرول",
+			"unknownAuthor": "ناپیژندل شوی"
+		},
+		"members": {
+			"subtitle": "{count} غړی",
+			"joinCodeLabel": "د ګډون کوډ",
+			"joinCodeDescription": "دا کوډ له زده‌کوونکو سره شریک کړئ.",
+			"copyCode": "کوډ کاپي کول",
+			"regenerateCode": "نوی کوډ جوړول",
+			"joinCodeRegenerated": "د ګډون کوډ تازه شو.",
+			"unknownUser": "ناپیژندل شوی کارونکی",
+			"emptyTitle": "لا غړی نشته",
+			"emptyDescription": "د ګډون کوډ له زده‌کوونکو سره شریک کړئ.",
+			"role": {
+				"owner": "مالک",
+				"instructor": "استاد",
+				"assistant": "مرستیال",
+				"student": "زده‌کوونکی"
+			},
+			"invite": {
+				"button": "زده‌کوونکی بلل",
+				"title": "زده‌کوونکی بلل",
+				"emailLabel": "د زده‌کوونکي بریښنالیک",
+				"emailPlaceholder": "student@example.com",
+				"submit": "بلنه لیږل",
+				"sent": "بلنه ولیږل شوه."
+			},
+			"requests": {
+				"title": "د غړیتوب غوښتنې",
+				"subtitle": "{count, plural, one {# پاتې غوښتنه} other {# پاتې غوښتنې}}",
+				"emptyTitle": "هیڅ پاتې غوښتنه نشته",
+				"emptyDescription": "د هغو زده‌کوونکو غوښتنې چې ستاسو کوډ کاروي دلته ښکاره کیږي.",
+				"approve": "منل",
+				"decline": "رد کول",
+				"approved": "غوښتنه ومنل شوه.",
+				"declined": "غوښتنه رد شوه.",
+				"cancel": "بلنه لغوه کول",
+				"canceled": "بلنه لغوه شوه.",
+				"invitedAwaiting": "بلل شوی — د هغه د ځواب په تمه.",
+				"wantsToJoin": "غواړي ستاسو د ټولګي کوډ په کارولو سره غړی شي."
+			}
+		}
+	},
+	"aboutUs": {
+		"title": "زموږ په اړه",
+		"description": "ابزارک د زده‌کړې لپاره یو نوښتګر آنلاین پلیټفارم دی چې د زده‌کوونکو، ښوونکو او ښوونځیو لپاره عصري تعلیمي حلونه وړاندې کوي. زموږ ماموریت د زده‌کړې لاسرسی پراخول، د کیفیت لرونکي موادو وړاندې کول او د زده‌کړې تجربه ښه کول دي.",
+		"hero": {
+			"badge": "د زموږ پلیټفارم په اړه",
+			"title": "د زده‌کوونکو په هر ځای کې پیاوړي کول",
+			"description": "ابزارک، یو آنلاین تعلیمي پلیټفارم چې زدهکړه ډیر آسانه او خوندوره کوي. موږ د لوړ کیفیت لرونکي تعلیمي منابع، تعاملي وسیلې او اسانتیاوې وړاندې کوو چې زدهکوونکو ته په خپل مهارتونو پراختیا ورکولو او د خپلو اهدافو ترلاسه کولو کې مرسته کوي.",
+			"subtitle": "د لوړ کیفیت زده کړې؛ هر وخت، هر ځای او په اسانۍ سره — آنلاین یا آفلاین، په هر ډول وسیله کې",
+			"cta": {
+				"primary": "پیل کړئ",
+				"secondary": "ډیمو وګورئ"
+			}
+		},
+		"stats": {
+			"students": "فعال زده‌کوونکي",
+			"courses": "کورسونه",
+			"schools": "فعال ښوونځي",
+			"rating": "د اپلیکیشن درجه",
+			"value": {
+				"students": "1M+",
+				"courses": "100+",
+				"schools": "120+",
+				"rating": "4.9★"
+			}
+		},
+		"mission": {
+			"title": "زموږ ماموریت",
+			"body": "موږ باور لرو چې زده‌کړه باید هیڅ حدونه نلري. زموږ پلیټفارم عصري ټکنالوژي د ثابت شوي تدریس میتودونو سره ترکیبوي ترڅو میلیونونو زده‌کوونکو ته د خپلو اهدافو ترلاسه کولو کې مرسته وکړي.",
+			"points": [
+				"هر زده‌کوونکي ته د کیفیت لرونکی زده‌کړې رسول.",
+				"په بېلابېلو ژبو او وسیلو کې د زده‌کړې لاسرسی اسانه کول.",
+				"د عملي وسایلو له لارې دوامداره پرمختګ ملاتړ کول."
+			]
+		},
+		"features": {
+			"title": "ولې موږ غوره یو",
+			"subtitle": "هر هغه څه چې تاسو یو ځایګی زده‌کړې تجربه لپاره اړتیا لرئ.",
+			"offline": {
+				"title": "آفلاین لاسرسی",
+				"desc": "درسونه ډاونلوډ کړئ او بې انټرنیټ زده کړئ."
+			},
+			"sync": {
+				"title": "کلاوډ همغږي",
+				"desc": "ستاسو پرمختګ فوراً په ټولو وسیلو باندې همغږیږي."
+			},
+			"secure": {
+				"title": "خوندي او باوري",
+				"desc": "ستاسو معلومات په هر ګام رمزګذاري شوي او خوندي دي."
+			},
+			"fast": {
+				"title": "ګړندی سرعت",
+				"desc": "په ویب او موبایل باندې نرم او اصلاح شوی تجربه."
+			},
+			"library": {
+				"title": "غنی کتابخانه",
+				"desc": "په هر موضوع او کچه زرګونه کورسونه."
+			},
+			"certified": {
+				"title": "تایید شوي کورسونه",
+				"desc": "د کورسونو پای ته رسولو سره معتبر گواهینامې ترلاسه کړئ."
+			}
+		},
+		"values": {
+			"title": "زموږ اصلي ارزښتونه",
+			"subtitle": "هغه اصول چې زموږ د جوړونې هر پریکړه رهبري کوي.",
+			"accessible": {
+				"title": "د لاسرسي وړ",
+				"desc": "زده‌کړه لپاره هر ځای لپاره خلاص."
+			},
+			"learner": {
+				"title": "لومړی زده‌کوونکی",
+				"desc": "هر پریکړه زموږ زده‌کوونکو سره پیل کیږي."
+			},
+			"quality": {
+				"title": "کیفیت",
+				"desc": "د متخصصینو څخه باوري محتوا."
+			}
+		},
+		"video": {
+			"badge": "ډیمو کتل",
+			"title": "ابزار کانکور په عمل کې وګورئ",
+			"subtitle": "وګورئ چې زموږ پلیټ فارم څنګه په ټول افغانستان کې د زرګونو زده‌کړیالانو لپاره زده‌کړه بدلونوي.",
+			"playButton": "ویډیو پلی کول",
+			"closeButton": "ویډیو تړل",
+			"duration": "۲:۳۰ دقیقې",
+			"feature1Title": "اسانه کارونه",
+			"feature1Desc": "د هرې کچې زده‌کړیالانو لپاره ډیزاین شوی ساده انټرفیس.",
+			"feature2Title": "آفلاین لاسرسی",
+			"feature2Desc": "درسونه ښکته (Download) کړئ او هر وخت او هر ځای زده‌کړه وکړئ.",
+			"feature3Title": "د پرمختګ څارنه",
+			"feature3Desc": "د دقیقو تحلیلونو په مرسته د خپلې زده‌کړې مسیر تعقیب کړئ."
+		},
+		"team": {
+			"badge": "زموږ ټیم",
+			"title": "زموږ ټیم",
+			"subtitle": "هغه خلک وپیژنئ چې ابزار کنکور جوړوي.",
+			"highlight": "زموږ له مسلکي او ژمن ټیم سره آشنا شئ",
+			"panelTitle": "د هغو خلکو له خوا جوړ شوی چې کار په پاملرنه رسوي",
+			"panelDesc": "د محصول، ډیزاین او انجینرۍ یوه کوچنۍ ډله چې د زده‌کړې پایلو، چټکتیا او باور ته پام کوي.",
+			"members": [
+				{
+					"id": "besmillah-ibrahimi",
+					"name": "بسم الله ابراهیمي",
+					"role": "اجرایي رئیس او بنسټګر",
+					"imageUrl": "/team-ali.png",
+					"email": "bemillah@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"location": "کابل، افغانستان",
+					"shortBio": "بسم الله، «ابزار کانکور» د دې موخې لپاره تاسیس کړ چې هر افغان زده‌کړیال باکیفیته زده‌کړو ته لاسرسی ولري.",
+					"fullBio": "بسم الله ابراهیمي د ابزار کانکور بنسټګر او اجرایي رئیس دی. هغه په پوهنه او ټیکنالوژۍ کې تر ۱۰ کلونو زیاته تجربه لري او د کابل پوهنتون د کمپیوټر ساینس له پوهنځي څخه فارغ شوی دی. هغه باور لري چې ټیکنالوژي کولای شي د زده‌کړو واټن له منځه یوسي او ټولو زده‌کړیالانو ته مساوي فرصتونه برابر کړي.",
+					"socialLinks": [
+						{ "platform": "ټویټر", "url": "https://twitter.com/besmillah" },
+						{ "platform": "فیسبوک", "url": "https://facebook.com/besmillah" },
+						{
+							"platform": "انسټاګرام",
+							"url": "https://instagram.com/besmillah"
+						}
+					]
+				},
+				{
+					"id": "fatema-ahmadi",
+					"name": "فاطمه احمدي",
+					"role": "د ټیکنالوژۍ ارشد مسؤله (CTO)",
+					"imageUrl": "/team-nilo.png",
+					"email": "fatema@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "فاطمه زموږ د انجینرۍ ټیم رهبري کوي او د میلیونونو زده‌کړیالانو لپاره د سکېل وړ (Scalable) سیسټمونه ډیزاین کوي.",
+					"fullBio": "فاطمه احمدي زموږ د ټیکنالوژۍ ارشد مسؤله ده چې د سافټویر جوړولو په برخه کې تر ۸ کلونو زیاته تجربه لري. د هغې تخصص د سکېل وړ معمارۍ او د کارن تجربې په ښه کولو کې دی.",
+					"socialLinks": [
+						{ "platform": "ټویټر", "url": "https://twitter.com/fatema" },
+						{ "platform": "انسټاګرام", "url": "https://instagram.com/fatema" },
+						{ "platform": "فیسبوک", "url": "https://facebook.com/fatema" }
+					]
+				},
+				{
+					"id": "nadia-rahimi",
+					"name": "نادیه رحیمي",
+					"role": "د محصول مدیره",
+					"imageUrl": "/team-sara.jpg",
+					"email": "nadia@abzarkankor.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "نادیه خلاقیت د کارن له څېړنو سره یوځای کوي ترڅو د زده‌کړې ساده او په زړه پورې تجربې رامنځته کړي.",
+					"fullBio": "نادیه رحیمي زموږ د محصول مدیره ده او په تعلیمي ډیجیټل محصولاتو کې تخصص لري. هغه په منظمه توګه له افغان زده‌کړیالانو سره د دوی د ریښتینو اړتیاو د پوهېدو لپاره څېړنې کوي.",
+					"socialLinks": [
+						{ "platform": "فیسبوک", "url": "https://facebook.com/nadia" },
+						{ "platform": "انسټاګرام", "url": "https://instagram.com/nadia" },
+						{ "platform": "ټویټر", "url": "https://twitter.com/nadia" }
+					]
+				},
+				{
+					"id": "ali-hosseini",
+					"name": "علي حسیني",
+					"role": "د محتوا مدیر",
+					"imageUrl": "/img/team/4.jpg",
+					"email": "ali@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "علي د تعلیمي محتوا په کیفیت څارنه کوي او په ټول افغانستان کې له تکړه ښوونکو سره کار کوي.",
+					"fullBio": "علي حسیني په پوهنه کې د ماسټرۍ سند لري او د تدریس تر ۱۲ کلونو زیاته تجربه لري. هغه د ښوونکو له پراخې شبکې سره همکاري کوي ترڅو باکیفیته او تازه محتوا تولید کړي.",
+					"socialLinks": [
+						{ "platform": "فیسبوک", "url": "https://facebook.com/ali" },
+						{ "platform": "انسټاګرام", "url": "https://instagram.com/ali" },
+						{ "platform": "ټویټر", "url": "https://twitter.com/ali" }
+					]
+				}
+			]
+		},
+		"download": {
+			"title": "نن د زده‌کړې پیل وکړئ",
+			"subtitle": "په زموږ اپلیکیشن او ویب پلیټفارم باندې له یو میلیون څخه زیاتو زده‌کوونکو سره یوځای شئ.",
+			"ios": "په App Store ډاونلوډ کړئ",
+			"android": "په Google Play ترلاسه کړئ",
+			"stores": {
+				"appStore": {
+					"label": "ډاونلوډ له",
+					"name": "App Store"
+				},
+				"googlePlay": {
+					"label": "ترلاسه کړئ له",
+					"name": "Google Play"
+				}
+			}
+		},
+		"contact": {
+			"email": "بریښنالیک پته",
+			"phone": "د تلیفون شمیره",
+			"address": "د دفتر پته",
+			"hours": "د کار ساعتونه",
+			"hoursValue": "شنبه - پنجشنبه، ۸:۰۰ سهار - ۵:۰۰ مازدیګر",
+			"badge": "اړیکه ونیسئ",
+			"title": "زموږ له ټیم سره اړیکه ونیسئ",
+			"subtitle": "پوښتنې لرئ یا ملاتړ ته اړتیا لرئ؟ موږ دلته یو چې مرسته وکړو.",
+			"socialTitle": "موږ په ټولنیزو رسنیو کې تعقیب کړئ",
+			"socialSubtitle": "زموږ له وروستیو خبرونو او اعلانونو باخبره اوسئ.",
+			"responseTime": "موږ معمولاً په ۲۴ ساعتونو کې ځواب ورکوو."
+		}
+	},
+	"search": {
+		"tabs": {
+			"all": "ټول",
+			"courses": "کورسونه",
+			"libraries": "کتابتون",
+			"decks": "ډېکونه",
+			"quizzes": "ازموینې"
+		},
+		"groups": {
+			"courses": "کورسونه",
+			"libraries": "کتابتون",
+			"decks": "ډېکونه",
+			"quizzes": "ازموینې"
+		},
+		"seeAll": "ټول وګورئ",
+		"loadError": "د لټون پایلې نشي بارېدلی",
+		"tryAgain": "بیا هڅه وکړئ",
+		"searching": "په لټون کې…",
+		"noResults": "هېڅ پایله ونه موندل شوه",
+		"noResultsDescription": "بله جمله وازمویئ.",
+		"showingResults": "د {total} څخه {from} تر {to} ښودل کیږي",
+		"previous": "پخوانی",
+		"next": "راتلونکی",
+		"resultsFor": "د «{query}» پایلې",
+		"resultsTitle": "د لټون پایلې",
+		"emptyQuery": "د لټون لپاره یو څه ولیکئ.",
+		"viewAllResults": "د «{query}» ټولې پایلې وګورئ"
+	},
+	"decks": {
+		"title": "ډیکونه",
+		"discussions": "د ډېک بحثونه او خبرې",
+		"description": "د چمتو شویو او ګډو فلش کارتونو ډېکونو تمرین وکړئ.",
+		"backToHome": "شاته کور ته",
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "لایتنر"
+		},
+		"free": "وړیا",
+		"practiceNow": "اوس تمرین وکړئ",
+		"continueStudying": "زده کړه ته دوام ورکړئ",
+		"signUpToPractice": "د تمرین لپاره ثبت نوم وکړئ",
+		"searchPlaceholder": "د ډېکونو لټون…",
+		"clearSearch": "لټون پاک کړئ",
+		"freeOnly": "یوازې وړیا",
+		"deckCount": "{count, plural, =1 {# ډېک} other {# ډېکونه}}",
+		"cardCount": "{count, plural, =1 {# کارت} other {# کارتونه}}",
+		"priceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+		"buyForCredits": "د {count, plural, one {# کریډیټ} other {# کریډیټ}} په بیه یې واخلئ"
+	},
+	"quizzes": {
+		"title": "آزموینې",
+		"discussions": "د ازموینې بحثونه او خبرې",
+		"description": "د هر مضمون تمرینی ازموینې او د کانکور د ازموینې تمرین وکړئ.",
+		"backToList": "شاته ازموینو ته",
+		"searchPlaceholder": "د ازموینو لټون…",
+		"clearSearch": "لټون پاک کړئ",
+		"noQuizzesFound": "هېڅ ازموینه ونه موندل شوه",
+		"noQuizzesDescription": "بله جمله وازمویئ.",
+		"showing": "د {total} څخه {from} تر {to} ازموینې ښودل کیږي",
+		"previous": "پخوانی",
+		"next": "راتلونکی",
+		"loadError": "د ازموینو بارول نشي کیدلی",
+		"loadErrorDescription": "مهرباني وکړئ بیا هڅه وکړئ.",
+		"tryAgain": "بیا هڅه وکړئ",
+		"view": "ازموینه وګورئ",
+		"instructions": "لارښوونې",
+		"timeLimitMinutes": "{count, plural, =1 {# دقیقه} other {# دقیقې}}",
+		"passingScore": "{percent}% د بریالیتوب لپاره",
+		"maxAttempts": "{count, plural, =1 {# هڅه} other {# هڅې}}",
+		"signUpToTake": "د دې ازموینې لپاره ثبت نوم وکړئ",
+		"askInstructorForCode": "د دې ازموینې د ننوتلو کوډ لپاره له خپل استاد یا ښوونځي وپوښتئ.",
+		"free": "وړیا",
+		"priceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+		"register": "ثبت نوم",
+		"registerForCredits": "د {count, plural, one {# کریډیټ} other {# کریډیټ}} په بیه ثبت نوم",
+		"alreadyRegistered": "تاسو په دې ازموینه کې ثبت نوم شوي یاست.",
+		"registrationClosed": "د دې ازموینې ثبت نوم بند شوی دی.",
+		"registrationSuccess": "په بریالیتوب سره ثبت نوم شو!",
+		"registrationFailed": "ثبت نوم ونه شو. بیا هڅه وکړئ.",
+		"insufficientCredits": "ستاسو سره کافي کریډیټ نشته. مهرباني وکړئ حساب مو بشپړ کړئ."
+	},
+	"bookmarks": {
+		"title": "نښه‌ګانې",
+		"description": "هرڅه چې تاسو یې وروسته لپاره ساتلي، ټول په یو ځای کې.",
+		"searchPlaceholder": "د نښه‌ګانو لټون…",
+		"clearSearch": "لټون پاک کړئ",
+		"allTypes": "ټول ډولونه",
+		"type_course": "کورس",
+		"type_deck": "ډېک",
+		"type_library": "کتابتون",
+		"type_quiz": "ازموینه",
+		"open": "خلاصول",
+		"remove": "نښه لرې کول",
+		"untitled": "بې سرلیکه",
+		"noBookmarksFound": "هېڅ نښه ونه موندل شوه",
+		"noBookmarksDescription": "خپل لټون یا فلټرونه بدل کړئ.",
+		"noBookmarksYet": "لا تر اوسه هېڅ نښه نشته",
+		"noBookmarksYetDescription": "کورسونه، ډېکونه، د کتابتون کتابونه، او ازموینې وساتئ ترڅو یې وروسته دلته ومومئ.",
+		"showing": "د {total} څخه {from} تر {to} نښې ښودل کیږي",
+		"previous": "پخوانی",
+		"next": "راتلونکی",
+		"loadError": "د نښه‌ګانو بارول نشي کیدلی",
+		"loadErrorDescription": "مهرباني وکړئ بیا هڅه وکړئ.",
+		"tryAgain": "بیا هڅه وکړئ",
+		"bookmark": "نښه کول",
+		"bookmarked": "نښه شوی",
+		"bookmarkAdded": "نښه اضافه شوه.",
+		"bookmarkRemoved": "نښه لرې شوه.",
+		"bookmarkFailed": "د نښې تازه کول پاتې راغلل.",
+		"removeFailed": "د نښې لرې کول پاتې راغلل."
+	},
+	"notifications": {
+		"title": "خبرتیاوې",
+		"description": "هرڅه چې ستاسو پاملرنې ته اړتیا لري، ټول په یو ځای کې.",
+		"markAllRead": "ټول د لوستل شوي په توګه نښه کول",
+		"markAsRead": "د لوستل شوي په توګه نښه کول",
+		"viewAll": "ټول کتل",
+		"unread": "نالوستل شوي",
+		"all": "ټول",
+		"noNotifications": "هیڅ خبرتیا نشته",
+		"noNotificationsDescription": "تاسو تازه یاست. نوې خبرتیاوې به دلته ښکاره شي.",
+		"noUnreadNotifications": "هیڅ نالوستل شوې خبرتیا نشته",
+		"loadError": "د خبرتیاوو بارول نشي کیدلی",
+		"loadErrorDescription": "مهرباني وکړئ بیا هڅه وکړئ.",
+		"tryAgain": "بیا هڅه وکړئ",
+		"showing": "د {total} څخه {from} تر {to} خبرتیاوې ښودل کیږي",
+		"previous": "پخوانی",
+		"next": "راتلونکی",
+		"justNow": "همدا اوس",
+		"type": {
+			"new_course_enrollment": "نوی نوم لیکنه",
+			"course_completion": "کورس بشپړ شو",
+			"new_lesson_available": "نوی درس شته",
+			"quiz_due_reminder": "د ازموینې نیټه نږدې ده",
+			"quiz_graded": "ازموینه ارزول شوه",
+			"new_assignment_submission": "نوی سپارل شوی کار",
+			"assignment_graded": "دنده ارزول شوه",
+			"new_discussion_post": "نوې بحث پوسته",
+			"new_reply_to_post": "نوی ځواب",
+			"course_announcement": "اعلان",
+			"system_update": "د سیسټم تازه کول",
+			"badge_awarded": "نښان ورکړل شو",
+			"classroom_invite": "د ټولګي بلنه",
+			"classroom_join_request": "د ټولګي ننوتلو غوښتنه",
+			"classroom_invite_response": "د ټولګي بلنې ځواب",
+			"school_invite": "د ښوونځي بلنه",
+			"school_invite_response": "د ښوونځي بلنې ځواب"
+		},
+		"telegramTitle": "د ټلیګرام خبرتیاوې",
+		"telegramDescription": "خپل ټلیګرام حساب وصل کړئ ترڅو هلته هم سملاسي خبر شئ.",
+		"telegramConnectedDescription": "وصل شو — خبرتیاوې ستاسو ټلیګرام ته هم لیږل کیږي.",
+		"telegramConnect": "له ټلیګرام سره وصلول",
+		"telegramDisconnect": "پیوستون قطع کول",
+		"telegramDisconnected": "د ټلیګرام پیوستون قطع شو.",
+		"pushTitle": "د براوزر خبرتیاوې",
+		"pushDescription": "په خپل براوزر کې سملاسي خبر شئ، حتی کله چې دا ټب خلاص نه وي.",
+		"pushEnabledDescription": "پدې وسیله کې فعال دی.",
+		"pushDeniedDescription": "د دې سایټ لپاره بند دی — د فعالولو لپاره یې د خپل براوزر ترتیباتو کې اجازه ورکړئ.",
+		"pushEnable": "فعالول",
+		"pushDisable": "غیرفعالول",
+		"pushDisabled": "د براوزر خبرتیاوې پدې وسیله کې غیرفعال شوې.",
+		"pushEnableError": "د براوزر خبرتیاوو فعالول ونشول. مهرباني وکړئ بیا هڅه وکړئ.",
+		"accept": "منل",
+		"decline": "رد کول",
+		"respondError": "ځواب ورکول ونشول. مهرباني وکړئ بیا هڅه وکړئ.",
+		"requestApproved": "ومنل شو.",
+		"requestDeclined": "رد شو."
+	},
+	"importDialog": {
+		"title": "معلومات واردول",
+		"description": "قطارونه د CSV، Excel، Google Sheets یا PDF فایل نه په {table} کې وارد کړئ.",
+		"steps": {
+			"upload": "پورته کول",
+			"mapping": "د ساتونو نقشه",
+			"preview": "مخکتنه"
+		},
+		"footer": {
+			"back": "شاته",
+			"continue": "دوام",
+			"importCount": "{count, plural, =1 {# قطار واردول} other {# قطارونه واردول}}",
+			"done": "بشپړ"
+		},
+		"upload": {
+			"fileTab": "فایل",
+			"googleSheetTab": "Google Sheets",
+			"dropzoneIdle": "فایل راکاږئ او ږدئ، یا د انتخاب لپاره کلیک وکړئ",
+			"dropzoneParsing": "فایل پروسس کیږي…",
+			"supports": "ملاتړ کوي: {extensions}",
+			"googleSheetHint": "د هغه Google Sheet لینک ولیکئ چې د «هر څوک چې لینک لري» سره شریک شوی وي.",
+			"googleSheetPlaceholder": "https://docs.google.com/spreadsheets/d/...",
+			"submit": "واردول",
+			"errorTitle": "دا فایل نه شو لوستل"
+		},
+		"mapping": {
+			"requiredAlertTitle": "اړین ساحو ته د سرچینې یا تلواله ارزښت اړتیا ده",
+			"destinationColumn": "د مقصد ساتون",
+			"sourceColumn": "د سرچینې ساتون",
+			"defaultValue": "تلواله ارزښت",
+			"required": "اړین",
+			"dontImport": "وارد نه کړئ",
+			"defaultPlaceholder": "اختیاري تلواله ارزښت"
+		},
+		"preview": {
+			"showingRows": "{shown, plural, =1 {# قطار} other {# قطارونه}} د {total, plural, =1 {# قطار} other {# قطارونه}} نه ښودل کیږي",
+			"rowsSkipped": "{count, plural, =1 {# قطار به پریښودل شي} other {# قطارونه به پریښودل شي}}",
+			"issuesAlertTitle": "ځینو قطارونو کې د تایید ستونزې شته",
+			"issuesAlertDescription": "ستونزمن قطارونه لاندې ښودل شوي او د واردولو پر مهال به پریښودل شي. د سمولو لپاره نقشې ته لاړ شئ، یا یوازې د اعتبار وړ قطارونه وارد کړئ."
+		},
+		"result": {
+			"importing": "{processed} د {total} قطارونو نه واردیږي…",
+			"importedSummary": "{count, plural, =1 {# قطار وارد شو} other {# قطارونه وارد شول}}",
+			"importedWithFailures": "{count, plural, =1 {# قطار وارد شو} other {# قطارونه وارد شول}}، {failed, plural, =1 {# ناکام یا پریښودل شو} other {# ناکامې یا پریښودل شوې}}",
+			"errorsAlertTitle": "ځینې قطارونه وارد نه شول",
+			"errorsAlertDescription": "لاندې جزئیات وګورئ، د سرچینې فایل سم کړئ، او که اړتیا وي یوازې هغه قطارونه بیا وارد کړئ.",
+			"rowColumn": "قطار",
+			"reasonColumn": "دلیل"
+		}
+	},
+	"credits": {
+		"admin": {
+			"title": "زده‌کوونکي",
+			"subtitle": "{count, plural, =1 {# زده‌کوونکی} other {# زده‌کوونکي}}",
+			"searchPlaceholder": "د نوم، بریښنالیک یا ټیلیفون له مخې لټون…",
+			"loading": "زده‌کوونکي بارېږي…",
+			"empty": "هیڅ زده‌کوونکی ونه موندل شو.",
+			"unnamedStudent": "بې نومه زده‌کوونکی",
+			"balanceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"charge": "چارج کول",
+			"backToStudents": "شاته زده‌کوونکو ته",
+			"previous": "پخوانی",
+			"next": "راتلونکی",
+			"showing": "د {total} څخه {from} تر {to} ښودل کیږي",
+			"table": {
+				"name": "نوم",
+				"contact": "اړیکه",
+				"balance": "پاتې شونې",
+				"status": "حالت"
+			},
+			"tabs": {
+				"ledger": "د حساب کتاب",
+				"purchases": "پیرودنې"
+			},
+			"ledgerTable": {
+				"date": "نېټه",
+				"type": "ډول",
+				"amount": "اندازه",
+				"balanceAfter": "وروسته پاتې شونې",
+				"note": "یادداښت",
+				"empty": "تر اوسه هیڅ راکړه ورکړه نشته."
+			},
+			"purchasesTable": {
+				"date": "نېټه",
+				"item": "توکی",
+				"type": "ډول",
+				"price": "بیه",
+				"empty": "تر اوسه هیڅ پیرودنه نشته."
+			},
+			"type": {
+				"topup": "چارج",
+				"purchase": "پیرودنه",
+				"refund": "بیرته ورکړه",
+				"adjustment": "سمون"
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "ډګ",
+				"quiz": "ازموینه"
+			}
+		},
+		"chargeDialog": {
+			"title": "کریډیټ چارج کول",
+			"description": "دې زده‌کوونکي ته کریډیټ اضافه کړئ.",
+			"descriptionNamed": "{name} ته کریډیټ اضافه کړئ.",
+			"amountLabel": "اندازه (کریډیټ)",
+			"noteLabel": "یادداښت (اختیاري)",
+			"notePlaceholder": "لکه، په دفتر کې نغدي چارج",
+			"cancel": "لغوه",
+			"charge": "چارج کول",
+			"charging": "چارج کیږي…",
+			"success": "{amount} کریډیټ په بریالیتوب سره چارج شو.",
+			"invalidAmount": "له صفر څخه لوی اعتبار شمیره ولیکئ."
+		},
+		"wallet": {
+			"title": "کیسه",
+			"subtitle": "ستاسو د کریډیټ پاتې شونې او د راکړه ورکړو تاریخچه.",
+			"balanceLabel": "پاتې شونې",
+			"balanceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"tabs": {
+				"ledger": "د حساب کتاب",
+				"purchases": "پیرودنې",
+				"sales": "پلورنې",
+				"discounts": "تخفیفونه"
+			},
+			"ledgerTable": {
+				"date": "نېټه",
+				"type": "ډول",
+				"amount": "اندازه",
+				"balanceAfter": "وروسته پاتې شونې",
+				"empty": "تر اوسه هیڅ راکړه ورکړه نشته."
+			},
+			"purchasesTable": {
+				"date": "نېټه",
+				"item": "توکی",
+				"type": "ډول",
+				"price": "بیه",
+				"empty": "تاسو تر اوسه هیڅ شی نه دی اخیستی."
+			},
+			"salesDescription": "هغه کریډیټونه چې تاسو د خپلو ډګونو د پلورلو له لارې ترلاسه کړي.",
+			"totalEarned": "ټول ترلاسه شوي",
+			"salesTable": {
+				"date": "نېټه",
+				"item": "توکی",
+				"price": "بیه",
+				"empty": "تر اوسه هیڅ پلورنه نشته."
+			},
+			"type": {
+				"topup": "چارج",
+				"purchase": "پیرودنه",
+				"refund": "بیرته ورکړه",
+				"adjustment": "سمون"
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "ډګ",
+				"quiz": "ازموینه"
+			}
+		},
+		"earnings": {
+			"title": "ګټه",
+			"subtitle": "هغه کریډیټونه چې تاسو د کورسونو، ډګونو، او ازموینو د پلورلو له لارې ترلاسه کړي.",
+			"totalEarned": "ټول ترلاسه شوي",
+			"balanceCredits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"table": {
+				"date": "نېټه",
+				"item": "توکی",
+				"type": "ډول",
+				"price": "بیه",
+				"empty": "تر اوسه هیڅ پلورنه نشته."
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "ډګ",
+				"quiz": "ازموینه"
+			}
+		}
+	},
+	"discounts": {
+		"page": {
+			"title": "تخفیفونه",
+			"subtitle": "د خپلو کورسونو، ډګونو، او ازموینو لپاره د تخفیف کوډونه جوړ او اداره کړئ.",
+			"adminSubtitle": "د پلیټفارم په کچه تخفیفونه اداره کړئ، او په ابزار کانکور کې جوړ شوي ټول تخفیفونه بیاکتنه کړئ."
+		},
+		"picker": {
+			"searchPlaceholder": "ستاسو توکي ولټوئ…",
+			"empty": "هیڅ توکی ونه موندل شو.",
+			"itemType": {
+				"course": "کورسونه",
+				"deck": "ډګونه",
+				"quiz": "ازموینې"
+			},
+			"singleHint": "هغه یو توکی وټاکئ چې دا تخفیف پرې تطبیقیږي.",
+			"multiHint": "هغه یو یا ډېر توکي وټاکئ چې دا تخفیف پرې تطبیقیږي."
+		},
+		"dialog": {
+			"createTitle": "نوی تخفیف",
+			"createDescription": "یو د تخفیف کوډ جوړ کړئ چې پیرودونکي یې د تادیې پر مهال کارولی شي.",
+			"editTitle": "تخفیف سمول",
+			"editDescription": "د دې تخفیف کوډ، اندازه، او شتون تازه کړئ.",
+			"codeLabel": "کوډ",
+			"codePlaceholder": "لکه SUMMER20",
+			"typeLabel": "ډول",
+			"type": {
+				"percentage": "سلنه‌یی",
+				"fixed": "ثابته اندازه"
+			},
+			"valueLabelPercentage": "سلنه (%)",
+			"valueLabelFixed": "اندازه (کریډیټ)",
+			"scopeLabel": "پرې تطبیقیږي",
+			"scope": {
+				"item": "یو توکی",
+				"group": "د توکو ډله",
+				"all": "په پلیټفارم کې هرڅه"
+			},
+			"startsAtLabel": "پیل (اختیاري)",
+			"endsAtLabel": "پای (اختیاري)",
+			"activeLabel": "فعال",
+			"activeDescription": "غیرفعال تخفیفونه نشي کارول کیدی.",
+			"cancel": "لغوه",
+			"saving": "ساتل کیږي…",
+			"save": "بدلونونه وساتئ",
+			"create": "تخفیف جوړول",
+			"created": "تخفیف جوړ شو.",
+			"updated": "تخفیف تازه شو.",
+			"validation": {
+				"codeRequired": "کوډ اړین دی.",
+				"valueRequired": "له صفر څخه لویه اندازه ولیکئ.",
+				"targetsRequired": "لږ تر لږه یو توکی وټاکئ."
+			}
+		},
+		"list": {
+			"newDiscount": "نوی تخفیف",
+			"table": {
+				"code": "کوډ",
+				"scope": "پرې تطبیقیږي",
+				"value": "اندازه",
+				"window": "فعاله موده",
+				"status": "حالت",
+				"owner": "مالک"
+			},
+			"loading": "تخفیفونه بارېږي…",
+			"empty": "تر اوسه هیڅ تخفیف نشته.",
+			"scope": {
+				"item": "یو توکی",
+				"group": "ډله",
+				"all": "د پلیټفارم په کچه"
+			},
+			"status": {
+				"active": "فعال",
+				"inactive": "غیرفعال"
+			},
+			"ownerType": {
+				"platform": "ابزار کانکور",
+				"instructor": "استاد",
+				"school": "ښوونځی",
+				"student": "زده‌کوونکی"
+			},
+			"edit": "سمول",
+			"delete": "ړنګول",
+			"deleted": "تخفیف ړنګ شو.",
+			"deleteConfirmTitle": "دا تخفیف ړنګ شي؟",
+			"deleteConfirmDescription": "کوډ «{code}» به سمدلاسه کار ونه کړي. دا عمل نشي بیرته کیدی.",
+			"cancel": "لغوه",
+			"valuePercentage": "{value}% تخفیف",
+			"valueFixed": "{value} کریډیټ تخفیف",
+			"alwaysOn": "تل فعال",
+			"startsOn": "له {date} څخه",
+			"endsOn": "تر {date} پورې"
+		},
+		"field": {
+			"haveCode": "د تخفیف کوډ لرئ؟",
+			"codePlaceholder": "کوډ ولیکئ",
+			"apply": "تطبیق",
+			"applied": "تخفیف تطبیق شو!",
+			"appliedLabel": "کوډ «{code}» تطبیق شو — نوې بیه: {price, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"invalidCode": "دا کوډ معتبر نه دی یا موده یې پای ته رسیدلې.",
+			"notApplicable": "دا کوډ پدې توکي باندې نه تطبیقیږي.",
+			"applyFailed": "د دې کوډ تطبیق ونه شو. بیا هڅه وکړئ.",
+			"remove": "کوډ لرې کول"
+		}
+	},
+	"overview": {
+		"student": {
+			"kankorCountdown": "تر کانکور پاتې ورځې",
+			"daysRemaining": "پاتې ورځې",
+			"reviewCards": "د فلش‌کارتونو کتنه",
+			"takeTest": "په ازموینه کې برخه اخیستل",
+			"stats": {
+				"enrolledCourses": "نومول‌شوي کورسونه",
+				"activeDecks": "فعال ډیکونه",
+				"cardsDueToday": "نننۍ کارتونه",
+				"testsCompleted": "بشپړې شوې ازموینې",
+				"testsPassed": "بریالۍ ازموینې",
+				"bookmarks": "ساتل‌شوي",
+				"notes": "یادښتونه",
+				"creditBalance": "د کریډیټ بیلانس"
+			},
+			"continueLearning": "زده‌کړه ته دوام ورکړئ",
+			"resume": "دوام",
+			"noActiveCourse": "هیڅ کورس روان نه دی",
+			"noActiveCourseSubtitle": "د زده‌کړې پیل کولو لپاره په یو کورس کې نوم ولیکئ.",
+			"browseCourses": "کورسونه وګورئ",
+			"recentTests": "وروستۍ ازموینې",
+			"viewAll": "ټول وګورئ",
+			"noRecentTests": "تر اوسه مو هیڅ ازموینه نه ده ورکړې",
+			"noRecentTestsSubtitle": "هغه ازموینې چې بشپړوئ به دلته ښکاره شي.",
+			"recentNotes": "وروستي یادښتونه",
+			"noRecentNotes": "تر اوسه هیڅ یادښت نشته",
+			"noRecentNotesSubtitle": "هغه یادښتونه چې د درس پر مهال لیکئ به دلته ښکاره شي.",
+			"studyActivity": "د زده‌کړې فعالیت",
+			"studyActivitySubtitle": "په تېرو ۱۴ ورځو کې کتل‌شوي کارتونه",
+			"cardsReviewed": "کتل‌شوي کارتونه",
+			"passed": "بریالی",
+			"failed": "ناکام"
+		},
+		"instructor": {
+			"stats": {
+				"publishedCourses": "خپاره‌شوي کورسونه",
+				"draftCourses": "مسوده کورسونه",
+				"totalStudents": "ټول زده‌کوونکي",
+				"totalDecks": "ډیکونه",
+				"totalQuizzes": "ازموینې",
+				"averageRating": "منځنی درجه‌بندي",
+				"totalEarnings": "ټوله ګټه",
+				"earningsThisMonth": "د دې میاشتې ګټه"
+			},
+			"recentEnrollments": "وروستي نومونې",
+			"noRecentEnrollments": "تر اوسه هیڅ نوم‌لیکنه نشته",
+			"noRecentEnrollmentsSubtitle": "هغه زده‌کوونکي چې ستاسو په کورسونو کې نوم لیکي به دلته ښکاره شي.",
+			"recentQuizAttempts": "وروستي د ازموینې هڅې",
+			"noRecentQuizAttempts": "تر اوسه هیڅ هڅه نشته",
+			"noRecentQuizAttemptsSubtitle": "د زده‌کوونکو هڅې ستاسو په ازموینو کې به دلته ښکاره شي.",
+			"earningsTrend": "ګټه",
+			"earningsTrendSubtitle": "په تېرو ۱۴ ورځو کې ترلاسه شوي کریډیټونه",
+			"viewAll": "ټول وګورئ",
+			"enrolledIn": "په {course} کې نوم لیکل شوی",
+			"credits": "{count, plural, one {# کریډیټ} other {# کریډیټ}}",
+			"noRating": "تر اوسه هیڅ درجه‌بندي نشته"
+		},
+		"school": {
+			"stats": {
+				"students": "زده‌کوونکي",
+				"teachers": "ښوونکي",
+				"staff": "کارکوونکي",
+				"courses": "کورسونه",
+				"decks": "ډیکونه",
+				"quizzes": "ازموینې",
+				"totalEarnings": "ټوله ګټه",
+				"earningsThisMonth": "د دې میاشتې ګټه"
+			},
+			"recentMembers": "وروستي غړي",
+			"noRecentMembers": "تر اوسه هیڅ غړی نشته",
+			"noRecentMembersSubtitle": "هغه کارکوونکي او ښوونکي چې ستاسو ښوونځي ته یوځای کیږي به دلته ښکاره شي.",
+			"recentQuizAttempts": "وروستي د ازموینې هڅې",
+			"noRecentQuizAttempts": "تر اوسه هیڅ هڅه نشته",
+			"noRecentQuizAttemptsSubtitle": "ستاسو د ښوونځي په ازموینو کې هڅې به دلته ښکاره شي.",
+			"earningsTrend": "ګټه",
+			"earningsTrendSubtitle": "په تېرو ۱۴ ورځو کې ترلاسه شوي کریډیټونه",
+			"viewAll": "ټول وګورئ",
+			"joined": "{date} کې یوځای شوی",
+			"memberRoles": {
+				"owner": "خاوند",
+				"admin": "اډمین",
+				"instructor": "ښوونکی",
+				"manager": "مدیر",
+				"staff": "کارکوونکی",
+				"viewer": "کتونکی"
+			}
+		},
+		"admin": {
+			"stats": {
+				"students": "زده‌کوونکي",
+				"instructors": "ښوونکي",
+				"activeSchools": "فعال ښوونځي",
+				"pendingSchools": "په تمه ښوونځي",
+				"pendingInstructors": "د تایید په تمه ښوونکي",
+				"publishedCourses": "خپاره‌شوي کورسونه",
+				"draftCourses": "مسوده کورسونه",
+				"decks": "ډیکونه",
+				"quizzes": "ازموینې",
+				"totalRevenue": "ټوله ګټه",
+				"revenueThisMonth": "د دې میاشتې ګټه"
+			},
+			"recentSignups": "وروستي نوم‌لیکنه",
+			"noRecentSignups": "تر اوسه هیڅ نوم‌لیکنه نشته",
+			"noRecentSignupsSubtitle": "نوي زده‌کوونکي، ښوونکي، او ښوونځي به دلته ښکاره شي.",
+			"revenueTrend": "ګټه",
+			"revenueTrendSubtitle": "په تېرو ۱۴ ورځو کې ترلاسه شوي کریډیټونه",
+			"signupTrend": "نوم‌لیکنې",
+			"signupTrendSubtitle": "نوي حسابونه په تېرو ۱۴ ورځو کې",
+			"viewAll": "ټول وګورئ",
+			"roleLabels": {
+				"student": "زده‌کوونکی",
+				"instructor": "ښوونکی",
+				"admin": "اډمین"
+			}
+		}
+	},
+	"admin": {
+		"common": {
+			"all": "ټول",
+			"loading": "بارېږي…",
+			"empty": "پایله ونه موندل شوه.",
+			"viewDetails": "جزئیات وګورئ",
+			"previous": "مخکینی",
+			"next": "راتلونکی",
+			"showing": "د {total} څخه {from}–{to} ښودل کېږي",
+			"cancel": "لغوه",
+			"confirm": "تایید",
+			"actions": "کړنې",
+			"role": "رول",
+			"userRoles": {
+				"student": "زده‌کوونکی",
+				"instructor": "استاد",
+				"admin": "مدیر"
+			},
+			"changeRoleConfirmTitle": "رول بدلول؟",
+			"changeRoleConfirmDescription": "آیا تاسو ډاډه یاست چې غواړئ د {name} رول له {oldRole} څخه {newRole} ته بدل کړئ؟",
+			"roleChangedSuccess": "د کارونکي رول په بریالیتوب سره تازه شو.",
+			"doubleClickToEdit": "د ترمیم لپاره دوه ځله کلیک وکړئ"
+		},
+		"status": {
+			"pending": "په تمه",
+			"active": "فعال",
+			"rejected": "رد شوی",
+			"suspended": "ځنډول شوی",
+			"disabled": "غیرفعال"
+		},
+		"actions": {
+			"openMenu": "د کړنو مینو خلاصول",
+			"statusLabel": "حالت بدلول",
+			"statusChanged": "حالت تازه شو.",
+			"verify": "تایید",
+			"activate": "فعالول",
+			"suspend": "ځنډول",
+			"disable": "غیرفعالول",
+			"reject": "ردول"
+		},
+		"instructors": {
+			"title": "استادان",
+			"subtitle": "د استادانو د حسابونو، تایید او منځپانګې مدیریت.",
+			"searchPlaceholder": "د نوم، بریښنالیک یا تلیفون له مخې لټون…",
+			"provinceFilter": "ولایت",
+			"allProvinces": "ټول ولایتونه",
+			"empty": "استاد ونه موندل شو.",
+			"unnamed": "بې نومه استاد",
+			"backToList": "بېرته استادانو ته",
+			"about": "په اړه",
+			"recentEnrollments": "وروستي نوم‌لیکنې",
+			"noEnrollments": "تر اوسه نوم‌لیکنه نشته.",
+			"table": {
+				"name": "نوم",
+				"province": "ولایت",
+				"courses": "کورسونه (خپاره شوي / ټول)",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې",
+				"status": "حالت",
+				"joined": "د غړیتوب نېټه"
+			},
+			"tabs": {
+				"info": "معلومات",
+				"courses": "کورسونه",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې"
+			},
+			"stats": {
+				"publishedCourses": "خپاره شوي کورسونه",
+				"draftCourses": "مسوده کورسونه",
+				"students": "زده‌کوونکي",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې",
+				"totalEarnings": "ټوله عاید (کریډټ)",
+				"earningsThisMonth": "د دې میاشتې عاید",
+				"averageRating": "منځنۍ درجه"
+			},
+			"fields": {
+				"email": "بریښنالیک",
+				"phone": "تلیفون",
+				"website": "ویب‌پاڼه",
+				"province": "ولایت",
+				"joined": "د غړیتوب نېټه"
+			}
+		},
+		"schools": {
+			"title": "ښوونځي",
+			"subtitle": "د ښوونځیو د حسابونو، غړو او منځپانګې مدیریت.",
+			"searchPlaceholder": "د ښوونځي نوم، بریښنالیک یا مالک له مخې لټون…",
+			"empty": "ښوونځی ونه موندل شو.",
+			"unnamed": "بې نومه ښوونځی",
+			"backToList": "بېرته ښوونځیو ته",
+			"about": "په اړه",
+			"recentMembers": "وروستي غړي",
+			"noMembers": "تر اوسه غړی نشته.",
+			"table": {
+				"name": "نوم",
+				"owner": "مالک",
+				"members": "غړي",
+				"courses": "کورسونه",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې",
+				"status": "حالت",
+				"created": "د جوړېدو نېټه"
+			},
+			"tabs": {
+				"info": "معلومات",
+				"members": "غړي",
+				"courses": "کورسونه",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې"
+			},
+			"stats": {
+				"students": "زده‌کوونکي",
+				"teachers": "استادان",
+				"staff": "کارمندان",
+				"courses": "کورسونه",
+				"decks": "کارت ډلې",
+				"quizzes": "ازموینې",
+				"totalEarnings": "ټوله عاید (کریډټ)",
+				"earningsThisMonth": "د دې میاشتې عاید"
+			},
+			"fields": {
+				"owner": "مالک",
+				"adminEmail": "د مدیر بریښنالیک",
+				"address": "پته",
+				"created": "د جوړېدو نېټه"
+			}
+		},
+		"members": {
+			"searchPlaceholder": "د غړو لټون د نوم یا بریښنالیک له مخې…",
+			"empty": "غړی ونه موندل شو.",
+			"unnamed": "بې نومه غړی",
+			"openMenu": "د غړي کړنې خلاصول",
+			"changeRole": "رول بدلول",
+			"roleChanged": "د غړي رول تازه شو.",
+			"remove": "له ښوونځي لرې کول",
+			"removed": "غړی لرې شو.",
+			"removeTitle": "غړی لرې کړئ؟",
+			"removeDescription": "{name} به دې ښوونځي ته لاسرسی له لاسه ورکړي. دا کړنه نه بېرته کېږي.",
+			"table": {
+				"member": "غړی",
+				"role": "رول",
+				"joined": "د غړیتوب نېټه"
+			},
+			"roles": {
+				"owner": "مالک",
+				"admin": "مدیر",
+				"instructor": "استاد",
+				"manager": "مسئول",
+				"staff": "کارمند",
+				"viewer": "لیدونکی"
+			}
+		},
+		"content": {
+			"updated": "تازه شو.",
+			"deleted": "حذف شو.",
+			"view": "کتل",
+			"edit": "سمول",
+			"delete": "حذف",
+			"publish": "خپرول",
+			"unpublish": "خپرول لغوه کول",
+			"published": "خپور شوی",
+			"draft": "مسوده",
+			"free": "وړیا",
+			"credits": "{count, plural, one {# کریډټ} other {# کریډټ}}",
+			"searchCourses": "د کورسونو لټون…",
+			"searchDecks": "د کارت ډلو لټون…",
+			"searchQuizzes": "د ازموینو لټون…",
+			"emptyCourses": "کورس ونه موندل شو.",
+			"emptyDecks": "کارت ډله ونه موندل شوه.",
+			"emptyQuizzes": "ازموینه ونه موندل شوه.",
+			"deleteTitle": "توکی حذف کړئ؟",
+			"deleteDescription": "«{title}» به د تل لپاره حذف شي. دا کړنه نه بېرته کېږي.",
+			"table": {
+				"title": "سرلیک",
+				"status": "حالت",
+				"price": "بیه",
+				"created": "د جوړېدو نېټه",
+				"visibility": "لیدنه"
+			}
+		},
+		"agencies": {
+			"title": "نمایندګۍ",
+			"subtitle": "د همکارو نمایندګیو، د هغوی د لاسرسیو او تصفیه حسابونو مدیریت",
+			"create": "نوې نمایندګي",
+			"createTitle": "د نمایندګۍ جوړول",
+			"created": "نمایندګي جوړه شوه",
+			"searchPlaceholder": "د نمایندګیو لټون...",
+			"empty": "نمایندګي ونه موندل شوه",
+			"table": {
+				"name": "نوم",
+				"status": "حالت",
+				"commission": "کمیشن",
+				"charged": "ټول شارژ",
+				"settled": "تصفیه شوي",
+				"outstanding": "پاتې پور",
+				"lastTopup": "وروستی شارژ"
+			},
+			"tabs": {
+				"grants": "لاسرسي",
+				"members": "غړي",
+				"topups": "شارژونه",
+				"settlements": "تصفیه حسابونه",
+				"disputes": "اعتراضونه"
+			},
+			"detail": {
+				"back": "بېرته نمایندګیو ته",
+				"edit": "سمون",
+				"editTitle": "د نمایندګۍ سمون",
+				"updated": "نمایندګي تازه شوه",
+				"suspend": "ځنډول",
+				"reactivate": "بیا فعالول",
+				"suspended": "نمایندګي وځنډول شوه",
+				"reactivated": "نمایندګي بیا فعاله شوه",
+				"suspendTitle": "نمایندګي وځنډول شي؟",
+				"suspendDescription": "د {name} په ځنډولو سره یې ټول فعالیتونه، د زده‌کوونکو د حساب شارژ په ګډون، سمدلاسه بندیږي.",
+				"commission": "کمیشن: {percent}٪",
+				"liabilityLimit": "د پور سقف: {limit}"
+			},
+			"form": {
+				"name": "نوم",
+				"province": "ولایت",
+				"contactEmail": "د اړیکې ایمیل",
+				"contactPhone": "د اړیکې شمېره",
+				"address": "پته",
+				"commissionPercent": "کمیشن (٪)",
+				"liabilityLimit": "د پور سقف (افغانۍ)",
+				"save": "خوندي کول",
+				"cancel": "لغوه کول",
+				"validation": {
+					"nameRequired": "نوم اړین دی",
+					"invalidEmail": "ناسم ایمیل",
+					"invalidCommission": "ناسم کمیشن",
+					"invalidLiabilityLimit": "د پور ناسم سقف"
+				}
+			},
+			"grants": {
+				"granted": "لاسرسی ورکړل شو",
+				"revoked": "لاسرسی لغوه شو",
+				"scope": {
+					"global": "ټولیز",
+					"province": "ولایتي",
+					"entities": "ټاکلي موارد"
+				},
+				"permissions": {
+					"students": {
+						"charge": "د زده‌کوونکو د حساب شارژ"
+					},
+					"schools": {
+						"suspend": "د ښوونځیو ځنډول",
+						"manage": "د ښوونځیو مدیریت"
+					},
+					"instructors": {
+						"suspend": "د ښوونکو ځنډول"
+					},
+					"courses": {
+						"manage_own": "د خپلو کورسونو مدیریت",
+						"manage_any": "د ټولو کورسونو مدیریت"
+					},
+					"decks": {
+						"manage_own": "د خپلو فلش‌کارت ډیکونو مدیریت",
+						"manage_any": "د ټولو فلش‌کارت ډیکونو مدیریت"
+					},
+					"quizzes": {
+						"manage_own": "د خپلو ازموینو مدیریت",
+						"manage_any": "د ټولو ازموینو مدیریت"
+					}
+				},
+				"entityPicker": {
+					"searchSchools": "د ښوونځیو لټون...",
+					"searchInstructors": "د ښوونکو لټون...",
+					"noResults": "پایله ونه موندل شوه",
+					"unsupported": "د دې لاسرسي لپاره د ټاکلو مواردو ساحه نه کارول کیږي."
+				}
+			},
+			"members": {
+				"add": "غړی زیاتول",
+				"addTitle": "نوی غړی زیاتول",
+				"added": "غړی زیات شو",
+				"removed": "غړی لرې شو",
+				"remove": "لرې کول",
+				"removeTitle": "غړی لرې شي؟",
+				"removeDescription": "{name} به له نمایندګۍ لرې شي.",
+				"disable": "غیر فعالول",
+				"enable": "فعالول",
+				"makeRole": "رول بدلول: {role}",
+				"email": "ایمیل",
+				"empty": "غړی ونه موندل شو",
+				"table": {
+					"member": "غړی",
+					"role": "رول",
+					"status": "حالت",
+					"joined": "د غړیتوب نېټه"
+				},
+				"roles": {
+					"owner": "مالک",
+					"admin": "مدیر",
+					"staff": "کارکوونکی"
+				},
+				"status": {
+					"active": "فعال",
+					"disabled": "غیر فعال"
+				},
+				"validation": {
+					"invalidEmail": "ناسم ایمیل"
+				}
+			},
+			"topups": {
+				"searchPlaceholder": "د شارژونو لټون...",
+				"empty": "راکړه ورکړه ونه موندل شوه",
+				"table": {
+					"student": "زده‌کوونکی",
+					"amount": "مبلغ",
+					"member": "کارکوونکی",
+					"dispute": "اعتراض",
+					"date": "نېټه"
+				},
+				"disputeStatus": {
+					"open": "پرانیستی",
+					"resolved": "حل شوی",
+					"rejected": "رد شوی"
+				}
+			},
+			"settlements": {
+				"record": "تصفیه ثبتول",
+				"recordTitle": "د تصفیه حساب ثبت",
+				"recorded": "تصفیه ثبت شوه",
+				"grossAmount": "ناخالص مبلغ (افغانۍ)",
+				"empty": "تصفیه ونه موندل شوه",
+				"table": {
+					"date": "نېټه",
+					"gross": "ناخالص",
+					"commission": "کمیشن",
+					"net": "خالص ترلاسه شوی",
+					"method": "طریقه",
+					"note": "یادښت"
+				},
+				"methods": {
+					"cash": "نغدي",
+					"bank": "بانک",
+					"hawala": "حواله",
+					"other": "نور"
+				},
+				"validation": {
+					"invalidAmount": "ناسم مبلغ"
+				}
+			},
+			"disputes": {
+				"empty": "اعتراض ونه موندل شو",
+				"view": "کتل",
+				"detailTitle": "د اعتراض جزئیات",
+				"studentNote": "د زده‌کوونکي یادښت",
+				"agencyResponse": "د نمایندګۍ ځواب",
+				"resolutionNote": "د رسیدګۍ یادښت",
+				"adjustment": "اصلاحي مبلغ (کریډیټ)",
+				"adjustmentHint": "د بېلګې په توګه ۲۰۰ د زده‌کوونکي حساب ته د زیاتولو لپاره",
+				"respond": "ځواب لېږل",
+				"responded": "ځواب ثبت شو",
+				"resolve": "حل کول",
+				"reject": "ردول",
+				"resolvedToast": "اعتراض ته رسیدګي وشوه",
+				"table": {
+					"student": "زده‌کوونکی",
+					"amount": "مبلغ",
+					"status": "حالت",
+					"created": "د ثبت نېټه"
+				},
+				"status": {
+					"open": "پرانیستی",
+					"resolved": "حل شوی",
+					"rejected": "رد شوی"
+				}
+			}
+		}
+	},
+	"classrooms": {
+		"title": "ټولګي",
+		"description": "هغه ټولګي چې تاسو یې غړی یاست.",
+		"join": "ټولګي ته د ننوتلو غوښتنه",
+		"joinDialog": {
+			"title": "ټولګي ته ننوتل",
+			"description": "هغه کوډ ولیکئ چې ستاسو استاد یې شریک کړی.",
+			"codeLabel": "د ننوتلو کوډ",
+			"codePlaceholder": "لکه: 123456",
+			"submit": "د ننوتلو غوښتنه",
+			"requested": "غوښتنه ولیږل شوه. ستاسو استاد باید یې تایید کړي.",
+			"cancel": "لغوه کول"
+		},
+		"emptyTitle": "تر اوسه هیڅ ټولګی نشته",
+		"emptyDescription": "د خپل استاد له کوډ سره یو ټولګي ته ننوځئ.",
+		"role": {
+			"owner": "مالک",
+			"instructor": "استاد",
+			"assistant": "مرستیال",
+			"student": "زده‌کوونکی"
+		},
+		"pendingTitle": "پاتې",
+		"invitedDescription": "تاسو د غړیتوب لپاره بلل شوي یاست.",
+		"awaitingApproval": "د استاد د تایید په تمه.",
+		"pendingBadge": "پاتې",
+		"accept": "منل",
+		"decline": "رد کول",
+		"requestApproved": "ومنل شو.",
+		"requestDeclined": "رد شو.",
+		"detail": {
+			"resources": "سرچینې",
+			"materials": "زده‌کړیز توکي",
+			"announcements": "اعلانونه",
+			"noResources": "لا تر اوسه هیڅ سرچینه نه ده شریکه شوې.",
+			"noMaterials": "لا تر اوسه هیڅ زده‌کړیز توکی نه دی خپور شوی.",
+			"noAnnouncements": "لا تر اوسه هیڅ اعلان نشته.",
+			"loadError": "د دې ټولګي بارول ونشول.",
+			"unknownAuthor": "ناپیژندل شوی"
+		}
+	},
+	"schoolMembers": {
+		"title": "غړي",
+		"description": "د دې ښوونځي ډشبورډ ته د لاسرسي مدیریت.",
+		"inviteButton": "غړی بلل",
+		"inviteDialog": {
+			"title": "غړی بلل",
+			"emailLabel": "بریښنالیک",
+			"emailPlaceholder": "member@example.com",
+			"roleLabel": "رول",
+			"submit": "بلنه لیږل",
+			"sent": "بلنه ولیږل شوه.",
+			"cancel": "لغوه کول"
+		},
+		"pendingTitle": "پاتې بلنې",
+		"pendingEmpty": "هیڅ پاتې بلنه نشته",
+		"currentTitle": "اوسني غړي",
+		"role": {
+			"owner": "مالک",
+			"admin": "اډمین",
+			"manager": "مدیر",
+			"instructor": "استاد",
+			"staff": "کارمند",
+			"viewer": "لیدونکی"
+		},
+		"accept": "منل",
+		"decline": "رد کول"
+	},
+	"instructorStudents": {
+		"title": "زده‌کوونکي",
+		"subtitle": "{count, plural, =0 {هیڅ زده‌کوونکی نشته} one {# زده‌کوونکی} other {# زده‌کوونکي}}",
+		"searchPlaceholder": "د زده‌کوونکو لټون...",
+		"classroomFilterAll": "ټول ټولګي",
+		"table": {
+			"name": "نوم",
+			"contact": "د اړیکې معلومات",
+			"classrooms": "ټولګي",
+			"joinedAt": "د یوځای کیدو نیټه"
+		},
+		"empty": "هیڅ زده‌کوونکی ونه موندل شو.",
+		"loading": "د زده‌کوونکو د بارولو په حال کې...",
+		"unnamedStudent": "بې نومه زده‌کوونکی",
+		"showing": "له {from} څخه تر {to} پورې له ټول ټال {total} څخه ښودل کیږي",
+		"previous": "مخکینی",
+		"next": "راتلونکی"
+	},
+	"verificationPending": {
+		"instructor": {
+			"title": "ستاسو د ښوونکي حساب د بیاکتنې لاندې دی",
+			"body": "د ښوونکي په توګه ستاسو د نوم لیکنې څخه مننه. زموږ ټیم ستاسو حساب بیاکتنه کوي او ژر به یې تصویب کړي. د تصدیق وروسته به تاسو خپل ډشبورډ ته لاسرسی ولرئ."
+		},
+		"school": {
+			"title": "ستاسو ښوونځی د بیاکتنې لاندې دی",
+			"body": "ستاسو د ښوونځي د ثبت څخه مننه. زموږ ټیم یې بیاکتنه کوي او ژر به یې تصویب کړي. د تصدیق وروسته به تاسو د ښوونځي ډشبورډ ته لاسرسی ولرئ."
+		},
+		"default": {
+			"title": "حساب د بیاکتنې په تمه",
+			"body": "ستاسو حساب د تصویب په تمه دی. د بیاکتنې وروسته به تاسو خبر کړو."
+		},
+		"statusBadge": "د تصویب په تمه",
+		"backHome": "کور ته بېرته",
+		"signOut": "وتل"
+	},
+	"reviews": {
+		"title": "{count, plural, one {# نظر} other {# نظرونه}}",
+		"basedOn": "د {count, plural, one {# نظر} other {# نظرونو}} پر بنسټ",
+		"yourRating": "ستاسو درجه‌بندي",
+		"ratingValue": "{rating} له ۵ ستورو څخه",
+		"commentPlaceholder": "خپل تجربه شریک کړئ (اختیاري)",
+		"cancel": "لغوه کول",
+		"submit": "نظر ثبت کړئ",
+		"ratingRequired": "مهرباني وکړئ یوه درجه‌بندي وټاکئ.",
+		"submitSuccess": "ستاسو نظر ثبت شو.",
+		"submitFailed": "د نظر ثبتول ناکام شول.",
+		"deleteSuccess": "نظر ړنګ شو.",
+		"deleteFailed": "د نظر ړنګول ناکام شول.",
+		"writeReview": "نظر ولیکئ",
+		"editReview": "نظر سمون کړئ",
+		"youReviewedThis": "تاسو پدې نظر ورکړی دی",
+		"anonymous": "ناڅرګند",
+		"you": "تاسو",
+		"delete": "ړنګول",
+		"noReviewsYet": "تر اوسه هیڅ نظر نشته. لومړی کس اوسئ چې خپل تجربه شریکوي.",
+		"loadMore": "نور وګورئ",
+		"signInPrompt": "د نظر لیکلو لپاره ننوځئ.",
+		"signIn": "ننوتل",
+		"enrollPrompt": "د نظر لیکلو لپاره لومړی نوم لیکنه وکړئ او یې تجربه کړئ."
+	},
+	"pwa": {
+		"installTitle": "د ابزار کانکور اپلیکیشن نصبول",
+		"installDescription": "زموږ اپلیکیشن په خپل موبایل یا کمپیوټر کې نصب کړئ ترڅو ګړندی لاسرسی او آفلاین زده کړه ترلاسه کړئ.",
+		"installButton": "اپلیکیشن نصب کړئ",
+		"maybeLater": "شاید وروسته",
+		"feature1": "درسونو او کتابتون ته آفلاین لاسرسی",
+		"feature2": "د تکرار بڼې فلش کارتونه",
+		"feature3": "لوړ سرعت او عاجل خلاصیدل",
+		"iosInstructionsTitle": "په آیفون (iOS) کې د نصبولو لارښود",
+		"iosStep1": "د شریکولو (Share) تڼۍ ووهئ",
+		"iosStep2": "لاندې سکرول وکړئ او 'Add to Home Screen' وټاکئ"
+	},
+	"offline": {
+		"bannerText": "تاسو همدا اوس آفلاین یاست. خوندي شوي محتويات ښودل کیږي.",
+		"bannerRestored": "د انټرنیټ اړیکه بیرته فعاله شوه!",
+		"title": "د انټرنیټ اړیکه نشته",
+		"subtitle": "ستاسو د انټرنیټ اړیکه پرې شوې ده. اندېښنه مه کوئ، تاسو کولی شئ خپل خوندي شوي فلش کارتونه او کتابونه مطالعه کړئ.",
+		"retryButton": "بیا نښلولو هڅه وکړئ",
+		"goFlashcards": "فلش کارتونو ته تګ",
+		"goLibrary": "کتابتون ته تګ",
+		"statusOffline": "آفلاین حالت",
+		"statusOnline": "بیرته آنلاين"
+	}
+}

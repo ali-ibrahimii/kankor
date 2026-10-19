@@ -1,0 +1,17 @@
+# Lefthook configuration
+# Refer for explanation to: https://lefthook.dev/configuration/
+
+pre-commit:
+  parallel: true
+  commands:
+    check:
+      glob: "*.{js,ts,jsx,tsx,json,css}"
+      run: pnpm biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+    type-check:
+      run: pnpm check:type
+
+# pre-push:
+#   commands:
+#     test:
+#       run: pnpm test

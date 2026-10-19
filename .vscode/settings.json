@@ -1,0 +1,8 @@
+{
+	"chat.mcp.serverSampling": {
+		"abzarkankor-web/.vscode/mcp.json: io.github.github/github-mcp-server": {
+			"allowedModels": ["copilotcli/auto"]
+		}
+	},
+	"postman.settings.dotenv-detection-notification-visibility": false
+}

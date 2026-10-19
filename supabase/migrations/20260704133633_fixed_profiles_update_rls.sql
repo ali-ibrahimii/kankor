@@ -1,0 +1,43 @@
+create extension if not exists "hypopg" with schema "extensions";
+
+create extension if not exists "index_advisor" with schema "extensions";
+
+drop policy "Admins can insert any profile" on "public"."profiles";
+
+drop policy "Allow users to update their own profile" on "public"."profiles";
+
+set check_function_bodies = off;
+
+CREATE OR REPLACE FUNCTION public.handle_new_user_profile_creation()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO 'public'
+AS $function$BEGIN
+  INSERT INTO public.profiles (id, full_name, email, phone, avatar_url, role, locale)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'full_name', 'Unknown'), 
+    COALESCE(NEW.email, NULL),
+    COALESCE(NEW.phone, NULL),
+    COALESCE(NEW.raw_user_meta_data->>'avatar_url', NULL),
+    COALESCE(NEW.raw_user_meta_data->>'role', 'student')::public.user_role,
+    COALESCE(NEW.raw_user_meta_data->>'locale', 'fa')::public.language_enum
+  )
+  ON CONFLICT (id) DO NOTHING;
+  
+  RETURN NEW;
+END;$function$
+;
+
+
+  create policy "Allow users to update their own profile"
+  on "public"."profiles"
+  as permissive
+  for update
+  to authenticated
+using (public.is_owner(id))
+with check ((public.is_owner(id) AND (role <> 'admin'::public.user_role)));
+
+
+

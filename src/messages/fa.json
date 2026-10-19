@@ -1,0 +1,3233 @@
+{
+	"app": {
+		"name": "ابزار کانکور"
+	},
+	"discussions": {
+		"new_thread": "بحث جدید",
+		"create_thread_title": "ایجاد موضوع بحث",
+		"create_thread_subtitle": "سوال بپرسید، نکات درسی به اشتراک بگذارید یا با سایر دانش‌آموزان و استادان گفتگو کنید.",
+		"search_placeholder": "جستجوی گفتگوها بر اساس کلیدواژه، عنوان، برچسب...",
+		"thread_type": "نوع موضوع",
+		"title_label": "عنوان",
+		"title_placeholder": "مثلاً: چگونه معادلات درجه دو را سریع حل کنیم؟",
+		"content_label": "متن (مارک‌داون)",
+		"content_placeholder": "توضیحات و جزئیات سوال یا بحث خود را بنویسید...",
+		"tags_label": "برچسب‌ها (با کاما جدا کنید)",
+		"tags_placeholder": "ریاضی، کانکور، جبر",
+		"posting": "در حال ارسال...",
+		"post_thread": "ارسال موضوع",
+		"cancel": "انصراف",
+		"reply_placeholder": "پاسخ یا نظر خود را بنویسید...",
+		"submit_reply": "ارسال پاسخ",
+		"markdown_supported": "پشتیبانی از فرمت مارک‌داون",
+		"editor_text_sample": "متن",
+		"anonymous": "ناشناس",
+		"author_default": "کاربر",
+		"replies": "پاسخ",
+		"views": "بازدید",
+		"bookmarked": "نشان‌شده",
+		"bookmark": "نشان کردن",
+		"subscribed": "اشتراک‌یافته",
+		"subscribe": "اشتراک",
+		"accepted_solution_title": "پاسخ تاییدشده",
+		"mark_as_solution": "تایید به عنوان پاسخ",
+		"reply": "پاسخ دادن",
+		"leave_reply": "ارسال پاسخ",
+		"replies_count_title": "پاسخ‌ها ({count})",
+		"no_replies_yet": "هنوز پاسخی داده نشده است. اولین کسی باشید که نظر می‌دهد!",
+		"thread_not_found": "موضوع بحث یافت نشد.",
+		"duplicate_check_title": "گفتگوهای مشابه یافت شد",
+		"duplicate_check_desc": "قبل از ارسال، بررسی کنید آیا سوال شما قبلاً پاسخ داده شده است:",
+		"view_thread": "مشاهده بحث",
+		"moderation_queue_title": "صف نظارت بر گفتگوها",
+		"moderation_queue_subtitle": "بررسی گزارش‌های کاربران درباره گفتگوها و پاسخ‌ها.",
+		"pending": "در انتظار",
+		"no_pending_reports": "هیچ گزارش نظارتی در انتظار نیست.",
+		"reported_by": "گزارش‌شده توسط",
+		"dismiss": "رد کردن",
+		"soft_delete": "حذف موقت",
+		"status": {
+			"open": "باز",
+			"answered": "پاسخ داده شده",
+			"solved": "حل شده",
+			"closed": "بسته شده"
+		},
+		"types": {
+			"question": "سوال",
+			"discussion": "بحث",
+			"tip": "نکته درسی",
+			"announcement": "اطلاعیه",
+			"report_mistake": "گزارش اشتباه"
+		},
+		"badges": {
+			"pinned": "سنجاق‌شده",
+			"locked": "قفل‌شده",
+			"instructor_only": "مخصوص استاد"
+		},
+		"roles": {
+			"instructor": "استاد",
+			"admin": "مدیر",
+			"student": "دانش‌آموز"
+		},
+		"filters": {
+			"status": "وضعیت",
+			"all_statuses": "همه وضعیت‌ها"
+		},
+		"empty": {
+			"title": "هنوز بحثی ثبت نشده است",
+			"public_subtitle": "برای ثبت بحث جدید، ابتدا ثبت نام کنید یا وارد شوید.",
+			"dashboard_subtitle": "با پرسیدن یک سوال یا به اشتراک گذاشتن یک نکته درسی، گفتگو را شروع کنید!"
+		},
+		"errors": {
+			"create_failed": "خطا در ایجاد موضوع بحث",
+			"reply_failed": "خطا در ارسال پاسخ",
+			"solution_failed": "خطا در تایید پاسخ",
+			"fetch_failed": "خطا در بارگیری گفتگوها",
+			"mod_failed": "خطا در انجام اقدام نظارتی"
+		},
+		"loading": "در حال بارگیری...",
+		"retry": "تلاش مجدد"
+	},
+	"metadata": {
+		"description": "یک برنامه موبایل آموزشی آفلاین برای شاگردان افغانستان، با ابزارهای یادگیری جامع شامل کورس‌های ویدیویی، فلش‌کارت‌های تکرار فاصله‌دار، امتحان‌های مجازی کانکور و کتابخانه دیجیتال.",
+		"keywords": [
+			"ابزار کانکور",
+			"کانکور",
+			"آموزش افغانستان",
+			"یادگیری آفلاین",
+			"شاگردان افغانستان",
+			"امتحان ورودی پوهنتون",
+			"کانکور مجازی",
+			"فلش‌کارت تکرار فاصله‌دار",
+			"کورس‌های ویدیویی",
+			"برنامه درسی افغانستان",
+			"کتابخانه دیجیتال",
+			"Abzar Kankor",
+			"Kankor"
+		]
+	},
+	"seo": {
+		"home": "خانه",
+		"courses": "کورس‌ها",
+		"decks": "دسته‌ها",
+		"libraries": "کتابخانه",
+		"quizzes": "آزمون‌ها",
+		"discussions": "بحث‌ها و گفتگوها",
+		"verify": "تایید مدرک",
+		"relatedResources": "منابع مرتبط",
+		"relatedCourses": "کورس‌های مرتبط",
+		"relatedDecks": "دسته‌های فلش‌کارت مرتبط",
+		"relatedBooks": "کتاب‌های مرتبط",
+		"relatedQuizzes": "آزمون‌های مرتبط",
+		"faq": "سوالات مکرر",
+		"faqPrerequisites": "پیشنیازهای این کورس چیست؟",
+		"faqObjectives": "در این کورس چه چیزی خواهم آموخت؟",
+		"faqStudy": "چگونه باید این دسته را مطالعه کنم؟",
+		"faqStudyAnswer": "توصیه می‌کنیم این فلش‌کارت‌ها را به صورت روزانه با استفاده از سیستم تکرار فاصله‌دار مطالعه کنید تا برای امتحان کانکور ملکه ذهنتان شود.",
+		"passingCriteria": "معیار قبولی",
+		"passingCriteriaText": "برای قبولی در این آزمون، به نمره {percent}٪ یا بالاتر نیاز دارید. شما حداکثر {count} بار می‌توانید تلاش کنید.",
+		"timeLimitText": "مدت زمان آزمون {count} دقیقه است."
+	},
+	"dashboard": {
+		"notifications": "اعلان‌ها",
+		"student": {
+			"roleLabel": "شاگرد",
+			"overview": "نمای کلی",
+			"school": "مکتب",
+			"grades": {
+				"10": "صنف ۱۰",
+				"11": "صنف ۱۱",
+				"12": "صنف ۱۲"
+			},
+			"courses": "کورس‌ها",
+			"allCourses": "همه کورس‌ها",
+			"myCourses": "کورس‌های من",
+			"flashcards": "فلش‌کارت‌ها",
+			"decks": "دسته ها",
+			"myDecks": "دسته‌های من",
+			"practice": "تمرین",
+			"tests": "امتحان‌ها",
+			"testTypes": {
+				"kankor": "امتحان کانکور",
+				"subject": "امتحان درسی",
+				"quiz": "تمرین امتحان",
+				"passed": "امتحان‌های قبول شده",
+				"registered": "امتحان‌های ثبت‌نام شده"
+			},
+			"library": "کتابخانه",
+			"librarySections": {
+				"fields": "رشته‌ها",
+				"studies": "مطالعات",
+				"more": "بیشتر"
+			},
+			"passedQuizzes": {
+				"title": "امتحان‌های قبول شده",
+				"description": "امتحان‌هایی که داده‌اید و در آن‌ها قبول شده‌اید.",
+				"score": "{score}/{max}",
+				"completedOn": "تکمیل شده در {date}",
+				"empty": {
+					"title": "هنوز امتحانی قبول نشده",
+					"subtitle": "امتحان‌هایی که در آن‌ها قبول شوید اینجا نمایش داده می‌شوند."
+				}
+			},
+			"registeredQuizzes": {
+				"title": "امتحان‌های ثبت‌نام شده",
+				"description": "امتحان‌هایی که برای شرکت در آن‌ها ثبت‌نام شده‌اید.",
+				"timeLimitMinutes": "{count, plural, =1 {# دقیقه} other {# دقیقه}}",
+				"registeredOn": "ثبت‌نام شده در {date}",
+				"empty": {
+					"title": "هیچ امتحان ثبت‌نام شده‌ای نیست",
+					"subtitle": "از استاد یا مکتب خود بخواهید شما را برای یک امتحان ثبت‌نام کنند."
+				}
+			},
+			"personal": "شخصی",
+			"notes": "یادداشت‌ها",
+			"bookmarks": "نشانه‌ها",
+			"wallet": "کیف پول",
+			"notifications": "اعلان‌ها",
+			"classrooms": "کلاس‌ها"
+		},
+		"admin": {
+			"roleLabel": "ادمین اصلی",
+			"overview": "نمای کلی",
+			"users": {
+				"label": "کاربران",
+				"allUsers": "همه کاربران",
+				"students": "شاگردان",
+				"instructors": "استادان",
+				"staff": "کارمندان مکتب",
+				"schools": "مکتب‌ها",
+				"agencies": "نمایندگی‌ها"
+			},
+			"content": {
+				"label": "محتوا",
+				"courses": "کورس‌ها",
+				"flashcards": "فلش‌کارت‌ها",
+				"decks": "دسته‌ها",
+				"cards": "کارت‌ها",
+				"tests": "امتحان‌ها و تمرین‌ها",
+				"library": "کتابخانه",
+				"discounts": "تخفیف‌ها"
+			},
+			"kankor": {
+				"label": "کانکور",
+				"forms": "اوراق امتحانات",
+				"universities": "پوهنتون‌ها",
+				"faculties": "فاکولته‌ها",
+				"departments": "دپارتمان‌ها",
+				"codes": "کدهای نمره"
+			},
+			"platform": {
+				"label": "بستر",
+				"grades": "صنوف و مضامین",
+				"provinces": "ولایت‌ها",
+				"settings": "تنظیمات"
+			},
+			"notifications": "اعلان‌ها"
+		},
+		"instructor": {
+			"roleLabel": "استاد",
+			"newCourse": "کورس جدید",
+			"overview": "نمای کلی",
+			"myCourses": "کورس‌های من",
+			"courses": {
+				"published": "منتشرشده",
+				"drafts": "پیش‌نویس",
+				"archived": "آرشیو"
+			},
+			"decks": "دسته‌های من",
+			"quizBuilder": "سازنده امتحان",
+			"classrooms": "کلاس‌ها",
+			"students": "شاگردان",
+			"reports": "گزارش‌ها",
+			"analytics": "تحلیل‌ها",
+			"earnings": "درآمد",
+			"discounts": "تخفیف‌ها",
+			"settings": "تنظیمات",
+			"notifications": "اعلان‌ها"
+		},
+		"school": {
+			"roleLabel": "ادمین مکتب",
+			"defaultName": "داشبورد مکتب",
+			"overview": "نمای کلی",
+			"members": {
+				"label": "اعضا",
+				"students": "شاگردان",
+				"teachers": "معلمان",
+				"staff": "کارمندان"
+			},
+			"decks": "دسته‌ها",
+			"quizzes": "امتحان‌ها",
+			"results": "نتایج",
+			"reports": "گزارش‌ها",
+			"analytics": "تحلیل‌ها",
+			"attendance": "حاضری",
+			"earnings": "درآمد",
+			"discounts": "تخفیف‌ها",
+			"settings": "تنظیمات",
+			"notifications": "اعلان‌ها"
+		},
+		"agency": {
+			"nav": {
+				"overview": "نمای کلی",
+				"chargeStudent": "شارژ حساب شاگرد",
+				"transactions": "تراکنش‌ها",
+				"settlements": "تصفیه حساب‌ها",
+				"disputes": "اعتراض‌ها",
+				"members": "اعضا",
+				"notifications": "اعلان‌ها",
+				"schools": "مکاتب",
+				"instructors": "استادان",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌کارت‌ها",
+				"quizzes": "امتحان‌ها"
+			},
+			"overview": {
+				"title": "نمای کلی نمایندگی",
+				"subtitle": "خلاصهٔ فعالیت و حساب نمایندگی شما",
+				"chargedTotal": "مجموع شارژ",
+				"outstanding": "بدهی / سقف",
+				"studentsCharged": "شاگردان شارژشده",
+				"chargedLast30d": "شارژ ۳۰ روز اخیر",
+				"commissionEarned": "کمیشن به‌دست‌آمده",
+				"openDisputes": "اعتراض‌های باز",
+				"recentTopups": "شارژهای اخیر",
+				"salesTotal": "فروش محتوا (تعداد)"
+			},
+			"charge": {
+				"title": "شارژ حساب شاگرد",
+				"subtitle": "ایمیل شاگرد را وارد کنید و مبلغ نقدی دریافت‌شده را شارژ کنید (۱ کریدیت = ۱ افغانی)",
+				"studentEmail": "ایمیل شاگرد",
+				"studentEmailPlaceholder": "student@example.com",
+				"amount": "مبلغ (افغانی)",
+				"note": "یادداشت (اختیاری)",
+				"submit": "شارژ حساب",
+				"receipt": {
+					"title": "شارژ موفق بود",
+					"student": "شاگرد",
+					"amount": "مبلغ",
+					"newBalance": "موجودی جدید",
+					"reference": "کد پیگیری",
+					"date": "تاریخ",
+					"currency": "افغانی",
+					"chargeAnother": "شارژ شاگرد دیگر"
+				},
+				"validation": {
+					"invalidEmail": "ایمیل نامعتبر است",
+					"invalidAmount": "مبلغ نامعتبر است"
+				},
+				"errors": {
+					"studentNotFound": "شاگردی با این ایمیل یافت نشد",
+					"permissionDenied": "شما اجازهٔ این کار را ندارید",
+					"liabilityLimitExceeded": "سقف بدهی نمایندگی پر شده است؛ لطفاً ابتدا تصفیه کنید",
+					"invalidAmount": "مبلغ نامعتبر است"
+				}
+			},
+			"transactions": {
+				"title": "تراکنش‌ها",
+				"subtitle": "تمام شارژهای انجام‌شده توسط نمایندگی شما"
+			},
+			"settlements": {
+				"title": "تصفیه حساب‌ها",
+				"subtitle": "تاریخچهٔ انتقال وجه به ابزار کانکور"
+			},
+			"disputes": {
+				"title": "اعتراض‌ها",
+				"subtitle": "اعتراض‌های شاگردان بر تراکنش‌های نمایندگی شما"
+			},
+			"members": {
+				"title": "اعضا",
+				"subtitle": "مدیریت کارمندان نمایندگی"
+			},
+			"moderation": {
+				"reason": "دلیل",
+				"reasonPlaceholder": "چرا این حساب تعلیق می‌شود؟",
+				"cancel": "لغو",
+				"confirmSuspend": "تعلیق",
+				"suspend": "تعلیق",
+				"reactivate": "فعال‌سازی دوباره",
+				"suspended": "حساب تعلیق شد",
+				"reactivated": "حساب دوباره فعال شد",
+				"suspendSchoolTitle": "تعلیق مکتب؟",
+				"suspendSchoolDescription": "با تعلیق {name} محتوای آن فوراً پنهان و داشبوردش مسدود می‌شود. تعلیق‌های نمایندگی خودتان قابل بازگشت است.",
+				"suspendInstructorTitle": "تعلیق استاد؟",
+				"suspendInstructorDescription": "با تعلیق {name} محتوای منتشرشدهٔ او فوراً پنهان می‌شود. تعلیق‌های نمایندگی خودتان قابل بازگشت است."
+			},
+			"schools": {
+				"title": "مکاتب",
+				"subtitle": "مکاتب در محدودهٔ نظارت نمایندگی شما",
+				"searchPlaceholder": "جستجوی مکاتب...",
+				"empty": "مکتبی در محدودهٔ شما نیست",
+				"edit": "ویرایش",
+				"editTitle": "ویرایش مشخصات مکتب",
+				"updated": "مکتب به‌روزرسانی شد",
+				"address": "آدرس",
+				"adminEmail": "ایمیل مدیر",
+				"save": "ذخیره",
+				"table": {
+					"name": "مکتب",
+					"province": "ولایت",
+					"status": "وضعیت"
+				},
+				"validation": {
+					"nameRequired": "نام الزامی است",
+					"invalidEmail": "ایمیل نامعتبر است"
+				}
+			},
+			"instructors": {
+				"title": "استادان",
+				"subtitle": "استادان در محدودهٔ نظارت نمایندگی شما",
+				"searchPlaceholder": "جستجوی استادان...",
+				"empty": "استادی در محدودهٔ شما نیست",
+				"table": {
+					"instructor": "استاد",
+					"province": "ولایت",
+					"status": "وضعیت"
+				}
+			},
+			"resources": {
+				"quizzesTitle": "امتحان‌های نمایندگی",
+				"quizzesSubtitle": "امتحان‌هایی که مالک و ناشر آن‌ها نمایندگی شماست"
+			}
+		}
+	},
+	"nav": {
+		"openMenu": "باز کردن منو",
+		"closeMenu": "بستن منو",
+		"dashboard": "داشبورد",
+		"students": "شاگردان",
+		"courses": "کورس‌ها",
+		"quizzes": "امتحان‌ها",
+		"members": "اعضا",
+		"settings": "تنظیمات",
+		"schools": "مکتب‌ها",
+		"instructors": "استادان",
+		"exams": "امتحانات",
+		"user": {
+			"home": "خانه",
+			"aboutUs": "درباره ما",
+			"contact": "تماس با ما",
+			"locales": {
+				"en": "English",
+				"fa": "دری",
+				"ps": "پښتو"
+			},
+			"signIn": "ورود",
+			"signUp": "ثبت‌نام",
+			"phone": "۰۰۹۸-۹۰۱-۲۲۳-۵۵۸۶",
+			"email": "info@abzarkankor.com",
+			"search": "جستجو",
+			"searchPlaceholder": "جستجوی امتحان، خدمات...",
+			"quickLinks": "دسترسی سریع",
+			"language": "زبان",
+			"aboutUsDesc": "با بستر و مأموریت ما آشنا شوید",
+			"ourTeam": "تیم ما",
+			"ourTeamDesc": "آشنایی با افراد پشت ابزار کانکور",
+			"ourMission": "مأموریت ما",
+			"ourMissionDesc": "آنچه هر روز ما را هدایت می‌کند",
+			"services": "خدمات",
+			"mockExams": "امتحان‌های آزمایشی",
+			"mockExamsDesc": "تمرین با امتحان‌های شبیه‌ساز کانکور",
+			"studyPlans": "برنامه‌های درسی",
+			"studyPlansDesc": "برنامه‌های ساختاریافته متناسب با اهداف شما",
+			"gpaCalculator": "محاسبه نمره",
+			"gpaCalculatorDesc": "محاسبه معدل خود به سادگی",
+			"faq": "سؤالات متداول",
+			"faqDesc": "پاسخ به پرسش‌های رایج"
+		}
+	},
+	"courses": {
+		"title": "کورس‌ها",
+		"discussions": "بحث‌ها و گفتگوهای کورس",
+		"newCourse": "کورس جدید",
+		"myCourses": "کورس‌های من",
+		"enrolledCourses": "کورس‌های ثبت‌نامی",
+		"allCourses": "همه کورس‌ها",
+		"searchPlaceholder": "جستجوی کورس‌ها…",
+		"filters": "فیلترها",
+		"clearAll": "پاک کردن همه",
+		"noCoursesFound": "کورسی یافت نشد",
+		"noCoursesDescription": "جستجو یا فیلترهای خود را تنظیم کنید.",
+		"noEnrolledCourses": "کورس ثبت‌نامی وجود ندارد",
+		"noEnrolledCoursesDescription": "در کاتالوگ مرور کنید و در یک کورس ثبت‌نام کنید.",
+		"browseCatalog": "مرور کاتالوگ",
+		"showing": "نمایش {from}–{to} از {total} کورس",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"manage": "مدیریت",
+		"publish": "انتشار",
+		"unpublish": "لغو انتشار",
+		"resume": "ادامه",
+		"startLearning": "شروع یادگیری",
+		"reviewCourse": "مرور کورس",
+		"enroll": "ثبت‌نام",
+		"loginToEnroll": "ورود و ثبت نام",
+		"enrolled": "ثبت‌نام شده",
+		"completed": "تکمیل شده",
+		"notStarted": "شروع نشده",
+		"percentComplete": "{percent}٪ تکمیل",
+		"lessons": "{count} درس",
+		"duration": "{hours} ساعت",
+		"enrollments": "{count} شاگرد",
+		"filters_level": "سطح",
+		"filters_language": "زبان",
+		"filters_status": "وضعیت",
+		"filters_pricing": "قیمت‌گذاری",
+		"level_beginner": "مبتدی",
+		"level_intermediate": "متوسط",
+		"level_advanced": "پیشرفته",
+		"level_all_levels": "همه سطوح",
+		"language_fa": "دری",
+		"language_ps": "پښتو",
+		"language_en": "English",
+		"status_published": "منتشر شده",
+		"status_draft": "پیش‌نویس",
+		"status_live": "فعال",
+		"free": "رایگان",
+		"detail": {
+			"about": "درباره این کورس",
+			"objectives": "آنچه یاد می‌گیرید",
+			"prerequisites": "پیش‌نیازها",
+			"instructor": "استاد",
+			"curriculum": "برنامه درسی",
+			"overview": "نمای کلی",
+			"students": "شاگردان",
+			"reviews": "نظرات",
+			"totalLessons": "{count} درس",
+			"totalDuration": "{hours} ساعت کل",
+			"totalEnrollments": "{count} شاگرد ثبت‌نام کرده",
+			"averageRating": "{rating} از ۵",
+			"totalReviews": "{count} نظر",
+			"lastUpdated": "آخرین به‌روزرسانی {date}",
+			"language": "زبان",
+			"level": "سطح",
+			"certificate": "گواهینامه پایان کورس",
+			"publishedStatus": "منتشر شده",
+			"draftStatus": "پیش‌نویس",
+			"editInBuilder": "ویرایش در سازنده",
+			"preview": "پیش‌نمایش",
+			"minutesShort": "{count} دقیقه",
+			"sectionCount": "{count} فصل",
+			"completedOfTotal": "{completed}/{total} تکمیل شده",
+			"hoursMinutes": "{hours} ساعت و {minutes} دقیقه"
+		},
+		"learn": {
+			"markComplete": "علامت‌گذاری به عنوان تکمیل شده",
+			"completed": "تکمیل شده",
+			"nextLesson": "درس بعدی",
+			"previousLesson": "درس قبلی",
+			"courseContent": "محتوای کورس",
+			"lessonOf": "درس {current} از {total}",
+			"videoNotSupported": "مرورگر شما از عنصر ویدیو پشتیبانی نمی‌کند.",
+			"assetUnavailable": "این فایل در حال حاضر در دسترس نیست.",
+			"contentTypes": {
+				"video": "ویدیو",
+				"text": "مقاله",
+				"audio": "صوتی",
+				"quiz": "امتحان",
+				"assignment": "تکلیف",
+				"pdf_document": "PDF",
+				"slide_presentation": "اسلاید",
+				"external_resource": "منبع",
+				"code_playground": "کد"
+			}
+		},
+		"view": "مشاهده کورس",
+		"sortBy": "مرتب‌سازی",
+		"sort_newest": "جدیدترین",
+		"sort_oldest": "قدیمی‌ترین",
+		"sort_titleAsc": "عنوان (الف تا ی)",
+		"courseCount": "{count} کورس",
+		"courseNotFound": "کورس پیدا نشد.",
+		"enrollSuccess": "با موفقیت ثبت‌نام شدید!",
+		"enrollFailed": "ثبت‌نام ناموفق بود. دوباره تلاش کنید.",
+		"priceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+		"buyForCredits": "خرید به قیمت {count, plural, one {# اعتبار} other {# اعتبار}}",
+		"insufficientCredits": "اعتبار کافی ندارید. لطفاً حساب خود را شارژ کنید.",
+		"learning": {
+			"continueLearning": "ادامه یادگیری",
+			"upNext": "درس بعدی",
+			"notEnrolledTitle": "شما در این کورس ثبت‌نام نکرده‌اید",
+			"notEnrolledDescription": "برای شروع یادگیری و پیگیری پیشرفت، ثبت‌نام کنید.",
+			"allComplete": "همه درس‌ها را کامل کردید — آفرین!",
+			"markCompleteFailed": "ثبت تکمیل درس ناموفق بود.",
+			"lessonNotFound": "درس پیدا نشد."
+		},
+		"filters_subject": "مضمون",
+		"filters_grade": "صنف",
+		"filters_book": "کتاب",
+		"filterAll": "همه",
+		"description": "کورس‌های ویدیویی را در همه مضامین و صنف‌ها مرور کرده و ثبت‌نام کنید.",
+		"loadError": "بارگذاری کورس‌ها ممکن نشد",
+		"loadErrorDescription": "لطفاً لحظاتی دیگر دوباره تلاش کنید.",
+		"tryAgain": "دوباره تلاش کنید",
+		"filters_instructor": "استاد",
+		"pricing_paid": "پولی",
+		"agencyTitle": "کورس‌های نمایندگی",
+		"agencySubtitle": "کورس‌هایی که مالک و ناشر آن‌ها نمایندگی شماست",
+		"published": "کورس منتشر شد.",
+		"unpublished": "انتشار کورس لغو شد.",
+		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد."
+	},
+	"certificates": {
+		"pdf": {
+			"platform": "ابزار کانکور",
+			"title": "گواهینامه تکمیل کورس",
+			"presentedTo": "این گواهینامه با افتخار تقدیم می‌شود به",
+			"bodyLine": "به پاس تکمیل موفقانه کورس",
+			"dateLine": "تاریخ صدور: {date}",
+			"verificationLabel": "کد تأیید",
+			"verifyHint": "برای تأیید اصالت به {url} مراجعه کنید",
+			"signatureRole": "بستر صادرکننده"
+		},
+		"claim": {
+			"eligibleTitle": "گواهینامه آماده است",
+			"eligibleDescription": "شما این کورس را تکمیل کرده‌اید — گواهینامه خود را دریافت کنید.",
+			"claim": "دریافت گواهینامه",
+			"download": "دانلود گواهینامه",
+			"generating": "در حال آماده‌سازی گواهینامه…",
+			"claimFailed": "ایجاد گواهینامه ناکام شد. لطفاً دوباره تلاش کنید.",
+			"notEligible": "برای دریافت گواهینامه، همه درس‌ها را تکمیل و امتحان‌ها را موفقانه سپری کنید."
+		},
+		"verify": {
+			"metaTitle": "تأیید گواهینامه",
+			"title": "تأیید گواهینامه",
+			"description": "اصالت گواهینامه ابزار کانکور را بررسی کنید.",
+			"validTitle": "گواهینامه معتبر است",
+			"validDescription": "این گواهینامه توسط {platform} صادر شده است.",
+			"invalidTitle": "گواهینامه یافت نشد",
+			"invalidDescription": "هیچ گواهینامه‌ای با کد {code} مطابقت ندارد. کد را بررسی کرده و دوباره تلاش کنید.",
+			"student": "شاگرد",
+			"course": "کورس",
+			"issuedAt": "تاریخ صدور",
+			"completedAt": "تاریخ تکمیل",
+			"code": "کد تأیید",
+			"codePlaceholder": "مانند CERT-1234-5678",
+			"verifyButton": "تأیید",
+			"codeRequired": "وارد کردن کد تأیید الزامی است",
+			"scanQrTitle": "اسکن کد QR",
+			"scanQrPlaceholder": "برای ثبت یا آپلود کد QR گواهینامه کلیک یا درگ کنید",
+			"scanQrSuccess": "کد QR با موفقیت اسکن شد!",
+			"scanQrError": "هیچ کد گواهینامه معتبری در تصویر یافت نشد.",
+			"scanQrLoading": "در حال رمزگشایی کد QR...",
+			"scanWithCamera": "اسکن با دوربین",
+			"cameraPermissionError": "دسترسی به دوربین رد شده است یا در این دستگاه پشتیبانی نمی‌شود.",
+			"cameraLoading": "در حال راه‌اندازی دوربین...",
+			"cameraError": "خطایی در راه‌اندازی دوربین رخ داد.",
+			"close": "بستن"
+		}
+	},
+	"libraries": {
+		"title": "کتابخانه",
+		"discussions": "بحث‌ها و گفتگوهای کتاب",
+		"description": "کتاب‌ها و منابع آموزشی را بر اساس صنف و مضمون مرور کنید.",
+		"searchPlaceholder": "جستجوی کتاب‌ها…",
+		"clearSearch": "پاک کردن جستجو",
+		"filters": "فیلترها",
+		"clearAll": "پاک کردن همه",
+		"allGrades": "همه صنف‌ها",
+		"allSubjects": "همه مضمون‌ها",
+		"allBooks": "همه کتاب‌ها",
+		"allCategories": "همه دسته‌ها",
+		"sort": "مرتب‌سازی",
+		"sortRecent": "تازه‌ترین",
+		"sortNameAsc": "نام الف تا ی",
+		"sortNameDesc": "نام ی تا الف",
+		"open": "باز کردن",
+		"downloadBook": "دانلود {title}",
+		"noBooksFound": "کتابی یافت نشد",
+		"noBooksDescription": "جستجو یا فیلترهای خود را تنظیم کنید.",
+		"showing": "نمایش {from}–{to} از {total} کتاب",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"loadError": "کتاب‌ها بارگذاری نشدند",
+		"loadErrorDescription": "لطفاً کمی بعد دوباره تلاش کنید.",
+		"tryAgain": "تلاش دوباره",
+		"author": "نویسنده",
+		"publisher": "ناشر",
+		"isbn": "ISBN",
+		"download": "دانلود",
+		"details": "جزئیات کتاب",
+		"backToList": "بازگشت به کتابخانه",
+		"unknownAuthor": "نویسنده ناشناس",
+		"unknownPublisher": "ناشر ناشناس",
+		"viewPdf": "مشاهده PDF",
+		"grade": "صنف",
+		"category": "دسته",
+		"subject": "مضمون",
+		"type": "نوع کتاب",
+		"noPdfViewer": "مرورگر شما از نمایش فایل‌های PDF پشتیبانی نمی‌کند.",
+		"admin": {
+			"title": "کتاب‌های کتابخانه",
+			"subtitle": "{count, plural, =1 {# کتاب کتابخانه} other {# کتاب کتابخانه}}",
+			"searchPlaceholder": "جستجو بر اساس عنوان، توضیحات، مسیر فایل یا URI…",
+			"loading": "در حال بارگذاری کتاب‌ها…",
+			"empty": "هیچ کتابی در کتابخانه یافت نشد.",
+			"newLibrary": "کتاب جدید در کتابخانه",
+			"newLibraryDesc": "یک کتاب یا منبع آموزشی جدید برای شاگردان ایجاد کنید.",
+			"editLibrary": "ویرایش کتاب کتابخانه",
+			"editLibraryDesc": "پیکربندی منبع را ویرایش کنید.",
+			"import": "وارد کردن کتاب‌ها",
+			"importComplete": "کتاب‌ها با موفقیت وارد شدند",
+			"deleteConfirm": "آیا از حذف این کتاب کتابخانه اطمینان دارید؟",
+			"deleteSuccess": "کتاب کتابخانه با موفقیت حذف شد",
+			"saveSuccess": "کتاب کتابخانه با موفقیت ذخیره شد",
+			"createSuccess": "کتاب کتابخانه با موفقیت ایجاد شد",
+			"fields": {
+				"title": "عنوان",
+				"desc": "توضیحات",
+				"filePath": "مسیر فایل",
+				"uri": "آدرس URI",
+				"slug": "اسلاگ",
+				"book": "کتاب مرتبط",
+				"category": "دسته بندی",
+				"grade": "صنف",
+				"subject": "مضمون",
+				"seoTitle": "عنوان SEO",
+				"seoDescription": "توضیحات SEO"
+			},
+			"validation": {
+				"titleRequired": "عنوان الزامی است",
+				"filePathRequired": "مسیر فایل الزامی است",
+				"uriRequired": "آدرس URI الزامی است",
+				"uriInvalid": "آدرس URI باید معتبر باشد"
+			},
+			"tabs": {
+				"preview": "پیش‌نمایش",
+				"edit": "ویرایش"
+			},
+			"actions": {
+				"edit": "ویرایش",
+				"view": "مشاهده",
+				"delete": "حذف"
+			},
+			"uploader": {
+				"title": "آپلود فایل کتاب به Cloudflare R2",
+				"description": "پشتیبانی از PDF و EPUB تا ۱۵۰ مگابایت. نام فایل به طور خودکار پاک‌سازی می‌شود.",
+				"selectFile": "انتخاب فایل",
+				"uploading": "در حال آپلود ({progress}%)",
+				"success": "فایل با موفقیت در R2 آپلود شد!",
+				"errorInvalidType": "فقط فایل‌های PDF و EPUB مجاز هستند.",
+				"errorTooLarge": "فایل خیلی بزرگ است (حداکثر ۱۵۰ مگابایت).",
+				"errorUpload": "آپلود فایل انجام نشد"
+			},
+			"seoSection": "متا دیتای سئو (SEO)",
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "ذخیره",
+				"create": "ایجاد کتاب",
+				"saveChanges": "ذخیره تغییرات"
+			}
+		}
+	},
+	"provinces": {
+		"admin": {
+			"title": "ولایات",
+			"subtitle": "{count, plural, =1 {# ولایت} other {# ولایت}}",
+			"searchPlaceholder": "جستجوی ولایات…",
+			"loading": "در حال بارگذاری ولایات…",
+			"empty": "هیچ ولایتی یافت نشد.",
+			"newProvince": "ولایت جدید",
+			"newProvinceDesc": "ایجاد یک ولایت جغرافیایی جدید برای پروفایل شاگردان.",
+			"editProvince": "ویرایش ولایت",
+			"editProvinceDesc": "ویرایش پیکربندی ولایت.",
+			"deleteConfirm": "آیا از حذف این ولایت اطمینان دارید؟",
+			"deleteSuccess": "ولایت با موفقیت حذف شد",
+			"saveSuccess": "ولایت با موفقیت ذخیره شد",
+			"createSuccess": "ولایت با موفقیت ایجاد شد",
+			"fields": {
+				"name": "نام ولایت"
+			},
+			"validation": {
+				"nameRequired": "نام ولایت الزامی است"
+			},
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "ذخیره",
+				"create": "ایجاد ولایت",
+				"saveChanges": "ذخیره تغییرات"
+			}
+		}
+	},
+	"grades": {
+		"admin": {
+			"title": "صنف‌ها و مضامین",
+			"gradesTab": "صنف‌ها",
+			"subjectsTab": "مضامین",
+			"booksTab": "کتاب‌ها",
+			"grades": {
+				"title": "صنف‌ها",
+				"subtitle": "{count, plural, =1 {# صنف} other {# صنف}}",
+				"searchPlaceholder": "جستجوی صنف‌ها…",
+				"loading": "در حال بارگذاری صنف‌ها…",
+				"empty": "هیچ صنفی یافت نشد.",
+				"newGrade": "صنف جدید",
+				"newGradeDesc": "ایجاد صنف جدید.",
+				"editGrade": "ویرایش صنف",
+				"editGradeDesc": "ویرایش پیکربندی صنف.",
+				"deleteConfirm": "آیا از حذف این صنف اطمینان دارید؟",
+				"deleteSuccess": "صنف با موفقیت حذف شد",
+				"saveSuccess": "صنف با موفقیت ذخیره شد",
+				"createSuccess": "صنف با موفقیت ایجاد شد"
+			},
+			"subjects": {
+				"title": "مضامین",
+				"subtitle": "{count, plural, =1 {# مضمون} other {# مضمون}}",
+				"searchPlaceholder": "جستجوی مضامین…",
+				"loading": "در حال بارگذاری مضامین…",
+				"empty": "هیچ مضمونی یافت نشد.",
+				"newSubject": "مضمون جدید",
+				"newSubjectDesc": "ایجاد یک مضمون عمومی مانند ریاضی یا بیولوژی.",
+				"editSubject": "ویرایش مضمون",
+				"editSubjectDesc": "ویرایش پیکربندی مضمون.",
+				"deleteConfirm": "آیا از حذف این مضمون اطمینان دارید؟",
+				"deleteSuccess": "مضمون با موفقیت حذف شد",
+				"saveSuccess": "مضمون با موفقیت ذخیره شد",
+				"createSuccess": "مضمون با موفقیت ایجاد شد"
+			},
+			"books": {
+				"title": "کتاب‌ها",
+				"subtitle": "{count, plural, =1 {# کتاب} other {# کتاب}}",
+				"searchPlaceholder": "جستجوی کتاب‌ها…",
+				"loading": "در حال بارگذاری کتاب‌ها…",
+				"empty": "هیچ کتابی یافت نشد.",
+				"newBook": "کتاب جدید",
+				"newBookDesc": "ربط دادن یک کتاب درسی مشخص به صنف و مضمون.",
+				"editBook": "ویرایش کتاب",
+				"editBookDesc": "ویرایش پیکربندی کتاب.",
+				"deleteConfirm": "آیا از حذف این کتاب اطمینان دارید؟",
+				"deleteSuccess": "کتاب با موفقیت حذف شد",
+				"saveSuccess": "کتاب با موفقیت ذخیره شد",
+				"createSuccess": "کتاب با موفقیت ایجاد شد"
+			},
+			"fields": {
+				"name": "نام",
+				"fullName": "نام کامل",
+				"filePath": "مسیر فایل",
+				"ordering": "ترتیب نمایش",
+				"category": "کتگوری",
+				"grade": "صنف",
+				"subject": "مضمون"
+			},
+			"validation": {
+				"nameRequired": "نام الزامی است",
+				"fullNameRequired": "نام کامل الزامی است",
+				"filePathRequired": "مسیر فایل الزامی است",
+				"orderingRequired": "ترتیب نمایش الزامی است"
+			},
+			"buttons": {
+				"cancel": "انصراف",
+				"save": "ذخیره",
+				"createGrade": "ایجاد صنف",
+				"createSubject": "ایجاد مضمون",
+				"createBook": "ایجاد کتاب",
+				"saveChanges": "ذخیره تغییرات"
+			}
+		}
+	},
+	"auth": {
+		"login": "ورود",
+		"registerSchool": "ثبت مکتب",
+		"registerStudent": "ثبت به عنوان شاگرد",
+		"registerInstructor": "ثبت‌نام به‌عنوان استاد",
+		"email": "ایمیل",
+		"password": "رمز عبور",
+		"pendingReviewTitle": "حساب در حال بررسی",
+		"pendingReviewBody": "حساب شما در حال بررسی است. پس از تأیید، به شما ایمیل می‌فرستیم.",
+		"common": {
+			"42501": "سطح دسترسی شما محدود است. لطفا به پشتبانی پیام بدهید.",
+			"orDivider": "یا",
+			"emailLabel": "آدرس ایمیل",
+			"emailPlaceholder": "hello@example.com",
+			"passwordLabel": "رمز عبور",
+			"confirmPasswordLabel": "تأیید رمز عبور",
+			"fullNameLabel": "نام کامل",
+			"fullNamePlaceholder": "احمد شاه",
+			"schoolNameLabel": "نام مکتب",
+			"schoolNamePlaceholder": "آکادمی کانکور",
+			"schoolAddressLabel": "آدرس مکتب",
+			"schoolAddressPlaceholder": "کابل، افغانستان",
+			"provinceLabel": "ولایت",
+			"provincePlaceholder": "ولایت خود را انتخاب کنید...",
+			"successTitle": "ایمیل خود را بررسی کنید",
+			"user_already_exists": "حساب شما قبلا ایجاد شده است. لطفا وارد حساب تان شوید.",
+			"email_not_confirmed": "لطفاً ابتدا آدرس ایمیل خود را تأیید کنید.",
+			"over_email_send_rate_limit": "تعداد تلاش‌ها زیاد است. لطفاً کمی صبر کنید و دوباره امتحان کنید.",
+			"weak_password": "رمز عبور شما ضعیف است. لطفاً رمز قوی‌تری انتخاب کنید.",
+			"email_address_not_authorized": "این آدرس ایمیل مجاز به ثبت‌نام نیست.",
+			"signup_disabled": "ثبت‌نام‌های جدید در حال حاضر غیرفعال است.",
+			"unknown_error": "مشکلی پیش آمد. لطفاً دوباره امتحان کنید.",
+			"otp_expired": "کد منقضی شده است. لطفاً دوباره درخواست بدهید."
+		},
+		"validation": {
+			"invalidEmail": "آدرس ایمیل نامعتبر است",
+			"required": "این فیلد الزامی است",
+			"passwordTooShort": "رمز عبور باید حداقل ۸ کاراکتر باشد",
+			"passwordWeak": "باید شامل ۱ حرف بزرگ و ۱ عدد باشد",
+			"passwordMismatch": "رمزهای عبور مطابقت ندارند"
+		},
+		"header": {
+			"login": {
+				"prompt": "حساب ندارید؟",
+				"linkText": "ثبت‌نام"
+			},
+			"register": {
+				"prompt": "از قبل حساب دارید؟",
+				"linkText": "ورود"
+			},
+			"resetPassword": {
+				"prompt": "نظرتان عوض شد؟",
+				"linkText": "بازگشت"
+			}
+		},
+		"footer": {
+			"copyright": "© {year} ابزار کانکور. تمام حقوق محفوظ است.",
+			"agreeToTerms": "با ادامه دادن، موافقت می‌کنید با <termsLink>شرایط استفاده</termsLink> و <privacyLink>سیاست حریم خصوصی</privacyLink> ما."
+		},
+		"loginPage": {
+			"title": "وارد حساب خود شوید",
+			"subtitle": "جزئیات خود را برای ورود وارد کنید.",
+			"googleButton": "ورود با گوگل",
+			"rememberMe": "مرا وارد نگه دار",
+			"forgotPassword": "رمز را فراموش کردید؟",
+			"submit": "ورود",
+			"submitting": "در حال ورود…"
+		},
+		"registerStudentPage": {
+			"title": "ایجاد حساب کاربری",
+			"subtitle": "جزئیات خود را برای شروع وارد کنید.",
+			"passwordHint": "باید شامل ۱ حرف بزرگ، ۱ عدد و حداقل ۸ کاراکتر باشد.",
+			"submit": "ایجاد حساب",
+			"submitting": "در حال ایجاد حساب…",
+			"successBody": "لینک تأیید به صندوق ورودی شما ارسال شد. برای فعال‌سازی حساب خود روی لینک کلیک کنید."
+		},
+		"registerInstructorPage": {
+			"title": "ثبت‌نام به‌عنوان استاد",
+			"subtitle": "جزئیات خود را برای ثبت‌نام وارد کنید.",
+			"passwordHint": "باید شامل ۱ حرف بزرگ، ۱ عدد و حداقل ۸ کاراکتر باشد.",
+			"submit": "ثبت‌نام",
+			"submitting": "در حال ایجاد حساب…",
+			"successBody": "لینک تأیید به صندوق ورودی شما ارسال شد. برای فعال‌سازی حساب استادی خود روی لینک کلیک کنید."
+		},
+		"registerSchoolPage": {
+			"title": "ثبت مکتب شما",
+			"subtitle": "جزئیات خود را برای ایجاد حساب مکتب وارد کنید.",
+			"schoolNameLabel": "نام مکتب",
+			"schoolNamePlaceholder": "آکادمی کانکور",
+			"passwordHint": "باید شامل ۱ حرف بزرگ، ۱ عدد و حداقل ۸ کاراکتر باشد.",
+			"submit": "ثبت‌نام",
+			"submitting": "در حال ایجاد حساب…",
+			"successBody": "لینک تأیید به صندوق ورودی شما ارسال شد. برای فعال‌سازی حساب مکتب خود روی لینک کلیک کنید."
+		},
+		"resetPasswordPage": {
+			"title": "بازیابی رمز عبور",
+			"subtitle": "ایمیل خود را برای بازیابی رمز وارد کنید.",
+			"emailHint": "ایمیلی که با آن ثبت‌نام کرده‌اید را وارد کنید.",
+			"noAccess": "دیگر دسترسی ندارید؟",
+			"tryAnotherMethod": "روش دیگری امتحان کنید",
+			"submit": "بازیابی رمز عبور",
+			"submitting": "در حال ارسال…",
+			"successBody": "لینک بازیابی رمز به صندوق ورودی شما ارسال شد. روی لینک کلیک کنید تا رمز جدید تنظیم کنید."
+		},
+		"updatePasswordPage": {
+			"title": "رمز عبور جدید",
+			"subtitle": "رمز عبور جدید خود را وارد و تأیید کنید.",
+			"passwordHint": "باید شامل ۱ حرف بزرگ، ۱ عدد و حداقل ۸ کاراکتر باشد.",
+			"submit": "به‌روزرسانی رمز عبور",
+			"submitting": "در حال به‌روزرسانی…",
+			"successTitle": "رمز عبور به‌روز شد",
+			"successBody": "رمز عبور شما با موفقیت به‌روز شد. اکنون می‌توانید با رمز جدید وارد شوید."
+		},
+		"confirmEmailPage": {
+			"title": "ایمیل خود را تأیید کنید",
+			"subtitle": "آدرس ایمیل شما هنوز تأیید نشده است.",
+			"emailHint": "لینک تأیید جدیدی به این آدرس ارسال می‌کنیم.",
+			"submit": "ارسال مجدد ایمیل تأیید",
+			"submitting": "در حال ارسال…",
+			"successBody": "لینک تأیید جدیدی به صندوق ورودی شما ارسال شد. برای فعال‌سازی حساب روی لینک کلیک کنید."
+		}
+	},
+	"landing": {
+		"user": {
+			"signIn": "ورود",
+			"signUp": "ثبت‌نام",
+			"searchPlaceholder": "جستجوی امتحان، خدمات..."
+		},
+		"header": {
+			"signIn": "ورود",
+			"dashboard": "داشبورد",
+			"libraries": "کتابخانه",
+			"courses": "کورس‌ها",
+			"decks": "دسته‌ها",
+			"quizzes": "امتحان‌ها",
+			"aboutUs": "درباره ما",
+			"openMenu": "باز کردن منو",
+			"closeMenu": "بستن منو"
+		},
+		"hero": {
+			"badge": "برای شاگردان افغانستان",
+			"heading": "هر جا بخوانید. <accent>کانکور را قبول شوید.</accent>",
+			"subtitle": "برنامه کامل یادگیری آفلاین — دروس منطبق با برنامه درسی، بیش از ۱۳٬۰۰۰ فلش‌کارت، امتحان‌های مجازی کانکور و کتابخانه دیجیتال. بدون نیاز به اینترنت.",
+			"ctaPrimary": "کشف برنامه",
+			"ctaSecondary": "برای مکتب‌ها و استادان",
+			"signInPrompt": "از قبل حساب دارید؟",
+			"signInLink": "ورود"
+		},
+		"download": {
+			"heading": "ابزار کانکور را دریافت کنید",
+			"subtitle": "رایگان. بدون اینترنت. هر جا.",
+			"getItOn": "دریافت از",
+			"downloadOn": "دانلود از",
+			"comingSoon": "به‌زودی"
+		},
+		"stats": {
+			"flashcards": "+۱۳٬۰۰۰",
+			"flashcardsLabel": "فلش‌کارت",
+			"offline": "۱۰۰٪",
+			"offlineLabel": "کاملاً آفلاین",
+			"modules": "۴",
+			"modulesLabel": "ماژول یادگیری"
+		},
+		"app": {
+			"heading": "چهار ماژول. یک برنامه.",
+			"subtitle": "همه آنچه یک شاگرد افغانستان نیاز دارد — از درس‌های روزانه تا آمادگی برای کانکور.",
+			"school": {
+				"title": "دروس مکتب",
+				"description": "درس‌های ویدیویی هم‌راستا با برنامه درسی رسمی افغانستان برای تمام صنوف، همراه با ارائه‌های PDF و یادداشت‌برداری یکپارچه."
+			},
+			"flashcards": {
+				"title": "فلش‌کارت‌های هوشمند",
+				"description": "بیش از ۱۳٬۰۰۰ فلش‌کارت مستقیماً از کتاب‌های درسی رسمی، با سیستم تکرار فاصله‌دار لایتنر برای حفظ پایدار."
+			},
+			"tests": {
+				"title": "کانکور مجازی",
+				"description": "شبیه‌سازی‌های واقعی امتحان ورودی پوهنتون و تمرین‌های کتاب‌محور با نمره‌دهی خودکار فوری."
+			},
+			"library": {
+				"title": "کتابخانه دیجیتال",
+				"description": "هزاران کتاب و منبع آموزشی دسته‌بندی‌شده — همه قابل دانلود برای مطالعه کاملاً آفلاین، هر زمان، هر جا."
+			}
+		},
+		"offline": {
+			"heading": "ساخته‌شده برای افغانستان",
+			"subtitle": "طراحی‌شده برای مناطقی با دسترسی محدود یا بدون اینترنت. یک‌بار دانلود کنید و همیشه بدون اینترنت بخوانید.",
+			"badgeLabel": "۱۰۰٪ آفلاین",
+			"point1Title": "بدون اینترنت درس بخوانید",
+			"point1Desc": "تمام درس‌ها، فلش‌کارت‌ها و امتحان‌ها پس از دانلود کاملاً آفلاین کار می‌کنند.",
+			"point2Title": "محتوا روی دستگاه شما",
+			"point2Desc": "ویدیوها، PDF‌ها و فلش‌کارت‌ها به‌صورت محلی ذخیره می‌شوند تا اتصال کند هرگز مانع یادگیری شما نشود.",
+			"point3Title": "پیشرفت به‌طور خودکار همگام می‌شود",
+			"point3Desc": "تاریخچه مطالعه و نمرات شما به محض اتصال مجدد با فضای ابری همگام می‌شوند."
+		},
+		"educators": {
+			"heading": "همچنین برای آموزگاران",
+			"subtitle": "مکتب‌ها و استادان می‌توانند کورس‌ها را نشر دهند، امتحان بسازند و شاگردان را از طریق پنل مدیریت ابزار کانکور مدیریت کنند."
+		},
+		"instructor": {
+			"title": "برای استادان",
+			"description": "کورس‌های خود را نشر و مدیریت کنید، امتحان بسازید و پایگاه شاگردی خود را از یک داشبورد اختصاصی گسترش دهید.",
+			"cta": "ثبت‌نام به‌عنوان استاد"
+		},
+		"school": {
+			"title": "برای مکتب‌ها",
+			"description": "مکتب، کارمندان، فهرست کورس‌ها و ثبت‌نام شاگردان خود را از یک پنل مرکزی مدیریت کنید.",
+			"cta": "ثبت مکتب"
+		},
+		"locales": {
+			"en": "English",
+			"fa": "دری",
+			"ps": "پښتو"
+		},
+		"privacy": {
+			"heading": "شفافیت درباره داده‌های شما",
+			"subtitle": "ما باور داریم که باید دقیقاً بدانید چه اطلاعاتی درخواست می‌کنیم و چرا — بدون غافلگیری.",
+			"googleTitle": "داده‌های ورود با گوگل",
+			"googleDesc": "هنگامی که با گوگل وارد می‌شوید، ما فقط آدرس ایمیل و نام نمایشی شما را دریافت می‌کنیم. این اطلاعات تنها برای ایجاد و شناسایی حساب شما در ابزار کانکور استفاده می‌شود.",
+			"syncTitle": "پیشرفت یادگیری",
+			"syncDesc": "تاریخچه مطالعه، پیشرفت فلش‌کارت‌ها و نمرات امتحان شما ابتدا به‌صورت محلی در دستگاه شما ذخیره می‌شود، سپس با سرورهای امن ما همگام می‌شود.",
+			"noSaleTitle": "هرگز فروخته نمی‌شود",
+			"noSaleDesc": "اطلاعات شخصی شما هرگز به تبلیغ‌دهندگان یا اشخاص ثالث فروخته نمی‌شود. ما فقط آنچه برای ارائه خدمات ابزار کانکور ضروری است جمع‌آوری می‌کنیم.",
+			"policyLink": "مشاهده سیاست حریم خصوصی"
+		},
+		"footer": {
+			"copyright": "© {year} ابزار کانکور. تمام حقوق محفوظ است.",
+			"instructorSignup": "ثبت‌نام استاد",
+			"schoolSignup": "ثبت مکتب",
+			"privacy": "سیاست حریم خصوصی",
+			"terms": "شرایط استفاده"
+		}
+	},
+	"quizBuilder": {
+		"title": "سازنده امتحان",
+		"description": "ایجاد و مدیریت امتحان‌های تعاملی، تستی، و جای خالی برای درس‌های شما.",
+		"actions": {
+			"newQuiz": "امتحان جدید",
+			"importQuizzes": "وارد کردن",
+			"createQuiz": "ایجاد امتحان",
+			"saveChanges": "ذخیره تغییرات",
+			"delete": "حذف",
+			"cancel": "لغو",
+			"editQuiz": "ویرایش امتحان",
+			"printAndScan": "چاپ و اسکن",
+			"copyCode": "کپی کد ورودی",
+			"addQuestion": "افزودن سوال",
+			"addOption": "افزودن گزینه",
+			"addPair": "افزودن جفت",
+			"addBlankAnswer": "افزودن پاسخ جای خالی",
+			"addItem": "افزودن مورد"
+		},
+		"status": {
+			"editing": "ویرایش"
+		},
+		"toast": {
+			"quizCreated": "امتحان ایجاد شد.",
+			"quizUpdated": "امتحان به‌روز شد.",
+			"quizDeleted": "«{title}» حذف شد.",
+			"codeCopied": "کد ورودی کپی شد.",
+			"loadError": "بارگیری امتحان ناموفق بود: {error}",
+			"deleteError": "حذف امتحان ناموفق بود.",
+			"importSuccess": "{count} امتحان وارد شد.",
+			"importPartial": "{inserted} مورد وارد شد، {failed} مورد ناموفق یا رد شد."
+		},
+		"validation": {
+			"titleRequired": "عنوان امتحان الزامی است.",
+			"questionNoText": "سوال {n} متن ندارد.",
+			"questionNoAnswer": "سوال {n} پاسخ صحیح ندارد.",
+			"fixIssues": "لطفاً مشکلات را قبل از ذخیره برطرف کنید.",
+			"fixIssuesTitle": "لطفاً مشکلات زیر را برطرف کنید:"
+		},
+		"tabs": {
+			"settings": "تنظیمات",
+			"questions": "سوالات",
+			"totalPts": "{count} امتیاز کل"
+		},
+		"sheet": {
+			"newTitle": "امتحان جدید",
+			"editTitle": "ویرایش امتحان",
+			"newDescription": "یک امتحان جدید ایجاد کنید. تنظیمات را پر کنید و سوالات اضافه کنید.",
+			"editDescription": "ویرایش «{title}»"
+		},
+		"deleteDialog": {
+			"title": "امتحان حذف شود؟",
+			"description": "این عمل «{title}» و تمام سوالات و تلاش‌های شاگردان آن را برای همیشه حذف می‌کند. قابل بازگشت نیست.",
+			"confirm": "حذف امتحان",
+			"cancel": "لغو"
+		},
+		"settings": {
+			"basicInfo": "اطلاعات پایه",
+			"titleLabel": "عنوان",
+			"titlePlaceholder": "مثلاً: ارزیابی فصل ۳",
+			"description": "توضیحات",
+			"descriptionPlaceholder": "توضیح کوتاهی که قبل از شروع به شاگردان نمایش داده می‌شود…",
+			"instructions": "دستورالعمل‌ها",
+			"instructionsPlaceholder": "هر سوال را با دقت بخوانید. یک تلاش دارید…",
+			"entranceCode": "کد ورودی",
+			"entranceCodeHint": "این کد را با شاگردان به اشتراک بگذارید.",
+			"timingAndAttempts": "زمان‌بندی و تلاش‌ها",
+			"timeLimit": "محدودیت زمانی (دقیقه)",
+			"timeLimitPlaceholder": "بدون محدودیت",
+			"maxAttempts": "حداکثر تلاش",
+			"maxAttemptsPlaceholder": "نامحدود",
+			"passingScore": "نمره قبولی (%)",
+			"behavior": "رفتار امتحان",
+			"shuffleQuestions": "اختلاط سوالات",
+			"shuffleQuestionsDesc": "ترتیب سوالات را در هر تلاش تصادفی کنید.",
+			"showAnswers": "نمایش پاسخ‌های صحیح",
+			"showAnswersHint": "زمانی که شاگردان می‌توانند پاسخ‌های صحیح را ببینند.",
+			"showAnswersAfterAttempt": "بعد از هر تلاش",
+			"showAnswersAfterClose": "بعد از بسته شدن امتحان",
+			"showAnswersNever": "هرگز",
+			"pricing": "قیمت‌گذاری",
+			"isFreeLabel": "امتحان رایگان",
+			"isFreeDescription": "شاگردان می‌توانند بدون پرداخت ثبت‌نام کنند.",
+			"priceCreditsLabel": "قیمت (اعتبار)"
+		},
+		"questionTypes": {
+			"multiple_choice_single_correct": "چندگزینه‌ای (یک پاسخ)",
+			"multiple_choice_multiple_correct": "چندگزینه‌ای (چند پاسخ)",
+			"true_false": "درست / نادرست",
+			"yes_no": "بلی / خیر",
+			"short_answer_text": "پاسخ کوتاه",
+			"long_answer_text": "پاسخ تفصیلی",
+			"fill_in_the_blanks": "پر کردن جای خالی",
+			"matching": "تطبیق",
+			"ordering": "مرتب‌سازی",
+			"image_based_question": "بر اساس تصویر"
+		},
+		"question": {
+			"label": "سوال {n}",
+			"untitled": "سوال بدون عنوان",
+			"noCorrectAnswer": "بدون پاسخ صحیح",
+			"placeholder": "سوال خود را اینجا بنویسید…",
+			"fillBlanksPlaceholder": "متن سوال را بنویسید. از {marker} برای هر جای خالی استفاده کنید.",
+			"typeLabel": "نوع سوال",
+			"points": "امتیاز",
+			"pt": "{count} امتیاز",
+			"pts": "{count} امتیاز",
+			"hint": "راهنمایی",
+			"optional": "(اختیاری)",
+			"hintPlaceholder": "در صورت درخواست شاگرد نمایش داده می‌شود…",
+			"explanation": "توضیح",
+			"explanationPlaceholder": "بعد از پاسخ دادن نمایش داده می‌شود…",
+			"sections": {
+				"matchingPairs": "جفت‌های تطبیقی",
+				"ordering": "موارد (به ترتیب صحیح)",
+				"fillBlanks": "پاسخ‌های صحیح",
+				"default": "گزینه‌های پاسخ"
+			},
+			"hints": {
+				"multipleCorrect": "تمام گزینه‌های صحیح را علامت بزنید.",
+				"fillBlanksPrefix": "از",
+				"fillBlanksSuffix": "در متن سوال برای هر جای خالی استفاده کنید. پاسخ‌های صحیح را به ترتیب اضافه کنید.",
+				"ordering": "موارد را به ترتیب صحیح اضافه کنید. شاگردان باید آن‌ها را به همان ترتیب مرتب کنند.",
+				"manualGrading": "این نوع سوال نیاز به نمره‌دهی دستی دارد. گزینه‌ای لازم نیست."
+			},
+			"option": {
+				"placeholder": "متن گزینه…",
+				"leftPlaceholder": "عبارت سمت چپ…",
+				"rightPlaceholder": "تطبیق سمت راست…",
+				"blankPlaceholder": "پاسخ جای خالی {n}…",
+				"correct": "صحیح",
+				"incorrect": "نادرست",
+				"feedbackSet": "بازخورد تنظیم شده",
+				"addFeedback": "افزودن بازخورد",
+				"feedbackPlaceholder": "بازخوردی که هنگام انتخاب این گزینه نمایش داده می‌شود…"
+			},
+			"emptyList": {
+				"title": "هنوز سوالی وجود ندارد",
+				"description": "اولین سوال خود را برای شروع اضافه کنید."
+			}
+		},
+		"list": {
+			"defaultDescription": "امتحان‌های شاگردان خود را ایجاد و مدیریت کنید.",
+			"stats": {
+				"total": "کل امتحان‌ها",
+				"questions": "کل سوالات",
+				"avgPassing": "میانگین نمره قبولی",
+				"withLimit": "با محدودیت زمانی"
+			},
+			"table": {
+				"quiz": "امتحان",
+				"code": "کد",
+				"questions": "سوالات",
+				"timeLimit": "محدودیت زمانی",
+				"maxAttempts": "حداکثر تلاش",
+				"passScore": "نمره قبولی",
+				"showAnswers": "نمایش پاسخ",
+				"noLimit": "بدون محدودیت",
+				"unlimited": "∞",
+				"shuffled": "تصادفی"
+			},
+			"showAnswersLabels": {
+				"attempt": "بعد از تلاش",
+				"quiz_end_time": "بعد از بسته شدن",
+				"never": "هرگز"
+			},
+			"empty": {
+				"title": "هنوز امتحانی وجود ندارد",
+				"description": "اولین امتحان خود را برای شروع ایجاد کنید."
+			},
+			"filters": {
+				"searchPlaceholder": "جستجوی امتحان‌ها...",
+				"filters": "فیلترها",
+				"visibility": "قابلیت مشاهده",
+				"visibilityPublic": "عمومی",
+				"visibilityPrivate": "خصوصی",
+				"visibilityClassmate": "هم‌صنفی‌ها",
+				"pricing": "قیمت‌گذاری",
+				"free": "رایگان",
+				"paid": "پولی",
+				"standalone": "مستقل (بدون مکتب)",
+				"clearAll": "پاک کردن همه"
+			}
+		}
+	},
+	"quizOmr": {
+		"questionCount": "{count, plural, one {# سوال} other {# سوال}}",
+		"notFound": "امتحان یافت نشد.",
+		"back": "بازگشت",
+		"noQuestionsWarning": "این امتحان هنوز سوالی ندارد — قبل از چاپ برگه‌های پاسخ، سوالات را اضافه کنید.",
+		"lock": {
+			"bannerText": "این امتحان قفل شده است (نسخه چاپ {version}) — تا زمانی که آن را باز نکنید، سوالات و گزینه‌ها قابل ویرایش نیستند.",
+			"unlockAction": "باز کردن برای ویرایش",
+			"confirmTitle": "این امتحان برای ویرایش باز شود؟",
+			"confirmDescription": "ویرایش سوالات پس از این مرحله باعث می‌شود برگه‌های چاپ‌شده قبلی منسوخ شوند. باید دوباره برای همه شاگردان ثبت‌نام‌شده چاپ کنید.",
+			"confirmCancel": "لغو",
+			"confirmAction": "باز کردن",
+			"unlocked": "امتحان برای ویرایش باز شد."
+		},
+		"tabs": {
+			"roster": "فهرست شاگردان",
+			"print": "چاپ و نسخه‌ها",
+			"scans": "اسکن‌ها",
+			"results": "نتایج"
+		},
+		"roster": {
+			"addTitle": "افزودن شاگرد",
+			"addDescription": "با ایمیل، شاگردی را جستجو کرده و به فهرست این امتحان اضافه کنید.",
+			"emailPlaceholder": "student@example.com",
+			"addAction": "افزودن",
+			"notFound": "شاگردی با این ایمیل یافت نشد.",
+			"alreadyRegistered": "این شاگرد قبلاً ثبت‌نام کرده است.",
+			"added": "{name} به فهرست اضافه شد.",
+			"deadlinePassedOwnerNote": "مهلت ثبت‌نام گذشته است — شاگردان دیگر نمی‌توانند خودشان ثبت‌نام کنند، اما شما همچنان می‌توانید به‌صورت دستی اضافه کنید.",
+			"empty": {
+				"title": "هنوز شاگردی ثبت‌نام نکرده است",
+				"description": "شاگردی را بالا اضافه کنید، یا امتحان را به اشتراک بگذارید تا شاگردان خودشان ثبت‌نام کنند."
+			},
+			"table": {
+				"student": "شاگرد",
+				"source": "منبع",
+				"printed": "چاپ‌شده"
+			},
+			"sourceSelf": "ثبت‌نام خودکار",
+			"sourceOwner": "توسط شما اضافه شد",
+			"printed": "چاپ‌شده",
+			"notPrinted": "هنوز چاپ نشده",
+			"unknownStudent": "شاگرد ناشناس"
+		},
+		"print": {
+			"printTitle": "چاپ برگه‌های پاسخ",
+			"reprintTitle": "چاپ مجدد برگه‌های پاسخ",
+			"printDescription": "برای هر شاگرد ثبت‌نام‌شده یک برگه حبابی می‌سازد و سوالات امتحان را قفل می‌کند.",
+			"downloadPdf": "دانلود PDF",
+			"printAction": "چاپ",
+			"reprintAction": "چاپ مجدد",
+			"confirmTitle": "برگه‌های پاسخ چاپ شود؟",
+			"confirmDescription": "این کار برای هر شاگرد ثبت‌نام‌شده فعلی یک نسخه می‌سازد.",
+			"shuffleLabel": "ترتیب تصادفی سوالات",
+			"shuffleDescription": "ترتیب سوالات برای هر شاگرد متفاوت خواهد بود (جای گزینه‌ها ثابت می‌ماند).",
+			"lockConfirmLabel": "می‌دانم که این کار امتحان را قفل می‌کند — ویرایش سوالات یا گزینه‌ها پس از آن نیاز به چاپ مجدد برای همه شاگردان دارد.",
+			"cancel": "لغو",
+			"confirmAction": "تأیید و چاپ",
+			"printed": "{count, plural, one {# برگه} other {# برگه}} چاپ شد.",
+			"empty": {
+				"title": "هنوز برگه‌ای چاپ نشده است",
+				"description": "ابتدا در تب فهرست شاگردان، شاگردان را ثبت‌نام کنید، سپس چاپ کنید."
+			},
+			"table": {
+				"student": "شاگرد",
+				"version": "نسخه",
+				"shuffled": "تصادفی",
+				"scanStatus": "وضعیت اسکن"
+			},
+			"shuffledYes": "تصادفی",
+			"shuffledNo": "ترتیب اصلی",
+			"notScanned": "هنوز اسکن نشده",
+			"unknownStudent": "شاگرد ناشناس"
+		},
+		"scans": {
+			"uploadTitle": "بارگذاری برگه پاسخ تکمیل‌شده",
+			"dropzoneLabel": "عکس را اینجا بکشید یا کلیک کنید",
+			"dropzoneHint": "در موبایل، این کار دوربین را مستقیم باز می‌کند.",
+			"variantPlaceholder": "شاگرد مربوط به این برگه را انتخاب کنید",
+			"uploadAction": "بارگذاری",
+			"qrDecoded": "کد QR خوانده شد — شاگرد به‌طور خودکار مشخص شد.",
+			"qrDecodedUnknownVariant": "کد QR خوانده شد، اما با هیچ برگه چاپ‌شده‌ای برای این امتحان مطابقت ندارد.",
+			"qrNotDecoded": "کد QR در این عکس خوانده نشد — شاگرد را به‌صورت دستی انتخاب کنید.",
+			"uploaded": "بارگذاری شد — در حال نمره‌دهی.",
+			"empty": {
+				"title": "هنوز اسکنی بارگذاری نشده است"
+			},
+			"table": {
+				"student": "شاگرد",
+				"status": "وضعیت",
+				"score": "نمره"
+			},
+			"status": {
+				"pending": "در انتظار",
+				"processing": "در حال پردازش",
+				"scored": "نمره‌دهی‌شده",
+				"needs_review": "نیاز به بازبینی",
+				"error": "خطا"
+			},
+			"reviewAction": "بازبینی",
+			"retryAction": "تلاش مجدد",
+			"viewImageAction": "مشاهده تصویر",
+			"unknownStudent": "شاگرد ناشناس",
+			"review": {
+				"title": "بازبینی اسکن",
+				"description": "پاسخ‌های تشخیص‌داده‌شده با اطمینان پایین را تأیید یا اصلاح کنید.",
+				"scanImageAlt": "تصویر اسکن برگه پاسخ",
+				"noImage": "تصویر در دسترس نیست",
+				"questionN": "سوال {n}",
+				"lowConfidence": "{pct}% اطمینان",
+				"noAnswerDetected": "پاسخی تشخیص داده نشد",
+				"saved": "اصلاحیه ذخیره شد."
+			}
+		},
+		"results": {
+			"stats": {
+				"scored": "نمره‌دهی‌شده",
+				"average": "میانگین نمره",
+				"total": "مجموع برگه‌ها"
+			},
+			"scoresTitle": "نمرات",
+			"noScores": "هنوز نمره‌ای وجود ندارد.",
+			"table": {
+				"student": "شاگرد",
+				"status": "وضعیت",
+				"score": "نمره",
+				"question": "سوال",
+				"answered": "پاسخ‌داده‌شده",
+				"wrongPct": "٪ اشتباه"
+			},
+			"unknownStudent": "شاگرد ناشناس",
+			"difficultyTitle": "دشواری سوالات",
+			"noQuestions": "هنوز داده‌ای برای سوالات وجود ندارد.",
+			"questionN": "سوال {n}"
+		}
+	},
+	"courseBuilder": {
+		"meta": {
+			"newCourse": "کورس جدید",
+			"editCourse": "ویرایش کورس"
+		},
+		"common": {
+			"cancel": "انصراف",
+			"save": "ذخیره",
+			"delete": "حذف",
+			"creating": "در حال ایجاد…",
+			"dragToReorder": "برای مرتب‌سازی بکشید",
+			"collapse": "بستن",
+			"expand": "باز کردن"
+		},
+		"validation": {
+			"titleRequired": "عنوان کورس الزامی است."
+		},
+		"newCourse": {
+			"title": "کورس جدید",
+			"description": "جزئیات اساسی را پر کنید. بعداً می‌توانید همه چیز را ویرایش کنید.",
+			"courseTitle": "عنوان کورس",
+			"courseTitlePlaceholder": "مثلاً فیزیک — صنف دوازدهم",
+			"subtitle": "عنوان فرعی",
+			"subtitlePlaceholder": "توضیح کوتاه یک خطی",
+			"courseDescription": "توضیحات",
+			"descriptionPlaceholder": "شاگردان در این کورس چه چیزی یاد می‌گیرند؟",
+			"language": "زبان",
+			"level": "سطح",
+			"isFree": "کورس رایگان",
+			"isFreeDescription": "شاگردان می‌توانند بدون پرداخت ثبت‌نام کنند.",
+			"priceCredits": "قیمت (اعتبار)",
+			"create": "ایجاد و ساخت",
+			"visibility": "دیدپذیر",
+			"visibilityDescription": "آیا همه این کورس را ببیند؟"
+		},
+		"editCourse": {
+			"title": "ویرایش جزئیات کورس",
+			"description": "جزئیات پایه کورس خود را به‌روزرسانی کنید.",
+			"save": "ذخیره تغییرات",
+			"saving": "در حال ذخیره…",
+			"saved": "جزئیات کورس به‌روزرسانی شد."
+		},
+		"header": {
+			"back": "بازگشت به کورس‌ها",
+			"draft": "پیش‌نویس",
+			"published": "منتشر شده",
+			"preview": "پیش‌نمایش",
+			"saveDraft": "ذخیره پیش‌نویس",
+			"publishBtn": "انتشار",
+			"unpublishBtn": "لغو انتشار",
+			"savedDraft": "پیش‌نویس ذخیره شد.",
+			"unpublished": "کورس از انتشار خارج شد.",
+			"unsavedChanges": "تغییرات ذخیره نشده",
+			"autoSaving": "در حال ذخیره...",
+			"autoSaved": "ذخیره شد",
+			"autoSaveFailed": "ذخیره خودکار ناموفق بود",
+			"editDetails": "ویرایش جزئیات کورس"
+		},
+		"tree": {
+			"title": "برنامه درسی",
+			"emptyTitle": "هنوز هیچ فصلی نیست",
+			"emptyDescription": "اولین فصل را اضافه کنید تا شروع به ساخت کنید."
+		},
+		"module": {
+			"add": "افزودن فصل",
+			"untitled": "فصل بدون عنوان",
+			"editDetails": "ویرایش جزئیات فصل",
+			"titleLabel": "عنوان فصل",
+			"titlePlaceholder": "مثلاً فصل ۱: مقدمه",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "این فصل چه چیزی را پوشش می‌دهد؟",
+			"startPage": "صفحه شروع",
+			"endPage": "صفحه پایان"
+		},
+		"lesson": {
+			"addLesson": "افزودن درس",
+			"untitled": "درس بدون عنوان",
+			"editDetails": "ویرایش جزئیات درس",
+			"titleLabel": "عنوان درس",
+			"titlePlaceholder": "مثلاً قانون اول نیوتن",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "توضیح کوتاه این درس…",
+			"contentType": "نوع محتوا",
+			"estimatedDuration": "مدت زمان (دقیقه)",
+			"previewable": "پیش‌نمایش رایگان",
+			"previewableDescription": "شاگردان ثبت‌نام نشده می‌توانند این درس را پیش‌نمایش کنند.",
+			"mandatory": "اجباری",
+			"mandatoryDescription": "برای تکمیل کورس الزامی است.",
+			"previewBadge": "پیش‌نمایش"
+		},
+		"contentType": {
+			"video": "ویدیو",
+			"text": "متن",
+			"audio": "صدا",
+			"pdf_document": "سند PDF",
+			"slide_presentation": "ارائه اسلاید",
+			"quiz": "امتحان",
+			"assignment": "تکلیف",
+			"external_resource": "منبع خارجی",
+			"code_playground": "محیط کدنویسی"
+		},
+		"level": {
+			"all_levels": "همه سطوح",
+			"beginner": "مبتدی",
+			"intermediate": "متوسط",
+			"advanced": "پیشرفته"
+		},
+		"content": {
+			"noLessonTitle": "هیچ درسی انتخاب نشده",
+			"noLessonDescription": "یک درس از برنامه درسی سمت چپ انتخاب کنید تا محتوای آن را ویرایش کنید.",
+			"noBlocksTitle": "هنوز هیچ بلوک محتوایی نیست",
+			"noBlocksDescription": "یک بلوک اضافه کنید تا شروع به ساخت این درس کنید."
+		},
+		"block": {
+			"addBlock": "افزودن بلوک محتوا",
+			"chooseType": "نوع بلوک را انتخاب کنید",
+			"textContent": "محتوا (Markdown پشتیبانی می‌شود)",
+			"textPlaceholder": "شروع به نوشتن کنید…",
+			"videoUrl": "لینک ویدیو",
+			"videoProvider": "ارائه‌دهنده",
+			"providerPlaceholder": "ارائه‌دهنده را انتخاب کنید",
+			"customProvider": "سفارشی / مستقیم",
+			"transcript": "متن گفتار",
+			"transcriptPlaceholder": "متن گفتار را اینجا بگذارید…",
+			"audioUrl": "لینک صوتی",
+			"documentUrl": "لینک PDF",
+			"slidesUrl": "لینک اسلایدها",
+			"resourceTitle": "عنوان منبع",
+			"resourceTitlePlaceholder": "مثلاً مستندات رسمی",
+			"resourceUrl": "لینک منبع",
+			"codeLanguage": "زبان برنامه‌نویسی",
+			"languagePlaceholder": "زبان را انتخاب کنید",
+			"defaultCode": "کد پیش‌فرض",
+			"codePlaceholder": "// کد پیش‌فرض را اینجا بنویسید…",
+			"solutionCode": "کد راه‌حل",
+			"solutionPlaceholder": "// کد راه‌حل پس از ارسال نشان داده می‌شود…",
+			"quizManagedSeparately": "محتوای امتحان از طریق سازنده امتحان مدیریت می‌شود.",
+			"upload": {
+				"modeLink": "لینک",
+				"modeUpload": "بارگذاری",
+				"dropzoneLabel": "فایل را بکشید و رها کنید یا برای انتخاب کلیک کنید",
+				"dropzoneHint": "حداکثر حجم {max}",
+				"uploading": "در حال بارگذاری… {pct}%",
+				"verifying": "در حال بررسی بارگذاری…",
+				"uploadSuccess": "فایل بارگذاری شد.",
+				"uploadFailed": "بارگذاری ناموفق بود. دوباره تلاش کنید.",
+				"invalidType": "این نوع فایل پشتیبانی نمی‌شود.",
+				"tooLarge": "حجم فایل زیاد است (حداکثر {max}).",
+				"open": "باز کردن فایل",
+				"remove": "حذف فایل"
+			},
+			"type": {
+				"text": "متن / مقاله",
+				"video": "ویدیو",
+				"audio": "صدا",
+				"pdf_document": "سند PDF",
+				"slide_presentation": "ارائه اسلاید",
+				"external_resource": "منبع خارجی",
+				"code_playground": "محیط کدنویسی",
+				"quiz": "امتحان",
+				"assignment": "تکلیف"
+			}
+		}
+	},
+	"flashcardBuilder": {
+		"meta": {
+			"newDeck": "دسته جدید",
+			"editDeck": "ویرایش دسته"
+		},
+		"common": {
+			"cancel": "انصراف",
+			"save": "ذخیره",
+			"delete": "حذف",
+			"edit": "ویرایش",
+			"actions": "عملیات",
+			"creating": "در حال ایجاد…"
+		},
+		"list": {
+			"title": "دسته‌ها",
+			"myDecks": "دسته‌های من",
+			"allDecks": "همه دسته‌ها",
+			"subtitle": "{count} دسته",
+			"newDeck": "دسته جدید",
+			"cardCount": "{count} کارت",
+			"priceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"dailyLimit": "{count}/روز",
+			"emptyTitle": "هیچ دسته‌ای یافت نشد",
+			"emptyDescription": "اولین دسته‌ات را بساز تا شروع به مطالعه کنی.",
+			"emptyAction": "ساخت دسته",
+			"searchPlaceholder": "جستجوی دسته‌ها…",
+			"filters": "فیلترها",
+			"clearAll": "پاک کردن همه",
+			"previous": "قبلی",
+			"next": "بعدی",
+			"showing": "نمایش {from}–{to} از {total} دسته",
+			"algorithmFilter": "الگوریتم",
+			"visibilityFilter": "قابلیت نمایش",
+			"onlyMyDecks": "فقط دسته‌های من",
+			"deckDeleted": "دسته حذف شد.",
+			"deleteFailed": "حذف دسته ناموفق بود."
+		},
+		"validation": {
+			"nameRequired": "نام دسته الزامی است.",
+			"questionRequired": "سوال الزامی است.",
+			"oneCorrectRequired": "حداقل یک جواب باید صحیح باشد.",
+			"allAnswersFilled": "همه فیلدهای جواب باید پر شوند."
+		},
+		"visibility": {
+			"public": "عمومی",
+			"private": "خصوصی",
+			"classmate": "هم‌صنفان"
+		},
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "لایتنر"
+		},
+		"newDeck": {
+			"title": "دسته جدید",
+			"description": "یک دسته فلش‌کارت جدید برای شروع مطالعه بسازید.",
+			"nameLabel": "نام دسته",
+			"namePlaceholder": "مثلاً فصل سوم بیولوژی",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "این دسته درباره چیست؟",
+			"visibilityLabel": "دیدپذیری",
+			"algorithmLabel": "الگوریتم",
+			"isFreeLabel": "دسترسی رایگان",
+			"isFreeDescription": "این دسته را برای همه کاربران به صورت رایگان در دسترس بگذارید.",
+			"priceCreditsLabel": "قیمت (اعتبار)",
+			"dailyLimitLabel": "محدودیت روزانه",
+			"dailyLimitDescription": "حداکثر کارت‌های روزانه. برای نامحدود خالی بگذارید.",
+			"dailyLimitPlaceholder": "مثلاً ۵۰",
+			"create": "ایجاد دسته"
+		},
+		"advancedSettings": {
+			"title": "تنظیمات پیشرفته",
+			"fsrsSection": "تنظیمات FSRS",
+			"sm2Section": "تنظیمات SM-2",
+			"leitnerNote": "سیستم لایتنر از فواصل جعبه ثابت استفاده می‌کند. هیچ تنظیمات اضافی موجود نیست.",
+			"fsrsMaxIntervalLabel": "حداکثر فاصله (روز)",
+			"fsrsMaxIntervalDescription": "سقف سخت برای فاصله مرور. پیش‌فرض ۳۶۵۰۰ (≈۱۰۰ سال).",
+			"fsrsRetentionLabel": "هدف یادآوری",
+			"fsrsRetentionDescription": "احتمال به خاطر آوردن در زمان مرور (۰.۷۰–۰.۹۹). پیش‌فرض ۰.۹.",
+			"sm2EasyBonusLabel": "پاداش آسان",
+			"sm2EasyBonusDescription": "ضریب اعمال شده هنگام پاسخ آسان (≥ ۱.۰). پیش‌فرض ۱.۳.",
+			"sm2IntervalModifierLabel": "تغییردهنده فاصله",
+			"sm2IntervalModifierDescription": "همه فواصل را مقیاس می‌کند. افزایش دهید تا کمتر مرور کنید. پیش‌فرض ۱.۰.",
+			"sm2StartingEaseLabel": "سهولت اولیه",
+			"sm2StartingEaseDescription": "ضریب سهولت اولیه برای کارت‌های جدید (≥ ۱.۳). پیش‌فرض ۲.۵."
+		},
+		"deckEdit": {
+			"title": "تنظیمات دسته",
+			"description": "جزئیات این دسته فلش‌کارت را ویرایش کنید.",
+			"save": "ذخیره تغییرات",
+			"savedSuccess": "دسته به‌روزرسانی شد."
+		},
+		"header": {
+			"back": "بازگشت به دسته‌ها",
+			"settings": "تنظیمات",
+			"addCard": "افزودن کارت"
+		},
+		"builder": {
+			"cardCount": "{count} کارت",
+			"emptyTitle": "هنوز فلش‌کارتی نیست",
+			"emptyDescription": "اولین کارت خود را برای ساخت این دسته اضافه کنید.",
+			"addFirst": "افزودن اولین کارت",
+			"addCard": "افزودن کارت"
+		},
+		"card": {
+			"fact": "نکته",
+			"hint": "راهنما",
+			"answers": "{count} جواب",
+			"deleted": "فلش‌کارت حذف شد.",
+			"deleteTitle": "حذف این فلش‌کارت؟",
+			"deleteDescription": "این عملیات قابل بازگشت نیست. فلش‌کارت به طور دائمی از این دسته حذف می‌شود."
+		},
+		"dialog": {
+			"addTitle": "افزودن فلش‌کارت",
+			"addDescription": "سوال و جواب‌های این فلش‌کارت را پر کنید.",
+			"editTitle": "ویرایش فلش‌کارت",
+			"editDescription": "سوال و جواب‌ها را به‌روزرسانی کنید.",
+			"questionLabel": "سوال",
+			"questionPlaceholder": "سوال چیست؟",
+			"answersLabel": "جواب‌ها",
+			"answerLabel": "جواب {number}",
+			"answerPlaceholder": "جواب {number}",
+			"markCorrect": "علامت‌گذاری به عنوان صحیح",
+			"markIncorrect": "علامت‌گذاری به عنوان غلط",
+			"addAnswer": "افزودن جواب",
+			"removeAnswer": "حذف جواب",
+			"factLabel": "نکته / توضیح",
+			"factDescription": "یادداشت اختیاری که بعد از پاسخ نشان داده می‌شود.",
+			"factPlaceholder": "یک نکته جالب یا توضیح اضافه کنید…",
+			"hintLabel": "راهنما",
+			"hintDescription": "سرنخ اختیاری که قبل از پاسخ نشان داده می‌شود.",
+			"hintPlaceholder": "یک سرنخ بدهید…",
+			"add": "افزودن کارت",
+			"update": "ذخیره تغییرات",
+			"addedSuccess": "فلش‌کارت اضافه شد.",
+			"updatedSuccess": "فلش‌کارت به‌روزرسانی شد."
+		}
+	},
+	"spacedRepetition": {
+		"meta": {
+			"title": "تمرین"
+		},
+		"myDecks": {
+			"title": "دسته‌های من",
+			"deckCount": "{count, plural, =1 {# دسته} other {# دسته}}"
+		},
+		"page": {
+			"title": "تمرین",
+			"subtitle": "فلش‌کارت‌های خود را با روش تکرار فاصله‌دار مرور کنید تا در حافظه درازمدت ثبت شوند.",
+			"addDeck": "افزودن دسته",
+			"study": "تمرین",
+			"noDeckSelected": "برای شروع تمرین یک دسته را انتخاب کنید."
+		},
+		"deckSwitcher": {
+			"label": "دسته فعال",
+			"placeholder": "انتخاب دسته",
+			"due": "{count} در نوبت"
+		},
+		"enroll": {
+			"title": "راه‌اندازی دسته",
+			"description": "یک دسته را انتخاب کنید و تعیین کنید روزانه چند کارت جدید بیاموزید.",
+			"deckLabel": "دسته",
+			"deckPlaceholder": "انتخاب دسته…",
+			"loading": "در حال بارگذاری دسته‌ها…",
+			"noDecks": "دسته‌ای برای ثبت‌نام موجود نیست.",
+			"cardCount": "{count} کارت",
+			"dailyLimitLabel": "کارت‌های جدید در روز",
+			"dailyLimitHint": "تعداد کارت‌های جدیدی که هر روز معرفی می‌شوند. بعداً می‌توانید آن را تغییر دهید.",
+			"cancel": "انصراف",
+			"submit": "شروع یادگیری",
+			"submitting": "در حال ثبت‌نام…",
+			"enrolled": "دسته اضافه شد — موفق باشید!",
+			"failed": "ثبت‌نام در این دسته ممکن نشد.",
+			"loadFailed": "بارگذاری دسته‌ها ممکن نشد.",
+			"priceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"buyForCredits": "خرید به قیمت {count, plural, one {# اعتبار} other {# اعتبار}}",
+			"insufficientCredits": "اعتبار کافی ندارید. لطفاً حساب خود را شارژ کنید."
+		},
+		"settings": {
+			"label": "تنظیمات دسته",
+			"dailyLimit": "کارت‌های جدید در روز",
+			"update": "ذخیره",
+			"updating": "در حال ذخیره…",
+			"updated": "سقف روزانه به‌روزرسانی شد.",
+			"updateFailed": "به‌روزرسانی سقف روزانه ممکن نشد."
+		},
+		"card": {
+			"question": "سوال",
+			"answer": "جواب",
+			"hint": "راهنمایی",
+			"fact": "دانستنی",
+			"tapToReveal": "برای دیدن جواب کلیک کنید یا کلید Space را بزنید",
+			"flipLabel": "برگرداندن کارت",
+			"status": {
+				"new": "جدید",
+				"learning": "در حال یادگیری",
+				"review": "مرور",
+				"relearning": "یادگیری دوباره"
+			}
+		},
+		"grades": {
+			"prompt": "چقدر خوب به یاد داشتید؟",
+			"again": "دوباره",
+			"hard": "سخت",
+			"good": "خوب",
+			"easy": "آسان",
+			"gradedAs": "پاسخ شما: {grade}",
+			"intervalMinutes": "{count} دقیقه",
+			"intervalDays": "{count} روز",
+			"intervalMonths": "{count} ماه",
+			"saveFailed": "ذخیره مرور شما ممکن نشد. لطفاً دوباره تلاش کنید."
+		},
+		"nav": {
+			"previous": "قبلی",
+			"next": "بعدی"
+		},
+		"stats": {
+			"progress": "{done} از {total} مرور شده",
+			"progressLabel": "پیشرفت جلسه",
+			"new": "جدید",
+			"learning": "در حال یادگیری",
+			"review": "مرور"
+		},
+		"complete": {
+			"title": "جلسه تمام شد!",
+			"subtitle": "امروز {count} کارت را مرور کردید. فردا برای دسته بعدی برگردید.",
+			"backToDecks": "مشاهده دسته‌ها"
+		},
+		"caughtUp": {
+			"title": "همه‌چیز مرور شده",
+			"subtitle": "فعلاً کارتی در نوبت نیست. بعداً برگردید یا سقف روزانه را افزایش دهید."
+		},
+		"empty": {
+			"title": "هنوز دسته فعالی ندارید",
+			"subtitle": "برای ساختن عادت مرور روزانه، در یک دسته ثبت‌نام کنید.",
+			"action": "افزودن اولین دسته"
+		}
+	},
+	"classroomBuilder": {
+		"common": {
+			"cancel": "لغو",
+			"save": "ذخیره",
+			"delete": "حذف",
+			"remove": "حذف",
+			"actions": "عملیات"
+		},
+		"validation": {
+			"nameRequired": "نام الزامی است.",
+			"titleRequired": "عنوان الزامی است.",
+			"messageRequired": "پیام الزامی است.",
+			"joinCodeRequired": "کد پیوستن الزامی است.",
+			"joinCodeLength": "کد پیوستن باید یک عدد ۶ رقمی باشد."
+		},
+		"list": {
+			"myClassrooms": "کلاس‌های من",
+			"subtitle": "{count} کلاس",
+			"newClassroom": "کلاس جدید",
+			"emptyTitle": "هنوز کلاسی ندارید",
+			"emptyDescription": "یک کلاس ایجاد کنید تا منابع را با گروهی از شاگردان به اشتراک بگذارید.",
+			"emptyAction": "ایجاد کلاس"
+		},
+		"newClassroom": {
+			"title": "کلاس جدید",
+			"description": "یک کلاس برای به اشتراک‌گذاری دسته‌ها و کورس‌ها ایجاد کنید.",
+			"nameLabel": "نام کلاس",
+			"namePlaceholder": "مثلاً: فیزیک — صنف ۱۲",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "این کلاس برای چه هدفی است؟",
+			"joinCodeLabel": "کد پیوستن",
+			"joinCodePlaceholder": "مثلاً: 123456",
+			"create": "ایجاد کلاس"
+		},
+		"card": {
+			"actions": "عملیات",
+			"manage": "مدیریت",
+			"copyJoinCode": "کپی کد پیوستن",
+			"joinCodeCopied": "کد کپی شد!",
+			"delete": "حذف",
+			"archived": "آرشیو",
+			"noDescription": "بدون توضیحات",
+			"members": "{count} عضو"
+		},
+		"header": {
+			"back": "بازگشت به کلاس‌ها",
+			"settings": "تنظیمات",
+			"memberCount": "{count} عضو"
+		},
+		"settings": {
+			"title": "تنظیمات کلاس",
+			"description": "نام و توضیحات کلاس را ویرایش کنید.",
+			"nameLabel": "نام",
+			"namePlaceholder": "نام کلاس",
+			"descriptionLabel": "توضیحات",
+			"descriptionPlaceholder": "توضیح مختصر",
+			"saved": "تنظیمات ذخیره شد."
+		},
+		"tabs": {
+			"resources": "منابع",
+			"materials": "مطالب",
+			"announcements": "اطلاعیه‌ها",
+			"members": "اعضا"
+		},
+		"resources": {
+			"subtitle": "{count} منبع",
+			"add": "افزودن منبع",
+			"added": "منبع اضافه شد.",
+			"emptyTitle": "هنوز منبعی ندارید",
+			"emptyDescription": "دسته‌ها و کورس‌ها را با این کلاس به اشتراک بگذارید.",
+			"type": {
+				"deck": "دسته فلش‌کارت",
+				"course": "کورس",
+				"library": "کتابخانه",
+				"quiz": "امتحان"
+			},
+			"addDialog": {
+				"title": "افزودن منبع",
+				"typeLabel": "نوع منبع",
+				"resourceLabel": "انتخاب منبع",
+				"selectRequired": "لطفاً یک منبع انتخاب کنید.",
+				"noItems": "موردی یافت نشد.",
+				"add": "افزودن"
+			}
+		},
+		"materials": {
+			"subtitle": "{count} ماده آموزشی",
+			"add": "افزودن ماده",
+			"added": "ماده آموزشی اضافه شد.",
+			"published": "منتشرشده",
+			"emptyTitle": "هنوز ماده آموزشی ندارید",
+			"emptyDescription": "فایل‌ها، لینک‌ها یا اسناد را برای شاگردان اضافه کنید.",
+			"type": {
+				"lesson": "درس",
+				"pdf": "PDF",
+				"video": "ویدیو",
+				"document": "سند",
+				"link": "لینک",
+				"practice": "تمرین",
+				"exam": "امتحان",
+				"other": "سایر"
+			},
+			"addDialog": {
+				"title": "افزودن ماده آموزشی",
+				"titleLabel": "عنوان",
+				"titlePlaceholder": "عنوان ماده آموزشی",
+				"descriptionLabel": "توضیحات",
+				"descriptionPlaceholder": "توضیح مختصر",
+				"typeLabel": "نوع",
+				"add": "افزودن"
+			}
+		},
+		"announcements": {
+			"emptyTitle": "هنوز اطلاعیه‌ای ندارید",
+			"emptyDescription": "یک اطلاعیه ارسال کنید تا شاگردان مطلع شوند.",
+			"newLabel": "نوشتن اطلاعیه",
+			"placeholder": "چیزی با شاگردان به اشتراک بگذارید…",
+			"post": "ارسال",
+			"unknownAuthor": "ناشناس"
+		},
+		"members": {
+			"subtitle": "{count} عضو",
+			"joinCodeLabel": "کد پیوستن",
+			"joinCodeDescription": "این کد را با شاگردان به اشتراک بگذارید.",
+			"copyCode": "کپی کد",
+			"regenerateCode": "تولید کد جدید",
+			"joinCodeRegenerated": "کد پیوستن تجدید شد.",
+			"unknownUser": "کاربر ناشناس",
+			"emptyTitle": "هنوز عضوی ندارید",
+			"emptyDescription": "کد پیوستن را با شاگردان به اشتراک بگذارید.",
+			"role": {
+				"owner": "مالک",
+				"instructor": "استاد",
+				"assistant": "دستیار",
+				"student": "شاگرد"
+			},
+			"invite": {
+				"button": "دعوت شاگرد",
+				"title": "دعوت شاگرد",
+				"emailLabel": "ایمیل شاگرد",
+				"emailPlaceholder": "student@example.com",
+				"submit": "ارسال دعوت",
+				"sent": "دعوت ارسال شد."
+			},
+			"requests": {
+				"title": "درخواست‌های عضویت",
+				"subtitle": "{count, plural, one {# درخواست در انتظار} other {# درخواست در انتظار}}",
+				"emptyTitle": "درخواست در انتظاری وجود ندارد",
+				"emptyDescription": "درخواست‌های شاگردانی که با کد شما عضو می‌شوند اینجا نمایش داده می‌شوند.",
+				"approve": "تایید",
+				"decline": "رد کردن",
+				"approved": "درخواست تایید شد.",
+				"declined": "درخواست رد شد.",
+				"cancel": "لغو دعوت",
+				"canceled": "دعوت لغو شد.",
+				"invitedAwaiting": "دعوت شده — در انتظار پاسخ او.",
+				"wantsToJoin": "می‌خواهد با کد کلاس شما عضو شود."
+			}
+		}
+	},
+	"aboutUs": {
+		"title": "درباره ما",
+		"description": "ابزارک، یک پلتفرم آموزشی آنلاین که یادگیری را دسترس‌پذیرتر و جذاب‌تر می‌کند. ما منابع آموزشی باکیفیت، ابزارهای تعاملی و امکاناتی را ارائه می‌دهیم که به دانش‌آموزان کمک می‌کند تا مهارت‌های خود را توسعه داده و به اهدافشان برسند.",
+		"hero": {
+			"badge": "درباره پلتفرم ما",
+			"title": "توانمندسازی دانش‌آموزان در هر جا",
+			"description": "ابزارک، یک پلتفرم آموزشی آنلاین که یادگیری را دسترس‌پذیرتر و جذاب‌تر می‌کند. ما منابع آموزشی باکیفیت، ابزارهای تعاملی و امکاناتی را ارائه می‌دهیم که به دانش‌آموزان کمک می‌کند تا مهارت‌های خود را توسعه داده و به اهدافشان برسند.",
+			"subtitle": "آموزش باکیفیت؛ همیشه در دسترس، جذاب و همه‌جا همراه شما — آنلاین یا آفلاین، در هر دستگاهی",
+			"cta": {
+				"primary": "شروع کنید",
+				"secondary": "تماشای دمو"
+			}
+		},
+		"stats": {
+			"students": "دانش‌آموزان فعال",
+			"courses": "دوره‌ها",
+			"schools": "مکاتب فعال",
+			"rating": "امتیاز اپلیکیشن",
+			"value": {
+				"students": "1M+",
+				"courses": "100+",
+				"schools": "120+",
+				"rating": "4.9★"
+			}
+		},
+		"mission": {
+			"title": "مأموریت ما",
+			"body": "ما معتقدیم یادگیری نباید محدودیتی داشته باشد. بستر ما فناوری مدرن را با روش‌های اثبات‌شده تدریس ترکیب می‌کند تا به میلیون‌ها شاگرد کمک کند اهداف خود را محقق کنند.",
+			"points": [
+				"ارائه آموزش با کیفیت برای همه شاگردان.",
+				"دسترسی‌پذیر کردن یادگیری در زبان‌ها و دستگاه‌های مختلف.",
+				"پشتیبانی از پیشرفت پایدار با ابزارهای کاربردی."
+			]
+		},
+		"features": {
+			"title": "چرا ما را انتخاب کنید",
+			"subtitle": "هر آنچه برای یک تجربه یادگیری یکپارچه نیاز دارید.",
+			"offline": {
+				"title": "دسترسی آفلاین",
+				"desc": "درس‌ها را دانلود کنید و بدون اینترنت یاد بگیرید."
+			},
+			"sync": {
+				"title": "همگام‌سازی ابری",
+				"desc": "پیشرفت شما فوراً در تمام دستگاه‌هایتان همگام‌سازی می‌شود."
+			},
+			"secure": {
+				"title": "امن و مطمئن",
+				"desc": "داده‌های شما در هر مرحله رمزگذاری و محافظت می‌شوند."
+			},
+			"fast": {
+				"title": "سرعت بالا",
+				"desc": "تجربه‌ای روان و بهینه در وب و موبایل."
+			},
+			"library": {
+				"title": "کتابخانه غنی",
+				"desc": "هزاران کورس در هر موضوع و سطح."
+			},
+			"certified": {
+				"title": "کورس‌های گواهی‌شده",
+				"desc": "با تکمیل کورس‌ها گواهی‌نامه معتبر کسب کنید."
+			}
+		},
+		"values": {
+			"title": "ارزش‌های اصلی ما",
+			"subtitle": "اصولی که مسیر تمام تصمیم‌های ما را تعیین می‌کند.",
+			"accessible": {
+				"title": "دسترسی‌پذیر",
+				"desc": "آموزش برای همه، در همه جا."
+			},
+			"learner": {
+				"title": "اول شاگرد",
+				"desc": "هر تصمیمی با شاگردان ما آغاز می‌شود."
+			},
+			"quality": {
+				"title": "کیفیت",
+				"desc": "محتوای قابل اعتماد از معلمان متخصص."
+			}
+		},
+		"video": {
+			"badge": "مشاهده دمو",
+			"title": "ابزار کانکور را در عمل ببینید",
+			"subtitle": "کشف کنید که پلتفرم ما چگونه یادگیری را برای هزاران دانش‌آموز در سراسر افغانستان متحول می‌کند.",
+			"playButton": "پخش ویدیو",
+			"closeButton": "بستن ویدیو",
+			"duration": "۲:۳۰ دقیقه",
+			"feature1Title": "کاربری آسان",
+			"feature1Desc": "رابط کاربری بصری طراحی شده برای دانش‌آموزان در تمام سطوح.",
+			"feature2Title": "دسترسی آفلاین",
+			"feature2Desc": "درس‌ها را دانلود کنید و در هر زمان و مکان یاد بگیرید.",
+			"feature3Title": "پیگیری پیشرفت",
+			"feature3Desc": "مسیر یادگیری خود را با تحلیل‌های دقیق دنبال کنید."
+		},
+		"team": {
+			"badge": "تیم ما",
+			"title": "تیم ما",
+			"subtitle": "با اعضای تیم ابزار کانکور آشنا شوید.",
+			"highlight": "با تیم حرفه‌ای و متعهد ما آشنا شوید",
+			"panelTitle": "ساخته شده توسط آدم‌هایی که با دقت کار می‌کنند",
+			"panelDesc": "یک گروه کوچک از ذهن‌های محصول، طراحی و مهندسی که روی نتیجه یادگیری، سرعت و اعتماد تمرکز دارند.",
+			"members": [
+				{
+					"id": "bemillah-ibrahimi",
+					"name": "بسم الله ابراهیمي",
+					"role": "مدیرعامل و بنیان‌گذار",
+					"imageUrl": "/team-ali.png",
+					"email": "bemillah@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"location": "کابل، افغانستان",
+					"shortBio": "بسم الله، «ابزار کانکور» را با هدف دسترسی همه دانش‌آموزان افغان به آموزش باکیفیت تأسیس کرد.",
+					"fullBio": "بسم الله ابراهیمي بنیان‌گذار و مدیرعامل ابزار کانکور است. او با بیش از ۱۰ سال تجربه در حوزه آموزش و فناوری و فارغ‌التحصیل رشته علوم کامپیوتر از دانشگاه کابل است. او معتقد است که فناوری می‌تواند شکاف آموزشی را از بین ببرد و فرصت‌های برابری برای همه دانش‌آموزان ایجاد کند.",
+					"socialLinks": [
+						{ "platform": "توییتر", "url": "https://twitter.com/besmillah" },
+						{ "platform": "فیسبوک", "url": "https://facebook.com/bemillah" },
+						{
+							"platform": "اینستاگرام",
+							"url": "https://instagram.com/besmillah"
+						}
+					]
+				},
+				{
+					"id": "fatema-ahmadi",
+					"name": "فاطمه احمدی",
+					"role": "مدیر ارشد فناوری (CTO)",
+					"imageUrl": "/team-nilo.png",
+					"email": "fatema@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "فاطمه تیم مهندسی ما را رهبری می‌کند و معمار سیستم‌های مقیاس‌پذیر برای میلیون‌ها دانش‌آموز است.",
+					"fullBio": "فاطمه احمدی مدیر ارشد فناوری ما با بیش از ۸ سال تجربه در توسعه نرم‌افزار است. تخصص او در معماری مقیاس‌پذیر و بهینه‌سازی تجربه کاربری است.",
+					"socialLinks": [
+						{ "platform": "توییتر", "url": "https://twitter.com/fatema" },
+						{ "platform": "اینستاگرام", "url": "https://instagram.com/fatema" },
+						{ "platform": "فیسبوک", "url": "https://facebook.com/fatema" }
+					]
+				},
+				{
+					"id": "nadia-rahimi",
+					"name": "نادیا رحیمی",
+					"role": "مدیر محصول",
+					"imageUrl": "/team-sara.jpg",
+					"email": "nadia@abzarkankor.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "نادیا خلاقیت را با تحقیقات کاربری ترکیب می‌کند تا تجربیات یادگیری ساده و دلپذیری بسازد.",
+					"fullBio": "نادیا رحیمی مدیر محصول ماست و در زمینه محصولات آموزشی دیجیتال تخصص دارد. او به طور مرتب با دانش‌آموزان افغان تحقیقات کاربری انجام می‌دهد تا نیازهای واقعی آن‌ها را درک کند.",
+					"socialLinks": [
+						{ "platform": "فیسبوک", "url": "https://facebook.com/nadia" },
+						{ "platform": "اینستاگرام", "url": "https://instagram.com/nadia" },
+						{ "platform": "توییتر", "url": "https://twitter.com/nadia" }
+					]
+				},
+				{
+					"id": "ali-hosseini",
+					"name": "علی حسینی",
+					"role": "مدیر محتوا",
+					"imageUrl": "/img/team/4.jpg",
+					"email": "ali@abzarkonkur.com",
+					"phone": "+93 700 123 456",
+					"shortBio": "علی بر کیفیت محتوای آموزشی نظارت دارد و با اساتید برجسته در سراسر افغانستان همکاری می‌کند.",
+					"fullBio": "علی حسینی دارای مدرک کارشناسی ارشد در رشته آموزش و بیش از ۱۲ سال تجربه تدریس است. او با شبکه گسترده‌ای از معلمان همکاری می‌کند تا محتوای باکیفیت و به‌روز تولید کند.",
+					"socialLinks": [
+						{ "platform": "فیسبوک", "url": "https://facebook.com/ali" },
+						{ "platform": "اینستاگرام", "url": "https://instagram.com/ali" },
+						{ "platform": "توییتر", "url": "https://twitter.com/ali" }
+					]
+				}
+			]
+		},
+		"download": {
+			"title": "همین امروز شروع به یادگیری کنید",
+			"subtitle": "به بیش از یک میلیون یادگیرنده در بستر وب و اپلیکیشن ما بپیوندید.",
+			"ios": "دانلود از اپ استور",
+			"android": "دریافت از گوگل پلی",
+			"stores": {
+				"appStore": {
+					"label": "دانلود از",
+					"name": "App Store"
+				},
+				"googlePlay": {
+					"label": "دریافت از",
+					"name": "Google Play"
+				}
+			}
+		},
+		"contact": {
+			"email": "آدرس ایمیل",
+			"phone": "شماره تلفن",
+			"address": "آدرس دفتر",
+			"hours": "ساعات کاری",
+			"hoursValue": "شنبه - پنجشنبه، ۸:۰۰ صبح - ۵:۰۰ بعد از ظهر",
+			"badge": "ارتباط با ما",
+			"title": "تماس با تیم ما",
+			"subtitle": "سوالاتی دارید یا به پشتیبانی نیاز دارید؟ ما اینجا هستیم تا کمک کنیم.",
+			"socialTitle": "ما را در شبکه‌های اجتماعی دنبال کنید",
+			"socialSubtitle": "با آخرین اخبار و اطلاعیه‌های ما به‌روز باشید.",
+			"responseTime": "ما معمولاً ظرف ۲۴ ساعت پاسخ می‌دهیم."
+		}
+	},
+	"search": {
+		"tabs": {
+			"all": "همه",
+			"courses": "کورس‌ها",
+			"libraries": "کتابخانه",
+			"decks": "دسته‌ها",
+			"quizzes": "امتحان‌ها"
+		},
+		"groups": {
+			"courses": "کورس‌ها",
+			"libraries": "کتابخانه",
+			"decks": "دسته‌ها",
+			"quizzes": "امتحان‌ها"
+		},
+		"seeAll": "دیدن همه",
+		"loadError": "بارگذاری نتایج جستجو ممکن نشد",
+		"tryAgain": "دوباره تلاش کنید",
+		"searching": "در حال جستجو…",
+		"noResults": "نتیجه‌ای یافت نشد",
+		"noResultsDescription": "عبارت جستجوی دیگری را امتحان کنید.",
+		"showingResults": "نمایش {from} تا {to} از {total} نتیجه",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"resultsFor": "نتایج برای «{query}»",
+		"resultsTitle": "نتایج جستجو",
+		"emptyQuery": "چیزی بنویسید تا در ابزار کانکور جستجو شود.",
+		"viewAllResults": "نمایش همه نتایج برای «{query}»"
+	},
+	"decks": {
+		"title": "دسته‌ها",
+		"discussions": "بحث‌ها و گفتگوهای دسته",
+		"description": "تمرین دسته‌های آماده و اشتراکی فلش‌کارت.",
+		"backToHome": "بازگشت به صفحه اصلی",
+		"algorithm": {
+			"fsrs": "FSRS",
+			"sm2": "SM-2",
+			"leitner": "لایتنر"
+		},
+		"free": "رایگان",
+		"practiceNow": "اکنون تمرین کنید",
+		"continueStudying": "ادامه مطالعه",
+		"signUpToPractice": "برای تمرین ثبت‌نام کنید",
+		"searchPlaceholder": "جستجوی دسته‌ها…",
+		"clearSearch": "پاک کردن جستجو",
+		"freeOnly": "فقط رایگان",
+		"deckCount": "{count, plural, =1 {# دسته} other {# دسته}}",
+		"cardCount": "{count, plural, =1 {# کارت} other {# کارت}}",
+		"priceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+		"buyForCredits": "خرید به قیمت {count, plural, one {# اعتبار} other {# اعتبار}}"
+	},
+	"quizzes": {
+		"title": "آزمون‌ها",
+		"discussions": "بحث‌ها و گفتگوهای آزمون",
+		"description": "امتحان‌های تمرینی و شبیه‌سازی کانکور در هر مضمون را تمرین کنید.",
+		"backToList": "بازگشت به امتحان‌ها",
+		"searchPlaceholder": "جستجوی امتحان‌ها…",
+		"clearSearch": "پاک کردن جستجو",
+		"noQuizzesFound": "امتحانی یافت نشد",
+		"noQuizzesDescription": "عبارت جستجوی دیگری را امتحان کنید.",
+		"showing": "نمایش {from} تا {to} از {total} امتحان",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"loadError": "بارگذاری امتحان‌ها ممکن نشد",
+		"loadErrorDescription": "لطفاً دوباره تلاش کنید.",
+		"tryAgain": "دوباره تلاش کنید",
+		"view": "مشاهده امتحان",
+		"instructions": "رهنمود‌ها",
+		"timeLimitMinutes": "{count, plural, =1 {# دقیقه} other {# دقیقه}}",
+		"passingScore": "{percent}% برای قبولی",
+		"maxAttempts": "{count, plural, =1 {# تلاش} other {# تلاش}}",
+		"signUpToTake": "برای شرکت در این امتحان ثبت‌نام کنید",
+		"askInstructorForCode": "برای دریافت رمز ورود این امتحان، از استاد یا مکتب خود بپرسید.",
+		"free": "رایگان",
+		"priceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+		"register": "ثبت‌نام",
+		"registerForCredits": "ثبت‌نام به قیمت {count, plural, one {# اعتبار} other {# اعتبار}}",
+		"alreadyRegistered": "شما در این امتحان ثبت‌نام کرده‌اید.",
+		"registrationClosed": "ثبت‌نام این امتحان بسته شده است.",
+		"registrationSuccess": "با موفقیت ثبت‌نام شدید!",
+		"registrationFailed": "ثبت‌نام ناموفق بود. دوباره تلاش کنید.",
+		"insufficientCredits": "اعتبار کافی ندارید. لطفاً حساب خود را شارژ کنید."
+	},
+	"bookmarks": {
+		"title": "نشانه‌ها",
+		"description": "هر آنچه برای بعد ذخیره کرده‌اید، همه در یک‌جا.",
+		"searchPlaceholder": "جستجوی نشانه‌ها…",
+		"clearSearch": "پاک کردن جستجو",
+		"allTypes": "همه انواع",
+		"type_course": "کورس",
+		"type_deck": "دسته فلش‌کارت",
+		"type_library": "کتابخانه",
+		"type_quiz": "امتحان",
+		"open": "باز کردن",
+		"remove": "حذف نشانه",
+		"untitled": "بدون عنوان",
+		"noBookmarksFound": "نشانه‌ای یافت نشد",
+		"noBookmarksDescription": "عبارت جستجو یا فیلترها را تغییر دهید.",
+		"noBookmarksYet": "هنوز نشانه‌ای ندارید",
+		"noBookmarksYetDescription": "کورس‌ها، دسته‌های فلش‌کارت، کتاب‌های کتابخانه و امتحان‌ها را ذخیره کنید تا بعداً اینجا پیدایشان کنید.",
+		"showing": "نمایش {from} تا {to} از {total} نشانه",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"loadError": "بارگذاری نشانه‌ها ممکن نشد",
+		"loadErrorDescription": "لطفاً دوباره تلاش کنید.",
+		"tryAgain": "دوباره تلاش کنید",
+		"bookmark": "نشانه‌گذاری",
+		"bookmarked": "نشانه‌گذاری شده",
+		"bookmarkAdded": "نشانه اضافه شد.",
+		"bookmarkRemoved": "نشانه حذف شد.",
+		"bookmarkFailed": "به‌روزرسانی نشانه ناموفق بود.",
+		"removeFailed": "حذف نشانه ناموفق بود."
+	},
+	"notifications": {
+		"title": "اعلان‌ها",
+		"description": "هر آنچه نیاز به توجه شما دارد، همه در یک‌جا.",
+		"markAllRead": "علامت‌گذاری همه به‌عنوان خوانده‌شده",
+		"markAsRead": "علامت‌گذاری به‌عنوان خوانده‌شده",
+		"viewAll": "مشاهده همه",
+		"unread": "نخوانده",
+		"all": "همه",
+		"noNotifications": "اعلانی وجود ندارد",
+		"noNotificationsDescription": "شما به‌روز هستید. اعلان‌های جدید اینجا نمایش داده می‌شوند.",
+		"noUnreadNotifications": "اعلان نخوانده‌ای وجود ندارد",
+		"loadError": "بارگذاری اعلان‌ها ممکن نشد",
+		"loadErrorDescription": "لطفاً دوباره تلاش کنید.",
+		"tryAgain": "دوباره تلاش کنید",
+		"showing": "نمایش {from} تا {to} از {total} اعلان",
+		"previous": "قبلی",
+		"next": "بعدی",
+		"justNow": "همین الان",
+		"type": {
+			"new_course_enrollment": "ثبت‌نام جدید",
+			"course_completion": "کورس تکمیل شد",
+			"new_lesson_available": "درس جدید موجود است",
+			"quiz_due_reminder": "مهلت امتحان نزدیک است",
+			"quiz_graded": "امتحان نمره‌گذاری شد",
+			"new_assignment_submission": "ارسال جدید تکلیف",
+			"assignment_graded": "تکلیف نمره‌گذاری شد",
+			"new_discussion_post": "پست جدید در بحث",
+			"new_reply_to_post": "پاسخ جدید",
+			"course_announcement": "اعلامیه",
+			"system_update": "به‌روزرسانی سیستم",
+			"badge_awarded": "نشان اهدا شد",
+			"classroom_invite": "دعوت کلاس",
+			"classroom_join_request": "درخواست عضویت در کلاس",
+			"classroom_invite_response": "پاسخ دعوت کلاس",
+			"school_invite": "دعوت مکتب",
+			"school_invite_response": "پاسخ دعوت مکتب"
+		},
+		"telegramTitle": "اعلان‌های تلگرام",
+		"telegramDescription": "حساب تلگرام خود را وصل کنید تا آنجا هم فوراً مطلع شوید.",
+		"telegramConnectedDescription": "وصل شد — اعلان‌ها به تلگرام شما نیز ارسال می‌شوند.",
+		"telegramConnect": "اتصال به تلگرام",
+		"telegramDisconnect": "قطع اتصال",
+		"telegramDisconnected": "اتصال تلگرام قطع شد.",
+		"pushTitle": "اعلان‌های مرورگر",
+		"pushDescription": "فوراً در مرورگر خود مطلع شوید، حتی زمانی که این تب باز نیست.",
+		"pushEnabledDescription": "در این دستگاه فعال است.",
+		"pushDeniedDescription": "برای این سایت مسدود شده — برای فعال کردن، اعلان‌ها را در تنظیمات مرورگر خود مجاز کنید.",
+		"pushEnable": "فعال‌سازی",
+		"pushDisable": "غیرفعال کردن",
+		"pushDisabled": "اعلان‌های مرورگر در این دستگاه غیرفعال شد.",
+		"pushEnableError": "فعال‌سازی اعلان‌های مرورگر ممکن نشد. لطفاً دوباره تلاش کنید.",
+		"accept": "پذیرفتن",
+		"decline": "رد کردن",
+		"respondError": "پاسخ‌دهی ممکن نشد. لطفاً دوباره تلاش کنید.",
+		"requestApproved": "تایید شد.",
+		"requestDeclined": "رد شد."
+	},
+	"importDialog": {
+		"title": "وارد کردن داده‌ها",
+		"description": "سطرها را از یک فایل CSV، Excel، Google Sheets یا PDF در {table} وارد کنید.",
+		"steps": {
+			"upload": "بارگذاری",
+			"mapping": "نگاشت ستون‌ها",
+			"preview": "پیش‌نمایش"
+		},
+		"footer": {
+			"back": "بازگشت",
+			"continue": "ادامه",
+			"importCount": "{count, plural, =1 {وارد کردن # سطر} other {وارد کردن # سطر}}",
+			"done": "پایان"
+		},
+		"upload": {
+			"fileTab": "فایل",
+			"googleSheetTab": "Google Sheets",
+			"dropzoneIdle": "فایل را بکشید و رها کنید، یا برای انتخاب کلیک کنید",
+			"dropzoneParsing": "در حال پردازش فایل…",
+			"supports": "پشتیبانی از {extensions}",
+			"googleSheetHint": "پیوند یک Google Sheet که با «هر کسی که پیوند را دارد» به اشتراک گذاشته شده را وارد کنید.",
+			"googleSheetPlaceholder": "https://docs.google.com/spreadsheets/d/...",
+			"submit": "وارد کردن",
+			"errorTitle": "خواندن این فایل ممکن نشد"
+		},
+		"mapping": {
+			"requiredAlertTitle": "فیلدهای الزامی به یک ستون منبع یا مقدار پیش‌فرض نیاز دارند",
+			"destinationColumn": "ستون مقصد",
+			"sourceColumn": "ستون منبع",
+			"defaultValue": "مقدار پیش‌فرض",
+			"required": "الزامی",
+			"dontImport": "وارد نشود",
+			"defaultPlaceholder": "مقدار پیش‌فرض اختیاری"
+		},
+		"preview": {
+			"showingRows": "نمایش {shown, plural, =1 {# سطر} other {# سطر}} از {total, plural, =1 {# سطر} other {# سطر}}",
+			"rowsSkipped": "{count, plural, =1 {# سطر نادیده گرفته می‌شود} other {# سطر نادیده گرفته می‌شوند}}",
+			"issuesAlertTitle": "برخی سطرها مشکل اعتبارسنجی دارند",
+			"issuesAlertDescription": "سطرهای دارای مشکل در زیر مشخص شده‌اند و هنگام وارد کردن نادیده گرفته می‌شوند. برای اصلاح آن‌ها به مرحله نگاشت بازگردید، یا فقط سطرهای معتبر را وارد کنید."
+		},
+		"result": {
+			"importing": "در حال وارد کردن {processed} از {total} سطر…",
+			"importedSummary": "{count, plural, =1 {# سطر وارد شد} other {# سطر وارد شد}}",
+			"importedWithFailures": "{count, plural, =1 {# سطر وارد شد} other {# سطر وارد شد}}، {failed, plural, =1 {# سطر ناموفق یا نادیده گرفته شد} other {# سطر ناموفق یا نادیده گرفته شدند}}",
+			"errorsAlertTitle": "برخی سطرها وارد نشدند",
+			"errorsAlertDescription": "جزئیات زیر را بررسی کنید، فایل منبع را اصلاح کنید و در صورت نیاز فقط همان سطرها را دوباره وارد کنید.",
+			"rowColumn": "سطر",
+			"reasonColumn": "دلیل"
+		}
+	},
+	"credits": {
+		"admin": {
+			"title": "شاگردان",
+			"subtitle": "{count, plural, =1 {# شاگرد} other {# شاگرد}}",
+			"searchPlaceholder": "جستجو با نام، ایمیل یا شماره تلفن…",
+			"loading": "در حال بارگذاری شاگردان…",
+			"empty": "شاگردی یافت نشد.",
+			"unnamedStudent": "شاگرد بدون نام",
+			"balanceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"charge": "شارژ",
+			"backToStudents": "بازگشت به شاگردان",
+			"previous": "قبلی",
+			"next": "بعدی",
+			"showing": "نمایش {from} تا {to} از {total}",
+			"table": {
+				"name": "نام",
+				"contact": "تماس",
+				"balance": "موجودی",
+				"status": "وضعیت"
+			},
+			"tabs": {
+				"ledger": "دفتر حساب",
+				"purchases": "خریدها"
+			},
+			"ledgerTable": {
+				"date": "تاریخ",
+				"type": "نوع",
+				"amount": "مقدار",
+				"balanceAfter": "موجودی پس از تراکنش",
+				"note": "یادداشت",
+				"empty": "هنوز تراکنشی ثبت نشده است."
+			},
+			"purchasesTable": {
+				"date": "تاریخ",
+				"item": "آیتم",
+				"type": "نوع",
+				"price": "قیمت",
+				"empty": "هنوز خریدی ثبت نشده است."
+			},
+			"type": {
+				"topup": "شارژ حساب",
+				"purchase": "خرید",
+				"refund": "بازپرداخت",
+				"adjustment": "تعدیل"
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "دسته",
+				"quiz": "امتحان"
+			}
+		},
+		"chargeDialog": {
+			"title": "شارژ اعتبار",
+			"description": "به حساب این شاگرد اعتبار اضافه کنید.",
+			"descriptionNamed": "به حساب {name} اعتبار اضافه کنید.",
+			"amountLabel": "مقدار (اعتبار)",
+			"noteLabel": "یادداشت (اختیاری)",
+			"notePlaceholder": "مثلاً شارژ نقدی در دفتر",
+			"cancel": "انصراف",
+			"charge": "شارژ",
+			"charging": "در حال شارژ…",
+			"success": "{amount} اعتبار با موفقیت شارژ شد.",
+			"invalidAmount": "مقداری معتبر و بزرگ‌تر از صفر وارد کنید."
+		},
+		"wallet": {
+			"title": "کیف پول",
+			"subtitle": "موجودی اعتبار و تاریخچه تراکنش‌های شما.",
+			"balanceLabel": "موجودی",
+			"balanceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"tabs": {
+				"ledger": "دفتر حساب",
+				"purchases": "خریدها",
+				"sales": "فروش‌ها",
+				"discounts": "تخفیف‌ها"
+			},
+			"ledgerTable": {
+				"date": "تاریخ",
+				"type": "نوع",
+				"amount": "مقدار",
+				"balanceAfter": "موجودی پس از تراکنش",
+				"empty": "هنوز تراکنشی ثبت نشده است."
+			},
+			"purchasesTable": {
+				"date": "تاریخ",
+				"item": "آیتم",
+				"type": "نوع",
+				"price": "قیمت",
+				"empty": "هنوز چیزی نخریده‌اید."
+			},
+			"salesDescription": "اعتباری که از فروش دسته‌های خودتان کسب کرده‌اید.",
+			"totalEarned": "مجموع درآمد",
+			"salesTable": {
+				"date": "تاریخ",
+				"item": "آیتم",
+				"price": "قیمت",
+				"empty": "هنوز فروشی نداشته‌اید."
+			},
+			"type": {
+				"topup": "شارژ حساب",
+				"purchase": "خرید",
+				"refund": "بازپرداخت",
+				"adjustment": "تعدیل"
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "دسته",
+				"quiz": "امتحان"
+			}
+		},
+		"earnings": {
+			"title": "درآمد",
+			"subtitle": "اعتباری که از فروش کورس‌ها، دسته‌ها و امتحان‌ها کسب کرده‌اید.",
+			"totalEarned": "مجموع درآمد",
+			"balanceCredits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"table": {
+				"date": "تاریخ",
+				"item": "آیتم",
+				"type": "نوع",
+				"price": "قیمت",
+				"empty": "هنوز فروشی نداشته‌اید."
+			},
+			"itemType": {
+				"course": "کورس",
+				"deck": "دسته",
+				"quiz": "امتحان"
+			}
+		}
+	},
+	"discounts": {
+		"page": {
+			"title": "تخفیف‌ها",
+			"subtitle": "کدهای تخفیف برای کورس‌ها، دسته‌ها و امتحان‌های خود بسازید و مدیریت کنید.",
+			"adminSubtitle": "تخفیف‌های سراسر بستر را مدیریت کنید و همه تخفیف‌های ایجاد شده در ابزار کانکور را بررسی کنید."
+		},
+		"picker": {
+			"searchPlaceholder": "جستجوی آیتم‌های شما…",
+			"empty": "آیتمی یافت نشد.",
+			"itemType": {
+				"course": "کورس‌ها",
+				"deck": "دسته‌ها",
+				"quiz": "امتحان‌ها"
+			},
+			"singleHint": "یک آیتم را که این تخفیف روی آن اعمال می‌شود انتخاب کنید.",
+			"multiHint": "یک یا چند آیتم را که این تخفیف روی آن‌ها اعمال می‌شود انتخاب کنید."
+		},
+		"dialog": {
+			"createTitle": "تخفیف جدید",
+			"createDescription": "یک کد تخفیف بسازید که خریداران هنگام پرداخت می‌توانند استفاده کنند.",
+			"editTitle": "ویرایش تخفیف",
+			"editDescription": "کد، مقدار و در دسترس بودن این تخفیف را به‌روزرسانی کنید.",
+			"codeLabel": "کد",
+			"codePlaceholder": "مثلاً SUMMER20",
+			"typeLabel": "نوع",
+			"type": {
+				"percentage": "درصدی",
+				"fixed": "مقدار ثابت"
+			},
+			"valueLabelPercentage": "درصد (%)",
+			"valueLabelFixed": "مقدار (اعتبار)",
+			"scopeLabel": "اعمال روی",
+			"scope": {
+				"item": "یک آیتم",
+				"group": "گروهی از آیتم‌ها",
+				"all": "همه چیز در بستر"
+			},
+			"startsAtLabel": "شروع (اختیاری)",
+			"endsAtLabel": "پایان (اختیاری)",
+			"activeLabel": "فعال",
+			"activeDescription": "تخفیف‌های غیرفعال قابل استفاده نیستند.",
+			"cancel": "انصراف",
+			"saving": "در حال ذخیره…",
+			"save": "ذخیره تغییرات",
+			"create": "ایجاد تخفیف",
+			"created": "تخفیف ایجاد شد.",
+			"updated": "تخفیف به‌روزرسانی شد.",
+			"validation": {
+				"codeRequired": "کد الزامی است.",
+				"valueRequired": "مقداری بزرگ‌تر از صفر وارد کنید.",
+				"targetsRequired": "حداقل یک آیتم انتخاب کنید."
+			}
+		},
+		"list": {
+			"newDiscount": "تخفیف جدید",
+			"table": {
+				"code": "کد",
+				"scope": "اعمال روی",
+				"value": "مقدار",
+				"window": "بازه فعال",
+				"status": "وضعیت",
+				"owner": "مالک"
+			},
+			"loading": "در حال بارگذاری تخفیف‌ها…",
+			"empty": "هنوز تخفیفی وجود ندارد.",
+			"scope": {
+				"item": "یک آیتم",
+				"group": "گروه",
+				"all": "سراسر بستر"
+			},
+			"status": {
+				"active": "فعال",
+				"inactive": "غیرفعال"
+			},
+			"ownerType": {
+				"platform": "ابزار کانکور",
+				"instructor": "استاد",
+				"school": "مکتب",
+				"student": "شاگرد"
+			},
+			"edit": "ویرایش",
+			"delete": "حذف",
+			"deleted": "تخفیف حذف شد.",
+			"deleteConfirmTitle": "این تخفیف حذف شود؟",
+			"deleteConfirmDescription": "کد «{code}» بلافاصله از کار می‌افتد. این عمل قابل بازگشت نیست.",
+			"cancel": "انصراف",
+			"valuePercentage": "{value}% تخفیف",
+			"valueFixed": "{value} اعتبار تخفیف",
+			"alwaysOn": "همیشه فعال",
+			"startsOn": "از {date}",
+			"endsOn": "تا {date}"
+		},
+		"field": {
+			"haveCode": "کد تخفیف دارید؟",
+			"codePlaceholder": "کد را وارد کنید",
+			"apply": "اعمال",
+			"applied": "تخفیف اعمال شد!",
+			"appliedLabel": "کد «{code}» اعمال شد — قیمت جدید: {price, plural, one {# اعتبار} other {# اعتبار}}",
+			"invalidCode": "این کد معتبر نیست یا منقضی شده است.",
+			"notApplicable": "این کد برای این آیتم قابل استفاده نیست.",
+			"applyFailed": "اعمال این کد ممکن نشد. دوباره تلاش کنید.",
+			"remove": "حذف کد"
+		}
+	},
+	"overview": {
+		"student": {
+			"kankorCountdown": "روزهای باقی‌مانده تا کانکور",
+			"daysRemaining": "روز باقی‌مانده",
+			"reviewCards": "مرور فلش‌کارت‌ها",
+			"takeTest": "شرکت در امتحان",
+			"stats": {
+				"enrolledCourses": "کورس‌های ثبت‌نامی",
+				"activeDecks": "دسته‌های فعال",
+				"cardsDueToday": "کارت‌های امروز",
+				"testsCompleted": "امتحان‌های انجام‌شده",
+				"testsPassed": "امتحان‌های قبول‌شده",
+				"bookmarks": "نشان‌شده‌ها",
+				"notes": "یادداشت‌ها",
+				"creditBalance": "موجودی اعتبار"
+			},
+			"continueLearning": "ادامه یادگیری",
+			"resume": "ادامه",
+			"noActiveCourse": "هیچ کورسی در حال پیشرفت نیست",
+			"noActiveCourseSubtitle": "برای شروع یادگیری در یک کورس ثبت‌نام کنید.",
+			"browseCourses": "مرور کورس‌ها",
+			"recentTests": "امتحان‌های اخیر",
+			"viewAll": "مشاهده همه",
+			"noRecentTests": "هنوز امتحانی نداده‌اید",
+			"noRecentTestsSubtitle": "امتحان‌هایی که تکمیل می‌کنید اینجا نمایش داده می‌شوند.",
+			"recentNotes": "یادداشت‌های اخیر",
+			"noRecentNotes": "هنوز یادداشتی ندارید",
+			"noRecentNotesSubtitle": "یادداشت‌هایی که هنگام درس می‌نویسید اینجا نمایش داده می‌شوند.",
+			"studyActivity": "فعالیت مطالعه",
+			"studyActivitySubtitle": "کارت‌های مرورشده در ۱۴ روز گذشته",
+			"cardsReviewed": "کارت‌های مرورشده",
+			"passed": "قبول",
+			"failed": "رد"
+		},
+		"instructor": {
+			"stats": {
+				"publishedCourses": "کورس‌های منتشرشده",
+				"draftCourses": "پیش‌نویس‌ها",
+				"totalStudents": "مجموع شاگردان",
+				"totalDecks": "دسته‌ها",
+				"totalQuizzes": "امتحان‌ها",
+				"averageRating": "میانگین امتیاز",
+				"totalEarnings": "مجموع درآمد",
+				"earningsThisMonth": "درآمد این ماه"
+			},
+			"recentEnrollments": "ثبت‌نام‌های اخیر",
+			"noRecentEnrollments": "هنوز ثبت‌نامی نداشته‌اید",
+			"noRecentEnrollmentsSubtitle": "شاگردانی که در کورس‌های شما ثبت‌نام می‌کنند اینجا نمایش داده می‌شوند.",
+			"recentQuizAttempts": "تلاش‌های اخیر امتحان",
+			"noRecentQuizAttempts": "هنوز تلاشی برای امتحان ثبت نشده",
+			"noRecentQuizAttemptsSubtitle": "تلاش‌های شاگردان روی امتحان‌های شما اینجا نمایش داده می‌شوند.",
+			"earningsTrend": "درآمد",
+			"earningsTrendSubtitle": "اعتبار کسب‌شده در ۱۴ روز گذشته",
+			"viewAll": "مشاهده همه",
+			"enrolledIn": "ثبت‌نام در {course}",
+			"credits": "{count, plural, one {# اعتبار} other {# اعتبار}}",
+			"noRating": "هنوز امتیازی ثبت نشده"
+		},
+		"school": {
+			"stats": {
+				"students": "شاگردان",
+				"teachers": "معلمان",
+				"staff": "کارمندان",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"totalEarnings": "مجموع درآمد",
+				"earningsThisMonth": "درآمد این ماه"
+			},
+			"recentMembers": "اعضای اخیر",
+			"noRecentMembers": "هنوز عضوی ندارید",
+			"noRecentMembersSubtitle": "کارمندان و معلمانی که به مکتب شما می‌پیوندند اینجا نمایش داده می‌شوند.",
+			"recentQuizAttempts": "تلاش‌های اخیر امتحان",
+			"noRecentQuizAttempts": "هنوز تلاشی برای امتحان ثبت نشده",
+			"noRecentQuizAttemptsSubtitle": "تلاش‌های روی امتحان‌های مکتب شما اینجا نمایش داده می‌شوند.",
+			"earningsTrend": "درآمد",
+			"earningsTrendSubtitle": "اعتبار کسب‌شده در ۱۴ روز گذشته",
+			"viewAll": "مشاهده همه",
+			"joined": "پیوسته در {date}",
+			"memberRoles": {
+				"owner": "مالک",
+				"admin": "مدیر",
+				"instructor": "استاد",
+				"manager": "مدیر بخش",
+				"staff": "کارمند",
+				"viewer": "بیننده"
+			}
+		},
+		"admin": {
+			"stats": {
+				"students": "شاگردان",
+				"instructors": "استادان",
+				"activeSchools": "مکاتب فعال",
+				"pendingSchools": "مکاتب در انتظار",
+				"pendingInstructors": "استادان در انتظار تأیید",
+				"publishedCourses": "کورس‌های منتشرشده",
+				"draftCourses": "پیش‌نویس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"totalRevenue": "مجموع درآمد",
+				"revenueThisMonth": "درآمد این ماه"
+			},
+			"recentSignups": "ثبت‌نام‌های اخیر",
+			"noRecentSignups": "هنوز ثبت‌نامی نشده",
+			"noRecentSignupsSubtitle": "شاگردان، استادان و مکاتب جدید اینجا نمایش داده می‌شوند.",
+			"revenueTrend": "درآمد",
+			"revenueTrendSubtitle": "اعتبار کسب‌شده در ۱۴ روز گذشته",
+			"signupTrend": "ثبت‌نام‌ها",
+			"signupTrendSubtitle": "حساب‌های جدید در ۱۴ روز گذشته",
+			"viewAll": "مشاهده همه",
+			"roleLabels": {
+				"student": "شاگرد",
+				"instructor": "استاد",
+				"admin": "مدیر"
+			}
+		}
+	},
+	"admin": {
+		"common": {
+			"all": "همه",
+			"loading": "در حال بارگذاری…",
+			"empty": "نتیجه‌ای یافت نشد.",
+			"viewDetails": "مشاهده جزئیات",
+			"previous": "قبلی",
+			"next": "بعدی",
+			"showing": "نمایش {from}–{to} از {total}",
+			"cancel": "لغو",
+			"confirm": "تأیید",
+			"actions": "عملیات",
+			"role": "نقش",
+			"userRoles": {
+				"student": "شاگرد",
+				"instructor": "استاد",
+				"admin": "مدیر"
+			},
+			"changeRoleConfirmTitle": "تغییر نقش؟",
+			"changeRoleConfirmDescription": "آیا مطمئن هستید که می‌خواهید نقش {name} را از {oldRole} به {newRole} تغییر دهید؟",
+			"roleChangedSuccess": "نقش کاربر با موفقیت به‌روزرسانی شد.",
+			"doubleClickToEdit": "دوبار کلیک برای ویرایش"
+		},
+		"status": {
+			"pending": "در انتظار",
+			"active": "فعال",
+			"rejected": "رد شده",
+			"suspended": "معلق",
+			"disabled": "غیرفعال"
+		},
+		"actions": {
+			"openMenu": "باز کردن منوی عملیات",
+			"statusLabel": "تغییر وضعیت",
+			"statusChanged": "وضعیت به‌روزرسانی شد.",
+			"verify": "تأیید",
+			"activate": "فعال‌سازی",
+			"suspend": "تعلیق",
+			"disable": "غیرفعال کردن",
+			"reject": "رد کردن"
+		},
+		"instructors": {
+			"title": "استادان",
+			"subtitle": "مدیریت حساب‌ها، تأیید و محتوای استادان.",
+			"searchPlaceholder": "جستجو با نام، ایمیل یا شماره تلفن…",
+			"provinceFilter": "ولایت",
+			"allProvinces": "همه ولایت‌ها",
+			"empty": "استادی یافت نشد.",
+			"unnamed": "استاد بدون نام",
+			"backToList": "بازگشت به استادان",
+			"about": "درباره",
+			"recentEnrollments": "ثبت‌نام‌های اخیر",
+			"noEnrollments": "هنوز ثبت‌نامی وجود ندارد.",
+			"table": {
+				"name": "نام",
+				"province": "ولایت",
+				"courses": "کورس‌ها (منتشرشده / همه)",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"status": "وضعیت",
+				"joined": "تاریخ عضویت"
+			},
+			"tabs": {
+				"info": "معلومات",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها"
+			},
+			"stats": {
+				"publishedCourses": "کورس‌های منتشرشده",
+				"draftCourses": "کورس‌های پیش‌نویس",
+				"students": "شاگردان",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"totalEarnings": "مجموع درآمد (کریدت)",
+				"earningsThisMonth": "درآمد این ماه",
+				"averageRating": "میانگین امتیاز"
+			},
+			"fields": {
+				"email": "ایمیل",
+				"phone": "تلفن",
+				"website": "وب‌سایت",
+				"province": "ولایت",
+				"joined": "تاریخ عضویت"
+			}
+		},
+		"schools": {
+			"title": "مکتب‌ها",
+			"subtitle": "مدیریت حساب‌ها، اعضا و محتوای مکتب‌ها.",
+			"searchPlaceholder": "جستجو با نام مکتب، ایمیل یا مالک…",
+			"empty": "مکتبی یافت نشد.",
+			"unnamed": "مکتب بدون نام",
+			"backToList": "بازگشت به مکتب‌ها",
+			"about": "درباره",
+			"recentMembers": "اعضای اخیر",
+			"noMembers": "هنوز عضوی وجود ندارد.",
+			"table": {
+				"name": "نام",
+				"owner": "مالک",
+				"members": "اعضا",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"status": "وضعیت",
+				"created": "تاریخ ایجاد"
+			},
+			"tabs": {
+				"info": "معلومات",
+				"members": "اعضا",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها"
+			},
+			"stats": {
+				"students": "شاگردان",
+				"teachers": "استادان",
+				"staff": "کارمندان",
+				"courses": "کورس‌ها",
+				"decks": "دسته‌ها",
+				"quizzes": "امتحان‌ها",
+				"totalEarnings": "مجموع درآمد (کریدت)",
+				"earningsThisMonth": "درآمد این ماه"
+			},
+			"fields": {
+				"owner": "مالک",
+				"adminEmail": "ایمیل مدیر",
+				"address": "آدرس",
+				"created": "تاریخ ایجاد"
+			}
+		},
+		"members": {
+			"searchPlaceholder": "جستجوی اعضا با نام یا ایمیل…",
+			"empty": "عضوی یافت نشد.",
+			"unnamed": "عضو بدون نام",
+			"openMenu": "باز کردن عملیات عضو",
+			"changeRole": "تغییر نقش",
+			"roleChanged": "نقش عضو به‌روزرسانی شد.",
+			"remove": "حذف از مکتب",
+			"removed": "عضو حذف شد.",
+			"removeTitle": "حذف عضو؟",
+			"removeDescription": "{name} دسترسی به این مکتب را از دست می‌دهد. این عمل قابل بازگشت نیست.",
+			"table": {
+				"member": "عضو",
+				"role": "نقش",
+				"joined": "تاریخ عضویت"
+			},
+			"roles": {
+				"owner": "مالک",
+				"admin": "مدیر",
+				"instructor": "استاد",
+				"manager": "مسئول",
+				"staff": "کارمند",
+				"viewer": "بیننده"
+			}
+		},
+		"content": {
+			"updated": "به‌روزرسانی شد.",
+			"deleted": "حذف شد.",
+			"view": "مشاهده",
+			"edit": "ویرایش",
+			"delete": "حذف",
+			"publish": "انتشار",
+			"unpublish": "لغو انتشار",
+			"published": "منتشرشده",
+			"draft": "پیش‌نویس",
+			"free": "رایگان",
+			"credits": "{count, plural, one {# کریدت} other {# کریدت}}",
+			"searchCourses": "جستجوی کورس‌ها…",
+			"searchDecks": "جستجوی دسته‌ها…",
+			"searchQuizzes": "جستجوی امتحان‌ها…",
+			"emptyCourses": "کورسی یافت نشد.",
+			"emptyDecks": "دسته‌ای یافت نشد.",
+			"emptyQuizzes": "امتحانی یافت نشد.",
+			"deleteTitle": "حذف آیتم؟",
+			"deleteDescription": "«{title}» برای همیشه حذف می‌شود. این عمل قابل بازگشت نیست.",
+			"table": {
+				"title": "عنوان",
+				"status": "وضعیت",
+				"price": "قیمت",
+				"created": "تاریخ ایجاد",
+				"visibility": "قابلیت دید"
+			}
+		},
+		"agencies": {
+			"title": "نمایندگی‌ها",
+			"subtitle": "مدیریت نمایندگی‌های همکار، دسترسی‌ها و تصفیه حساب‌های آن‌ها",
+			"create": "نمایندگی جدید",
+			"createTitle": "ایجاد نمایندگی",
+			"created": "نمایندگی ایجاد شد",
+			"searchPlaceholder": "جستجوی نمایندگی‌ها...",
+			"empty": "نمایندگی‌ای یافت نشد",
+			"table": {
+				"name": "نام",
+				"status": "وضعیت",
+				"commission": "کمیشن",
+				"charged": "مجموع شارژ",
+				"settled": "تصفیه‌شده",
+				"outstanding": "باقی‌مانده",
+				"lastTopup": "آخرین شارژ"
+			},
+			"tabs": {
+				"grants": "دسترسی‌ها",
+				"members": "اعضا",
+				"topups": "شارژها",
+				"settlements": "تصفیه حساب‌ها",
+				"disputes": "اعتراض‌ها"
+			},
+			"detail": {
+				"back": "بازگشت به نمایندگی‌ها",
+				"edit": "ویرایش",
+				"editTitle": "ویرایش نمایندگی",
+				"updated": "نمایندگی به‌روزرسانی شد",
+				"suspend": "تعلیق",
+				"reactivate": "فعال‌سازی دوباره",
+				"suspended": "نمایندگی تعلیق شد",
+				"reactivated": "نمایندگی دوباره فعال شد",
+				"suspendTitle": "تعلیق نمایندگی؟",
+				"suspendDescription": "با تعلیق {name} تمام فعالیت‌های آن، از جمله شارژ حساب شاگردان، فوراً مسدود می‌شود.",
+				"commission": "کمیشن: {percent}٪",
+				"liabilityLimit": "سقف بدهی: {limit}"
+			},
+			"form": {
+				"name": "نام",
+				"province": "ولایت",
+				"contactEmail": "ایمیل تماس",
+				"contactPhone": "شماره تماس",
+				"address": "آدرس",
+				"commissionPercent": "کمیشن (٪)",
+				"liabilityLimit": "سقف بدهی (افغانی)",
+				"save": "ذخیره",
+				"cancel": "لغو",
+				"validation": {
+					"nameRequired": "نام الزامی است",
+					"invalidEmail": "ایمیل نامعتبر است",
+					"invalidCommission": "مقدار کمیشن نامعتبر است",
+					"invalidLiabilityLimit": "سقف بدهی نامعتبر است"
+				}
+			},
+			"grants": {
+				"granted": "دسترسی داده شد",
+				"revoked": "دسترسی لغو شد",
+				"scope": {
+					"global": "سراسری",
+					"province": "ولایتی",
+					"entities": "موارد مشخص"
+				},
+				"permissions": {
+					"students": {
+						"charge": "شارژ حساب شاگردان"
+					},
+					"schools": {
+						"suspend": "تعلیق مکاتب",
+						"manage": "مدیریت مکاتب"
+					},
+					"instructors": {
+						"suspend": "تعلیق استادان"
+					},
+					"courses": {
+						"manage_own": "مدیریت کورس‌های خودی",
+						"manage_any": "مدیریت همهٔ کورس‌ها"
+					},
+					"decks": {
+						"manage_own": "مدیریت دسته‌کارت‌های خودی",
+						"manage_any": "مدیریت همهٔ دسته‌کارت‌ها"
+					},
+					"quizzes": {
+						"manage_own": "مدیریت امتحان‌های خودی",
+						"manage_any": "مدیریت همهٔ امتحان‌ها"
+					}
+				},
+				"entityPicker": {
+					"searchSchools": "جستجوی مکاتب...",
+					"searchInstructors": "جستجوی استادان...",
+					"noResults": "نتیجه‌ای یافت نشد",
+					"unsupported": "محدودهٔ موردی برای این دسترسی قابل استفاده نیست."
+				}
+			},
+			"members": {
+				"add": "افزودن عضو",
+				"addTitle": "افزودن عضو جدید",
+				"added": "عضو اضافه شد",
+				"removed": "عضو حذف شد",
+				"remove": "حذف",
+				"removeTitle": "حذف عضو؟",
+				"removeDescription": "{name} از نمایندگی حذف می‌شود.",
+				"disable": "غیرفعال‌سازی",
+				"enable": "فعال‌سازی",
+				"makeRole": "تغییر نقش به {role}",
+				"email": "ایمیل",
+				"empty": "عضوی یافت نشد",
+				"table": {
+					"member": "عضو",
+					"role": "نقش",
+					"status": "وضعیت",
+					"joined": "تاریخ عضویت"
+				},
+				"roles": {
+					"owner": "مالک",
+					"admin": "مدیر",
+					"staff": "کارمند"
+				},
+				"status": {
+					"active": "فعال",
+					"disabled": "غیرفعال"
+				},
+				"validation": {
+					"invalidEmail": "ایمیل نامعتبر است"
+				}
+			},
+			"topups": {
+				"searchPlaceholder": "جستجوی شارژها...",
+				"empty": "تراکنشی یافت نشد",
+				"table": {
+					"student": "شاگرد",
+					"amount": "مبلغ",
+					"member": "کارمند",
+					"dispute": "اعتراض",
+					"date": "تاریخ"
+				},
+				"disputeStatus": {
+					"open": "باز",
+					"resolved": "حل‌شده",
+					"rejected": "ردشده"
+				}
+			},
+			"settlements": {
+				"record": "ثبت تصفیه",
+				"recordTitle": "ثبت تصفیه حساب",
+				"recorded": "تصفیه ثبت شد",
+				"grossAmount": "مبلغ ناخالص (افغانی)",
+				"empty": "تصفیه‌ای یافت نشد",
+				"table": {
+					"date": "تاریخ",
+					"gross": "ناخالص",
+					"commission": "کمیشن",
+					"net": "خالص دریافتی",
+					"method": "روش",
+					"note": "یادداشت"
+				},
+				"methods": {
+					"cash": "نقد",
+					"bank": "بانک",
+					"hawala": "حواله",
+					"other": "دیگر"
+				},
+				"validation": {
+					"invalidAmount": "مبلغ نامعتبر است"
+				}
+			},
+			"disputes": {
+				"empty": "اعتراضی یافت نشد",
+				"view": "مشاهده",
+				"detailTitle": "جزئیات اعتراض",
+				"studentNote": "یادداشت شاگرد",
+				"agencyResponse": "پاسخ نمایندگی",
+				"resolutionNote": "یادداشت رسیدگی",
+				"adjustment": "مبلغ اصلاحی (کریدیت)",
+				"adjustmentHint": "مثلاً ۲۰۰ برای افزودن کریدیت به شاگرد",
+				"respond": "ارسال پاسخ",
+				"responded": "پاسخ ثبت شد",
+				"resolve": "حل شد",
+				"reject": "رد",
+				"resolvedToast": "اعتراض رسیدگی شد",
+				"table": {
+					"student": "شاگرد",
+					"amount": "مبلغ",
+					"status": "وضعیت",
+					"created": "تاریخ ثبت"
+				},
+				"status": {
+					"open": "باز",
+					"resolved": "حل‌شده",
+					"rejected": "ردشده"
+				}
+			}
+		}
+	},
+	"classrooms": {
+		"title": "کلاس‌ها",
+		"description": "کلاس‌هایی که عضو آن‌ها هستید.",
+		"join": "پیوستن به یک کلاس",
+		"joinDialog": {
+			"title": "پیوستن به یک کلاس",
+			"description": "کدی که استاد شما به اشتراک گذاشته را وارد کنید.",
+			"codeLabel": "کد عضویت",
+			"codePlaceholder": "مثال: 123456",
+			"submit": "درخواست عضویت",
+			"requested": "درخواست ارسال شد. استاد شما باید آن را تایید کند.",
+			"cancel": "لغو"
+		},
+		"emptyTitle": "هنوز کلاسی ندارید",
+		"emptyDescription": "با استفاده از کدی که از استاد خود دریافت کرده‌اید، به یک کلاس بپیوندید.",
+		"role": {
+			"owner": "مالک",
+			"instructor": "استاد",
+			"assistant": "دستیار",
+			"student": "شاگرد"
+		},
+		"pendingTitle": "در انتظار",
+		"invitedDescription": "شما به عضویت دعوت شده‌اید.",
+		"awaitingApproval": "در انتظار تایید استاد.",
+		"pendingBadge": "در انتظار",
+		"accept": "پذیرفتن",
+		"decline": "رد کردن",
+		"requestApproved": "تایید شد.",
+		"requestDeclined": "رد شد.",
+		"detail": {
+			"resources": "منابع",
+			"materials": "مواد آموزشی",
+			"announcements": "اعلامیه‌ها",
+			"noResources": "هنوز منبعی به اشتراک گذاشته نشده.",
+			"noMaterials": "هنوز مواد آموزشی منتشر نشده.",
+			"noAnnouncements": "هنوز اعلامیه‌ای وجود ندارد.",
+			"loadError": "بارگذاری این کلاس ممکن نشد.",
+			"unknownAuthor": "ناشناس"
+		}
+	},
+	"schoolMembers": {
+		"title": "اعضا",
+		"description": "مدیریت دسترسی افراد به داشبورد این مکتب.",
+		"inviteButton": "دعوت عضو",
+		"inviteDialog": {
+			"title": "دعوت عضو",
+			"emailLabel": "ایمیل",
+			"emailPlaceholder": "member@example.com",
+			"roleLabel": "نقش",
+			"submit": "ارسال دعوت",
+			"sent": "دعوت ارسال شد.",
+			"cancel": "لغو"
+		},
+		"pendingTitle": "دعوت‌های در انتظار",
+		"pendingEmpty": "دعوت در انتظاری وجود ندارد",
+		"currentTitle": "اعضای فعلی",
+		"role": {
+			"owner": "مالک",
+			"admin": "ادمین",
+			"manager": "مدیر",
+			"instructor": "استاد",
+			"staff": "کارمند",
+			"viewer": "بیننده"
+		},
+		"accept": "پذیرفتن",
+		"decline": "رد کردن"
+	},
+	"instructorStudents": {
+		"title": "شاگردان",
+		"subtitle": "{count, plural, =0 {بدون شاگرد} one {# شاگرد} other {# شاگرد}}",
+		"searchPlaceholder": "جستجوی شاگردان...",
+		"classroomFilterAll": "همه صنف‌ها",
+		"table": {
+			"name": "نام",
+			"contact": "اطلاعات تماس",
+			"classrooms": "صنف‌ها",
+			"joinedAt": "تاریخ شمولیت"
+		},
+		"empty": "هیچ شاگردی پیدا نشد.",
+		"loading": "در حال بارگذاری شاگردان...",
+		"unnamedStudent": "شاگرد بدون نام",
+		"showing": "نمایش {from} تا {to} از {total} شاگرد",
+		"previous": "قبلی",
+		"next": "بعدی"
+	},
+	"verificationPending": {
+		"instructor": {
+			"title": "حساب استادی شما در حال بررسی است",
+			"body": "از ثبت‌نام شما به عنوان استاد سپاسگزاریم. تیم ما در حال بررسی حساب شماست و به‌زودی آن را تأیید می‌کند. پس از تأیید می‌توانید به داشبورد خود دسترسی پیدا کنید."
+		},
+		"school": {
+			"title": "مکتب شما در حال بررسی است",
+			"body": "از ثبت مکتب شما سپاسگزاریم. تیم ما در حال بررسی آن است و به‌زودی آن را تأیید می‌کند. پس از تأیید می‌توانید به داشبورد مکتب دسترسی پیدا کنید."
+		},
+		"default": {
+			"title": "حساب در انتظار بررسی",
+			"body": "حساب شما در انتظار تأیید است. پس از بررسی به شما اطلاع خواهیم داد."
+		},
+		"statusBadge": "در انتظار تأیید",
+		"backHome": "بازگشت به خانه",
+		"signOut": "خروج"
+	},
+	"reviews": {
+		"title": "{count, plural, one {# نظر} other {# نظر}}",
+		"basedOn": "بر اساس {count, plural, one {# نظر} other {# نظر}}",
+		"yourRating": "امتیاز شما",
+		"ratingValue": "{rating} از ۵ ستاره",
+		"commentPlaceholder": "تجربه‌ی خود را به اشتراک بگذارید (اختیاری)",
+		"cancel": "لغو",
+		"submit": "ثبت نظر",
+		"ratingRequired": "لطفاً یک امتیاز انتخاب کنید.",
+		"submitSuccess": "نظر شما ثبت شد.",
+		"submitFailed": "ثبت نظر ناموفق بود.",
+		"deleteSuccess": "نظر حذف شد.",
+		"deleteFailed": "حذف نظر ناموفق بود.",
+		"writeReview": "ثبت نظر",
+		"editReview": "ویرایش نظر",
+		"youReviewedThis": "شما به این نظر داده‌اید",
+		"anonymous": "ناشناس",
+		"you": "شما",
+		"delete": "حذف",
+		"noReviewsYet": "هنوز نظری ثبت نشده. اولین نفری باشید که تجربه‌ی خود را به اشتراک می‌گذارد.",
+		"loadMore": "بیشتر ببینید",
+		"signInPrompt": "برای ثبت نظر وارد حساب خود شوید.",
+		"signIn": "ورود",
+		"enrollPrompt": "برای ثبت نظر، ابتدا ثبت‌نام کنید و آن را تجربه کنید."
+	},
+	"pwa": {
+		"installTitle": "نصب برنامه ابزار کانکور",
+		"installDescription": "برنامه ما را برای دسترسی سریع‌تر، قابلیت مطالعه آفلاین و تجربه کامل نیتیو روی دستگاه خود نصب کنید.",
+		"installButton": "نصب برنامه",
+		"maybeLater": "شاید بعداً",
+		"feature1": "دسترسی آفلاین به درس‌ها و کتابخانه",
+		"feature2": "فلش‌کارت‌های مرور با فاصله",
+		"feature3": "سرعت بالا و اجرای فوری",
+		"iosInstructionsTitle": "راهنمای نصب در آیفون (iOS)",
+		"iosStep1": "دکمه اشتراک‌گذاری (Share) را لمس کنید",
+		"iosStep2": "پایین بروید و گزینه 'Add to Home Screen' را انتخاب کنید"
+	},
+	"offline": {
+		"bannerText": "شما هم‌اکنون آفلاین هستید. محتوای ذخیره‌شده نمایش داده می‌شود.",
+		"bannerRestored": "اتصال اینترنت برقرار شد!",
+		"title": "عدم دسترسی به اینترنت",
+		"subtitle": "ارتباط اینترنتی شما قطع است. نگران نباشید، همچنان می‌توانید به فلش‌کارت‌های ذخیره‌شده و کتابخانه دسترسی داشته باشید.",
+		"retryButton": "تلاش مجدد برای اتصال",
+		"goFlashcards": "رفتن به فلش‌کارت‌ها",
+		"goLibrary": "رفتن به کتابخانه",
+		"statusOffline": "حالت آفلاین",
+		"statusOnline": "بازگشت به آنلاین"
+	}
+}

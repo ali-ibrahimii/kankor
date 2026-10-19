@@ -1,0 +1,12 @@
+{
+	"crons": [
+		{
+			"path": "/api/cron/deliver-telegram-notifications",
+			"schedule": "0 0 * * *"
+		},
+		{
+			"path": "/api/cron/deliver-push-notifications",
+			"schedule": "0 0 * * *"
+		}
+	]
+}
