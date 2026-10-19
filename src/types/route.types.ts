@@ -1,131 +1,134 @@
 // AUTO-GENERATED FILE — DO NOT EDIT
 
 export type StaticRoute =
-	| "/terms-of-use"
-	| "/terms-of-use/content.mdx"
+	| "/.well-known/assetlinks.json"
+	| "/about"
+	| "/courses"
+	| "/decks"
+	| "/libraries"
+	| "/"
+	| "/quizzes"
+	| "/search"
+	| "/verify"
 	| "/delete-account"
 	| "/delete-account/content.mdx"
 	| "/privacy-policy"
 	| "/privacy-policy/content.mdx"
-	| "/auth/signup"
-	| "/auth/forgot-password"
-	| "/auth/reset-password"
+	| "/terms-of-use"
+	| "/terms-of-use/content.mdx"
 	| "/auth/confirm-email"
+	| "/auth/forgot-password"
 	| "/auth/login"
-	| "/verify"
-	| "/libraries"
-	| "/about"
-	| "/search"
-	| "/decks"
-	| "/courses"
-	| "/"
-	| "/quizzes"
+	| "/auth/reset-password"
+	| "/auth/signup"
 	| "/d"
-	| "/d/tests/registered"
-	| "/d/tests/passed"
-	| "/d/library"
-	| "/d/my-decks"
-	| "/d/decks"
-	| "/d/decks/practice"
-	| "/d/courses"
+	| "/d/account"
 	| "/d/bookmarks"
 	| "/d/classrooms"
-	| "/d/wallet"
-	| "/d/account"
+	| "/d/courses"
+	| "/d/decks"
+	| "/d/decks/practice"
+	| "/d/library"
 	| "/d/my-courses"
+	| "/d/my-decks"
 	| "/d/notifications"
+	| "/d/tests/passed"
+	| "/d/tests/registered"
+	| "/d/wallet"
+	| "/d/certificates"
 	| "/d/admin"
-	| "/d/admin/grades"
-	| "/d/admin/provinces"
-	| "/d/admin/discounts"
-	| "/d/admin/libraries"
-	| "/d/admin/decks"
+	| "/d/admin/agencies"
 	| "/d/admin/courses"
+	| "/d/admin/decks"
+	| "/d/admin/discounts"
+	| "/d/admin/grades"
+	| "/d/admin/libraries"
+	| "/d/admin/notifications"
+	| "/d/admin/provinces"
+	| "/d/admin/quizzes"
+	| "/d/admin/schools"
 	| "/d/admin/users/instructors"
 	| "/d/admin/users/students"
-	| "/d/admin/schools"
-	| "/d/admin/agencies"
-	| "/d/admin/quizzes"
-	| "/d/admin/notifications"
 	| "/d/instructor"
-	| "/d/instructor/discounts"
-	| "/d/instructor/decks"
-	| "/d/instructor/students"
-	| "/d/instructor/courses"
-	| "/d/instructor/earnings"
-	| "/d/instructor/classrooms"
 	| "/d/instructor/account"
-	| "/d/instructor/quizzes"
+	| "/d/instructor/classrooms"
+	| "/d/instructor/courses"
+	| "/d/instructor/decks"
+	| "/d/instructor/discounts"
+	| "/d/instructor/earnings"
 	| "/d/instructor/notifications"
+	| "/d/instructor/quizzes"
+	| "/d/instructor/students"
 	| "/offline"
 	| "/verification-pending"
-	| "/.well-known/assetlinks.json"
-	| "/api/omr/scan"
-	| "/api/omr/print"
-	| "/api/auth/signout"
+	| "/demo"
 	| "/api/auth/callback"
-	| "/api/telegram/webhook"
+	| "/api/auth/signout"
+	| "/api/cron/deliver-push-notifications"
+	| "/api/cron/deliver-telegram-notifications"
+	| "/api/import/google-sheet"
+	| "/api/omr/print"
+	| "/api/omr/scan"
+	| "/api/slack/interactions"
 	| "/api/slack/webhook/instructor-signup"
 	| "/api/slack/webhook/school-created"
-	| "/api/slack/interactions"
-	| "/api/webhooks/notification-created"
-	| "/api/import/google-sheet"
-	| "/api/cron/deliver-push-notifications"
-	| "/api/cron/deliver-telegram-notifications";
+	| "/api/telegram/webhook"
+	| "/api/webhooks/notification-created";
 
 export type DynamicRoute =
-	| `/verify/:code`
-	| `/libraries/:slug`
-	| `/decks/:slug`
 	| `/courses/:slug`
+	| `/decks/:slug`
+	| `/libraries/:slug`
 	| `/quizzes/:slug`
-	| `/watch/u/:id`
-	| `/d/library/:slug`
-	| `/d/decks/:slug/edit`
+	| `/verify/:code`
+	| `/d/classrooms/:classroom_id`
 	| `/d/courses/:slug/learn/:lesson_id`
 	| `/d/courses/:slug`
-	| `/d/classrooms/:classroom_id`
+	| `/d/decks/:slug/edit`
+	| `/d/library/:slug`
 	| `/d/my-courses/:slug`
-	| `/d/agency/:agency_id`
-	| `/d/agency/:agency_id/charge`
-	| `/d/agency/:agency_id/settlements`
-	| `/d/agency/:agency_id/disputes`
-	| `/d/agency/:agency_id/instructors`
-	| `/d/agency/:agency_id/decks`
-	| `/d/agency/:agency_id/decks/:slug/edit`
-	| `/d/agency/:agency_id/transactions`
-	| `/d/agency/:agency_id/courses`
-	| `/d/agency/:agency_id/courses/new/:course_id`
-	| `/d/agency/:agency_id/members`
-	| `/d/agency/:agency_id/schools`
-	| `/d/agency/:agency_id/quizzes`
-	| `/d/agency/:agency_id/quizzes/:slug`
-	| `/d/agency/:agency_id/notifications`
-	| `/d/admin/libraries/:slug`
-	| `/d/admin/decks/:slug/edit`
+	| `/d/admin/agencies/:agency_id`
 	| `/d/admin/courses/:slug`
+	| `/d/admin/decks/:slug/edit`
+	| `/d/admin/libraries/:slug`
+	| `/d/admin/quizzes/:slug`
+	| `/d/admin/schools/:school_id`
 	| `/d/admin/users/instructors/:user_id`
 	| `/d/admin/users/students/:user_id`
-	| `/d/admin/schools/:school_id`
-	| `/d/admin/agencies/:agency_id`
-	| `/d/admin/quizzes/:slug`
+	| `/d/agency/:agency_id`
+	| `/d/agency/:agency_id/charge`
+	| `/d/agency/:agency_id/courses`
+	| `/d/agency/:agency_id/courses/new/:course_id`
+	| `/d/agency/:agency_id/decks`
+	| `/d/agency/:agency_id/decks/:slug/edit`
+	| `/d/agency/:agency_id/disputes`
+	| `/d/agency/:agency_id/instructors`
+	| `/d/agency/:agency_id/members`
+	| `/d/agency/:agency_id/notifications`
+	| `/d/agency/:agency_id/quizzes`
+	| `/d/agency/:agency_id/quizzes/:slug`
+	| `/d/agency/:agency_id/schools`
+	| `/d/agency/:agency_id/settlements`
+	| `/d/agency/:agency_id/transactions`
+	| `/d/instructor/classrooms/:classroom_id/edit`
+	| `/d/instructor/courses/:slug`
+	| `/d/instructor/courses/new/:course_id`
+	| `/d/instructor/decks/:slug/edit`
+	| `/d/instructor/quizzes/:slug`
 	| `/d/school/:school_id`
-	| `/d/school/:school_id/discounts`
+	| `/d/school/:school_id/account`
+	| `/d/school/:school_id/courses`
+	| `/d/school/:school_id/courses/:slug`
+	| `/d/school/:school_id/courses/new/:course_id`
 	| `/d/school/:school_id/decks`
 	| `/d/school/:school_id/decks/:slug/edit`
-	| `/d/school/:school_id/courses`
-	| `/d/school/:school_id/courses/new/:course_id`
-	| `/d/school/:school_id/courses/:slug`
+	| `/d/school/:school_id/discounts`
 	| `/d/school/:school_id/earnings`
 	| `/d/school/:school_id/members`
-	| `/d/school/:school_id/account`
+	| `/d/school/:school_id/notifications`
 	| `/d/school/:school_id/quizzes`
 	| `/d/school/:school_id/quizzes/:slug`
-	| `/d/school/:school_id/notifications`
-	| `/d/instructor/decks/:slug/edit`
-	| `/d/instructor/courses/new/:course_id`
-	| `/d/instructor/courses/:slug`
-	| `/d/instructor/classrooms/:classroom_id/edit`
-	| `/d/instructor/quizzes/:slug`;
+	| `/watch/u/:id`
+	| `/demo/verify/:code`;
 
 export type AppRoute = StaticRoute | DynamicRoute;

@@ -598,6 +598,12 @@ export const routes = {
 				options: { locale?: string; isAbsolute?: boolean } = {}
 			) => buildPath("/d/bookmarks", {}, searchParams, options),
 		},
+		certificates: {
+			page: (
+				searchParams?: Record<string, string>,
+				options: { locale?: string; isAbsolute?: boolean } = {}
+			) => buildPath("/d/certificates", {}, searchParams, options),
+		},
 		classrooms: {
 			page: (
 				searchParams?: Record<string, string>,
@@ -1033,6 +1039,19 @@ export const routes = {
 				searchParams?: Record<string, string>,
 				options: { locale?: string; isAbsolute?: boolean } = {}
 			) => buildPath("/delete-account/content.mdx", {}, searchParams, options),
+		},
+	},
+	demo: {
+		page: (
+			searchParams?: Record<string, string>,
+			options: { locale?: string; isAbsolute?: boolean } = {}
+		) => buildPath("/demo", {}, searchParams, options),
+		verify: {
+			page: (
+				params: { code: string },
+				searchParams?: Record<string, string>,
+				options: { locale?: string; isAbsolute?: boolean } = {}
+			) => buildPath("/demo/verify/:code", params, searchParams, options),
 		},
 	},
 	home: {

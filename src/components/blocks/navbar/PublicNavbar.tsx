@@ -1,6 +1,6 @@
+import { GraduationCap, Sparkles } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { GlobalSearch } from "@/components/blocks/navbar/global-search";
-import { LogoBlueRounded } from "@/components/logos/logos";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
@@ -21,6 +21,7 @@ export async function PublicNavbar() {
 		{ href: routes.libraries.page(), label: t("header.libraries") },
 		{ href: routes.quizzes.page(), label: t("header.quizzes") },
 		{ href: routes.about.page(), label: t("header.aboutUs") },
+		{ href: routes.demo.page(), label: t("header.demo") },
 	];
 
 	return (
@@ -31,15 +32,15 @@ export async function PublicNavbar() {
 				aria-label={ta("name")}
 				className="flex shrink-0 items-center gap-3"
 			>
-				<div className="flex size-10 items-center justify-center">
-					<LogoBlueRounded className="size-8 shrink-0" />
+				<div className="flex size-10 items-center justify-center rounded-[14px] bg-[linear-gradient(135deg,#725bff,#343a6d)] text-[#b7f486] shadow-sm shadow-violet-300/50">
+					<GraduationCap className="size-6" />
 				</div>
 				<div className="hidden flex-col sm:flex">
-					<span className="text-lg font-semibold tracking-tight text-slate-900">
+					<span className="text-base font-extrabold tracking-tight text-[#19243b]">
 						{ta("name")}
 					</span>
-					<span className="text-[6px] font-semibold uppercase tracking-[0.32em] text-slate-500">
-						Educational Platform
+					<span className="text-[9px] font-semibold text-slate-400">
+						{t("showcase.modulesLabel")}
 					</span>
 				</div>
 			</Link>
@@ -47,7 +48,7 @@ export async function PublicNavbar() {
 			{/* Desktop Navigation */}
 			<div className="hidden items-center gap-2 lg:flex">
 				<div className="hidden items-center px-[4px] py-1 lg:flex">
-					{navLinks.map((link) => (
+					{navLinks.slice(0, -1).map((link) => (
 						<DesktopNavLink key={link.href} href={link.href}>
 							{link.label}
 						</DesktopNavLink>
@@ -59,6 +60,13 @@ export async function PublicNavbar() {
 			<div className="flex items-center w-full md:w-auto gap-2">
 				<GlobalSearch classes={{ container: "grow md:grow-0" }} />
 				<LocaleSwitcher type="group" />
+				<Link
+					href={routes.demo.page()}
+					className="hidden items-center gap-1.5 rounded-xl bg-[#eee9ff] px-3.5 py-2.5 text-xs font-extrabold text-[#6545c9] transition hover:bg-[#e4daff] xl:inline-flex"
+				>
+					<Sparkles className="size-3.5" />
+					{t("header.demo")}
+				</Link>
 
 				<PublicNavbarAuthButton
 					signInLabel={t("header.signIn")}

@@ -34,12 +34,11 @@ const NavbarScroll = ({ children }: { children: ReactNode }) => {
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
 	return (
-		<header className="fixed top-1.5 z-50 px-3 w-full transition-all duration-300 lg:px-4 bg-transparent">
+		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#e7e8ef] bg-white/90 px-3 backdrop-blur-2xl transition-all duration-300 lg:px-4">
 			<nav
 				className={cn(
-					"flex justify-between mx-auto max-w-7xl rounded-xl border py-1.5 lg:py-2.5 border-slate-200/80 bg-white/80 px-4 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-lg transition-all duration-300 lg:px-3.5 gap-2",
-					scrolled &&
-						"border-slate-200/70 bg-white/70 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
+					"flex min-h-[64px] items-center justify-between gap-2 mx-auto max-w-7xl px-1 transition-all duration-300 lg:min-h-[82px] lg:px-3",
+					scrolled && "bg-white/70"
 				)}
 			>
 				{children}
@@ -63,10 +62,10 @@ export function DesktopNavLink({
 		<Link
 			href={href}
 			className={cn(
-				"rounded-full px-2 xl:px-4 py-2 text-sm font-medium transition-all duration-200",
+				"rounded-xl px-2 xl:px-3 py-2 text-[13px] font-semibold transition-all duration-200",
 				active
-					? "bg-white text-[#0f4f9d] shadow-sm ring-1 ring-slate-200"
-					: "text-slate-600 hover:bg-white hover:text-slate-950"
+					? "bg-[#f0ebff] text-[#684bd0]"
+					: "text-slate-600 hover:bg-[#f5f2ff] hover:text-[#684bd0]"
 			)}
 		>
 			{children}
@@ -89,9 +88,9 @@ export function PublicNavbarAuthButton({
 			className={buttonVariants({
 				variant: isAuthenticated ? "ghost" : "default",
 				class: cn(
-					"hidden md:inline-flex border rounded-full! text-sm font-medium transition-colors",
+					"hidden md:inline-flex border rounded-xl! text-xs font-bold transition-colors",
 					{
-						"rounded-md border-gray-800 bg-slate-900 px-4 py-2 hover:bg-gray-800 text-gray-200":
+						"border-[#17233a] bg-[#17233a] px-4 py-2 hover:bg-[#303753] text-white":
 							!isAuthenticated,
 						"px-0!": isAuthenticated,
 					}
