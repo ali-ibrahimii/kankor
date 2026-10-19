@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, GraduationCap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -20,6 +20,7 @@ import { ResourceDiscussionView } from "@/components/blocks/discussions/Resource
 import { ReviewsSection } from "@/components/blocks/reviews";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/providers/auth.provider";
@@ -37,6 +38,7 @@ export default function CourseDetailClient({
 	course,
 }: CourseDetailClientProps) {
 	const t = useTranslations("courses");
+	const tDetail = useTranslations("courses.detail");
 	const router = useRouter();
 	const { refetchProfile } = useAuth();
 	const [isEnrolling, setIsEnrolling] = React.useState(false);
@@ -118,6 +120,51 @@ export default function CourseDetailClient({
 							}
 						/>
 					</aside>
+
+					{/* Public profiles help learners choose with confidence before enrolling. */}
+					{(course.instructor?.slug || course.school_id) && (
+						<div className="flex flex-wrap gap-3 @4xl:col-start-1">
+							{course.instructor?.slug && (
+								<Link
+									href={`/instructors/${course.instructor.slug}`}
+									className="group flex min-w-[220px] flex-1 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md dark:bg-card"
+								>
+									<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-violet-100 text-lg font-extrabold text-violet-700">
+										{course.instructor.name?.slice(0, 1) || "؟"}
+									</span>
+									<span className="min-w-0 flex-1">
+										<small className="block text-[11px] text-muted-foreground">
+											{tDetail("instructor")}
+										</small>
+										<strong className="mt-0.5 block truncate text-sm">
+											{course.instructor.name}
+										</strong>
+									</span>
+									<span className="text-xs font-bold text-violet-700">
+										{tDetail("visitInstructor")}
+									</span>
+								</Link>
+							)}
+							{course.school_id && (
+								<Link
+									href={`/schools/${course.school_id}`}
+									className="group flex min-w-[220px] flex-1 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md dark:bg-card"
+								>
+									<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+										<GraduationCap className="size-5" />
+									</span>
+									<span className="min-w-0 flex-1">
+										<small className="block text-[11px] text-muted-foreground">
+											{tDetail("about")}
+										</small>
+										<strong className="mt-0.5 block truncate text-sm">
+											{tDetail("visitSchool")}
+										</strong>
+									</span>
+								</Link>
+							)}
+						</div>
+					)}
 
 					{/* About + curriculum */}
 					<div className="min-w-0 space-y-10 @4xl:col-start-1">

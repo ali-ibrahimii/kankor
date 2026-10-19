@@ -34,11 +34,11 @@ const NavbarScroll = ({ children }: { children: ReactNode }) => {
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#e7e8ef] bg-white/90 px-3 backdrop-blur-2xl transition-all duration-300 lg:px-4">
+		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#e7e8ef] bg-white/90 px-3 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#141b2c]/90 lg:px-4">
 			<nav
 				className={cn(
 					"flex min-h-[64px] items-center justify-between gap-2 mx-auto max-w-7xl px-1 transition-all duration-300 lg:min-h-[82px] lg:px-3",
-					scrolled && "bg-white/70"
+					scrolled && "bg-white/70 dark:bg-[#141b2c]/75"
 				)}
 			>
 				{children}
