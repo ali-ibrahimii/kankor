@@ -19,11 +19,7 @@ import {
 	CommandItem,
 	CommandList,
 } from "@/components/ui/command";
-import {
-	InputGroup,
-	InputGroupAddon,
-	InputGroupInput,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group";
 import { useSearchSuggestions } from "@/hooks/use-search-suggestions";
 import { useRouter } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
@@ -115,12 +111,12 @@ export function GlobalSearch({
 				loop
 				className="overflow-visible bg-transparent"
 			>
-				<InputGroup className={cn("bg-white/70 ")}>
-					{/* <CommandPrimitive.Input */}
-					<InputGroupInput
+				<InputGroup className="bg-white/70">
+					<CommandPrimitive.Input
+						data-slot="input-group-control"
 						value={query}
-						onChange={(e) => {
-							setQuery(e.target.value);
+						onValueChange={(value) => {
+							setQuery(value);
 							setOpen(true);
 						}}
 						onFocus={() => setOpen(true)}
@@ -137,7 +133,7 @@ export function GlobalSearch({
 						placeholder={
 							locale === "fa" || locale === "ps" ? "جستجو" : "Search..."
 						}
-						className="w-full bg-transparent text-sm outline-hidden placeholder:text-slate-400"
+						className="h-9 min-w-0 flex-1 border-0 bg-transparent px-2.5 text-sm outline-hidden placeholder:text-slate-400"
 					/>
 					<InputGroupAddon>
 						<Search className="size-4 text-slate-400" />

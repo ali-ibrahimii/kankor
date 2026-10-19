@@ -4,11 +4,20 @@ import { BaseParams } from "@/types/common.types";
 
 export default async function ClassroomsPage({
 	params,
+	searchParams,
 }: {
 	params: Promise<BaseParams>;
+	searchParams: Promise<{ join?: string | string[] }>;
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
+	const { join } = await searchParams;
+	// The invite is only a prefilled code. Students still submit a request
+	// themselves; the teacher must approve it before membership is granted.
+	const inviteCode =
+		typeof join === "string" && join.trim().length > 0 && join.length <= 80
+			? join.trim()
+			: undefined;
 
 	const t = await getTranslations("classrooms");
 
@@ -21,7 +30,7 @@ export default async function ClassroomsPage({
 				</p>
 			</div>
 
-			<MyClassroomsList />
+			<MyClassroomsList inviteCode={inviteCode} />
 		</div>
 	);
 }

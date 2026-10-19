@@ -4,11 +4,12 @@ import { useAtomValue, useSetAtom } from "jotai";
 import {
 	CheckIcon,
 	CopyIcon,
+	LinkIcon,
 	RefreshCwIcon,
 	TrashIcon,
 	UsersIcon,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -21,6 +22,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { routes } from "@/lib/routes";
 import {
 	regenerateJoinCode,
 	removeClassroomMember,
@@ -151,15 +153,23 @@ function MemberRow({ member }: { member: ClassroomMember }) {
 
 function JoinCodePanel() {
 	const t = useTranslations("classroomBuilder");
+	const locale = useLocale();
 	const classroom = useAtomValue(classroomAtom);
 	const patchClassroom = useSetAtom(patchClassroomAtom);
-	const [copying, setCopying] = React.useState(false);
+	const [copied, setCopied] = React.useState<"code" | "link" | null>(null);
 	const [regenerating, setRegenerating] = React.useState(false);
 
-	async function handleCopy() {
-		await navigator.clipboard.writeText(classroom.join_code);
-		setCopying(true);
-		setTimeout(() => setCopying(false), 1500);
+	async function handleCopy(value: string, kind: "code" | "link") {
+		try {
+			await navigator.clipboard.writeText(value);
+			setCopied(kind);
+			toast.success(
+				t(kind === "code" ? "members.codeCopied" : "members.linkCopied")
+			);
+			setTimeout(() => setCopied(null), 1500);
+		} catch {
+			toast.error(t("members.copyFailed"));
+		}
 	}
 
 	async function handleRegenerate() {
@@ -188,10 +198,10 @@ function JoinCodePanel() {
 				<Button
 					variant="outline"
 					size="icon"
-					onClick={handleCopy}
+					onClick={() => handleCopy(classroom.join_code, "code")}
 					aria-label={t("members.copyCode")}
 				>
-					{copying ? (
+					{copied === "code" ? (
 						<CheckIcon className="size-4 text-green-600" />
 					) : (
 						<CopyIcon className="size-4" />
@@ -208,6 +218,33 @@ function JoinCodePanel() {
 						className={`size-4 ${regenerating ? "animate-spin" : ""}`}
 					/>
 				</Button>
+			</div>
+			<div className="mt-3 flex flex-wrap items-center gap-3">
+				<Button
+					type="button"
+					variant="secondary"
+					size="sm"
+					onClick={() => {
+						const path = routes.d.classrooms.page(
+							{ join: classroom.join_code },
+							{ locale }
+						);
+						void handleCopy(
+							new URL(path, window.location.origin).toString(),
+							"link"
+						);
+					}}
+				>
+					{copied === "link" ? (
+						<CheckIcon className="size-4" />
+					) : (
+						<LinkIcon className="size-4" />
+					)}
+					{t("members.copyInviteLink")}
+				</Button>
+				<p className="text-xs text-muted-foreground">
+					{t("members.inviteLinkHint")}
+				</p>
 			</div>
 		</div>
 	);

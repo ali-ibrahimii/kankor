@@ -1,4 +1,5 @@
 import {
+	Award,
 	Bell,
 	Bookmark,
 	BookOpen,
@@ -66,6 +67,11 @@ export default async function DashboardLayout({
 					label: t("classrooms"),
 					href: routes.d.classrooms.page(),
 					icon: <School />,
+				},
+				{
+					label: t("certificates"),
+					href: routes.d.certificates.page(),
+					icon: <Award />,
 				},
 				{
 					label: t("flashcards"),

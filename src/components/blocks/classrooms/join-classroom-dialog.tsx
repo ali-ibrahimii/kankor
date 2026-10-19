@@ -18,14 +18,31 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "@/i18n/navigation";
+import { routes } from "@/lib/routes";
 import { requestJoinClassroom } from "./actions";
 
-export function JoinClassroomDialog() {
+export function JoinClassroomDialog({ inviteCode }: { inviteCode?: string }) {
 	const t = useTranslations("classrooms");
+	const router = useRouter();
 	const queryClient = useQueryClient();
 	const [open, setOpen] = React.useState(false);
 	const [code, setCode] = React.useState("");
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+	React.useEffect(() => {
+		if (inviteCode) {
+			setCode(inviteCode);
+			setOpen(true);
+		}
+	}, [inviteCode]);
+
+	function handleOpenChange(next: boolean) {
+		setOpen(next);
+		// Clear the invite query so closing or successfully joining does not
+		// reopen the dialog on refresh; the typed code is kept for manual retry.
+		if (!next && inviteCode) router.replace(routes.d.classrooms.page());
+	}
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
@@ -39,12 +56,13 @@ export function JoinClassroomDialog() {
 		}
 		toast.success(t("joinDialog.requested"));
 		setCode("");
-		setOpen(false);
-		queryClient.invalidateQueries({ queryKey: ["my_classrooms"] });
+		handleOpenChange(false);
+		void queryClient.invalidateQueries({ queryKey: ["my_classrooms"] });
+		void queryClient.invalidateQueries({ queryKey: ["my_classroom_requests"] });
 	}
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog open={open} onOpenChange={handleOpenChange}>
 			<DialogTrigger asChild>
 				<Button size="sm">
 					<LogInIcon />

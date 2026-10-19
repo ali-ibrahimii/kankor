@@ -40,7 +40,7 @@ function ClassroomCard({ classroom }: { classroom: MyClassroom }) {
 	);
 }
 
-export function MyClassroomsList() {
+export function MyClassroomsList({ inviteCode }: { inviteCode?: string }) {
 	const t = useTranslations("classrooms");
 
 	const classroomsQuery = useQuery({
@@ -60,7 +60,7 @@ export function MyClassroomsList() {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex items-center justify-end">
-				<JoinClassroomDialog />
+				<JoinClassroomDialog inviteCode={inviteCode} />
 			</div>
 
 			<PendingRequestsSection />
