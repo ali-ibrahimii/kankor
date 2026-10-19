@@ -1,4 +1,4 @@
-import { GraduationCap, Sparkles } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { CoursesMegaMenu } from "@/components/blocks/navbar/courses-mega-menu";
 import { GlobalSearch } from "@/components/blocks/navbar/global-search";
@@ -25,7 +25,6 @@ export async function PublicNavbar() {
 		{ href: routes.quizzes.page(), label: t("header.quizzes") },
 		{ href: routes.about.page(), label: t("header.aboutUs") },
 		{ href: "/roadmap", label: t("header.roadmap") },
-		{ href: routes.demo.page(), label: t("header.demo") },
 	];
 
 	return (
@@ -36,7 +35,7 @@ export async function PublicNavbar() {
 				aria-label={ta("name")}
 				className="flex shrink-0 items-center gap-3"
 			>
-				<div className="flex size-10 items-center justify-center rounded-[14px] bg-[linear-gradient(135deg,#725bff,#343a6d)] text-[#b7f486] shadow-sm shadow-violet-300/50">
+				<div className="flex size-10 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/25 transition-transform hover:-rotate-3 hover:scale-105">
 					<GraduationCap className="size-6" />
 				</div>
 				<div className="hidden flex-col sm:flex">
@@ -80,13 +79,6 @@ export async function PublicNavbar() {
 				<GlobalSearch classes={{ container: "grow md:grow-0" }} />
 				<LocaleSwitcher type="group" />
 				<ThemeSwitcher label={t("header.themeToggle")} />
-				<Link
-					href={routes.demo.page()}
-					className="hidden items-center gap-1.5 rounded-xl bg-[#eee9ff] px-3.5 py-2.5 text-xs font-extrabold text-[#6545c9] transition hover:bg-[#e4daff] xl:inline-flex"
-				>
-					<Sparkles className="size-3.5" />
-					{t("header.demo")}
-				</Link>
 
 				<PublicNavbarAuthButton
 					signInLabel={t("header.signIn")}

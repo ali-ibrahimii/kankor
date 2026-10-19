@@ -1,11 +1,9 @@
 import {
-	ArrowDownLeft,
 	ArrowLeft,
 	ArrowRight,
 	Award,
 	BookOpen,
 	Check,
-	ChevronLeft,
 	CloudDownload,
 	FileText,
 	Flame,
@@ -32,6 +30,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 		getTranslations({ locale, namespace: "app" }),
 	]);
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
+
 	const modules = [
 		{
 			key: "school",
@@ -62,6 +61,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			symbol: "⌘",
 		},
 	] as const;
+
 	const roles = [
 		{
 			icon: GraduationCap,
@@ -91,6 +91,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			tint: "bg-[#e0ecff] text-[#427dc5]",
 		},
 	];
+
 	return (
 		<div className="min-h-screen overflow-hidden bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
 			<section className="mx-auto max-w-[1320px] px-4 pb-0 pt-4 sm:px-6 sm:pt-7 lg:px-8">
@@ -121,8 +122,8 @@ export default async function HomeContent({ locale }: { locale: string }) {
 							</p>
 							<div className="mt-8 flex flex-col gap-3 sm:flex-row">
 								<Link
-									href={routes.demo.page()}
-									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 py-3 text-sm font-extrabold text-[#17233a] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#c9f8a2]"
+									href={routes.courses.page()}
+									className="button-primary bg-[#b7f486] text-[#17233a] hover:bg-[#c9f8a2] hover:shadow-primary/25 shadow-black/20"
 								>
 									<Sparkles className="size-4" />
 									{t("showcase.previewCta")}
@@ -137,16 +138,14 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</Link>
 							</div>
 							<div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[11px] font-semibold text-white/65">
-								{(["featureOne", "featureTwo", "featureThree"] as const).map(
-									(key) => (
-										<span key={key} className="inline-flex items-center gap-2">
-											<span className="flex size-5 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
-												<Check className="size-3" />
-											</span>
-											{t(`showcase.${key}`)}
+								{["featureOne", "featureTwo", "featureThree"].map((key) => (
+									<span key={key} className="inline-flex items-center gap-2">
+										<span className="flex size-5 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
+											<Check className="size-3" />
 										</span>
-									)
-								)}
+										{t(`showcase.${key}`)}
+									</span>
+								))}
 							</div>
 						</div>
 						<div className="relative mx-auto w-full max-w-[485px] pb-9 pt-8 sm:px-5">
@@ -187,11 +186,11 @@ export default async function HomeContent({ locale }: { locale: string }) {
 										<div className="h-full w-[76%] rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]" />
 									</div>
 									<div className="mt-6 space-y-4">
-										{[
+										([
 											{ key: "subjectMath", value: 84, color: "#b7f486" },
 											{ key: "subjectPhysics", value: 65, color: "#a58cff" },
 											{ key: "subjectBio", value: 72, color: "#7ce5d1" },
-										].map((item) => (
+										] as const).map((item) => (
 											<div key={item.key}>
 												<div className="mb-2 flex items-center justify-between text-[11px]">
 													<span className="font-semibold text-white/75">
@@ -260,7 +259,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 sm:px-6 lg:grid-cols-4 lg:px-8">
-				{[
+				([
 					{
 						value: t("stats.flashcards"),
 						label: t("stats.flashcardsLabel"),
@@ -285,10 +284,10 @@ export default async function HomeContent({ locale }: { locale: string }) {
 						icon: Users,
 						tint: "bg-[#ffeddf] text-[#c87949]",
 					},
-				].map((item) => (
+				] as const).map((item) => (
 					<div
 						key={item.label}
-						className="flex items-center gap-3 rounded-[22px] border border-[#e9eaf2] bg-white px-4 py-5 shadow-[0_14px_40px_-32px_rgba(31,41,75,.25)] sm:px-5"
+						className="soft-card flex items-center gap-3 p-4 sm:px-5"
 					>
 						<span
 							className={`flex size-11 shrink-0 items-center justify-center rounded-2xl ${item.tint}`}
@@ -311,19 +310,19 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			>
 				<div className="mb-9 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
 					<div>
-						<span className="inline-flex rounded-full bg-[#f0ecff] px-3 py-1.5 text-[11px] font-bold text-[#694bd2]">
+						<span className="section-kicker">
 							{t("showcase.modulesLabel")}
 						</span>
-						<h2 className="mt-4 text-[1.9rem] font-extrabold leading-[1.5] tracking-tight sm:text-[2.5rem]">
+						<h2 className="section-title">
 							{t("app.heading")}
 						</h2>
-						<p className="mt-2 max-w-xl text-sm leading-7 text-slate-500 dark:text-slate-400">
+						<p className="section-copy">
 							{t("app.subtitle")}
 						</p>
 					</div>
 					<Link
-						href={routes.demo.page()}
-						className="inline-flex items-center gap-2 self-start text-sm font-bold text-violet-600 hover:underline"
+						href={routes.courses.page()}
+						className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline"
 					>
 						{t("showcase.previewCta")}
 						<Arrow className="size-4" />
@@ -334,7 +333,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 						<Link
 							key={key}
 							href={href}
-							className="group flex flex-col overflow-hidden rounded-[25px] border border-[#e9eaf2] bg-white shadow-[0_16px_44px_-34px_rgba(27,31,73,.32)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_-32px_rgba(92,70,202,.25)]"
+							className="soft-card card-hover flex flex-col overflow-hidden"
 						>
 							<div
 								className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${art}`}
@@ -378,13 +377,19 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</span>
 								<span className="size-2 rounded-full bg-[#57d4a7]" />
 							</div>
-							{["school", "flashcards", "tests"].map((key, index) => (
+							(["school", "flashcards", "tests"] as const).map((key, index) => (
 								<div
 									key={key}
 									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f8f7fd] p-3"
 								>
 									<span
-										className={`flex size-10 items-center justify-center rounded-xl ${index === 0 ? "bg-[#e6ddff] text-violet-600" : index === 1 ? "bg-[#dcf5e7] text-emerald-600" : "bg-[#ffe7d8] text-orange-600"}`}
+										className={`flex size-10 items-center justify-center rounded-xl ${
+											index === 0
+												? "bg-[#e6ddff] text-violet-600"
+												: index === 1
+													? "bg-[#dcf5e7] text-emerald-600"
+													: "bg-[#ffe7d8] text-orange-600"
+										}`}
 									>
 										{index === 0 ? (
 											<BookOpen className="size-5" />
@@ -413,7 +418,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 							{t("offline.subtitle")}
 						</p>
 						<div className="mt-7 space-y-5">
-							{([1, 2, 3] as const).map((num) => (
+							([1, 2, 3] as const).map((num) => (
 								<div key={num} className="flex items-start gap-3">
 									<span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl bg-[#e8f7e7] text-emerald-700">
 										<Check className="size-4" />
@@ -447,13 +452,13 @@ export default async function HomeContent({ locale }: { locale: string }) {
 				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
 			>
 				<div className="mx-auto mb-10 max-w-2xl text-center">
-					<span className="inline-flex rounded-full bg-[#f0ecff] px-3 py-1.5 text-[11px] font-bold text-[#694bd2]">
+					<span className="section-kicker">
 						{t("showcase.educatorLabel")}
 					</span>
-					<h2 className="mt-4 text-[1.9rem] font-extrabold leading-[1.5] sm:text-[2.5rem]">
+					<h2 className="section-title text-center mt-4">
 						{t("educators.heading")}
 					</h2>
-					<p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400">
+					<p className="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400 mx-auto max-w-xl">
 						{t("educators.subtitle")}
 					</p>
 				</div>
@@ -461,7 +466,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 					{roles.map((item) => (
 						<div
 							key={item.title}
-							className="flex flex-col rounded-[26px] border border-[#e9eaf2] bg-white p-6 shadow-[0_16px_44px_-34px_rgba(27,31,73,.32)] sm:p-7"
+							className="soft-card flex flex-col p-6 sm:p-7"
 						>
 							<span
 								className={`flex size-14 items-center justify-center rounded-[20px] ${item.tint}`}
@@ -505,8 +510,8 @@ export default async function HomeContent({ locale }: { locale: string }) {
 					</p>
 					<div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
 						<Link
-							href={routes.demo.page()}
-							className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 py-3 text-sm font-extrabold text-[#17233a] hover:bg-[#c9f8a2]"
+							href={routes.courses.page()}
+							className="button-primary bg-[#b7f486] text-[#17233a] hover:bg-[#c9f8a2] hover:shadow-primary/25 shadow-black/20"
 						>
 							{t("showcase.previewCta")}
 							<Arrow className="size-4" />
