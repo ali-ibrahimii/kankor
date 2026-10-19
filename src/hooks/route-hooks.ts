@@ -6,7 +6,9 @@ export function useIsPathActive(path?: string) {
 	const pathname = usePathname();
 	const route = path || pathname;
 	const locale = useLocale();
-	const clearPath = route.replace(`/${locale}`, "") || "/";
+	const clearPath = route.replace(new RegExp(`^/${locale}(?=/|$)`), "") || "/";
 	return (href: string) =>
-		href === "/" ? clearPath === "/" : clearPath.startsWith(href);
+		href === "/"
+			? clearPath === "/"
+			: clearPath === href || clearPath.startsWith(`${href}/`);
 }

@@ -28,10 +28,13 @@ import {
 	type LibrarySection,
 	STUDIES_CATEGORY_ID,
 } from "./section-categories";
-import type { LibraryBook, LibraryFilterOption } from "./types";
+import {
+	BOOK_SELECT,
+	type LibraryBook,
+	type LibraryFilterOption,
+} from "./types";
 
-export const BOOK_SELECT =
-	"id, slug, title, desc, uri, file_path, book_id, category_id, grade_id, subject_id, created_at, updated_at, books ( id, name, full_name ), categories ( id, name, slug ), grades ( id, name ), subjects ( id, name )";
+export { BOOK_SELECT };
 
 const SEARCH_COLUMNS = ["title", "desc"] as const;
 
@@ -81,71 +84,18 @@ function fixedSectionQueryFn(
 
 async function fetchLibraryOptions() {
 	const client = createClient();
-	const { data, error } = await client
-		.from("libraries")
-		.select(
-			"category_id, categories(id, name), subject_id, subjects(id, name), book_id, books(id, name), grade_id, grades(id, name)"
-		);
-
-	if (error) throw error;
-
-	const categoriesMap = new Map<string, LibraryFilterOption>();
-	const subjectsMap = new Map<string, LibraryFilterOption>();
-	const booksMap = new Map<string, LibraryFilterOption>();
-	const gradesMap = new Map<string, LibraryFilterOption>();
-
-	for (const row of data ?? []) {
-		if (
-			row.categories &&
-			typeof row.categories === "object" &&
-			"id" in row.categories &&
-			"name" in row.categories
-		) {
-			const cat = row.categories as LibraryFilterOption;
-			categoriesMap.set(cat.id, cat);
-		}
-		if (
-			row.subjects &&
-			typeof row.subjects === "object" &&
-			"id" in row.subjects &&
-			"name" in row.subjects
-		) {
-			const sub = row.subjects as LibraryFilterOption;
-			subjectsMap.set(sub.id, sub);
-		}
-		if (
-			row.books &&
-			typeof row.books === "object" &&
-			"id" in row.books &&
-			"name" in row.books
-		) {
-			const bk = row.books as LibraryFilterOption;
-			booksMap.set(bk.id, bk);
-		}
-		if (
-			row.grades &&
-			typeof row.grades === "object" &&
-			"id" in row.grades &&
-			"name" in row.grades
-		) {
-			const grd = row.grades as LibraryFilterOption;
-			gradesMap.set(grd.id, grd);
-		}
-	}
+	const [categoriesRes, subjectsRes, booksRes, gradesRes] = await Promise.all([
+		client.from("categories").select("id, name").order("name"),
+		client.from("subjects").select("id, name").order("name"),
+		client.from("books").select("id, name").order("name"),
+		client.from("grades").select("id, name").order("ordering"),
+	]);
 
 	return {
-		categories: Array.from(categoriesMap.values()).sort((a, b) =>
-			a.name.localeCompare(b.name)
-		),
-		subjects: Array.from(subjectsMap.values()).sort((a, b) =>
-			a.name.localeCompare(b.name)
-		),
-		books: Array.from(booksMap.values()).sort((a, b) =>
-			a.name.localeCompare(b.name)
-		),
-		grades: Array.from(gradesMap.values()).sort((a, b) =>
-			a.name.localeCompare(b.name)
-		),
+		categories: (categoriesRes.data ?? []) as LibraryFilterOption[],
+		subjects: (subjectsRes.data ?? []) as LibraryFilterOption[],
+		books: (booksRes.data ?? []) as LibraryFilterOption[],
+		grades: (gradesRes.data ?? []) as LibraryFilterOption[],
 	};
 }
 
@@ -163,6 +113,7 @@ export function LibraryCatalog({
 	const optionsQuery = useQuery({
 		queryKey: ["library-options"],
 		queryFn: fetchLibraryOptions,
+		staleTime: 5 * 60 * 1000,
 	});
 
 	const booksQuery = useQueryFilters<"libraries", LibraryBook[]>({

@@ -88,7 +88,6 @@ export function SignupForm({
 			setServerError(null);
 			const result = await signupAction(value);
 			if (result.error) {
-				console.log("error", result);
 				setServerError(result.code || result.error);
 			} else {
 				setSuccess(true);
@@ -265,7 +264,6 @@ export function SignupForm({
 										// clears immediately if the user fixes the password field.
 										onBlurListenTo: ["password"],
 										onChange: ({ value, fieldApi }) => {
-											console.log("value", value);
 											if (!value) return t("validation.required");
 											if (value !== fieldApi.form.getFieldValue("password"))
 												return t("validation.passwordMismatch");

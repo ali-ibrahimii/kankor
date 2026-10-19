@@ -1,4 +1,3 @@
-import { useLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { isRtl } from "@/i18n/routing";
 import { BaseParams } from "@/types/common.types";
@@ -26,8 +25,13 @@ export async function generateMetadata({
 	};
 }
 
-export default function AboutUsPage() {
-	const locale = useLocale();
+export default async function AboutUsPage({
+	params,
+}: {
+	params: Promise<BaseParams>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
 	const rtl = isRtl(locale);
 
 	return (

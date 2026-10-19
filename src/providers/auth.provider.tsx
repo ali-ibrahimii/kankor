@@ -7,6 +7,7 @@ import * as React from "react";
 import { signOutAction } from "@/lib/auth/actions";
 import { getDashboardPath } from "@/lib/auth/auth.util";
 import { CurrentUser } from "@/lib/auth/types";
+import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 
 const supabase = createClient();
@@ -148,7 +149,7 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 	const signOut = React.useCallback(async () => {
 		await signOutAction();
 		setAuthState({ status: "unauthenticated" });
-		router.push(`/${locale}/login`);
+		router.push(routes.auth.login.page(undefined, { locale }));
 		router.refresh();
 	}, [locale, router]);
 

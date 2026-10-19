@@ -5,6 +5,7 @@ import { Locale, locales } from "@/i18n";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { updateProfile } from "@/lib/auth/actions";
 import { cn } from "@/lib/utils";
+import { useIsAuthenticated } from "@/providers/auth.provider";
 import {
 	Select,
 	SelectContent,
@@ -27,14 +28,18 @@ export function LocaleSwitcher({
 	const t = useTranslations("landing");
 	const router = useRouter();
 	const pathname = usePathname();
+	const isAuthenticated = useIsAuthenticated();
 	const type = useResponsive({
 		md: _type,
 		base: responsive ? "select" : _type,
 	});
 
-	async function updateLocale(locale: string) {
-		router.replace(pathname, { locale });
-		const res = await updateProfile({ locale: locale as Locale });
+	async function updateLocale(nextLocale: string) {
+		if (!nextLocale || nextLocale === locale) return;
+		router.replace(pathname, { locale: nextLocale });
+		if (isAuthenticated) {
+			await updateProfile({ locale: nextLocale as Locale });
+		}
 	}
 
 	if (type === "group")
@@ -43,6 +48,10 @@ export function LocaleSwitcher({
 				size={"sm"}
 				variant="outline"
 				type="single"
+				value={locale}
+				onValueChange={(val) => {
+					if (val) updateLocale(val);
+				}}
 				className="border p-0.5 h-9"
 			>
 				{locales.map((l) => (
@@ -72,9 +81,8 @@ export function LocaleSwitcher({
 	return (
 		<Select
 			value={locale}
-			onValueChange={(locale) => {
-				updateLocale(locale);
-				router.push(pathname, { locale });
+			onValueChange={(nextLocale) => {
+				updateLocale(nextLocale);
 			}}
 		>
 			<SelectTrigger className="w-fit gap-1">

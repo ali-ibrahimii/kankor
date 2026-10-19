@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronRight, PanelRightIcon } from "lucide-react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import * as React from "react";
@@ -33,7 +32,7 @@ import {
 	SidebarMenuSubItem,
 	SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { dirOf, isRtl } from "@/i18n/routing";
 import { CurrentUser } from "@/lib/auth/types";
 import { cn } from "@/lib/utils";

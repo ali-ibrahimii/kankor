@@ -214,6 +214,16 @@ export function useQueryFilters<
 		return queryFn ?? defaultQueryFn<T, TResult>(selectColumns, searchColumns);
 	}, [queryFn, selectColumns, searchColumns]);
 
+	const serializedKey = useMemo(() => JSON.stringify(queryKey), [queryKey]);
+	const initialSerializedKeyRef = useRef(serializedKey);
+	const hasValidInitialData =
+		options.initialData !== undefined &&
+		(options.initialData as { data?: unknown })?.data != null;
+	const effectiveInitialData =
+		hasValidInitialData && serializedKey === initialSerializedKeyRef.current
+			? options.initialData
+			: undefined;
+
 	const queryResult = useQuery({
 		queryKey,
 		queryFn: () =>
@@ -224,7 +234,7 @@ export function useQueryFilters<
 		enabled,
 		staleTime,
 		gcTime,
-		initialData: options.initialData,
+		initialData: effectiveInitialData,
 		placeholderData: (prev) => prev,
 	});
 

@@ -1,23 +1,36 @@
-import { AppLogo } from "@/components/widgets/app-logo";
+import { setRequestLocale } from "next-intl/server";
+import { LogoBlueRounded } from "@/components/logos/logos";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 import { Link } from "@/i18n/navigation";
+import { routes } from "@/lib/routes";
+import { BaseParams } from "@/types/common.types";
 
-export default function AuthLayout({ children }: React.PropsWithChildren) {
+export default async function Layout({
+	children,
+	params,
+}: {
+	children: React.ReactNode;
+	params: Promise<BaseParams>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
+
 	return (
-		<div className="relative flex min-h-svh flex-col bg-muted">
-			<div className="flex flex-1 items-center justify-center p-6 md:p-10">
-				<div className="flex w-full max-w-sm flex-col gap-6">
-					<Link
-						href="/"
-						className="flex items-center gap-2 self-center font-medium"
-					>
-						<AppLogo className="w-20" variant="logo" />
-					</Link>
+		<div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+			<div className="w-full max-w-sm md:max-w-4xl">
+				<div className="flex flex-col gap-6">
+					<div className="flex flex-row items-center justify-between">
+						<Link
+							href={routes.home.page(undefined, { locale })}
+							aria-label="Kankor"
+							className="inline-flex items-center transition-opacity hover:opacity-85"
+						>
+							<LogoBlueRounded className="size-10" />
+						</Link>
+						<LocaleSwitcher />
+					</div>
 					{children}
 				</div>
-			</div>
-			<div className="flex md:fixed bottom-5 justify-center p-4 md:p-6">
-				<LocaleSwitcher type="group" />
 			</div>
 		</div>
 	);
