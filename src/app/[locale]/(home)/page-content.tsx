@@ -186,11 +186,13 @@ export default async function HomeContent({ locale }: { locale: string }) {
 										<div className="h-full w-[76%] rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]" />
 									</div>
 									<div className="mt-6 space-y-4">
-										([
-											{ key: "subjectMath", value: 84, color: "#b7f486" },
-											{ key: "subjectPhysics", value: 65, color: "#a58cff" },
-											{ key: "subjectBio", value: 72, color: "#7ce5d1" },
-										] as const).map((item) => (
+										{(
+											[
+												{ key: "subjectMath", value: 84, color: "#b7f486" },
+												{ key: "subjectPhysics", value: 65, color: "#a58cff" },
+												{ key: "subjectBio", value: 72, color: "#7ce5d1" },
+											] as const
+										).map((item) => (
 											<div key={item.key}>
 												<div className="mb-2 flex items-center justify-between text-[11px]">
 													<span className="font-semibold text-white/75">
@@ -259,32 +261,34 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 sm:px-6 lg:grid-cols-4 lg:px-8">
-				([
-					{
-						value: t("stats.flashcards"),
-						label: t("stats.flashcardsLabel"),
-						icon: Zap,
-						tint: "bg-[#eee8ff] text-[#6b4dd7]",
-					},
-					{
-						value: t("stats.offline"),
-						label: t("stats.offlineLabel"),
-						icon: WifiOff,
-						tint: "bg-[#e1f6ec] text-[#258263]",
-					},
-					{
-						value: t("stats.modules"),
-						label: t("stats.modulesLabel"),
-						icon: BookOpen,
-						tint: "bg-[#e6f1ff] text-[#3a79c2]",
-					},
-					{
-						value: t("showcase.statsRoles"),
-						label: t("showcase.statsRolesLabel"),
-						icon: Users,
-						tint: "bg-[#ffeddf] text-[#c87949]",
-					},
-				] as const).map((item) => (
+				{(
+					[
+						{
+							value: t("stats.flashcards"),
+							label: t("stats.flashcardsLabel"),
+							icon: Zap,
+							tint: "bg-[#eee8ff] text-[#6b4dd7]",
+						},
+						{
+							value: t("stats.offline"),
+							label: t("stats.offlineLabel"),
+							icon: WifiOff,
+							tint: "bg-[#e1f6ec] text-[#258263]",
+						},
+						{
+							value: t("stats.modules"),
+							label: t("stats.modulesLabel"),
+							icon: BookOpen,
+							tint: "bg-[#e6f1ff] text-[#3a79c2]",
+						},
+						{
+							value: t("showcase.statsRoles"),
+							label: t("showcase.statsRolesLabel"),
+							icon: Users,
+							tint: "bg-[#ffeddf] text-[#c87949]",
+						},
+					] as const
+				).map((item) => (
 					<div
 						key={item.label}
 						className="soft-card flex items-center gap-3 p-4 sm:px-5"
@@ -310,15 +314,9 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			>
 				<div className="mb-9 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
 					<div>
-						<span className="section-kicker">
-							{t("showcase.modulesLabel")}
-						</span>
-						<h2 className="section-title">
-							{t("app.heading")}
-						</h2>
-						<p className="section-copy">
-							{t("app.subtitle")}
-						</p>
+						<span className="section-kicker">{t("showcase.modulesLabel")}</span>
+						<h2 className="section-title">{t("app.heading")}</h2>
+						<p className="section-copy">{t("app.subtitle")}</p>
 					</div>
 					<Link
 						href={routes.courses.page()}
@@ -377,34 +375,36 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</span>
 								<span className="size-2 rounded-full bg-[#57d4a7]" />
 							</div>
-							(["school", "flashcards", "tests"] as const).map((key, index) => (
-								<div
-									key={key}
-									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f8f7fd] p-3"
-								>
-									<span
-										className={`flex size-10 items-center justify-center rounded-xl ${
-											index === 0
-												? "bg-[#e6ddff] text-violet-600"
-												: index === 1
-													? "bg-[#dcf5e7] text-emerald-600"
-													: "bg-[#ffe7d8] text-orange-600"
-										}`}
+							{(["school", "flashcards", "tests"] as const).map(
+								(key, index) => (
+									<div
+										key={key}
+										className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f8f7fd] p-3"
 									>
-										{index === 0 ? (
-											<BookOpen className="size-5" />
-										) : index === 1 ? (
-											<Zap className="size-5" />
-										) : (
-											<FileText className="size-5" />
-										)}
-									</span>
-									<span className="flex-1 text-xs font-bold text-slate-700">
-										{t(`app.${key}.title`)}
-									</span>
-									<Check className="size-4 text-emerald-600" />
-								</div>
-							))}
+										<span
+											className={`flex size-10 items-center justify-center rounded-xl ${
+												index === 0
+													? "bg-[#e6ddff] text-violet-600"
+													: index === 1
+														? "bg-[#dcf5e7] text-emerald-600"
+														: "bg-[#ffe7d8] text-orange-600"
+											}`}
+										>
+											{index === 0 ? (
+												<BookOpen className="size-5" />
+											) : index === 1 ? (
+												<Zap className="size-5" />
+											) : (
+												<FileText className="size-5" />
+											)}
+										</span>
+										<span className="flex-1 text-xs font-bold text-slate-700">
+											{t(`app.${key}.title`)}
+										</span>
+										<Check className="size-4 text-emerald-600" />
+									</div>
+								)
+							)}
 						</div>
 					</div>
 					<div>
@@ -418,7 +418,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 							{t("offline.subtitle")}
 						</p>
 						<div className="mt-7 space-y-5">
-							([1, 2, 3] as const).map((num) => (
+							{([1, 2, 3] as const).map((num) => (
 								<div key={num} className="flex items-start gap-3">
 									<span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl bg-[#e8f7e7] text-emerald-700">
 										<Check className="size-4" />
@@ -452,9 +452,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
 			>
 				<div className="mx-auto mb-10 max-w-2xl text-center">
-					<span className="section-kicker">
-						{t("showcase.educatorLabel")}
-					</span>
+					<span className="section-kicker">{t("showcase.educatorLabel")}</span>
 					<h2 className="section-title text-center mt-4">
 						{t("educators.heading")}
 					</h2>

@@ -137,8 +137,8 @@ export default async function SchoolLayout({ children, params }: Props) {
 	return (
 		<SidebarProvider>
 			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
-			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
+			<SidebarInset className="bg-[#f8f9fc] dark:bg-background">
+				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-border/70 bg-background/80 px-4 backdrop-blur-2xl supports-backdrop-filter:bg-background/60">
 					<SidebarTrigger className="-ms-1" />
 					<Separator orientation="vertical" className="h-4" />
 					<div className="ms-auto flex items-center gap-1.5">
@@ -146,7 +146,9 @@ export default async function SchoolLayout({ children, params }: Props) {
 						<NotificationBell notificationsHref={`${base}/notifications`} />
 					</div>
 				</header>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex flex-1 flex-col bg-muted/10 p-3 sm:p-4 lg:p-6">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);

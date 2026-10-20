@@ -157,11 +157,26 @@ export default async function DashboardLayout({
 	const header = (
 		<SidebarMenu>
 			<SidebarMenuItem>
-				<SidebarMenuButton asChild size="lg">
-					<Link href={routes.home.page(undefined, { locale })}>
-						<LogoBlueRounded className="size-7 shrink-0" />
-						<span className="text-base font-semibold group-data-[state=collapsed]:w-0 group-data-[state=collapsed]:opacity-0 transition-all duration-150">
-							{ta("name")}
+				<SidebarMenuButton
+					asChild
+					size="lg"
+					className="group/header hover:bg-muted rounded-2xl px-2 py-2.5 transition"
+				>
+					<Link
+						href={routes.home.page(undefined, { locale })}
+						className="flex items-center gap-3"
+					>
+						<span className="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/20 group-data-[state=collapsed]:size-8 group-data-[state=collapsed]:rounded-xl">
+							<LogoBlueRounded className="size-6 shrink-0 group-data-[state=collapsed]:size-5" />
+							<span className="absolute -bottom-2 -left-1 size-5 rounded-full bg-[#b7f486]/30 blur-md" />
+						</span>
+						<span className="grid flex-1 text-start leading-tight group-data-[state=collapsed]:hidden">
+							<span className="truncate text-[13px] font-black tracking-tight">
+								{ta("name")}
+							</span>
+							<span className="truncate text-[10px] font-medium text-muted-foreground">
+								{t("personal")}
+							</span>
 						</span>
 					</Link>
 				</SidebarMenuButton>
@@ -172,10 +187,13 @@ export default async function DashboardLayout({
 	return (
 		<SidebarProvider>
 			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
-			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
-					<SidebarTrigger className="-ms-1" />
-					<Separator orientation="vertical" className="h-4" />
+			<SidebarInset className="bg-[#f8f9fc] dark:bg-background">
+				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-border/70 bg-background/80 px-4 backdrop-blur-2xl supports-backdrop-filter:bg-background/60">
+					<SidebarTrigger className="-ms-1 rounded-xl" />
+					<Separator orientation="vertical" className="mx-2 h-4" />
+					<div className="hidden text-xs font-black text-muted-foreground sm:block">
+						{t("overview")}
+					</div>
 					<div className="ms-auto flex items-center gap-1.5">
 						<LocaleSwitcher responsive={false} />
 						<NotificationBell
@@ -183,7 +201,9 @@ export default async function DashboardLayout({
 						/>
 					</div>
 				</header>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex flex-1 flex-col bg-muted/10 p-3 sm:p-4 lg:p-6">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);

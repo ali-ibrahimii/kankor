@@ -186,16 +186,25 @@ export default async function AdminLayout({
 	const header = (
 		<SidebarMenu>
 			<SidebarMenuItem>
-				<SidebarMenuButton asChild size="lg">
-					<Link href={localizedBase}>
-						<LogoBlueRounded className="size-7 shrink-0" />
-						<div className="flex flex-col leading-none">
-							<span className="text-sm font-semibold">Abzar Kankor</span>
-							<span className="flex items-center gap-1 text-[10px] text-sidebar-foreground/50 text-base font-semibold group-data-[state=collapsed]:w-0 group-data-[state=collapsed]:opacity-0 transition-all duration-150">
+				<SidebarMenuButton
+					asChild
+					size="lg"
+					className="group/header hover:bg-muted rounded-2xl px-2 py-2.5 transition"
+				>
+					<Link href={localizedBase} className="flex items-center gap-3">
+						<span className="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/20 group-data-[state=collapsed]:size-8 group-data-[state=collapsed]:rounded-xl">
+							<LogoBlueRounded className="size-6 shrink-0 group-data-[state=collapsed]:size-5" />
+							<span className="absolute -bottom-2 -left-1 size-5 rounded-full bg-[#b7f486]/30 blur-md" />
+						</span>
+						<span className="grid flex-1 text-start leading-tight group-data-[state=collapsed]:hidden">
+							<span className="truncate text-[13px] font-black tracking-tight">
+								Abzar Kankor
+							</span>
+							<span className="flex items-center gap-1 truncate text-[10px] font-medium text-muted-foreground">
 								<ShieldCheck className="size-3" />
 								{t("roleLabel")}
 							</span>
-						</div>
+						</span>
 					</Link>
 				</SidebarMenuButton>
 			</SidebarMenuItem>
@@ -204,14 +213,9 @@ export default async function AdminLayout({
 
 	return (
 		<SidebarProvider>
-			<AppSidebar
-				menus={menus}
-				header={header}
-				user={user ?? undefined}
-				className="text-sidebar-foreground [--sidebar:oklch(0.13_0.04_237)] [--sidebar-foreground:oklch(0.92_0.01_237)] [--sidebar-accent:oklch(0.21_0.04_237)] [--sidebar-accent-foreground:oklch(0.97_0.01_237)] [--sidebar-border:oklch(1_0_0/0.08)] [--sidebar-primary:oklch(0.67_0.18_250)] [--sidebar-primary-foreground:oklch(0.97_0.01_250)] [--sidebar-muted-foreground:oklch(0.65_0.02_237)]"
-			/>
-			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
+			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
+			<SidebarInset className="bg-[#f8f9fc] dark:bg-background">
+				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-border/70 bg-background/80 px-4 backdrop-blur-2xl supports-backdrop-filter:bg-background/60">
 					<SidebarTrigger className="-ms-1" />
 					<Separator orientation="vertical" className="h-4" />
 					<div className="ms-auto flex items-center gap-1.5">
@@ -219,7 +223,9 @@ export default async function AdminLayout({
 						<NotificationBell notificationsHref={`${base}/notifications`} />
 					</div>
 				</header>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex flex-1 flex-col bg-muted/10 p-3 sm:p-4 lg:p-6">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);

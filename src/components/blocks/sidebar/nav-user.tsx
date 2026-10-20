@@ -1,9 +1,7 @@
 "use client";
 
 import {
-	BellIcon,
 	CircleUserRoundIcon,
-	CreditCardIcon,
 	EllipsisVerticalIcon,
 	LogOutIcon,
 } from "lucide-react";
@@ -48,56 +46,64 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 					<DropdownMenuTrigger asChild>
 						<SidebarMenuButton
 							size="lg"
-							className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+							className="rounded-2xl border border-border/60 bg-muted/40 px-2.5 py-2.5 transition hover:bg-muted data-[state=open]:bg-muted data-[state=open]:text-foreground group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-2"
 						>
-							<Avatar className="h-8 w-8 rounded-lg grayscale">
+							<Avatar className="h-8 w-8 rounded-xl shadow-sm">
 								<AvatarImage
 									src={user.avatar_url ?? ""}
 									alt={user.full_name ?? ""}
 								/>
-								<AvatarFallback className="rounded-lg">
+								<AvatarFallback className="rounded-xl bg-gradient-to-br from-[#725bff] to-[#36c6ab] text-xs font-black text-white">
 									{getInitial(user.full_name)}
 								</AvatarFallback>
 							</Avatar>
-							<div className="grid flex-1 text-start text-sm leading-tight">
-								<span className="truncate font-medium">{user.full_name}</span>
-								<span className="truncate text-xs text-muted-foreground">
+							<div className="grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden">
+								<span className="truncate text-xs font-black">
+									{user.full_name}
+								</span>
+								<span className="truncate text-[11px] font-medium text-muted-foreground">
 									{user.email}
 								</span>
 							</div>
-							<EllipsisVerticalIcon className="ms-auto size-4" />
+							<EllipsisVerticalIcon className="ms-auto size-4 text-muted-foreground group-data-[collapsible=icon]:hidden" />
 						</SidebarMenuButton>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
-						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-2xl p-1.5"
 						side={isMobile ? "bottom" : "right"}
 						align="end"
-						sideOffset={4}
+						sideOffset={8}
 					>
 						<DropdownMenuLabel className="p-0 font-normal">
-							<div className="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-								<Avatar className="h-8 w-8 rounded-lg">
+							<div className="flex items-center gap-3 rounded-xl bg-gradient-to-br from-[#17233a] to-[#222340] p-3 text-white">
+								<Avatar className="h-9 w-9 rounded-xl border border-white/10">
 									{user.avatar_url && (
 										<AvatarImage
 											src={user.avatar_url}
 											alt={user.full_name ?? ""}
 										/>
 									)}
-									<AvatarFallback className="rounded-lg">
+									<AvatarFallback className="rounded-xl bg-gradient-to-br from-[#725bff] to-[#36c6ab] text-xs font-black text-white">
 										{getInitial(user.full_name)}
 									</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-start text-sm leading-tight">
-									<span className="truncate font-medium">{user.full_name}</span>
-									<span className="truncate text-xs text-muted-foreground">
+									<span className="truncate text-xs font-black text-white">
+										{user.full_name}
+									</span>
+									<span
+										className="truncate text-[11px] text-white/60"
+										dir="ltr"
+									>
 										{user.email}
 									</span>
 								</div>
 							</div>
 						</DropdownMenuLabel>
-						<DropdownMenuSeparator />
+						<DropdownMenuSeparator className="my-1.5 bg-border/60" />
 						<DropdownMenuGroup>
 							<DropdownMenuItem
+								className="rounded-xl py-2.5 text-xs font-bold focus:bg-muted"
 								onClick={() => {
 									if (user.role === "instructor") {
 										router.push(routes.d.instructor.account.page());
@@ -119,14 +125,17 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 									}
 								}}
 							>
-								<CircleUserRoundIcon />
-								Account
+								<CircleUserRoundIcon className="size-4" />
+								حساب کاربری
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem onClick={logout}>
-							<LogOutIcon />
-							Log out
+						<DropdownMenuSeparator className="my-1.5 bg-border/60" />
+						<DropdownMenuItem
+							onClick={logout}
+							className="rounded-xl py-2.5 text-xs font-bold text-destructive focus:bg-destructive/10 focus:text-destructive"
+						>
+							<LogOutIcon className="size-4" />
+							خروج
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
@@ -144,33 +153,32 @@ export function NavUserSkeleton({ logout }: { logout: () => Promise<void> }) {
 					<DropdownMenuTrigger asChild>
 						<SidebarMenuButton
 							size="lg"
-							className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+							className="rounded-2xl border border-border/60 bg-muted/40 data-[state=open]:bg-muted"
 						>
-							<Avatar className="h-8 w-8 rounded-lg grayscale">
-								<AvatarFallback className="rounded-lg">
-									<Skeleton className="size-2" />
+							<Avatar className="h-8 w-8 rounded-xl">
+								<AvatarFallback className="rounded-xl">
+									<Skeleton className="size-4 rounded-md" />
 								</AvatarFallback>
 							</Avatar>
 							<div className="grid flex-1 text-start text-sm leading-tight gap-2">
 								<span className="truncate font-medium">
-									<Skeleton className="w-8/12 h-3" />
+									<Skeleton className="w-8/12 h-3 rounded-full" />
 								</span>
-								<span className="truncate text-xs text-muted-foreground">
-									<Skeleton className="w-full h-3" />
+								<span className="truncate text-xs">
+									<Skeleton className="w-full h-3 rounded-full" />
 								</span>
 							</div>
 							<EllipsisVerticalIcon className="ms-auto size-4" />
 						</SidebarMenuButton>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
-						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-2xl"
 						side={isMobile ? "bottom" : "right"}
 						align="end"
 						sideOffset={4}
 					>
-						<DropdownMenuItem onClick={logout}>
-							<LogOutIcon />
-							Log out
+						<DropdownMenuItem onClick={logout} className="rounded-xl">
+							<LogOutIcon /> خروج
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
