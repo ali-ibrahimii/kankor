@@ -11,6 +11,7 @@ const operatorMap: Record<string, OperatorFn> = {
 	gte: (q, f, v) => q.gte(f, v),
 	lt: (q, f, v) => q.lt(f, v),
 	lte: (q, f, v) => q.lte(f, v),
+	"not.is": (q, f, v) => q.not(f, "is", v),
 
 	like: (q, f, v) => q.like(f, `%${v}%`),
 	ilike: (q, f, v) => q.ilike(f, `%${v}%`),

@@ -1,12 +1,28 @@
+import {
+	ArrowLeft,
+	ArrowRight,
+	BookOpen,
+	CheckCircle2,
+	Clock3,
+	GraduationCap,
+	Layers3,
+	MessageCircle,
+	Sparkles,
+	Star,
+	Target,
+} from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+
 import CourseDetailClient from "@/app/[locale]/d/(student)/courses/[slug]/course-detail-client";
+
 import { resolveCoverSrc } from "@/components/blocks/course";
 import { PublicDeckCard } from "@/components/blocks/decks/public-deck-card";
 import { ResourceDiscussionView } from "@/components/blocks/discussions/ResourceDiscussionView";
 import { LibraryCard } from "@/components/blocks/libraries/library-card";
 import { PublicQuizCard } from "@/components/blocks/quizzes/public-quiz-card";
 import { ReviewsSection } from "@/components/blocks/reviews";
+
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -15,16 +31,22 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
 import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { decodeSlugParam } from "@/lib/utils";
-import { BaseParams } from "@/types/common.types";
-import { CourseDetail } from "@/types/queries.types";
+
+import type { BaseParams } from "@/types/common.types";
+import type { CourseDetail } from "@/types/queries.types";
 
 export const revalidate = 86400;
+
+// ============================================================
+// METADATA
+// ============================================================
 
 export async function generateMetadata({
 	params,
@@ -32,7 +54,9 @@ export async function generateMetadata({
 	params: Promise<BaseParams & { slug: string }>;
 }) {
 	const { slug, locale } = await params;
+
 	const supabase = await createClient();
+
 	const { data: course, error } = await supabase
 		.from("courses")
 		.select(
@@ -41,9 +65,13 @@ export async function generateMetadata({
 		.eq("slug", decodeSlugParam(slug))
 		.eq("is_published", true)
 		.single();
+
 	if (!course || error) return {};
 
-	const t = await getTranslations({ locale, namespace: "courses" });
+	const t = await getTranslations({
+		locale,
+		namespace: "courses",
+	});
 
 	return buildEntityMetadata({
 		seoTitle: course.seo_title,
@@ -51,23 +79,33 @@ export async function generateMetadata({
 		fallbackTitle: `${course.title} | ${t("title")}`,
 		fallbackDescription:
 			course.description || course.subtitle || t("description"),
-		path: routes.courses.slug.page({ slug: course.slug ?? course.id }),
+		path: routes.courses.slug.page({
+			slug: course.slug ?? course.id,
+		}),
 		locale,
 		coverImage: resolveCoverSrc(course.cover_image_url),
 		keywords: course.learning_objectives,
 	});
 }
 
+// ============================================================
+// PAGE
+// ============================================================
+
 export default async function CourseDetailPage({
 	params,
 }: {
 	params: Promise<BaseParams & { slug: string }>;
 }) {
-	const supabase = await createClient();
-	const { data } = await supabase.auth.getClaims();
-	const userId = data?.claims.sub;
 	const { slug, locale } = await params;
+
 	setRequestLocale(locale);
+
+	const supabase = await createClient();
+
+	const { data } = await supabase.auth.getClaims();
+
+	const userId = data?.claims.sub;
 
 	const { data: course, error } = await supabase
 		.rpc("get_course_details", {
@@ -79,17 +117,27 @@ export default async function CourseDetailPage({
 		notFound();
 	}
 
-	const s = await getTranslations({ locale, namespace: "seo" });
+	const s = await getTranslations({
+		locale,
+		namespace: "seo",
+	});
+
 	const baseUrl = serverEnv.app.address.replace(/\/$/, "");
 
-	// Fetch related resources in parallel
+	// ========================================================
+	// RELATED RESOURCES
+	// ========================================================
+
 	const bookId = course.book?.id;
 	const subjectId = course.subject?.id;
 	const gradeId = course.grade?.id;
 
 	const schoolId = course.school_id;
+
 	const selectedDeckIds = course.related_decks_ids || [];
+
 	const selectedQuizIds = course.related_quizzes_ids || [];
+
 	const selectedBookIds = course.related_libraries_ids || [];
 
 	const [relatedDecksRes, relatedQuizzesRes, relatedBooksRes] =
@@ -102,6 +150,7 @@ export default async function CourseDetailPage({
 				p_school_id: schoolId || undefined,
 				p_limit: 3,
 			}),
+
 			supabase.rpc("get_related_quizzes", {
 				p_related_ids: selectedQuizIds,
 				p_book_id: bookId || undefined,
@@ -110,6 +159,7 @@ export default async function CourseDetailPage({
 				p_school_id: schoolId || undefined,
 				p_limit: 3,
 			}),
+
 			supabase.rpc("get_related_libraries", {
 				p_related_ids: selectedBookIds,
 				p_book_id: bookId || undefined,
@@ -124,7 +174,15 @@ export default async function CourseDetailPage({
 	const relatedQuizzes = relatedQuizzesRes.data || [];
 	const relatedBooks = relatedBooksRes.data || [];
 
-	// JSON-LD Course Schema
+	const hasRelatedResources =
+		relatedDecks.length > 0 ||
+		relatedQuizzes.length > 0 ||
+		relatedBooks.length > 0;
+
+	// ========================================================
+	// JSON-LD COURSE
+	// ========================================================
+
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "Course",
@@ -138,7 +196,11 @@ export default async function CourseDetailPage({
 			url: baseUrl,
 		},
 		offers: course.is_free
-			? { "@type": "Offer", price: "0", priceCurrency: "USD" }
+			? {
+					"@type": "Offer",
+					price: "0",
+					priceCurrency: "USD",
+				}
 			: course.price != null
 				? {
 						"@type": "Offer",
@@ -148,7 +210,10 @@ export default async function CourseDetailPage({
 				: undefined,
 	};
 
-	// JSON-LD Breadcrumb Schema
+	// ========================================================
+	// JSON-LD BREADCRUMB
+	// ========================================================
+
 	const breadcrumbJsonLd = {
 		"@context": "https://schema.org",
 		"@type": "BreadcrumbList",
@@ -174,8 +239,12 @@ export default async function CourseDetailPage({
 		],
 	};
 
-	// Construct dynamic FAQ schema if objectives/prerequisites exist
+	// ========================================================
+	// FAQ JSON-LD
+	// ========================================================
+
 	const faqQuestions = [];
+
 	if (course.prerequisites && course.prerequisites.length > 0) {
 		faqQuestions.push({
 			"@type": "Question",
@@ -186,6 +255,7 @@ export default async function CourseDetailPage({
 			},
 		});
 	}
+
 	if (course.learning_objectives && course.learning_objectives.length > 0) {
 		faqQuestions.push({
 			"@type": "Question",
@@ -206,126 +276,314 @@ export default async function CourseDetailPage({
 				}
 			: null;
 
+	// ========================================================
+	// PAGE CONTENT
+	// ========================================================
+
 	return (
-		<div className="mx-auto max-w-7xl px-4 py-8 mt-12 sm:px-6 lg:px-8">
-			{/* JSON-LD scripts for SEO */}
+		<div className="min-h-screen bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+			{/* SEO */}
+
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+				}}
 			/>
+
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
+				}}
 			/>
+
 			{faqJsonLd && (
 				<script
 					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
+					}}
 				/>
 			)}
 
-			{/* Visual Breadcrumbs */}
-			<Breadcrumb className="mb-6">
-				<BreadcrumbList>
-					<BreadcrumbItem>
-						<BreadcrumbLink asChild>
-							<Link href={routes.home.page()}>{s("home")}</Link>
-						</BreadcrumbLink>
-					</BreadcrumbItem>
-					<BreadcrumbSeparator />
-					<BreadcrumbItem>
-						<BreadcrumbLink asChild>
-							<Link href={routes.courses.page()}>{s("courses")}</Link>
-						</BreadcrumbLink>
-					</BreadcrumbItem>
-					<BreadcrumbSeparator />
-					<BreadcrumbItem>
-						<BreadcrumbPage>{course.title}</BreadcrumbPage>
-					</BreadcrumbItem>
-				</BreadcrumbList>
-			</Breadcrumb>
+			{/* ================================================= */}
+			{/* BREADCRUMB */}
+			{/* ================================================= */}
 
-			<CourseDetailClient
-				courseId={course.id}
-				userId={userId}
-				course={course as CourseDetail}
-			/>
+			<div className="border-b border-[#e9eaf2] bg-white/80 dark:border-white/10 dark:bg-[#1b2438]">
+				<div className="mx-auto max-w-[1320px] px-4 py-5 sm:px-6 lg:px-8">
+					<Breadcrumb>
+						<BreadcrumbList className="flex flex-wrap items-center gap-2 text-xs">
+							<BreadcrumbItem>
+								<BreadcrumbLink asChild>
+									<Link
+										href={routes.home.page()}
+										className="font-medium text-slate-500 transition-colors hover:text-[#694bd2] dark:text-slate-400"
+									>
+										{s("home")}
+									</Link>
+								</BreadcrumbLink>
+							</BreadcrumbItem>
 
-			{/* Fallback Educational Content for Thin description */}
-			{!course.description && (
-				<div className="mt-12 grid grid-cols-1 gap-8 border-t border-slate-100 pt-10 md:grid-cols-2">
-					{course.learning_objectives &&
-						course.learning_objectives.length > 0 && (
-							<div className="rounded-xl border border-slate-100 bg-slate-50/50 p-6">
-								<h3 className="text-base font-semibold text-slate-900 mb-3">
-									{s("faqObjectives")}
-								</h3>
-								<ul className="list-disc list-inside text-sm text-slate-600 space-y-1.5">
-									{course.learning_objectives.map((obj, i) => (
-										<li key={i}>{obj}</li>
-									))}
-								</ul>
+							<BreadcrumbSeparator />
+
+							<BreadcrumbItem>
+								<BreadcrumbLink asChild>
+									<Link
+										href={routes.courses.page()}
+										className="font-medium text-slate-500 transition-colors hover:text-[#694bd2] dark:text-slate-400"
+									>
+										{s("courses")}
+									</Link>
+								</BreadcrumbLink>
+							</BreadcrumbItem>
+
+							<BreadcrumbSeparator />
+
+							<BreadcrumbItem>
+								<BreadcrumbPage className="max-w-[220px] truncate font-bold text-[#694bd2] dark:text-violet-300 sm:max-w-md">
+									{course.title}
+								</BreadcrumbPage>
+							</BreadcrumbItem>
+						</BreadcrumbList>
+					</Breadcrumb>
+				</div>
+			</div>
+
+			{/* ================================================= */}
+			{/* MAIN CONTENT */}
+			{/* ================================================= */}
+
+			<main className="mx-auto max-w-[1320px] space-y-16 px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+				{/* COURSE DETAILS */}
+
+				<section>
+					<CourseDetailClient
+						courseId={course.id}
+						userId={userId}
+						course={course as CourseDetail}
+					/>
+				</section>
+
+				{/* ================================================= */}
+				{/* LEARNING OBJECTIVES AND PREREQUISITES */}
+				{/* ================================================= */}
+
+				{!course.description &&
+					(course.learning_objectives?.length > 0 ||
+						course.prerequisites?.length > 0) && (
+						<section className="space-y-7">
+							<div className="flex items-center gap-4">
+								<div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+									<Target className="size-6" />
+								</div>
+
+								<div>
+									<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
+										{s("faqObjectives")}
+									</h2>
+
+									<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+										{course.title}
+									</p>
+								</div>
 							</div>
-						)}
-					{course.prerequisites && course.prerequisites.length > 0 && (
-						<div className="rounded-xl border border-slate-100 bg-slate-50/50 p-6">
-							<h3 className="text-base font-semibold text-slate-900 mb-3">
-								{s("faqPrerequisites")}
-							</h3>
-							<ul className="list-disc list-inside text-sm text-slate-600 space-y-1.5">
-								{course.prerequisites.map((prereq, i) => (
-									<li key={i}>{prereq}</li>
-								))}
-							</ul>
-						</div>
+
+							<div className="grid gap-5 md:grid-cols-2">
+								{/* OBJECTIVES */}
+
+								{course.learning_objectives &&
+									course.learning_objectives.length > 0 && (
+										<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+											<div className="absolute -end-10 -top-10 size-32 rounded-full bg-violet-100/60 blur-2xl dark:bg-violet-500/10" />
+
+											<div className="relative">
+												<div className="mb-6 flex items-center gap-3">
+													<span className="flex size-11 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+														<Target className="size-5" />
+													</span>
+
+													<h3 className="text-base font-extrabold">
+														{s("faqObjectives")}
+													</h3>
+												</div>
+
+												<ul className="space-y-4">
+													{course.learning_objectives.map(
+														(objective, index) => (
+															<li
+																key={index}
+																className="flex items-start gap-3"
+															>
+																<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+																	<CheckCircle2 className="size-4" />
+																</span>
+
+																<span className="text-sm leading-7 text-slate-600 dark:text-slate-300">
+																	{objective}
+																</span>
+															</li>
+														)
+													)}
+												</ul>
+											</div>
+										</div>
+									)}
+
+								{/* PREREQUISITES */}
+
+								{course.prerequisites && course.prerequisites.length > 0 && (
+									<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+										<div className="absolute -end-10 -top-10 size-32 rounded-full bg-emerald-100/60 blur-2xl dark:bg-emerald-500/10" />
+
+										<div className="relative">
+											<div className="mb-6 flex items-center gap-3">
+												<span className="flex size-11 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+													<BookOpen className="size-5" />
+												</span>
+
+												<h3 className="text-base font-extrabold">
+													{s("faqPrerequisites")}
+												</h3>
+											</div>
+
+											<ul className="space-y-4">
+												{course.prerequisites.map((prerequisite, index) => (
+													<li key={index} className="flex items-start gap-3">
+														<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+															<CheckCircle2 className="size-4" />
+														</span>
+
+														<span className="text-sm leading-7 text-slate-600 dark:text-slate-300">
+															{prerequisite}
+														</span>
+													</li>
+												))}
+											</ul>
+										</div>
+									</div>
+								)}
+							</div>
+						</section>
 					)}
-				</div>
-			)}
 
-			{/* Related resources section */}
-			{(relatedDecks.length > 0 ||
-				relatedQuizzes.length > 0 ||
-				relatedBooks.length > 0) && (
-				<div className="mt-16 border-t border-slate-200/80 pt-10">
-					<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
-						{s("relatedResources")}
-					</h2>
-					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						{relatedDecks.map((deck) => (
-							<PublicDeckCard key={deck.id} deck={deck} />
-						))}
-						{relatedQuizzes.map((quiz) => (
-							<PublicQuizCard key={quiz.id} quiz={quiz} />
-						))}
-						{relatedBooks.map((book) => (
-							<LibraryCard key={book.id} book={book as any} />
-						))}
+				{/* ================================================= */}
+				{/* RELATED RESOURCES */}
+				{/* ================================================= */}
+
+				{hasRelatedResources && (
+					<section className="space-y-7">
+						<div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+							<div className="flex items-center gap-4">
+								<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+									<Layers3 className="size-6" />
+								</span>
+
+								<div>
+									<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
+										{s("relatedResources")}
+									</h2>
+
+									<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+										{course.title}
+									</p>
+								</div>
+							</div>
+
+							<span className="inline-flex self-start items-center gap-2 rounded-full border border-[#e9eaf2] bg-white px-4 py-2 text-xs font-bold text-[#694bd2] dark:border-white/10 dark:bg-white/5 dark:text-violet-300">
+								<BookOpen className="size-4" />
+
+								{relatedDecks.length +
+									relatedQuizzes.length +
+									relatedBooks.length}
+							</span>
+						</div>
+
+						<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+							{relatedDecks.map((deck) => (
+								<PublicDeckCard key={deck.id} deck={deck} />
+							))}
+
+							{relatedQuizzes.map((quiz) => (
+								<PublicQuizCard key={quiz.id} quiz={quiz} />
+							))}
+
+							{relatedBooks.map((book) => (
+								<LibraryCard key={book.id} book={book as any} />
+							))}
+						</div>
+					</section>
+				)}
+
+				{/* ================================================= */}
+				{/* REVIEWS */}
+				{/* ================================================= */}
+
+				<section className="space-y-7">
+					<div className="flex items-center gap-4">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#fff4dc] text-[#d99421] dark:bg-amber-500/10 dark:text-amber-300">
+							<Star className="size-6" />
+						</span>
+
+						<div>
+							<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
+								{/* ReviewsSection has its own translated heading */}
+								{s("courses")}
+							</h2>
+
+							<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+								{course.title}
+							</p>
+						</div>
 					</div>
-				</div>
-			)}
 
-			{/* Reviews Section — below related resources, above discussions */}
-			<div className="mt-16 border-t border-slate-200/80 pt-10">
-				<ReviewsSection
-					target={{ type: "course", id: course.id }}
-					averageRating={course.average_rating}
-					totalReviews={course.total_reviews}
-					userId={userId}
-					canReview={!!course.enrollment}
-				/>
-			</div>
+					<div className="rounded-[26px] border border-[#e9eaf2] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+						<ReviewsSection
+							target={{
+								type: "course",
+								id: course.id,
+							}}
+							averageRating={course.average_rating}
+							totalReviews={course.total_reviews}
+							userId={userId}
+							canReview={!!course.enrollment}
+						/>
+					</div>
+				</section>
 
-			{/* Course Public Read-Only Discussions Section */}
-			<div className="mt-16 border-t border-slate-200/80 pt-10">
-				<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
-					{s("discussions", { defaultValue: "Course Discussions" })}
-				</h2>
-				<ResourceDiscussionView
-					resource_type="course"
-					resource_id={course.id}
-					publicView={true}
-				/>
-			</div>
+				{/* ================================================= */}
+				{/* DISCUSSIONS */}
+				{/* ================================================= */}
+
+				<section className="space-y-7">
+					<div className="flex items-center gap-4">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+							<MessageCircle className="size-6" />
+						</span>
+
+						<div>
+							<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
+								{s("discussions", {
+									defaultValue: "Course Discussions",
+								})}
+							</h2>
+
+							<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+								{course.title}
+							</p>
+						</div>
+					</div>
+
+					<div className="rounded-[26px] border border-[#e9eaf2] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+						<ResourceDiscussionView
+							resource_type="course"
+							resource_id={course.id}
+							publicView={true}
+						/>
+					</div>
+				</section>
+			</main>
 		</div>
 	);
 }

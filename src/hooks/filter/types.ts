@@ -5,7 +5,7 @@ import type {
 import type { Database } from "@/lib/supabase/database.types";
 import type { ColumnName, TableRow, TableViewName } from "@/types/db.types";
 
-export type BaseOperators = "eq" | "neq" | "in" | "is";
+export type BaseOperators = "eq" | "neq" | "in" | "is" | "not.is";
 
 export type StringOperators = "like" | "ilike";
 
