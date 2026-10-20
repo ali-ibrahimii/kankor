@@ -3,6 +3,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 import createNextIntlPlugin from "next-intl/plugin";
+import { buildSecurityHeaders } from "./src/lib/security/headers";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const withMDX = createMDX({
@@ -49,14 +50,10 @@ const nextConfig: NextConfig = {
 	async headers() {
 		return [
 			{
+				// Security headers (CSP, HSTS, frame denial, permissions policy)
+				// are defined once in src/lib/security/headers.ts.
 				source: "/(.*)",
-				headers: [
-					{ key: "X-Content-Type-Options", value: "nosniff" },
-					...(process.env.NODE_ENV === "production"
-						? [{ key: "X-Frame-Options", value: "DENY" }]
-						: []),
-					{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-				],
+				headers: buildSecurityHeaders(),
 			},
 			{
 				source: "/sw.js",

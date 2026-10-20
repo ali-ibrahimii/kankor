@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { serverEnv } from "@/lib/env/server-env";
+import { timingSafeStringEqual } from "@/lib/security/secret";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 
 type TelegramUpdate = {
@@ -39,7 +40,10 @@ export async function POST(request: NextRequest) {
 
 	if (serverEnv.telegram.webhookSecret) {
 		const secret = request.headers.get("x-telegram-bot-api-secret-token");
-		if (secret !== serverEnv.telegram.webhookSecret) {
+		if (
+			!secret ||
+			!timingSafeStringEqual(secret, serverEnv.telegram.webhookSecret)
+		) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 	}

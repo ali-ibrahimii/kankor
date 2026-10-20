@@ -2,10 +2,17 @@
 
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import { guardServerAction } from "@/lib/security/action-guard";
 import { createClient, createServiceRoleClient } from "@/lib/supabase/server";
 import { SignUpFormValues } from "./signup-schema";
 
 export async function signupAction(values: SignUpFormValues) {
+	// Signup spam guard: 10 attempts per 15 minutes per (IP, email).
+	const denied = await guardServerAction("signup", values.email);
+	if (!denied.ok) {
+		return { error: "common.rateLimited", code: "common.rateLimited" };
+	}
+
 	const supabase = await createClient();
 
 	if (values.confirmPassword !== values.password)

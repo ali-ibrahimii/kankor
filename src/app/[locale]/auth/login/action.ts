@@ -1,8 +1,16 @@
 "use server";
 
+import { guardServerAction } from "@/lib/security/action-guard";
 import { createClient, createServiceRoleClient } from "@/lib/supabase/server";
 
 export async function loginAction(values: { email: string; password: string }) {
+	// Credential-stuffing / brute-force guard: 10 attempts per 15 minutes
+	// per (IP, email) pair.
+	const denied = await guardServerAction("login", values.email);
+	if (!denied.ok) {
+		return { error: "common.rateLimited", code: "common.rateLimited" };
+	}
+
 	const supabase = await createClient();
 	const { error, data } = await supabase.auth.signInWithPassword({
 		email: values.email.toLowerCase().trim(),

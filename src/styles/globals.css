@@ -261,8 +261,16 @@
 		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 2rem;
 		background:
-			radial-gradient(circle at 12% 100%, rgba(83, 205, 173, 0.16), transparent 27rem),
-			radial-gradient(circle at 93% 0%, rgba(140, 106, 255, 0.34), transparent 30rem),
+			radial-gradient(
+				circle at 12% 100%,
+				rgba(83, 205, 173, 0.16),
+				transparent 27rem
+			),
+			radial-gradient(
+				circle at 93% 0%,
+				rgba(140, 106, 255, 0.34),
+				transparent 30rem
+			),
 			linear-gradient(125deg, #101a2c 4%, #17233a 58%, #222340 100%);
 		color: #f8f8ff;
 		box-shadow: 0 30px 70px -42px rgba(19, 24, 54, 0.6);
@@ -272,11 +280,20 @@
 		position: absolute;
 		z-index: -1;
 		inset: 0;
-		background-image: radial-gradient(rgba(255, 255, 255, 0.13) 0.7px, transparent 0.7px);
+		background-image: radial-gradient(
+			rgba(255, 255, 255, 0.13) 0.7px,
+			transparent 0.7px
+		);
 		background-size: 23px 23px;
 		opacity: 0.2;
 		content: "";
-		mask-image: linear-gradient(110deg, transparent, #000 30%, #000 85%, transparent);
+		mask-image: linear-gradient(
+			110deg,
+			transparent,
+			#000 30%,
+			#000 85%,
+			transparent
+		);
 	}
 
 	.hero-highlight {
@@ -315,6 +332,57 @@
 	/* استیک با انتخاب رنگ */
 	.sticky-card {
 		@apply sticky top-4 rounded-3xl border border-border/60 bg-card/90 backdrop-blur-xl p-5 shadow-xl shadow-black/5 md:top-6 lg:top-8;
+	}
+
+	/* ─── Cards with pastel art headers (Coursera-style) ─── */
+
+	.subject-art {
+		background:
+			radial-gradient(
+				circle at 75% 25%,
+				rgba(255, 255, 255, 0.58),
+				transparent 10rem
+			),
+			linear-gradient(
+				135deg,
+				var(--art-start, #e7e0ff),
+				var(--art-end, #e9f5fc)
+			);
+	}
+
+	.art-icon {
+		color: var(--art-icon, #5b4be0);
+	}
+
+	.art-icon-on-art {
+		color: var(--art-icon, #5b4be0);
+	}
+
+	.dark .art-icon-on-art {
+		color: color-mix(in oklab, var(--art-icon, #8b7cf0) 58%, white);
+	}
+
+	.dark .subject-art {
+		background:
+			radial-gradient(
+				circle at 75% 25%,
+				rgba(255, 255, 255, 0.11),
+				transparent 10rem
+			),
+			linear-gradient(
+				135deg,
+				color-mix(in oklab, var(--art-start, #6b5ce7) 24%, #20283e),
+				color-mix(in oklab, var(--art-end, #58c7bc) 22%, #20283e)
+			);
+	}
+
+	/* چیپ شیشه‌ای روی هدر کارت */
+	.art-chip {
+		@apply relative rounded-full border border-white/50 bg-white/60 px-3 py-1 text-[10px] font-black text-slate-700 backdrop-blur;
+	}
+
+	.dark .art-chip {
+		@apply border-white/15 bg-white/10 text-white/85;
 	}
 }
 

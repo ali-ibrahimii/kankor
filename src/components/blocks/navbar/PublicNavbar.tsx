@@ -35,14 +35,14 @@ export async function PublicNavbar() {
 				aria-label={ta("name")}
 				className="flex shrink-0 items-center gap-3"
 			>
-				<div className="flex size-10 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/25 transition-transform hover:-rotate-3 hover:scale-105">
+				<div className="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/25 transition-transform hover:-rotate-3 hover:scale-105">
 					<GraduationCap className="size-6" />
 				</div>
 				<div className="hidden flex-col sm:flex">
-					<span className="text-base font-extrabold tracking-tight text-[#19243b]">
+					<span className="text-base font-black tracking-tight text-foreground">
 						{ta("name")}
 					</span>
-					<span className="text-[9px] font-semibold text-slate-400">
+					<span className="text-[10px] font-medium text-muted-foreground">
 						{t("showcase.modulesLabel")}
 					</span>
 				</div>

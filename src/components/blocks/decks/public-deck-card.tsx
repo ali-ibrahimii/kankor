@@ -1,13 +1,18 @@
 "use client";
 
-import { Layers, Sparkles, SquareStack } from "lucide-react";
+import { ArrowLeft, Layers, Sparkles, SquareStack } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+	EntityCardArt,
+	EntityCardBadge,
+	EntityCardBody,
+	EntityCardFooter,
+	EntityCardMetaItem,
+	EntityCardShell,
+	toneFromString,
+} from "@/components/blocks/shared/entity-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
-import { cn } from "@/lib/utils";
 
 export type PublicDeck = {
 	id: string;
@@ -18,6 +23,9 @@ export type PublicDeck = {
 	card_count?: number;
 };
 
+/**
+ * Catalog card for a flashcard deck — Coursera-style art header + meta footer.
+ */
 export function PublicDeckCard({
 	deck,
 	className,
@@ -28,63 +36,67 @@ export function PublicDeckCard({
 	const t = useTranslations("decks");
 
 	return (
-		<Card className={cn("flex h-full flex-col overflow-hidden", className)}>
-			<Link href={routes.decks.slug.page({ slug: deck.slug ?? deck.id })}>
-				<CardContent className="flex flex-1 flex-col gap-4 p-4">
-					<div className="flex items-start gap-3">
-						<div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-							<Layers />
-						</div>
-						<div className="min-w-0 flex-1">
-							<h3 className="line-clamp-2 text-sm font-semibold leading-snug">
-								{deck.name}
-							</h3>
-							{deck.description && (
-								<p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-									{deck.description}
-								</p>
-							)}
-						</div>
-					</div>
-
-					<div className="mt-auto flex flex-wrap gap-1.5">
+		<EntityCardShell
+			href={routes.decks.slug.page({ slug: deck.slug ?? deck.id })}
+			className={className}
+		>
+			<EntityCardArt
+				icon={Layers}
+				tone={toneFromString(deck.id)}
+				label={t("title")}
+			/>
+			<EntityCardBody
+				title={deck.name}
+				description={deck.description}
+				badges={
+					<>
 						{deck.card_count != null && (
-							<Badge variant="outline" className="gap-1 font-normal">
+							<EntityCardBadge>
 								<SquareStack className="size-3" />
 								{t("cardCount", { count: deck.card_count })}
-							</Badge>
+							</EntityCardBadge>
 						)}
 						{deck.is_free && (
-							<Badge
-								variant="outline"
-								className="gap-1 font-normal border-emerald-200 text-emerald-700"
-							>
+							<EntityCardBadge tone="success">
 								<Sparkles className="size-3" />
 								{t("free")}
-							</Badge>
+							</EntityCardBadge>
 						)}
-					</div>
-				</CardContent>
-			</Link>
-		</Card>
+					</>
+				}
+			/>
+			<EntityCardFooter
+				meta={
+					deck.card_count != null ? (
+						<EntityCardMetaItem icon={SquareStack}>
+							{t("cardCount", { count: deck.card_count })}
+						</EntityCardMetaItem>
+					) : undefined
+				}
+				price={deck.is_free ? t("free") : null}
+				cta={
+					<>
+						{t("practiceNow")}{" "}
+						<ArrowLeft className="rtl:rotate-180" size={13} />
+					</>
+				}
+			/>
+		</EntityCardShell>
 	);
 }
 
 export function PublicDeckCardSkeleton() {
 	return (
-		<Card className="overflow-hidden">
-			<CardContent className="flex flex-col gap-4 p-4">
-				<div className="flex items-start gap-3">
-					<Skeleton className="size-11 rounded-lg" />
-					<div className="flex flex-1 flex-col gap-2">
-						<Skeleton className="h-4 w-4/5" />
-						<Skeleton className="h-3 w-1/2" />
-					</div>
-				</div>
-				<div className="flex gap-1.5">
+		<div className="soft-card flex h-full flex-col overflow-hidden">
+			<Skeleton className="h-36 w-full rounded-none" />
+			<div className="flex flex-1 flex-col gap-3 p-5">
+				<Skeleton className="h-5 w-4/5" />
+				<Skeleton className="h-3 w-full" />
+				<Skeleton className="h-3 w-1/2" />
+				<div className="mt-auto flex gap-1.5">
 					<Skeleton className="h-6 w-20 rounded-full" />
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }

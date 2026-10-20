@@ -15,7 +15,9 @@ const baseSchema = z.object({
 	}),
 
 	supabase: z.object({
-		url: z.string().min(1).default("https://xjzmpanstxgwwjupujwr.supabase.co"),
+		// No hardcoded default: deployments must set NEXT_PUBLIC_SUPABASE_URL
+		// (client-env falls back to an inert demo host when unset).
+		url: z.string().min(1),
 		publishableKey: z.string().min(1),
 		secretKey: z.string().min(1),
 	}),
@@ -25,6 +27,12 @@ const baseSchema = z.object({
 export const serverSchema = baseSchema.extend({
 	omr: z.object({
 		serviceUrl: z.url().optional(),
+		/**
+		 * Shared secret the external OMR service must present as
+		 * `Authorization: Bearer …` when it calls /api/omr/scan. Optional so
+		 * local/dev boots without it — the route responds 503 when unset.
+		 */
+		internalSecret: z.string().min(1).optional(),
 	}),
 
 	// Cloudflare R2 (S3-compatible) object storage for course assets — videos,

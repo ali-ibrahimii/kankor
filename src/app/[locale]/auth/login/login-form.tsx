@@ -70,7 +70,9 @@ export function LoginForm({
 					);
 					return;
 				}
-				setServerError(result.error);
+				// Actions may return either a translation key (e.g. the
+				// rate-limit guard) or a raw provider message.
+				setServerError(t.has(result.error) ? t(result.error) : result.error);
 			} else {
 				// If profile is null (e.g. brand-new user where trigger hasn't fired yet),
 				// fall back to the default dashboard so we don't loop back to login.

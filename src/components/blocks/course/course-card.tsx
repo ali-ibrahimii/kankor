@@ -83,14 +83,14 @@ export type EnrollmentMeta = {
 // STYLES
 // ============================================================
 
+// Shared Coursera-style card chrome — same soft-card/card-hover language as
+// the deck/quiz/library cards (see blocks/shared/entity-card.tsx).
 const CARD_STYLE =
-	"group/card flex h-full flex-col overflow-hidden rounded-[24px] border border-[#e8eaf2] bg-white shadow-[0_8px_30px_-18px_rgba(30,35,75,.18)] transition-all duration-300 hover:-translate-y-1.5 hover:border-violet-300 hover:shadow-[0_25px_60px_-25px_rgba(100,70,190,.35)] dark:border-white/10 dark:bg-[#1c263b] dark:hover:border-violet-400/30";
+	"group/card soft-card card-hover flex h-full flex-col overflow-hidden";
 
-const PRIMARY_BUTTON =
-	"h-11 w-full rounded-[14px] bg-gradient-to-r from-[#694bd2] to-[#8b5cf6] text-xs font-extrabold text-white shadow-md shadow-violet-500/20 transition-all duration-300 hover:from-[#593bc1] hover:to-[#7c3aed] hover:shadow-lg hover:shadow-violet-500/30";
+const PRIMARY_BUTTON = "button-primary h-11 w-full text-xs";
 
-const SECONDARY_BUTTON =
-	"h-11 rounded-[14px] border border-[#e5e6ef] bg-white text-xs font-bold text-[#27344d] hover:border-violet-200 hover:bg-violet-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:hover:bg-white/10";
+const SECONDARY_BUTTON = "button-secondary h-11 text-xs";
 
 // ============================================================
 // SUBJECT THEME

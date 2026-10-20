@@ -2,6 +2,9 @@
 	"app": {
 		"name": "ابزار کانکور"
 	},
+	"common": {
+		"rateLimited": "درخواست‌های زیادی ارسال شده است. لطفاً کمی بعد دوباره تلاش کنید."
+	},
 	"discussions": {
 		"new_thread": "بحث جدید",
 		"create_thread_title": "ایجاد موضوع بحث",
@@ -269,6 +272,7 @@
 			"notifications": "اعلان‌ها"
 		},
 		"agency": {
+			"roleLabel": "ایجنسی",
 			"nav": {
 				"overview": "نمای کلی",
 				"chargeStudent": "شارژ حساب شاگرد",

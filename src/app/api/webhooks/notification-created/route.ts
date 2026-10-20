@@ -3,6 +3,7 @@ import { serverEnv } from "@/lib/env/server-env";
 import { getFirebaseAdminMessaging } from "@/lib/firebase/admin";
 import { deliverPushNotifications } from "@/lib/notifications/deliver-push";
 import { deliverTelegramNotifications } from "@/lib/notifications/deliver-telegram";
+import { requireBearerSecret } from "@/lib/security/guard";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 
 type NotificationInsertPayload = {
@@ -27,17 +28,10 @@ type NotificationInsertPayload = {
  * fallback since this call is fire-and-forget with no automatic retry.
  */
 export async function POST(request: NextRequest) {
-	if (!serverEnv.cron.secret) {
-		return NextResponse.json(
-			{ error: "Webhook is not configured" },
-			{ status: 503 }
-		);
-	}
-	if (
-		request.headers.get("authorization") !== `Bearer ${serverEnv.cron.secret}`
-	) {
-		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-	}
+	const denied = requireBearerSecret(request, serverEnv.cron.secret, {
+		serviceName: "Webhook",
+	});
+	if (denied) return denied;
 
 	const payload = (await request.json()) as NotificationInsertPayload;
 	const notification = payload.record;

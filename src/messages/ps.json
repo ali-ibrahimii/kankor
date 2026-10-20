@@ -2,6 +2,9 @@
 	"app": {
 		"name": "ابزار کانکور"
 	},
+	"common": {
+		"rateLimited": "تر ټیرو درخواستونو. لمه‌نۍ څه وروسته بیا هڅه وکړئ."
+	},
 	"discussions": {
 		"new_thread": "نوې بحث",
 		"create_thread_title": "د بحث موضوع جوړول",
@@ -269,6 +272,7 @@
 			"notifications": "خبرتیاوې"
 		},
 		"agency": {
+			"roleLabel": "ایجنسۍ",
 			"nav": {
 				"overview": "عمومي کتنه",
 				"chargeStudent": "د زده‌کوونکي حساب شارژ",
