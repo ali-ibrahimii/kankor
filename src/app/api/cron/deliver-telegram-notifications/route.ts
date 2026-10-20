@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { serverEnv } from "@/lib/env/server-env";
 import { deliverTelegramNotifications } from "@/lib/notifications/deliver-telegram";
+import { requireBearerSecret } from "@/lib/security/guard";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 
 const BATCH_SIZE = 50;
@@ -15,17 +16,10 @@ const BATCH_SIZE = 50;
  * just delayed until the next tick.
  */
 export async function GET(request: NextRequest) {
-	if (!serverEnv.cron.secret) {
-		return NextResponse.json(
-			{ error: "Cron is not configured" },
-			{ status: 503 }
-		);
-	}
-	if (
-		request.headers.get("authorization") !== `Bearer ${serverEnv.cron.secret}`
-	) {
-		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-	}
+	const denied = requireBearerSecret(request, serverEnv.cron.secret, {
+		serviceName: "Cron",
+	});
+	if (denied) return denied;
 	if (!serverEnv.telegram.botToken) {
 		return NextResponse.json({ processed: 0, delivered: 0, skipped: 0 });
 	}

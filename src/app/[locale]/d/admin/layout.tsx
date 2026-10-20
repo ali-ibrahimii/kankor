@@ -15,7 +15,6 @@ import {
 	Users,
 	Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import * as React from "react";
 import {
@@ -23,17 +22,10 @@ import {
 	NotificationBell,
 } from "@/components/blocks/notifications";
 import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
+import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup, MenuParent } from "@/components/blocks/sidebar/types";
-import { LogoBlueRounded } from "@/components/logos/logos";
-import { Separator } from "@/components/ui/separator";
-import {
-	SidebarInset,
-	SidebarMenu,
-	SidebarMenuButton,
-	SidebarMenuItem,
-	SidebarProvider,
-	SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 
@@ -183,42 +175,34 @@ export default async function AdminLayout({
 		},
 	];
 
-	const header = (
-		<SidebarMenu>
-			<SidebarMenuItem>
-				<SidebarMenuButton asChild size="lg">
-					<Link href={localizedBase}>
-						<LogoBlueRounded className="size-7 shrink-0" />
-						<div className="flex flex-col leading-none">
-							<span className="text-sm font-semibold">Abzar Kankor</span>
-							<span className="flex items-center gap-1 text-[10px] text-sidebar-foreground/50 text-base font-semibold group-data-[state=collapsed]:w-0 group-data-[state=collapsed]:opacity-0 transition-all duration-150">
-								<ShieldCheck className="size-3" />
-								{t("roleLabel")}
-							</span>
-						</div>
-					</Link>
-				</SidebarMenuButton>
-			</SidebarMenuItem>
-		</SidebarMenu>
-	);
-
 	return (
 		<SidebarProvider>
 			<AppSidebar
 				menus={menus}
-				header={header}
+				header={
+					<SidebarBrand
+						name="Abzar Kankor"
+						href={localizedBase}
+						subtitle={
+							<span className="inline-flex items-center gap-1">
+								<ShieldCheck className="size-3" />
+								{t("roleLabel")}
+							</span>
+						}
+					/>
+				}
 				user={user ?? undefined}
 				className="text-sidebar-foreground [--sidebar:oklch(0.13_0.04_237)] [--sidebar-foreground:oklch(0.92_0.01_237)] [--sidebar-accent:oklch(0.21_0.04_237)] [--sidebar-accent-foreground:oklch(0.97_0.01_237)] [--sidebar-border:oklch(1_0_0/0.08)] [--sidebar-primary:oklch(0.67_0.18_250)] [--sidebar-primary-foreground:oklch(0.97_0.01_250)] [--sidebar-muted-foreground:oklch(0.65_0.02_237)]"
 			/>
 			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
-					<SidebarTrigger className="-ms-1" />
-					<Separator orientation="vertical" className="h-4" />
-					<div className="ms-auto flex items-center gap-1.5">
-						<LocaleSwitcher responsive={false} />
-						<NotificationBell notificationsHref={`${base}/notifications`} />
-					</div>
-				</header>
+				<DashboardTopbar
+					actions={
+						<>
+							<LocaleSwitcher responsive={false} />
+							<NotificationBell notificationsHref={`${base}/notifications`} />
+						</>
+					}
+				/>
 				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
 			</SidebarInset>
 		</SidebarProvider>

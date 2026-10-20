@@ -13,7 +13,6 @@ import {
 	Wallet,
 	Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import * as React from "react";
 import {
@@ -21,17 +20,10 @@ import {
 	NotificationBell,
 } from "@/components/blocks/notifications";
 import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
+import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup, MenuParent } from "@/components/blocks/sidebar/types";
-import { LogoBlueRounded } from "@/components/logos/logos";
-import { Separator } from "@/components/ui/separator";
-import {
-	SidebarInset,
-	SidebarMenu,
-	SidebarMenuButton,
-	SidebarMenuItem,
-	SidebarProvider,
-	SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
@@ -154,35 +146,24 @@ export default async function DashboardLayout({
 		},
 	];
 
-	const header = (
-		<SidebarMenu>
-			<SidebarMenuItem>
-				<SidebarMenuButton asChild size="lg">
-					<Link href={routes.home.page(undefined, { locale })}>
-						<LogoBlueRounded className="size-7 shrink-0" />
-						<span className="text-base font-semibold group-data-[state=collapsed]:w-0 group-data-[state=collapsed]:opacity-0 transition-all duration-150">
-							{ta("name")}
-						</span>
-					</Link>
-				</SidebarMenuButton>
-			</SidebarMenuItem>
-		</SidebarMenu>
-	);
-
 	return (
 		<SidebarProvider>
-			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
+			<AppSidebar
+				menus={menus}
+				header={<SidebarBrand name={ta("name")} />}
+				user={user ?? undefined}
+			/>
 			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
-					<SidebarTrigger className="-ms-1" />
-					<Separator orientation="vertical" className="h-4" />
-					<div className="ms-auto flex items-center gap-1.5">
-						<LocaleSwitcher responsive={false} />
-						<NotificationBell
-							notificationsHref={routes.d.notifications.page()}
-						/>
-					</div>
-				</header>
+				<DashboardTopbar
+					actions={
+						<>
+							<LocaleSwitcher responsive={false} />
+							<NotificationBell
+								notificationsHref={routes.d.notifications.page()}
+							/>
+						</>
+					}
+				/>
 				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
 			</SidebarInset>
 		</SidebarProvider>

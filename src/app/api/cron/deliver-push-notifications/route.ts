@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { serverEnv } from "@/lib/env/server-env";
 import { getFirebaseAdminMessaging } from "@/lib/firebase/admin";
 import { deliverPushNotifications } from "@/lib/notifications/deliver-push";
+import { requireBearerSecret } from "@/lib/security/guard";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 
 const BATCH_SIZE = 50;
@@ -13,17 +14,10 @@ const BATCH_SIZE = 50;
  * push_delivered_at in case a webhook call failed or wasn't configured yet.
  */
 export async function GET(request: NextRequest) {
-	if (!serverEnv.cron.secret) {
-		return NextResponse.json(
-			{ error: "Cron is not configured" },
-			{ status: 503 }
-		);
-	}
-	if (
-		request.headers.get("authorization") !== `Bearer ${serverEnv.cron.secret}`
-	) {
-		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-	}
+	const denied = requireBearerSecret(request, serverEnv.cron.secret, {
+		serviceName: "Cron",
+	});
+	if (denied) return denied;
 
 	const messaging = getFirebaseAdminMessaging();
 	if (!messaging) {

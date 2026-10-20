@@ -11,6 +11,7 @@ function parseServerEnv(): ServerEnv {
 		},
 		omr: {
 			serviceUrl: process.env.OMR_SERVICE_URL || undefined,
+			internalSecret: process.env.OMR_INTERNAL_SECRET || undefined,
 		},
 		r2: {
 			accountId: process.env.R2_ACCOUNT_ID || undefined,

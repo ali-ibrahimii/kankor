@@ -20,13 +20,10 @@ import {
 	NotificationBell,
 } from "@/components/blocks/notifications";
 import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
+import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
-import { Separator } from "@/components/ui/separator";
-import {
-	SidebarInset,
-	SidebarProvider,
-	SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
@@ -179,23 +176,21 @@ export default async function AgencyLayout({ children, params }: Props) {
 	];
 
 	const header = (
-		<div className="flex min-w-0 items-center gap-2 px-2 py-1.5">
-			<span className="truncate font-semibold">{agency.name}</span>
-		</div>
+		<SidebarBrand name={agency.name} href={base} subtitle={t("roleLabel")} />
 	);
 
 	return (
 		<SidebarProvider>
 			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
 			<SidebarInset>
-				<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
-					<SidebarTrigger className="-ms-1" />
-					<Separator orientation="vertical" className="h-4" />
-					<div className="ms-auto flex items-center gap-1.5">
-						<LocaleSwitcher responsive={false} />
-						<NotificationBell notificationsHref={`${base}/notifications`} />
-					</div>
-				</header>
+				<DashboardTopbar
+					actions={
+						<>
+							<LocaleSwitcher responsive={false} />
+							<NotificationBell notificationsHref={`${base}/notifications`} />
+						</>
+					}
+				/>
 				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
 			</SidebarInset>
 		</SidebarProvider>

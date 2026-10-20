@@ -2,7 +2,7 @@
 
 import { LogIn, Menu } from "lucide-react";
 import { useLocale } from "next-intl";
-import { memo, ReactNode, useEffect, useState } from "react";
+import { memo, type ReactNode, useEffect, useState } from "react";
 import { LogoBlueRounded } from "@/components/logos/logos";
 import {
 	Accordion,
@@ -26,6 +26,13 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/auth.provider";
 import { getInitial } from "@/utils/str.util";
 
+/**
+ * Public-site navbar — Coursera-style sticky header.
+ *
+ * All colors come from the design tokens (primary/foreground/muted…) so the
+ * light and dark themes stay in sync; no hardcoded hex here.
+ */
+
 const NavbarScroll = ({ children }: { children: ReactNode }) => {
 	const [scrolled, setScrolled] = useState(false);
 	useEffect(() => {
@@ -34,11 +41,11 @@ const NavbarScroll = ({ children }: { children: ReactNode }) => {
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 border-b border-[#e7e8ef] bg-white/90 px-3 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#141b2c]/90 lg:px-4">
+		<header className="site-header">
 			<nav
 				className={cn(
-					"flex min-h-[64px] items-center justify-between gap-2 mx-auto max-w-7xl px-1 transition-all duration-300 lg:min-h-[82px] lg:px-3",
-					scrolled && "bg-white/70 dark:bg-[#141b2c]/75"
+					"mx-auto flex min-h-[64px] max-w-7xl items-center justify-between gap-2 px-4 transition-all duration-300 sm:px-6 lg:min-h-[82px] lg:px-8",
+					scrolled && "min-h-[60px] lg:min-h-[72px]"
 				)}
 			>
 				{children}
@@ -62,10 +69,10 @@ export function DesktopNavLink({
 		<Link
 			href={href}
 			className={cn(
-				"rounded-xl px-2 xl:px-3 py-2 text-[13px] font-semibold transition-all duration-200",
+				"rounded-xl px-3 py-2 text-[13px] font-bold transition-colors duration-200",
 				active
-					? "bg-[#f0ebff] text-[#684bd0]"
-					: "text-slate-600 hover:bg-[#f5f2ff] hover:text-[#684bd0]"
+					? "bg-primary/10 text-primary"
+					: "text-muted-foreground hover:bg-primary/5 hover:text-primary"
 			)}
 		>
 			{children}
@@ -88,10 +95,9 @@ export function PublicNavbarAuthButton({
 			className={buttonVariants({
 				variant: isAuthenticated ? "ghost" : "default",
 				class: cn(
-					"hidden md:inline-flex border rounded-xl! text-xs font-bold transition-colors",
+					"hidden border-none text-xs font-bold transition-colors md:inline-flex",
 					{
-						"border-[#17233a] bg-[#17233a] px-4 py-2 hover:bg-[#303753] text-white":
-							!isAuthenticated,
+						"button-primary": !isAuthenticated,
 						"px-0!": isAuthenticated,
 					}
 				),
@@ -104,7 +110,6 @@ export function PublicNavbarAuthButton({
 						alt={profile?.full_name ?? "User Profile"}
 					/>
 					<AvatarFallback className="text-foreground">
-						{" "}
 						{getInitial(profile?.full_name)}
 					</AvatarFallback>
 				</Avatar>
@@ -140,10 +145,10 @@ function MobileAccordion({
 			<AccordionItem value={link.href} className="border-none">
 				<AccordionTrigger
 					className={cn(
-						"flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-colors hover:no-underline [&[data-state=open]>svg]:rotate-180",
+						"flex w-full items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-bold transition-colors hover:no-underline [&[data-state=open]>svg]:rotate-180",
 						active
-							? "bg-[#1461B8]/5 text-[#1461B8]"
-							: "text-gray-700 hover:bg-gray-50"
+							? "bg-primary/10 text-primary"
+							: "text-foreground hover:bg-primary/5 hover:text-primary"
 					)}
 				>
 					<span className="flex items-center gap-2.5">
@@ -159,10 +164,10 @@ function MobileAccordion({
 								href={child.href}
 								onClick={onClose}
 								className={cn(
-									"flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors",
+									"flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition-colors",
 									isActive(child.href)
-										? "bg-[#1461B8]/5 font-medium text-[#1461B8]"
-										: "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+										? "bg-primary/10 font-bold text-primary"
+										: "text-muted-foreground hover:bg-primary/5 hover:text-primary"
 								)}
 							>
 								{child.icon}
@@ -197,7 +202,7 @@ export function MobileNavSheet({
 				<Button
 					variant="ghost"
 					size="icon"
-					className="md:hidden size-9"
+					className="size-9 md:hidden"
 					aria-label="Open Menu"
 				>
 					<Menu className="size-5" />
@@ -205,24 +210,22 @@ export function MobileNavSheet({
 			</SheetTrigger>
 			<SheetContent
 				showCloseButton={false}
-				className="w-[320px] p-0 flex flex-col gap-0 border-none bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(255,255,255,0.97))] backdrop-blur-xl"
+				className="flex w-[320px] flex-col gap-0 border-border/70 bg-background p-0"
 			>
-				<SheetHeader className="border-b border-slate-200/80 py-3.5 text-left bg-white/80 backdrop-blur-xl">
+				<SheetHeader className="border-b border-border/70 py-3.5 text-start">
 					<SheetTitle className="sr-only">Menu</SheetTitle>
-					<div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/70 bg-[linear-gradient(135deg,rgba(20,97,184,0.08),rgba(14,165,233,0.08))] px-3 py-2.5">
+					<div className="flex items-center justify-between gap-3 rounded-2xl border border-border/70 bg-primary/5 px-3 py-2.5">
 						<Link
 							href="/"
 							onClick={() => setOpen(false)}
 							className="flex items-center gap-2.5"
 						>
-							<div className="flex size-9 items-center justify-center rounded-2xl bg-white/80 ring-1 ring-inset ring-sky-500/10">
-								<LogoBlueRounded className="size-7" />
+							<div className="flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#725bff] via-[#735fe7] to-[#36c6ab] text-white shadow-lg shadow-primary/25">
+								<LogoBlueRounded className="size-6" />
 							</div>
-							<div className="flex flex-col">
-								<span className="text-base font-semibold tracking-tight text-slate-900">
-									{brandName}
-								</span>
-							</div>
+							<span className="text-base font-black tracking-tight text-foreground">
+								{brandName}
+							</span>
 						</Link>
 					</div>
 				</SheetHeader>
@@ -248,10 +251,10 @@ export function MobileNavSheet({
 									href={link.href}
 									onClick={() => setOpen(false)}
 									className={cn(
-										"flex items-center gap-2.5 rounded-[18px] px-3 py-[11px] text-sm font-medium transition-all duration-200",
+										"flex items-center gap-2.5 rounded-2xl px-3 py-[11px] text-sm font-bold transition-all duration-200",
 										active
-											? "bg-[linear-gradient(135deg,rgba(20,97,184,0.1),rgba(14,165,233,0.12))] text-[#1461B8] shadow-sm"
-											: "text-slate-700 hover:bg-slate-50"
+											? "bg-primary/10 text-primary"
+											: "text-foreground hover:bg-primary/5 hover:text-primary"
 									)}
 								>
 									{link.icon}
@@ -262,11 +265,11 @@ export function MobileNavSheet({
 					</div>
 				</div>
 
-				<div className="space-y-2 border-t border-slate-200/80 bg-white/90 p-4 backdrop-blur-xl">
+				<div className="space-y-2 border-t border-border/70 p-4">
 					<Link
 						href={signInUrl}
 						onClick={() => setOpen(false)}
-						className="flex w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#1461B8,#0ea5e9)] py-3 text-sm font-semibold text-white shadow-sm shadow-sky-500/20 transition-all hover:-translate-y-0.5 hover:shadow-md"
+						className="button-primary w-full"
 					>
 						<LogIn className="size-4" />
 						{signInLabel}

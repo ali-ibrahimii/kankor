@@ -1,4 +1,12 @@
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/auth/session";
+import { rateLimitResponse } from "@/lib/security/guard";
+import {
+	AUTH_ABUSE_RULE,
+	getClientIp,
+	rateLimit,
+	rateLimitKey,
+} from "@/lib/security/rate-limit";
 
 const SHEET_ID_PATTERN = /docs\.google\.com\/spreadsheets\/d\/([\w-]+)/;
 const GID_PATTERN = /[?&#]gid=(\d+)/;
@@ -10,8 +18,29 @@ const GID_PATTERN = /[?&#]gid=(\d+)/;
  * by CORS, so the generic import engine routes it through this server-side
  * handler instead. This route is intentionally domain-agnostic — it knows
  * nothing about which table the caller intends to import into.
+ *
+ * Auth: restricted to signed-in staff (admin / instructor / school members)
+ * and rate-limited — an open proxy would otherwise be an abuse magnet.
  */
 export async function POST(request: Request) {
+	const user = await getCurrentUser();
+	const isStaff =
+		user?.role === "admin" ||
+		user?.role === "instructor" ||
+		(user?.schoolMemberships?.length ?? 0) > 0;
+
+	if (!user || !isStaff) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
+	const limit = rateLimit(
+		rateLimitKey("google-sheet-import", getClientIp(request), user.id),
+		AUTH_ABUSE_RULE
+	);
+	if (!limit.ok) {
+		return rateLimitResponse(limit.retryAfterSeconds);
+	}
+
 	const body = await request.json().catch(() => null);
 	const url = typeof body?.url === "string" ? body.url : null;
 
