@@ -17,7 +17,7 @@ const CSP_DIRECTIVES: Record<string, string[]> = {
 	"base-uri": ["'self'"],
 	"object-src": ["'none'"],
 	"form-action": ["'self'"],
-	"frame-ancestors": ["'none'"],
+	"frame-ancestors": isDev ? ["*"] : ["'none'"],
 	"script-src": [
 		"'self'",
 		// Next.js injects small inline bootstrap/flight scripts.
@@ -89,7 +89,7 @@ function buildCsp(): string {
 export function buildSecurityHeaders(): Header[] {
 	const headers: Header[] = [
 		{ key: "X-Content-Type-Options", value: "nosniff" },
-		{ key: "X-Frame-Options", value: "DENY" },
+		...(isDev ? [] : [{ key: "X-Frame-Options", value: "DENY" }]),
 		{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
 		{
 			key: "Permissions-Policy",

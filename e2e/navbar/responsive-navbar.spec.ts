@@ -1,51 +1,68 @@
 import { expect, test } from "@playwright/test";
 
-const HOME_URL = "/en";
+test.describe("Responsive Navbar", () => {
+	test("mobile viewport renders search as a button, opens search modal, and shows clean School sheet without standalone Library tab", async ({
+		page,
+	}) => {
+		await page.setViewportSize({ width: 375, height: 667 });
+		await page.goto("/en");
 
-test.describe("Responsive Navbar & Locale Switcher", () => {
-	test("behaves correctly on desktop", async ({ page }) => {
-		// Set a desktop resolution
-		await page.setViewportSize({ width: 1200, height: 800 });
-		await page.goto(HOME_URL);
+		const header = page.locator("header");
+		await expect(header.getByRole("link", { name: "School" })).toBeHidden();
 
-		// Desktop nav links should be visible in the nav container
-		const nav = page.getByRole("navigation");
-		await expect(nav.getByRole("link", { name: "Courses" })).toBeVisible();
-		await expect(nav.getByRole("link", { name: "Decks" })).toBeVisible();
-		await expect(nav.getByRole("link", { name: "Library" })).toBeVisible();
-		await expect(nav.getByRole("link", { name: "Quizzes" })).toBeVisible();
+		const searchButton = page.getByTestId("mobile-search-trigger");
+		await expect(searchButton).toBeVisible();
+		await searchButton.click();
 
-		// Mobile menu button should be hidden
+		const searchDialog = page.getByTestId("mobile-search-dialog");
+		await expect(searchDialog).toBeVisible();
+		await expect(searchDialog.getByPlaceholder("Search...")).toBeVisible();
+		await page.keyboard.press("Escape");
+
 		const menuButton = page.getByRole("button", { name: "Open menu" });
-		await expect(menuButton).toBeHidden();
+		await expect(menuButton).toBeVisible();
+		await menuButton.click();
+
+		const dialog = page.getByRole("dialog");
+		await expect(dialog).toBeVisible();
+		await expect(
+			dialog.getByRole("link", { name: "School Textbooks" })
+		).toBeVisible();
+		await expect(
+			dialog.getByRole("link", { name: "Library & General Books" })
+		).toBeVisible();
+		await expect(
+			dialog.getByRole("link", { name: "General Kankor Forms" })
+		).toBeVisible();
 	});
 
-	test("behaves correctly on mobile viewports", async ({ page }) => {
-		// Set a mobile resolution
-		await page.setViewportSize({ width: 375, height: 667 });
-		await page.goto(HOME_URL);
+	test("desktop viewport hides standalone Library tab, shows 'مکتب', and reveals hover mega-menu", async ({
+		page,
+	}) => {
+		await page.setViewportSize({ width: 1280, height: 800 });
+		await page.goto("/");
 
-		// Desktop inline navigation items should be hidden on mobile
-		const desktopItems = page.locator("nav .hidden");
-		await expect(desktopItems.first()).toBeHidden();
+		await expect(
+			page.getByRole("button", { name: "باز کردن منو" })
+		).toBeHidden();
+		await expect(page.getByTestId("mobile-search-trigger")).toBeHidden();
 
-		// Mobile menu button should be visible
-		const menuButton = page
-			.getByRole("button", { name: /open menu|toggle menu/i })
-			.first();
-		if (await menuButton.isVisible({ timeout: 5000 }).catch(() => false)) {
-			// Open mobile menu
-			await menuButton.click();
+		const schoolTab = page
+			.getByTestId("school-mega-menu")
+			.getByRole("link", { name: "مکتب" });
+		await expect(schoolTab).toBeVisible();
 
-			// Drawer content should appear
-			const drawer = page
-				.locator("[data-slot=sheet-content], [role=dialog]")
-				.first();
-			if (await drawer.isVisible({ timeout: 5000 }).catch(() => false)) {
-				await expect(
-					drawer.getByRole("link", { name: /courses/i })
-				).toBeVisible();
-			}
-		}
+		await schoolTab.hover();
+		const panel = page.getByTestId("school-mega-menu-panel");
+		await expect(panel).toBeVisible();
+		await expect(
+			panel.getByRole("link", { name: /کتاب‌های درسی مکتب/ })
+		).toBeVisible();
+		await expect(
+			panel.getByRole("link", { name: /کتابخانه و کتاب‌های عمومی/ })
+		).toBeVisible();
+		await expect(
+			panel.getByRole("link", { name: /فورم‌های عمومی کانکور/ })
+		).toBeVisible();
 	});
 });

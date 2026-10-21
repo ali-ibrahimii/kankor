@@ -1016,7 +1016,8 @@
 			"openMenu": "Open menu",
 			"closeMenu": "Close menu",
 			"roadmap": "Roadmap",
-			"themeToggle": "Toggle light or dark theme"
+			"themeToggle": "Toggle light or dark theme",
+			"school": "School"
 		},
 		"hero": {
 			"badge": "For Afghan students",
@@ -1119,6 +1120,99 @@
 			"paths": ["Mathematics", "Physics", "Biology", "Chemistry"],
 			"cardTitle": "Prepare with confidence",
 			"cardText": "Pick a subject, follow lessons at your pace, and keep track of your progress."
+		},
+		"schoolMenu": {
+			"eyebrow": "School Learning Hub",
+			"title": "Every school & Kankor resource in one place",
+			"description": "Jump straight into school courses, official textbooks, general reading, and Kankor forms.",
+			"all": "View all courses",
+			"subjects": "Key Kankor subjects",
+			"gradesLabel": "High-school grades",
+			"grades": ["Grade 10", "Grade 11", "Grade 12"],
+			"paths": [
+				"Mathematics",
+				"Physics",
+				"Chemistry",
+				"Biology",
+				"History & Geography",
+				"Dari & Pashto"
+			],
+			"cardTitle": "From classroom lessons to Kankor day",
+			"cardText": "Learn every subject step by step, review with Leitner flashcards, and test yourself with real exam forms.",
+			"verify": "Verify certificate",
+			"classrooms": "Live classrooms",
+			"items": {
+				"courses": {
+					"title": "School Video Courses",
+					"description": "Structured Grade 10–12 lessons taught by expert instructors"
+				},
+				"schoolBooks": {
+					"title": "School Textbooks",
+					"description": "Official curriculum PDF textbooks organized by grade"
+				},
+				"library": {
+					"title": "Library & General Books",
+					"description": "General reading, study guides, and university major handbooks"
+				},
+				"kankorForms": {
+					"title": "General Kankor Forms",
+					"description": "Provincial Kankor exam forms and timed mock tests"
+				},
+				"flashcards": {
+					"title": "Smart Flashcards",
+					"description": "Spaced-repetition decks for formulas, dates, and terms"
+				},
+				"roadmap": {
+					"title": "Study Roadmap",
+					"description": "Step-by-step preparation plan leading up to exam day"
+				}
+			}
+		},
+		"shelves": {
+			"viewMore": "View more",
+			"prev": "Previous",
+			"next": "Next",
+			"courses": {
+				"eyebrow": "Step-by-step video lessons",
+				"title": "School Courses",
+				"subtitle": "Core high-school subjects and Kankor problem-solving taught clearly by experienced teachers."
+			},
+			"schoolBooks": {
+				"eyebrow": "Official curriculum",
+				"title": "School Textbooks",
+				"subtitle": "Direct access to official school textbooks organized cleanly by grade and subject."
+			},
+			"generalBooks": {
+				"eyebrow": "Digital library",
+				"title": "General Books & Major Guides",
+				"subtitle": "Curated study-skills handbooks, faculty selection guides, and reference books."
+			},
+			"decks": {
+				"eyebrow": "Active recall with Leitner",
+				"title": "Flashcards",
+				"subtitle": "Lock in formulas, scientific terms, and historical dates in just minutes a day."
+			},
+			"kankorForms": {
+				"eyebrow": "Authentic exam simulation",
+				"title": "General Kankor Forms",
+				"subtitle": "Timed provincial exam forms and subject drills to benchmark your readiness."
+			}
+		},
+		"partners": {
+			"navLabel": "Partner Universities & Schools",
+			"eyebrow": "Academic Partner Network",
+			"title": "Universities & Schools Collaborating with Abzar Kankor",
+			"subtitle": "Working alongside leading universities and high schools to bring accessible digital learning across provinces.",
+			"filterAll": "All institutions",
+			"filterUniversities": "Universities",
+			"filterSchools": "Schools",
+			"universityBadge": "Partner University",
+			"schoolBadge": "Partner School",
+			"verifiedPartner": "Verified Partner",
+			"viewSchool": "View school page",
+			"ctaTitle": "Representing a school, academy, or university faculty?",
+			"ctaSubtitle": "Launch blended classrooms, digital libraries, and mock exams for your students on Abzar Kankor.",
+			"ctaButton": "Partner with us"
 		}
 	},
 	"quizBuilder": {
@@ -2264,7 +2358,11 @@
 		"resultsFor": "Results for \"{query}\"",
 		"resultsTitle": "Search results",
 		"emptyQuery": "Type something to search Abzar Kankor.",
-		"viewAllResults": "View all results for \"{query}\""
+		"viewAllResults": "View all results for \"{query}\"",
+		"openSearch": "Search",
+		"clearSearch": "Clear search",
+		"submitSearch": "Search",
+		"placeholder": "Search..."
 	},
 	"decks": {
 		"title": "Decks",
@@ -3731,5 +3829,98 @@
 			"badge": "Your study library",
 			"chips": ["Books & notes", "Organized resources", "Learn anywhere"]
 		}
+	},
+	"schoolHub": {
+		"metaTitle": "Online Academy, Coding, Skills & Live Classes — Abzar Kankor",
+		"metaDescription": "Explore Front-end, Back-end, Programming Languages, Technical & Career Skills, Life Skills, High-School Subjects, and Live Online Classes.",
+		"heroBadge": "Unified Academy · Skills to Career",
+		"heroTitle": "One Complete Academy for Coding, Life Skills, School Subjects & Live Classes",
+		"heroSubtitle": "Master Front-end, Back-end, programming languages, digital career skills, personal growth, and high-school subjects — through structured courses and live classes hosted by universities, schools, and teachers.",
+		"searchPlaceholder": "Search courses, live classes, React, Python, Excel, speaking, or math...",
+		"searchClear": "Clear",
+		"joinLiveBtn": "Browse Live Classes",
+		"joinWithCodeBtn": "Join with Class Code",
+		"statLiveLabel": "Live Interactive Classes",
+		"statCoursesLabel": "Structured Courses",
+		"statTracksLabel": "Complete Learning Tracks",
+		"statFreeLabel": "Free to Start",
+		"spotlightLiveTag": "Streaming Live Now",
+		"spotlightSeatText": "{enrolled} of {capacity} learners online",
+		"spotlightEnterBtn": "Join Live Classroom",
+		"tabsLabel": "Learning Tracks",
+		"tabAll": "All Tracks",
+		"tabLive": "Live Classes",
+		"tabFrontend": "Front-end",
+		"tabBackend": "Back-end & DB",
+		"tabLanguages": "Programming Languages",
+		"tabTechnical": "Technical Skills",
+		"tabLife": "Life Skills",
+		"tabSchool": "School & Kankor",
+		"levelAll": "All Levels",
+		"levelBeginner": "Beginner",
+		"levelIntermediate": "Intermediate",
+		"levelAdvanced": "Advanced",
+		"onlyFreeLabel": "Free Only",
+		"sortRecommended": "Recommended",
+		"sortPopular": "Most Popular",
+		"sortRating": "Highest Rated",
+		"resultsCount": "{count} active learning items",
+		"resetFilters": "Show all courses & live classes",
+		"emptyTitle": "No matching courses or live classes found",
+		"emptyDesc": "Try clearing filters or using a broader keyword to explore all learning tracks.",
+		"liveBadge": "Interactive Live Sessions",
+		"liveTitle": "Live Online Classes — Hosted by Universities, Schools & Teachers",
+		"liveSubtitle": "Attend real-time classes with live Q&A, shared worksheets, and session recordings.",
+		"hostAll": "All Hosts",
+		"hostUniversity": "Universities",
+		"hostSchool": "Schools",
+		"hostTeacher": "Teachers",
+		"orgUniversityBadge": "University",
+		"orgSchoolBadge": "School",
+		"orgTeacherBadge": "Teacher",
+		"freeTag": "Free",
+		"creditsTag": "{credits} Credits",
+		"seatsProgress": "{enrolled} / {capacity} seats filled",
+		"seatsLeft": "{left} seats left",
+		"classCodeLabel": "Code: {code}",
+		"enterLiveNow": "Join Live Session",
+		"reserveLiveSeat": "Reserve Free Seat",
+		"pathsBadge": "Guided Roadmaps",
+		"pathsTitle": "Not Sure Where to Begin? Follow a Step-by-Step Learning Path",
+		"pathsSubtitle": "Clear milestone sequences taking you from first fundamentals to real portfolio projects.",
+		"pathExploreBtn": "View Path Courses",
+		"pathCoursesCount": "{count} Structured Courses",
+		"frontendBadge": "Modern Web Interfaces",
+		"frontendTitle": "Front-end Web Development & UI Engineering",
+		"frontendSubtitle": "Build fast, accessible, responsive apps with HTML5, CSS3, Tailwind, React 19, and Next.js.",
+		"backendBadge": "Servers, APIs & Data",
+		"backendTitle": "Back-end Engineering, Databases & Cloud",
+		"backendSubtitle": "Architect secure APIs and relational schemas with Node.js, Python, PostgreSQL, and Docker.",
+		"languagesBadge": "Core Coding & Mobile",
+		"languagesTitle": "Programming Languages, Algorithms & Mobile Apps",
+		"languagesSubtitle": "Master problem-solving in Python, JavaScript, TypeScript, C++, and Flutter.",
+		"technicalBadge": "Career & Digital Tools",
+		"technicalTitle": "Technical, Digital & Freelancing Skills",
+		"technicalSubtitle": "Applied AI workflows, advanced Excel, graphic design, and remote career readiness.",
+		"lifeBadge": "Personal Growth",
+		"lifeTitle": "Life Skills, Communication & Personal Effectiveness",
+		"lifeSubtitle": "Time management, public speaking, financial literacy, career English, and critical thinking.",
+		"schoolBadge": "Curriculum & Exam Prep",
+		"schoolTitle": "High-School Curriculum & Kankor Preparation",
+		"schoolSubtitle": "Clear conceptual teaching and rapid test strategies across core school subjects.",
+		"lessonsUnit": "{count} lessons",
+		"hoursUnit": "{count} hrs",
+		"votesUnit": "({count})",
+		"startCourseBtn": "Explore & Start Learning",
+		"hostCtaBadge": "For Teachers, Schools & Universities",
+		"hostCtaTitle": "Are You a Teacher, School, or University? Launch Your Own Live Class",
+		"hostCtaDesc": "Create dedicated classrooms with invite codes, share assignments and quizzes, and teach students anywhere.",
+		"hostCtaPrimary": "Register as Instructor / Institution",
+		"hostCtaSecondary": "Verify a Certificate",
+		"joinDialogTitle": "Join a Classroom with Invite Code",
+		"joinDialogDesc": "Enter the classroom code shared by your teacher, school, or university (for example FE-204) to jump into your class.",
+		"joinDialogPlaceholder": "e.g. FE-204",
+		"joinDialogAction": "Continue to Classrooms",
+		"joinDialogCancel": "Cancel"
 	}
 }

@@ -8,7 +8,6 @@ import {
 	FileText,
 	Flame,
 	GraduationCap,
-	Library,
 	Play,
 	School,
 	Sparkles,
@@ -18,79 +17,36 @@ import {
 	Zap,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import {
+	HomeCourseCard,
+	HomeFlashcardDeckCard,
+	HomeGeneralBookCard,
+	HomeKankorFormCard,
+	HomeSchoolBookCard,
+} from "./_components/home-cards";
+import type { HomeCatalogData } from "./_components/home-catalog-data";
+import { HorizontalCardSection } from "./_components/horizontal-card-section";
+import { PartnerInstitutionsSection } from "./_components/partner-institutions-section";
 
-export default async function HomeContent({ locale }: { locale: string }) {
+export default async function HomeContent({
+	locale,
+	catalog,
+}: {
+	locale: Locale;
+	catalog: HomeCatalogData;
+}) {
 	const [t, app] = await Promise.all([
 		getTranslations({ locale, namespace: "landing" }),
 		getTranslations({ locale, namespace: "app" }),
 	]);
 
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
-
-	const modules = [
-		{
-			key: "school",
-			icon: BookOpen,
-			href: routes.courses.page(),
-			art: "from-[#e8ddff] to-[#cfc7ff] text-[#6a46c7]",
-			symbol: "∑",
-		},
-		{
-			key: "flashcards",
-			icon: Zap,
-			href: routes.decks.page(),
-			art: "from-[#def8e7] to-[#b9e6d4] text-[#2a8c68]",
-			symbol: "✦",
-		},
-		{
-			key: "tests",
-			icon: FileText,
-			href: routes.quizzes.page(),
-			art: "from-[#ffe5d7] to-[#ffd2b6] text-[#c77849]",
-			symbol: "✳",
-		},
-		{
-			key: "library",
-			icon: Library,
-			href: routes.libraries.page(),
-			art: "from-[#ddebff] to-[#b8dafa] text-[#4678c3]",
-			symbol: "⌘",
-		},
-	] as const;
-
-	const roles = [
-		{
-			icon: GraduationCap,
-			title: t("showcase.studentTitle"),
-			description: t("showcase.studentDescription"),
-			feature: t("showcase.studentFeature"),
-			cta: t("showcase.studentCta"),
-			href: routes.auth.signup.page({ type: "student" }),
-			tint: "bg-[#e8e0ff] text-[#6246be]",
-		},
-		{
-			icon: BookOpen,
-			title: t("instructor.title"),
-			description: t("instructor.description"),
-			feature: t("showcase.teacherFeature"),
-			cta: t("instructor.cta"),
-			href: routes.auth.signup.page({ type: "instructor" }),
-			tint: "bg-[#dcf4e7] text-[#268064]",
-		},
-		{
-			icon: School,
-			title: t("school.title"),
-			description: t("school.description"),
-			feature: t("showcase.schoolFeature"),
-			cta: t("school.cta"),
-			href: routes.auth.signup.page({ type: "school" }),
-			tint: "bg-[#e0ecff] text-[#427dc5]",
-		},
-	] as const;
+	const viewMoreLabel = t("shelves.viewMore");
 
 	const stats = [
 		{
@@ -137,15 +93,45 @@ export default async function HomeContent({ locale }: { locale: string }) {
 		},
 	] as const;
 
+	const roles = [
+		{
+			icon: GraduationCap,
+			title: t("showcase.studentTitle"),
+			description: t("showcase.studentDescription"),
+			feature: t("showcase.studentFeature"),
+			cta: t("showcase.studentCta"),
+			href: routes.auth.signup.page({ type: "student" }),
+			tint: "bg-[#e8e0ff] text-[#6246be]",
+		},
+		{
+			icon: BookOpen,
+			title: t("instructor.title"),
+			description: t("instructor.description"),
+			feature: t("showcase.teacherFeature"),
+			cta: t("instructor.cta"),
+			href: routes.auth.signup.page({ type: "instructor" }),
+			tint: "bg-[#dcf4e7] text-[#268064]",
+		},
+		{
+			icon: School,
+			title: t("school.title"),
+			description: t("school.description"),
+			feature: t("showcase.schoolFeature"),
+			cta: t("school.cta"),
+			href: routes.auth.signup.page({ type: "school" }),
+			tint: "bg-[#e0ecff] text-[#427dc5]",
+		},
+	] as const;
+
 	const offlineModules = ["school", "flashcards", "tests"] as const;
 	const offlinePoints = [1, 2, 3] as const;
 	const heroFeatures = ["featureOne", "featureTwo", "featureThree"] as const;
 
 	return (
-		<div className="min-h-screen overflow-hidden bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+		<div className="min-h-screen overflow-x-clip bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
 			{/* Hero */}
-			<section className="mx-auto max-w-[1320px] px-4 pb-0 pt-4 sm:px-6 sm:pt-7 lg:px-8">
-				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_13%_105%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_94%_0%,rgba(137,100,255,.34),transparent_39%),linear-gradient(125deg,#101a2c_4%,#17233a_58%,#222340_100%)] px-5 py-12 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[36px] sm:px-9 sm:py-14 lg:px-14 lg:py-[78px]">
+			<section className="mx-auto max-w-[1320px] px-4 pt-4 pb-0 sm:px-6 sm:pt-7 lg:px-8">
+				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_13%_105%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_94%_0%,rgba(137,100,255,.34),transparent_39%),linear-gradient(125deg,#101a2c_4%,#17233a_58%,#222340_100%)] px-5 py-12 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[36px] sm:px-9 sm:py-14 lg:px-14 lg:py-[68px]">
 					<div
 						aria-hidden="true"
 						className="pointer-events-none absolute inset-0 opacity-[.16] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:23px_23px]"
@@ -190,7 +176,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</Link>
 
 								<Link
-									href={routes.courses.page()}
+									href={routes.auth.signup.page()}
 									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
 								>
 									{t("hero.ctaPrimary")}
@@ -212,8 +198,8 @@ export default async function HomeContent({ locale }: { locale: string }) {
 							</div>
 						</div>
 
-						{/* Hero preview card */}
-						<div className="relative mx-auto w-full max-w-[485px] pb-9 pt-8 sm:px-5">
+						{/* Hero study progress preview card */}
+						<div className="relative mx-auto w-full max-w-[485px] pt-8 pb-9 sm:px-5">
 							<div
 								aria-hidden="true"
 								className="absolute -end-2 top-0 size-28 rounded-full bg-violet-500/35 blur-3xl"
@@ -343,7 +329,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			{/* Stats */}
-			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 sm:px-6 lg:grid-cols-4 lg:px-8">
+			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
 				{stats.map(({ value, label, icon: Icon, tint }) => (
 					<div
 						key={label}
@@ -356,7 +342,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 						</span>
 
 						<div>
-							<p className="text-xl font-extrabold text-[#1d2841] dark:text-slate-100 sm:text-2xl">
+							<p className="text-xl font-extrabold text-[#1d2841] sm:text-2xl dark:text-slate-100">
 								{value}
 							</p>
 
@@ -368,73 +354,87 @@ export default async function HomeContent({ locale }: { locale: string }) {
 				))}
 			</section>
 
-			{/* Modules */}
-			<section
-				id="modules"
-				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+			{/* 1. School Courses Horizontal Row — Video Lesson Card Design */}
+			<HorizontalCardSection
+				id="school-courses"
+				title={t("shelves.courses.title")}
+				subtitle={t("shelves.courses.subtitle")}
+				viewMoreHref={routes.courses.page()}
+				viewMoreLabel={viewMoreLabel}
 			>
-				<div className="mb-9 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-					<div>
-						<span className="section-kicker">{t("showcase.modulesLabel")}</span>
+				{catalog.courses.map(({ item, href }) => (
+					<HomeCourseCard key={item.id} course={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<h2 className="section-title">{t("app.heading")}</h2>
+			{/* 2. Official School Textbooks Horizontal Row — Book-Spine Layout */}
+			<HorizontalCardSection
+				id="school-books"
+				title={t("shelves.schoolBooks.title")}
+				subtitle={t("shelves.schoolBooks.subtitle")}
+				viewMoreHref={routes.libraries.page()}
+				viewMoreLabel={viewMoreLabel}
+				surface="tinted"
+			>
+				{catalog.schoolBooks.map(({ item, href }) => (
+					<HomeSchoolBookCard key={item.id} book={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<p className="section-copy">{t("app.subtitle")}</p>
-					</div>
+			{/* 3. General Books & Guides Horizontal Row — Editorial Overlay Design */}
+			<HorizontalCardSection
+				id="general-books"
+				title={t("shelves.generalBooks.title")}
+				subtitle={t("shelves.generalBooks.subtitle")}
+				viewMoreHref={catalog.generalBooksMoreHref}
+				viewMoreLabel={viewMoreLabel}
+			>
+				{catalog.generalBooks.map(({ item, href }) => (
+					<HomeGeneralBookCard key={item.id} book={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-					<Link
-						href={routes.courses.page()}
-						className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline"
-					>
-						{t("showcase.previewCta")}
+			{/* 4. Smart Flashcards Horizontal Row — Stacked Deck Card Design */}
+			<HorizontalCardSection
+				id="flashcards"
+				title={t("shelves.decks.title")}
+				subtitle={t("shelves.decks.subtitle")}
+				viewMoreHref={routes.decks.page()}
+				viewMoreLabel={viewMoreLabel}
+				surface="tinted"
+			>
+				{catalog.decks.map(({ item, href }) => (
+					<HomeFlashcardDeckCard key={item.id} deck={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<Arrow className="size-4" />
-					</Link>
-				</div>
+			{/* 5. General Kankor Forms Horizontal Row — Structured Exam Sheet Design */}
+			<HorizontalCardSection
+				id="kankor-forms"
+				title={t("shelves.kankorForms.title")}
+				subtitle={t("shelves.kankorForms.subtitle")}
+				viewMoreHref={routes.quizzes.page()}
+				viewMoreLabel={viewMoreLabel}
+			>
+				{catalog.kankorForms.map(({ item, href }) => (
+					<HomeKankorFormCard key={item.id} quiz={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-				<div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-					{modules.map(({ key, icon: Icon, href, art, symbol }) => (
-						<Link
-							key={key}
-							href={href}
-							className="group soft-card card-hover flex flex-col overflow-hidden"
-						>
-							<div
-								className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${art}`}
-							>
-								<span className="absolute -end-12 -top-14 size-44 rounded-full border-2 border-white/45 shadow-[0_0_0_35px_rgba(255,255,255,.13)]" />
+			{/* 6. Collaborating Universities & Schools — Campus Card Design */}
+			<PartnerInstitutionsSection
+				institutions={catalog.partners}
+				labels={{
+					title: t("partners.title"),
+					subtitle: t("partners.subtitle"),
+					ctaTitle: t("partners.ctaTitle"),
+					ctaSubtitle: t("partners.ctaSubtitle"),
+					ctaButton: t("partners.ctaButton"),
+				}}
+			/>
 
-								<span className="font-serif text-[5rem] font-bold opacity-80">
-									{symbol}
-								</span>
-
-								<span className="absolute bottom-4 start-4 flex size-11 items-center justify-center rounded-2xl bg-white/60 shadow-sm">
-									<Icon className="size-5" />
-								</span>
-							</div>
-
-							<div className="flex flex-1 flex-col p-5">
-								<h3 className="text-base font-extrabold text-[#19243b] dark:text-slate-100">
-									{t(`app.${key}.title`)}
-								</h3>
-
-								<p className="mt-3 line-clamp-3 text-xs leading-7 text-slate-500 dark:text-slate-400">
-									{t(`app.${key}.description`)}
-								</p>
-
-								<span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-xs font-bold text-[#694bd2] dark:text-violet-300">
-									{t("showcase.explore")}
-
-									<Arrow className="size-4 transition-transform ltr:group-hover:translate-x-[3px] rtl:group-hover:-translate-x-[3px]" />
-								</span>
-							</div>
-						</Link>
-					))}
-				</div>
-			</section>
-
-			{/* Offline */}
-			<section className="border-y border-[#e9eaf2] bg-white/75 py-20 dark:border-white/10 dark:bg-[#1b2438] sm:py-24">
+			{/* Offline Mobile App Highlight */}
+			<section className="py-16 sm:py-22">
 				<div className="mx-auto grid max-w-[1320px] items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
 					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#e9e2ff] p-5 sm:p-8">
 						<div className="absolute -start-3 -top-5 flex size-20 items-center justify-center rounded-[26px] bg-[#b7f486] text-[#23304a] shadow-lg shadow-[#273953]/10">
@@ -534,7 +534,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			{/* Educators */}
 			<section
 				id="educators"
-				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+				className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 lg:px-8 lg:py-22"
 			>
 				<div className="mx-auto mb-10 max-w-2xl text-center">
 					<span className="section-kicker">{t("showcase.educatorLabel")}</span>
@@ -587,7 +587,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			{/* Final CTA */}
-			<section className="mx-auto max-w-[1320px] px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+			<section className="mx-auto max-w-[1320px] px-4 pb-20 sm:px-6 lg:px-8 lg:pb-24">
 				<div className="relative isolate overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_80%_15%,#413c82,transparent_42%),linear-gradient(130deg,#141f34,#222a46)] px-6 py-12 text-center text-white sm:px-10 sm:py-16">
 					<div
 						aria-hidden="true"
