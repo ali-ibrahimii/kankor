@@ -179,7 +179,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 
 							<div className="mt-8 flex flex-col gap-3 sm:flex-row">
 								<Link
-									href={routes.courses.page()}
+									href={routes.demo.page()}
 									className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
 								>
 									<Sparkles className="size-4" />
@@ -383,7 +383,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 					</div>
 
 					<Link
-						href={routes.courses.page()}
+						href={routes.demo.page()}
 						className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline"
 					>
 						{t("showcase.previewCta")}
@@ -606,7 +606,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 
 					<div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
 						<Link
-							href={routes.courses.page()}
+							href={routes.demo.page()}
 							className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
 						>
 							{t("showcase.previewCta")}
