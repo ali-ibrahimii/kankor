@@ -1,5 +1,20 @@
 import { type ClientEnv, clientSchema } from "./schema";
 
+// Read the raw values once: Next inlines `NEXT_PUBLIC_*` at build time, so
+// this stays a compile-time constant in client bundles.
+const rawSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const rawSupabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+/**
+ * True when real Supabase credentials are configured.
+ *
+ * The public website and the isolated `/demo` dashboard can run without
+ * Supabase credentials (see the inert `demo.invalid` fallback below). Anything
+ * that would hit the network — the auth provider above all — must check this
+ * flag first instead of firing requests at a host that cannot resolve.
+ */
+export const isSupabaseConfigured = Boolean(rawSupabaseUrl && rawSupabaseKey);
+
 function parseClientEnv(): ClientEnv {
 	const env = {
 		app: {

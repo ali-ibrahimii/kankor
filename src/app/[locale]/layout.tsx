@@ -71,6 +71,7 @@ export default async function RootLayout({
 			lang={locale}
 			dir={dir}
 			suppressHydrationWarning
+			data-scroll-behavior="smooth"
 			className={`${fontVazirmatn.variable} antialiased`}
 		>
 			<body className="relative">
