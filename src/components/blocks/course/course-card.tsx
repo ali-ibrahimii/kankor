@@ -27,18 +27,15 @@ import {
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
-
+import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-
 import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import type { Tables } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
-
-import { coverPlaceholderClass, resolveCoverSrc } from "./cover.utils";
 
 // ============================================================
 // TYPES
@@ -275,11 +272,14 @@ function CourseCover({
 	topEndBadge,
 	overlay,
 }: CourseCoverProps) {
-	const coverSrc = resolveCoverSrc(src);
+	const coverSrc = resolveEntityCardImage({
+		customSrc: src,
+		text: `${subject ?? ""} ${alt}`,
+		kind: "course",
+		seed: alt,
+	});
 
 	const theme = getSubjectTheme(subject);
-
-	const Icon = theme.icon;
 
 	return (
 		<div
@@ -288,37 +288,15 @@ function CourseCover({
 				theme.gradient
 			)}
 		>
-			{coverSrc ? (
-				<Image
-					src={coverSrc}
-					alt={alt}
-					fill
-					className="object-cover transition-transform duration-700 group-hover/card:scale-[1.07]"
-					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
-				/>
-			) : (
-				<div className="absolute inset-0 flex flex-col items-center justify-center">
-					<div className="absolute -end-16 -top-20 size-64 rounded-full border-[40px] border-white/10" />
+			<Image
+				src={coverSrc}
+				alt={alt}
+				fill
+				className="object-cover transition-transform duration-700 group-hover/card:scale-[1.07]"
+				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
+			/>
 
-					<div className="absolute -start-20 -bottom-24 size-72 rounded-full border-[45px] border-white/10" />
-
-					<div
-						className={cn("absolute size-40 rounded-full blur-3xl", theme.glow)}
-					/>
-
-					<div className="relative flex size-[86px] items-center justify-center rounded-[28px] border border-white/25 bg-white/15 text-white shadow-2xl backdrop-blur-md transition-transform duration-500 group-hover/card:rotate-3 group-hover/card:scale-110">
-						<Icon className="size-11" strokeWidth={1.7} />
-					</div>
-
-					{subject && (
-						<span className="relative mt-4 max-w-[85%] truncate text-sm font-extrabold tracking-tight text-white drop-shadow-sm">
-							{subject}
-						</span>
-					)}
-				</div>
-			)}
-
-			<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
+			<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/15" />
 
 			{/* GRADE */}
 
@@ -533,10 +511,10 @@ export function CatalogCourseCard({
 				/>
 			</Link>
 
-			<div className="flex flex-1 flex-col p-4 sm:p-5">
+			<div className="flex flex-1 flex-col p-3.5 sm:p-4">
 				{/* SUBJECT + LANGUAGE */}
 
-				<div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+				<div className="mb-2 flex flex-wrap items-center justify-between gap-2">
 					<SubjectBadge subject={course.subject} />
 
 					{course.language && (
@@ -551,7 +529,7 @@ export function CatalogCourseCard({
 				{/* TITLE */}
 
 				<Link href={href}>
-					<h3 className="line-clamp-2 text-[15px] font-extrabold leading-6 text-[#19243b] transition-colors hover:text-[#694bd2] dark:text-slate-100">
+					<h3 className="line-clamp-2 text-[14.5px] font-extrabold leading-6 text-[#19243b] transition-colors hover:text-[#694bd2] dark:text-slate-100">
 						{course.title}
 					</h3>
 				</Link>
@@ -559,7 +537,7 @@ export function CatalogCourseCard({
 				{/* DESCRIPTION */}
 
 				{course.subtitle && (
-					<p className="mt-2 line-clamp-2 text-[11px] leading-5 text-slate-500 dark:text-slate-400">
+					<p className="mt-1.5 line-clamp-2 text-[11px] leading-5 text-slate-500 dark:text-slate-400">
 						{course.subtitle}
 					</p>
 				)}
@@ -567,7 +545,7 @@ export function CatalogCourseCard({
 				{/* INSTRUCTOR */}
 
 				{course.instructor && (
-					<div className="mt-4">
+					<div className="mt-2.5">
 						<InstructorByline instructor={course.instructor} />
 					</div>
 				)}
@@ -575,7 +553,7 @@ export function CatalogCourseCard({
 				{/* META */}
 
 				{showMeta && (
-					<div className="mt-4 rounded-xl border border-[#f0eff6] bg-[#fafaff] p-3 dark:border-white/5 dark:bg-white/[.03]">
+					<div className="mt-2.5 rounded-xl border border-[#f0eff6] bg-[#fafaff] px-3 py-2 dark:border-white/5 dark:bg-white/[.03]">
 						<CourseMetaRow
 							totalLessons={course.total_lessons}
 							durationHours={course.estimated_duration_hours}
@@ -587,8 +565,8 @@ export function CatalogCourseCard({
 
 				{/* BUTTON */}
 
-				<div className="mt-auto pt-5">
-					<Button asChild className={PRIMARY_BUTTON}>
+				<div className="mt-auto pt-3">
+					<Button asChild className="button-primary h-9 w-full text-xs">
 						<Link
 							href={href}
 							className="flex items-center justify-center gap-2"

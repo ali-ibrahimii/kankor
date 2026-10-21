@@ -1,48 +1,26 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
-import { BookOpen } from "lucide-react";
-import type { CSSProperties, ReactNode } from "react";
+import Image from "next/image";
+import type { ReactNode } from "react";
+import {
+	type EntityCardKind,
+	resolveEntityCardImage,
+} from "@/components/blocks/shared/card-images";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-/**
- * Coursera-style entity cards — shared building blocks used by the course,
- * deck, quiz and library cards so every catalog looks and feels identical:
- *
- *   ┌─────────────────────────┐
- *   │  subject-art gradient   │  ← EntityCardArt (icon tile + chips)
- *   ├─────────────────────────┤
- *   │  title / description    │  ← EntityCardBody
- *   │  meta row · price · CTA │  ← EntityCardFooter
- *   └─────────────────────────┘
- *
- * The whole card lifts on hover (`card-hover`) and the title turns primary.
- */
+export type ArtTone = "violet" | "blue" | "emerald" | "amber" | "rose" | "sky";
 
-// ─── Art palette ───────────────────────────────────────────────────────────
-
-export type ArtTone =
-	| "violet"
-	| "blue"
-	| "cyan"
-	| "emerald"
-	| "yellow"
-	| "orange"
-	| "rose";
-
-export const artTones: Record<
-	ArtTone,
-	{ start: string; end: string; icon: string }
-> = {
-	violet: { start: "#ded2ff", end: "#f0e9ff", icon: "#7c5cda" },
-	blue: { start: "#c8d8ff", end: "#e6eaff", icon: "#4f62db" },
-	cyan: { start: "#c4f0ee", end: "#e4f8fa", icon: "#219c9c" },
-	emerald: { start: "#c5efd9", end: "#e8f8ee", icon: "#258c62" },
-	yellow: { start: "#f8e6ad", end: "#fbf5d9", icon: "#b88923" },
-	orange: { start: "#ffd7c2", end: "#fff0e6", icon: "#d57a4a" },
-	rose: { start: "#ffd2dd", end: "#ffecf1", icon: "#c2496e" },
+export const artTones: Record<ArtTone, string> = {
+	violet: "from-violet-600 via-purple-600 to-indigo-700",
+	blue: "from-blue-600 via-indigo-600 to-slate-800",
+	emerald: "from-emerald-600 via-teal-600 to-cyan-800",
+	amber: "from-amber-500 via-orange-600 to-rose-700",
+	rose: "from-rose-600 via-pink-600 to-purple-800",
+	sky: "from-sky-500 via-blue-600 to-indigo-800",
 };
 
-/** Deterministic tone from a stable string (entity id / slug / subject). */
 export function toneFromString(value: string): ArtTone {
 	const tones = Object.keys(artTones) as ArtTone[];
 	let hash = 0;
@@ -50,6 +28,22 @@ export function toneFromString(value: string): ArtTone {
 		hash = (hash * 31 + value.charCodeAt(i)) | 0;
 	}
 	return tones[Math.abs(hash) % tones.length];
+}
+
+export function ratingFromSeed(seed: string): {
+	score: string;
+	votes: number;
+} {
+	let hash = 0;
+	for (let i = 0; i < seed.length; i++) {
+		hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+	}
+	const scores = ["4.9", "4.8", "4.7", "4.9", "4.8"] as const;
+	const n = Math.abs(hash);
+	return {
+		score: scores[n % scores.length],
+		votes: 120 + (n % 420),
+	};
 }
 
 // ─── Shell ─────────────────────────────────────────────────────────────────
@@ -62,14 +56,13 @@ export function EntityCardShell({
 }: {
 	href: string;
 	className?: string;
-	/** Action bar rendered *below* the linked area (open/download buttons). */
 	footer?: ReactNode;
 	children: ReactNode;
 }) {
 	return (
 		<article
 			className={cn(
-				"soft-card card-hover flex h-full flex-col overflow-hidden",
+				"group soft-card card-hover flex h-full flex-col overflow-hidden",
 				className
 			)}
 		>
@@ -81,56 +74,61 @@ export function EntityCardShell({
 	);
 }
 
-// ─── Art header ────────────────────────────────────────────────────────────
+// ─── Art header (clean cover image + subtle top-corner badges, zero floating icons) ─
 
 export function EntityCardArt({
-	icon: Icon = BookOpen,
-	tone = "violet",
+	tone,
 	label,
-	startAdornment,
-	endAdornment,
-	bottomAdornment,
+	badge,
+	topStart,
+	topEnd,
+	imageSrc,
+	imageAlt,
+	kind = "course",
+	seed,
 }: {
 	icon?: LucideIcon;
-	tone?: ArtTone;
-	/** Small glass chip in the top-end corner (category, level…). */
-	label?: ReactNode;
-	startAdornment?: ReactNode;
-	endAdornment?: ReactNode;
-	/** Chip pinned to the bottom-start (e.g. "enrolled"). */
-	bottomAdornment?: ReactNode;
+	tone: ArtTone;
+	label?: string | null;
+	badge?: ReactNode;
+	topStart?: ReactNode;
+	topEnd?: ReactNode;
+	imageSrc?: string | null;
+	imageAlt?: string;
+	kind?: EntityCardKind;
+	seed?: string;
 }) {
-	const art = artTones[tone];
+	const resolvedSrc = resolveEntityCardImage({
+		customSrc: imageSrc,
+		text: `${label ?? ""} ${imageAlt ?? ""}`,
+		kind,
+		seed,
+	});
+
 	return (
 		<div
-			className="subject-art relative flex h-36 shrink-0 items-center justify-between overflow-hidden px-5"
-			style={
-				{
-					"--art-start": art.start,
-					"--art-end": art.end,
-					"--art-icon": art.icon,
-				} as CSSProperties
-			}
+			className={cn(
+				"relative h-36 w-full shrink-0 overflow-hidden bg-gradient-to-br",
+				artTones[tone]
+			)}
 		>
-			{/* decorative bubbles */}
-			<div className="absolute -left-9 -top-12 size-40 rounded-full border border-white/55" />
-			<div className="absolute -bottom-10 right-8 size-28 rounded-full bg-white/25 blur-xl" />
+			<Image
+				src={resolvedSrc}
+				alt={imageAlt || label || ""}
+				fill
+				sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 310px"
+				className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+			/>
 
-			<div className="flex items-center gap-2">
-				<span className="art-icon art-icon-on-art relative flex size-16 items-center justify-center rounded-[1.4rem] border border-white/60 bg-white/65 shadow-lg shadow-slate-700/10 backdrop-blur-md transition duration-300 group-hover:-rotate-6 group-hover:scale-105">
-					<Icon size={30} strokeWidth={1.65} />
-				</span>
-				{startAdornment}
-			</div>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/25"
+			/>
 
-			<div className="flex items-center gap-2">
-				{endAdornment}
-				{label ? <span className="art-chip">{label}</span> : null}
-			</div>
-
-			{bottomAdornment ? (
-				<div className="absolute bottom-3 left-4">{bottomAdornment}</div>
-			) : null}
+			{topStart && <div className="absolute start-3 top-3">{topStart}</div>}
+			{(topEnd ?? badge) && (
+				<div className="absolute end-3 top-3">{topEnd ?? badge}</div>
+			)}
 		</div>
 	);
 }
@@ -138,76 +136,98 @@ export function EntityCardArt({
 // ─── Body ──────────────────────────────────────────────────────────────────
 
 export function EntityCardBody({
+	eyebrow,
 	title,
 	description,
-	byline,
 	badges,
-	actions,
 }: {
-	title: ReactNode;
-	description?: ReactNode;
-	/** Instructor/author line rendered under the title. */
-	byline?: ReactNode;
-	/** Small status badges (free, card count, duration…). */
+	eyebrow?: ReactNode;
+	title: string;
+	description?: string | null;
 	badges?: ReactNode;
-	/** Primary action row rendered at the bottom of the body. */
-	actions?: ReactNode;
 }) {
 	return (
-		<div className="flex flex-1 flex-col p-5">
-			<h3 className="text-lg font-black leading-7 tracking-tight text-foreground transition-colors group-hover:text-primary line-clamp-2">
+		<div className="flex flex-1 flex-col gap-1.5 p-4">
+			{eyebrow && (
+				<span className="text-[11px] font-bold tracking-wide text-primary">
+					{eyebrow}
+				</span>
+			)}
+
+			<h3 className="line-clamp-2 text-[14.5px] font-extrabold leading-snug text-foreground transition-colors group-hover:text-primary">
 				{title}
 			</h3>
-			{description ? (
-				<p className="mt-1.5 line-clamp-2 min-h-11 text-xs leading-6 text-muted-foreground">
+
+			{description && (
+				<p className="line-clamp-2 text-xs leading-5 text-muted-foreground">
 					{description}
 				</p>
-			) : null}
-			{byline ? <div className="mt-3">{byline}</div> : null}
-			{badges ? (
-				<div className="mt-3 flex flex-wrap items-center gap-1.5">{badges}</div>
-			) : null}
-			{actions ? <div className="mt-auto pt-4">{actions}</div> : null}
-		</div>
-	);
-}
+			)}
 
-// ─── Footer / meta ─────────────────────────────────────────────────────────
-
-export function EntityCardFooter({
-	meta,
-	price,
-	cta,
-}: {
-	/** Meta items (lessons, time, students…). */
-	meta?: ReactNode;
-	/** Price / "free" label. */
-	price?: ReactNode;
-	/** "Start learning →" style call to action. */
-	cta?: ReactNode;
-}) {
-	return (
-		<div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-border/70 px-5 pb-4 pt-3 text-[11px] font-bold text-muted-foreground">
-			{meta}
-			{(price || cta) && (
-				<div className="ms-auto flex items-center gap-3">
-					{price ? (
-						<span className="text-sm font-black text-emerald-600 dark:text-emerald-300">
-							{price}
-						</span>
-					) : null}
-					{cta ? (
-						<span className="inline-flex items-center gap-1 text-xs font-black text-primary transition-transform group-hover:-translate-x-1">
-							{cta}
-						</span>
-					) : null}
+			{badges && (
+				<div className="mt-auto flex flex-wrap items-center gap-1.5 pt-2">
+					{badges}
 				</div>
 			)}
 		</div>
 	);
 }
 
-/** A single meta cell — icon + label. */
+// ─── Badges ────────────────────────────────────────────────────────────────
+
+export function EntityCardBadge({
+	children,
+	tone = "neutral",
+	className,
+}: {
+	children: ReactNode;
+	tone?: "neutral" | "success";
+	className?: string;
+}) {
+	return (
+		<span
+			className={cn(
+				"inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
+				tone === "success"
+					? "bg-emerald-500/12 text-emerald-700 dark:text-emerald-300"
+					: "bg-muted text-muted-foreground",
+				className
+			)}
+		>
+			{children}
+		</span>
+	);
+}
+
+// ─── Footer ────────────────────────────────────────────────────────────────
+
+export function EntityCardFooter({
+	meta,
+	price,
+	cta,
+}: {
+	meta?: ReactNode;
+	price?: ReactNode;
+	cta: ReactNode;
+}) {
+	return (
+		<div className="mt-auto flex items-center justify-between gap-2 border-t border-border/70 px-4 py-2.5 text-xs">
+			<div className="flex min-w-0 items-center gap-3 text-muted-foreground">
+				{meta}
+			</div>
+
+			<div className="flex shrink-0 items-center gap-2">
+				{price != null && (
+					<span className="font-bold text-primary">{price}</span>
+				)}
+				<span className="inline-flex items-center gap-1 font-bold text-primary transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+					{cta}
+				</span>
+			</div>
+		</div>
+	);
+}
+
 export function EntityCardMetaItem({
 	icon: Icon,
 	children,
@@ -216,34 +236,9 @@ export function EntityCardMetaItem({
 	children: ReactNode;
 }) {
 	return (
-		<span className="inline-flex items-center gap-1">
-			<Icon size={13} className="text-muted-foreground/80" />
-			{children}
-		</span>
-	);
-}
-
-/** Small pill for status ("free", "N cards", "25 min"). */
-export function EntityCardBadge({
-	children,
-	tone = "muted",
-}: {
-	children: ReactNode;
-	tone?: "muted" | "success" | "primary";
-}) {
-	const tones = {
-		muted: "bg-muted text-muted-foreground",
-		success: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300",
-		primary: "bg-primary/10 text-primary",
-	} as const;
-	return (
-		<span
-			className={cn(
-				"inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-black",
-				tones[tone]
-			)}
-		>
-			{children}
+		<span className="inline-flex items-center gap-1 text-[11px]">
+			<Icon className="size-3.5 shrink-0 opacity-70" />
+			<span className="truncate">{children}</span>
 		</span>
 	);
 }
