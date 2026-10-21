@@ -22,6 +22,21 @@ This document describes the workflow commands, configurations, and steps for run
    ```
 3. Open [http://localhost:3000](http://localhost:3000) to view the application.
 
+### Dashboard design preview (no account needed)
+The student, instructor, school, and platform-admin overviews are also
+rendered publicly with mock data:
+
+```bash
+open http://localhost:3000/fa/demo
+# switch roles with ?role=student|instructor|school|admin
+```
+
+The preview lives in `src/app/[locale]/demo`, never authenticates, and never
+queries Supabase. Its numbers come from `src/lib/demo/mock-dashboard.ts`. The
+overview markup itself is shared with the real dashboards through
+`src/components/blocks/dashboard-overview/*`, so a change made there shows up
+in both places.
+
 ---
 
 ## 2. Testing & Quality Gates

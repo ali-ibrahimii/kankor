@@ -12,12 +12,16 @@ type Header = { key: string; value: string };
 
 const isDev = process.env.NODE_ENV !== "production";
 
+// The local dev server is embedded by the hosted preview environment, so the
+// dev CSP has to allow that one frame ancestor. Production stays locked down.
+const DEV_FRAME_ANCESTORS = ["'self'", "https://*.e2b.app"];
+
 const CSP_DIRECTIVES: Record<string, string[]> = {
 	"default-src": ["'self'"],
 	"base-uri": ["'self'"],
 	"object-src": ["'none'"],
 	"form-action": ["'self'"],
-	"frame-ancestors": ["'none'"],
+	"frame-ancestors": isDev ? DEV_FRAME_ANCESTORS : ["'none'"],
 	"script-src": [
 		"'self'",
 		// Next.js injects small inline bootstrap/flight scripts.
@@ -89,7 +93,9 @@ function buildCsp(): string {
 export function buildSecurityHeaders(): Header[] {
 	const headers: Header[] = [
 		{ key: "X-Content-Type-Options", value: "nosniff" },
-		{ key: "X-Frame-Options", value: "DENY" },
+		// frame-ancestors in the dev CSP above governs embedding there; the
+		// legacy X-Frame-Options header would override it in older browsers.
+		...(isDev ? [] : [{ key: "X-Frame-Options", value: "DENY" } as const]),
 		{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
 		{
 			key: "Permissions-Policy",

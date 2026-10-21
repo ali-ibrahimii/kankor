@@ -7,10 +7,16 @@ import * as React from "react";
 import { signOutAction } from "@/lib/auth/actions";
 import { getDashboardPath } from "@/lib/auth/auth.util";
 import { CurrentUser } from "@/lib/auth/types";
+import { isSupabaseConfigured } from "@/lib/env/client-env";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 
-const supabase = createClient();
+/**
+ * Browser client, or `null` when the deployment has no Supabase credentials
+ * (the public site and `/demo` must boot without them). Every call site below
+ * checks for `null` before touching the network.
+ */
+const supabase = isSupabaseConfigured ? createClient() : null;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -55,13 +61,15 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 	const router = useRouter();
 	const locale = useLocale();
 
-	const [authState, setAuthState] = React.useState<AuthState>({
-		status: "loading",
-	});
+	const [authState, setAuthState] = React.useState<AuthState>(
+		supabase ? { status: "loading" } : { status: "unauthenticated" }
+	);
 
 	// Fetch the full profile (role + school memberships) from the DB.
 	const fetchProfile =
 		React.useCallback(async (): Promise<CurrentUser | null> => {
+			if (!supabase) return null;
+
 			const { data: claimsData } = await supabase.auth.getClaims();
 			const sub = claimsData?.claims?.sub;
 			if (!sub) return null;
@@ -79,6 +87,9 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 
 	// On mount: resolve the initial session and subscribe to auth state changes.
 	React.useEffect(() => {
+		// No credentials configured — stay unauthenticated, skip all network IO.
+		if (!supabase) return;
+
 		// Resolve the current session once.
 		supabase.auth.getClaims().then(async ({ data }) => {
 			if (!data?.claims) {
@@ -147,7 +158,7 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 	}, []);
 
 	const signOut = React.useCallback(async () => {
-		await signOutAction();
+		if (supabase) await signOutAction();
 		setAuthState({ status: "unauthenticated" });
 		router.push(routes.auth.login.page(undefined, { locale }));
 		router.refresh();
@@ -163,7 +174,9 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 
 	const dashboardPath = React.useMemo((): string => {
 		if (authState.status === "authenticated")
-			return getDashboardPath(authState.profile);
+			// Pass the locale so the path is localized (`/fa/d/admin`), matching
+			// what the middleware and the server components generate.
+			return getDashboardPath(authState.profile, locale);
 		return `/${locale}`;
 	}, [authState, locale]);
 

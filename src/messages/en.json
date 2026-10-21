@@ -3337,6 +3337,8 @@
 		"demoBadge": "Demo mode",
 		"workspace": "Learning workspace",
 		"workspaceCaption": "Abzar Kankor learning platform",
+		"previewNotice": "This dashboard is rendered with sample data and is not connected to any real account or database.",
+		"sampleData": "Sample data",
 		"localNotice": "Sample data lives only in this browser. This demo cannot access real accounts.",
 		"backToSite": "Back to website",
 		"openMenu": "Open menu",
