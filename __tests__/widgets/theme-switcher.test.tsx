@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
+import { THEME_STORAGE_KEY } from "@/providers/theme.constants";
 import { ThemeProvider } from "@/providers/theme.provider";
-import { THEME_STORAGE_KEY } from "@/providers/theme-script";
 
 function renderSwitcher() {
 	return render(

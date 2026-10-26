@@ -6,15 +6,23 @@ import {
 	useCallback,
 	useContext,
 	useEffect,
+	useLayoutEffect,
 	useMemo,
 	useState,
 } from "react";
 import {
+	DARK_MEDIA_QUERY,
+	isTheme,
 	type ResolvedTheme,
 	THEME_STORAGE_KEY,
 	THEMES,
 	type Theme,
-} from "./theme-script";
+} from "./theme.constants";
+
+// On the server a layout effect would only trigger React's SSR warning, so it
+// degrades to useEffect there (it runs on the client either way).
+const useIsomorphicLayoutEffect =
+	typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 type ThemeContextValue = {
 	/** Stored preference: light, dark or system. */
@@ -30,15 +38,11 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 function readStoredTheme(): Theme | null {
 	try {
 		const stored = localStorage.getItem(THEME_STORAGE_KEY);
-		return stored === "light" || stored === "dark" || stored === "system"
-			? stored
-			: null;
+		return isTheme(stored) ? stored : null;
 	} catch {
 		return null;
 	}
 }
-
-const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 function supportsMediaQuery() {
 	return (
@@ -47,7 +51,7 @@ function supportsMediaQuery() {
 }
 
 function systemTheme(): ResolvedTheme {
-	return supportsMediaQuery() && window.matchMedia(DARK_QUERY).matches
+	return supportsMediaQuery() && window.matchMedia(DARK_MEDIA_QUERY).matches
 		? "dark"
 		: "light";
 }
@@ -62,10 +66,11 @@ function applyTheme(resolved: ResolvedTheme) {
 /**
  * Small, dependency-free theme provider.
  *
- * `next-themes` renders an inline <script> from a client component, which
- * React 19 reports in development as "Encountered a script tag while rendering
- * React component". Here the pre-paint script is rendered once by the server
- * layout (`themeInitScript`) and this provider only syncs state with it.
+ * No inline bootstrap script is used: React 19 warns ("Encountered a script tag
+ * while rendering React component") for any <script> a component renders, and a
+ * cookie-based server read would force every page to render dynamically. The
+ * stored preference is therefore applied in a layout effect, which runs before
+ * the hydrated tree is painted.
  */
 export function ThemeProvider({
 	children,
@@ -78,8 +83,8 @@ export function ThemeProvider({
 	const [system, setSystem] = useState<ResolvedTheme>("light");
 	const [ready, setReady] = useState(false);
 
-	// Adopt the preference the pre-paint script already used.
-	useEffect(() => {
+	// Adopt the stored preference as early as the client allows.
+	useIsomorphicLayoutEffect(() => {
 		const stored = readStoredTheme();
 		if (stored) setThemeState(stored);
 		setSystem(systemTheme());
@@ -90,7 +95,7 @@ export function ThemeProvider({
 	useEffect(() => {
 		if (!supportsMediaQuery()) return;
 
-		const query = window.matchMedia(DARK_QUERY);
+		const query = window.matchMedia(DARK_MEDIA_QUERY);
 		const onChange = () => setSystem(query.matches ? "dark" : "light");
 		query.addEventListener("change", onChange);
 		return () => query.removeEventListener("change", onChange);
@@ -100,12 +105,7 @@ export function ThemeProvider({
 	useEffect(() => {
 		const onStorage = (event: StorageEvent) => {
 			if (event.key !== THEME_STORAGE_KEY) return;
-			const next = event.newValue;
-			setThemeState(
-				next === "light" || next === "dark" || next === "system"
-					? next
-					: defaultTheme
-			);
+			setThemeState(isTheme(event.newValue) ? event.newValue : defaultTheme);
 		};
 		window.addEventListener("storage", onStorage);
 		return () => window.removeEventListener("storage", onStorage);
@@ -113,8 +113,8 @@ export function ThemeProvider({
 
 	const resolvedTheme: ResolvedTheme = theme === "system" ? system : theme;
 
-	// Skip the first pass: the server-rendered script already painted it.
-	useEffect(() => {
+	// Reflect the resolved theme on <html> as early as possible.
+	useIsomorphicLayoutEffect(() => {
 		if (!ready) return;
 		applyTheme(resolvedTheme);
 	}, [ready, resolvedTheme]);
