@@ -7,9 +7,10 @@ import { resetDevCache } from "@/lib/pwa/reset-dev-cache";
 
 /**
  * Turbopack keeps unhashed dev chunks in the browser, so a long-lived tab can
- * end up running a module graph whose dependencies no longer exist and every
- * navigation throws "module factory is not available". Reload once (bounded, so
- * a persistent failure cannot loop) instead of asking the user to do it.
+ * end up running an old module graph: it then throws "module factory is not
+ * available", or renders a translation that no longer matches the current
+ * message file ("FORMATTING_ERROR"). Reload once (bounded, so a persistent
+ * failure cannot loop) instead of asking the user to do it.
  */
 function reloadOnceOnStaleChunk() {
 	if (typeof window === "undefined" || typeof sessionStorage === "undefined") {
@@ -24,7 +25,10 @@ function reloadOnceOnStaleChunk() {
 			(event.error instanceof Error ? event.error.message : "") ||
 			event.message ||
 			"";
-		if (!message.includes("module factory is not available")) return;
+		const looksStale =
+			message.includes("module factory is not available") ||
+			message.includes("FORMATTING_ERROR");
+		if (!looksStale) return;
 
 		const attempts = Number(sessionStorage.getItem(KEY) ?? "0");
 		if (attempts >= MAX) return;
