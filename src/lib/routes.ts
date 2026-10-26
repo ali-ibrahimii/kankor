@@ -996,6 +996,12 @@ export const routes = {
 			},
 		},
 		tests: {
+			kankor: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/tests/kankor", {}, searchParams, options),
+			},
 			passed: {
 				page: (
 					searchParams?: Record<string, string>,

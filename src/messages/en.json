@@ -537,7 +537,24 @@
 				"slide_presentation": "Slides",
 				"external_resource": "Resource",
 				"code_playground": "Code"
-			}
+			},
+			"completeAndNext": "Complete & next",
+			"currentLesson": "Current lesson",
+			"noContentTitle": "This lesson has no content yet",
+			"noContentDescription": "You can mark it complete and move on — the material will be added later.",
+			"startNextLesson": "Go to next lesson",
+			"unnamedModule": "Course lessons",
+			"minutes": "{count} min",
+			"lessonsProgress": "{done} of {total} lessons",
+			"completedLessonsHint": "{done} of {total} lessons complete",
+			"moduleNumber": "Section {number}",
+			"openCourseContent": "Open lesson list",
+			"closeCourseContent": "Close lesson list",
+			"openDocument": "Open document",
+			"openResource": "Open",
+			"lastLessonHint": "This is the last lesson — completing it finishes the course.",
+			"upNext": "Up next",
+			"unsupportedBlock": "This part of the lesson cannot be displayed here yet — use the open button if a link is available."
 		},
 		"view": "View Course",
 		"sortBy": "Sort by",
@@ -4264,6 +4281,213 @@
 				"allLevels": "All levels",
 				"team": "Abzar Kankor Learning Team"
 			}
+		},
+		"kankorExam": {
+			"questions": [
+				{
+					"id": "math-1",
+					"subject": "math",
+					"stem": "What is the derivative of f(x) = x³ − 3x at x = 2?",
+					"options": ["۹", "۶", "۳", "۱۲"],
+					"correct": 2,
+					"explanation": "The derivative is 3x² − 3, so at x = 2 it is 12 − 3 = 9."
+				},
+				{
+					"id": "math-2",
+					"subject": "math",
+					"stem": "If sin θ = 3/5 and θ lies in the first quadrant, what is cos θ?",
+					"options": ["۴/۵", "۳/۵", "۵/۴", "۱/۵"],
+					"correct": 0,
+					"explanation": "Using sin²θ + cos²θ = 1 gives cos θ = 4/5."
+				},
+				{
+					"id": "physics-1",
+					"subject": "physics",
+					"stem": "An object moves at a constant 10 m/s. How far does it travel in 5 seconds?",
+					"options": ["۲ متر", "۱۰ متر", "۵۰ متر", "۱۰۰ متر"],
+					"correct": 2,
+					"explanation": "Distance = speed × time = 10 × 5 = 50 m."
+				},
+				{
+					"id": "physics-2",
+					"subject": "physics",
+					"stem": "Two resistors of 6 Ω and 3 Ω are connected in parallel. What is the equivalent resistance?",
+					"options": ["۲ اهم", "۴٫۵ اهم", "۹ اهم", "۱۸ اهم"],
+					"correct": 0,
+					"explanation": "In parallel: 1/R = 1/6 + 1/3 = 1/2, so R = 2 Ω."
+				},
+				{
+					"id": "chemistry-1",
+					"subject": "chemistry",
+					"stem": "What is the atomic number of the element with the electron configuration 2, 8, 1?",
+					"options": ["۹", "۱۰", "۱۱", "۱۹"],
+					"correct": 2,
+					"explanation": "The electrons add up to 2 + 8 + 1 = 11, so the atomic number is 11 (sodium)."
+				},
+				{
+					"id": "chemistry-2",
+					"subject": "chemistry",
+					"stem": "Which of the following is a saturated hydrocarbon?",
+					"options": ["ایتلین", "متان", "استیلین", "بنزین"],
+					"correct": 1,
+					"explanation": "Methane (CH₄) has only single bonds; the others are unsaturated."
+				},
+				{
+					"id": "biology-1",
+					"subject": "biology",
+					"stem": "Which organ secretes insulin?",
+					"options": ["کبد", "پانکراس", "کلیه", "طحال"],
+					"correct": 1,
+					"explanation": "Beta cells in the pancreatic islets of Langerhans produce insulin."
+				},
+				{
+					"id": "biology-2",
+					"subject": "biology",
+					"stem": "In a cross between two heterozygotes (Aa × Aa), what fraction of the offspring show the dominant phenotype?",
+					"options": ["۱/۴", "۱/۲", "۳/۴", "همهٔ فرزندان"],
+					"correct": 2,
+					"explanation": "The phenotypic ratio is 3 dominant to 1 recessive, i.e. 3/4."
+				},
+				{
+					"id": "dari-1",
+					"subject": "dari",
+					"stem": "Which word is a synonym of «سخاوت» (generosity)?",
+					"options": ["بخل", "جود", "حرص", "کینه"],
+					"correct": 1,
+					"explanation": "«جود» (joud) means generosity; بخل and حرص are its opposites."
+				},
+				{
+					"id": "dari-2",
+					"subject": "dari",
+					"stem": "Which literary device is used in “her face shone like the moon”?",
+					"options": ["استعاره", "تشبیه", "کنایه", "مجاز"],
+					"correct": 1,
+					"explanation": "The word “like” compares two things, so the device is a simile (تشبیه)."
+				},
+				{
+					"id": "pashto-1",
+					"subject": "pashto",
+					"stem": "What is the opposite of «مینه» (love) in Pashto?",
+					"options": ["محبت", "کرکه", "خواخوږي", "زړه‌سوې"],
+					"correct": 1,
+					"explanation": "«کرکه» means hatred, the opposite of «مینه» (love)."
+				},
+				{
+					"id": "pashto-2",
+					"subject": "pashto",
+					"stem": "Which word is a synonym of «لوی» (big) in Pashto?",
+					"options": ["وړوکی", "غټ", "لنډ", "سست"],
+					"correct": 1,
+					"explanation": "«غټ» also means big, so it is a synonym of «لوی»."
+				},
+				{
+					"id": "english-1",
+					"subject": "english",
+					"stem": "Choose the correct form: “She ____ to school every day.”",
+					"options": ["go", "goes", "going", "gone"],
+					"correct": 1,
+					"explanation": "A third-person singular subject (She) takes “goes” in the simple present."
+				},
+				{
+					"id": "english-2",
+					"subject": "english",
+					"stem": "Choose the synonym of “rapid”.",
+					"options": ["slow", "fast", "weak", "calm"],
+					"correct": 1,
+					"explanation": "“rapid” means quick; its synonym is “fast”."
+				},
+				{
+					"id": "islamic-1",
+					"subject": "islamic",
+					"stem": "How many pillars of Islam are there?",
+					"options": ["سه", "چهار", "پنج", "شش"],
+					"correct": 2,
+					"explanation": "Shahada, prayer, zakat, fasting and Hajj — five in total."
+				},
+				{
+					"id": "islamic-2",
+					"subject": "islamic",
+					"stem": "Which surah is known as “the heart of the Qur’an”?",
+					"options": ["سورهٔ فاتحه", "سورهٔ یاسین", "سورهٔ کهف", "سورهٔ الرحمن"],
+					"correct": 1,
+					"explanation": "Surah Ya-Sin is called the heart of the Qur’an in the narrations."
+				}
+			]
+		}
+	},
+	"kankorExam": {
+		"title": "Kankor mock exam",
+		"subtitle": "A full exam built on the Afghan Kankor structure: eight subjects, four options per question and a fixed time limit.",
+		"introBadge": "Kankor general exam simulation",
+		"introHeading": "Ready? Sit an exam the way Kankor day works",
+		"introDescription": "This mirrors exam day: one question at a time, an answer sheet to review, the freedom to go back to any question, and no negative marking. At the end you get a breakdown per subject.",
+		"startButton": "Start exam",
+		"resumeButton": "Resume the previous attempt",
+		"rulesTitle": "Exam rules",
+		"rules": [
+			"16 questions from 8 Kankor subjects: mathematics, physics, chemistry, biology, Dari, Pashto, English and Islamic studies.",
+			"24 minutes in total — 1.5 minutes per question, as in the real Kankor.",
+			"Exactly one correct answer per question, with no negative marking.",
+			"You can flag a question and come back to it later.",
+			"If the time runs out, the answers already saved are graded automatically."
+		],
+		"realExamNote": "The Afghan general Kankor has 160 questions and 4 hours; this mock follows the same structure but is shorter.",
+		"minutesUnit": "min",
+		"questionsUnit": "questions",
+		"questionOf": "Question {current} of {total}",
+		"answered": "{answered} of {total} answered",
+		"timeLeft": "Time left",
+		"flag": "Flag",
+		"flagged": "Flagged",
+		"previous": "Previous question",
+		"next": "Next question",
+		"finish": "Finish exam",
+		"exit": "Exit",
+		"answerSheet": "Answer sheet",
+		"answerSheetHint": "Tap a number to jump to that question.",
+		"legendAnswered": "Answered",
+		"legendBlank": "Unanswered",
+		"legendFlagged": "Flagged",
+		"exitTitle": "Leave the exam?",
+		"exitDescription": "This attempt will be discarded. You would have to start again.",
+		"exitConfirm": "Yes, leave",
+		"cancel": "Keep going",
+		"finishTitle": "Finish the exam?",
+		"finishDescriptionWithBlank": "{blank} questions are still unanswered and will score zero.",
+		"finishDescriptionComplete": "You answered every question. Your result is shown right away.",
+		"finishConfirm": "Grade it",
+		"timeUpTitle": "Time is up",
+		"timeUpDescription": "The clock reached zero and the saved answers were graded.",
+		"resultTitle": "Mock exam result",
+		"score": "Total score",
+		"correct": "Correct",
+		"wrong": "Wrong",
+		"blank": "Blank",
+		"percent": "Score",
+		"bandExcellent": "Excellent — Kankor ready",
+		"bandGood": "Good — close to full readiness",
+		"bandAverage": "Average — you need more practice",
+		"bandWeak": "Weak — start from the core subjects",
+		"perSubject": "Result by subject",
+		"reviewTitle": "Review answers",
+		"yourAnswer": "Your answer",
+		"correctAnswer": "Correct answer",
+		"noAnswer": "No answer",
+		"explanation": "Explanation",
+		"retry": "Try again",
+		"showReview": "Show answer review",
+		"hideReview": "Hide answer review",
+		"unansweredWarning": "{count} unanswered",
+		"savedProgress": "Your progress is saved in this browser.",
+		"subjects": {
+			"math": "Mathematics",
+			"physics": "Physics",
+			"chemistry": "Chemistry",
+			"biology": "Biology",
+			"dari": "Dari",
+			"pashto": "Pashto",
+			"english": "English",
+			"islamic": "Islamic studies"
 		}
 	}
 }
