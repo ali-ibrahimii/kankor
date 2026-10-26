@@ -55,7 +55,9 @@ describe("SignupForm", () => {
 	describe("student type (default)", () => {
 		it("renders the student signup title", () => {
 			renderWithIntl(<SignupForm type="student" />);
-			expect(screen.getByText(/create your account/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("heading", { name: /create your account/i })
+			).toBeInTheDocument();
 		});
 
 		it("renders full name, email, password, and confirm password fields", () => {
@@ -84,7 +86,9 @@ describe("SignupForm", () => {
 	describe("instructor type", () => {
 		it("renders the instructor signup title", () => {
 			renderWithIntl(<SignupForm type="instructor" />);
-			expect(screen.getByText(/register as instructor/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("heading", { name: /register as instructor/i })
+			).toBeInTheDocument();
 		});
 
 		it("does not render school-specific fields", () => {
@@ -96,7 +100,9 @@ describe("SignupForm", () => {
 	describe("school type", () => {
 		it("renders the school signup title", () => {
 			renderWithIntl(<SignupForm type="school" />);
-			expect(screen.getByText(/register your school/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("heading", { name: /register your school/i })
+			).toBeInTheDocument();
 		});
 
 		it("renders school name and address fields", () => {
@@ -106,7 +112,50 @@ describe("SignupForm", () => {
 		});
 	});
 
+	describe("account type selection", () => {
+		it("updates the active registration type and reveals school fields", async () => {
+			const user = userEvent.setup();
+			renderWithIntl(<SignupForm type="student" />);
+
+			const schoolButton = screen.getByRole("button", {
+				name: "Register your school",
+			});
+			expect(schoolButton).toHaveAttribute("aria-pressed", "false");
+			await user.click(schoolButton);
+
+			expect(schoolButton).toHaveAttribute("aria-pressed", "true");
+			expect(screen.getByLabelText("School Name")).toBeInTheDocument();
+			expect(screen.getByLabelText("School Address")).toBeInTheDocument();
+		});
+	});
+
 	describe("form submission", () => {
+		it("submits the account type currently selected in the form", async () => {
+			mockSignupAction.mockResolvedValueOnce({ error: null });
+
+			const user = userEvent.setup();
+			renderWithIntl(<SignupForm type="student" />);
+			await user.click(
+				screen.getByRole("button", { name: "Register your school" })
+			);
+			await user.type(screen.getByLabelText("Full Name"), "School Admin");
+			await user.type(
+				screen.getByLabelText("Email Address"),
+				"admin@school.example"
+			);
+			await user.type(screen.getByLabelText("School Name"), "Kankor Academy");
+			await user.type(screen.getByLabelText("School Address"), "Kabul");
+			await user.type(screen.getByLabelText("Password"), "Password1");
+			await user.type(screen.getByLabelText("Confirm Password"), "Password1");
+			await user.click(screen.getByRole("button", { name: "Register" }));
+
+			await waitFor(() => {
+				expect(mockSignupAction).toHaveBeenCalledWith(
+					expect.objectContaining({ type: "school" })
+				);
+			});
+		});
+
 		it("shows the success card after a successful student signup", async () => {
 			mockSignupAction.mockResolvedValueOnce({ error: null });
 

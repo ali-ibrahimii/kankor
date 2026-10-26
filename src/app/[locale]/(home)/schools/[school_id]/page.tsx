@@ -53,7 +53,7 @@ export default async function SchoolPublicPage({
 				.eq("role", "student"),
 		]);
 	return (
-		<main className="min-h-screen bg-[#f8f9fd] px-4 py-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:py-16 lg:px-8">
+		<main className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:pt-10 sm:pb-16 lg:px-8">
 			<div className="mx-auto max-w-6xl">
 				<section className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_90%_5%,rgba(139,119,255,.4),transparent_32%),linear-gradient(125deg,#121d32,#252b49)] p-6 text-white shadow-xl sm:p-10 lg:p-12">
 					<div className="absolute -end-12 -top-20 size-64 rounded-full border-[42px] border-white/[.06]" />

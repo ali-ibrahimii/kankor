@@ -12,33 +12,6 @@ export type HubTrackId =
 	| "life"
 	| "school";
 
-export type OrganizerKind = "university" | "school" | "teacher";
-
-export type LiveSessionItem = {
-	id: string;
-	title: string;
-	topic: string;
-	track: HubTrackId;
-	status: "live" | "upcoming";
-	statusLabel: string;
-	organizerKind: OrganizerKind;
-	organizerName: string;
-	teacherName: string;
-	scheduleDays: string;
-	scheduleTime: string;
-	durationLabel: string;
-	enrolledCount: number;
-	capacity: number;
-	joinCode: string;
-	isFree: boolean;
-	priceCredits?: number;
-	rating: number;
-	votes: number;
-	formatNote: string;
-	imageSrc: string;
-	href: string;
-};
-
 export type HubCourseItem = {
 	id: string;
 	title: string;
@@ -49,6 +22,7 @@ export type HubCourseItem = {
 	instructorName: string;
 	level: "beginner" | "intermediate" | "advanced" | "all_levels";
 	isFree: boolean;
+	isFeatured: boolean;
 	priceCredits: number;
 	lessonsCount: number;
 	durationHours: number;
@@ -66,13 +40,13 @@ export type LearningPathItem = {
 	title: string;
 	subtitle: string;
 	steps: string[];
+	courseIds: string[];
 	coursesCount: number;
 	durationLabel: string;
 	accent: "violet" | "sky" | "amber" | "emerald";
 };
 
 export type SchoolHubData = {
-	liveSessions: LiveSessionItem[];
 	courses: HubCourseItem[];
 	learningPaths: LearningPathItem[];
 };
@@ -87,406 +61,6 @@ function tr(locale: Locale, value: LocalizedString): string {
 	return value[locale] ?? value.fa;
 }
 
-function getFallbackLiveSessions(locale: Locale): LiveSessionItem[] {
-	const classroomHref = routes.d.classrooms.page();
-
-	const items: {
-		id: string;
-		track: HubTrackId;
-		status: "live" | "upcoming";
-		organizerKind: OrganizerKind;
-		enrolled: number;
-		capacity: number;
-		code: string;
-		isFree: boolean;
-		rating: number;
-		votes: number;
-		image: string;
-		title: LocalizedString;
-		topic: LocalizedString;
-		statusLabel: LocalizedString;
-		organizerName: LocalizedString;
-		teacherName: LocalizedString;
-		scheduleDays: LocalizedString;
-		scheduleTime: LocalizedString;
-		durationLabel: LocalizedString;
-		formatNote: LocalizedString;
-	}[] = [
-		{
-			id: "live-fullstack-polytechnic",
-			track: "frontend",
-			status: "live",
-			organizerKind: "university",
-			enrolled: 44,
-			capacity: 50,
-			code: "FE-204",
-			isFree: true,
-			rating: 4.9,
-			votes: 318,
-			image: CARD_IMAGES.liveClassroom,
-			title: {
-				fa: "کارگاه زنده ساخت اپلیکیشن مدرن با React و Next.js",
-				ps: "له React او Next.js سره د عصري اپلیکیشن جوړولو ژوندی ټولګی",
-				en: "Live Workshop: Building Full-Featured Web Apps with React & Next.js",
-			},
-			topic: {
-				fa: "فرانت‌اند مدرن",
-				ps: "عصري فرانت‌انډ",
-				en: "Modern Front-end",
-			},
-			statusLabel: {
-				fa: "در حال برگزاری · زنده",
-				ps: "همدا اوس ژوندی",
-				en: "Live Now",
-			},
-			organizerName: {
-				fa: "دیپارتمنت کمپیوتر ساینس — پوهنتون پولی‌تخنیک کابل",
-				ps: "د کابل پولي‌تخنیک پوهنتون — کمپیوټر ساینس څانګه",
-				en: "CS Dept — Kabul Polytechnic University",
-			},
-			teacherName: {
-				fa: "انجنیر فواد سلیمانی",
-				ps: "انجنیر فواد سلیماني",
-				en: "Eng. Fawad Soleimani",
-			},
-			scheduleDays: {
-				fa: "شنبه، دوشنبه، چهارشنبه",
-				ps: "شنبه، دوشنبه، چهارشنبه",
-				en: "Sat · Mon · Wed",
-			},
-			scheduleTime: {
-				fa: "۱۹:۰۰ تا ۲۰:۳۰",
-				ps: "۱۹:۰۰ تر ۲۰:۳۰",
-				en: "19:00 – 20:30",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه · کدنویسی هم‌زمان",
-				ps: "۹۰ دقیقې · عملي کوډینګ",
-				en: "90 min · Live Coding",
-			},
-			formatNote: {
-				fa: "پخش زنده + رفع اشکال مستقیم + ضبط جلسه",
-				ps: "ژوندۍ خپرونه + پوښتنې او ځوابونه + ثبت",
-				en: "Live stream + Q&A + Recording included",
-			},
-		},
-		{
-			id: "live-kankor-math-school",
-			track: "school",
-			status: "live",
-			organizerKind: "school",
-			enrolled: 76,
-			capacity: 90,
-			code: "MTH-12",
-			isFree: true,
-			rating: 4.9,
-			votes: 429,
-			image: CARD_IMAGES.math,
-			title: {
-				fa: "صنف زنده حل تست‌های سرعتی ریاضی و لمت کانکور",
-				ps: "د کانکور د ریاضي او لېمېټ چټکو پوښتنو ژوندی ټولګی",
-				en: "Live Class: Rapid Kankor Calculus & Limit Problem Solving",
-			},
-			topic: {
-				fa: "ریاضیات صنف ۱۲",
-				ps: "د ۱۲ ټولګي ریاضي",
-				en: "Grade 12 Math",
-			},
-			statusLabel: {
-				fa: "در حال برگزاری · زنده",
-				ps: "همدا اوس ژوندی",
-				en: "Live Now",
-			},
-			organizerName: {
-				fa: "لیسه عالی معرفت",
-				ps: "د معرفت عالي لېسه",
-				en: "Marefat High School",
-			},
-			teacherName: {
-				fa: "استاد احمد رشاد نادری",
-				ps: "استاد احمد رشاد نادري",
-				en: "Ahmad Rashad Naderi",
-			},
-			scheduleDays: {
-				fa: "همه‌روزه به‌جز جمعه",
-				ps: "هره ورځ پرته له جمعې",
-				en: "Sat – Thu Daily",
-			},
-			scheduleTime: {
-				fa: "۱۷:۳۰ تا ۱۹:۰۰",
-				ps: "۱۷:۳۰ تر ۱۹:۰۰",
-				en: "17:30 – 19:00",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه · تخته دیجیتال",
-				ps: "۹۰ دقیقې · ډیجیټل تخته",
-				en: "90 min · Digital Board",
-			},
-			formatNote: {
-				fa: "حل نمونه سوالات امتحانی با پرسش مستقیم شاگردان",
-				ps: "د ازموینې پوښتنو ژوندی حل",
-				en: "Interactive live whiteboard + student Q&A",
-			},
-		},
-		{
-			id: "live-backend-architecture-teacher",
-			track: "backend",
-			status: "upcoming",
-			organizerKind: "teacher",
-			enrolled: 32,
-			capacity: 40,
-			code: "API-88",
-			isFree: true,
-			rating: 4.8,
-			votes: 194,
-			image: CARD_IMAGES.backend,
-			title: {
-				fa: "کلاس زنده طراحی API امن با Node.js، PostgreSQL و Docker",
-				ps: "له Node.js او PostgreSQL سره د خوندي API ډیزاین ژوندی ټولګی",
-				en: "Live Class: Production APIs with Node.js, PostgreSQL & Docker",
-			},
-			topic: {
-				fa: "مهندسی بک‌اند",
-				ps: "بک‌انډ انجنیرۍ",
-				en: "Back-end Engineering",
-			},
-			statusLabel: {
-				fa: "امروز ۲۰:۰۰",
-				ps: "نن شپه ۲۰:۰۰",
-				en: "Today · 20:00",
-			},
-			organizerName: {
-				fa: "استاد مستقل تأییدشده ابزار کانکور",
-				ps: "خپلواک تایید شوی استاد",
-				en: "Verified Independent Instructor",
-			},
-			teacherName: {
-				fa: "انجنیر میلاد رحمانی",
-				ps: "انجنیر میلاد رحماني",
-				en: "Milad Rahmani",
-			},
-			scheduleDays: {
-				fa: "یکشنبه، سه‌شنبه، پنجشنبه",
-				ps: "یکشنبه، سه‌شنبه، پنجشنبه",
-				en: "Sun · Tue · Thu",
-			},
-			scheduleTime: {
-				fa: "۲۰:۰۰ تا ۲۱:۳۰",
-				ps: "۲۰:۰۰ تر ۲۱:۳۰",
-				en: "20:00 – 21:30",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه · پروژه عملی",
-				ps: "۹۰ دقیقې · عملي پروژه",
-				en: "90 min · Hands-on Lab",
-			},
-			formatNote: {
-				fa: "بازبینی کد دانشجویان به صورت زنده در هر جلسه",
-				ps: "په هره غونډه کې د کوډ ژوندۍ کتنه",
-				en: "Live code reviews & deployment labs every session",
-			},
-		},
-		{
-			id: "live-ai-university-seminar",
-			track: "technical",
-			status: "upcoming",
-			organizerKind: "university",
-			enrolled: 112,
-			capacity: 150,
-			code: "AI-105",
-			isFree: true,
-			rating: 4.9,
-			votes: 287,
-			image: CARD_IMAGES.technicalSkills,
-			title: {
-				fa: "سمینار زنده پایتون، هوش مصنوعی کاربردی و بازار کار جهانی",
-				ps: "د پایتون، مصنوعي ځیرکتیا او نړیوال کار بازار ژوندی سمینار",
-				en: "Live University Seminar: Applied Python, AI Tools & Global Careers",
-			},
-			topic: {
-				fa: "هوش مصنوعی و مهارت فنی",
-				ps: "مصنوعي ځیرکتیا",
-				en: "AI & Technical Skills",
-			},
-			statusLabel: {
-				fa: "پنجشنبه ۱۸:۰۰",
-				ps: "پنجشنبه ۱۸:۰۰",
-				en: "Thu · 18:00",
-			},
-			organizerName: {
-				fa: "پوهنتون کابل — مرکز نوآوری دیجیتال",
-				ps: "د کابل پوهنتون — ډیجیټل نوښت مرکز",
-				en: "Kabul University — Digital Innovation Lab",
-			},
-			teacherName: {
-				fa: "داکتر سمیرا فرهمند",
-				ps: "ډاکټره سمیرا فرهمند",
-				en: "Dr. Samira Farahmand",
-			},
-			scheduleDays: {
-				fa: "پنجشنبه‌ها (هفته‌وار)",
-				ps: "هر پنجشنبه",
-				en: "Thursdays Weekly",
-			},
-			scheduleTime: {
-				fa: "۱۸:۰۰ تا ۱۹:۳۰",
-				ps: "۱۸:۰۰ تر ۱۹:۳۰",
-				en: "18:00 – 19:30",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه + گواهی حضور",
-				ps: "۹۰ دقیقې + ګډون بریالیک",
-				en: "90 min + Attendance Cert",
-			},
-			formatNote: {
-				fa: "آزاد برای تمام محصلان و شاگردان مکاتب سراسر کشور",
-				ps: "د ټولو محصلینو او زده‌کوونکو لپاره وړیا",
-				en: "Open to university & high-school students nationwide",
-			},
-		},
-		{
-			id: "live-english-communication-teacher",
-			track: "life",
-			status: "upcoming",
-			organizerKind: "teacher",
-			enrolled: 29,
-			capacity: 35,
-			code: "ENG-55",
-			isFree: true,
-			rating: 4.8,
-			votes: 215,
-			image: CARD_IMAGES.lifeSkills,
-			title: {
-				fa: "کلاس زنده فن بیان، مکالمه انگلیسی و آمادگی مصاحبه شغلی",
-				ps: "د وینا هنر، انګلیسي مکالمې او کاري مرکې ژوندی ټولګی",
-				en: "Live Workshop: Public Speaking, English Fluency & Job Interviews",
-			},
-			topic: {
-				fa: "مهارت‌های ارتباطی و زندگی",
-				ps: "د اړیکو او ژوند مهارتونه",
-				en: "Communication & Life Skills",
-			},
-			statusLabel: {
-				fa: "جمعه ۱۶:۳۰",
-				ps: "جمعه ۱۶:۳۰",
-				en: "Fri · 16:30",
-			},
-			organizerName: {
-				fa: "مدرس مهارت‌های ارتباطی و زبان",
-				ps: "د ژبې او اړیکو استاد",
-				en: "Communication & Language Coach",
-			},
-			teacherName: {
-				fa: "استاد فرشته نیازی",
-				ps: "استاده فرشته نیازۍ",
-				en: "Fereshta Niazi",
-			},
-			scheduleDays: {
-				fa: "چهارشنبه و جمعه",
-				ps: "چهارشنبه او جمعه",
-				en: "Wed & Fri",
-			},
-			scheduleTime: {
-				fa: "۱۶:۳۰ تا ۱۸:۰۰",
-				ps: "۱۶:۳۰ تر ۱۸:۰۰",
-				en: "16:30 – 18:00",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه · تمرین گروهی",
-				ps: "۹۰ دقیقې · ګروپي تمرین",
-				en: "90 min · Group Practice",
-			},
-			formatNote: {
-				fa: "تمرین عملی مکالمه و شبیه‌سازی مصاحبه واقعی در کلاس",
-				ps: "په ټولګي کې عملي مکالمه او مرکه",
-				en: "Live speaking practice & mock interview feedback",
-			},
-		},
-		{
-			id: "live-sciences-habibia",
-			track: "school",
-			status: "upcoming",
-			organizerKind: "school",
-			enrolled: 64,
-			capacity: 80,
-			code: "SCI-11",
-			isFree: true,
-			rating: 4.8,
-			votes: 256,
-			image: CARD_IMAGES.chemistry,
-			title: {
-				fa: "صنف آنلاین فزیک و کیمیای عضوی — آمادگی امتحانات لیسه",
-				ps: "د فزیک او عضوي کیمیا انلاین ټولګی — د لېسې ازموینو چمتووالی",
-				en: "Live School Class: Physics & Organic Chemistry Exam Review",
-			},
-			topic: {
-				fa: "علوم طبیعی مکتب",
-				ps: "طبیعي علوم",
-				en: "Natural Sciences",
-			},
-			statusLabel: {
-				fa: "فردا ۱۶:۰۰",
-				ps: "سبا ۱۶:۰۰",
-				en: "Tomorrow · 16:00",
-			},
-			organizerName: {
-				fa: "لیسه عالی حبیبیه کابل",
-				ps: "د کابل حبیبیې عالي لېسه",
-				en: "Habibia High School",
-			},
-			teacherName: {
-				fa: "استاد حسیب‌الله کریمی",
-				ps: "استاد حسیب الله کریمي",
-				en: "Hasibullah Karimi",
-			},
-			scheduleDays: {
-				fa: "شنبه، سه‌شنبه، پنجشنبه",
-				ps: "شنبه، سه‌شنبه، پنجشنبه",
-				en: "Sat · Tue · Thu",
-			},
-			scheduleTime: {
-				fa: "۱۶:۰۰ تا ۱۷:۳۰",
-				ps: "۱۶:۰۰ تر ۱۷:۳۰",
-				en: "16:00 – 17:30",
-			},
-			durationLabel: {
-				fa: "۹۰ دقیقه · حل مسایل",
-				ps: "۹۰ دقیقې · د مسایلو حل",
-				en: "90 min · Problem Lab",
-			},
-			formatNote: {
-				fa: "همراه با جزوه PDF جلسه و کوئیز پایان کلاس",
-				ps: "له PDF نوټونو او پای ازموینې سره",
-				en: "Includes PDF worksheet & end-of-class quiz",
-			},
-		},
-	];
-
-	return items.map((item) => ({
-		id: item.id,
-		title: tr(locale, item.title),
-		topic: tr(locale, item.topic),
-		track: item.track,
-		status: item.status,
-		statusLabel: tr(locale, item.statusLabel),
-		organizerKind: item.organizerKind,
-		organizerName: tr(locale, item.organizerName),
-		teacherName: tr(locale, item.teacherName),
-		scheduleDays: tr(locale, item.scheduleDays),
-		scheduleTime: tr(locale, item.scheduleTime),
-		durationLabel: tr(locale, item.durationLabel),
-		enrolledCount: item.enrolled,
-		capacity: item.capacity,
-		joinCode: item.code,
-		isFree: item.isFree,
-		rating: item.rating,
-		votes: item.votes,
-		formatNote: tr(locale, item.formatNote),
-		imageSrc: item.image,
-		href: classroomHref,
-	}));
-}
-
 function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 	const paths: {
 		id: string;
@@ -497,11 +71,18 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 		subtitle: LocalizedString;
 		duration: LocalizedString;
 		steps: LocalizedString[];
+		courseIds: string[];
 	}[] = [
 		{
 			id: "path-frontend",
 			track: "frontend",
 			coursesCount: 4,
+			courseIds: [
+				"fe-html-css-responsive",
+				"fe-ui-ux-design-systems",
+				"fe-react-nextjs-pro",
+				"fe-state-testing-perf",
+			],
 			accent: "violet",
 			title: {
 				fa: "مسیر متخصص فرانت‌اند (Front-end)",
@@ -516,15 +97,25 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 			duration: { fa: "۸۴ ساعت", ps: "۸۴ ساعته", en: "84 Hours" },
 			steps: [
 				{ fa: "HTML5 & CSS3", ps: "HTML5 & CSS3", en: "HTML5 & CSS3" },
-				{ fa: "JavaScript & TS", ps: "JavaScript & TS", en: "JavaScript & TS" },
+				{ fa: "طراحی UI/UX", ps: "UI/UX ډیزاین", en: "UI/UX Design" },
 				{ fa: "React & Next.js", ps: "React & Next.js", en: "React & Next.js" },
-				{ fa: "پروژه و نمونه‌کار", ps: "عملي پروژه", en: "Portfolio App" },
+				{
+					fa: "آزمون و بهینه‌سازی",
+					ps: "ازموینه او چټکتیا",
+					en: "Testing & Performance",
+				},
 			],
 		},
 		{
 			id: "path-backend",
 			track: "backend",
 			coursesCount: 4,
+			courseIds: [
+				"be-linux-git-docker",
+				"be-nodejs-express-api",
+				"be-sql-postgresql-supabase",
+				"be-python-django-fastapi",
+			],
 			accent: "sky",
 			title: {
 				fa: "مسیر مهندسی بک‌اند و دیتابیس",
@@ -552,6 +143,12 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 			id: "path-programming",
 			track: "languages",
 			coursesCount: 4,
+			courseIds: [
+				"lang-python-zero-to-hero",
+				"lang-js-typescript-mastery",
+				"lang-cpp-algorithms",
+				"lang-flutter-mobile",
+			],
 			accent: "emerald",
 			title: {
 				fa: "مسیر زبان‌های برنامه‌نویسی و الگوریتم",
@@ -575,6 +172,16 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 			id: "path-career-life",
 			track: "technical",
 			coursesCount: 8,
+			courseIds: [
+				"tech-ai-productivity",
+				"tech-excel-data-analysis",
+				"tech-graphic-design-branding",
+				"tech-freelancing-remote-work",
+				"life-time-focus-systems",
+				"life-public-speaking-communication",
+				"life-financial-literacy",
+				"life-critical-thinking-english",
+			],
 			accent: "amber",
 			title: {
 				fa: "مسیر مهارت‌های فنی، زندگی و بازار کار",
@@ -594,6 +201,64 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 				{ fa: "کسب درآمد و رزومه", ps: "فریلنسینګ", en: "Freelancing" },
 			],
 		},
+		{
+			id: "path-life-skills",
+			track: "life",
+			coursesCount: 4,
+			courseIds: [
+				"life-time-focus-systems",
+				"life-public-speaking-communication",
+				"life-financial-literacy",
+				"life-critical-thinking-english",
+			],
+			accent: "violet",
+			title: {
+				fa: "مسیر رشد فردی و مهارت‌های زندگی",
+				ps: "د شخصي ودې او ژوند مهارتونو لار",
+				en: "Personal Growth & Life Skills Path",
+			},
+			subtitle: {
+				fa: "مدیریت زمان، ارتباط مؤثر، سواد مالی و تفکر نقاد را گام‌به‌گام بیاموزید.",
+				ps: "د وخت مدیریت، اغېزمنې اړیکې، مالي پوهه او انتقادي فکر زده کړئ.",
+				en: "Build focus, communication, financial literacy, and critical thinking step by step.",
+			},
+			duration: { fa: "۴۸ ساعت", ps: "۴۸ ساعته", en: "48 Hours" },
+			steps: [
+				{ fa: "مدیریت زمان", ps: "د وخت مدیریت", en: "Time Management" },
+				{ fa: "فن بیان و ارتباط", ps: "وینا او اړیکې", en: "Communication" },
+				{ fa: "سواد مالی", ps: "مالي پوهه", en: "Financial Literacy" },
+				{ fa: "تفکر نقاد", ps: "انتقادي فکر", en: "Critical Thinking" },
+			],
+		},
+		{
+			id: "path-school-curriculum",
+			track: "school",
+			coursesCount: 4,
+			courseIds: [
+				"sch-calculus-12",
+				"sch-physics-mechanics",
+				"sch-chemistry-organic",
+				"sch-biology-genetics",
+			],
+			accent: "emerald",
+			title: {
+				fa: "مسیر دروس مکتب و آمادگی کانکور",
+				ps: "د ښوونځي مضمونونو او کانکور چمتووالي لار",
+				en: "School Curriculum & Kankor Preparation",
+			},
+			subtitle: {
+				fa: "مفاهیم اساسی مضامین اصلی را از ریاضی تا علوم طبیعی با ترتیب روشن بیاموزید.",
+				ps: "له ریاضي څخه تر طبیعي علومو پورې د ښوونځي بنسټیز مضمونونه زده کړئ.",
+				en: "Strengthen core subjects in a clear sequence, from mathematics to natural sciences.",
+			},
+			duration: { fa: "۵۶ ساعت", ps: "۵۶ ساعته", en: "56 Hours" },
+			steps: [
+				{ fa: "ریاضی", ps: "ریاضي", en: "Mathematics" },
+				{ fa: "فزیک", ps: "فزیک", en: "Physics" },
+				{ fa: "کیمیا", ps: "کیمیا", en: "Chemistry" },
+				{ fa: "بیولوژی", ps: "بیولوژي", en: "Biology" },
+			],
+		},
 	];
 
 	return paths.map((p) => ({
@@ -602,6 +267,7 @@ function getFallbackLearningPaths(locale: Locale): LearningPathItem[] {
 		title: tr(locale, p.title),
 		subtitle: tr(locale, p.subtitle),
 		steps: p.steps.map((s) => tr(locale, s)),
+		courseIds: p.courseIds,
 		coursesCount: p.coursesCount,
 		durationLabel: tr(locale, p.duration),
 		accent: p.accent,
@@ -629,10 +295,12 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		subLabel: LocalizedString;
 		instructor: LocalizedString;
 		projects?: LocalizedString;
+		featured?: boolean;
 	}[] = [
 		// ── 1. FRONT-END DEVELOPMENT ──
 		{
 			id: "fe-html-css-responsive",
+			featured: true,
 			track: "frontend",
 			level: "beginner",
 			isFree: true,
@@ -771,6 +439,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		// ── 2. BACK-END & DATABASES ──
 		{
 			id: "be-nodejs-express-api",
+			featured: true,
 			track: "backend",
 			level: "intermediate",
 			isFree: true,
@@ -917,6 +586,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		// ── 3. PROGRAMMING LANGUAGES ──
 		{
 			id: "lang-python-zero-to-hero",
+			featured: true,
 			track: "languages",
 			level: "beginner",
 			isFree: true,
@@ -1071,6 +741,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		// ── 4. TECHNICAL & CAREER SKILLS ──
 		{
 			id: "tech-ai-productivity",
+			featured: true,
 			track: "technical",
 			level: "all_levels",
 			isFree: true,
@@ -1221,6 +892,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		// ── 5. LIFE & PERSONAL DEVELOPMENT SKILLS ──
 		{
 			id: "life-time-focus-systems",
+			featured: true,
 			track: "life",
 			level: "all_levels",
 			isFree: true,
@@ -1267,7 +939,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 			hours: 11,
 			rating: 4.9,
 			votes: 545,
-			image: CARD_IMAGES.liveClassroom,
+			image: CARD_IMAGES.lifeSkills,
 			tags: ["فن بیان", "اعتمادبه‌نفس", "مذاکره"],
 			title: {
 				fa: "فن بیان، سخنرانی مؤثر، زبان بدن و اعتمادبه‌نفس در جمع",
@@ -1375,6 +1047,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		// ── 6. SCHOOL CURRICULUM & KANKOR ──
 		{
 			id: "sch-calculus-12",
+			featured: true,
 			track: "school",
 			level: "all_levels",
 			isFree: true,
@@ -1529,6 +1202,7 @@ function getFallbackCourses(locale: Locale): HubCourseItem[] {
 		instructorName: tr(locale, item.instructor),
 		level: item.level,
 		isFree: item.isFree,
+		isFeatured: Boolean(item.featured),
 		priceCredits: item.credits,
 		lessonsCount: item.lessons,
 		durationHours: item.hours,
@@ -1565,176 +1239,117 @@ function isPlaceholderSupabase(): boolean {
 }
 
 /**
- * Loads the complete School & Skills Hub data on the server, merging any live
- * published `courses` and active `classrooms` rows from Supabase with the
- * curated multi-track curriculum so every category and live class section is rich.
+ * Loads only publicly published courses and their curated learning paths.
  */
 export async function getSchoolHubData(locale: Locale): Promise<SchoolHubData> {
 	const fallbackCourses = getFallbackCourses(locale);
-	const fallbackLive = getFallbackLiveSessions(locale);
 	const learningPaths = getFallbackLearningPaths(locale);
 
 	if (isPlaceholderSupabase()) {
-		return {
-			liveSessions: fallbackLive,
-			courses: fallbackCourses,
-			learningPaths,
-		};
+		return { courses: fallbackCourses, learningPaths };
 	}
 
 	try {
 		const supabase = await createClient();
+		const { data } = await supabase
+			.from("courses")
+			.select(
+				"id, slug, title, subtitle, cover_image_url, level, is_free, price_credits, estimated_duration_hours, average_rating, total_reviews, grade_id, instructor_id, grade:grades(id, name), subject:subjects(name), instructor:profiles!courses_instructor_id_fkey(full_name, role)"
+			)
+			.eq("is_published", true)
+			.eq("visibility", "public")
+			.order("created_at", { ascending: false })
+			.limit(24);
 
-		const [coursesRes, classroomsRes] = await Promise.all([
-			supabase
-				.from("courses")
-				.select(
-					"id, slug, title, subtitle, cover_image_url, level, is_free, price_credits, estimated_duration_hours, average_rating, total_reviews, grade_id, grade:grades(id, name), subject:subjects(name), instructor:profiles!courses_instructor_id_fkey(full_name)"
-				)
-				.eq("is_published", true)
-				.eq("visibility", "public")
-				.order("created_at", { ascending: false })
-				.limit(24),
-			supabase
-				.from("classrooms")
-				.select("id, name, description, cover_image, join_code")
-				.eq("is_archived", false)
-				.order("created_at", { ascending: false })
-				.limit(6),
-		]);
+		const eligibleRows = (data ?? []).filter((row) => {
+			const instructor = Array.isArray(row.instructor)
+				? row.instructor[0]
+				: row.instructor;
+			return (
+				!row.instructor_id ||
+				instructor?.role === "instructor" ||
+				instructor?.role === "admin"
+			);
+		});
 
-		const liveDbCourses: HubCourseItem[] = (coursesRes.data ?? []).map(
-			(row) => {
-				const subject = Array.isArray(row.subject)
-					? row.subject[0]
-					: row.subject;
-				const grade = Array.isArray(row.grade) ? row.grade[0] : row.grade;
-				const instructor = Array.isArray(row.instructor)
-					? row.instructor[0]
-					: row.instructor;
-				const track = inferTrackFromTitle(row.title, row.grade_id);
+		const publishedCourses: HubCourseItem[] = eligibleRows.map((row) => {
+			const subject = Array.isArray(row.subject) ? row.subject[0] : row.subject;
+			const grade = Array.isArray(row.grade) ? row.grade[0] : row.grade;
+			const instructor = Array.isArray(row.instructor)
+				? row.instructor[0]
+				: row.instructor;
+			const track = inferTrackFromTitle(row.title, row.grade_id);
 
-				return {
-					id: row.id,
-					title: row.title,
-					subtitle: row.subtitle ?? "",
-					track,
-					categoryLabel:
-						subject?.name ??
-						tr(locale, {
-							fa: "دوره آموزشی",
-							ps: "زده‌کړیز کورس",
-							en: "Course",
-						}),
-					subLabel:
-						grade?.name ??
-						tr(locale, {
-							fa: "همه سطوح",
-							ps: "ټولې کچې",
-							en: "All Levels",
-						}),
-					instructorName:
-						instructor?.full_name ??
-						tr(locale, {
-							fa: "استاد ابزار کانکور",
-							ps: "د ابزار کانکور استاد",
-							en: "Abzar Kankor Instructor",
-						}),
-					level: row.level ?? "all_levels",
-					isFree: Boolean(row.is_free),
-					priceCredits: row.price_credits ?? 0,
-					lessonsCount: 24,
-					durationHours: row.estimated_duration_hours ?? 12,
-					tags: [subject?.name, grade?.name].filter((x): x is string =>
-						Boolean(x)
-					),
-					rating:
-						row.average_rating && row.average_rating > 0
-							? row.average_rating
-							: 4.9,
-					votes: row.total_reviews > 0 ? row.total_reviews : 140,
-					imageSrc: row.cover_image_url ?? "",
-					href: routes.courses.slug.page({ slug: row.slug ?? row.id }),
-				};
-			}
-		);
-
-		const liveDbClassrooms: LiveSessionItem[] = (classroomsRes.data ?? []).map(
-			(room) => ({
-				id: room.id,
-				title: room.name,
-				topic: tr(locale, {
-					fa: "صنف آنلاین فعال",
-					ps: "فعال انلاین ټولګی",
-					en: "Active Classroom",
-				}),
-				track: "school",
-				status: "live",
-				statusLabel: tr(locale, {
-					fa: "فعال · آماده ورود",
-					ps: "فعال ټولګی",
-					en: "Active Class",
-				}),
-				organizerKind: "school",
-				organizerName: tr(locale, {
-					fa: "صنف رسمی ابزار کانکور",
-					ps: "د ابزار کانکور رسمي ټولګی",
-					en: "Abzar Kankor Classroom",
-				}),
-				teacherName: tr(locale, {
-					fa: "استاد صنف",
-					ps: "د ټولګي استاد",
-					en: "Class Instructor",
-				}),
-				scheduleDays: tr(locale, {
-					fa: "برگزاری هفته‌وار آنلاین",
-					ps: "اونیز انلاین ټولګی",
-					en: "Weekly Live Sessions",
-				}),
-				scheduleTime: tr(locale, {
-					fa: "طبق برنامه صنف",
-					ps: "د مهالوېش له مخې",
-					en: "Scheduled Live",
-				}),
-				durationLabel: tr(locale, {
-					fa: "صنف تعاملی",
-					ps: "تعاملي ټولګی",
-					en: "Interactive Class",
-				}),
-				enrolledCount: 28,
-				capacity: 40,
-				joinCode: room.join_code,
-				isFree: true,
-				rating: 4.9,
-				votes: 120,
-				formatNote:
-					room.description ??
+			return {
+				id: row.id,
+				title: row.title,
+				subtitle: row.subtitle ?? "",
+				track,
+				isFeatured: false,
+				categoryLabel:
+					subject?.name ??
 					tr(locale, {
-						fa: "دسترسی به منابع، تکالیف و جلسات زنده",
-						ps: "ژوندۍ غونډې او درسي سرچینې",
-						en: "Live sessions, shared resources & announcements",
+						fa: "دوره آموزشی",
+						ps: "زده‌کړیز کورس",
+						en: "Course",
 					}),
-				imageSrc: room.cover_image ?? CARD_IMAGES.liveClassroom,
-				href: routes.d.classrooms.page(),
-			})
+				subLabel:
+					grade?.name ??
+					tr(locale, {
+						fa: "همه سطوح",
+						ps: "ټولې کچې",
+						en: "All Levels",
+					}),
+				instructorName:
+					row.instructor_id && instructor?.role === "instructor"
+						? (instructor.full_name ??
+							tr(locale, {
+								fa: "تیم آموزشی ابزار کانکور",
+								ps: "د ابزار کانکور ښوونیز ټیم",
+								en: "Abzar Kankor Learning Team",
+							}))
+						: tr(locale, {
+								fa: "تیم آموزشی ابزار کانکور",
+								ps: "د ابزار کانکور ښوونیز ټیم",
+								en: "Abzar Kankor Learning Team",
+							}),
+				level: row.level ?? "all_levels",
+				isFree: Boolean(row.is_free),
+				priceCredits: row.price_credits ?? 0,
+				lessonsCount: 24,
+				durationHours: row.estimated_duration_hours ?? 12,
+				tags: [subject?.name, grade?.name].filter((value): value is string =>
+					Boolean(value)
+				),
+				rating:
+					row.average_rating && row.average_rating > 0
+						? row.average_rating
+						: 4.9,
+				votes: row.total_reviews > 0 ? row.total_reviews : 0,
+				imageSrc: row.cover_image_url ?? "",
+				href: routes.courses.slug.page({ slug: row.slug ?? row.id }),
+			};
+		});
+
+		if (publishedCourses.length === 0) {
+			return { courses: fallbackCourses, learningPaths };
+		}
+
+		const featuredCourseIds = new Set(
+			[...publishedCourses]
+				.sort((a, b) => b.rating - a.rating || b.votes - a.votes)
+				.slice(0, Math.min(6, publishedCourses.length))
+				.map((course) => course.id)
 		);
 
 		return {
-			liveSessions:
-				liveDbClassrooms.length > 0
-					? [...liveDbClassrooms, ...fallbackLive]
-					: fallbackLive,
-			courses:
-				liveDbCourses.length > 0
-					? [...liveDbCourses, ...fallbackCourses]
-					: fallbackCourses,
+			courses: publishedCourses.map((course) => ({
+				...course,
+				isFeatured: featuredCourseIds.has(course.id),
+			})),
 			learningPaths,
 		};
 	} catch {
-		return {
-			liveSessions: fallbackLive,
-			courses: fallbackCourses,
-			learningPaths,
-		};
+		return { courses: fallbackCourses, learningPaths };
 	}
 }

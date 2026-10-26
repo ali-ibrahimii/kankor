@@ -50,7 +50,7 @@ export default async function InstructorPublicPage({
 	]);
 	const initials = teacher.full_name?.trim().slice(0, 1) || "؟";
 	return (
-		<main className="min-h-screen bg-[#f8f9fd] px-4 py-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:py-16 lg:px-8">
+		<main className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:pt-10 sm:pb-16 lg:px-8">
 			<div className="mx-auto max-w-6xl">
 				<section className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_92%_5%,rgba(183,244,134,.24),transparent_28%),linear-gradient(125deg,#121d32,#2c294c)] p-6 text-white shadow-xl sm:p-10 lg:p-12">
 					<div className="absolute -end-16 -bottom-28 size-72 rounded-full border-[44px] border-white/[.05]" />
