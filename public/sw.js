@@ -1,4 +1,15 @@
-const CACHE_NAME = "abzarkankor-v1";
+// Bump this to invalidate every bucket from an earlier worker version.
+const CACHE_NAME = "abzarkankor-v2";
+
+// Only long-lived, content-hashed assets are worth storing. Dev chunks are
+// unhashed and change on every edit, so caching them serves stale modules.
+function isImmutableAsset(response) {
+	const cacheControl = response.headers.get("cache-control") || "";
+	return (
+		cacheControl.includes("immutable") ||
+		/max-age=(31536000|[3-9][0-9]{6,})/.test(cacheControl)
+	);
+}
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_ASSETS = [
@@ -77,7 +88,11 @@ self.addEventListener("fetch", (event) => {
 			caches.match(event.request).then((cachedResponse) => {
 				const fetchPromise = fetch(event.request)
 					.then((networkResponse) => {
-						if (networkResponse && networkResponse.status === 200) {
+						if (
+							networkResponse &&
+							networkResponse.status === 200 &&
+							isImmutableAsset(networkResponse)
+						) {
 							const responseToCache = networkResponse.clone();
 							caches.open(CACHE_NAME).then((cache) => {
 								cache.put(event.request, responseToCache);

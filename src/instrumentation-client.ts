@@ -3,8 +3,15 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs";
+import { resetDevCache } from "@/lib/pwa/reset-dev-cache";
 
 const isProd = process.env.NODE_ENV === "production";
+
+// Development only: front-run the app bundle so a stale service-worker cache
+// from an earlier production run can never serve outdated dev chunks.
+if (!isProd) {
+	resetDevCache().catch(() => {});
+}
 
 if (isProd) {
 	Sentry.init({

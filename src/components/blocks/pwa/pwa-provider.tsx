@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { resetDevCache } from "@/lib/pwa/reset-dev-cache";
 import { InstallPromptDialog } from "./install-prompt-dialog";
 import { OfflineIndicator } from "./offline-indicator";
 
@@ -10,17 +11,10 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
 			return;
 		}
 
-		// In development, unregister any cached service workers so unhashed
-		// dev chunks are never served stale from CacheStorage.
+		// In development, unregister any cached service workers and drop their
+		// caches so unhashed dev chunks are never served stale.
 		if (process.env.NODE_ENV !== "production") {
-			navigator.serviceWorker
-				.getRegistrations()
-				.then((registrations) => {
-					for (const registration of registrations) {
-						registration.unregister();
-					}
-				})
-				.catch(() => {});
+			resetDevCache().catch(() => {});
 			return;
 		}
 
