@@ -6,7 +6,6 @@ import {
 	ChevronDown,
 	ChevronLeft,
 	ChevronRight,
-	Circle,
 	Clock,
 	Code2,
 	ExternalLink,
@@ -19,7 +18,6 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { LessonItem, ModuleItem } from "@/types/queries.types";
@@ -51,121 +49,217 @@ export type LessonSidebarProps = {
 	className?: string;
 };
 
+/** Modules created by the course builder may still carry a raw `__DEFAULT__`. */
+function readableModuleTitle(title?: string | null) {
+	const trimmed = (title ?? "").trim();
+	if (!trimmed || /^__.*__$/.test(trimmed)) return null;
+	return trimmed;
+}
+
+// ─── Progress ring ────────────────────────────────────────────────────────────
+
+function ProgressRing({ value }: { value: number }) {
+	const clamped = Math.max(0, Math.min(100, Math.round(value)));
+	const radius = 20;
+	const circumference = 2 * Math.PI * radius;
+	const offset = circumference - (clamped / 100) * circumference;
+
+	return (
+		<div className="relative size-12 shrink-0">
+			<svg
+				viewBox="0 0 48 48"
+				className="size-12 -rotate-90"
+				role="img"
+				aria-label={`${clamped}%`}
+			>
+				<circle
+					cx="24"
+					cy="24"
+					r={radius}
+					fill="none"
+					strokeWidth="4"
+					className="stroke-muted"
+				/>
+				<circle
+					cx="24"
+					cy="24"
+					r={radius}
+					fill="none"
+					strokeWidth="4"
+					strokeLinecap="round"
+					strokeDasharray={circumference}
+					strokeDashoffset={offset}
+					className="stroke-primary transition-[stroke-dashoffset] duration-500"
+				/>
+			</svg>
+			<span className="absolute inset-0 flex items-center justify-center text-[10px] font-black tabular-nums">
+				{clamped}%
+			</span>
+		</div>
+	);
+}
+
 // ─── SidebarLessonRow ─────────────────────────────────────────────────────────
 
-function SidebarLessonRow({
-	lesson,
-	isActive,
-	onSelect,
-}: {
-	lesson: LessonItem;
-	isActive: boolean;
-	onSelect: () => void;
-}) {
+const SidebarLessonRow = React.forwardRef<
+	HTMLButtonElement,
+	{
+		lesson: LessonItem;
+		index: number;
+		isActive: boolean;
+		onSelect: () => void;
+	}
+>(function SidebarLessonRow({ lesson, index, isActive, onSelect }, ref) {
+	const t = useTranslations("courses.learn");
 	const Icon = TYPE_ICONS[lesson.content_type] ?? FileText;
+	const isCompleted = Boolean(lesson.lesson_progress?.is_completed);
 
 	return (
 		<button
-			className={cn(
-				"group flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-start text-sm transition-colors",
-				isActive
-					? "bg-primary/10 font-medium text-primary"
-					: "hover:bg-muted/60 text-foreground"
-			)}
+			ref={ref}
+			type="button"
 			onClick={onSelect}
 			aria-current={isActive ? "step" : undefined}
+			className={cn(
+				"group relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-start transition-colors",
+				isActive
+					? "bg-primary/10 text-primary ring-1 ring-primary/20"
+					: "hover:bg-muted/60"
+			)}
 		>
-			{/* Completion */}
-			<span className="shrink-0">
-				{lesson.lesson_progress?.is_completed ? (
-					<CheckCircle2 className="size-4 text-emerald-500" />
+			{/* Step indicator */}
+			<span
+				className={cn(
+					"flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold tabular-nums transition-colors",
+					isCompleted
+						? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+						: isActive
+							? "bg-primary text-primary-foreground"
+							: "bg-muted text-muted-foreground"
+				)}
+			>
+				{isCompleted ? (
+					<CheckCircle2 className="size-3.5" />
 				) : (
-					<Circle
-						className={cn(
-							"size-4",
-							isActive ? "text-primary/40" : "text-muted-foreground/30"
-						)}
-					/>
+					<>
+						<span className="group-hover:hidden">{index}</span>
+						<Icon className="hidden size-3 group-hover:block" />
+					</>
 				)}
 			</span>
 
-			{/* Icon */}
-			<Icon
-				className={cn(
-					"size-3.5 shrink-0",
-					isActive ? "text-primary" : "text-muted-foreground"
-				)}
-			/>
-
 			{/* Title */}
-			<span className="flex-1 truncate leading-snug">{lesson.title}</span>
+			<span
+				className={cn(
+					"min-w-0 flex-1 truncate text-[13px] leading-snug",
+					isActive ? "font-bold" : "font-medium"
+				)}
+			>
+				{lesson.title}
+			</span>
 
 			{/* Duration */}
 			{lesson.estimated_duration_minutes != null && (
-				<span className="shrink-0 text-xs text-muted-foreground">
-					{lesson.estimated_duration_minutes}m
+				<span className="flex shrink-0 items-center gap-0.5 text-[10px] text-muted-foreground">
+					<Clock className="size-2.5" />
+					{lesson.estimated_duration_minutes}
 				</span>
 			)}
+
+			{isActive && <span className="sr-only">{t("currentLesson")}</span>}
 		</button>
 	);
-}
+});
 
 // ─── SidebarModuleSection ─────────────────────────────────────────────────────
 
 function SidebarModuleSection({
 	module,
+	moduleIndex,
 	activeLessonId,
 	onLessonSelect,
 }: {
 	module: ModuleItem;
+	moduleIndex: number;
 	activeLessonId: string;
 	onLessonSelect: (id: string) => void;
 }) {
+	const t = useTranslations("courses.learn");
 	const hasActive = module.lessons.some((l) => l.id === activeLessonId);
-	const [isOpen, setIsOpen] = React.useState(hasActive);
+	const [isOpen, setIsOpen] = React.useState(true);
+	const activeRef = React.useRef<HTMLButtonElement>(null);
 
-	const completedCount = module.lessons.filter(
+	const orderedLessons = React.useMemo(
+		() => module.lessons.slice().sort((a, b) => a.order_index - b.order_index),
+		[module.lessons]
+	);
+
+	const completedCount = orderedLessons.filter(
 		(l) => l.lesson_progress?.is_completed
 	).length;
+	const percent =
+		orderedLessons.length > 0
+			? (completedCount / orderedLessons.length) * 100
+			: 0;
+
+	// Keep the lesson the learner is watching in view.
+	React.useEffect(() => {
+		if (!hasActive) return;
+		activeRef.current?.scrollIntoView?.({ block: "nearest" });
+	}, [hasActive, activeLessonId]);
+
+	const title = readableModuleTitle(module.title) ?? t("unnamedModule");
 
 	return (
-		<div>
-			{/* Module header */}
+		<section className="pb-1">
 			<button
-				className="flex w-full items-center gap-2 px-3 py-2 text-start hover:bg-muted/30 rounded-lg transition-colors"
+				type="button"
 				onClick={() => setIsOpen((v) => !v)}
 				aria-expanded={isOpen}
+				className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-start transition-colors hover:bg-muted/50"
 			>
 				<ChevronDown
 					className={cn(
-						"size-3.5 shrink-0 text-muted-foreground transition-transform duration-150",
-						!isOpen && "-rotate-90"
+						"size-3.5 shrink-0 text-muted-foreground transition-transform duration-200",
+						!isOpen && "-rotate-90 rtl:rotate-90"
 					)}
 				/>
-				<span className="flex-1 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-					{module.title}
+				<span className="flex min-w-0 flex-1 flex-col">
+					<span className="truncate text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+						{title}
+					</span>
+					<span className="mt-1 flex items-center gap-2">
+						<span className="h-1 w-full max-w-24 overflow-hidden rounded-full bg-muted">
+							<span
+								className="block h-full rounded-full bg-emerald-500 transition-[width] duration-500"
+								style={{ width: `${percent}%` }}
+							/>
+						</span>
+						<span className="shrink-0 text-[10px] font-semibold tabular-nums text-muted-foreground">
+							{completedCount}/{orderedLessons.length}
+						</span>
+					</span>
 				</span>
-				<span className="shrink-0 text-xs text-muted-foreground">
-					{completedCount}/{module.lessons.length}
+				<span className="sr-only">
+					{t("moduleNumber", { number: moduleIndex + 1 })}
 				</span>
 			</button>
 
 			{isOpen && (
-				<div className="ms-2 mt-0.5 space-y-0.5 border-s border-border ps-2">
-					{module.lessons
-						.slice()
-						.sort((a, b) => a.order_index - b.order_index)
-						.map((lesson) => (
-							<SidebarLessonRow
-								key={lesson.id}
-								lesson={lesson}
-								isActive={lesson.id === activeLessonId}
-								onSelect={() => onLessonSelect(lesson.id)}
-							/>
-						))}
+				<div className="mt-1 space-y-0.5">
+					{orderedLessons.map((lesson, index) => (
+						<SidebarLessonRow
+							key={lesson.id}
+							ref={lesson.id === activeLessonId ? activeRef : undefined}
+							lesson={lesson}
+							index={index + 1}
+							isActive={lesson.id === activeLessonId}
+							onSelect={() => onLessonSelect(lesson.id)}
+						/>
+					))}
 				</div>
 			)}
-		</div>
+		</section>
 	);
 }
 
@@ -189,13 +283,21 @@ export function LessonSidebar({
 			s + m.lessons.filter((l) => l.lesson_progress?.is_completed).length,
 		0
 	);
+	const percent =
+		totalProgress ??
+		(totalLessons ? (completedLessons / totalLessons) * 100 : 0);
+
+	const orderedModules = React.useMemo(
+		() => modules.slice().sort((a, b) => a.order_index - b.order_index),
+		[modules]
+	);
 
 	return (
 		<>
 			{/* Mobile overlay */}
 			{isOpen && (
 				<div
-					className="fixed inset-0 z-30 bg-black/40 lg:hidden"
+					className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[2px] lg:hidden"
 					onClick={onClose}
 					aria-hidden="true"
 				/>
@@ -204,68 +306,70 @@ export function LessonSidebar({
 			{/* Sidebar panel */}
 			<aside
 				className={cn(
-					// Mobile: slide in from end
-					"fixed inset-y-0 end-0 z-40 w-80 border-s bg-background transition-transform duration-300 lg:static lg:z-auto lg:border-s lg:transition-none",
-					// RTL-aware slide, mobile only — at lg+ the sidebar is static and
-					// must never be translated off-screen
+					// Mobile: slide in from the end side
+					"fixed inset-y-0 end-0 z-40 flex w-[min(21rem,88vw)] flex-col border-s border-border/70 bg-background shadow-xl transition-transform duration-300 lg:static lg:z-auto lg:w-[320px] lg:shadow-none xl:w-[344px]",
 					isOpen
 						? "translate-x-0"
 						: "max-lg:translate-x-full max-lg:rtl:-translate-x-full",
 					className
 				)}
 			>
-				<div className="flex h-full flex-col">
-					{/* Header */}
-					<div className="flex items-center gap-2 border-b px-4 py-3">
-						<div className="flex-1 min-w-0">
-							<p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+				{/* Summary header */}
+				<div className="shrink-0 border-b border-border/70 bg-gradient-to-b from-primary/5 to-transparent px-4 py-3.5">
+					<div className="flex items-start gap-3">
+						<ProgressRing value={percent} />
+						<div className="min-w-0 flex-1">
+							<p className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
 								{t("courseContent")}
 							</p>
-							<p className="mt-0.5 truncate text-sm font-medium">
+							<p className="mt-0.5 truncate text-sm font-bold leading-snug">
 								{courseTitle}
+							</p>
+							<p className="mt-0.5 text-[11px] text-muted-foreground">
+								{t("lessonsProgress", {
+									done: completedLessons,
+									total: totalLessons,
+								})}
 							</p>
 						</div>
 						<button
+							type="button"
 							onClick={onClose}
-							className="shrink-0 rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground lg:hidden"
-							aria-label="Close sidebar"
+							className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:hidden"
+							aria-label={t("closeCourseContent")}
 						>
 							<X className="size-4" />
 						</button>
 					</div>
+				</div>
 
-					{/* Progress bar */}
-					{totalProgress != null && (
-						<div className="border-b px-4 py-3">
-							<div className="mb-1 flex items-center justify-between text-xs text-muted-foreground">
-								<span>
-									{completedLessons}/{totalLessons}
-								</span>
-								<span>{Math.round(totalProgress)}%</span>
-							</div>
-							<Progress value={totalProgress} className="h-1.5" />
-						</div>
-					)}
+				{/* Lesson list */}
+				<ScrollArea className="min-h-0 flex-1">
+					<div className="space-y-2 p-2.5">
+						{orderedModules.map((module, moduleIndex) => (
+							<SidebarModuleSection
+								key={module.id}
+								module={module}
+								moduleIndex={moduleIndex}
+								activeLessonId={activeLessonId}
+								onLessonSelect={(id) => {
+									onLessonSelect(id);
+									onClose();
+								}}
+							/>
+						))}
+					</div>
+				</ScrollArea>
 
-					{/* Lesson list */}
-					<ScrollArea className="flex-1">
-						<div className="space-y-1 p-3">
-							{modules
-								.slice()
-								.sort((a, b) => a.order_index - b.order_index)
-								.map((module) => (
-									<SidebarModuleSection
-										key={module.id}
-										module={module}
-										activeLessonId={activeLessonId}
-										onLessonSelect={(id) => {
-											onLessonSelect(id);
-											onClose();
-										}}
-									/>
-								))}
-						</div>
-					</ScrollArea>
+				{/* Footer hint */}
+				<div className="shrink-0 border-t border-border/70 px-4 py-2.5 text-[11px] text-muted-foreground">
+					<span className="inline-flex items-center gap-1.5">
+						<CheckCircle2 className="size-3.5 text-emerald-500" />
+						{t("completedLessonsHint", {
+							done: completedLessons,
+							total: totalLessons,
+						})}
+					</span>
 				</div>
 			</aside>
 		</>
@@ -288,8 +392,8 @@ export function LessonSidebarToggle({
 			variant="outline"
 			size="sm"
 			onClick={onToggle}
-			className="gap-1.5"
-			aria-label={isOpen ? "Close course content" : "Open course content"}
+			className="h-9 gap-1.5 rounded-xl border-border/70 text-xs font-bold"
+			aria-label={isOpen ? t("closeCourseContent") : t("openCourseContent")}
 		>
 			{isOpen ? (
 				<ChevronRight className="size-4 rtl:rotate-180" />
