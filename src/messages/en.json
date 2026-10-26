@@ -1031,6 +1031,7 @@
 		},
 		"hero": {
 			"badge": "For Afghan students",
+			"imageAlt": "A student showing the Abzar Kankor learning dashboard on her smartphone",
 			"heading": "Study anywhere. <accent>Pass the Kankor.</accent>",
 			"subtitle": "The complete offline learning app — curriculum-aligned school courses, 13,000+ flashcards, mock Kankor exams, and a full digital library. No internet required.",
 			"ctaPrimary": "Explore the App",
@@ -2118,22 +2119,37 @@
 		"title": "About Us",
 		"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
 		"hero": {
-			"title": "Empowering Learners Everywhere",
-			"badge": "About Our Platform",
-			"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
-			"subtitle": "High-quality education: accessible, engaging, and always with you — online or offline, on any device",
+			"title": "Quality education for every student, everywhere",
+			"badge": "About our platform",
+			"description": "Abzar Kankor is a learning platform that makes education more accessible and more engaging. We provide high-quality resources and interactive tools that help students build skills and reach their goals.",
+			"subtitle": "School courses, smart flashcards, mock Kankor exams and a digital library — all in one place, online or offline.",
 			"cta": {
-				"primary": "Get Started",
-				"secondary": "Watch Demo"
+				"primary": "Start learning",
+				"secondary": "Watch the demo"
+			},
+			"panel": {
+				"eyebrow": "Learning path",
+				"title": "This week's progress",
+				"progressLabel": "Kankor mathematics",
+				"progressValue": "76%",
+				"lesson": "Lessons completed",
+				"lessonValue": "12 / 16",
+				"quiz": "Quiz this week",
+				"quizValue": "85%",
+				"streak": "Day streak",
+				"streakValue": "14 days",
+				"certificate": "Course certificate",
+				"certificateDesc": "Issued after lessons and exams are complete",
+				"verified": "Verifiable by code"
 			}
 		},
 		"stats": {
-			"students": "Active Students",
+			"students": "Active students",
 			"courses": "Courses",
-			"schools": "Active Schools",
-			"rating": "App Rating",
+			"schools": "Active schools",
+			"rating": "User rating",
 			"value": {
-				"students": "1M+",
+				"students": "2,480+",
 				"courses": "100+",
 				"schools": "120+",
 				"rating": "4.9★"
@@ -2146,7 +2162,8 @@
 				"Deliver high-quality lessons to every learner.",
 				"Make learning inclusive across languages and devices.",
 				"Support long-term progress with practical tools."
-			]
+			],
+			"badge": "Our purpose"
 		},
 		"features": {
 			"title": "Why Choose Us",
@@ -2174,6 +2191,25 @@
 			"certified": {
 				"title": "Certified Courses",
 				"desc": "Earn recognized certificates as you complete courses."
+			},
+			"badge": "Why Abzar Kankor",
+			"specs": {
+				"platforms": {
+					"label": "Platforms",
+					"value": "Web & Android"
+				},
+				"languages": {
+					"label": "Languages",
+					"value": "Dari, Pashto, English"
+				},
+				"offline": {
+					"label": "Access",
+					"value": "Offline after download"
+				},
+				"price": {
+					"label": "To start",
+					"value": "Free"
+				}
 			}
 		},
 		"values": {
@@ -2190,7 +2226,8 @@
 			"quality": {
 				"title": "Quality",
 				"desc": "Trusted content from expert educators."
-			}
+			},
+			"badge": "How we work"
 		},
 		"video": {
 			"badge": "Watch Demo",
@@ -2208,7 +2245,7 @@
 		},
 		"team": {
 			"badge": "Our Team",
-			"title": "Our Team",
+			"title": "The people behind Abzar Kankor",
 			"subtitle": "Meet the people building Abzar Kankor.",
 			"highlight": "Meet Our Dedicated Team of Professionals",
 			"panelTitle": "Built by people who ship with care",
@@ -2327,7 +2364,9 @@
 					"label": "GET IT ON",
 					"name": "Google Play"
 				}
-			}
+			},
+			"badge": "With you on every device",
+			"webCta": "Use the web app"
 		},
 		"contact": {
 			"email": "Email Address",
@@ -2340,7 +2379,109 @@
 			"subtitle": "Have questions or need support? We are here to help.",
 			"socialTitle": "Follow Us on Social Media",
 			"socialSubtitle": "Stay updated with our latest news and announcements.",
-			"responseTime": "We typically respond within 24 hours."
+			"responseTime": "We typically respond within 24 hours.",
+			"addressValue": "Kabul, Afghanistan"
+		},
+		"nav": {
+			"label": "On this page",
+			"story": "Our story",
+			"mission": "Mission",
+			"features": "Features",
+			"audience": "Who it's for",
+			"values": "Values",
+			"faq": "FAQ",
+			"team": "Team",
+			"contact": "Contact",
+			"video": "Demo"
+		},
+		"story": {
+			"badge": "Our story",
+			"title": "From a simple idea to a learning platform",
+			"subtitle": "Abzar Kankor was born from a real need: giving Afghan students access to quality study material, even without internet.",
+			"items": [
+				{
+					"year": "2020",
+					"title": "Starting with a problem",
+					"description": "Seeing how few Kankor preparation resources schools had, our small team began digitising scattered question papers and notes."
+				},
+				{
+					"year": "2021",
+					"title": "The first app release",
+					"description": "The offline app launched with smart flashcards and a school library, and started spreading from school to school."
+				},
+				{
+					"year": "2023",
+					"title": "Classrooms, paths and certificates",
+					"description": "Invite-only classrooms, learning paths and course certificates arrived so instructors and schools could teach and manage here too."
+				},
+				{
+					"year": "Today",
+					"title": "One shared space",
+					"description": "More than 2,480 students, instructors and schools use our web app and Android app to learn, teach and manage education."
+				}
+			]
+		},
+		"audience": {
+			"badge": "Who it's for",
+			"title": "One platform, three clear paths",
+			"subtitle": "Students, instructors and schools each get their own workspace — from enrolling in a course to managing a school's members.",
+			"students": {
+				"title": "For students",
+				"desc": "Browse courses, join a classroom with a code, practise flashcards and work through mock Kankor exams.",
+				"point1": "Lesson progress saved automatically",
+				"point2": "Offline flashcards and library",
+				"point3": "Verifiable certificates",
+				"cta": "Student sign up"
+			},
+			"instructors": {
+				"title": "For instructors",
+				"desc": "Build courses, publish lessons, manage students and follow your earnings.",
+				"point1": "Step-by-step course builder",
+				"point2": "Student and exam management",
+				"point3": "Wallet and credit payouts",
+				"cta": "Instructor sign up"
+			},
+			"schools": {
+				"title": "For schools",
+				"desc": "Add members with invite codes, create classrooms and manage school content in one place.",
+				"point1": "Invite-only classrooms and roles",
+				"point2": "Student progress reporting",
+				"point3": "A public school page",
+				"cta": "School sign up"
+			}
+		},
+		"faq": {
+			"badge": "FAQ",
+			"title": "Everything you need to know",
+			"subtitle": "Short, clear answers to the questions we hear most.",
+			"items": [
+				{
+					"question": "What is Abzar Kankor?",
+					"answer": "Abzar Kankor is a learning platform that brings school courses, flashcards, mock Kankor exams and a digital library to students, instructors and schools on the web and on Android."
+				},
+				{
+					"question": "Does it work without internet?",
+					"answer": "Yes. You can download lessons, flashcards and books and study offline; your progress syncs once you are back online."
+				},
+				{
+					"question": "Does it cost anything?",
+					"answer": "A large part of the content is free. Some specialised courses may have a price, which is always shown before you enrol."
+				},
+				{
+					"question": "How are certificates issued?",
+					"answer": "When every lesson and exam in a course is complete, a course certificate is issued, and anyone can check it with its unique code on the certificate verification page."
+				},
+				{
+					"question": "How can my school join?",
+					"answer": "Create a school account, invite members and instructors with codes, then publish your courses and content. Student progress reports live in the same panel."
+				},
+				{
+					"question": "How do I contact the team?",
+					"answer": "Use the contact section on this page or email our support team — we usually reply within 24 hours."
+				}
+			],
+			"moreTitle": "Didn't find your answer?",
+			"moreCta": "Contact support"
 		}
 	},
 	"search": {

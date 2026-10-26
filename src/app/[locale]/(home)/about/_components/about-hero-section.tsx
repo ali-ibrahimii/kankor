@@ -1,141 +1,232 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
 	ArrowLeft,
 	ArrowRight,
-	Globe2,
+	Award,
+	BadgeCheck,
+	BookOpen,
+	Flame,
 	GraduationCap,
-	Play,
-	ShieldCheck,
 	Sparkles,
+	WifiOff,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
+import { useAboutMotion } from "./about-motion";
 
 export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 	const t = useTranslations("aboutUs");
+	const tApp = useTranslations("app");
+	const aboutMotion = useAboutMotion();
 	const Arrow = isRtl ? ArrowLeft : ArrowRight;
 
+	const highlights = [
+		{ key: "offline", icon: WifiOff },
+		{ key: "sync", icon: Sparkles },
+		{ key: "certified", icon: Award },
+	] as const;
+
 	return (
-		<section className="relative overflow-hidden bg-[#060A1A] text-white">
-			<div className="absolute inset-0 opacity-50 [background-image:radial-gradient(circle_at_15%_20%,rgba(56,189,248,0.22),transparent_34%),radial-gradient(circle_at_88%_24%,rgba(99,102,241,0.36),transparent_36%),radial-gradient(circle_at_54%_92%,rgba(14,165,233,0.2),transparent_42%)]" />
-			<div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(148,163,184,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.2)_1px,transparent_1px)] [background-size:36px_36px]" />
-			<div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/35 to-transparent" />
+		<section className="relative overflow-hidden bg-[#0b1222] text-white">
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(124,229,209,0.22),transparent_38%),radial-gradient(circle_at_88%_12%,rgba(137,100,255,0.4),transparent_42%),radial-gradient(circle_at_50%_120%,rgba(106,75,212,0.28),transparent_48%)]"
+			/>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 opacity-[.14] [background-image:radial-gradient(rgba(255,255,255,.65)_.7px,transparent_.7px)] [background-size:24px_24px]"
+			/>
 
-			<div className="relative mx-auto grid max-w-7xl gap-14 px-6 py-16 sm:py-20 lg:grid-cols-[1fr_0.92fr] lg:items-center lg:py-28">
-				<div>
-					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-semibold text-slate-100 backdrop-blur">
-						<GraduationCap className="h-4 w-4 text-cyan-300" />
+			<div className="relative mx-auto grid max-w-[1320px] items-center gap-14 px-5 pb-28 pt-14 sm:px-6 sm:pb-32 sm:pt-18 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,.92fr)] lg:gap-16 lg:px-8 lg:pb-36 lg:pt-24">
+				<motion.div
+					variants={aboutMotion.stagger}
+					initial="hidden"
+					animate="show"
+				>
+					<motion.span
+						variants={aboutMotion.item}
+						className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-2 text-xs font-bold text-white/80 backdrop-blur-sm"
+					>
+						<GraduationCap className="size-3.5 text-[#b7f486]" />
+
 						{t("hero.badge")}
-					</span>
 
-					<h1 className="mt-7 max-w-2xl text-4xl font-black leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-						<span className="bg-gradient-to-r from-cyan-200 via-sky-100 to-indigo-100 bg-clip-text text-transparent">
-							{t("hero.title")}
-						</span>
-					</h1>
+						<span className="mx-0.5 size-1 rounded-full bg-[#b7f486]" />
 
-					<p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
+						<span className="text-white/55">{t("nav.label")}</span>
+					</motion.span>
+
+					<motion.h1
+						variants={aboutMotion.item}
+						className="mt-6 max-w-[640px] text-[2.1rem] font-black leading-[1.45] tracking-tight sm:text-[3rem] lg:text-[3.35rem]"
+					>
+						{t("hero.title")}
+					</motion.h1>
+
+					<motion.p
+						variants={aboutMotion.item}
+						className="mt-5 max-w-[560px] text-sm leading-8 text-white/65 sm:text-base sm:leading-9"
+					>
 						{t("hero.subtitle")}
-					</p>
+					</motion.p>
 
-					<div className="mt-10 flex flex-wrap gap-4">
+					<motion.div
+						variants={aboutMotion.item}
+						className="mt-8 flex flex-col gap-3 sm:flex-row"
+					>
 						<Link
 							href={routes.courses.page()}
-							className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-7 py-3.5 font-semibold text-slate-950 transition-all hover:-translate-y-0.5 hover:bg-cyan-200"
+							className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
 						>
+							<Sparkles className="size-4" />
+
 							{t("hero.cta.primary")}
-							<Arrow className="h-4 w-4" />
+
+							<Arrow className="size-4" />
 						</Link>
+
 						<Link
-							href={routes.home.page()}
-							className="group inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/15"
+							href="#demo"
+							className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
 						>
-							<span className="flex size-8 items-center justify-center rounded-full bg-white/15 transition group-hover:bg-white/25">
-								<Play className="h-3.5 w-3.5 fill-current" />
-							</span>
 							{t("hero.cta.secondary")}
 						</Link>
+					</motion.div>
+
+					<motion.div
+						variants={aboutMotion.item}
+						className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[11px] font-semibold text-white/65"
+					>
+						{highlights.map(({ key, icon: Icon }) => (
+							<span key={key} className="inline-flex items-center gap-2">
+								<span className="flex size-5 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
+									<Icon className="size-3" />
+								</span>
+
+								{t(`features.${key}.title`)}
+							</span>
+						))}
+					</motion.div>
+				</motion.div>
+
+				{/* Product preview — mirrors the real dashboard, no images needed */}
+				<motion.div
+					variants={aboutMotion.card}
+					initial="hidden"
+					animate="show"
+					className="relative mx-auto w-full max-w-[430px] lg:max-w-[460px]"
+				>
+					<div
+						aria-hidden="true"
+						className="absolute -top-6 -end-4 size-32 rounded-full bg-violet-500/30 blur-3xl"
+					/>
+
+					<div className="relative overflow-hidden rounded-[26px] border border-white/15 bg-[#0f182c]/90 shadow-[0_40px_80px_-32px_rgba(0,0,0,.8)] backdrop-blur-xl">
+						<div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+							<span className="flex items-center gap-2 text-[11px] font-bold text-white/70">
+								<span className="flex size-6 items-center justify-center rounded-lg bg-[#b7f486]/15 text-[#b7f486]">
+									<BookOpen className="size-3.5" />
+								</span>
+
+								{t("hero.panel.eyebrow")}
+							</span>
+
+							<span className="flex items-center gap-1.5 rounded-full bg-[#b7f486]/12 px-2.5 py-1 text-[10px] font-bold text-[#b7f486]">
+								<Flame className="size-3" />
+
+								{t("hero.panel.streakValue")}
+							</span>
+						</div>
+
+						<div className="px-5 py-5">
+							<div className="flex items-end justify-between gap-3">
+								<p className="text-sm font-extrabold text-white">
+									{t("hero.panel.title")}
+								</p>
+
+								<span className="text-lg font-black text-[#b7f486]">
+									{t("hero.panel.progressValue")}
+								</span>
+							</div>
+
+							<div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+								<motion.div
+									className="h-full rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]"
+									initial={{ width: 0 }}
+									animate={{ width: "76%" }}
+									transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+								/>
+							</div>
+
+							<div className="mt-5 flex items-center justify-between text-[11px]">
+								<span className="font-semibold text-white/70">
+									{t("hero.panel.progressLabel")}
+								</span>
+
+								<span className="text-white/45">
+									{t("hero.panel.progressValue")}
+								</span>
+							</div>
+
+							<div className="mt-4 grid grid-cols-2 gap-2.5">
+								<div className="rounded-2xl border border-white/10 bg-white/[.05] p-3">
+									<p className="text-[10px] text-white/45">
+										{t("hero.panel.lesson")}
+									</p>
+
+									<p className="mt-1 text-sm font-extrabold">
+										{t("hero.panel.lessonValue")}
+									</p>
+								</div>
+
+								<div className="rounded-2xl border border-white/10 bg-white/[.05] p-3">
+									<p className="text-[10px] text-white/45">
+										{t("hero.panel.quiz")}
+									</p>
+
+									<p className="mt-1 text-sm font-extrabold">
+										{t("hero.panel.quizValue")}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div className="mx-5 mb-5 flex items-start gap-3 rounded-2xl border border-[#b7f486]/20 bg-[#b7f486]/[.07] p-3.5">
+							<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#b7f486]/15 text-[#b7f486]">
+								<Award className="size-4" />
+							</span>
+
+							<div className="min-w-0">
+								<p className="text-[11px] font-extrabold text-white">
+									{t("hero.panel.certificate")}
+								</p>
+
+								<p className="mt-1 text-[10px] leading-5 text-white/50">
+									{t("hero.panel.certificateDesc")}
+								</p>
+							</div>
+						</div>
 					</div>
 
-					<div className="mt-10 flex flex-wrap gap-3 text-sm">
-						<div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-400/10 px-4 py-2 text-emerald-100">
-							<ShieldCheck className="h-4 w-4" />
-							{t("features.offline.title")}
-						</div>
-						<div className="inline-flex items-center gap-2 rounded-full border border-sky-300/30 bg-sky-400/10 px-4 py-2 text-sky-100">
-							<Globe2 className="h-4 w-4" />
-							{t("features.sync.title")}
-						</div>
+					<div className="absolute -bottom-5 -start-3 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-3.5 py-2.5 text-[10px] font-bold shadow-xl backdrop-blur sm:-start-5">
+						<span className="rounded-lg bg-[#b7f486]/15 p-1.5 text-[#b7f486]">
+							<BadgeCheck className="size-3.5" />
+						</span>
+
+						{t("hero.panel.verified")}
 					</div>
-				</div>
 
-				<div className="relative mx-auto w-full max-w-[520px]">
-					<div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-slate-950/45 p-6 shadow-[0_25px_80px_rgba(2,6,23,0.6)] backdrop-blur-xl md:p-8">
-						<div className="mb-6 flex items-center justify-between">
-							<p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200/80">
-								Learning Signal
-							</p>
-							<div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[11px] font-medium text-slate-200">
-								<Sparkles className="h-3.5 w-3.5 text-cyan-300" />
-								Live
-							</div>
-						</div>
+					<div className="absolute -top-4 -start-2 hidden items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-3.5 py-2.5 text-[10px] font-bold shadow-xl backdrop-blur sm:flex">
+						<span className="rounded-lg bg-violet-400/15 p-1.5 text-violet-200">
+							<Sparkles className="size-3.5" />
+						</span>
 
-						<div className="relative flex min-h-[260px] items-center justify-center">
-							<div className="absolute size-[260px] rounded-full border border-cyan-200/25" />
-							<div className="absolute size-[190px] rounded-full border border-indigo-200/25" />
-							<div className="absolute size-[126px] rounded-full border border-sky-200/30 bg-sky-300/10 backdrop-blur-sm" />
-
-							<div className="absolute -left-2 top-5 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-start shadow-xl">
-								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
-									{t("stats.students")}
-								</p>
-								<p className="mt-1 text-xl font-bold text-cyan-100">
-									{t("stats.value.students")}
-								</p>
-							</div>
-
-							<div className="absolute -right-2 top-1/2 -translate-y-1/2 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-start shadow-xl">
-								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
-									{t("stats.courses")}
-								</p>
-								<p className="mt-1 text-xl font-bold text-indigo-100">
-									{t("stats.value.courses")}
-								</p>
-							</div>
-
-							<div className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-2xl border border-white/15 bg-slate-900/70 px-4 py-3 text-center shadow-xl">
-								<p className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
-									{t("stats.rating")}
-								</p>
-								<p className="mt-1 text-xl font-bold text-emerald-100">
-									{t("stats.value.rating")} ★
-								</p>
-							</div>
-						</div>
-
-						<div className="mt-6 grid gap-3 sm:grid-cols-2">
-							<div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-								<p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-400">
-									{t("features.offline.title")}
-								</p>
-								<p className="mt-2 text-sm text-slate-200">
-									{t("features.offline.desc")}
-								</p>
-							</div>
-							<div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-								<p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-400">
-									{t("features.sync.title")}
-								</p>
-								<p className="mt-2 text-sm text-slate-200">
-									{t("features.sync.desc")}
-								</p>
-							</div>
-						</div>
+						{tApp("name")}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);

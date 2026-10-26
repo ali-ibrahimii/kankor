@@ -6,7 +6,6 @@ import {
 	Check,
 	CloudDownload,
 	FileText,
-	Flame,
 	GraduationCap,
 	Play,
 	School,
@@ -16,6 +15,7 @@ import {
 	WifiOff,
 	Zap,
 } from "lucide-react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
@@ -47,6 +47,7 @@ export default async function HomeContent({
 
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
 	const viewMoreLabel = t("shelves.viewMore");
+	const learnersCount = `${new Intl.NumberFormat(locale).format(2480)}+`;
 
 	const stats = [
 		{
@@ -198,130 +199,71 @@ export default async function HomeContent({
 							</div>
 						</div>
 
-						{/* Hero study progress preview card */}
-						<div className="relative mx-auto w-full max-w-[485px] pt-8 pb-9 sm:px-5">
+						{/* Hero visual — a student holding the platform in her hand */}
+						<div className="relative mx-auto w-full max-w-[430px] lg:max-w-[460px]">
 							<div
 								aria-hidden="true"
-								className="absolute -end-2 top-0 size-28 rounded-full bg-violet-500/35 blur-3xl"
+								className="absolute -top-8 end-0 size-40 rounded-full bg-violet-500/30 blur-3xl"
 							/>
 
 							<div
 								aria-hidden="true"
-								className="absolute -start-2 bottom-0 size-28 rounded-full bg-emerald-300/20 blur-3xl"
+								className="absolute -bottom-6 start-0 size-36 rounded-full bg-emerald-300/20 blur-3xl"
 							/>
 
-							<div className="relative z-10 overflow-hidden rounded-[23px] border border-white/15 bg-[#0f182c]/85 shadow-[0_35px_70px_-25px_rgba(0,0,0,.65)] backdrop-blur-lg">
-								<div className="flex items-center justify-between border-b border-white/10 px-5 py-4 text-[11px] font-semibold text-white/65">
-									<span className="flex items-center gap-2">
-										<Target className="size-4 text-[#b7f486]" />
+							<div className="group relative overflow-hidden rounded-[32px] border border-white/15 bg-[#0d1526] shadow-[0_45px_90px_-38px_rgba(0,0,0,.85)] sm:rounded-[38px]">
+								<div className="relative aspect-[4/5] w-full">
+									<Image
+										src="/images/hero/student-phone.jpg"
+										alt={t("hero.imageAlt")}
+										fill
+										priority
+										sizes="(max-width: 1023px) 92vw, 40vw"
+										className="object-cover object-[58%_18%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+									/>
+								</div>
 
-										{t("showcase.previewTitle")}
+								<div
+									aria-hidden="true"
+									className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1424] via-[#0c1424]/10 to-transparent"
+								/>
+
+								<div
+									aria-hidden="true"
+									className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/10 sm:rounded-[38px]"
+								/>
+
+								<div className="absolute start-4 top-4 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-[#1c2740]/80 px-3.5 py-2.5 text-[11px] font-bold text-white shadow-xl backdrop-blur-md sm:start-5 sm:top-5">
+									<span className="rounded-lg bg-[#b7f486]/15 p-1.5 text-[#b7f486]">
+										<Sparkles className="size-3.5" />
 									</span>
 
-									<span className="flex items-center gap-1.5 text-[#b7f486]">
-										<Flame className="size-3.5" />
+									{t("showcase.startHere")}
+								</div>
+
+								<div className="absolute inset-x-3 bottom-3 z-20 flex items-center justify-between gap-2 rounded-[22px] border border-white/12 bg-[#141d31]/75 p-2.5 shadow-[0_18px_40px_-22px_rgba(0,0,0,.9)] backdrop-blur-md sm:inset-x-4 sm:bottom-4 sm:p-3">
+									<div className="flex min-w-0 items-center gap-2.5">
+										<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#b7f486]/15 text-[#b7f486]">
+											<Users className="size-4" />
+										</span>
+
+										<span className="min-w-0 leading-tight">
+											<strong className="block text-xs font-extrabold text-white">
+												{learnersCount}
+											</strong>
+
+											<small className="mt-0.5 block truncate text-[10px] text-white/55">
+												{t("showcase.students")}
+											</small>
+										</span>
+									</div>
+
+									<span className="flex shrink-0 items-center gap-1.5 rounded-full bg-[#b7f486]/12 px-2.5 py-1.5 text-[10px] font-extrabold text-[#b7f486]">
+										<Target className="size-3" />
 
 										{t("showcase.previewBadge")}
 									</span>
 								</div>
-
-								<div className="p-5 sm:p-6">
-									<div className="flex items-start justify-between">
-										<div>
-											<p className="text-[11px] text-white/45">
-												{t("showcase.progress")}
-											</p>
-
-											<p className="mt-1.5 text-lg font-extrabold">
-												{t("showcase.previewHeading")}
-											</p>
-										</div>
-
-										<span className="rounded-full bg-[#b7f486]/15 px-2.5 py-1 text-xs font-bold text-[#b7f486]">
-											۷۶٪
-										</span>
-									</div>
-
-									<div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
-										<div className="h-full w-[76%] rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]" />
-									</div>
-
-									<div className="mt-6 space-y-4">
-										{subjects.map((item) => (
-											<div key={item.key}>
-												<div className="mb-2 flex items-center justify-between text-[11px]">
-													<span className="font-semibold text-white/75">
-														{t(`showcase.${item.key}`)}
-													</span>
-
-													<span className="text-white/45">{item.value}٪</span>
-												</div>
-
-												<div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-													<div
-														className="h-full rounded-full"
-														style={{
-															width: `${item.value}%`,
-															backgroundColor: item.color,
-														}}
-													/>
-												</div>
-											</div>
-										))}
-									</div>
-
-									<div className="mt-6 grid grid-cols-2 gap-2">
-										<div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.05] p-3">
-											<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-												<BookOpen className="size-4" />
-											</span>
-
-											<span>
-												<strong className="block text-xs">۱۲ / ۱۶</strong>
-
-												<small className="block text-[10px] text-white/45">
-													{t("showcase.lessons")}
-												</small>
-											</span>
-										</div>
-
-										<div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.05] p-3">
-											<span className="rounded-xl bg-violet-400/15 p-2 text-violet-200">
-												<Zap className="size-4" />
-											</span>
-
-											<span>
-												<strong className="block text-xs">۸۵٪</strong>
-
-												<small className="block text-[10px] text-white/45">
-													{t("showcase.quiz")}
-												</small>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="absolute -start-2 top-0 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-4 py-3 text-[11px] font-bold shadow-xl backdrop-blur sm:-start-3">
-								<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-									<Sparkles className="size-4" />
-								</span>
-
-								{t("showcase.startHere")}
-							</div>
-
-							<div className="absolute -end-2 bottom-0 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-4 py-3 shadow-xl backdrop-blur sm:-end-3">
-								<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-									<Users className="size-4" />
-								</span>
-
-								<span>
-									<strong className="block text-xs">۲٬۴۸۰+</strong>
-
-									<small className="block text-[10px] text-white/50">
-										{t("showcase.students")}
-									</small>
-								</span>
 							</div>
 						</div>
 					</div>

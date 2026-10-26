@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Building, Globe2, Star, Users } from "lucide-react";
+import { BookOpen, Building, Star, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useAboutMotion } from "./about-motion";
@@ -15,30 +15,38 @@ export function AboutStatsSection() {
 			value: t("stats.value.students"),
 			label: t("stats.students"),
 			icon: Users,
+			tint: "bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200",
 		},
 		{
 			value: t("stats.value.courses"),
 			label: t("stats.courses"),
 			icon: BookOpen,
+			tint: "bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200",
 		},
 		{
 			value: t("stats.value.schools"),
 			label: t("stats.schools"),
 			icon: Building,
+			tint: "bg-[#e6f1ff] text-[#3a79c2] dark:bg-sky-400/15 dark:text-sky-200",
 		},
-		{ value: t("stats.value.rating"), label: t("stats.rating"), icon: Star },
+		{
+			value: t("stats.value.rating"),
+			label: t("stats.rating"),
+			icon: Star,
+			tint: "bg-[#ffeddf] text-[#c87949] dark:bg-amber-400/15 dark:text-amber-200",
+		},
 	];
 
 	return (
 		<motion.section
 			id="stats"
-			className="relative z-20 -mt-10 mx-auto w-full max-w-6xl px-6"
+			className="relative z-20 mx-auto -mt-14 w-full max-w-[1160px] px-4 sm:-mt-16 sm:px-6"
 			variants={aboutMotion.section}
 			initial="hidden"
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+			<div className="overflow-hidden rounded-[26px] border border-border/70 bg-card/95 shadow-[0_28px_70px_-38px_rgba(15,23,42,0.45)] backdrop-blur-xl">
 				<motion.div
 					className="grid grid-cols-2 gap-0 md:grid-cols-4"
 					variants={aboutMotion.stagger}
@@ -48,23 +56,33 @@ export function AboutStatsSection() {
 				>
 					{stats.map((s, i) => (
 						<motion.div
-							key={i}
+							key={s.label}
 							variants={aboutMotion.item}
 							className={cn(
-								"group relative flex flex-col items-center px-4 py-8 sm:px-6",
-								i < stats.length - 1 &&
-									"border-e border-slate-100 rtl:border-s rtl:border-e-0"
+								"group relative flex items-center gap-3 px-4 py-6 sm:px-6 sm:py-7",
+								"border-border/60",
+								i < stats.length - 1 && "md:border-e",
+								i % 2 === 0 && "max-md:border-e",
+								i < 2 && "max-md:border-b"
 							)}
 						>
-							<div className="absolute inset-x-6 top-0 h-px bg-linear-to-r from-transparent via-sky-200 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-							<div className="mb-3 flex size-11 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-lg shadow-slate-950/15 transition-transform duration-300 group-hover:-translate-y-0.5">
-								<s.icon className="h-5 w-5" />
-							</div>
-							<div className="text-2xl font-extrabold tracking-tight text-slate-950 md:text-3xl">
-								{s.value}
-							</div>
-							<div className="mt-1 max-w-44 text-center text-sm font-medium leading-6 text-slate-500">
-								{s.label}
+							<span
+								className={cn(
+									"flex size-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-translate-y-0.5",
+									s.tint
+								)}
+							>
+								<s.icon className="size-5" />
+							</span>
+
+							<div className="min-w-0">
+								<p className="text-xl font-black tracking-tight text-foreground sm:text-2xl">
+									{s.value}
+								</p>
+
+								<p className="mt-0.5 truncate text-[11px] font-medium text-muted-foreground">
+									{s.label}
+								</p>
 							</div>
 						</motion.div>
 					))}

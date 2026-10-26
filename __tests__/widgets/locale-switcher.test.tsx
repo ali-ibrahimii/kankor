@@ -1,15 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import enMessages from "@/messages/en.json";
 
 const mockReplace = vi.hoisted(() => vi.fn());
-
-vi.mock("@/hooks/use-breakpoint", () => ({
-	useResponsive: () => "group",
-}));
 
 vi.mock("@/i18n/navigation", () => ({
 	usePathname: () => "/courses",
@@ -25,21 +21,45 @@ vi.mock("@/providers/auth.provider", () => ({
 
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
 
-describe("LocaleSwitcher", () => {
-	it("renders an accessible segmented language control and navigates to the selected locale", () => {
-		render(
-			<NextIntlClientProvider locale="en" messages={enMessages}>
-				<LocaleSwitcher type="group" responsive={false} />
-			</NextIntlClientProvider>
-		);
+function renderSwitcher() {
+	return render(
+		<NextIntlClientProvider locale="en" messages={enMessages}>
+			<LocaleSwitcher />
+		</NextIntlClientProvider>
+	);
+}
 
-		expect(screen.getByRole("group", { name: "Language" })).toBeInTheDocument();
-		expect(screen.getByRole("button", { name: "English" })).toHaveAttribute(
-			"aria-pressed",
+describe("LocaleSwitcher", () => {
+	beforeEach(() => {
+		mockReplace.mockReset();
+	});
+
+	it("shows the active language on a compact trigger and marks the current option", () => {
+		renderSwitcher();
+
+		const trigger = screen.getByRole("button", { name: /Language: English/ });
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+		fireEvent.click(trigger);
+
+		const listbox = screen.getByRole("listbox", { name: "Language" });
+		expect(listbox).toBeInTheDocument();
+		expect(screen.getByRole("option", { name: "English" })).toHaveAttribute(
+			"aria-selected",
 			"true"
 		);
+		expect(screen.getByRole("option", { name: "دری" })).toHaveAttribute(
+			"aria-selected",
+			"false"
+		);
+	});
 
-		fireEvent.click(screen.getByRole("button", { name: "دری" }));
+	it("navigates to the selected locale and keeps the current path", () => {
+		renderSwitcher();
+
+		fireEvent.click(screen.getByRole("button", { name: /Language: English/ }));
+		fireEvent.click(screen.getByRole("option", { name: "دری" }));
+
 		expect(mockReplace).toHaveBeenCalledWith("/courses", { locale: "fa" });
 	});
 });

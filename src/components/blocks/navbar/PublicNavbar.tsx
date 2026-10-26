@@ -172,12 +172,8 @@ export async function PublicNavbar() {
 			{/* End Section — Mobile-responsive controls with zero hydration mismatch */}
 			<div className="flex shrink-0 items-center gap-1 sm:gap-2">
 				<GlobalSearch />
-				<div className="hidden md:block">
-					<LocaleSwitcher type="group" responsive={false} />
-				</div>
-				<div className="md:hidden">
-					<LocaleSwitcher type="select" responsive={false} />
-				</div>
+				<LocaleSwitcher size="compact" className="md:hidden" />
+				<LocaleSwitcher className="hidden md:inline-flex" />
 				<ThemeSwitcher label={t("header.themeToggle")} />
 
 				<PublicNavbarAuthButton
