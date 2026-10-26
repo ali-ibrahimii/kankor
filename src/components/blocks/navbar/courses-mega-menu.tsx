@@ -101,9 +101,9 @@ export function CoursesMegaMenu({
 
 			<div
 				data-testid="school-mega-menu-panel"
-				className="invisible absolute start-0 top-full z-[60] w-[min(330px,calc(100vw-32px))] translate-y-2 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+				className="invisible absolute start-0 top-full z-[60] w-[min(258px,calc(100vw-32px))] translate-y-1.5 pt-2.5 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
 			>
-				<div className="overflow-hidden rounded-2xl border border-border/70 bg-popover p-1.5 text-popover-foreground shadow-[0_24px_60px_-24px_rgba(19,25,58,.45)]">
+				<div className="overflow-hidden rounded-2xl border border-border/70 bg-popover p-1 text-popover-foreground shadow-[0_18px_45px_-26px_rgba(19,25,58,.5)]">
 					{items.map((item) => {
 						const meta = ITEM_META[item.key];
 						const Icon = meta.icon;
@@ -112,28 +112,19 @@ export function CoursesMegaMenu({
 							<Link
 								key={item.key}
 								href={item.href}
-								className="group/item flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-colors hover:bg-muted/60"
+								title={item.description}
+								className="flex items-center gap-2.5 rounded-xl px-2 py-2 text-[12px] font-semibold text-foreground/85 transition-colors hover:bg-muted/70 hover:text-foreground"
 							>
 								<span
 									className={cn(
-										"flex size-8 shrink-0 items-center justify-center rounded-lg",
+										"flex size-7 shrink-0 items-center justify-center rounded-lg",
 										meta.tint
 									)}
 								>
-									<Icon className="size-4" />
+									<Icon className="size-3.5" />
 								</span>
 
-								<span className="min-w-0 flex-1">
-									<strong className="block truncate text-[12px] font-bold text-foreground">
-										{item.title}
-									</strong>
-
-									<span className="mt-0.5 block truncate text-[10px] leading-4 text-muted-foreground">
-										{item.description}
-									</span>
-								</span>
-
-								<Arrow className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/item:opacity-100" />
+								<span className="truncate">{item.title}</span>
 							</Link>
 						);
 					})}
@@ -141,30 +132,26 @@ export function CoursesMegaMenu({
 					<div className="mt-1 border-t border-border/60 pt-1">
 						<Link
 							href={routes.courses.page()}
-							className="flex items-center justify-between rounded-xl px-2.5 py-2 text-[11px] font-extrabold text-primary transition-colors hover:bg-primary/5"
+							className="flex items-center justify-between rounded-xl px-2 py-2 text-[11px] font-extrabold text-primary transition-colors hover:bg-primary/5"
 						>
 							{allLabel}
 
 							<Arrow className="size-3.5" />
 						</Link>
 
-						<div className="flex items-center gap-3 px-2.5 pb-1">
-							<Link
-								href={routes.verify.page()}
-								className="text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
-							>
-								{verifyLabel}
-							</Link>
+						<Link
+							href={routes.verify.page()}
+							className="flex items-center rounded-xl px-2 py-1.5 text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
+						>
+							{verifyLabel}
+						</Link>
 
-							<span className="size-1 rounded-full bg-border" />
-
-							<Link
-								href={routes.d.classrooms.page()}
-								className="text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
-							>
-								{classroomsLabel}
-							</Link>
-						</div>
+						<Link
+							href={routes.d.classrooms.page()}
+							className="flex items-center rounded-xl px-2 py-1.5 pt-0 text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
+						>
+							{classroomsLabel}
+						</Link>
 					</div>
 				</div>
 			</div>

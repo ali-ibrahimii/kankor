@@ -2119,7 +2119,7 @@
 		"title": "About Us",
 		"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
 		"hero": {
-			"title": "Quality education for every student, everywhere",
+			"title": "Quality education for every student, <accent>everywhere</accent>",
 			"badge": "About our platform",
 			"description": "Abzar Kankor is a learning platform that makes education more accessible and more engaging. We provide high-quality resources and interactive tools that help students build skills and reach their goals.",
 			"subtitle": "School courses, smart flashcards, mock Kankor exams and a digital library — all in one place, online or offline.",

@@ -309,34 +309,36 @@ export function SchoolHubView({
 	return (
 		<div className="flex flex-col">
 			{/* ════════════════════════════════════════════════════════════════
-			    SINGLE UNIFIED HERO (Replaces the broken double-hero layout)
+			    HERO — dark panel with search, quick actions and featured course
 			   ════════════════════════════════════════════════════════════════ */}
-			<section className="relative overflow-hidden border-b border-border/65 bg-gradient-to-b from-primary/[0.06] via-background to-background py-10 sm:py-14">
-				<div
-					aria-hidden="true"
-					className="pointer-events-none absolute -top-28 start-1/3 h-80 w-80 rounded-full bg-primary/10 blur-3xl"
-				/>
-				<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-					<div className="grid items-center gap-8 lg:grid-cols-12">
-						{/* Hero Main Copy + Search + Quick Actions */}
-						<div className="space-y-5 lg:col-span-7">
-							<span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/8 px-3.5 py-1 text-xs font-semibold text-primary">
-								<Sparkles className="size-3.5" aria-hidden="true" />
+			<section className="px-4 pb-2 pt-4 sm:px-6 sm:pt-6 lg:px-8">
+				<div className="relative isolate mx-auto max-w-[1320px] overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_8%_112%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_92%_-8%,rgba(137,100,255,.34),transparent_40%),linear-gradient(125deg,#101a2c_4%,#17233a_58%,#222340_100%)] px-5 py-10 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[34px] sm:px-9 sm:py-12 lg:px-12">
+					<div
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-0 opacity-[.14] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:24px_24px]"
+					/>
+
+					<div className="relative z-10 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,.85fr)] lg:gap-12">
+						<div>
+							<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm">
+								<Sparkles
+									className="size-3.5 text-[#b7f486]"
+									aria-hidden="true"
+								/>
 								{t("heroBadge")}
 							</span>
 
-							<h1 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl sm:leading-[1.2]">
+							<h1 className="mt-5 max-w-[560px] text-[1.9rem] font-black leading-[1.35] tracking-tight sm:text-[2.5rem] lg:text-[2.8rem]">
 								{t("heroTitle")}
 							</h1>
 
-							<p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+							<p className="mt-4 max-w-[520px] text-sm leading-7 text-white/60 sm:text-[15px]">
 								{t("heroSubtitle")}
 							</p>
 
-							{/* Integrated course search input */}
-							<div className="relative max-w-2xl">
+							<div className="relative mt-7 max-w-[520px]">
 								<Search
-									className="pointer-events-none absolute top-1/2 start-3.5 size-4 -translate-y-1/2 text-muted-foreground"
+									className="pointer-events-none absolute top-1/2 start-4 size-4 -translate-y-1/2 text-white/40"
 									aria-hidden="true"
 								/>
 								<Input
@@ -347,26 +349,23 @@ export function SchoolHubView({
 										if (e.target.value) setSelectedPathId(null);
 									}}
 									placeholder={t("searchPlaceholder")}
-									className="h-12 rounded-2xl border-border/80 bg-background ps-10 pe-20 text-sm shadow-xs"
+									className="h-12 rounded-2xl border-white/15 bg-white/[.07] ps-11 pe-24 text-sm text-white placeholder:text-white/40 focus-visible:border-[#b7f486]/50 focus-visible:ring-[#b7f486]/20"
 								/>
-								{search && (
+								{search ? (
 									<button
 										type="button"
 										onClick={() => setSearch("")}
-										className="absolute top-1/2 end-3 inline-flex -translate-y-1/2 items-center gap-1 rounded-lg bg-muted px-2.5 py-1 text-xs font-medium text-foreground hover:bg-muted/80"
+										className="absolute top-1/2 end-2.5 inline-flex -translate-y-1/2 items-center gap-1 rounded-xl bg-white/10 px-2.5 py-1.5 text-[11px] font-bold text-white/80 transition hover:bg-white/20"
 									>
 										<X className="size-3" />
 										{t("searchClear")}
 									</button>
-								)}
+								) : null}
 							</div>
 
-							{/* Course discovery and instructor publishing actions */}
-							<div className="flex flex-wrap items-center gap-3 pt-0.5">
-								<Button
+							<div className="mt-4 flex flex-wrap items-center gap-2.5">
+								<button
 									type="button"
-									size="default"
-									className="rounded-xl"
 									onClick={() => {
 										setActiveTab("all");
 										setSearch("");
@@ -375,64 +374,60 @@ export function SchoolHubView({
 											.getElementById("course-catalog")
 											?.scrollIntoView({ behavior: "smooth" });
 									}}
+									className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-[#b7f486] px-5 text-sm font-black text-[#17233a] shadow-lg shadow-black/20 transition hover:bg-[#c9f8a2]"
 								>
 									<BookOpen className="size-4" aria-hidden="true" />
 									{t("browseCoursesBtn")}
-								</Button>
-								<Button
-									asChild
-									variant="outline"
-									size="default"
-									className="rounded-xl"
+								</button>
+
+								<Link
+									href={routes.auth.signup.page({ type: "instructor" })}
+									className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-5 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
 								>
-									<Link href={routes.auth.signup.page({ type: "instructor" })}>
-										<Sparkles
-											className="size-4 text-primary"
-											aria-hidden="true"
-										/>
-										{t("publishCourseBtn")}
-									</Link>
-								</Button>
+									<Sparkles
+										className="size-4 text-[#b7f486]"
+										aria-hidden="true"
+									/>
+									{t("publishCourseBtn")}
+								</Link>
 							</div>
-							{/* Compact Key Figures */}
-							<dl className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-4">
-								<div className="rounded-xl border border-border/65 bg-card/85 px-3.5 py-2.5">
-									<dd className="text-lg font-extrabold text-foreground tabular-nums">
-										{featuredCourses.length}
-									</dd>
-									<dt className="text-[11px] text-muted-foreground">
-										{t("statFeaturedLabel")}
-									</dt>
-								</div>
-								<div className="rounded-xl border border-border/65 bg-card/85 px-3.5 py-2.5">
-									<dd className="text-lg font-extrabold text-foreground tabular-nums">
-										{data.courses.length}
-									</dd>
-									<dt className="text-[11px] text-muted-foreground">
-										{t("statCoursesLabel")}
-									</dt>
-								</div>
-								<div className="rounded-xl border border-border/65 bg-card/85 px-3.5 py-2.5">
-									<dd className="text-lg font-extrabold text-foreground tabular-nums">
-										{data.learningPaths.length}
-									</dd>
-									<dt className="text-[11px] text-muted-foreground">
-										{t("statTracksLabel")}
-									</dt>
-								</div>
-								<div className="rounded-xl border border-border/65 bg-card/85 px-3.5 py-2.5">
-									<dd className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400 tabular-nums">
-										{data.courses.filter((course) => course.isFree).length}
-									</dd>
-									<dt className="text-[11px] text-muted-foreground">
-										{t("statFreeLabel")}
-									</dt>
-								</div>
+
+							<dl className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+								{[
+									{
+										value: featuredCourses.length,
+										label: t("statFeaturedLabel"),
+									},
+									{ value: data.courses.length, label: t("statCoursesLabel") },
+									{
+										value: data.learningPaths.length,
+										label: t("statTracksLabel"),
+									},
+									{
+										value: data.courses.filter((course) => course.isFree)
+											.length,
+										label: t("statFreeLabel"),
+										accent: true,
+									},
+								].map((stat) => (
+									<div key={stat.label} className="flex items-baseline gap-2">
+										<dd
+											className={cn(
+												"text-xl font-black tabular-nums",
+												stat.accent ? "text-[#b7f486]" : "text-white"
+											)}
+										>
+											{stat.value}
+										</dd>
+										<dt className="text-[11px] font-medium text-white/50">
+											{stat.label}
+										</dt>
+									</div>
+								))}
 							</dl>
 						</div>
 
-						{/* Featured courses */}
-						<div className="lg:col-span-5">
+						<div className="lg:justify-self-end">
 							<FeaturedCoursesCarousel courses={featuredCourses} />
 						</div>
 					</div>
@@ -459,7 +454,10 @@ export function SchoolHubView({
 			    SECTION 2 — GUIDED STEP-BY-STEP LEARNING PATHS
 			   ════════════════════════════════════════════════════════════════ */}
 			{activeTab === "all" && !normalizedQuery && (
-				<section className="border-b border-border/60 bg-muted/20 py-11">
+				<section
+					id="course-catalog"
+					className="scroll-mt-28 border-b border-border/60 bg-muted/20 py-11"
+				>
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="mb-6">
 							<span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
@@ -575,7 +573,7 @@ export function SchoolHubView({
 									{section.subtitle}
 								</p>
 							</div>
-							<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+							<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 								{items.map((course) =>
 									section.variant === "tech" ? (
 										<HubTechCourseCard key={course.id} item={course} />

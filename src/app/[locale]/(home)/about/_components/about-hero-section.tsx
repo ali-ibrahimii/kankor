@@ -53,17 +53,19 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 						<GraduationCap className="size-3.5 text-[#b7f486]" />
 
 						{t("hero.badge")}
-
-						<span className="mx-0.5 size-1 rounded-full bg-[#b7f486]" />
-
-						<span className="text-white/55">{t("nav.label")}</span>
 					</motion.span>
 
 					<motion.h1
 						variants={aboutMotion.item}
-						className="mt-6 max-w-[640px] text-[2.1rem] font-black leading-[1.45] tracking-tight sm:text-[3rem] lg:text-[3.35rem]"
+						className="mt-6 max-w-[600px] text-[1.9rem] font-black leading-[1.35] tracking-tight sm:text-[2.6rem] lg:text-[3rem]"
 					>
-						{t("hero.title")}
+						{t.rich("hero.title", {
+							accent: (chunks) => (
+								<span className="bg-gradient-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
+									{chunks}
+								</span>
+							),
+						})}
 					</motion.h1>
 
 					<motion.p
@@ -208,18 +210,16 @@ export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
 									{t("hero.panel.certificateDesc")}
 								</p>
 							</div>
+
+							<span className="flex shrink-0 items-center gap-1 rounded-full bg-[#b7f486]/15 px-2 py-1 text-[9px] font-bold text-[#b7f486]">
+								<BadgeCheck className="size-3" />
+
+								{t("hero.panel.verified")}
+							</span>
 						</div>
 					</div>
 
-					<div className="absolute -bottom-5 -start-3 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-3.5 py-2.5 text-[10px] font-bold shadow-xl backdrop-blur sm:-start-5">
-						<span className="rounded-lg bg-[#b7f486]/15 p-1.5 text-[#b7f486]">
-							<BadgeCheck className="size-3.5" />
-						</span>
-
-						{t("hero.panel.verified")}
-					</div>
-
-					<div className="absolute -top-4 -start-2 hidden items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-3.5 py-2.5 text-[10px] font-bold shadow-xl backdrop-blur sm:flex">
+					<div className="absolute -top-3 -start-2 hidden items-center gap-2 rounded-2xl border border-white/15 bg-[#222d44]/95 px-3 py-2 text-[10px] font-bold shadow-xl backdrop-blur sm:flex">
 						<span className="rounded-lg bg-violet-400/15 p-1.5 text-violet-200">
 							<Sparkles className="size-3.5" />
 						</span>
