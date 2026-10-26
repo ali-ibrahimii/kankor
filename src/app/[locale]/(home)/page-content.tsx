@@ -132,7 +132,7 @@ export default async function HomeContent({
 		<div className="min-h-screen overflow-x-clip bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
 			{/* Hero */}
 			<section className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-				<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px]">
+				<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px]">
 					<div
 						aria-hidden="true"
 						className="pointer-events-none absolute inset-0 opacity-[.13] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:24px_24px]"

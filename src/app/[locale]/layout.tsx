@@ -70,6 +70,7 @@ export default async function RootLayout({
 		<html
 			lang={locale}
 			dir={dir}
+			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 			className={`${fontVazirmatn.variable} antialiased`}
 		>
