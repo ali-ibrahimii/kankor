@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { themeInitScript } from "@/providers/theme-script";
 import { BaseParams } from "@/types/common.types";
 import { Providers } from "./providers";
 
@@ -74,6 +75,12 @@ export default async function RootLayout({
 			className={`${fontVazirmatn.variable} antialiased`}
 		>
 			<body className="relative">
+				{/* Applies the stored theme before the first paint. Rendered on the
+				    server so React never creates a <script> on the client. */}
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: static, self-contained theme bootstrap
+					dangerouslySetInnerHTML={{ __html: themeInitScript }}
+				/>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<Providers dir={dir}>
 						{children}
