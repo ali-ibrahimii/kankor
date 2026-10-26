@@ -13,7 +13,7 @@ import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import type { HubCourseItem } from "./school-hub-data";
+import type { HubCourseItem } from "./course-hub-data";
 
 export function FeaturedCoursesCarousel({
 	courses,
@@ -35,12 +35,12 @@ export function FeaturedCoursesCarousel({
 	const next = () => setActiveIndex((index) => (index + 1) % courses.length);
 
 	return (
-		<div className="mx-auto w-full max-w-[520px]">
-			<article className="overflow-hidden rounded-[24px] border border-border/75 bg-card shadow-[0_26px_65px_-40px_rgba(31,41,75,.55)]">
+		<div className="mx-auto w-full max-w-[440px]">
+			<article className="overflow-hidden rounded-[22px] bg-card shadow-[0_28px_60px_-30px_rgba(4,10,25,.55)] ring-1 ring-white/10">
 				<Link
 					href={course.href}
 					aria-label={t("openFeaturedCourse", { title: course.title })}
-					className="group relative block aspect-[16/9] overflow-hidden bg-muted"
+					className="group relative block aspect-[16/10] overflow-hidden bg-slate-200"
 				>
 					<Image
 						src={resolveEntityCardImage({
@@ -78,12 +78,12 @@ export function FeaturedCoursesCarousel({
 					</div>
 				</Link>
 
-				<div className="space-y-3.5 p-4 sm:p-5">
+				<div className="space-y-3 p-4">
 					<p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
 						{course.subtitle}
 					</p>
 
-					<div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+					<div className="flex flex-wrap items-center justify-between gap-2 text-[11px]">
 						<span className="inline-flex min-w-0 items-center gap-1.5 font-semibold text-foreground">
 							<GraduationCap
 								className="size-4 shrink-0 text-primary"
@@ -99,7 +99,7 @@ export function FeaturedCoursesCarousel({
 
 					<Link
 						href={course.href}
-						className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition hover:bg-primary/90"
+						className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#b7f486] px-4 py-2 text-xs font-black text-[#17233a] transition hover:bg-[#c9f8a2]"
 					>
 						{t("startCourseBtn")}
 						<NextIcon className="size-4" aria-hidden="true" />
@@ -108,38 +108,20 @@ export function FeaturedCoursesCarousel({
 			</article>
 
 			{courses.length > 1 && (
-				<div className="mt-3 rounded-2xl border border-border/65 bg-background/80 p-2.5 shadow-sm backdrop-blur-sm">
-					<div className="mb-2 flex items-center justify-between gap-2 px-1">
-						<p className="text-[11px] font-semibold text-muted-foreground">
-							{t("featuredCoursePosition", {
-								current: activeIndex + 1,
-								total: courses.length,
-							})}
-						</p>
-						<div className="flex items-center gap-1">
-							<button
-								type="button"
-								onClick={previous}
-								aria-label={t("previousFeaturedCourse")}
-								className="inline-flex size-7 items-center justify-center rounded-lg border border-border/70 bg-card text-muted-foreground transition hover:border-primary/40 hover:text-primary focus-visible:outline-none"
-							>
-								<PreviousIcon className="size-4" aria-hidden="true" />
-							</button>
-							<button
-								type="button"
-								onClick={next}
-								aria-label={t("nextFeaturedCourse")}
-								className="inline-flex size-7 items-center justify-center rounded-lg border border-border/70 bg-card text-muted-foreground transition hover:border-primary/40 hover:text-primary focus-visible:outline-none"
-							>
-								<NextIcon className="size-4" aria-hidden="true" />
-							</button>
-						</div>
-					</div>
+				<div className="mt-3 flex items-center justify-center gap-2">
+					<button
+						type="button"
+						onClick={previous}
+						aria-label={t("previousFeaturedCourse")}
+						className="inline-flex size-7 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/75 backdrop-blur transition hover:bg-white/20 hover:text-white"
+					>
+						<PreviousIcon className="size-3.5" aria-hidden="true" />
+					</button>
 
 					<div
 						role="group"
 						aria-label={t("featuredCoursePagination")}
-						className="flex snap-x gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+						className="flex items-center gap-1.5 px-1"
 					>
 						{courses.map((item, index) => (
 							<button
@@ -149,33 +131,23 @@ export function FeaturedCoursesCarousel({
 								aria-label={t("selectFeaturedCourse", { title: item.title })}
 								aria-pressed={index === activeIndex}
 								className={cn(
-									"flex min-w-[145px] max-w-[200px] snap-start items-center gap-2 rounded-xl border p-1.5 text-start transition-colors",
+									"h-1.5 rounded-full transition-all",
 									index === activeIndex
-										? "border-primary/50 bg-primary/5"
-										: "border-border/60 bg-card hover:border-primary/30"
+										? "w-5 bg-[#b7f486]"
+										: "w-1.5 bg-white/30 hover:bg-white/60"
 								)}
-							>
-								<span className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-muted">
-									<Image
-										src={resolveEntityCardImage({
-											customSrc: item.imageSrc,
-											text: item.title,
-											kind: "course",
-											seed: item.id,
-										})}
-										alt=""
-										fill
-										aria-hidden="true"
-										sizes="40px"
-										className="object-cover"
-									/>
-								</span>
-								<span className="line-clamp-2 text-[10px] font-semibold leading-snug text-foreground">
-									{item.title}
-								</span>
-							</button>
+							/>
 						))}
 					</div>
+
+					<button
+						type="button"
+						onClick={next}
+						aria-label={t("nextFeaturedCourse")}
+						className="inline-flex size-7 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/75 backdrop-blur transition hover:bg-white/20 hover:text-white"
+					>
+						<NextIcon className="size-3.5" aria-hidden="true" />
+					</button>
 				</div>
 			)}
 		</div>

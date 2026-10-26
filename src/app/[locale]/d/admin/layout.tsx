@@ -198,7 +198,7 @@ export default async function AdminLayout({
 				<DashboardTopbar
 					actions={
 						<>
-							<LocaleSwitcher responsive={false} />
+							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>
 					}

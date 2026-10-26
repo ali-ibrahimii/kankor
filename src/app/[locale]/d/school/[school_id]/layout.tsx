@@ -134,7 +134,7 @@ export default async function SchoolLayout({ children, params }: Props) {
 				<DashboardTopbar
 					actions={
 						<>
-							<LocaleSwitcher responsive={false} />
+							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>
 					}

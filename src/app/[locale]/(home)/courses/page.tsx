@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 
 import { defaultLocale, type Locale, locales } from "@/i18n";
 
-import { getSchoolHubData } from "./_components/school-hub-data";
-import { SchoolHubView } from "./_components/school-hub-view";
+import { getSchoolHubData } from "./_components/course-hub-data";
+import { SchoolHubView } from "./_components/course-hub-view";
 
 function resolveLocale(value: string): Locale {
 	return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;

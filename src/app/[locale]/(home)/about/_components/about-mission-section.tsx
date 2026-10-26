@@ -13,13 +13,13 @@ export function AboutMissionSection() {
 	return (
 		<motion.section
 			id="mission"
-			className="mx-auto max-w-6xl px-6 py-24 lg:py-28"
+			className="mx-auto max-w-[1160px] px-4 py-20 sm:px-6 sm:py-24"
 			variants={aboutMotion.section}
 			initial="hidden"
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div className="grid items-center gap-12 rounded-[2.25rem] border border-slate-200/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.06)] backdrop-blur-xl lg:grid-cols-[0.95fr_1.05fr] lg:p-10">
+			<div className="grid items-center gap-10 rounded-[30px] border border-border/70 bg-card p-6 shadow-[0_24px_70px_-46px_rgba(15,23,42,0.35)] sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
 				<motion.div
 					className="relative hidden justify-center lg:flex h-full"
 					variants={aboutMotion.item}
@@ -40,19 +40,19 @@ export function AboutMissionSection() {
 
 				<div>
 					<motion.span
-						className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-1.5 text-sm font-semibold text-sky-700"
+						className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3.5 py-1.5 text-xs font-bold text-primary"
 						variants={aboutMotion.item}
 					>
-						<Target className="h-4 w-4" /> {t("mission.title")}
+						<Target className="h-4 w-4" /> {t("mission.badge")}
 					</motion.span>
 					<motion.h2
-						className="text-3xl font-black leading-tight tracking-tight text-slate-950 md:text-4xl lg:text-5xl"
+						className="text-2xl font-black leading-[1.5] tracking-tight text-foreground sm:text-3xl lg:text-4xl"
 						variants={aboutMotion.item}
 					>
 						{t("mission.title")}
 					</motion.h2>
 					<motion.p
-						className="mt-6 max-w-2xl text-lg leading-8 text-slate-600"
+						className="mt-5 max-w-2xl text-sm leading-8 text-muted-foreground sm:text-base"
 						variants={aboutMotion.item}
 					>
 						{t("mission.body")}
@@ -67,7 +67,7 @@ export function AboutMissionSection() {
 								<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 shadow-sm shadow-emerald-100/80">
 									<CheckCircle2 className="h-4 w-4" />
 								</div>
-								<span className="font-medium leading-7 text-slate-700">
+								<span className="text-sm font-medium leading-7 text-foreground/80">
 									{point}
 								</span>
 							</motion.li>

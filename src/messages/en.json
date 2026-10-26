@@ -1031,6 +1031,7 @@
 		},
 		"hero": {
 			"badge": "For Afghan students",
+			"imageAlt": "A student showing the Abzar Kankor learning dashboard on her smartphone",
 			"heading": "Study anywhere. <accent>Pass the Kankor.</accent>",
 			"subtitle": "The complete offline learning app — curriculum-aligned school courses, 13,000+ flashcards, mock Kankor exams, and a full digital library. No internet required.",
 			"ctaPrimary": "Explore the App",
@@ -2118,22 +2119,37 @@
 		"title": "About Us",
 		"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
 		"hero": {
-			"title": "Empowering Learners Everywhere",
-			"badge": "About Our Platform",
-			"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
-			"subtitle": "High-quality education: accessible, engaging, and always with you — online or offline, on any device",
+			"title": "Quality education for every student, <accent>everywhere</accent>",
+			"badge": "About our platform",
+			"description": "Abzar Kankor is a learning platform that makes education more accessible and more engaging. We provide high-quality resources and interactive tools that help students build skills and reach their goals.",
+			"subtitle": "School courses, smart flashcards, mock Kankor exams and a digital library — all in one place, online or offline.",
 			"cta": {
-				"primary": "Get Started",
-				"secondary": "Watch Demo"
+				"primary": "Start learning",
+				"secondary": "Watch the demo"
+			},
+			"panel": {
+				"eyebrow": "Learning path",
+				"title": "This week's progress",
+				"progressLabel": "Kankor mathematics",
+				"progressValue": "76%",
+				"lesson": "Lessons completed",
+				"lessonValue": "12 / 16",
+				"quiz": "Quiz this week",
+				"quizValue": "85%",
+				"streak": "Day streak",
+				"streakValue": "14 days",
+				"certificate": "Course certificate",
+				"certificateDesc": "Issued after lessons and exams are complete",
+				"verified": "Verifiable by code"
 			}
 		},
 		"stats": {
-			"students": "Active Students",
+			"students": "Active students",
 			"courses": "Courses",
-			"schools": "Active Schools",
-			"rating": "App Rating",
+			"schools": "Active schools",
+			"rating": "User rating",
 			"value": {
-				"students": "1M+",
+				"students": "2,480+",
 				"courses": "100+",
 				"schools": "120+",
 				"rating": "4.9★"
@@ -2146,7 +2162,8 @@
 				"Deliver high-quality lessons to every learner.",
 				"Make learning inclusive across languages and devices.",
 				"Support long-term progress with practical tools."
-			]
+			],
+			"badge": "Our purpose"
 		},
 		"features": {
 			"title": "Why Choose Us",
@@ -2174,6 +2191,25 @@
 			"certified": {
 				"title": "Certified Courses",
 				"desc": "Earn recognized certificates as you complete courses."
+			},
+			"badge": "Why Abzar Kankor",
+			"specs": {
+				"platforms": {
+					"label": "Platforms",
+					"value": "Web & Android"
+				},
+				"languages": {
+					"label": "Languages",
+					"value": "Dari, Pashto, English"
+				},
+				"offline": {
+					"label": "Access",
+					"value": "Offline after download"
+				},
+				"price": {
+					"label": "To start",
+					"value": "Free"
+				}
 			}
 		},
 		"values": {
@@ -2190,7 +2226,8 @@
 			"quality": {
 				"title": "Quality",
 				"desc": "Trusted content from expert educators."
-			}
+			},
+			"badge": "How we work"
 		},
 		"video": {
 			"badge": "Watch Demo",
@@ -2208,7 +2245,7 @@
 		},
 		"team": {
 			"badge": "Our Team",
-			"title": "Our Team",
+			"title": "The people behind Abzar Kankor",
 			"subtitle": "Meet the people building Abzar Kankor.",
 			"highlight": "Meet Our Dedicated Team of Professionals",
 			"panelTitle": "Built by people who ship with care",
@@ -2327,7 +2364,9 @@
 					"label": "GET IT ON",
 					"name": "Google Play"
 				}
-			}
+			},
+			"badge": "With you on every device",
+			"webCta": "Use the web app"
 		},
 		"contact": {
 			"email": "Email Address",
@@ -2340,7 +2379,109 @@
 			"subtitle": "Have questions or need support? We are here to help.",
 			"socialTitle": "Follow Us on Social Media",
 			"socialSubtitle": "Stay updated with our latest news and announcements.",
-			"responseTime": "We typically respond within 24 hours."
+			"responseTime": "We typically respond within 24 hours.",
+			"addressValue": "Kabul, Afghanistan"
+		},
+		"nav": {
+			"label": "On this page",
+			"story": "Our story",
+			"mission": "Mission",
+			"features": "Features",
+			"audience": "Who it's for",
+			"values": "Values",
+			"faq": "FAQ",
+			"team": "Team",
+			"contact": "Contact",
+			"video": "Demo"
+		},
+		"story": {
+			"badge": "Our story",
+			"title": "From a simple idea to a learning platform",
+			"subtitle": "Abzar Kankor was born from a real need: giving Afghan students access to quality study material, even without internet.",
+			"items": [
+				{
+					"year": "2020",
+					"title": "Starting with a problem",
+					"description": "Seeing how few Kankor preparation resources schools had, our small team began digitising scattered question papers and notes."
+				},
+				{
+					"year": "2021",
+					"title": "The first app release",
+					"description": "The offline app launched with smart flashcards and a school library, and started spreading from school to school."
+				},
+				{
+					"year": "2023",
+					"title": "Classrooms, paths and certificates",
+					"description": "Invite-only classrooms, learning paths and course certificates arrived so instructors and schools could teach and manage here too."
+				},
+				{
+					"year": "Today",
+					"title": "One shared space",
+					"description": "More than 2,480 students, instructors and schools use our web app and Android app to learn, teach and manage education."
+				}
+			]
+		},
+		"audience": {
+			"badge": "Who it's for",
+			"title": "One platform, three clear paths",
+			"subtitle": "Students, instructors and schools each get their own workspace — from enrolling in a course to managing a school's members.",
+			"students": {
+				"title": "For students",
+				"desc": "Browse courses, join a classroom with a code, practise flashcards and work through mock Kankor exams.",
+				"point1": "Lesson progress saved automatically",
+				"point2": "Offline flashcards and library",
+				"point3": "Verifiable certificates",
+				"cta": "Student sign up"
+			},
+			"instructors": {
+				"title": "For instructors",
+				"desc": "Build courses, publish lessons, manage students and follow your earnings.",
+				"point1": "Step-by-step course builder",
+				"point2": "Student and exam management",
+				"point3": "Wallet and credit payouts",
+				"cta": "Instructor sign up"
+			},
+			"schools": {
+				"title": "For schools",
+				"desc": "Add members with invite codes, create classrooms and manage school content in one place.",
+				"point1": "Invite-only classrooms and roles",
+				"point2": "Student progress reporting",
+				"point3": "A public school page",
+				"cta": "School sign up"
+			}
+		},
+		"faq": {
+			"badge": "FAQ",
+			"title": "Everything you need to know",
+			"subtitle": "Short, clear answers to the questions we hear most.",
+			"items": [
+				{
+					"question": "What is Abzar Kankor?",
+					"answer": "Abzar Kankor is a learning platform that brings school courses, flashcards, mock Kankor exams and a digital library to students, instructors and schools on the web and on Android."
+				},
+				{
+					"question": "Does it work without internet?",
+					"answer": "Yes. You can download lessons, flashcards and books and study offline; your progress syncs once you are back online."
+				},
+				{
+					"question": "Does it cost anything?",
+					"answer": "A large part of the content is free. Some specialised courses may have a price, which is always shown before you enrol."
+				},
+				{
+					"question": "How are certificates issued?",
+					"answer": "When every lesson and exam in a course is complete, a course certificate is issued, and anyone can check it with its unique code on the certificate verification page."
+				},
+				{
+					"question": "How can my school join?",
+					"answer": "Create a school account, invite members and instructors with codes, then publish your courses and content. Student progress reports live in the same panel."
+				},
+				{
+					"question": "How do I contact the team?",
+					"answer": "Use the contact section on this page or email our support team — we usually reply within 24 hours."
+				}
+			],
+			"moreTitle": "Didn't find your answer?",
+			"moreCta": "Contact support"
 		}
 	},
 	"search": {
@@ -3842,24 +3983,20 @@
 		}
 	},
 	"schoolHub": {
-		"metaTitle": "Online Academy for Coding, Career Skills & School Subjects — Abzar Kankor",
-		"metaDescription": "Explore Front-end, Back-end, Programming Languages, Technical & Career Skills, Life Skills, High-School Subjects, and Live Online Classes.",
-		"heroBadge": "Abzar Kankor Academy · Learn, Build, Grow",
-		"heroTitle": "A Complete Learning Hub for Programming, Career Skills & School Subjects",
-		"heroSubtitle": "Explore curated courses by Abzar Kankor and its educators—from front-end and back-end development to digital career skills, personal growth, and school subjects.",
-		"searchPlaceholder": "Search courses, React, Python, Excel, communication, or math...",
+		"metaTitle": "Kankor Preparation & School Subjects — Abzar Kankor",
+		"metaDescription": "Abzar Kankor exam-prep courses: mathematics, physics, chemistry, biology, Dari, Pashto, English, Islamic studies, social sciences and test-taking skills, taught by experienced teachers.",
+		"heroBadge": "Abzar Kankor preparation centre",
+		"heroTitle": "From school subjects to Kankor, one clear path",
+		"heroSubtitle": "Curated courses from Abzar Kankor teachers for every Kankor subject, with drills, spaced revision and mock exams.",
+		"searchPlaceholder": "Search a subject: limits, genetics, history, test technique…",
 		"searchClear": "Clear",
 		"statCoursesLabel": "Structured Courses",
 		"statTracksLabel": "Learning Roadmaps",
 		"statFreeLabel": "Free to Start",
 		"tabsLabel": "Learning Tracks",
 		"tabAll": "All Tracks",
-		"tabFrontend": "Front-end",
-		"tabBackend": "Back-end & DB",
-		"tabLanguages": "Programming Languages",
-		"tabTechnical": "Technical Skills",
-		"tabLife": "Life Skills",
-		"tabSchool": "School & Kankor",
+		"tabLanguages": "Languages & literature",
+		"tabSchool": "Grade packages",
 		"levelAll": "All Levels",
 		"levelBeginner": "Beginner",
 		"levelIntermediate": "Intermediate",
@@ -3874,35 +4011,23 @@
 		"emptyDesc": "Try clearing filters or using a broader keyword to explore all learning tracks.",
 		"freeTag": "Free",
 		"creditsTag": "{credits} Credits",
-		"pathsBadge": "Guided Roadmaps",
-		"pathsTitle": "Not Sure Where to Begin? Follow a Step-by-Step Learning Path",
-		"pathsSubtitle": "Clear milestone sequences taking you from first fundamentals to real portfolio projects.",
+		"pathsBadge": "Preparation paths",
+		"pathsTitle": "Not sure where to start? Pick your preparation path",
+		"pathsSubtitle": "Each path sets the study order from foundations to the mock exam.",
 		"pathExploreBtn": "View Path Courses",
-		"pathCoursesCount": "{count} Structured Courses",
-		"frontendBadge": "Modern Web Interfaces",
-		"frontendTitle": "Front-end Web Development & UI Engineering",
-		"frontendSubtitle": "Build fast, accessible, responsive apps with HTML5, CSS3, Tailwind, React 19, and Next.js.",
-		"backendBadge": "Servers, APIs & Data",
-		"backendTitle": "Back-end Engineering, Databases & Cloud",
-		"backendSubtitle": "Architect secure APIs and relational schemas with Node.js, Python, PostgreSQL, and Docker.",
-		"languagesBadge": "Core Coding & Mobile",
-		"languagesTitle": "Programming Languages, Algorithms & Mobile Apps",
-		"languagesSubtitle": "Master problem-solving in Python, JavaScript, TypeScript, C++, and Flutter.",
-		"technicalBadge": "Career & Digital Tools",
-		"technicalTitle": "Technical, Digital & Freelancing Skills",
-		"technicalSubtitle": "Applied AI workflows, advanced Excel, graphic design, and remote career readiness.",
-		"lifeBadge": "Personal Growth",
-		"lifeTitle": "Life Skills, Communication & Personal Effectiveness",
-		"lifeSubtitle": "Time management, public speaking, financial literacy, career English, and critical thinking.",
-		"schoolBadge": "Curriculum & Exam Prep",
-		"schoolTitle": "High-School Curriculum & Kankor Preparation",
-		"schoolSubtitle": "Clear conceptual teaching and rapid test strategies across core school subjects.",
+		"pathCoursesCount": "{count} courses",
+		"languagesBadge": "Languages & literature",
+		"languagesTitle": "Dari, Pashto and English",
+		"languagesSubtitle": "Grammar, literary devices, vocabulary and reading-comprehension technique.",
+		"schoolBadge": "Grade packages",
+		"schoolTitle": "Complete Grade 11 and Grade 12 programme",
+		"schoolSubtitle": "Every subject of a grade in one path and one order, up to Kankor day.",
 		"lessonsUnit": "{count} lessons",
 		"hoursUnit": "{count} hrs",
 		"startCourseBtn": "Explore & Start Learning",
-		"hostCtaBadge": "For Teachers, Schools & Universities",
-		"hostCtaTitle": "Are you a teacher or professor? Share your course on Abzar Kankor",
-		"hostCtaDesc": "Publish structured lessons for students to follow at their own pace. We welcome courses from Abzar Kankor educators, teachers, and professors.",
+		"hostCtaBadge": "For teachers, schools and study centres",
+		"hostCtaTitle": "Are you a teacher? Publish your course on Abzar Kankor",
+		"hostCtaDesc": "Publish structured lessons so students learn at their own pace and arrive ready for Kankor.",
 		"hostCtaPrimary": "Register as an instructor",
 		"hostCtaSecondary": "Verify a Certificate",
 		"statFeaturedLabel": "Featured Courses",
@@ -3919,6 +4044,226 @@
 		"pathSequenceEyebrow": "Courses in this roadmap",
 		"pathSequenceSubtitle": "Follow these courses in order to build your skills step by step.",
 		"pathStepLabel": "Step {number}",
-		"pathCloseBtn": "Close roadmap"
+		"pathCloseBtn": "Close roadmap",
+		"tabMath": "Mathematics",
+		"tabScience": "Natural sciences",
+		"tabSocial": "Social studies",
+		"tabExam": "Exam skills",
+		"mathBadge": "Kankor maths foundation",
+		"mathTitle": "Mathematics for Kankor",
+		"mathSubtitle": "From algebra and geometry to trigonometry, limits and derivatives, at exam level.",
+		"scienceBadge": "Natural sciences",
+		"scienceTitle": "Physics, chemistry and biology",
+		"scienceSubtitle": "Concepts and numeric problems built around the questions Kankor repeats.",
+		"socialBadge": "Social & Islamic studies",
+		"socialTitle": "History, geography, economics and Islamic studies",
+		"socialSubtitle": "Memory-heavy subjects organised with timelines, maps and a revision routine.",
+		"examBadge": "Exam readiness",
+		"examTitle": "Test technique and mock exams",
+		"examSubtitle": "Elimination method, time management and a full simulation of exam day."
+	},
+	"content": {
+		"schoolHub": {
+			"courses": {
+				"mth-calculus-12": {
+					"title": "Grade 12 Mathematics: Limits, Derivatives & Integrals",
+					"subtitle": "Every Grade 12 chapter, rebuilt around solved Kankor questions.",
+					"subject": "Mathematics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Basir Niazi"
+				},
+				"mth-algebra-geometry": {
+					"title": "Algebra & Geometry for Kankor",
+					"subtitle": "Equations, functions and analytic geometry at exam level.",
+					"subject": "Mathematics",
+					"grade": "Grades 10–12",
+					"instructor": "Ustad Najibullah Shinwari"
+				},
+				"mth-trigonometry": {
+					"title": "Trigonometry for Kankor",
+					"subtitle": "Unit circle, identities and exam-level trigonometric problem solving.",
+					"subject": "Mathematics",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Farid Ahmad Sharifi"
+				},
+				"sci-physics-mechanics": {
+					"title": "Physics: Mechanics & Motion",
+					"subtitle": "Newton's laws, motion, work and energy with the questions Kankor repeats most.",
+					"subject": "Physics",
+					"grade": "Grades 11–12",
+					"instructor": "Maryam Sadat Hashemi"
+				},
+				"sci-physics-electricity": {
+					"title": "Physics: Electricity & Magnetism",
+					"subtitle": "Circuits, electric fields, magnetism and induction, fully worked out.",
+					"subject": "Physics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Rahman Tokhi"
+				},
+				"sci-chem-organic": {
+					"title": "Chemistry: Organic & Hydrocarbons",
+					"subtitle": "Structure, naming and reactions of hydrocarbons with Kankor drills.",
+					"subject": "Chemistry",
+					"grade": "Grade 12",
+					"instructor": "Ustad Hasibullah Karimi"
+				},
+				"sci-chem-general": {
+					"title": "Chemistry: General, Solutions & Stoichiometry",
+					"subtitle": "Mole calculations, solutions and chemical equilibrium in practice.",
+					"subject": "Chemistry",
+					"grade": "Grade 11",
+					"instructor": "Shabana Nazari"
+				},
+				"sci-biology-cell-genetics": {
+					"title": "Biology: Cell & Genetics",
+					"subtitle": "Cells, division and Mendel's laws explained with simple diagrams.",
+					"subject": "Biology",
+					"grade": "Grades 11–12",
+					"instructor": "Dr. Nilofar Rahimi"
+				},
+				"sci-biology-human": {
+					"title": "Biology: Human Body",
+					"subtitle": "Circulatory, respiratory, digestive and nervous systems with exam-ready notes.",
+					"subject": "Biology",
+					"grade": "Grade 12",
+					"instructor": "Dr. Abdul Matin Lalzad"
+				},
+				"lng-dari-grammar": {
+					"title": "Dari: Grammar, Spelling & Reading",
+					"subtitle": "Grammar rules, literary devices and the reading-comprehension method.",
+					"subject": "Dari",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ahmad Zia Rahimi"
+				},
+				"lng-pashto-grammar": {
+					"title": "Pashto: Morphology, Syntax & Reading",
+					"subtitle": "Morphology, syntax, spelling and analysis of exam poetry and prose.",
+					"subject": "Pashto",
+					"grade": "Grade 12",
+					"instructor": "Ustad Mohammad Yaqoob Atak"
+				},
+				"lng-english-kankor": {
+					"title": "Kankor English: Grammar, Vocabulary & Reading",
+					"subtitle": "Tenses, high-frequency vocabulary and the reading technique for exam day.",
+					"subject": "English",
+					"grade": "Grades 10–12",
+					"instructor": "Tamana Rasouli"
+				},
+				"soc-history": {
+					"title": "Modern History of Afghanistan & the World",
+					"subtitle": "From Afghanistan's modern transformations to world events, on one clear timeline.",
+					"subject": "History",
+					"grade": "Grade 12",
+					"instructor": "Ustad Nasir Ahmad Fayeq"
+				},
+				"soc-geography": {
+					"title": "Geography of Afghanistan & the World",
+					"subtitle": "Climate, landforms and economic geography with map-reading practice.",
+					"subject": "Geography",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Shafiullah Zahid"
+				},
+				"soc-economics": {
+					"title": "Economics, National Budget & Civics",
+					"subtitle": "Core economics, how the national budget works and citizens' constitutional rights.",
+					"subject": "Economics & Civics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ramin Forutan"
+				},
+				"soc-islamic": {
+					"title": "Islamic Studies: Beliefs, Fiqh & Seerah",
+					"subtitle": "Beliefs, fiqh rulings and the Prophet's biography, following the official curriculum.",
+					"subject": "Islamic Studies",
+					"grade": "Grades 10–12",
+					"instructor": "Mawlawi Abdul Hadi Haqqani"
+				},
+				"exm-techniques": {
+					"title": "Test Techniques & Time Management",
+					"subtitle": "Elimination method, common traps and how to split time across four exam hours.",
+					"subject": "Kankor Preparation",
+					"grade": "All grades",
+					"instructor": "Elham Seddiqi"
+				},
+				"exm-past-papers": {
+					"title": "Past Kankor Paper Analysis",
+					"subtitle": "Ten years of Kankor papers broken down by subject and repetition pattern.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"exm-mock-exam": {
+					"title": "Full Kankor Mock Exam",
+					"subtitle": "A timed full simulation with answer card and a personal result breakdown.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-12": {
+					"title": "Complete Grade 12 Package",
+					"subtitle": "Every Grade 12 subject in one schedule and one order, all the way to exam day.",
+					"subject": "Grade Package",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-11": {
+					"title": "Complete Grade 11 Package",
+					"subtitle": "A solid Grade 11 foundation so the Kankor year starts without gaps.",
+					"subject": "Grade Package",
+					"grade": "Grade 11",
+					"instructor": "Abzar Kankor Learning Team"
+				}
+			},
+			"paths": {
+				"path-math-foundation": {
+					"title": "Kankor Mathematics Foundation",
+					"subtitle": "Three steps to master the subject that carries the most Kankor marks.",
+					"duration": "48 hours",
+					"steps": [
+						"Algebra & Geometry",
+						"Trigonometry",
+						"Limits & Derivatives"
+					]
+				},
+				"path-medical": {
+					"title": "Health Sciences & Medicine Track",
+					"subtitle": "Biology and chemistry, focused on the questions medical faculties ask.",
+					"duration": "58 hours",
+					"steps": ["Cell & Genetics", "Human Body", "Organic Chemistry"]
+				},
+				"path-engineering": {
+					"title": "Engineering & Technology Track",
+					"subtitle": "Physics and mathematics with the numeric problem solving engineering exams demand.",
+					"duration": "62 hours",
+					"steps": [
+						"Mechanics",
+						"Electricity & Magnetism",
+						"Algebra & Geometry"
+					]
+				},
+				"path-humanities": {
+					"title": "Social Sciences & Law Track",
+					"subtitle": "History, geography and economics, revised with a repeatable memory routine.",
+					"duration": "44 hours",
+					"steps": ["Modern History", "Geography", "Economics & Civics"]
+				},
+				"path-kankor-100": {
+					"title": "100 Days to Kankor",
+					"subtitle": "From technique to mock exam — a planned final three months.",
+					"duration": "36 hours",
+					"steps": ["Test Technique", "Past Paper Analysis", "Mock Exam"]
+				},
+				"path-grade-12": {
+					"title": "From Grade 11 to Kankor",
+					"subtitle": "Finish the Grade 11 foundation, then start Grade 12 with confidence.",
+					"duration": "70 hours",
+					"steps": ["Grade 11 Package", "Grade 12 Package", "Mock Exam"]
+				}
+			},
+			"labels": {
+				"course": "Course",
+				"allLevels": "All levels",
+				"team": "Abzar Kankor Learning Team"
+			}
+		}
 	}
 }

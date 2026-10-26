@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Apple, Play, Sparkles } from "lucide-react";
+import { Globe2, Play, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { clientEnv } from "@/lib/env/client-env";
+import { routes } from "@/lib/routes";
 import { useAboutMotion } from "./about-motion";
 
 export function AboutDownloadSection() {
@@ -30,7 +32,7 @@ export function AboutDownloadSection() {
 					variants={aboutMotion.card}
 				>
 					<div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
-						<Sparkles className="h-4 w-4" /> {t("download.title")}
+						<Sparkles className="h-4 w-4" /> {t("download.badge")}
 					</div>
 					<h2 className="text-3xl font-black leading-tight tracking-tight md:text-5xl">
 						{t("download.title")}
@@ -46,20 +48,14 @@ export function AboutDownloadSection() {
 						whileInView="show"
 						viewport={aboutMotion.viewport}
 					>
-						<motion.button
-							variants={aboutMotion.item}
-							className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-950 px-6 py-3.5 font-semibold text-white shadow-lg shadow-slate-950/20 transition-transform hover:-translate-y-0.5 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+						<Link
+							href={routes.courses.page()}
+							className="inline-flex items-center gap-2 rounded-2xl border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/20"
 						>
-							<Apple className="h-6 w-6" />
-							<div className="text-start">
-								<p className="text-[10px] leading-none text-white/55">
-									{t("download.stores.appStore.label")}
-								</p>
-								<p className="text-sm font-bold leading-tight">
-									{t("download.stores.appStore.name")}
-								</p>
-							</div>
-						</motion.button>
+							<Globe2 className="size-5" />
+
+							{t("download.webCta")}
+						</Link>
 						<motion.a
 							href={playStoreUrl}
 							target="_blank"

@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { cn } from "@/lib/utils";
 
-import type { HubCourseItem, LearningPathItem } from "./school-hub-data";
+import type { HubCourseItem, LearningPathItem } from "./course-hub-data";
 
 /* ──────────────────────────────────────────────────────────
    2. TECH & PROGRAMMING COURSE CARD — Front-end, Back-end, Coding
