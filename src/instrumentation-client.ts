@@ -5,12 +5,42 @@
 import * as Sentry from "@sentry/nextjs";
 import { resetDevCache } from "@/lib/pwa/reset-dev-cache";
 
+/**
+ * Turbopack keeps unhashed dev chunks in the browser, so a long-lived tab can
+ * end up running a module graph whose dependencies no longer exist and every
+ * navigation throws "module factory is not available". Reload once (bounded, so
+ * a persistent failure cannot loop) instead of asking the user to do it.
+ */
+function reloadOnceOnStaleChunk() {
+	if (typeof window === "undefined" || typeof sessionStorage === "undefined") {
+		return;
+	}
+
+	const KEY = "dev-stale-chunk-reloads";
+	const MAX = 3;
+
+	window.addEventListener("error", (event) => {
+		const message =
+			(event.error instanceof Error ? event.error.message : "") ||
+			event.message ||
+			"";
+		if (!message.includes("module factory is not available")) return;
+
+		const attempts = Number(sessionStorage.getItem(KEY) ?? "0");
+		if (attempts >= MAX) return;
+
+		sessionStorage.setItem(KEY, String(attempts + 1));
+		window.setTimeout(() => window.location.reload(), 300);
+	});
+}
+
 const isProd = process.env.NODE_ENV === "production";
 
 // Development only: front-run the app bundle so a stale service-worker cache
 // from an earlier production run can never serve outdated dev chunks.
 if (!isProd) {
 	resetDevCache().catch(() => {});
+	reloadOnceOnStaleChunk();
 }
 
 if (isProd) {
