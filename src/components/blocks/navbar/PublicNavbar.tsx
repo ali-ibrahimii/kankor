@@ -147,17 +147,8 @@ export async function PublicNavbar() {
 						<CoursesMegaMenu
 							key={link.href}
 							label={link.label}
-							eyebrow={schoolMenu("eyebrow")}
-							title={schoolMenu("title")}
-							description={schoolMenu("description")}
 							allLabel={schoolMenu("all")}
-							subjectsLabel={schoolMenu("subjects")}
-							gradesLabel={schoolMenu("gradesLabel")}
-							paths={schoolMenu.raw("paths") as string[]}
-							grades={schoolMenu.raw("grades") as string[]}
 							items={schoolMenuItems}
-							cardTitle={schoolMenu("cardTitle")}
-							cardText={schoolMenu("cardText")}
 							verifyLabel={schoolMenu("verify")}
 							classroomsLabel={schoolMenu("classrooms")}
 						/>

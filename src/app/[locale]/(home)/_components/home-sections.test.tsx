@@ -141,14 +141,7 @@ describe("Home Page Distinct Cards, Shelves, Partner Institutions & School Navba
 			<>
 				<CoursesMegaMenu
 					label="مکتب"
-					eyebrow={fa.landing.schoolMenu.eyebrow}
-					title={fa.landing.schoolMenu.title}
-					description={fa.landing.schoolMenu.description}
 					allLabel={fa.landing.schoolMenu.all}
-					subjectsLabel={fa.landing.schoolMenu.subjects}
-					gradesLabel={fa.landing.schoolMenu.gradesLabel}
-					paths={fa.landing.schoolMenu.paths}
-					grades={fa.landing.schoolMenu.grades}
 					items={[
 						{
 							key: "courses",
@@ -187,8 +180,6 @@ describe("Home Page Distinct Cards, Shelves, Partner Institutions & School Navba
 							href: "/roadmap",
 						},
 					]}
-					cardTitle={fa.landing.schoolMenu.cardTitle}
-					cardText={fa.landing.schoolMenu.cardText}
 					verifyLabel={fa.landing.schoolMenu.verify}
 					classroomsLabel={fa.landing.schoolMenu.classrooms}
 				/>
