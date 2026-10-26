@@ -13,7 +13,7 @@ import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import type { HubCourseItem } from "./school-hub-data";
+import type { HubCourseItem } from "./course-hub-data";
 
 export function FeaturedCoursesCarousel({
 	courses,

@@ -1,3 +1,31 @@
+// A dev or preview origin must never be served by a cached worker: Turbopack
+// keeps chunk URLs stable while their content changes, so a worker answering
+// from CacheStorage hands the browser an outdated module graph.
+const IS_DEV_HOST = /^(localhost|127\.0\.0\.1|\[::1\])$|(^|\.)e2b\.app$/.test(
+	self.location.hostname
+);
+
+if (IS_DEV_HOST) {
+	// Self-destruct: drop every bucket, then unregister this worker.
+	self.addEventListener("install", () => self.skipWaiting());
+	self.addEventListener("activate", (event) => {
+		event.waitUntil(
+			(async () => {
+				const names = await caches.keys();
+				await Promise.all(names.map((name) => caches.delete(name)));
+				await self.registration.unregister();
+				const controlled = await self.clients.matchAll({ type: "window" });
+				for (const client of controlled) client.navigate(client.url);
+			})()
+		);
+	});
+}
+
+// Production-only registration of the handlers below.
+const on = (type, handler) => {
+	if (!IS_DEV_HOST) self.addEventListener(type, handler);
+};
+
 // Bump this to invalidate every bucket from an earlier worker version.
 const CACHE_NAME = "abzarkankor-v2";
 
@@ -21,7 +49,7 @@ const PRECACHE_ASSETS = [
 ];
 
 // Install Event - Pre-cache essential resources
-self.addEventListener("install", (event) => {
+on("install", (event) => {
 	event.waitUntil(
 		caches
 			.open(CACHE_NAME)
@@ -33,7 +61,7 @@ self.addEventListener("install", (event) => {
 });
 
 // Activate Event - Clean up stale caches
-self.addEventListener("activate", (event) => {
+on("activate", (event) => {
 	event.waitUntil(
 		caches
 			.keys()
@@ -49,7 +77,7 @@ self.addEventListener("activate", (event) => {
 });
 
 // Fetch Event - Dynamic handling for offline fallback
-self.addEventListener("fetch", (event) => {
+on("fetch", (event) => {
 	// Skip non-GET requests or browser extension requests
 	if (
 		event.request.method !== "GET" ||
@@ -110,7 +138,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 // Push Notifications Listener
-self.addEventListener("push", (event) => {
+on("push", (event) => {
 	if (event.data) {
 		try {
 			const data = event.data.json();
@@ -143,7 +171,7 @@ self.addEventListener("push", (event) => {
 });
 
 // Notification Click Event Listener
-self.addEventListener("notificationclick", (event) => {
+on("notificationclick", (event) => {
 	event.notification.close();
 	const targetUrl = event.notification.data?.url || "/";
 

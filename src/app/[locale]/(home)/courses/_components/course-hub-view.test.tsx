@@ -5,8 +5,8 @@ import { describe, expect, it, vi } from "vitest";
 
 import faMessages from "@/messages/fa.json";
 
-import { getSchoolHubData } from "./school-hub-data";
-import { SchoolHubView } from "./school-hub-view";
+import { getSchoolHubData } from "./course-hub-data";
+import { SchoolHubView } from "./course-hub-view";
 
 vi.mock("@/i18n/navigation", () => ({
 	Link: ({ href, children }: { href: string; children: ReactNode }) => (

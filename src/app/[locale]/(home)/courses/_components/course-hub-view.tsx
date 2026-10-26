@@ -25,19 +25,18 @@ import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-
-import { FeaturedCoursesCarousel } from "./featured-courses-carousel";
 import {
 	HubSkillCourseCard,
 	HubTechCourseCard,
 	LearningPathCard,
-} from "./school-hub-cards";
+} from "./course-hub-cards";
 import type {
 	HubCourseItem,
 	HubTrackId,
 	LearningPathItem,
 	SchoolHubData,
-} from "./school-hub-data";
+} from "./course-hub-data";
+import { FeaturedCoursesCarousel } from "./featured-courses-carousel";
 
 type ActiveTab = "all" | HubTrackId;
 type LevelFilter = "all" | "beginner" | "intermediate" | "advanced";
