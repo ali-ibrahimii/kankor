@@ -3983,24 +3983,20 @@
 		}
 	},
 	"schoolHub": {
-		"metaTitle": "Online Academy for Coding, Career Skills & School Subjects — Abzar Kankor",
-		"metaDescription": "Explore Front-end, Back-end, Programming Languages, Technical & Career Skills, Life Skills, High-School Subjects, and Live Online Classes.",
-		"heroBadge": "Abzar Kankor Academy · Learn, Build, Grow",
-		"heroTitle": "A Complete Learning Hub for Programming, Career Skills & School Subjects",
-		"heroSubtitle": "Explore curated courses by Abzar Kankor and its educators—from front-end and back-end development to digital career skills, personal growth, and school subjects.",
-		"searchPlaceholder": "Search courses, React, Python, Excel, communication, or math...",
+		"metaTitle": "Kankor Preparation & School Subjects — Abzar Kankor",
+		"metaDescription": "Abzar Kankor exam-prep courses: mathematics, physics, chemistry, biology, Dari, Pashto, English, Islamic studies, social sciences and test-taking skills, taught by experienced teachers.",
+		"heroBadge": "Abzar Kankor preparation centre",
+		"heroTitle": "From school subjects to Kankor, one clear path",
+		"heroSubtitle": "Curated courses from Abzar Kankor teachers for every Kankor subject, with drills, spaced revision and mock exams.",
+		"searchPlaceholder": "Search a subject: limits, genetics, history, test technique…",
 		"searchClear": "Clear",
 		"statCoursesLabel": "Structured Courses",
 		"statTracksLabel": "Learning Roadmaps",
 		"statFreeLabel": "Free to Start",
 		"tabsLabel": "Learning Tracks",
 		"tabAll": "All Tracks",
-		"tabFrontend": "Front-end",
-		"tabBackend": "Back-end & DB",
-		"tabLanguages": "Programming Languages",
-		"tabTechnical": "Technical Skills",
-		"tabLife": "Life Skills",
-		"tabSchool": "School & Kankor",
+		"tabLanguages": "Languages & literature",
+		"tabSchool": "Grade packages",
 		"levelAll": "All Levels",
 		"levelBeginner": "Beginner",
 		"levelIntermediate": "Intermediate",
@@ -4015,35 +4011,23 @@
 		"emptyDesc": "Try clearing filters or using a broader keyword to explore all learning tracks.",
 		"freeTag": "Free",
 		"creditsTag": "{credits} Credits",
-		"pathsBadge": "Guided Roadmaps",
-		"pathsTitle": "Not Sure Where to Begin? Follow a Step-by-Step Learning Path",
-		"pathsSubtitle": "Clear milestone sequences taking you from first fundamentals to real portfolio projects.",
+		"pathsBadge": "Preparation paths",
+		"pathsTitle": "Not sure where to start? Pick your preparation path",
+		"pathsSubtitle": "Each path sets the study order from foundations to the mock exam.",
 		"pathExploreBtn": "View Path Courses",
-		"pathCoursesCount": "{count} Structured Courses",
-		"frontendBadge": "Modern Web Interfaces",
-		"frontendTitle": "Front-end Web Development & UI Engineering",
-		"frontendSubtitle": "Build fast, accessible, responsive apps with HTML5, CSS3, Tailwind, React 19, and Next.js.",
-		"backendBadge": "Servers, APIs & Data",
-		"backendTitle": "Back-end Engineering, Databases & Cloud",
-		"backendSubtitle": "Architect secure APIs and relational schemas with Node.js, Python, PostgreSQL, and Docker.",
-		"languagesBadge": "Core Coding & Mobile",
-		"languagesTitle": "Programming Languages, Algorithms & Mobile Apps",
-		"languagesSubtitle": "Master problem-solving in Python, JavaScript, TypeScript, C++, and Flutter.",
-		"technicalBadge": "Career & Digital Tools",
-		"technicalTitle": "Technical, Digital & Freelancing Skills",
-		"technicalSubtitle": "Applied AI workflows, advanced Excel, graphic design, and remote career readiness.",
-		"lifeBadge": "Personal Growth",
-		"lifeTitle": "Life Skills, Communication & Personal Effectiveness",
-		"lifeSubtitle": "Time management, public speaking, financial literacy, career English, and critical thinking.",
-		"schoolBadge": "Curriculum & Exam Prep",
-		"schoolTitle": "High-School Curriculum & Kankor Preparation",
-		"schoolSubtitle": "Clear conceptual teaching and rapid test strategies across core school subjects.",
+		"pathCoursesCount": "{count} courses",
+		"languagesBadge": "Languages & literature",
+		"languagesTitle": "Dari, Pashto and English",
+		"languagesSubtitle": "Grammar, literary devices, vocabulary and reading-comprehension technique.",
+		"schoolBadge": "Grade packages",
+		"schoolTitle": "Complete Grade 11 and Grade 12 programme",
+		"schoolSubtitle": "Every subject of a grade in one path and one order, up to Kankor day.",
 		"lessonsUnit": "{count} lessons",
 		"hoursUnit": "{count} hrs",
 		"startCourseBtn": "Explore & Start Learning",
-		"hostCtaBadge": "For Teachers, Schools & Universities",
-		"hostCtaTitle": "Are you a teacher or professor? Share your course on Abzar Kankor",
-		"hostCtaDesc": "Publish structured lessons for students to follow at their own pace. We welcome courses from Abzar Kankor educators, teachers, and professors.",
+		"hostCtaBadge": "For teachers, schools and study centres",
+		"hostCtaTitle": "Are you a teacher? Publish your course on Abzar Kankor",
+		"hostCtaDesc": "Publish structured lessons so students learn at their own pace and arrive ready for Kankor.",
 		"hostCtaPrimary": "Register as an instructor",
 		"hostCtaSecondary": "Verify a Certificate",
 		"statFeaturedLabel": "Featured Courses",
@@ -4060,6 +4044,226 @@
 		"pathSequenceEyebrow": "Courses in this roadmap",
 		"pathSequenceSubtitle": "Follow these courses in order to build your skills step by step.",
 		"pathStepLabel": "Step {number}",
-		"pathCloseBtn": "Close roadmap"
+		"pathCloseBtn": "Close roadmap",
+		"tabMath": "Mathematics",
+		"tabScience": "Natural sciences",
+		"tabSocial": "Social studies",
+		"tabExam": "Exam skills",
+		"mathBadge": "Kankor maths foundation",
+		"mathTitle": "Mathematics for Kankor",
+		"mathSubtitle": "From algebra and geometry to trigonometry, limits and derivatives, at exam level.",
+		"scienceBadge": "Natural sciences",
+		"scienceTitle": "Physics, chemistry and biology",
+		"scienceSubtitle": "Concepts and numeric problems built around the questions Kankor repeats.",
+		"socialBadge": "Social & Islamic studies",
+		"socialTitle": "History, geography, economics and Islamic studies",
+		"socialSubtitle": "Memory-heavy subjects organised with timelines, maps and a revision routine.",
+		"examBadge": "Exam readiness",
+		"examTitle": "Test technique and mock exams",
+		"examSubtitle": "Elimination method, time management and a full simulation of exam day."
+	},
+	"content": {
+		"schoolHub": {
+			"courses": {
+				"mth-calculus-12": {
+					"title": "Grade 12 Mathematics: Limits, Derivatives & Integrals",
+					"subtitle": "Every Grade 12 chapter, rebuilt around solved Kankor questions.",
+					"subject": "Mathematics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Basir Niazi"
+				},
+				"mth-algebra-geometry": {
+					"title": "Algebra & Geometry for Kankor",
+					"subtitle": "Equations, functions and analytic geometry at exam level.",
+					"subject": "Mathematics",
+					"grade": "Grades 10–12",
+					"instructor": "Ustad Najibullah Shinwari"
+				},
+				"mth-trigonometry": {
+					"title": "Trigonometry for Kankor",
+					"subtitle": "Unit circle, identities and exam-level trigonometric problem solving.",
+					"subject": "Mathematics",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Farid Ahmad Sharifi"
+				},
+				"sci-physics-mechanics": {
+					"title": "Physics: Mechanics & Motion",
+					"subtitle": "Newton's laws, motion, work and energy with the questions Kankor repeats most.",
+					"subject": "Physics",
+					"grade": "Grades 11–12",
+					"instructor": "Maryam Sadat Hashemi"
+				},
+				"sci-physics-electricity": {
+					"title": "Physics: Electricity & Magnetism",
+					"subtitle": "Circuits, electric fields, magnetism and induction, fully worked out.",
+					"subject": "Physics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Rahman Tokhi"
+				},
+				"sci-chem-organic": {
+					"title": "Chemistry: Organic & Hydrocarbons",
+					"subtitle": "Structure, naming and reactions of hydrocarbons with Kankor drills.",
+					"subject": "Chemistry",
+					"grade": "Grade 12",
+					"instructor": "Ustad Hasibullah Karimi"
+				},
+				"sci-chem-general": {
+					"title": "Chemistry: General, Solutions & Stoichiometry",
+					"subtitle": "Mole calculations, solutions and chemical equilibrium in practice.",
+					"subject": "Chemistry",
+					"grade": "Grade 11",
+					"instructor": "Shabana Nazari"
+				},
+				"sci-biology-cell-genetics": {
+					"title": "Biology: Cell & Genetics",
+					"subtitle": "Cells, division and Mendel's laws explained with simple diagrams.",
+					"subject": "Biology",
+					"grade": "Grades 11–12",
+					"instructor": "Dr. Nilofar Rahimi"
+				},
+				"sci-biology-human": {
+					"title": "Biology: Human Body",
+					"subtitle": "Circulatory, respiratory, digestive and nervous systems with exam-ready notes.",
+					"subject": "Biology",
+					"grade": "Grade 12",
+					"instructor": "Dr. Abdul Matin Lalzad"
+				},
+				"lng-dari-grammar": {
+					"title": "Dari: Grammar, Spelling & Reading",
+					"subtitle": "Grammar rules, literary devices and the reading-comprehension method.",
+					"subject": "Dari",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ahmad Zia Rahimi"
+				},
+				"lng-pashto-grammar": {
+					"title": "Pashto: Morphology, Syntax & Reading",
+					"subtitle": "Morphology, syntax, spelling and analysis of exam poetry and prose.",
+					"subject": "Pashto",
+					"grade": "Grade 12",
+					"instructor": "Ustad Mohammad Yaqoob Atak"
+				},
+				"lng-english-kankor": {
+					"title": "Kankor English: Grammar, Vocabulary & Reading",
+					"subtitle": "Tenses, high-frequency vocabulary and the reading technique for exam day.",
+					"subject": "English",
+					"grade": "Grades 10–12",
+					"instructor": "Tamana Rasouli"
+				},
+				"soc-history": {
+					"title": "Modern History of Afghanistan & the World",
+					"subtitle": "From Afghanistan's modern transformations to world events, on one clear timeline.",
+					"subject": "History",
+					"grade": "Grade 12",
+					"instructor": "Ustad Nasir Ahmad Fayeq"
+				},
+				"soc-geography": {
+					"title": "Geography of Afghanistan & the World",
+					"subtitle": "Climate, landforms and economic geography with map-reading practice.",
+					"subject": "Geography",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Shafiullah Zahid"
+				},
+				"soc-economics": {
+					"title": "Economics, National Budget & Civics",
+					"subtitle": "Core economics, how the national budget works and citizens' constitutional rights.",
+					"subject": "Economics & Civics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ramin Forutan"
+				},
+				"soc-islamic": {
+					"title": "Islamic Studies: Beliefs, Fiqh & Seerah",
+					"subtitle": "Beliefs, fiqh rulings and the Prophet's biography, following the official curriculum.",
+					"subject": "Islamic Studies",
+					"grade": "Grades 10–12",
+					"instructor": "Mawlawi Abdul Hadi Haqqani"
+				},
+				"exm-techniques": {
+					"title": "Test Techniques & Time Management",
+					"subtitle": "Elimination method, common traps and how to split time across four exam hours.",
+					"subject": "Kankor Preparation",
+					"grade": "All grades",
+					"instructor": "Elham Seddiqi"
+				},
+				"exm-past-papers": {
+					"title": "Past Kankor Paper Analysis",
+					"subtitle": "Ten years of Kankor papers broken down by subject and repetition pattern.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"exm-mock-exam": {
+					"title": "Full Kankor Mock Exam",
+					"subtitle": "A timed full simulation with answer card and a personal result breakdown.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-12": {
+					"title": "Complete Grade 12 Package",
+					"subtitle": "Every Grade 12 subject in one schedule and one order, all the way to exam day.",
+					"subject": "Grade Package",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-11": {
+					"title": "Complete Grade 11 Package",
+					"subtitle": "A solid Grade 11 foundation so the Kankor year starts without gaps.",
+					"subject": "Grade Package",
+					"grade": "Grade 11",
+					"instructor": "Abzar Kankor Learning Team"
+				}
+			},
+			"paths": {
+				"path-math-foundation": {
+					"title": "Kankor Mathematics Foundation",
+					"subtitle": "Three steps to master the subject that carries the most Kankor marks.",
+					"duration": "48 hours",
+					"steps": [
+						"Algebra & Geometry",
+						"Trigonometry",
+						"Limits & Derivatives"
+					]
+				},
+				"path-medical": {
+					"title": "Health Sciences & Medicine Track",
+					"subtitle": "Biology and chemistry, focused on the questions medical faculties ask.",
+					"duration": "58 hours",
+					"steps": ["Cell & Genetics", "Human Body", "Organic Chemistry"]
+				},
+				"path-engineering": {
+					"title": "Engineering & Technology Track",
+					"subtitle": "Physics and mathematics with the numeric problem solving engineering exams demand.",
+					"duration": "62 hours",
+					"steps": [
+						"Mechanics",
+						"Electricity & Magnetism",
+						"Algebra & Geometry"
+					]
+				},
+				"path-humanities": {
+					"title": "Social Sciences & Law Track",
+					"subtitle": "History, geography and economics, revised with a repeatable memory routine.",
+					"duration": "44 hours",
+					"steps": ["Modern History", "Geography", "Economics & Civics"]
+				},
+				"path-kankor-100": {
+					"title": "100 Days to Kankor",
+					"subtitle": "From technique to mock exam — a planned final three months.",
+					"duration": "36 hours",
+					"steps": ["Test Technique", "Past Paper Analysis", "Mock Exam"]
+				},
+				"path-grade-12": {
+					"title": "From Grade 11 to Kankor",
+					"subtitle": "Finish the Grade 11 foundation, then start Grade 12 with confidence.",
+					"duration": "70 hours",
+					"steps": ["Grade 11 Package", "Grade 12 Package", "Mock Exam"]
+				}
+			},
+			"labels": {
+				"course": "Course",
+				"allLevels": "All levels",
+				"team": "Abzar Kankor Learning Team"
+			}
+		}
 	}
 }

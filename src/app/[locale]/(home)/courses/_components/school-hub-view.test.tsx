@@ -28,12 +28,12 @@ describe("SchoolHubView (/courses)", () => {
 		expect(container).not.toHaveTextContent(/کلاس زنده|کلاس‌های زنده|صنف زنده/);
 
 		for (const title of [
-			/برنامه‌نویسی فرانت‌اند/,
-			/برنامه‌نویسی بک‌اند/,
-			/زبان‌های برنامه‌نویسی/,
-			/مهارت‌های فنی، دیجیتال و درآمدزا/,
-			/مهارت‌های زندگی/,
-			/دروس مکتب و آمادگی امتحان کانکور/,
+			/ریاضی برای کانکور/,
+			/فزیک، کیمیا و بیولوژی/,
+			/دری، پشتو و انگلیسی/,
+			/تاریخ، جغرافیه، اقتصاد و اسلامیات/,
+			/مهارت تست‌زنی و آزمون آزمایشی/,
+			/برنامهٔ کامل صنف یازدهم و دوازدهم/,
 		]) {
 			expect(
 				screen.getByRole("heading", { level: 2, name: title })
@@ -83,10 +83,30 @@ describe("SchoolHubView (/courses)", () => {
 			</NextIntlClientProvider>
 		);
 
-		const searchInput = screen.getByPlaceholderText(/جستجوی دوره/);
-		fireEvent.change(searchInput, { target: { value: "PostgreSQL" } });
-		expect(
-			screen.getByText(/طراحی دیتابیس رابطه‌ای، SQL پیشرفته و PostgreSQL/)
-		).toBeInTheDocument();
+		const searchInput = screen.getByPlaceholderText(/جستجوی مضمون/);
+		fireEvent.change(searchInput, { target: { value: "جنتیک" } });
+		expect(screen.getAllByText(/بیولوژی: حجره و جنتیک/).length).toBeGreaterThan(
+			0
+		);
+	});
+
+	it("builds every course and path from the messages content namespace", async () => {
+		const data = await getSchoolHubData("fa");
+
+		expect(data.courses).toHaveLength(21);
+		expect(data.learningPaths).toHaveLength(6);
+		for (const course of data.courses) {
+			expect(course.title).not.toBe("");
+			expect(course.subtitle).not.toBe("");
+			expect(course.instructorName).not.toBe("");
+		}
+		for (const path of data.learningPaths) {
+			expect(path.courseIds).toHaveLength(path.coursesCount);
+			for (const courseId of path.courseIds) {
+				expect(data.courses.some((course) => course.id === courseId)).toBe(
+					true
+				);
+			}
+		}
 	});
 });

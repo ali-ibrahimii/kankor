@@ -3,17 +3,18 @@
 import {
 	Award,
 	BookOpen,
-	Code2,
 	Compass,
-	Cpu,
-	HeartHandshake,
-	Laptop,
+	FlaskConical,
+	GraduationCap,
+	Landmark,
+	Languages,
 	Layers,
 	RotateCcw,
 	Search,
-	Server,
+	Sigma,
 	SlidersHorizontal,
 	Sparkles,
+	Target,
 	X,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -42,49 +43,6 @@ type ActiveTab = "all" | HubTrackId;
 type LevelFilter = "all" | "beginner" | "intermediate" | "advanced";
 type SortOption = "recommended" | "popular" | "rating";
 
-const PATH_COURSE_ORDER: Record<string, string[][]> = {
-	"path-frontend": [
-		["html", "css", "responsive"],
-		["ui/ux", "figma", "design system"],
-		["react", "next.js"],
-		["testing", "performance", "pwa"],
-	],
-	"path-backend": [
-		["linux", "git", "docker"],
-		["node.js", "django", "fastapi", "python"],
-		["postgres", "sql", "database", "دیتابیس"],
-		["auth", "security", "امنیت"],
-	],
-	"path-programming": [
-		["python", "پایتون"],
-		["javascript", "typescript", "جاوااسکریپت"],
-		["c++", "algorithm", "الگوریتم"],
-		["flutter", "dart", "mobile"],
-	],
-	"path-career-life": [
-		["ai", "هوش مصنوعی"],
-		["excel", "اکسل"],
-		["graphic", "figma", "گرافیک"],
-		["freelanc", "فریلنس"],
-		["time", "زمان"],
-		["speaking", "فن بیان"],
-		["financial", "finance", "سواد مالی"],
-		["critical", "تفکر نقاد"],
-	],
-	"path-life-skills": [
-		["time", "زمان"],
-		["speaking", "فن بیان"],
-		["financial", "finance", "سواد مالی"],
-		["critical", "تفکر نقاد"],
-	],
-	"path-school-curriculum": [
-		["math", "ریاضی"],
-		["physics", "فزیک"],
-		["chemistry", "کیمیا"],
-		["biology", "بیولوژی"],
-	],
-};
-
 function getCoursesForPath(
 	path: LearningPathItem,
 	courses: HubCourseItem[]
@@ -96,25 +54,8 @@ function getCoursesForPath(
 
 	if (orderedCourses.length === path.courseIds.length) return orderedCourses;
 
-	const relevantTracks =
-		path.id === "path-career-life"
-			? new Set<HubTrackId>(["technical", "life"])
-			: new Set<HubTrackId>([path.track]);
-	const orderHints = PATH_COURSE_ORDER[path.id] ?? [];
-
 	return courses
-		.filter((course) => relevantTracks.has(course.track))
-		.sort((a, b) => {
-			const getRank = (course: HubCourseItem) => {
-				const searchable =
-					`${course.id} ${course.title} ${course.subtitle} ${course.categoryLabel} ${course.tags.join(" ")}`.toLowerCase();
-				const rank = orderHints.findIndex((hints) =>
-					hints.some((hint) => searchable.includes(hint.toLowerCase()))
-				);
-				return rank === -1 ? orderHints.length : rank;
-			};
-			return getRank(a) - getRank(b) || a.title.localeCompare(b.title);
-		})
+		.filter((course) => course.track === path.track)
 		.slice(0, path.coursesCount);
 }
 export function SchoolHubView({
@@ -170,11 +111,11 @@ export function SchoolHubView({
 
 	const coursesByTrack = useMemo(() => {
 		const map: Record<HubTrackId, HubCourseItem[]> = {
-			frontend: [],
-			backend: [],
+			math: [],
+			science: [],
 			languages: [],
-			technical: [],
-			life: [],
+			social: [],
+			exam: [],
 			school: [],
 		};
 		for (const course of filteredCourses) {
@@ -217,34 +158,34 @@ export function SchoolHubView({
 	const trackTabs: { id: ActiveTab; label: string; icon: React.ReactNode }[] = [
 		{ id: "all", label: t("tabAll"), icon: <Layers className="size-3.5" /> },
 		{
-			id: "frontend",
-			label: t("tabFrontend"),
-			icon: <Laptop className="size-3.5" />,
+			id: "math",
+			label: t("tabMath"),
+			icon: <Sigma className="size-3.5" />,
 		},
 		{
-			id: "backend",
-			label: t("tabBackend"),
-			icon: <Server className="size-3.5" />,
+			id: "science",
+			label: t("tabScience"),
+			icon: <FlaskConical className="size-3.5" />,
 		},
 		{
 			id: "languages",
 			label: t("tabLanguages"),
-			icon: <Code2 className="size-3.5" />,
+			icon: <Languages className="size-3.5" />,
 		},
 		{
-			id: "technical",
-			label: t("tabTechnical"),
-			icon: <Cpu className="size-3.5" />,
+			id: "social",
+			label: t("tabSocial"),
+			icon: <Landmark className="size-3.5" />,
 		},
 		{
-			id: "life",
-			label: t("tabLife"),
-			icon: <HeartHandshake className="size-3.5" />,
+			id: "exam",
+			label: t("tabExam"),
+			icon: <Target className="size-3.5" />,
 		},
 		{
 			id: "school",
 			label: t("tabSchool"),
-			icon: <BookOpen className="size-3.5" />,
+			icon: <GraduationCap className="size-3.5" />,
 		},
 	];
 
@@ -257,18 +198,18 @@ export function SchoolHubView({
 		surfaceClass: string;
 	}[] = [
 		{
-			id: "frontend",
-			badge: t("frontendBadge"),
-			title: t("frontendTitle"),
-			subtitle: t("frontendSubtitle"),
+			id: "math",
+			badge: t("mathBadge"),
+			title: t("mathTitle"),
+			subtitle: t("mathSubtitle"),
 			variant: "tech",
 			surfaceClass: "bg-background",
 		},
 		{
-			id: "backend",
-			badge: t("backendBadge"),
-			title: t("backendTitle"),
-			subtitle: t("backendSubtitle"),
+			id: "science",
+			badge: t("scienceBadge"),
+			title: t("scienceTitle"),
+			subtitle: t("scienceSubtitle"),
 			variant: "tech",
 			surfaceClass: "bg-muted/25 border-y border-border/55",
 		},
@@ -281,18 +222,18 @@ export function SchoolHubView({
 			surfaceClass: "bg-background",
 		},
 		{
-			id: "technical",
-			badge: t("technicalBadge"),
-			title: t("technicalTitle"),
-			subtitle: t("technicalSubtitle"),
+			id: "social",
+			badge: t("socialBadge"),
+			title: t("socialTitle"),
+			subtitle: t("socialSubtitle"),
 			variant: "skill",
 			surfaceClass: "bg-muted/25 border-y border-border/55",
 		},
 		{
-			id: "life",
-			badge: t("lifeBadge"),
-			title: t("lifeTitle"),
-			subtitle: t("lifeSubtitle"),
+			id: "exam",
+			badge: t("examBadge"),
+			title: t("examTitle"),
+			subtitle: t("examSubtitle"),
 			variant: "skill",
 			surfaceClass: "bg-background",
 		},
