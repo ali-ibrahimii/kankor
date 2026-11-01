@@ -3457,6 +3457,48 @@ export type Database = {
 					},
 				];
 			};
+			image_assets: {
+				Row: {
+					created_at: string;
+					id: string;
+					mime_type: string;
+					original_filename: string;
+					owner_id: string;
+					scope: string;
+					size_bytes: number | null;
+					status: Database["public"]["Enums"]["course_asset_status"];
+					storage_key: string;
+					updated_at: string;
+					uploaded_by: string;
+				};
+				Insert: {
+					created_at?: string;
+					id?: string;
+					mime_type: string;
+					original_filename: string;
+					owner_id: string;
+					scope: string;
+					size_bytes?: number | null;
+					status?: Database["public"]["Enums"]["course_asset_status"];
+					storage_key: string;
+					updated_at?: string;
+					uploaded_by: string;
+				};
+				Update: {
+					created_at?: string;
+					id?: string;
+					mime_type?: string;
+					original_filename?: string;
+					owner_id?: string;
+					scope?: string;
+					size_bytes?: number | null;
+					status?: Database["public"]["Enums"]["course_asset_status"];
+					storage_key?: string;
+					updated_at?: string;
+					uploaded_by?: string;
+				};
+				Relationships: [];
+			};
 			leitners: {
 				Row: {
 					book_id: string | null;
@@ -5439,11 +5481,13 @@ export type Database = {
 			schools: {
 				Row: {
 					address: string | null;
+					cover_image_url: string | null;
 					admin_email: string | null;
 					created_at: string;
 					id: string;
 					name: string | null;
 					province_id: string | null;
+					logo_url: string | null;
 					status: Database["public"]["Enums"]["account_status"];
 					suspended_by_agency_id: string | null;
 					suspension_reason: string | null;
@@ -5452,11 +5496,13 @@ export type Database = {
 				};
 				Insert: {
 					address?: string | null;
+					cover_image_url?: string | null;
 					admin_email?: string | null;
 					created_at?: string;
 					id?: string;
 					name?: string | null;
 					province_id?: string | null;
+					logo_url?: string | null;
 					status?: Database["public"]["Enums"]["account_status"];
 					suspended_by_agency_id?: string | null;
 					suspension_reason?: string | null;
@@ -5465,11 +5511,13 @@ export type Database = {
 				};
 				Update: {
 					address?: string | null;
+					cover_image_url?: string | null;
 					admin_email?: string | null;
 					created_at?: string;
 					id?: string;
 					name?: string | null;
 					province_id?: string | null;
+					logo_url?: string | null;
 					status?: Database["public"]["Enums"]["account_status"];
 					suspended_by_agency_id?: string | null;
 					suspension_reason?: string | null;
@@ -6592,11 +6640,13 @@ export type Database = {
 				};
 				Returns: {
 					address: string | null;
+					cover_image_url: string | null;
 					admin_email: string | null;
 					created_at: string;
 					id: string;
 					name: string | null;
 					province_id: string | null;
+					logo_url: string | null;
 					status: Database["public"]["Enums"]["account_status"];
 					suspended_by_agency_id: string | null;
 					suspension_reason: string | null;
@@ -6620,11 +6670,13 @@ export type Database = {
 				};
 				Returns: {
 					address: string | null;
+					cover_image_url: string | null;
 					admin_email: string | null;
 					created_at: string;
 					id: string;
 					name: string | null;
 					province_id: string | null;
+					logo_url: string | null;
 					status: Database["public"]["Enums"]["account_status"];
 					suspended_by_agency_id: string | null;
 					suspension_reason: string | null;
@@ -6637,6 +6689,10 @@ export type Database = {
 					isOneToOne: true;
 					isSetofReturn: false;
 				};
+			};
+			can_manage_image_owner: {
+				Args: { p_owner_id: string; p_scope: string; p_user_id?: string };
+				Returns: boolean;
 			};
 			attach_certificate_pdf: {
 				Args: { p_certificate_id: string; p_pdf_storage_key: string };

@@ -269,7 +269,13 @@
 			"earnings": "درآمد",
 			"discounts": "تخفیف‌ها",
 			"settings": "تنظیمات",
-			"notifications": "اعلان‌ها"
+			"notifications": "اعلان‌ها",
+			"branding": {
+				"title": "برند مکتب",
+				"description": "عکس کاور و لوگوی مکتب در Cloudflare ذخیره می‌شوند و روی کارت‌ها و صفحهٔ عمومی مکتب نمایش داده می‌شوند.",
+				"coverLabel": "عکس کاور",
+				"logoLabel": "لوگو"
+			}
 		},
 		"agency": {
 			"roleLabel": "ایجنسی",
@@ -1605,7 +1611,8 @@
 			"description": "جزئیات پایه کورس خود را به‌روزرسانی کنید.",
 			"save": "ذخیره تغییرات",
 			"saving": "در حال ذخیره…",
-			"saved": "جزئیات کورس به‌روزرسانی شد."
+			"saved": "جزئیات کورس به‌روزرسانی شد.",
+			"coverLabel": "تصویر کارت کورس (Cloudflare)"
 		},
 		"header": {
 			"back": "بازگشت به کورس‌ها",
@@ -1728,6 +1735,21 @@
 				"assignment": "تکلیف"
 			}
 		}
+	},
+	"imageUpload": {
+		"dropHint": "برای بارگذاری تصویر کلیک کن یا فایل را اینجا رها کن",
+		"preview": "پیش‌نمایش تصویر",
+		"formats": "JPG، PNG، WebP یا AVIF تا {max}",
+		"upload": "بارگذاری تصویر",
+		"replace": "تغییر تصویر",
+		"remove": "حذف تصویر",
+		"uploaded": "تصویر در Cloudflare ذخیره شد",
+		"removed": "تصویر حذف شد",
+		"uploadFailed": "بارگذاری تصویر ناکام شد",
+		"finalizing": "در حال ثبت…",
+		"invalidType": "این نوع فایل پشتیبانی نمی‌شود",
+		"tooLarge": "حجم تصویر بیشتر از {max} است",
+		"storedInR2": "ذخیره‌شده در Cloudflare R2"
 	},
 	"flashcardBuilder": {
 		"meta": {

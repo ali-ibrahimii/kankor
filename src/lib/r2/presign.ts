@@ -78,3 +78,27 @@ export async function deleteObject(key: string): Promise<void> {
 		new DeleteObjectCommand({ Bucket: r2Bucket(), Key: key })
 	);
 }
+
+export interface ObjectStream {
+	body: ReadableStream<Uint8Array> | null;
+	contentType: string | null;
+	contentLength: number | null;
+	etag: string | null;
+}
+
+/**
+ * Streams an object out of R2 without buffering it in memory — used by the
+ * `/api/media` route that serves public images when no R2 custom domain is
+ * configured.
+ */
+export async function getObjectStream(key: string): Promise<ObjectStream> {
+	const result = await getR2Client().send(
+		new GetObjectCommand({ Bucket: r2Bucket(), Key: key })
+	);
+	return {
+		body: (result.Body as ReadableStream<Uint8Array> | undefined) ?? null,
+		contentType: result.ContentType ?? null,
+		contentLength: result.ContentLength ?? null,
+		etag: result.ETag ?? null,
+	};
+}

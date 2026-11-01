@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
 import { RelatedResourcesSelector } from "@/components/blocks/RelatedResourcesSelector";
+import { ImageUploadField } from "@/components/blocks/shared/image-upload-field";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 
@@ -221,6 +222,27 @@ export function NewCourseDialog({
 						</div>
 					) : (
 						<div className="mt-4 space-y-4">
+							{/* Cover (stored in Cloudflare R2) */}
+							{isEditMode && courseId ? (
+								<div className="space-y-1.5">
+									<Label>{t("editCourse.coverLabel")}</Label>
+									<ImageUploadField
+										scope="course"
+										ownerId={courseId}
+										target="cover"
+										value={values.cover_image_url}
+										onUploaded={({ url }) => {
+											patch("cover_image_url", url);
+											router.refresh();
+										}}
+										onRemoved={() => {
+											patch("cover_image_url", null);
+											router.refresh();
+										}}
+									/>
+								</div>
+							) : null}
+
 							{/* Title */}
 							<div className="space-y-1.5">
 								<Label htmlFor="cb-title">
