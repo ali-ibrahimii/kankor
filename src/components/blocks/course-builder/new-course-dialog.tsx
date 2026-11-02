@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { RelatedResourcesSelector } from "@/components/blocks/RelatedResourcesSelector";
 import { ImageUploadField } from "@/components/blocks/shared/image-upload-field";
 import { Button } from "@/components/ui/button";
+import { Dropzone } from "@/components/ui/dropzone";
 import { createClient } from "@/lib/supabase/client";
 
 interface FormOption {
@@ -42,6 +43,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { normalizedLocale } from "@/i18n";
+import { IMAGE_ACCEPT, IMAGE_LIMITS } from "@/lib/r2/public-images";
+import {
+	formatImageLimit,
+	uploadImageFile,
+	validateImageFile,
+} from "@/lib/r2/upload-client";
 import { createCourse, getCourseForEdit, updateCourse } from "./actions";
 import type { NewCourseFormValues } from "./types";
 
@@ -92,6 +99,12 @@ export function NewCourseDialog({
 	const isEditMode = !!courseId;
 	const [isPending, setIsPending] = React.useState(false);
 	const [isLoadingDetails, setIsLoadingDetails] = React.useState(isEditMode);
+	/** Create mode: the cover is uploaded right after the course row exists. */
+	const [pendingCover, setPendingCover] = React.useState<File | null>(null);
+	const [pendingCoverPreview, setPendingCoverPreview] = React.useState<
+		string | null
+	>(null);
+	const [isUploadingCover, setIsUploadingCover] = React.useState(false);
 
 	const client = createClient();
 
@@ -150,6 +163,57 @@ export function NewCourseDialog({
 		setValues((prev) => ({ ...prev, [key]: value }));
 	}
 
+	React.useEffect(() => {
+		if (!pendingCover) {
+			setPendingCoverPreview(null);
+			return;
+		}
+		const url = URL.createObjectURL(pendingCover);
+		setPendingCoverPreview(url);
+		return () => URL.revokeObjectURL(url);
+	}, [pendingCover]);
+
+	function handlePendingCover(files: File[]) {
+		const file = files[0];
+		if (!file) return;
+		const invalid = validateImageFile(file);
+		if (invalid) {
+			toast.error(
+				invalid === "invalidType"
+					? t("newCourse.coverInvalidType")
+					: t("newCourse.coverTooLarge", { max: formatImageLimit() })
+			);
+			return;
+		}
+		setPendingCover(file);
+	}
+
+	/**
+	 * Pushes the cover chosen before the course existed into Cloudflare R2.
+	 * The course is already created at this point, so a failure here must not
+	 * lose the course: it is reported and the builder still opens.
+	 */
+	async function uploadPendingCover(courseId: string) {
+		if (!pendingCover) return;
+		setIsUploadingCover(true);
+		try {
+			await uploadImageFile({
+				scope: "course",
+				ownerId: courseId,
+				file: pendingCover,
+				target: "cover",
+			});
+			setPendingCover(null);
+			toast.success(t("newCourse.coverUploaded"));
+		} catch (error) {
+			toast.error(
+				error instanceof Error ? error.message : t("newCourse.coverFailed")
+			);
+		} finally {
+			setIsUploadingCover(false);
+		}
+	}
+
 	// Load fresh details every time the edit dialog opens.
 	React.useEffect(() => {
 		if (!open || !courseId) return;
@@ -194,6 +258,7 @@ export function NewCourseDialog({
 				toast.error(result.error);
 				return;
 			}
+			await uploadPendingCover(result.data.courseId);
 			onOpenChange(false);
 			router.push(`${basePath}/courses/new/${result.data.courseId}`);
 		} finally {
@@ -222,6 +287,47 @@ export function NewCourseDialog({
 						</div>
 					) : (
 						<div className="mt-4 space-y-4">
+							{/* Cover chosen before the course exists — uploaded to R2 right
+							    after creation (see uploadPendingCover). */}
+							{!isEditMode ? (
+								<div className="space-y-1.5">
+									<Label>{t("newCourse.coverLabel")}</Label>
+									<Dropzone
+										accept={IMAGE_ACCEPT}
+										disabled={isPending || isUploadingCover}
+										onFilesSelected={handlePendingCover}
+										className="relative aspect-video overflow-hidden rounded-2xl border border-dashed border-border bg-muted/30 hover:border-primary/50"
+									>
+										{pendingCoverPreview ? (
+											// biome-ignore lint/performance/noImgElement: local blob preview
+											<img
+												src={pendingCoverPreview}
+												alt={t("newCourse.coverLabel")}
+												className="size-full object-cover"
+											/>
+										) : (
+											<div className="flex h-full flex-col items-center justify-center gap-1.5 p-3 text-center">
+												<p className="text-[11px] font-bold text-muted-foreground">
+													{t("newCourse.coverHint")}
+												</p>
+												<p className="text-[10px] text-muted-foreground/70">
+													{t("newCourse.coverFormats", {
+														max: Math.round(
+															IMAGE_LIMITS.maxSizeBytes / 1024 / 1024
+														),
+													})}
+												</p>
+											</div>
+										)}
+									</Dropzone>
+									{pendingCover ? (
+										<p className="text-[10px] text-muted-foreground">
+											{pendingCover.name}
+										</p>
+									) : null}
+								</div>
+							) : null}
+
 							{/* Cover (stored in Cloudflare R2) */}
 							{isEditMode && courseId ? (
 								<div className="space-y-1.5">

@@ -1,8 +1,14 @@
 "use server";
 
+import { serverEnv } from "@/lib/env/server-env";
 import { createClient } from "@/lib/supabase/server";
 import { isR2Configured } from "./client";
-import { createUploadUrl, deleteObject, headObject } from "./presign";
+import {
+	createUploadUrl,
+	deleteObject,
+	headObject,
+	listBucketObjects,
+} from "./presign";
 import {
 	buildImageKey,
 	IMAGE_LIMITS,
@@ -10,6 +16,7 @@ import {
 	isAllowedImageMimeType,
 	isAllowedImageSize,
 	isImageScope,
+	publicImageHost,
 	publicImageUrl,
 } from "./public-images";
 
@@ -343,4 +350,95 @@ export async function listOwnerImages(
 	});
 
 	return { success: true, data: images };
+}
+
+// ─── 5. Diagnostics ─────────────────────────────────────────────────────────
+//
+// Answers the only question that matters when covers do not appear: "is this
+// deployment actually pointed at the bucket, and does a presigned PUT reach
+// it?" Exposed as JSON at `GET /api/storage/health` (admin only) so it can be
+// checked after a deploy without digging through logs.
+
+export interface ImageStorageStatus {
+	configured: boolean;
+	bucket: string | null;
+	endpoint: string | null;
+	publicHostname: string | null;
+	/** How cards are served right now. */
+	delivery: "cloudflare-cdn" | "same-origin-proxy";
+	/** `image_assets` reachable (i.e. the migration has been applied). */
+	tableReady: boolean;
+	listing: { ok: boolean; error?: string; sample?: string[] };
+	covers: Record<"courses" | "schools" | "avatars", number>;
+}
+
+export async function getImageStorageStatus(): Promise<ImageStorageStatus> {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) throw new Error("Unauthenticated");
+
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+	if (profile?.role !== "admin") throw new Error("Admin only");
+
+	const configured = isR2Configured();
+
+	// Table check: a `head` count is enough and costs nothing to read.
+	const { error: tableError } = await supabase
+		.from("image_assets")
+		.select("id", { count: "exact", head: true });
+	const tableReady = !tableError;
+
+	const delivery: ImageStorageStatus["delivery"] = publicImageHost()
+		? "cloudflare-cdn"
+		: "same-origin-proxy";
+
+	let listing: ImageStorageStatus["listing"] = { ok: false };
+	if (configured) {
+		try {
+			const objects = await listBucketObjects("", 5);
+			listing = { ok: true, sample: objects.map((object) => object.key) };
+		} catch (error) {
+			listing = {
+				ok: false,
+				error: error instanceof Error ? error.message : "List failed",
+			};
+		}
+	}
+
+	const covers = { courses: 0, schools: 0, avatars: 0 };
+	if (tableReady) {
+		const counts = await Promise.all(
+			(["course", "school", "profile"] as const).map((scope) =>
+				supabase
+					.from("image_assets")
+					.select("id", { count: "exact", head: true })
+					.eq("scope", scope)
+					.eq("status", "ready")
+			)
+		);
+		covers.courses = counts[0].count ?? 0;
+		covers.schools = counts[1].count ?? 0;
+		covers.avatars = counts[2].count ?? 0;
+	}
+
+	return {
+		configured,
+		bucket: serverEnv.r2.bucketName ?? null,
+		endpoint:
+			serverEnv.r2.endpoint ??
+			(serverEnv.r2.accountId
+				? `https://${serverEnv.r2.accountId}.r2.cloudflarestorage.com`
+				: null),
+		publicHostname: publicImageHost(),
+		delivery,
+		tableReady,
+		listing,
+		covers,
+	};
 }

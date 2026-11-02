@@ -1604,7 +1604,14 @@
 			"priceCredits": "قیمت (کریډیټ)",
 			"create": "جوړول او جوړیدل",
 			"visibility": "لیدوالیت",
-			"visibilityDescription": "آیا دا کورس به د ټولو لیدو وړ وي؟"
+			"visibilityDescription": "آیا دا کورس به د ټولو لیدو وړ وي؟",
+			"coverLabel": "د کورس کارت انځور",
+			"coverHint": "د کاور انځور پورته کولو لپاره کلیک وکړئ یا فایل دلته پرېږدئ",
+			"coverFormats": "JPG، PNG، WebP یا AVIF تر {max}MB — کورس جوړیدو وروسته په Cloudflare کې خوندي کیږي",
+			"coverInvalidType": "دا ډول فایل نه ملاتړ کیږي",
+			"coverTooLarge": "د انځور اندازه له {max} زیاته ده",
+			"coverUploaded": "د کورس انځور په Cloudflare کې خوندي شو",
+			"coverFailed": "کورس جوړ شو خو انځور پورته نشو — د سمون له پاڼې بیا هڅه وکړئ"
 		},
 		"editCourse": {
 			"title": "د کورس جزئیاتو ایډیټ",

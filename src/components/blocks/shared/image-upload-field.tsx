@@ -8,19 +8,13 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dropzone } from "@/components/ui/dropzone";
 import { Progress } from "@/components/ui/progress";
-import {
-	deleteImageAsset,
-	finalizeImageUpload,
-	type ImageTarget,
-	requestImageUpload,
-} from "@/lib/r2/image-actions";
+import { deleteImageAsset, type ImageTarget } from "@/lib/r2/image-actions";
 import {
 	IMAGE_ACCEPT,
 	IMAGE_LIMITS,
 	type ImageScope,
-	isAllowedImageMimeType,
-	isAllowedImageSize,
 } from "@/lib/r2/public-images";
+import { uploadImageFile, validateImageFile } from "@/lib/r2/upload-client";
 import { cn } from "@/lib/utils";
 
 /**
@@ -32,29 +26,6 @@ import { cn } from "@/lib/utils";
  * then have the server HEAD the object and publish it. Nothing is world
  * readable until step 3 confirms the size/type actually landed.
  */
-
-function uploadWithProgress(
-	url: string,
-	file: File,
-	onProgress: (percent: number) => void
-): Promise<void> {
-	return new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		xhr.open("PUT", url);
-		xhr.setRequestHeader("Content-Type", file.type);
-		xhr.upload.onprogress = (event) => {
-			if (event.lengthComputable) {
-				onProgress(Math.round((event.loaded / event.total) * 100));
-			}
-		};
-		xhr.onload = () => {
-			if (xhr.status >= 200 && xhr.status < 300) resolve();
-			else reject(new Error(`Upload failed (${xhr.status})`));
-		};
-		xhr.onerror = () => reject(new Error("Upload failed"));
-		xhr.send(file);
-	});
-}
 
 function formatMb(bytes: number): string {
 	return `${Math.round(bytes / (1024 * 1024))}MB`;
@@ -115,47 +86,30 @@ export function ImageUploadField({
 		const file = files[0];
 		if (!file) return;
 
-		if (!isAllowedImageMimeType(file.type)) {
-			toast.error(t("invalidType"));
-			return;
-		}
-		if (!isAllowedImageSize(file.size)) {
-			toast.error(t("tooLarge", { max: formatMb(IMAGE_LIMITS.maxSizeBytes) }));
+		const invalid = validateImageFile(file);
+		if (invalid) {
+			toast.error(
+				invalid === "invalidType"
+					? t("invalidType")
+					: t("tooLarge", { max: formatMb(IMAGE_LIMITS.maxSizeBytes) })
+			);
 			return;
 		}
 
 		setProgress(0);
 		try {
-			const requested = await requestImageUpload({
+			const uploaded = await uploadImageFile({
 				scope,
 				ownerId,
-				variant: target,
-				filename: file.name,
-				mimeType: file.type,
-				sizeBytes: file.size,
+				file,
+				target,
+				onProgress: setProgress,
+				onFinalizing: () => setIsFinalizing(true),
 			});
-			if (!requested.success) {
-				toast.error(requested.error);
-				setProgress(null);
-				return;
-			}
 
-			await uploadWithProgress(requested.data.uploadUrl, file, setProgress);
-			setProgress(100);
-			setIsFinalizing(true);
-
-			const finalized = await finalizeImageUpload(
-				requested.data.assetId,
-				target
-			);
-			if (!finalized.success) {
-				toast.error(finalized.error);
-				return;
-			}
-
-			setPreview(finalized.data.url);
-			setCurrentAssetId(finalized.data.assetId);
-			onUploaded(finalized.data);
+			setPreview(uploaded.url);
+			setCurrentAssetId(uploaded.assetId);
+			onUploaded(uploaded);
 			toast.success(t("uploaded"));
 		} catch (error) {
 			toast.error(error instanceof Error ? error.message : t("uploadFailed"));

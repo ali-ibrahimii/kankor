@@ -1604,7 +1604,14 @@
 			"priceCredits": "قیمت (اعتبار)",
 			"create": "ایجاد و ساخت",
 			"visibility": "دیدپذیر",
-			"visibilityDescription": "آیا همه این کورس را ببیند؟"
+			"visibilityDescription": "آیا همه این کورس را ببیند؟",
+			"coverLabel": "تصویر کارت کورس",
+			"coverHint": "برای بارگذاری تصویر کاور کلیک کن یا فایل را اینجا رها کن",
+			"coverFormats": "JPG، PNG، WebP یا AVIF تا {max}MB — پس از ساخت کورس در Cloudflare ذخیره می‌شود",
+			"coverInvalidType": "این نوع فایل پشتیبانی نمی‌شود",
+			"coverTooLarge": "حجم تصویر بیشتر از {max} است",
+			"coverUploaded": "تصویر کورس در Cloudflare ذخیره شد",
+			"coverFailed": "کورس ساخته شد ولی بارگذاری تصویر ناکام شد — از صفحهٔ ویرایش دوباره تلاش کن"
 		},
 		"editCourse": {
 			"title": "ویرایش جزئیات کورس",

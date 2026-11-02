@@ -2,6 +2,7 @@ import {
 	DeleteObjectCommand,
 	GetObjectCommand,
 	HeadObjectCommand,
+	ListObjectsV2Command,
 	PutObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -101,4 +102,40 @@ export async function getObjectStream(key: string): Promise<ObjectStream> {
 		contentLength: result.ContentLength ?? null,
 		etag: result.ETag ?? null,
 	};
+}
+
+export interface BucketObject {
+	key: string;
+	sizeBytes: number;
+	lastModified: string | null;
+}
+
+/**
+ * Lists objects under a prefix — used by the storage health check so an
+ * operator can confirm the credentials point at the right bucket and see
+ * whether `courses/`, `schools/`… already hold uploads.
+ */
+export async function listBucketObjects(
+	prefix: string,
+	maxKeys = 5
+): Promise<BucketObject[]> {
+	const result = await getR2Client().send(
+		new ListObjectsV2Command({
+			Bucket: r2Bucket(),
+			Prefix: prefix,
+			MaxKeys: maxKeys,
+		})
+	);
+
+	return (result.Contents ?? []).flatMap((item) =>
+		item.Key
+			? [
+					{
+						key: item.Key,
+						sizeBytes: item.Size ?? 0,
+						lastModified: item.LastModified?.toISOString() ?? null,
+					},
+				]
+			: []
+	);
 }
