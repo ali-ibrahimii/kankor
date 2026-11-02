@@ -36,6 +36,7 @@ import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import type { Tables } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
+import { splitDuration } from "./course-stats";
 
 // ============================================================
 // TYPES
@@ -53,6 +54,8 @@ export type CourseMeta = Tables<"courses"> & {
 	average_rating: number;
 	total_lessons?: number;
 	total_enrollments?: number;
+	/** Summed `lessons.estimated_duration_minutes` for the whole course. */
+	total_duration_minutes?: number;
 
 	instructor?: {
 		full_name: string | null;
@@ -352,26 +355,61 @@ function MetaItem({
 export function CourseMetaRow({
 	totalLessons,
 	durationHours,
+	durationMinutes,
 	enrollments,
 	rating,
 	className,
 }: {
 	totalLessons?: number;
+	/** Course-level estimate typed into the details form. */
 	durationHours?: number | null;
+	/** Real total of the lessons' own durations — preferred when present. */
+	durationMinutes?: number | null;
 	enrollments?: number;
 	rating?: number;
 	className?: string;
 }) {
+	const t = useTranslations("courses");
 	const locale = useLocale();
 
-	const formatNumber = (value: number) =>
-		new Intl.NumberFormat(locale).format(value);
+	// Persian/Pashto cards should read ۱۲, not 12 — format every number here
+	// and hand the formatted string to the message.
+	const num = (value: number) =>
+		new Intl.NumberFormat(locale).format(Math.round(value));
+
+	// Real lesson time wins over the manually entered hour estimate, so a
+	// course whose lessons were timed never shows a stale "8 ساعت".
+	const hasExactDuration = durationMinutes != null && durationMinutes > 0;
+	const hasHourEstimate = durationHours != null && durationHours > 0;
+	const hasLessons = totalLessons != null && totalLessons > 0;
+	const hasEnrollments = enrollments != null && enrollments > 0;
+
+	const durationLabel = React.useMemo(() => {
+		if (hasExactDuration) {
+			const { hours, minutes } = splitDuration(durationMinutes ?? 0);
+			if (hours === 0) return t("durationMinutes", { minutes: num(minutes) });
+			if (minutes === 0) return t("duration", { hours: num(hours) });
+			return t("durationHoursMinutes", {
+				hours: num(hours),
+				minutes: num(minutes),
+			});
+		}
+		if (hasHourEstimate) {
+			return t("duration", { hours: num(durationHours ?? 0) });
+		}
+		return null;
+		// `num` is derived from locale + t, both listed below.
+	}, [
+		durationHours,
+		durationMinutes,
+		hasExactDuration,
+		hasHourEstimate,
+		locale,
+		t,
+	]);
 
 	const hasData =
-		totalLessons != null ||
-		durationHours != null ||
-		enrollments != null ||
-		rating != null;
+		hasLessons || durationLabel != null || hasEnrollments || (rating ?? 0) > 0;
 
 	if (!hasData) return null;
 
@@ -379,16 +417,18 @@ export function CourseMetaRow({
 		<div
 			className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", className)}
 		>
-			{totalLessons != null && (
-				<MetaItem icon={BookOpen}>{formatNumber(totalLessons)}</MetaItem>
+			{hasLessons && (
+				<MetaItem icon={BookOpen}>
+					{t("lessons", { count: num(totalLessons ?? 0) })}
+				</MetaItem>
 			)}
 
-			{durationHours != null && (
-				<MetaItem icon={Clock3}>{formatNumber(durationHours)}h</MetaItem>
-			)}
+			{durationLabel && <MetaItem icon={Clock3}>{durationLabel}</MetaItem>}
 
-			{enrollments != null && (
-				<MetaItem icon={Users}>{formatNumber(enrollments)}</MetaItem>
+			{hasEnrollments && (
+				<MetaItem icon={Users}>
+					{t("enrollments", { count: num(enrollments ?? 0) })}
+				</MetaItem>
 			)}
 
 			{rating != null && rating > 0 && (
@@ -557,6 +597,7 @@ export function CatalogCourseCard({
 						<CourseMetaRow
 							totalLessons={course.total_lessons}
 							durationHours={course.estimated_duration_hours}
+							durationMinutes={course.total_duration_minutes}
 							enrollments={course.total_enrollments}
 							rating={course.average_rating}
 						/>
@@ -681,6 +722,7 @@ export function EnrolledCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						rating={course.average_rating}
 					/>
 				</div>
@@ -800,6 +842,7 @@ export function InstructorCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						enrollments={course.total_enrollments}
 						rating={course.average_rating}
 					/>
@@ -903,6 +946,7 @@ export function AdminCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						enrollments={course.total_enrollments}
 						rating={course.average_rating}
 					/>

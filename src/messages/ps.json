@@ -597,7 +597,9 @@
 		"agencySubtitle": "هغه کورسونه چې ستاسو نمایندګي یې مالکه او خپروونکې ده",
 		"published": "کورس خپور شو.",
 		"unpublished": "د کورس خپرول لغوه شول.",
-		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول."
+		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول.",
+		"durationMinutes": "{minutes} دقیقې",
+		"durationHoursMinutes": "{hours} ساعت او {minutes} دقیقې"
 	},
 	"certificates": {
 		"list": {

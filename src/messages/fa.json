@@ -597,7 +597,9 @@
 		"agencySubtitle": "کورس‌هایی که مالک و ناشر آن‌ها نمایندگی شماست",
 		"published": "کورس منتشر شد.",
 		"unpublished": "انتشار کورس لغو شد.",
-		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد."
+		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد.",
+		"durationMinutes": "{minutes} دقیقه",
+		"durationHoursMinutes": "{hours} ساعت و {minutes} دقیقه"
 	},
 	"certificates": {
 		"list": {

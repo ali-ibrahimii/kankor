@@ -597,7 +597,9 @@
 		"agencySubtitle": "Courses owned and published by your agency",
 		"published": "Course published.",
 		"unpublished": "Course unpublished.",
-		"publishToggleFailed": "Failed to update publish status."
+		"publishToggleFailed": "Failed to update publish status.",
+		"durationMinutes": "{minutes} min",
+		"durationHoursMinutes": "{hours}h {minutes}m"
 	},
 	"certificates": {
 		"list": {

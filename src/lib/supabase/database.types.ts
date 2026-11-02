@@ -7039,6 +7039,15 @@ export type Database = {
 				Args: { p_course_id: string };
 				Returns: number;
 			};
+			get_course_card_stats: {
+				Args: { p_course_ids: string[] };
+				Returns: {
+					course_id: string;
+					enrollments_count: number;
+					lessons_count: number;
+					lessons_minutes: number;
+				}[];
+			};
 			get_course_details: {
 				Args: { p_course_id?: string; p_course_slug?: string };
 				Returns: {
