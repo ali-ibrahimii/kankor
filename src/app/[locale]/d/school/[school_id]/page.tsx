@@ -10,6 +10,7 @@ import {
 	Zap,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { SchoolBrandingCard } from "@/components/blocks/school/school-branding-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatCard } from "@/components/widgets/stat-card";
 import { TrendChart } from "@/components/widgets/trend-chart";
@@ -27,6 +28,27 @@ async function getOverview(
 		.single();
 	if (error) throw error;
 	return data as unknown as SchoolDashboardOverview;
+}
+
+type SchoolBranding = {
+	cover_image_url: string | null;
+	logo_url: string | null;
+};
+
+/**
+ * Cover/logo live on `schools`; the row is only visible here when RLS allows
+ * the caller to manage it, which doubles as the `canEdit` flag for the card.
+ */
+async function getSchoolBranding(
+	schoolId: string
+): Promise<SchoolBranding | null> {
+	const supabase = await createClient();
+	const { data } = await supabase
+		.from("schools")
+		.select("cover_image_url, logo_url")
+		.eq("id", schoolId)
+		.maybeSingle();
+	return data ?? null;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -94,6 +116,8 @@ export default async function SchoolDashboardPage({
 		},
 	];
 
+	const branding = await getSchoolBranding(school_id);
+
 	const recentMembers = overview?.recent_members ?? [];
 	const recentQuizAttempts = overview?.recent_quiz_attempts ?? [];
 	const earningsTrend = (overview?.earnings_trend ?? []).map((point) => ({
@@ -116,6 +140,14 @@ export default async function SchoolDashboardPage({
 				data={earningsTrend}
 				valueLabel={t("earningsTrendSubtitle")}
 				color="var(--color-chart-2, #1461B8)"
+			/>
+
+			{/* ── School branding (Cloudflare R2 images) ───────────────────────────── */}
+			<SchoolBrandingCard
+				schoolId={school_id}
+				initialCover={branding?.cover_image_url ?? null}
+				initialLogo={branding?.logo_url ?? null}
+				canEdit={Boolean(branding)}
 			/>
 
 			{/* ── Bottom two-column section ────────────────────────────────────────── */}

@@ -83,7 +83,7 @@ export async function getCourseForEdit(
 	const { data, error } = await supabase
 		.from("courses")
 		.select(
-			"title, subtitle, description, language, level, is_free, price_credits, visibility, related_decks_ids, related_quizzes_ids, related_libraries_ids, book_id, subject_id, grade_id"
+			"title, subtitle, description, language, level, is_free, price_credits, visibility, related_decks_ids, related_quizzes_ids, related_libraries_ids, book_id, subject_id, grade_id, cover_image_url"
 		)
 		.eq("id", courseId)
 		.single();
@@ -108,6 +108,7 @@ export async function getCourseForEdit(
 			book_id: data.book_id,
 			subject_id: data.subject_id,
 			grade_id: data.grade_id,
+			cover_image_url: data.cover_image_url,
 		},
 	};
 }

@@ -269,7 +269,13 @@
 			"earnings": "Earnings",
 			"discounts": "Discounts",
 			"settings": "Settings",
-			"notifications": "Notifications"
+			"notifications": "Notifications",
+			"branding": {
+				"title": "School branding",
+				"description": "The school cover and logo are stored in Cloudflare and shown on cards and the public school page.",
+				"coverLabel": "Cover image",
+				"logoLabel": "Logo"
+			}
 		},
 		"agency": {
 			"roleLabel": "Agency",
@@ -1598,14 +1604,22 @@
 			"priceCredits": "Price (credits)",
 			"create": "Create & Build",
 			"visibility": "Visibility",
-			"visibilityDescription": "Should this course be visible to all students?"
+			"visibilityDescription": "Should this course be visible to all students?",
+			"coverLabel": "Course card image",
+			"coverHint": "Click to upload the cover image, or drop a file here",
+			"coverFormats": "JPG, PNG, WebP or AVIF up to {max}MB — saved to Cloudflare once the course exists",
+			"coverInvalidType": "This file type is not supported",
+			"coverTooLarge": "Image is larger than {max}",
+			"coverUploaded": "Course image saved to Cloudflare",
+			"coverFailed": "The course was created but the image upload failed — retry from the edit dialog"
 		},
 		"editCourse": {
 			"title": "Edit Course Details",
 			"description": "Update your course's basic details.",
 			"save": "Save Changes",
 			"saving": "Saving…",
-			"saved": "Course details updated."
+			"saved": "Course details updated.",
+			"coverLabel": "Course card image (Cloudflare)"
 		},
 		"header": {
 			"back": "Back to courses",
@@ -1728,6 +1742,21 @@
 				"assignment": "Assignment"
 			}
 		}
+	},
+	"imageUpload": {
+		"dropHint": "Click to upload an image, or drop a file here",
+		"preview": "Image preview",
+		"formats": "JPG, PNG, WebP or AVIF up to {max}",
+		"upload": "Upload image",
+		"replace": "Replace image",
+		"remove": "Remove image",
+		"uploaded": "Image saved to Cloudflare",
+		"removed": "Image removed",
+		"uploadFailed": "Image upload failed",
+		"finalizing": "Saving…",
+		"invalidType": "This file type is not supported",
+		"tooLarge": "Image is larger than {max}",
+		"storedInR2": "Stored in Cloudflare R2"
 	},
 	"flashcardBuilder": {
 		"meta": {

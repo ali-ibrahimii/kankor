@@ -106,6 +106,9 @@ export interface NewCourseFormValues {
 	book_id?: string | null;
 	subject_id?: string | null;
 	grade_id?: string | null;
+	/** Public Cloudflare R2 URL shown on the course card (managed separately
+	 *  from the details form — see ImageUploadField). */
+	cover_image_url?: string | null;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

@@ -269,7 +269,13 @@
 			"earnings": "ګټه",
 			"discounts": "تخفیفونه",
 			"settings": "ترتیبات",
-			"notifications": "خبرتیاوې"
+			"notifications": "خبرتیاوې",
+			"branding": {
+				"title": "د مکتب برنډ",
+				"description": "د مکتب کاور او لوګو په Cloudflare کې خوندي کیږي او پر کارتونو او د مکتب عامه پاڼه ښکاري.",
+				"coverLabel": "د کاور انځور",
+				"logoLabel": "لوګو"
+			}
 		},
 		"agency": {
 			"roleLabel": "ایجنسۍ",
@@ -1598,14 +1604,22 @@
 			"priceCredits": "قیمت (کریډیټ)",
 			"create": "جوړول او جوړیدل",
 			"visibility": "لیدوالیت",
-			"visibilityDescription": "آیا دا کورس به د ټولو لیدو وړ وي؟"
+			"visibilityDescription": "آیا دا کورس به د ټولو لیدو وړ وي؟",
+			"coverLabel": "د کورس کارت انځور",
+			"coverHint": "د کاور انځور پورته کولو لپاره کلیک وکړئ یا فایل دلته پرېږدئ",
+			"coverFormats": "JPG، PNG، WebP یا AVIF تر {max}MB — کورس جوړیدو وروسته په Cloudflare کې خوندي کیږي",
+			"coverInvalidType": "دا ډول فایل نه ملاتړ کیږي",
+			"coverTooLarge": "د انځور اندازه له {max} زیاته ده",
+			"coverUploaded": "د کورس انځور په Cloudflare کې خوندي شو",
+			"coverFailed": "کورس جوړ شو خو انځور پورته نشو — د سمون له پاڼې بیا هڅه وکړئ"
 		},
 		"editCourse": {
 			"title": "د کورس جزئیاتو ایډیټ",
 			"description": "د خپل کورس بنسټیز جزئیات نوي کړئ.",
 			"save": "بدلونونه خوندي کړئ",
 			"saving": "خوندي کیږي…",
-			"saved": "د کورس جزئیات نوي شول."
+			"saved": "د کورس جزئیات نوي شول.",
+			"coverLabel": "د کورس کارت انځور (Cloudflare)"
 		},
 		"header": {
 			"back": "کورسونو ته بیرته",
@@ -1728,6 +1742,21 @@
 				"assignment": "دنده"
 			}
 		}
+	},
+	"imageUpload": {
+		"dropHint": "د انځور پورته کولو لپاره کلیک وکړئ یا فایل دلته پرېږدئ",
+		"preview": "د انځور مخکتنه",
+		"formats": "JPG، PNG، WebP یا AVIF تر {max}",
+		"upload": "انځور پورته کړئ",
+		"replace": "انځور بدل کړئ",
+		"remove": "انځور لرې کړئ",
+		"uploaded": "انځور په Cloudflare کې خوندي شو",
+		"removed": "انځور لرې شو",
+		"uploadFailed": "د انځور پورته کول ناکام شول",
+		"finalizing": "ثبتیږي…",
+		"invalidType": "دا ډول فایل نه ملاتړ کیږي",
+		"tooLarge": "د انځور اندازه له {max} زیاته ده",
+		"storedInR2": "په Cloudflare R2 کې خوندي"
 	},
 	"flashcardBuilder": {
 		"meta": {

@@ -19,7 +19,12 @@ function parseServerEnv(): ServerEnv {
 			secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || undefined,
 			bucketName: process.env.R2_BUCKET_NAME || undefined,
 			endpoint: process.env.R2_ENDPOINT || undefined,
-			publicHostname: process.env.R2_PUBLIC_HOSTNAME || undefined,
+			// Falls back to the browser-visible host so both halves of the app
+			// (server-side URL building and card rendering) always agree.
+			publicHostname:
+				process.env.R2_PUBLIC_HOSTNAME ||
+				process.env.NEXT_PUBLIC_R2_PUBLIC_HOSTNAME ||
+				undefined,
 		},
 		telegram: {
 			botToken: process.env.TELEGRAM_BOT_TOKEN || undefined,
