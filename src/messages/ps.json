@@ -597,7 +597,9 @@
 		"agencySubtitle": "هغه کورسونه چې ستاسو نمایندګي یې مالکه او خپروونکې ده",
 		"published": "کورس خپور شو.",
 		"unpublished": "د کورس خپرول لغوه شول.",
-		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول."
+		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول.",
+		"durationMinutes": "{minutes} دقیقې",
+		"durationHoursMinutes": "{hours} ساعت او {minutes} دقیقې"
 	},
 	"certificates": {
 		"list": {
@@ -1611,7 +1613,21 @@
 			"coverInvalidType": "دا ډول فایل نه ملاتړ کیږي",
 			"coverTooLarge": "د انځور اندازه له {max} زیاته ده",
 			"coverUploaded": "د کورس انځور په Cloudflare کې خوندي شو",
-			"coverFailed": "کورس جوړ شو خو انځور پورته نشو — د سمون له پاڼې بیا هڅه وکړئ"
+			"coverFailed": "کورس جوړ شو خو انځور پورته نشو — د سمون له پاڼې بیا هڅه وکړئ",
+			"moreDetails": "د کورس نور تفصیلات",
+			"moreDetailsHint": "دا په عامه کورس پاڼه او د لټون په پایلو کې ښکاري.",
+			"durationHours": "اټکلي موده (ساعت)",
+			"promoVideo": "د معرفي ویډیو (لینک)",
+			"objectives": "د زده کړې موخې",
+			"objectivesPlaceholder": "په پای کې د Next.js اپ جوړولی شئ\nروټینګ او کمپونینټونه پیژنئ",
+			"onePerLine": "هره موضوع په جلا کرښه کې.",
+			"prerequisites": "مخکیني اړتیاوې",
+			"prerequisitesPlaceholder": "د HTML او CSS بنسټیز پوهه\nNode.js نصب وي",
+			"welcomeMessage": "د ښه راغلاست پیغام",
+			"welcomePlaceholder": "دې کورس ته ښه راغلاست…",
+			"seoSection": "SEO (اختیاري)",
+			"seoTitle": "د SEO سرلیک",
+			"seoDescription": "د SEO تفصیل"
 		},
 		"editCourse": {
 			"title": "د کورس جزئیاتو ایډیټ",

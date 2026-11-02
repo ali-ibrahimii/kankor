@@ -56,6 +56,13 @@ const COURSE_VALUES: NewCourseFormValues = {
 	related_decks_ids: [],
 	related_quizzes_ids: [],
 	related_libraries_ids: [],
+	learning_objectives: "- Build a Next.js app\n- Understand routing",
+	prerequisites: "HTML basics",
+	estimated_duration_hours: "6",
+	promo_video_url: "",
+	welcome_message: "",
+	seo_title: "",
+	seo_description: "",
 };
 
 const DECK_VALUES: NewDeckFormValues = {
@@ -103,6 +110,24 @@ describe("createCourse (agency ownership)", () => {
 
 		expect(builder.insert).toHaveBeenCalledWith(
 			expect.objectContaining({ agency_id: null })
+		);
+	});
+
+	it("persists the full course details, normalising the bullet lists", async () => {
+		const builder = makeQueryBuilder({ data: { id: "c-1" }, error: null });
+		mockFrom.mockReturnValue(builder);
+
+		await createCourse(COURSE_VALUES);
+
+		expect(builder.insert).toHaveBeenCalledWith(
+			expect.objectContaining({
+				// "- " bullets are stripped so the public page gets clean items.
+				learning_objectives: ["Build a Next.js app", "Understand routing"],
+				prerequisites: ["HTML basics"],
+				estimated_duration_hours: 6,
+				promo_video_url: null,
+				seo_title: null,
+			})
 		);
 	});
 });

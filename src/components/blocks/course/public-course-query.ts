@@ -1,6 +1,7 @@
 import { defaultQueryFn } from "@/hooks/filter/query-state-mapping";
 import type { QueryFn } from "@/hooks/filter/types";
 import type { CourseMeta } from "./course-card";
+import { fetchCourseCardStats, withCourseCardStats } from "./course-stats";
 
 export const PUBLIC_COURSE_SELECT = `
 	id,
@@ -21,16 +22,16 @@ export const PUBLIC_COURSE_SELECT = `
 	subject:subjects(name)
 `;
 
-export const publishedCoursesQueryFn: QueryFn<"courses", CourseMeta[]> = (
+export const publishedCoursesQueryFn: QueryFn<"courses", CourseMeta[]> = async (
 	client,
 	table,
 	state,
 	single
-) =>
-	defaultQueryFn<"courses", CourseMeta[]>(PUBLIC_COURSE_SELECT, [
-		"title",
-		"subtitle",
-	])(
+) => {
+	const result = await defaultQueryFn<"courses", CourseMeta[]>(
+		PUBLIC_COURSE_SELECT,
+		["title", "subtitle"]
+	)(
 		client,
 		table,
 		{
@@ -46,3 +47,19 @@ export const publishedCoursesQueryFn: QueryFn<"courses", CourseMeta[]> = (
 		},
 		single
 	);
+
+	const courses = result.data as CourseMeta[] | null;
+	if (!courses || courses.length === 0) return result;
+
+	// Lessons/enrollments are not readable by signed-out visitors, so the
+	// card numbers arrive through the get_course_card_stats aggregate.
+	const stats = await fetchCourseCardStats(
+		client,
+		courses.map((course) => course.id)
+	);
+
+	return {
+		...result,
+		data: withCourseCardStats(courses, stats),
+	} as typeof result;
+};

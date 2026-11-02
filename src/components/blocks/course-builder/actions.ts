@@ -4,11 +4,13 @@ import { revalidatePath } from "next/cache";
 import { defaultLocale, Locale } from "@/i18n";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
-import type {
-	DraftContentBlock,
-	DraftLesson,
-	DraftModule,
-	NewCourseFormValues,
+import {
+	type DraftContentBlock,
+	type DraftLesson,
+	type DraftModule,
+	joinLines,
+	type NewCourseFormValues,
+	parseLines,
 } from "./types";
 
 // ─── Result type ──────────────────────────────────────────────────────────────
@@ -16,6 +18,52 @@ import type {
 type Result<T = void> =
 	| { success: true; data: T }
 	| { success: false; error: string };
+
+// ─── Shared payload ───────────────────────────────────────────────────────────
+
+/**
+ * Maps the details form onto `courses` columns. Kept in one place so create and
+ * update can never drift apart (the form gained objectives/prerequisites/SEO
+ * after the two paths were written separately).
+ */
+function coursePayload(values: NewCourseFormValues) {
+	const duration = Number(values.estimated_duration_hours);
+	return {
+		title: values.title,
+		subtitle: values.subtitle || null,
+		description: values.description || null,
+		language: (values.language as Locale) || defaultLocale,
+		level:
+			(values.level as
+				| "beginner"
+				| "intermediate"
+				| "advanced"
+				| "all_levels") || null,
+		is_free: values.is_free,
+		price_credits: values.is_free
+			? 0
+			: values.price_credits
+				? Number(values.price_credits)
+				: 0,
+		visibility: values.visibility,
+		related_decks_ids: values.related_decks_ids || [],
+		related_quizzes_ids: values.related_quizzes_ids || [],
+		related_libraries_ids: values.related_libraries_ids || [],
+		book_id: values.book_id || null,
+		subject_id: values.subject_id || null,
+		grade_id: values.grade_id || null,
+		learning_objectives: parseLines(values.learning_objectives),
+		prerequisites: parseLines(values.prerequisites),
+		estimated_duration_hours:
+			Number.isFinite(duration) && duration > 0
+				? Math.round(duration * 10) / 10
+				: null,
+		promo_video_url: values.promo_video_url?.trim() || null,
+		welcome_message: values.welcome_message?.trim() || null,
+		seo_title: values.seo_title?.trim() || null,
+		seo_description: values.seo_description?.trim() || null,
+	};
+}
 
 // ─── Create course ────────────────────────────────────────────────────────────
 
@@ -35,32 +83,10 @@ export async function createCourse(
 	const { data, error } = await supabase
 		.from("courses")
 		.insert({
+			...coursePayload(values),
 			agency_id: agencyId ?? null,
-			title: values.title,
-			subtitle: values.subtitle || null,
-			description: values.description || null,
-			language: (values.language as Locale) || defaultLocale,
-			level:
-				(values.level as
-					| "beginner"
-					| "intermediate"
-					| "advanced"
-					| "all_levels") || null,
-			is_free: values.is_free,
-			price_credits: values.is_free
-				? 0
-				: values.price_credits
-					? Number(values.price_credits)
-					: 0,
-			visibility: values.visibility,
 			is_published: false,
 			instructor_id: user.id,
-			related_decks_ids: values.related_decks_ids || [],
-			related_quizzes_ids: values.related_quizzes_ids || [],
-			related_libraries_ids: values.related_libraries_ids || [],
-			book_id: values.book_id || null,
-			subject_id: values.subject_id || null,
-			grade_id: values.grade_id || null,
 		})
 		.select("id")
 		.single();
@@ -83,7 +109,7 @@ export async function getCourseForEdit(
 	const { data, error } = await supabase
 		.from("courses")
 		.select(
-			"title, subtitle, description, language, level, is_free, price_credits, visibility, related_decks_ids, related_quizzes_ids, related_libraries_ids, book_id, subject_id, grade_id, cover_image_url"
+			"title, subtitle, description, language, level, is_free, price_credits, visibility, related_decks_ids, related_quizzes_ids, related_libraries_ids, book_id, subject_id, grade_id, cover_image_url, learning_objectives, prerequisites, estimated_duration_hours, promo_video_url, welcome_message, seo_title, seo_description"
 		)
 		.eq("id", courseId)
 		.single();
@@ -109,6 +135,15 @@ export async function getCourseForEdit(
 			subject_id: data.subject_id,
 			grade_id: data.grade_id,
 			cover_image_url: data.cover_image_url,
+			learning_objectives: joinLines(data.learning_objectives),
+			prerequisites: joinLines(data.prerequisites),
+			estimated_duration_hours: data.estimated_duration_hours
+				? String(data.estimated_duration_hours)
+				: "",
+			promo_video_url: data.promo_video_url ?? "",
+			welcome_message: data.welcome_message ?? "",
+			seo_title: data.seo_title ?? "",
+			seo_description: data.seo_description ?? "",
 		},
 	};
 }
@@ -123,31 +158,7 @@ export async function updateCourse(
 
 	const { data, error } = await supabase
 		.from("courses")
-		.update({
-			title: values.title,
-			subtitle: values.subtitle || null,
-			description: values.description || null,
-			language: (values.language as Locale) || defaultLocale,
-			level:
-				(values.level as
-					| "beginner"
-					| "intermediate"
-					| "advanced"
-					| "all_levels") || null,
-			is_free: values.is_free,
-			price_credits: values.is_free
-				? 0
-				: values.price_credits
-					? Number(values.price_credits)
-					: 0,
-			visibility: values.visibility,
-			related_decks_ids: values.related_decks_ids || [],
-			related_quizzes_ids: values.related_quizzes_ids || [],
-			related_libraries_ids: values.related_libraries_ids || [],
-			book_id: values.book_id || null,
-			subject_id: values.subject_id || null,
-			grade_id: values.grade_id || null,
-		})
+		.update(coursePayload(values))
 		.eq("id", courseId)
 		.select("id, slug")
 		.single();
@@ -157,6 +168,9 @@ export async function updateCourse(
 	const courseSlug = data?.slug ?? courseId;
 	revalidatePath(routes.d.instructor.courses.new.page({ course_id: courseId }));
 	revalidatePath(routes.d.instructor.courses.page());
+	// The same dialog is used from the admin panel — keep its list/builder fresh.
+	revalidatePath(routes.d.admin.courses.new.page({ course_id: courseId }));
+	revalidatePath(routes.d.admin.courses.page());
 	revalidatePath(routes.d.instructor.courses.slug.page({ slug: courseSlug }));
 	revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
 
@@ -434,6 +448,9 @@ export async function setCoursePublished(
 	revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
 	revalidatePath(`/d/instructor/courses/new/${courseId}`);
 	revalidatePath("/d/instructor/courses");
+	revalidatePath(routes.d.admin.courses.new.page({ course_id: courseId }));
+	revalidatePath(routes.d.admin.courses.page());
+	revalidatePath(routes.d.admin.courses.slug.page({ slug: courseSlug }));
 
 	return { success: true, data: undefined };
 }

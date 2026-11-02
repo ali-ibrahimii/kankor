@@ -597,7 +597,9 @@
 		"agencySubtitle": "کورس‌هایی که مالک و ناشر آن‌ها نمایندگی شماست",
 		"published": "کورس منتشر شد.",
 		"unpublished": "انتشار کورس لغو شد.",
-		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد."
+		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد.",
+		"durationMinutes": "{minutes} دقیقه",
+		"durationHoursMinutes": "{hours} ساعت و {minutes} دقیقه"
 	},
 	"certificates": {
 		"list": {
@@ -1611,7 +1613,21 @@
 			"coverInvalidType": "این نوع فایل پشتیبانی نمی‌شود",
 			"coverTooLarge": "حجم تصویر بیشتر از {max} است",
 			"coverUploaded": "تصویر کورس در Cloudflare ذخیره شد",
-			"coverFailed": "کورس ساخته شد ولی بارگذاری تصویر ناکام شد — از صفحهٔ ویرایش دوباره تلاش کن"
+			"coverFailed": "کورس ساخته شد ولی بارگذاری تصویر ناکام شد — از صفحهٔ ویرایش دوباره تلاش کن",
+			"moreDetails": "جزئیات بیشتر کورس",
+			"moreDetailsHint": "همین‌ها روی صفحهٔ عمومی کورس و در نتایج جست‌وجو دیده می‌شوند.",
+			"durationHours": "مدت تقریبی (ساعت)",
+			"promoVideo": "ویدیوی معرفی (لینک)",
+			"objectives": "اهداف یادگیری",
+			"objectivesPlaceholder": "در پایان این کورس می‌توانی یک اپ Next.js بسازی\nمسیریابی و کامپوننت‌ها را می‌شناسی",
+			"onePerLine": "هر مورد در یک خط جدا.",
+			"prerequisites": "پیش‌نیازها",
+			"prerequisitesPlaceholder": "آشنایی با HTML و CSS\nنصب Node.js",
+			"welcomeMessage": "پیام خوش‌آمد",
+			"welcomePlaceholder": "به این کورس خوش آمدی…",
+			"seoSection": "سئو (اختیاری)",
+			"seoTitle": "عنوان سئو",
+			"seoDescription": "توضیح سئو"
 		},
 		"editCourse": {
 			"title": "ویرایش جزئیات کورس",
