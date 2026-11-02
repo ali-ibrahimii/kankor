@@ -2,7 +2,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { InfoIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
@@ -10,6 +9,7 @@ import { RelatedResourcesSelector } from "@/components/blocks/RelatedResourcesSe
 import { ImageUploadField } from "@/components/blocks/shared/image-upload-field";
 import { Button } from "@/components/ui/button";
 import { Dropzone } from "@/components/ui/dropzone";
+import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface FormOption {
@@ -81,6 +81,13 @@ const DEFAULT_VALUES: Omit<NewCourseFormValues, "language"> = {
 	book_id: null,
 	subject_id: null,
 	grade_id: null,
+	learning_objectives: "",
+	prerequisites: "",
+	estimated_duration_hours: "",
+	promo_video_url: "",
+	welcome_message: "",
+	seo_title: "",
+	seo_description: "",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -268,7 +275,7 @@ export function NewCourseDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="sm:max-w-lg">
+			<DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-2xl">
 				<form onSubmit={handleSubmit}>
 					<DialogHeader>
 						<DialogTitle>
@@ -560,6 +567,126 @@ export function NewCourseDialog({
 									/>
 								</div>
 							)}
+
+							{/* ── The rest of the course record ─────────────────────────── */}
+							<div className="mt-4 space-y-4 border-t pt-4">
+								<div>
+									<p className="text-sm font-bold">
+										{t("newCourse.moreDetails")}
+									</p>
+									<p className="mt-0.5 text-xs text-muted-foreground">
+										{t("newCourse.moreDetailsHint")}
+									</p>
+								</div>
+
+								<div className="grid grid-cols-2 gap-3">
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-duration">
+											{t("newCourse.durationHours")}
+										</Label>
+										<Input
+											id="cb-duration"
+											type="number"
+											min="0"
+											step="0.5"
+											value={values.estimated_duration_hours}
+											onChange={(e) =>
+												patch("estimated_duration_hours", e.target.value)
+											}
+											placeholder="8"
+										/>
+									</div>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-promo">
+											{t("newCourse.promoVideo")}
+										</Label>
+										<Input
+											id="cb-promo"
+											type="url"
+											dir="ltr"
+											value={values.promo_video_url}
+											onChange={(e) => patch("promo_video_url", e.target.value)}
+											placeholder="https://youtube.com/watch?v=…"
+										/>
+									</div>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-objectives">
+										{t("newCourse.objectives")}
+									</Label>
+									<Textarea
+										id="cb-objectives"
+										value={values.learning_objectives}
+										onChange={(e) =>
+											patch("learning_objectives", e.target.value)
+										}
+										placeholder={t("newCourse.objectivesPlaceholder")}
+										rows={3}
+									/>
+									<p className="text-[11px] text-muted-foreground">
+										{t("newCourse.onePerLine")}
+									</p>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-prereqs">
+										{t("newCourse.prerequisites")}
+									</Label>
+									<Textarea
+										id="cb-prereqs"
+										value={values.prerequisites}
+										onChange={(e) => patch("prerequisites", e.target.value)}
+										placeholder={t("newCourse.prerequisitesPlaceholder")}
+										rows={3}
+									/>
+									<p className="text-[11px] text-muted-foreground">
+										{t("newCourse.onePerLine")}
+									</p>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-welcome">
+										{t("newCourse.welcomeMessage")}
+									</Label>
+									<Textarea
+										id="cb-welcome"
+										value={values.welcome_message}
+										onChange={(e) => patch("welcome_message", e.target.value)}
+										placeholder={t("newCourse.welcomePlaceholder")}
+										rows={2}
+									/>
+								</div>
+
+								<div className="space-y-3 rounded-xl border border-dashed p-3">
+									<p className="text-xs font-bold text-muted-foreground">
+										{t("newCourse.seoSection")}
+									</p>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-seo-title">
+											{t("newCourse.seoTitle")}
+										</Label>
+										<Input
+											id="cb-seo-title"
+											value={values.seo_title}
+											onChange={(e) => patch("seo_title", e.target.value)}
+											maxLength={60}
+										/>
+									</div>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-seo-description">
+											{t("newCourse.seoDescription")}
+										</Label>
+										<Textarea
+											id="cb-seo-description"
+											value={values.seo_description}
+											onChange={(e) => patch("seo_description", e.target.value)}
+											rows={2}
+											maxLength={160}
+										/>
+									</div>
+								</div>
+							</div>
 
 							<div className="border-t pt-4 mt-4 space-y-4">
 								<RelatedResourcesSelector

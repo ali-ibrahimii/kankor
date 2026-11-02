@@ -1611,7 +1611,21 @@
 			"coverInvalidType": "This file type is not supported",
 			"coverTooLarge": "Image is larger than {max}",
 			"coverUploaded": "Course image saved to Cloudflare",
-			"coverFailed": "The course was created but the image upload failed — retry from the edit dialog"
+			"coverFailed": "The course was created but the image upload failed — retry from the edit dialog",
+			"moreDetails": "More course details",
+			"moreDetailsHint": "These appear on the public course page and in search results.",
+			"durationHours": "Estimated duration (hours)",
+			"promoVideo": "Promo video (link)",
+			"objectives": "Learning objectives",
+			"objectivesPlaceholder": "Build a Next.js app by the end\nUnderstand routing and components",
+			"onePerLine": "One item per line.",
+			"prerequisites": "Prerequisites",
+			"prerequisitesPlaceholder": "Basic HTML and CSS\nNode.js installed",
+			"welcomeMessage": "Welcome message",
+			"welcomePlaceholder": "Welcome to this course…",
+			"seoSection": "SEO (optional)",
+			"seoTitle": "SEO title",
+			"seoDescription": "SEO description"
 		},
 		"editCourse": {
 			"title": "Edit Course Details",
