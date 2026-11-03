@@ -1,3 +1,5 @@
+"use client";
+
 import { GraduationCap } from "lucide-react";
 import type { ReactNode } from "react";
 import {
@@ -12,6 +14,12 @@ import { routes } from "@/lib/routes";
  * Brand lockup shown at the top of every dashboard sidebar — gradient tile +
  * product name (and an optional role subtitle), identical across student /
  * instructor / school / agency / admin dashboards.
+ */
+/**
+ * Client component on purpose: the sidebar's Slot-based `asChild` cannot clone
+ * elements authored by a Server Component (children cross the RSC boundary as
+ * lazy references and the Slot throws "Slot failed to slot onto its children").
+ * Rendering the brand on the client keeps the `Link` a plain client element.
  */
 export function SidebarBrand({
 	name,

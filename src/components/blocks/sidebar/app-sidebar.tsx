@@ -269,9 +269,17 @@ type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
 	menus: MenuGroup[];
 	header?: React.ReactNode;
 	user?: CurrentUser;
+	/** Overrides the default `NavUser` footer (e.g. the read-only demo card). */
+	footer?: React.ReactNode;
 };
 
-export function AppSidebar({ menus, header, user, ...props }: AppSidebarProps) {
+export function AppSidebar({
+	menus,
+	header,
+	user,
+	footer,
+	...props
+}: AppSidebarProps) {
 	const locale = useLocale();
 	const defaultSide = isRtl(locale) ? "right" : "left";
 	const defaultDir = dirOf(locale);
@@ -288,11 +296,13 @@ export function AppSidebar({ menus, header, user, ...props }: AppSidebarProps) {
 					</React.Fragment>
 				))}
 			</SidebarContent>
-			{user && (
+			{footer ? (
+				<SidebarFooter>{footer}</SidebarFooter>
+			) : user ? (
 				<SidebarFooter>
 					<NavUser user={user} />
 				</SidebarFooter>
-			)}
+			) : null}
 		</Sidebar>
 	);
 }
