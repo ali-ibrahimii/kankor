@@ -73,7 +73,12 @@ describe("NewCourseDialog — admin course creation", () => {
 	it("asks for every course detail before the course exists", () => {
 		render(
 			withProviders(
-				<NewCourseDialog open onOpenChange={vi.fn()} basePath="/d/admin" />
+				<NewCourseDialog
+					open
+					onOpenChange={vi.fn()}
+					basePath="/d/admin"
+					platformAuthored
+				/>
 			)
 		);
 
@@ -98,7 +103,12 @@ describe("NewCourseDialog — admin course creation", () => {
 
 		render(
 			withProviders(
-				<NewCourseDialog open onOpenChange={vi.fn()} basePath="/d/admin" />
+				<NewCourseDialog
+					open
+					onOpenChange={vi.fn()}
+					basePath="/d/admin"
+					platformAuthored
+				/>
 			)
 		);
 
@@ -121,7 +131,9 @@ describe("NewCourseDialog — admin course creation", () => {
 				learning_objectives: "- ساخت اپ Next.js\n- مسیریابی",
 				estimated_duration_hours: "8",
 			}),
-			undefined
+			undefined,
+			// Admin panel: the course is published as the platform.
+			{ platformAuthored: true }
 		);
 
 		// This URL is the whole point of the admin route added alongside: it must
@@ -134,7 +146,12 @@ describe("NewCourseDialog — admin course creation", () => {
 	it("does not submit without a title", async () => {
 		render(
 			withProviders(
-				<NewCourseDialog open onOpenChange={vi.fn()} basePath="/d/admin" />
+				<NewCourseDialog
+					open
+					onOpenChange={vi.fn()}
+					basePath="/d/admin"
+					platformAuthored
+				/>
 			)
 		);
 

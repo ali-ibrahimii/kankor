@@ -146,6 +146,8 @@ export interface CourseBuilderProps {
 	initialBlocks: DraftContentBlock[];
 	/** Route prefix for back navigation, e.g. "/d/instructor" */
 	basePath: string;
+	/** Set when the course exists but its modules/lessons could not be read. */
+	contentError?: string | null;
 }
 
 // ─── Inner builder (inside Jotai Provider) ────────────────────────────────────
@@ -154,6 +156,7 @@ function CourseBuilderInner({
 	courseTitle,
 	isPublished: initialIsPublished,
 	basePath,
+	contentError,
 }: Omit<
 	CourseBuilderProps,
 	"courseId" | "initialModules" | "initialLessons" | "initialBlocks"
@@ -305,6 +308,13 @@ function CourseBuilderInner({
 				</div>
 			</header>
 
+			{contentError && (
+				<div className="shrink-0 border-b border-amber-300/60 bg-amber-50 px-4 py-2 text-xs text-amber-900 dark:border-amber-400/30 dark:bg-amber-500/10 dark:text-amber-200">
+					{t("contentLoadFailed")}
+					<span className="ms-2 font-mono opacity-70">{contentError}</span>
+				</div>
+			)}
+
 			{/* Two-panel layout */}
 			<div className="flex flex-1 overflow-hidden">
 				{/* Left panel: Module / Lesson tree */}
@@ -342,6 +352,7 @@ export function CourseBuilder({
 	initialLessons,
 	initialBlocks,
 	basePath,
+	contentError,
 }: CourseBuilderProps) {
 	return (
 		<Provider>
@@ -353,6 +364,7 @@ export function CourseBuilder({
 				initialLessons={initialLessons}
 				initialBlocks={initialBlocks}
 				basePath={basePath}
+				contentError={contentError}
 			/>
 		</Provider>
 	);
@@ -368,7 +380,9 @@ function CourseBuilderInit({
 	initialLessons,
 	initialBlocks,
 	basePath,
+	contentError,
 }: CourseBuilderProps) {
+	const t = useTranslations("courseBuilder");
 	const initBuilder = useSetAtom(initBuilderAtom);
 	const [ready, setReady] = React.useState(false);
 
@@ -383,9 +397,17 @@ function CourseBuilderInit({
 	}, [courseId]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	if (!ready) {
+		// Render the course identity while the builder initialises. A bare
+		// spinner made a slow/failed hydration look like "the page is blank".
 		return (
-			<div className="flex h-screen items-center justify-center">
-				<Spinner className="size-6" />
+			<div className="flex h-screen flex-col">
+				<header className="flex shrink-0 items-center gap-3 border-b px-4 py-2.5">
+					<h1 className="truncate text-sm font-semibold">{courseTitle}</h1>
+				</header>
+				<div className="flex flex-1 flex-col items-center justify-center gap-3 text-muted-foreground">
+					<Spinner className="size-6" />
+					<p className="text-sm">{t("loading")}</p>
+				</div>
 			</div>
 		);
 	}
@@ -395,6 +417,7 @@ function CourseBuilderInit({
 			courseTitle={courseTitle}
 			isPublished={isPublished}
 			basePath={basePath}
+			contentError={contentError}
 		/>
 	);
 }

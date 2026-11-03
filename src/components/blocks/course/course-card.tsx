@@ -4,6 +4,7 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	Atom,
+	BadgeCheck,
 	BookOpen,
 	Calculator,
 	CheckCircle2,
@@ -60,6 +61,8 @@ export type CourseMeta = Tables<"courses"> & {
 	instructor?: {
 		full_name: string | null;
 		avatar_url: string | null;
+		/** Authored by an admin → shown as the platform, not the person. */
+		is_platform?: boolean;
 	} | null;
 
 	subject?: {
@@ -451,20 +454,45 @@ function InstructorByline({
 }: {
 	instructor?: CourseMeta["instructor"];
 }) {
+	const t = useTranslations("courses");
+
 	if (!instructor) return null;
+
+	// Admin-authored courses are published by the platform: never show the
+	// admin's personal name or avatar on a public card.
+	const isPlatform = Boolean(instructor.is_platform);
+	const displayName = isPlatform
+		? t("platformAuthor")
+		: (instructor.full_name ?? "—");
 
 	return (
 		<div className="flex min-w-0 items-center gap-2.5">
 			<Avatar className="size-8 shrink-0 border-2 border-white shadow-sm dark:border-white/10">
-				<AvatarImage src={instructor.avatar_url ?? undefined} />
+				{isPlatform ? null : (
+					<AvatarImage src={instructor.avatar_url ?? undefined} />
+				)}
 
-				<AvatarFallback className="bg-[#eee9ff] text-[11px] font-bold text-[#694bd2]">
-					{instructor.full_name?.[0] ?? "?"}
+				<AvatarFallback
+					className={cn(
+						"text-[11px] font-bold",
+						isPlatform
+							? "bg-[#694bd2] text-white"
+							: "bg-[#eee9ff] text-[#694bd2]"
+					)}
+				>
+					{isPlatform ? (
+						<BadgeCheck className="size-4" />
+					) : (
+						(displayName[0] ?? "?")
+					)}
 				</AvatarFallback>
 			</Avatar>
 
-			<span className="truncate text-[11px] font-semibold text-slate-600 dark:text-slate-300">
-				{instructor.full_name ?? "—"}
+			<span className="flex min-w-0 items-center gap-1 truncate text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+				<span className="truncate">{displayName}</span>
+				{isPlatform && (
+					<BadgeCheck className="size-3.5 shrink-0 text-[#694bd2] dark:text-violet-300" />
+				)}
 			</span>
 		</div>
 	);

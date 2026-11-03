@@ -599,7 +599,8 @@
 		"unpublished": "Course unpublished.",
 		"publishToggleFailed": "Failed to update publish status.",
 		"durationMinutes": "{minutes} min",
-		"durationHoursMinutes": "{hours}h {minutes}m"
+		"durationHoursMinutes": "{hours}h {minutes}m",
+		"platformAuthor": "Abzar Kankor"
 	},
 	"certificates": {
 		"list": {
@@ -1757,7 +1758,15 @@
 				"quiz": "Quiz",
 				"assignment": "Assignment"
 			}
-		}
+		},
+		"contentLoadFailed": "This course's content could not be loaded — try reloading the page.",
+		"loading": "Loading the course builder…",
+		"notFoundTitle": "This course could not be found",
+		"notFoundDescription": "It may have been deleted, or its address has changed.",
+		"errorTitle": "This page could not be loaded",
+		"errorDescription": "Something unexpected went wrong. Try again — if it keeps happening, send this message to support.",
+		"retry": "Try again",
+		"backToCourses": "Back to courses"
 	},
 	"imageUpload": {
 		"dropHint": "Click to upload an image, or drop a file here",

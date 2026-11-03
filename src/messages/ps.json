@@ -599,7 +599,8 @@
 		"unpublished": "د کورس خپرول لغوه شول.",
 		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول.",
 		"durationMinutes": "{minutes} دقیقې",
-		"durationHoursMinutes": "{hours} ساعت او {minutes} دقیقې"
+		"durationHoursMinutes": "{hours} ساعت او {minutes} دقیقې",
+		"platformAuthor": "ابزار کانکور"
 	},
 	"certificates": {
 		"list": {
@@ -1757,7 +1758,15 @@
 				"quiz": "ازموینه",
 				"assignment": "دنده"
 			}
-		}
+		},
+		"contentLoadFailed": "د دې کورس منځپانګه پورته نشوه — مهرباني وکړئ پاڼه بیا پورته کړئ.",
+		"loading": "د کورس جوړونکی پورته کیږي…",
+		"notFoundTitle": "دا کورس ونه موندل شو",
+		"notFoundDescription": "کیدای شي حذف شوی وي یا پته یې بدله شوې وي.",
+		"errorTitle": "دا پاڼه پورته نشوه",
+		"errorDescription": "یوه ناځوانه تېروتنه رامنځته شوه. بیا هڅه وکړئ.",
+		"retry": "بیا هڅه",
+		"backToCourses": "کورسونو ته بیرته"
 	},
 	"imageUpload": {
 		"dropHint": "د انځور پورته کولو لپاره کلیک وکړئ یا فایل دلته پرېږدئ",

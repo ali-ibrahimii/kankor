@@ -65,6 +65,8 @@ export interface NewCourseDialogProps {
 	onUpdated?: (values: { title: string }) => void;
 	/** When set, new courses are created as agency-owned (see createCourse). */
 	agencyId?: string;
+	/** Admin panel: publish as the platform ("Abzar Kankor"), not as the admin. */
+	platformAuthored?: boolean;
 }
 
 const DEFAULT_VALUES: Omit<NewCourseFormValues, "language"> = {
@@ -99,6 +101,7 @@ export function NewCourseDialog({
 	courseId,
 	onUpdated,
 	agencyId,
+	platformAuthored,
 }: NewCourseDialogProps) {
 	const t = useTranslations("courseBuilder");
 	const locale = useLocale();
@@ -260,7 +263,9 @@ export function NewCourseDialog({
 				return;
 			}
 
-			const result = await createCourse(values, agencyId);
+			const result = await createCourse(values, agencyId, {
+				platformAuthored,
+			});
 			if (!result.success) {
 				toast.error(result.error);
 				return;
