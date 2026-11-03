@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { LibraryDetailView } from "@/components/blocks/libraries";
 import { buildEntityMetadata } from "@/features/seo";
 import { routes } from "@/lib/routes";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
 import { decodeSlugParam } from "@/lib/utils";
 import { BaseParams } from "@/types/common.types";
@@ -74,7 +75,7 @@ export default async function StudentLibraryDetailPage({
 			{/* JSON-LD for SEO */}
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
 			/>
 			<LibraryDetailView
 				book={book}

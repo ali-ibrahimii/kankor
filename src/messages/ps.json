@@ -600,7 +600,10 @@
 		"publishToggleFailed": "د خپرولو حالت تازه کول ناکام شول.",
 		"durationMinutes": "{minutes} دقیقې",
 		"durationHoursMinutes": "{hours} ساعت او {minutes} دقیقې",
-		"platformAuthor": "ابزار کانکور"
+		"platformAuthor": "ابزار کانکور",
+		"deleteCourseFailed": "د کورس ړنګول ونشول.",
+		"courseDeleted": "کورس ړنګ شو.",
+		"backToCourses": "کورسونو ته بیرته"
 	},
 	"certificates": {
 		"list": {

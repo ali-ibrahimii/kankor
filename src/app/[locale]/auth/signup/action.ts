@@ -49,7 +49,8 @@ export async function signupAction(values: SignUpFormValues) {
 			province_id: values.provinceId || null,
 		});
 		if (schoolError?.code) {
-			console.log("error school", schoolError);
+			// Server log only — the message is surfaced to the user via `error`.
+			console.error("[signup] school record creation failed:", schoolError);
 			return { error: schoolError.message, code: `common.${schoolError.code}` };
 		}
 	}

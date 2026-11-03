@@ -600,7 +600,10 @@
 		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد.",
 		"durationMinutes": "{minutes} دقیقه",
 		"durationHoursMinutes": "{hours} ساعت و {minutes} دقیقه",
-		"platformAuthor": "ابزار کانکور"
+		"platformAuthor": "ابزار کانکور",
+		"deleteCourseFailed": "حذف کورس ناکام شد.",
+		"courseDeleted": "کورس حذف شد.",
+		"backToCourses": "بازگشت به فهرست کورس‌ها"
 	},
 	"certificates": {
 		"list": {

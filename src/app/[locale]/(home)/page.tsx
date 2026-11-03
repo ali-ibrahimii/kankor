@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
 import { serverEnv } from "@/lib/env/server-env";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import type { BaseParams } from "@/types/common.types";
 import { getHomeCatalogData } from "./_components/home-catalog-data";
 import HomeContent from "./page-content";
@@ -49,7 +50,7 @@ export default async function Home({
 		<>
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
 			/>
 			<HomeContent locale={locale as Locale} catalog={catalog} />
 		</>

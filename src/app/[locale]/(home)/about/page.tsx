@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
 import { isRtl } from "@/i18n/routing";
 import { serverEnv } from "@/lib/env/server-env";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import type { BaseParams } from "@/types/common.types";
 import { AboutAudienceSection } from "./_components/about-audience-section";
 import { AboutContactSection } from "./_components/about-contact-section";
@@ -106,12 +107,12 @@ export default async function AboutUsPage({
 		<div dir={rtl ? "rtl" : "ltr"} className="min-h-screen">
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+				dangerouslySetInnerHTML={{ __html: safeJsonLd(organizationLd) }}
 			/>
 			{faqLd && (
 				<script
 					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+					dangerouslySetInnerHTML={{ __html: safeJsonLd(faqLd) }}
 				/>
 			)}
 

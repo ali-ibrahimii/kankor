@@ -27,6 +27,7 @@ import { Link } from "@/i18n/navigation";
 import { getDashboardPath } from "@/lib/auth/auth.util";
 import { clientEnv } from "@/lib/env/client-env";
 import { routes } from "@/lib/routes";
+import { safeNextPath } from "@/lib/security/redirect";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { loginAction } from "./action";
@@ -41,7 +42,8 @@ export function LoginForm({
 	const [serverError, setServerError] = useState<string | null>(null);
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const searchParams = useSearchParams();
-	const nextPath = searchParams.get("next");
+	// `?next=` is user-controlled: never hand it to window.location raw.
+	const nextPath = safeNextPath(searchParams.get("next"), "");
 
 	useEffect(() => {
 		const parseError = () => {

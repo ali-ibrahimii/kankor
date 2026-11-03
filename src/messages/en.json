@@ -600,7 +600,10 @@
 		"publishToggleFailed": "Failed to update publish status.",
 		"durationMinutes": "{minutes} min",
 		"durationHoursMinutes": "{hours}h {minutes}m",
-		"platformAuthor": "Abzar Kankor"
+		"platformAuthor": "Abzar Kankor",
+		"deleteCourseFailed": "Failed to delete the course.",
+		"courseDeleted": "Course deleted.",
+		"backToCourses": "Back to courses"
 	},
 	"certificates": {
 		"list": {
