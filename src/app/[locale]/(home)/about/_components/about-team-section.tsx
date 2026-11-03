@@ -67,7 +67,10 @@ export function AboutTeamSection() {
 	};
 
 	return (
-		<section className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28">
+		<section
+			id="team"
+			className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+		>
 			{/* Animated gradient orbs */}
 			<div className="absolute inset-0 overflow-hidden">
 				<div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />

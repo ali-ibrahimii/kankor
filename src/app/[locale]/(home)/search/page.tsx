@@ -34,7 +34,7 @@ export default async function SearchPage({
 	const t = await getTranslations({ locale, namespace: "search" });
 
 	return (
-		<div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pt-24 pb-12 sm:px-6 lg:px-8">
+		<div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pt-8 pb-12 sm:px-6 lg:px-8">
 			<div>
 				<h1 className="text-2xl font-bold tracking-tight text-slate-900">
 					{query ? t("resultsFor", { query }) : t("resultsTitle")}

@@ -4,6 +4,7 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	Atom,
+	BadgeCheck,
 	BookOpen,
 	Calculator,
 	CheckCircle2,
@@ -27,18 +28,16 @@ import {
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
-
+import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-
 import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import type { Tables } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
-
-import { coverPlaceholderClass, resolveCoverSrc } from "./cover.utils";
+import { splitDuration } from "./course-stats";
 
 // ============================================================
 // TYPES
@@ -56,10 +55,14 @@ export type CourseMeta = Tables<"courses"> & {
 	average_rating: number;
 	total_lessons?: number;
 	total_enrollments?: number;
+	/** Summed `lessons.estimated_duration_minutes` for the whole course. */
+	total_duration_minutes?: number;
 
 	instructor?: {
 		full_name: string | null;
 		avatar_url: string | null;
+		/** Authored by an admin → shown as the platform, not the person. */
+		is_platform?: boolean;
 	} | null;
 
 	subject?: {
@@ -275,11 +278,14 @@ function CourseCover({
 	topEndBadge,
 	overlay,
 }: CourseCoverProps) {
-	const coverSrc = resolveCoverSrc(src);
+	const coverSrc = resolveEntityCardImage({
+		customSrc: src,
+		text: `${subject ?? ""} ${alt}`,
+		kind: "course",
+		seed: alt,
+	});
 
 	const theme = getSubjectTheme(subject);
-
-	const Icon = theme.icon;
 
 	return (
 		<div
@@ -288,37 +294,15 @@ function CourseCover({
 				theme.gradient
 			)}
 		>
-			{coverSrc ? (
-				<Image
-					src={coverSrc}
-					alt={alt}
-					fill
-					className="object-cover transition-transform duration-700 group-hover/card:scale-[1.07]"
-					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
-				/>
-			) : (
-				<div className="absolute inset-0 flex flex-col items-center justify-center">
-					<div className="absolute -end-16 -top-20 size-64 rounded-full border-[40px] border-white/10" />
+			<Image
+				src={coverSrc}
+				alt={alt}
+				fill
+				className="object-cover transition-transform duration-700 group-hover/card:scale-[1.07]"
+				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
+			/>
 
-					<div className="absolute -start-20 -bottom-24 size-72 rounded-full border-[45px] border-white/10" />
-
-					<div
-						className={cn("absolute size-40 rounded-full blur-3xl", theme.glow)}
-					/>
-
-					<div className="relative flex size-[86px] items-center justify-center rounded-[28px] border border-white/25 bg-white/15 text-white shadow-2xl backdrop-blur-md transition-transform duration-500 group-hover/card:rotate-3 group-hover/card:scale-110">
-						<Icon className="size-11" strokeWidth={1.7} />
-					</div>
-
-					{subject && (
-						<span className="relative mt-4 max-w-[85%] truncate text-sm font-extrabold tracking-tight text-white drop-shadow-sm">
-							{subject}
-						</span>
-					)}
-				</div>
-			)}
-
-			<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
+			<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/15" />
 
 			{/* GRADE */}
 
@@ -374,26 +358,61 @@ function MetaItem({
 export function CourseMetaRow({
 	totalLessons,
 	durationHours,
+	durationMinutes,
 	enrollments,
 	rating,
 	className,
 }: {
 	totalLessons?: number;
+	/** Course-level estimate typed into the details form. */
 	durationHours?: number | null;
+	/** Real total of the lessons' own durations — preferred when present. */
+	durationMinutes?: number | null;
 	enrollments?: number;
 	rating?: number;
 	className?: string;
 }) {
+	const t = useTranslations("courses");
 	const locale = useLocale();
 
-	const formatNumber = (value: number) =>
-		new Intl.NumberFormat(locale).format(value);
+	// Persian/Pashto cards should read ۱۲, not 12 — format every number here
+	// and hand the formatted string to the message.
+	const num = (value: number) =>
+		new Intl.NumberFormat(locale).format(Math.round(value));
+
+	// Real lesson time wins over the manually entered hour estimate, so a
+	// course whose lessons were timed never shows a stale "8 ساعت".
+	const hasExactDuration = durationMinutes != null && durationMinutes > 0;
+	const hasHourEstimate = durationHours != null && durationHours > 0;
+	const hasLessons = totalLessons != null && totalLessons > 0;
+	const hasEnrollments = enrollments != null && enrollments > 0;
+
+	const durationLabel = React.useMemo(() => {
+		if (hasExactDuration) {
+			const { hours, minutes } = splitDuration(durationMinutes ?? 0);
+			if (hours === 0) return t("durationMinutes", { minutes: num(minutes) });
+			if (minutes === 0) return t("duration", { hours: num(hours) });
+			return t("durationHoursMinutes", {
+				hours: num(hours),
+				minutes: num(minutes),
+			});
+		}
+		if (hasHourEstimate) {
+			return t("duration", { hours: num(durationHours ?? 0) });
+		}
+		return null;
+		// `num` is derived from locale + t, both listed below.
+	}, [
+		durationHours,
+		durationMinutes,
+		hasExactDuration,
+		hasHourEstimate,
+		locale,
+		t,
+	]);
 
 	const hasData =
-		totalLessons != null ||
-		durationHours != null ||
-		enrollments != null ||
-		rating != null;
+		hasLessons || durationLabel != null || hasEnrollments || (rating ?? 0) > 0;
 
 	if (!hasData) return null;
 
@@ -401,16 +420,18 @@ export function CourseMetaRow({
 		<div
 			className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", className)}
 		>
-			{totalLessons != null && (
-				<MetaItem icon={BookOpen}>{formatNumber(totalLessons)}</MetaItem>
+			{hasLessons && (
+				<MetaItem icon={BookOpen}>
+					{t("lessons", { count: num(totalLessons ?? 0) })}
+				</MetaItem>
 			)}
 
-			{durationHours != null && (
-				<MetaItem icon={Clock3}>{formatNumber(durationHours)}h</MetaItem>
-			)}
+			{durationLabel && <MetaItem icon={Clock3}>{durationLabel}</MetaItem>}
 
-			{enrollments != null && (
-				<MetaItem icon={Users}>{formatNumber(enrollments)}</MetaItem>
+			{hasEnrollments && (
+				<MetaItem icon={Users}>
+					{t("enrollments", { count: num(enrollments ?? 0) })}
+				</MetaItem>
 			)}
 
 			{rating != null && rating > 0 && (
@@ -433,20 +454,45 @@ function InstructorByline({
 }: {
 	instructor?: CourseMeta["instructor"];
 }) {
+	const t = useTranslations("courses");
+
 	if (!instructor) return null;
+
+	// Admin-authored courses are published by the platform: never show the
+	// admin's personal name or avatar on a public card.
+	const isPlatform = Boolean(instructor.is_platform);
+	const displayName = isPlatform
+		? t("platformAuthor")
+		: (instructor.full_name ?? "—");
 
 	return (
 		<div className="flex min-w-0 items-center gap-2.5">
 			<Avatar className="size-8 shrink-0 border-2 border-white shadow-sm dark:border-white/10">
-				<AvatarImage src={instructor.avatar_url ?? undefined} />
+				{isPlatform ? null : (
+					<AvatarImage src={instructor.avatar_url ?? undefined} />
+				)}
 
-				<AvatarFallback className="bg-[#eee9ff] text-[11px] font-bold text-[#694bd2]">
-					{instructor.full_name?.[0] ?? "?"}
+				<AvatarFallback
+					className={cn(
+						"text-[11px] font-bold",
+						isPlatform
+							? "bg-[#694bd2] text-white"
+							: "bg-[#eee9ff] text-[#694bd2]"
+					)}
+				>
+					{isPlatform ? (
+						<BadgeCheck className="size-4" />
+					) : (
+						(displayName[0] ?? "?")
+					)}
 				</AvatarFallback>
 			</Avatar>
 
-			<span className="truncate text-[11px] font-semibold text-slate-600 dark:text-slate-300">
-				{instructor.full_name ?? "—"}
+			<span className="flex min-w-0 items-center gap-1 truncate text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+				<span className="truncate">{displayName}</span>
+				{isPlatform && (
+					<BadgeCheck className="size-3.5 shrink-0 text-[#694bd2] dark:text-violet-300" />
+				)}
 			</span>
 		</div>
 	);
@@ -533,10 +579,10 @@ export function CatalogCourseCard({
 				/>
 			</Link>
 
-			<div className="flex flex-1 flex-col p-4 sm:p-5">
+			<div className="flex flex-1 flex-col p-3.5 sm:p-4">
 				{/* SUBJECT + LANGUAGE */}
 
-				<div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+				<div className="mb-2 flex flex-wrap items-center justify-between gap-2">
 					<SubjectBadge subject={course.subject} />
 
 					{course.language && (
@@ -551,7 +597,7 @@ export function CatalogCourseCard({
 				{/* TITLE */}
 
 				<Link href={href}>
-					<h3 className="line-clamp-2 text-[15px] font-extrabold leading-6 text-[#19243b] transition-colors hover:text-[#694bd2] dark:text-slate-100">
+					<h3 className="line-clamp-2 text-[14.5px] font-extrabold leading-6 text-[#19243b] transition-colors hover:text-[#694bd2] dark:text-slate-100">
 						{course.title}
 					</h3>
 				</Link>
@@ -559,7 +605,7 @@ export function CatalogCourseCard({
 				{/* DESCRIPTION */}
 
 				{course.subtitle && (
-					<p className="mt-2 line-clamp-2 text-[11px] leading-5 text-slate-500 dark:text-slate-400">
+					<p className="mt-1.5 line-clamp-2 text-[11px] leading-5 text-slate-500 dark:text-slate-400">
 						{course.subtitle}
 					</p>
 				)}
@@ -567,7 +613,7 @@ export function CatalogCourseCard({
 				{/* INSTRUCTOR */}
 
 				{course.instructor && (
-					<div className="mt-4">
+					<div className="mt-2.5">
 						<InstructorByline instructor={course.instructor} />
 					</div>
 				)}
@@ -575,10 +621,11 @@ export function CatalogCourseCard({
 				{/* META */}
 
 				{showMeta && (
-					<div className="mt-4 rounded-xl border border-[#f0eff6] bg-[#fafaff] p-3 dark:border-white/5 dark:bg-white/[.03]">
+					<div className="mt-2.5 rounded-xl border border-[#f0eff6] bg-[#fafaff] px-3 py-2 dark:border-white/5 dark:bg-white/[.03]">
 						<CourseMetaRow
 							totalLessons={course.total_lessons}
 							durationHours={course.estimated_duration_hours}
+							durationMinutes={course.total_duration_minutes}
 							enrollments={course.total_enrollments}
 							rating={course.average_rating}
 						/>
@@ -587,8 +634,8 @@ export function CatalogCourseCard({
 
 				{/* BUTTON */}
 
-				<div className="mt-auto pt-5">
-					<Button asChild className={PRIMARY_BUTTON}>
+				<div className="mt-auto pt-3">
+					<Button asChild className="button-primary h-9 w-full text-xs">
 						<Link
 							href={href}
 							className="flex items-center justify-center gap-2"
@@ -703,6 +750,7 @@ export function EnrolledCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						rating={course.average_rating}
 					/>
 				</div>
@@ -822,6 +870,7 @@ export function InstructorCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						enrollments={course.total_enrollments}
 						rating={course.average_rating}
 					/>
@@ -925,6 +974,7 @@ export function AdminCourseCard({
 					<CourseMetaRow
 						totalLessons={course.total_lessons}
 						durationHours={course.estimated_duration_hours}
+						durationMinutes={course.total_duration_minutes}
 						enrollments={course.total_enrollments}
 						rating={course.average_rating}
 					/>

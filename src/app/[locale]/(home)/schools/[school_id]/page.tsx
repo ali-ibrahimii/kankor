@@ -25,7 +25,7 @@ export default async function SchoolPublicPage({
 	const supabase = await createClient();
 	const { data: school } = await supabase
 		.from("schools")
-		.select("id, name, address, province_id")
+		.select("id, name, address, province_id, cover_image_url, logo_url")
 		.eq("id", school_id)
 		.maybeSingle();
 	if (!school) notFound();
@@ -53,16 +53,29 @@ export default async function SchoolPublicPage({
 				.eq("role", "student"),
 		]);
 	return (
-		<main className="min-h-screen bg-[#f8f9fd] px-4 py-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:py-16 lg:px-8">
+		<main className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:pt-10 sm:pb-16 lg:px-8">
 			<div className="mx-auto max-w-6xl">
 				<section className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_90%_5%,rgba(139,119,255,.4),transparent_32%),linear-gradient(125deg,#121d32,#252b49)] p-6 text-white shadow-xl sm:p-10 lg:p-12">
 					<div className="absolute -end-12 -top-20 size-64 rounded-full border-[42px] border-white/[.06]" />
 					<div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
 						<div>
-							<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold text-[#c6f69d]">
-								<School className="size-4" />
-								{t("schoolLabel")}
-							</span>
+							<div className="flex items-center gap-3">
+								{resolveCoverSrc(school.logo_url) ? (
+									<span className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-white/10">
+										<Image
+											src={resolveCoverSrc(school.logo_url) as string}
+											alt={school.name ?? ""}
+											fill
+											sizes="56px"
+											className="object-cover"
+										/>
+									</span>
+								) : null}
+								<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold text-[#c6f69d]">
+									<School className="size-4" />
+									{t("schoolLabel")}
+								</span>
+							</div>
 							<h1 className="mt-5 text-3xl font-black sm:text-5xl">
 								{school.name || t("schoolLabel")}
 							</h1>

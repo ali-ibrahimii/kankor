@@ -257,6 +257,20 @@ export const routes = {
 					searchParams?: Record<string, string>,
 					options: { locale?: string; isAbsolute?: boolean } = {}
 				) => buildPath("/d/admin/courses", {}, searchParams, options),
+				/** Course builder — where "New course" lands after creating a course. */
+				new: {
+					page: (
+						params: { course_id: string },
+						searchParams?: Record<string, string>,
+						options: { locale?: string; isAbsolute?: boolean } = {}
+					) =>
+						buildPath(
+							"/d/admin/courses/new/:course_id",
+							params,
+							searchParams,
+							options
+						),
+				},
 				slug: {
 					page: (
 						params: { slug: string },
@@ -996,6 +1010,12 @@ export const routes = {
 			},
 		},
 		tests: {
+			kankor: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/tests/kankor", {}, searchParams, options),
+			},
 			passed: {
 				page: (
 					searchParams?: Record<string, string>,

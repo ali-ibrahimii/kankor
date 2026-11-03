@@ -2,12 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { InfoIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
 import { RelatedResourcesSelector } from "@/components/blocks/RelatedResourcesSelector";
+import { ImageUploadField } from "@/components/blocks/shared/image-upload-field";
 import { Button } from "@/components/ui/button";
+import { Dropzone } from "@/components/ui/dropzone";
+import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface FormOption {
@@ -41,6 +43,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { normalizedLocale } from "@/i18n";
+import { IMAGE_ACCEPT, IMAGE_LIMITS } from "@/lib/r2/public-images";
+import {
+	formatImageLimit,
+	uploadImageFile,
+	validateImageFile,
+} from "@/lib/r2/upload-client";
 import { createCourse, getCourseForEdit, updateCourse } from "./actions";
 import type { NewCourseFormValues } from "./types";
 
@@ -57,6 +65,8 @@ export interface NewCourseDialogProps {
 	onUpdated?: (values: { title: string }) => void;
 	/** When set, new courses are created as agency-owned (see createCourse). */
 	agencyId?: string;
+	/** Admin panel: publish as the platform ("Abzar Kankor"), not as the admin. */
+	platformAuthored?: boolean;
 }
 
 const DEFAULT_VALUES: Omit<NewCourseFormValues, "language"> = {
@@ -73,6 +83,13 @@ const DEFAULT_VALUES: Omit<NewCourseFormValues, "language"> = {
 	book_id: null,
 	subject_id: null,
 	grade_id: null,
+	learning_objectives: "",
+	prerequisites: "",
+	estimated_duration_hours: "",
+	promo_video_url: "",
+	welcome_message: "",
+	seo_title: "",
+	seo_description: "",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -84,6 +101,7 @@ export function NewCourseDialog({
 	courseId,
 	onUpdated,
 	agencyId,
+	platformAuthored,
 }: NewCourseDialogProps) {
 	const t = useTranslations("courseBuilder");
 	const locale = useLocale();
@@ -91,6 +109,12 @@ export function NewCourseDialog({
 	const isEditMode = !!courseId;
 	const [isPending, setIsPending] = React.useState(false);
 	const [isLoadingDetails, setIsLoadingDetails] = React.useState(isEditMode);
+	/** Create mode: the cover is uploaded right after the course row exists. */
+	const [pendingCover, setPendingCover] = React.useState<File | null>(null);
+	const [pendingCoverPreview, setPendingCoverPreview] = React.useState<
+		string | null
+	>(null);
+	const [isUploadingCover, setIsUploadingCover] = React.useState(false);
 
 	const client = createClient();
 
@@ -149,6 +173,57 @@ export function NewCourseDialog({
 		setValues((prev) => ({ ...prev, [key]: value }));
 	}
 
+	React.useEffect(() => {
+		if (!pendingCover) {
+			setPendingCoverPreview(null);
+			return;
+		}
+		const url = URL.createObjectURL(pendingCover);
+		setPendingCoverPreview(url);
+		return () => URL.revokeObjectURL(url);
+	}, [pendingCover]);
+
+	function handlePendingCover(files: File[]) {
+		const file = files[0];
+		if (!file) return;
+		const invalid = validateImageFile(file);
+		if (invalid) {
+			toast.error(
+				invalid === "invalidType"
+					? t("newCourse.coverInvalidType")
+					: t("newCourse.coverTooLarge", { max: formatImageLimit() })
+			);
+			return;
+		}
+		setPendingCover(file);
+	}
+
+	/**
+	 * Pushes the cover chosen before the course existed into Cloudflare R2.
+	 * The course is already created at this point, so a failure here must not
+	 * lose the course: it is reported and the builder still opens.
+	 */
+	async function uploadPendingCover(courseId: string) {
+		if (!pendingCover) return;
+		setIsUploadingCover(true);
+		try {
+			await uploadImageFile({
+				scope: "course",
+				ownerId: courseId,
+				file: pendingCover,
+				target: "cover",
+			});
+			setPendingCover(null);
+			toast.success(t("newCourse.coverUploaded"));
+		} catch (error) {
+			toast.error(
+				error instanceof Error ? error.message : t("newCourse.coverFailed")
+			);
+		} finally {
+			setIsUploadingCover(false);
+		}
+	}
+
 	// Load fresh details every time the edit dialog opens.
 	React.useEffect(() => {
 		if (!open || !courseId) return;
@@ -188,11 +263,14 @@ export function NewCourseDialog({
 				return;
 			}
 
-			const result = await createCourse(values, agencyId);
+			const result = await createCourse(values, agencyId, {
+				platformAuthored,
+			});
 			if (!result.success) {
 				toast.error(result.error);
 				return;
 			}
+			await uploadPendingCover(result.data.courseId);
 			onOpenChange(false);
 			router.push(`${basePath}/courses/new/${result.data.courseId}`);
 		} finally {
@@ -202,7 +280,7 @@ export function NewCourseDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="sm:max-w-lg">
+			<DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-2xl">
 				<form onSubmit={handleSubmit}>
 					<DialogHeader>
 						<DialogTitle>
@@ -221,6 +299,68 @@ export function NewCourseDialog({
 						</div>
 					) : (
 						<div className="mt-4 space-y-4">
+							{/* Cover chosen before the course exists — uploaded to R2 right
+							    after creation (see uploadPendingCover). */}
+							{!isEditMode ? (
+								<div className="space-y-1.5">
+									<Label>{t("newCourse.coverLabel")}</Label>
+									<Dropzone
+										accept={IMAGE_ACCEPT}
+										disabled={isPending || isUploadingCover}
+										onFilesSelected={handlePendingCover}
+										className="relative aspect-video overflow-hidden rounded-2xl border border-dashed border-border bg-muted/30 hover:border-primary/50"
+									>
+										{pendingCoverPreview ? (
+											// biome-ignore lint/performance/noImgElement: local blob preview
+											<img
+												src={pendingCoverPreview}
+												alt={t("newCourse.coverLabel")}
+												className="size-full object-cover"
+											/>
+										) : (
+											<div className="flex h-full flex-col items-center justify-center gap-1.5 p-3 text-center">
+												<p className="text-[11px] font-bold text-muted-foreground">
+													{t("newCourse.coverHint")}
+												</p>
+												<p className="text-[10px] text-muted-foreground/70">
+													{t("newCourse.coverFormats", {
+														max: Math.round(
+															IMAGE_LIMITS.maxSizeBytes / 1024 / 1024
+														),
+													})}
+												</p>
+											</div>
+										)}
+									</Dropzone>
+									{pendingCover ? (
+										<p className="text-[10px] text-muted-foreground">
+											{pendingCover.name}
+										</p>
+									) : null}
+								</div>
+							) : null}
+
+							{/* Cover (stored in Cloudflare R2) */}
+							{isEditMode && courseId ? (
+								<div className="space-y-1.5">
+									<Label>{t("editCourse.coverLabel")}</Label>
+									<ImageUploadField
+										scope="course"
+										ownerId={courseId}
+										target="cover"
+										value={values.cover_image_url}
+										onUploaded={({ url }) => {
+											patch("cover_image_url", url);
+											router.refresh();
+										}}
+										onRemoved={() => {
+											patch("cover_image_url", null);
+											router.refresh();
+										}}
+									/>
+								</div>
+							) : null}
+
 							{/* Title */}
 							<div className="space-y-1.5">
 								<Label htmlFor="cb-title">
@@ -432,6 +572,126 @@ export function NewCourseDialog({
 									/>
 								</div>
 							)}
+
+							{/* ── The rest of the course record ─────────────────────────── */}
+							<div className="mt-4 space-y-4 border-t pt-4">
+								<div>
+									<p className="text-sm font-bold">
+										{t("newCourse.moreDetails")}
+									</p>
+									<p className="mt-0.5 text-xs text-muted-foreground">
+										{t("newCourse.moreDetailsHint")}
+									</p>
+								</div>
+
+								<div className="grid grid-cols-2 gap-3">
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-duration">
+											{t("newCourse.durationHours")}
+										</Label>
+										<Input
+											id="cb-duration"
+											type="number"
+											min="0"
+											step="0.5"
+											value={values.estimated_duration_hours}
+											onChange={(e) =>
+												patch("estimated_duration_hours", e.target.value)
+											}
+											placeholder="8"
+										/>
+									</div>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-promo">
+											{t("newCourse.promoVideo")}
+										</Label>
+										<Input
+											id="cb-promo"
+											type="url"
+											dir="ltr"
+											value={values.promo_video_url}
+											onChange={(e) => patch("promo_video_url", e.target.value)}
+											placeholder="https://youtube.com/watch?v=…"
+										/>
+									</div>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-objectives">
+										{t("newCourse.objectives")}
+									</Label>
+									<Textarea
+										id="cb-objectives"
+										value={values.learning_objectives}
+										onChange={(e) =>
+											patch("learning_objectives", e.target.value)
+										}
+										placeholder={t("newCourse.objectivesPlaceholder")}
+										rows={3}
+									/>
+									<p className="text-[11px] text-muted-foreground">
+										{t("newCourse.onePerLine")}
+									</p>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-prereqs">
+										{t("newCourse.prerequisites")}
+									</Label>
+									<Textarea
+										id="cb-prereqs"
+										value={values.prerequisites}
+										onChange={(e) => patch("prerequisites", e.target.value)}
+										placeholder={t("newCourse.prerequisitesPlaceholder")}
+										rows={3}
+									/>
+									<p className="text-[11px] text-muted-foreground">
+										{t("newCourse.onePerLine")}
+									</p>
+								</div>
+
+								<div className="space-y-1.5">
+									<Label htmlFor="cb-welcome">
+										{t("newCourse.welcomeMessage")}
+									</Label>
+									<Textarea
+										id="cb-welcome"
+										value={values.welcome_message}
+										onChange={(e) => patch("welcome_message", e.target.value)}
+										placeholder={t("newCourse.welcomePlaceholder")}
+										rows={2}
+									/>
+								</div>
+
+								<div className="space-y-3 rounded-xl border border-dashed p-3">
+									<p className="text-xs font-bold text-muted-foreground">
+										{t("newCourse.seoSection")}
+									</p>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-seo-title">
+											{t("newCourse.seoTitle")}
+										</Label>
+										<Input
+											id="cb-seo-title"
+											value={values.seo_title}
+											onChange={(e) => patch("seo_title", e.target.value)}
+											maxLength={60}
+										/>
+									</div>
+									<div className="space-y-1.5">
+										<Label htmlFor="cb-seo-description">
+											{t("newCourse.seoDescription")}
+										</Label>
+										<Textarea
+											id="cb-seo-description"
+											value={values.seo_description}
+											onChange={(e) => patch("seo_description", e.target.value)}
+											rows={2}
+											maxLength={160}
+										/>
+									</div>
+								</div>
+							</div>
 
 							<div className="border-t pt-4 mt-4 space-y-4">
 								<RelatedResourcesSelector

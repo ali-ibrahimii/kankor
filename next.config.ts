@@ -44,6 +44,23 @@ const nextConfig: NextConfig = {
 				hostname: "storage.googleapis.com",
 				pathname: "/abzarkankorv2.firebasestorage.app/**",
 			},
+			// Cloudflare R2 public images (course covers, school logos). The
+			// custom domain comes from the deployment env; `*.r2.dev` is the
+			// default public development host R2 hands out. Without a public
+			// domain the app serves the same objects from /api/media (same
+			// origin), which needs no pattern here.
+			...(process.env.NEXT_PUBLIC_R2_PUBLIC_HOSTNAME
+				? [
+						{
+							protocol: "https" as const,
+							hostname: process.env.NEXT_PUBLIC_R2_PUBLIC_HOSTNAME.replace(
+								/^https?:\/\//,
+								""
+							).replace(/\/+$/, ""),
+						},
+					]
+				: []),
+			{ protocol: "https" as const, hostname: "**.r2.dev" },
 		],
 	},
 	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],

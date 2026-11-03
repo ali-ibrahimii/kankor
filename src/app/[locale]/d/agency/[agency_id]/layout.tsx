@@ -186,7 +186,7 @@ export default async function AgencyLayout({ children, params }: Props) {
 				<DashboardTopbar
 					actions={
 						<>
-							<LocaleSwitcher responsive={false} />
+							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>
 					}

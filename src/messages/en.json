@@ -269,7 +269,13 @@
 			"earnings": "Earnings",
 			"discounts": "Discounts",
 			"settings": "Settings",
-			"notifications": "Notifications"
+			"notifications": "Notifications",
+			"branding": {
+				"title": "School branding",
+				"description": "The school cover and logo are stored in Cloudflare and shown on cards and the public school page.",
+				"coverLabel": "Cover image",
+				"logoLabel": "Logo"
+			}
 		},
 		"agency": {
 			"roleLabel": "Agency",
@@ -537,7 +543,24 @@
 				"slide_presentation": "Slides",
 				"external_resource": "Resource",
 				"code_playground": "Code"
-			}
+			},
+			"completeAndNext": "Complete & next",
+			"currentLesson": "Current lesson",
+			"noContentTitle": "This lesson has no content yet",
+			"noContentDescription": "You can mark it complete and move on — the material will be added later.",
+			"startNextLesson": "Go to next lesson",
+			"unnamedModule": "Course lessons",
+			"minutes": "{count} min",
+			"lessonsProgress": "{done} of {total} lessons",
+			"completedLessonsHint": "{done} of {total} lessons complete",
+			"moduleNumber": "Section {number}",
+			"openCourseContent": "Open lesson list",
+			"closeCourseContent": "Close lesson list",
+			"openDocument": "Open document",
+			"openResource": "Open",
+			"lastLessonHint": "This is the last lesson — completing it finishes the course.",
+			"upNext": "Up next",
+			"unsupportedBlock": "This part of the lesson cannot be displayed here yet — use the open button if a link is available."
 		},
 		"view": "View Course",
 		"sortBy": "Sort by",
@@ -574,7 +597,10 @@
 		"agencySubtitle": "Courses owned and published by your agency",
 		"published": "Course published.",
 		"unpublished": "Course unpublished.",
-		"publishToggleFailed": "Failed to update publish status."
+		"publishToggleFailed": "Failed to update publish status.",
+		"durationMinutes": "{minutes} min",
+		"durationHoursMinutes": "{hours}h {minutes}m",
+		"platformAuthor": "Abzar Kankor"
 	},
 	"certificates": {
 		"list": {
@@ -964,6 +990,16 @@
 			"submit": "Resend Confirmation Email",
 			"submitting": "Sending…",
 			"successBody": "We've sent a new confirmation link to your inbox. Click the link to activate your account."
+		},
+		"signupPromo": {
+			"eyebrow": "Join Abzar Kankor",
+			"title": "Learn with purpose. Grow with confidence.",
+			"description": "Create your account to explore focused courses, follow practical learning roadmaps, and keep your progress moving forward.",
+			"benefitCourses": "Explore courses created by Abzar Kankor and trusted educators.",
+			"benefitRoadmaps": "Follow clear roadmaps that make every next step easy to see.",
+			"benefitCommunity": "Build skills alongside students and educators in one learning community.",
+			"footer": "Your learning journey starts with one account.",
+			"accountTypeLabel": "Choose your account type"
 		}
 	},
 	"landing": {
@@ -1016,10 +1052,12 @@
 			"openMenu": "Open menu",
 			"closeMenu": "Close menu",
 			"roadmap": "Roadmap",
-			"themeToggle": "Toggle light or dark theme"
+			"themeToggle": "Toggle light or dark theme",
+			"school": "School"
 		},
 		"hero": {
 			"badge": "For Afghan students",
+			"imageAlt": "A student showing the Abzar Kankor learning dashboard on her smartphone",
 			"heading": "Study anywhere. <accent>Pass the Kankor.</accent>",
 			"subtitle": "The complete offline learning app — curriculum-aligned school courses, 13,000+ flashcards, mock Kankor exams, and a full digital library. No internet required.",
 			"ctaPrimary": "Explore the App",
@@ -1119,7 +1157,101 @@
 			"paths": ["Mathematics", "Physics", "Biology", "Chemistry"],
 			"cardTitle": "Prepare with confidence",
 			"cardText": "Pick a subject, follow lessons at your pace, and keep track of your progress."
-		}
+		},
+		"schoolMenu": {
+			"eyebrow": "School Learning Hub",
+			"title": "Every school & Kankor resource in one place",
+			"description": "Jump straight into school courses, official textbooks, general reading, and Kankor forms.",
+			"all": "View all courses",
+			"subjects": "Key Kankor subjects",
+			"gradesLabel": "High-school grades",
+			"grades": ["Grade 10", "Grade 11", "Grade 12"],
+			"paths": [
+				"Mathematics",
+				"Physics",
+				"Chemistry",
+				"Biology",
+				"History & Geography",
+				"Dari & Pashto"
+			],
+			"cardTitle": "From classroom lessons to Kankor day",
+			"cardText": "Learn every subject step by step, review with Leitner flashcards, and test yourself with real exam forms.",
+			"verify": "Verify certificate",
+			"classrooms": "Live classrooms",
+			"items": {
+				"courses": {
+					"title": "School Video Courses",
+					"description": "Structured Grade 10–12 lessons taught by expert instructors"
+				},
+				"schoolBooks": {
+					"title": "School Textbooks",
+					"description": "Official curriculum PDF textbooks organized by grade"
+				},
+				"library": {
+					"title": "Library & General Books",
+					"description": "General reading, study guides, and university major handbooks"
+				},
+				"kankorForms": {
+					"title": "General Kankor Forms",
+					"description": "Provincial Kankor exam forms and timed mock tests"
+				},
+				"flashcards": {
+					"title": "Smart Flashcards",
+					"description": "Spaced-repetition decks for formulas, dates, and terms"
+				},
+				"roadmap": {
+					"title": "Study Roadmap",
+					"description": "Step-by-step preparation plan leading up to exam day"
+				}
+			}
+		},
+		"shelves": {
+			"viewMore": "View more",
+			"prev": "Previous",
+			"next": "Next",
+			"courses": {
+				"eyebrow": "Step-by-step video lessons",
+				"title": "School Courses",
+				"subtitle": "Core high-school subjects and Kankor problem-solving taught clearly by experienced teachers."
+			},
+			"schoolBooks": {
+				"eyebrow": "Official curriculum",
+				"title": "School Textbooks",
+				"subtitle": "Direct access to official school textbooks organized cleanly by grade and subject."
+			},
+			"generalBooks": {
+				"eyebrow": "Digital library",
+				"title": "General Books & Major Guides",
+				"subtitle": "Curated study-skills handbooks, faculty selection guides, and reference books."
+			},
+			"decks": {
+				"eyebrow": "Active recall with Leitner",
+				"title": "Flashcards",
+				"subtitle": "Lock in formulas, scientific terms, and historical dates in just minutes a day."
+			},
+			"kankorForms": {
+				"eyebrow": "Authentic exam simulation",
+				"title": "General Kankor Forms",
+				"subtitle": "Timed provincial exam forms and subject drills to benchmark your readiness."
+			}
+		},
+		"partners": {
+			"navLabel": "Partner Universities & Schools",
+			"eyebrow": "Academic Partner Network",
+			"title": "Universities & Schools Collaborating with Abzar Kankor",
+			"subtitle": "Working alongside leading universities and high schools to bring accessible digital learning across provinces.",
+			"filterAll": "All institutions",
+			"filterUniversities": "Universities",
+			"filterSchools": "Schools",
+			"universityBadge": "Partner University",
+			"schoolBadge": "Partner School",
+			"verifiedPartner": "Verified Partner",
+			"viewSchool": "View school page",
+			"ctaTitle": "Representing a school, academy, or university faculty?",
+			"ctaSubtitle": "Launch blended classrooms, digital libraries, and mock exams for your students on Abzar Kankor.",
+			"ctaButton": "Partner with us"
+		},
+		"localeSwitcherLabel": "Language"
 	},
 	"quizBuilder": {
 		"title": "Quiz Builder",
@@ -1475,14 +1607,36 @@
 			"priceCredits": "Price (credits)",
 			"create": "Create & Build",
 			"visibility": "Visibility",
-			"visibilityDescription": "Should this course be visible to all students?"
+			"visibilityDescription": "Should this course be visible to all students?",
+			"coverLabel": "Course card image",
+			"coverHint": "Click to upload the cover image, or drop a file here",
+			"coverFormats": "JPG, PNG, WebP or AVIF up to {max}MB — saved to Cloudflare once the course exists",
+			"coverInvalidType": "This file type is not supported",
+			"coverTooLarge": "Image is larger than {max}",
+			"coverUploaded": "Course image saved to Cloudflare",
+			"coverFailed": "The course was created but the image upload failed — retry from the edit dialog",
+			"moreDetails": "More course details",
+			"moreDetailsHint": "These appear on the public course page and in search results.",
+			"durationHours": "Estimated duration (hours)",
+			"promoVideo": "Promo video (link)",
+			"objectives": "Learning objectives",
+			"objectivesPlaceholder": "Build a Next.js app by the end\nUnderstand routing and components",
+			"onePerLine": "One item per line.",
+			"prerequisites": "Prerequisites",
+			"prerequisitesPlaceholder": "Basic HTML and CSS\nNode.js installed",
+			"welcomeMessage": "Welcome message",
+			"welcomePlaceholder": "Welcome to this course…",
+			"seoSection": "SEO (optional)",
+			"seoTitle": "SEO title",
+			"seoDescription": "SEO description"
 		},
 		"editCourse": {
 			"title": "Edit Course Details",
 			"description": "Update your course's basic details.",
 			"save": "Save Changes",
 			"saving": "Saving…",
-			"saved": "Course details updated."
+			"saved": "Course details updated.",
+			"coverLabel": "Course card image (Cloudflare)"
 		},
 		"header": {
 			"back": "Back to courses",
@@ -1604,7 +1758,30 @@
 				"quiz": "Quiz",
 				"assignment": "Assignment"
 			}
-		}
+		},
+		"contentLoadFailed": "This course's content could not be loaded — try reloading the page.",
+		"loading": "Loading the course builder…",
+		"notFoundTitle": "This course could not be found",
+		"notFoundDescription": "It may have been deleted, or its address has changed.",
+		"errorTitle": "This page could not be loaded",
+		"errorDescription": "Something unexpected went wrong. Try again — if it keeps happening, send this message to support.",
+		"retry": "Try again",
+		"backToCourses": "Back to courses"
+	},
+	"imageUpload": {
+		"dropHint": "Click to upload an image, or drop a file here",
+		"preview": "Image preview",
+		"formats": "JPG, PNG, WebP or AVIF up to {max}",
+		"upload": "Upload image",
+		"replace": "Replace image",
+		"remove": "Remove image",
+		"uploaded": "Image saved to Cloudflare",
+		"removed": "Image removed",
+		"uploadFailed": "Image upload failed",
+		"finalizing": "Saving…",
+		"invalidType": "This file type is not supported",
+		"tooLarge": "Image is larger than {max}",
+		"storedInR2": "Stored in Cloudflare R2"
 	},
 	"flashcardBuilder": {
 		"meta": {
@@ -2013,22 +2190,37 @@
 		"title": "About Us",
 		"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
 		"hero": {
-			"title": "Empowering Learners Everywhere",
-			"badge": "About Our Platform",
-			"description": "Abzarkankor is an online educational platform that makes learning more accessible and engaging. We offer high-quality educational resources, interactive tools, and features that help students develop their skills and achieve their goals.",
-			"subtitle": "High-quality education: accessible, engaging, and always with you — online or offline, on any device",
+			"title": "Quality education for every student, <accent>everywhere</accent>",
+			"badge": "About our platform",
+			"description": "Abzar Kankor is a learning platform that makes education more accessible and more engaging. We provide high-quality resources and interactive tools that help students build skills and reach their goals.",
+			"subtitle": "School courses, smart flashcards, mock Kankor exams and a digital library — all in one place, online or offline.",
 			"cta": {
-				"primary": "Get Started",
-				"secondary": "Watch Demo"
+				"primary": "Start learning",
+				"secondary": "Watch the demo"
+			},
+			"panel": {
+				"eyebrow": "Learning path",
+				"title": "This week's progress",
+				"progressLabel": "Kankor mathematics",
+				"progressValue": "76%",
+				"lesson": "Lessons completed",
+				"lessonValue": "12 / 16",
+				"quiz": "Quiz this week",
+				"quizValue": "85%",
+				"streak": "Day streak",
+				"streakValue": "14 days",
+				"certificate": "Course certificate",
+				"certificateDesc": "Issued after lessons and exams are complete",
+				"verified": "Verifiable by code"
 			}
 		},
 		"stats": {
-			"students": "Active Students",
+			"students": "Active students",
 			"courses": "Courses",
-			"schools": "Active Schools",
-			"rating": "App Rating",
+			"schools": "Active schools",
+			"rating": "User rating",
 			"value": {
-				"students": "1M+",
+				"students": "2,480+",
 				"courses": "100+",
 				"schools": "120+",
 				"rating": "4.9★"
@@ -2041,7 +2233,8 @@
 				"Deliver high-quality lessons to every learner.",
 				"Make learning inclusive across languages and devices.",
 				"Support long-term progress with practical tools."
-			]
+			],
+			"badge": "Our purpose"
 		},
 		"features": {
 			"title": "Why Choose Us",
@@ -2069,6 +2262,25 @@
 			"certified": {
 				"title": "Certified Courses",
 				"desc": "Earn recognized certificates as you complete courses."
+			},
+			"badge": "Why Abzar Kankor",
+			"specs": {
+				"platforms": {
+					"label": "Platforms",
+					"value": "Web & Android"
+				},
+				"languages": {
+					"label": "Languages",
+					"value": "Dari, Pashto, English"
+				},
+				"offline": {
+					"label": "Access",
+					"value": "Offline after download"
+				},
+				"price": {
+					"label": "To start",
+					"value": "Free"
+				}
 			}
 		},
 		"values": {
@@ -2085,7 +2297,8 @@
 			"quality": {
 				"title": "Quality",
 				"desc": "Trusted content from expert educators."
-			}
+			},
+			"badge": "How we work"
 		},
 		"video": {
 			"badge": "Watch Demo",
@@ -2103,7 +2316,7 @@
 		},
 		"team": {
 			"badge": "Our Team",
-			"title": "Our Team",
+			"title": "The people behind Abzar Kankor",
 			"subtitle": "Meet the people building Abzar Kankor.",
 			"highlight": "Meet Our Dedicated Team of Professionals",
 			"panelTitle": "Built by people who ship with care",
@@ -2222,7 +2435,9 @@
 					"label": "GET IT ON",
 					"name": "Google Play"
 				}
-			}
+			},
+			"badge": "With you on every device",
+			"webCta": "Use the web app"
 		},
 		"contact": {
 			"email": "Email Address",
@@ -2235,7 +2450,109 @@
 			"subtitle": "Have questions or need support? We are here to help.",
 			"socialTitle": "Follow Us on Social Media",
 			"socialSubtitle": "Stay updated with our latest news and announcements.",
-			"responseTime": "We typically respond within 24 hours."
+			"responseTime": "We typically respond within 24 hours.",
+			"addressValue": "Kabul, Afghanistan"
+		},
+		"nav": {
+			"label": "On this page",
+			"story": "Our story",
+			"mission": "Mission",
+			"features": "Features",
+			"audience": "Who it's for",
+			"values": "Values",
+			"faq": "FAQ",
+			"team": "Team",
+			"contact": "Contact",
+			"video": "Demo"
+		},
+		"story": {
+			"badge": "Our story",
+			"title": "From a simple idea to a learning platform",
+			"subtitle": "Abzar Kankor was born from a real need: giving Afghan students access to quality study material, even without internet.",
+			"items": [
+				{
+					"year": "2020",
+					"title": "Starting with a problem",
+					"description": "Seeing how few Kankor preparation resources schools had, our small team began digitising scattered question papers and notes."
+				},
+				{
+					"year": "2021",
+					"title": "The first app release",
+					"description": "The offline app launched with smart flashcards and a school library, and started spreading from school to school."
+				},
+				{
+					"year": "2023",
+					"title": "Classrooms, paths and certificates",
+					"description": "Invite-only classrooms, learning paths and course certificates arrived so instructors and schools could teach and manage here too."
+				},
+				{
+					"year": "Today",
+					"title": "One shared space",
+					"description": "More than 2,480 students, instructors and schools use our web app and Android app to learn, teach and manage education."
+				}
+			]
+		},
+		"audience": {
+			"badge": "Who it's for",
+			"title": "One platform, three clear paths",
+			"subtitle": "Students, instructors and schools each get their own workspace — from enrolling in a course to managing a school's members.",
+			"students": {
+				"title": "For students",
+				"desc": "Browse courses, join a classroom with a code, practise flashcards and work through mock Kankor exams.",
+				"point1": "Lesson progress saved automatically",
+				"point2": "Offline flashcards and library",
+				"point3": "Verifiable certificates",
+				"cta": "Student sign up"
+			},
+			"instructors": {
+				"title": "For instructors",
+				"desc": "Build courses, publish lessons, manage students and follow your earnings.",
+				"point1": "Step-by-step course builder",
+				"point2": "Student and exam management",
+				"point3": "Wallet and credit payouts",
+				"cta": "Instructor sign up"
+			},
+			"schools": {
+				"title": "For schools",
+				"desc": "Add members with invite codes, create classrooms and manage school content in one place.",
+				"point1": "Invite-only classrooms and roles",
+				"point2": "Student progress reporting",
+				"point3": "A public school page",
+				"cta": "School sign up"
+			}
+		},
+		"faq": {
+			"badge": "FAQ",
+			"title": "Everything you need to know",
+			"subtitle": "Short, clear answers to the questions we hear most.",
+			"items": [
+				{
+					"question": "What is Abzar Kankor?",
+					"answer": "Abzar Kankor is a learning platform that brings school courses, flashcards, mock Kankor exams and a digital library to students, instructors and schools on the web and on Android."
+				},
+				{
+					"question": "Does it work without internet?",
+					"answer": "Yes. You can download lessons, flashcards and books and study offline; your progress syncs once you are back online."
+				},
+				{
+					"question": "Does it cost anything?",
+					"answer": "A large part of the content is free. Some specialised courses may have a price, which is always shown before you enrol."
+				},
+				{
+					"question": "How are certificates issued?",
+					"answer": "When every lesson and exam in a course is complete, a course certificate is issued, and anyone can check it with its unique code on the certificate verification page."
+				},
+				{
+					"question": "How can my school join?",
+					"answer": "Create a school account, invite members and instructors with codes, then publish your courses and content. Student progress reports live in the same panel."
+				},
+				{
+					"question": "How do I contact the team?",
+					"answer": "Use the contact section on this page or email our support team — we usually reply within 24 hours."
+				}
+			],
+			"moreTitle": "Didn't find your answer?",
+			"moreCta": "Contact support"
 		}
 	},
 	"search": {
@@ -2264,7 +2581,11 @@
 		"resultsFor": "Results for \"{query}\"",
 		"resultsTitle": "Search results",
 		"emptyQuery": "Type something to search Abzar Kankor.",
-		"viewAllResults": "View all results for \"{query}\""
+		"viewAllResults": "View all results for \"{query}\"",
+		"openSearch": "Search",
+		"clearSearch": "Clear search",
+		"submitSearch": "Search",
+		"placeholder": "Search..."
 	},
 	"decks": {
 		"title": "Decks",
@@ -3732,6 +4053,497 @@
 		"libraries": {
 			"badge": "Your study library",
 			"chips": ["Books & notes", "Organized resources", "Learn anywhere"]
+		}
+	},
+	"schoolHub": {
+		"metaTitle": "Kankor Preparation & School Subjects — Abzar Kankor",
+		"metaDescription": "Abzar Kankor exam-prep courses: mathematics, physics, chemistry, biology, Dari, Pashto, English, Islamic studies, social sciences and test-taking skills, taught by experienced teachers.",
+		"heroBadge": "Abzar Kankor preparation centre",
+		"heroTitle": "From school subjects to Kankor, one clear path",
+		"heroSubtitle": "Curated courses from Abzar Kankor teachers for every Kankor subject, with drills, spaced revision and mock exams.",
+		"searchPlaceholder": "Search a subject: limits, genetics, history, test technique…",
+		"searchClear": "Clear",
+		"statCoursesLabel": "Structured Courses",
+		"statTracksLabel": "Learning Roadmaps",
+		"statFreeLabel": "Free to Start",
+		"tabsLabel": "Learning Tracks",
+		"tabAll": "All Tracks",
+		"tabLanguages": "Languages & literature",
+		"tabSchool": "Grade packages",
+		"levelAll": "All Levels",
+		"levelBeginner": "Beginner",
+		"levelIntermediate": "Intermediate",
+		"levelAdvanced": "Advanced",
+		"onlyFreeLabel": "Free Only",
+		"sortRecommended": "Recommended",
+		"sortPopular": "Most Popular",
+		"sortRating": "Highest Rated",
+		"resultsCount": "{count} active learning items",
+		"resetFilters": "Show all courses",
+		"emptyTitle": "No matching courses found",
+		"emptyDesc": "Try clearing filters or using a broader keyword to explore all learning tracks.",
+		"freeTag": "Free",
+		"creditsTag": "{credits} Credits",
+		"pathsBadge": "Preparation paths",
+		"pathsTitle": "Not sure where to start? Pick your preparation path",
+		"pathsSubtitle": "Each path sets the study order from foundations to the mock exam.",
+		"pathExploreBtn": "View Path Courses",
+		"pathCoursesCount": "{count} courses",
+		"languagesBadge": "Languages & literature",
+		"languagesTitle": "Dari, Pashto and English",
+		"languagesSubtitle": "Grammar, literary devices, vocabulary and reading-comprehension technique.",
+		"schoolBadge": "Grade packages",
+		"schoolTitle": "Complete Grade 11 and Grade 12 programme",
+		"schoolSubtitle": "Every subject of a grade in one path and one order, up to Kankor day.",
+		"lessonsUnit": "{count} lessons",
+		"hoursUnit": "{count} hrs",
+		"startCourseBtn": "Explore & Start Learning",
+		"hostCtaBadge": "For teachers, schools and study centres",
+		"hostCtaTitle": "Are you a teacher? Publish your course on Abzar Kankor",
+		"hostCtaDesc": "Publish structured lessons so students learn at their own pace and arrive ready for Kankor.",
+		"hostCtaPrimary": "Register as an instructor",
+		"hostCtaSecondary": "Verify a Certificate",
+		"statFeaturedLabel": "Featured Courses",
+		"browseCoursesBtn": "Browse courses",
+		"publishCourseBtn": "Publish a course",
+		"featuredBadge": "Featured course",
+		"openFeaturedCourse": "Open {title}",
+		"featuredCoursePosition": "Featured course {current} of {total}",
+		"previousFeaturedCourse": "Previous featured course",
+		"nextFeaturedCourse": "Next featured course",
+		"featuredCoursePagination": "Featured courses",
+		"selectFeaturedCourse": "Show {title}",
+		"pathSelectedBtn": "Hide courses",
+		"pathSequenceEyebrow": "Courses in this roadmap",
+		"pathSequenceSubtitle": "Follow these courses in order to build your skills step by step.",
+		"pathStepLabel": "Step {number}",
+		"pathCloseBtn": "Close roadmap",
+		"tabMath": "Mathematics",
+		"tabScience": "Natural sciences",
+		"tabSocial": "Social studies",
+		"tabExam": "Exam skills",
+		"mathBadge": "Kankor maths foundation",
+		"mathTitle": "Mathematics for Kankor",
+		"mathSubtitle": "From algebra and geometry to trigonometry, limits and derivatives, at exam level.",
+		"scienceBadge": "Natural sciences",
+		"scienceTitle": "Physics, chemistry and biology",
+		"scienceSubtitle": "Concepts and numeric problems built around the questions Kankor repeats.",
+		"socialBadge": "Social & Islamic studies",
+		"socialTitle": "History, geography, economics and Islamic studies",
+		"socialSubtitle": "Memory-heavy subjects organised with timelines, maps and a revision routine.",
+		"examBadge": "Exam readiness",
+		"examTitle": "Test technique and mock exams",
+		"examSubtitle": "Elimination method, time management and a full simulation of exam day."
+	},
+	"content": {
+		"schoolHub": {
+			"courses": {
+				"mth-calculus-12": {
+					"title": "Grade 12 Mathematics: Limits, Derivatives & Integrals",
+					"subtitle": "Every Grade 12 chapter, rebuilt around solved Kankor questions.",
+					"subject": "Mathematics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Basir Niazi"
+				},
+				"mth-algebra-geometry": {
+					"title": "Algebra & Geometry for Kankor",
+					"subtitle": "Equations, functions and analytic geometry at exam level.",
+					"subject": "Mathematics",
+					"grade": "Grades 10–12",
+					"instructor": "Ustad Najibullah Shinwari"
+				},
+				"mth-trigonometry": {
+					"title": "Trigonometry for Kankor",
+					"subtitle": "Unit circle, identities and exam-level trigonometric problem solving.",
+					"subject": "Mathematics",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Farid Ahmad Sharifi"
+				},
+				"sci-physics-mechanics": {
+					"title": "Physics: Mechanics & Motion",
+					"subtitle": "Newton's laws, motion, work and energy with the questions Kankor repeats most.",
+					"subject": "Physics",
+					"grade": "Grades 11–12",
+					"instructor": "Maryam Sadat Hashemi"
+				},
+				"sci-physics-electricity": {
+					"title": "Physics: Electricity & Magnetism",
+					"subtitle": "Circuits, electric fields, magnetism and induction, fully worked out.",
+					"subject": "Physics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Abdul Rahman Tokhi"
+				},
+				"sci-chem-organic": {
+					"title": "Chemistry: Organic & Hydrocarbons",
+					"subtitle": "Structure, naming and reactions of hydrocarbons with Kankor drills.",
+					"subject": "Chemistry",
+					"grade": "Grade 12",
+					"instructor": "Ustad Hasibullah Karimi"
+				},
+				"sci-chem-general": {
+					"title": "Chemistry: General, Solutions & Stoichiometry",
+					"subtitle": "Mole calculations, solutions and chemical equilibrium in practice.",
+					"subject": "Chemistry",
+					"grade": "Grade 11",
+					"instructor": "Shabana Nazari"
+				},
+				"sci-biology-cell-genetics": {
+					"title": "Biology: Cell & Genetics",
+					"subtitle": "Cells, division and Mendel's laws explained with simple diagrams.",
+					"subject": "Biology",
+					"grade": "Grades 11–12",
+					"instructor": "Dr. Nilofar Rahimi"
+				},
+				"sci-biology-human": {
+					"title": "Biology: Human Body",
+					"subtitle": "Circulatory, respiratory, digestive and nervous systems with exam-ready notes.",
+					"subject": "Biology",
+					"grade": "Grade 12",
+					"instructor": "Dr. Abdul Matin Lalzad"
+				},
+				"lng-dari-grammar": {
+					"title": "Dari: Grammar, Spelling & Reading",
+					"subtitle": "Grammar rules, literary devices and the reading-comprehension method.",
+					"subject": "Dari",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ahmad Zia Rahimi"
+				},
+				"lng-pashto-grammar": {
+					"title": "Pashto: Morphology, Syntax & Reading",
+					"subtitle": "Morphology, syntax, spelling and analysis of exam poetry and prose.",
+					"subject": "Pashto",
+					"grade": "Grade 12",
+					"instructor": "Ustad Mohammad Yaqoob Atak"
+				},
+				"lng-english-kankor": {
+					"title": "Kankor English: Grammar, Vocabulary & Reading",
+					"subtitle": "Tenses, high-frequency vocabulary and the reading technique for exam day.",
+					"subject": "English",
+					"grade": "Grades 10–12",
+					"instructor": "Tamana Rasouli"
+				},
+				"soc-history": {
+					"title": "Modern History of Afghanistan & the World",
+					"subtitle": "From Afghanistan's modern transformations to world events, on one clear timeline.",
+					"subject": "History",
+					"grade": "Grade 12",
+					"instructor": "Ustad Nasir Ahmad Fayeq"
+				},
+				"soc-geography": {
+					"title": "Geography of Afghanistan & the World",
+					"subtitle": "Climate, landforms and economic geography with map-reading practice.",
+					"subject": "Geography",
+					"grade": "Grades 11–12",
+					"instructor": "Ustad Shafiullah Zahid"
+				},
+				"soc-economics": {
+					"title": "Economics, National Budget & Civics",
+					"subtitle": "Core economics, how the national budget works and citizens' constitutional rights.",
+					"subject": "Economics & Civics",
+					"grade": "Grade 12",
+					"instructor": "Ustad Ramin Forutan"
+				},
+				"soc-islamic": {
+					"title": "Islamic Studies: Beliefs, Fiqh & Seerah",
+					"subtitle": "Beliefs, fiqh rulings and the Prophet's biography, following the official curriculum.",
+					"subject": "Islamic Studies",
+					"grade": "Grades 10–12",
+					"instructor": "Mawlawi Abdul Hadi Haqqani"
+				},
+				"exm-techniques": {
+					"title": "Test Techniques & Time Management",
+					"subtitle": "Elimination method, common traps and how to split time across four exam hours.",
+					"subject": "Kankor Preparation",
+					"grade": "All grades",
+					"instructor": "Elham Seddiqi"
+				},
+				"exm-past-papers": {
+					"title": "Past Kankor Paper Analysis",
+					"subtitle": "Ten years of Kankor papers broken down by subject and repetition pattern.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"exm-mock-exam": {
+					"title": "Full Kankor Mock Exam",
+					"subtitle": "A timed full simulation with answer card and a personal result breakdown.",
+					"subject": "Kankor Preparation",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-12": {
+					"title": "Complete Grade 12 Package",
+					"subtitle": "Every Grade 12 subject in one schedule and one order, all the way to exam day.",
+					"subject": "Grade Package",
+					"grade": "Grade 12",
+					"instructor": "Abzar Kankor Learning Team"
+				},
+				"sch-grade-11": {
+					"title": "Complete Grade 11 Package",
+					"subtitle": "A solid Grade 11 foundation so the Kankor year starts without gaps.",
+					"subject": "Grade Package",
+					"grade": "Grade 11",
+					"instructor": "Abzar Kankor Learning Team"
+				}
+			},
+			"paths": {
+				"path-math-foundation": {
+					"title": "Kankor Mathematics Foundation",
+					"subtitle": "Three steps to master the subject that carries the most Kankor marks.",
+					"duration": "48 hours",
+					"steps": [
+						"Algebra & Geometry",
+						"Trigonometry",
+						"Limits & Derivatives"
+					]
+				},
+				"path-medical": {
+					"title": "Health Sciences & Medicine Track",
+					"subtitle": "Biology and chemistry, focused on the questions medical faculties ask.",
+					"duration": "58 hours",
+					"steps": ["Cell & Genetics", "Human Body", "Organic Chemistry"]
+				},
+				"path-engineering": {
+					"title": "Engineering & Technology Track",
+					"subtitle": "Physics and mathematics with the numeric problem solving engineering exams demand.",
+					"duration": "62 hours",
+					"steps": [
+						"Mechanics",
+						"Electricity & Magnetism",
+						"Algebra & Geometry"
+					]
+				},
+				"path-humanities": {
+					"title": "Social Sciences & Law Track",
+					"subtitle": "History, geography and economics, revised with a repeatable memory routine.",
+					"duration": "44 hours",
+					"steps": ["Modern History", "Geography", "Economics & Civics"]
+				},
+				"path-kankor-100": {
+					"title": "100 Days to Kankor",
+					"subtitle": "From technique to mock exam — a planned final three months.",
+					"duration": "36 hours",
+					"steps": ["Test Technique", "Past Paper Analysis", "Mock Exam"]
+				},
+				"path-grade-12": {
+					"title": "From Grade 11 to Kankor",
+					"subtitle": "Finish the Grade 11 foundation, then start Grade 12 with confidence.",
+					"duration": "70 hours",
+					"steps": ["Grade 11 Package", "Grade 12 Package", "Mock Exam"]
+				}
+			},
+			"labels": {
+				"course": "Course",
+				"allLevels": "All levels",
+				"team": "Abzar Kankor Learning Team"
+			}
+		},
+		"kankorExam": {
+			"questions": [
+				{
+					"id": "math-1",
+					"subject": "math",
+					"stem": "What is the derivative of f(x) = x³ − 3x at x = 2?",
+					"options": ["۹", "۶", "۳", "۱۲"],
+					"correct": 2,
+					"explanation": "The derivative is 3x² − 3, so at x = 2 it is 12 − 3 = 9."
+				},
+				{
+					"id": "math-2",
+					"subject": "math",
+					"stem": "If sin θ = 3/5 and θ lies in the first quadrant, what is cos θ?",
+					"options": ["۴/۵", "۳/۵", "۵/۴", "۱/۵"],
+					"correct": 0,
+					"explanation": "Using sin²θ + cos²θ = 1 gives cos θ = 4/5."
+				},
+				{
+					"id": "physics-1",
+					"subject": "physics",
+					"stem": "An object moves at a constant 10 m/s. How far does it travel in 5 seconds?",
+					"options": ["۲ متر", "۱۰ متر", "۵۰ متر", "۱۰۰ متر"],
+					"correct": 2,
+					"explanation": "Distance = speed × time = 10 × 5 = 50 m."
+				},
+				{
+					"id": "physics-2",
+					"subject": "physics",
+					"stem": "Two resistors of 6 Ω and 3 Ω are connected in parallel. What is the equivalent resistance?",
+					"options": ["۲ اهم", "۴٫۵ اهم", "۹ اهم", "۱۸ اهم"],
+					"correct": 0,
+					"explanation": "In parallel: 1/R = 1/6 + 1/3 = 1/2, so R = 2 Ω."
+				},
+				{
+					"id": "chemistry-1",
+					"subject": "chemistry",
+					"stem": "What is the atomic number of the element with the electron configuration 2, 8, 1?",
+					"options": ["۹", "۱۰", "۱۱", "۱۹"],
+					"correct": 2,
+					"explanation": "The electrons add up to 2 + 8 + 1 = 11, so the atomic number is 11 (sodium)."
+				},
+				{
+					"id": "chemistry-2",
+					"subject": "chemistry",
+					"stem": "Which of the following is a saturated hydrocarbon?",
+					"options": ["ایتلین", "متان", "استیلین", "بنزین"],
+					"correct": 1,
+					"explanation": "Methane (CH₄) has only single bonds; the others are unsaturated."
+				},
+				{
+					"id": "biology-1",
+					"subject": "biology",
+					"stem": "Which organ secretes insulin?",
+					"options": ["کبد", "پانکراس", "کلیه", "طحال"],
+					"correct": 1,
+					"explanation": "Beta cells in the pancreatic islets of Langerhans produce insulin."
+				},
+				{
+					"id": "biology-2",
+					"subject": "biology",
+					"stem": "In a cross between two heterozygotes (Aa × Aa), what fraction of the offspring show the dominant phenotype?",
+					"options": ["۱/۴", "۱/۲", "۳/۴", "همهٔ فرزندان"],
+					"correct": 2,
+					"explanation": "The phenotypic ratio is 3 dominant to 1 recessive, i.e. 3/4."
+				},
+				{
+					"id": "dari-1",
+					"subject": "dari",
+					"stem": "Which word is a synonym of «سخاوت» (generosity)?",
+					"options": ["بخل", "جود", "حرص", "کینه"],
+					"correct": 1,
+					"explanation": "«جود» (joud) means generosity; بخل and حرص are its opposites."
+				},
+				{
+					"id": "dari-2",
+					"subject": "dari",
+					"stem": "Which literary device is used in “her face shone like the moon”?",
+					"options": ["استعاره", "تشبیه", "کنایه", "مجاز"],
+					"correct": 1,
+					"explanation": "The word “like” compares two things, so the device is a simile (تشبیه)."
+				},
+				{
+					"id": "pashto-1",
+					"subject": "pashto",
+					"stem": "What is the opposite of «مینه» (love) in Pashto?",
+					"options": ["محبت", "کرکه", "خواخوږي", "زړه‌سوې"],
+					"correct": 1,
+					"explanation": "«کرکه» means hatred, the opposite of «مینه» (love)."
+				},
+				{
+					"id": "pashto-2",
+					"subject": "pashto",
+					"stem": "Which word is a synonym of «لوی» (big) in Pashto?",
+					"options": ["وړوکی", "غټ", "لنډ", "سست"],
+					"correct": 1,
+					"explanation": "«غټ» also means big, so it is a synonym of «لوی»."
+				},
+				{
+					"id": "english-1",
+					"subject": "english",
+					"stem": "Choose the correct form: “She ____ to school every day.”",
+					"options": ["go", "goes", "going", "gone"],
+					"correct": 1,
+					"explanation": "A third-person singular subject (She) takes “goes” in the simple present."
+				},
+				{
+					"id": "english-2",
+					"subject": "english",
+					"stem": "Choose the synonym of “rapid”.",
+					"options": ["slow", "fast", "weak", "calm"],
+					"correct": 1,
+					"explanation": "“rapid” means quick; its synonym is “fast”."
+				},
+				{
+					"id": "islamic-1",
+					"subject": "islamic",
+					"stem": "How many pillars of Islam are there?",
+					"options": ["سه", "چهار", "پنج", "شش"],
+					"correct": 2,
+					"explanation": "Shahada, prayer, zakat, fasting and Hajj — five in total."
+				},
+				{
+					"id": "islamic-2",
+					"subject": "islamic",
+					"stem": "Which surah is known as “the heart of the Qur’an”?",
+					"options": ["سورهٔ فاتحه", "سورهٔ یاسین", "سورهٔ کهف", "سورهٔ الرحمن"],
+					"correct": 1,
+					"explanation": "Surah Ya-Sin is called the heart of the Qur’an in the narrations."
+				}
+			]
+		}
+	},
+	"kankorExam": {
+		"title": "Kankor mock exam",
+		"subtitle": "A full exam built on the Afghan Kankor structure: eight subjects, four options per question and a fixed time limit.",
+		"introBadge": "Kankor general exam simulation",
+		"introHeading": "Ready? Sit an exam the way Kankor day works",
+		"introDescription": "This mirrors exam day: one question at a time, an answer sheet to review, the freedom to go back to any question, and no negative marking. At the end you get a breakdown per subject.",
+		"startButton": "Start exam",
+		"resumeButton": "Resume the previous attempt",
+		"rulesTitle": "Exam rules",
+		"rules": [
+			"16 questions from 8 Kankor subjects: mathematics, physics, chemistry, biology, Dari, Pashto, English and Islamic studies.",
+			"24 minutes in total — 1.5 minutes per question, as in the real Kankor.",
+			"Exactly one correct answer per question, with no negative marking.",
+			"You can flag a question and come back to it later.",
+			"If the time runs out, the answers already saved are graded automatically."
+		],
+		"realExamNote": "The Afghan general Kankor has 160 questions and 4 hours; this mock follows the same structure but is shorter.",
+		"minutesUnit": "min",
+		"questionsUnit": "questions",
+		"questionOf": "Question {current} of {total}",
+		"answered": "{answered} of {total} answered",
+		"timeLeft": "Time left",
+		"flag": "Flag",
+		"flagged": "Flagged",
+		"previous": "Previous question",
+		"next": "Next question",
+		"finish": "Finish exam",
+		"exit": "Exit",
+		"answerSheet": "Answer sheet",
+		"answerSheetHint": "Tap a number to jump to that question.",
+		"legendAnswered": "Answered",
+		"legendBlank": "Unanswered",
+		"legendFlagged": "Flagged",
+		"exitTitle": "Leave the exam?",
+		"exitDescription": "This attempt will be discarded. You would have to start again.",
+		"exitConfirm": "Yes, leave",
+		"cancel": "Keep going",
+		"finishTitle": "Finish the exam?",
+		"finishDescriptionWithBlank": "{blank} questions are still unanswered and will score zero.",
+		"finishDescriptionComplete": "You answered every question. Your result is shown right away.",
+		"finishConfirm": "Grade it",
+		"timeUpTitle": "Time is up",
+		"timeUpDescription": "The clock reached zero and the saved answers were graded.",
+		"resultTitle": "Mock exam result",
+		"score": "Total score",
+		"correct": "Correct",
+		"wrong": "Wrong",
+		"blank": "Blank",
+		"percent": "Score",
+		"bandExcellent": "Excellent — Kankor ready",
+		"bandGood": "Good — close to full readiness",
+		"bandAverage": "Average — you need more practice",
+		"bandWeak": "Weak — start from the core subjects",
+		"perSubject": "Result by subject",
+		"reviewTitle": "Review answers",
+		"yourAnswer": "Your answer",
+		"correctAnswer": "Correct answer",
+		"noAnswer": "No answer",
+		"explanation": "Explanation",
+		"retry": "Try again",
+		"showReview": "Show answer review",
+		"hideReview": "Hide answer review",
+		"unansweredWarning": "{count} unanswered",
+		"savedProgress": "Your progress is saved in this browser.",
+		"subjects": {
+			"math": "Mathematics",
+			"physics": "Physics",
+			"chemistry": "Chemistry",
+			"biology": "Biology",
+			"dari": "Dari",
+			"pashto": "Pashto",
+			"english": "English",
+			"islamic": "Islamic studies"
 		}
 	}
 }

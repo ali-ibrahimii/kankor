@@ -157,7 +157,7 @@ export default async function DashboardLayout({
 				<DashboardTopbar
 					actions={
 						<>
-							<LocaleSwitcher responsive={false} />
+							<LocaleSwitcher />
 							<NotificationBell
 								notificationsHref={routes.d.notifications.page()}
 							/>

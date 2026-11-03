@@ -1,40 +1,36 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { CourseBuilder } from "@/components/blocks/course-builder";
-import { loadCourseContent } from "@/components/blocks/course-builder/actions";
-import { createClient } from "@/lib/supabase/server";
-import { decodeSlugParam, getSlugOrIdColumn } from "@/lib/utils";
-
-// ─── Data fetching ────────────────────────────────────────────────────────────
-
-async function fetchCourse(rawSlug: string) {
-	const identifier = decodeSlugParam(rawSlug);
-	const supabase = await createClient();
-	const { data, error } = await supabase
-		.from("courses")
-		.select("id, title, is_published, instructor_id")
-		.eq(getSlugOrIdColumn(identifier), identifier)
-		.single();
-	if (error || !data) return null;
-	return data;
-}
+import { getDashboardPath, isSuperAdmin } from "@/lib/auth/auth.util";
+import { getCurrentUser } from "@/lib/auth/session";
+import {
+	findCourseForBuilder,
+	loadBuilderContent,
+} from "@/lib/courses/builder-loader";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
+//
+// Admin course builder, addressed by slug (or id — see findCourseForBuilder).
 
 export default async function AdminCourseBuilderPage({
 	params,
 }: {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ locale: string; slug: string }>;
 }) {
-	const { slug } = await params;
+	const { locale, slug } = await params;
 
-	const course = await fetchCourse(slug);
+	// The builder writes through can_manage_course(), but a non-admin should
+	// never land inside the admin shell in the first place.
+	const user = await getCurrentUser();
+	if (!user) redirect(`/${locale}/auth/login`);
+	if (!isSuperAdmin(user)) redirect(getDashboardPath(user, locale));
+
+	const course = await findCourseForBuilder(slug);
 	if (!course) notFound();
 
-	const contentResult = await loadCourseContent(course.id);
-	if (!contentResult.success) notFound();
-
-	const { modules, lessons, blocks } = contentResult.data;
+	const { modules, lessons, blocks, error } = await loadBuilderContent(
+		course.id
+	);
 
 	return (
 		<CourseBuilder
@@ -44,6 +40,7 @@ export default async function AdminCourseBuilderPage({
 			initialModules={modules}
 			initialLessons={lessons}
 			initialBlocks={blocks}
+			contentError={error}
 			basePath="/d/admin"
 		/>
 	);
@@ -58,7 +55,7 @@ export async function generateMetadata({
 }) {
 	const { slug } = await params;
 	const t = await getTranslations("courseBuilder");
-	const course = await fetchCourse(slug);
+	const course = await findCourseForBuilder(slug);
 	return {
 		title: course
 			? `${t("meta.editCourse")} — ${course.title}`

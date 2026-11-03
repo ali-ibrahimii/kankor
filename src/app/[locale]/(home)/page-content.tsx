@@ -6,9 +6,7 @@ import {
 	Check,
 	CloudDownload,
 	FileText,
-	Flame,
 	GraduationCap,
-	Library,
 	Play,
 	School,
 	Sparkles,
@@ -17,80 +15,39 @@ import {
 	WifiOff,
 	Zap,
 } from "lucide-react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import {
+	HomeCourseCard,
+	HomeFlashcardDeckCard,
+	HomeGeneralBookCard,
+	HomeKankorFormCard,
+	HomeSchoolBookCard,
+} from "./_components/home-cards";
+import type { HomeCatalogData } from "./_components/home-catalog-data";
+import { HorizontalCardSection } from "./_components/horizontal-card-section";
+import { PartnerInstitutionsSection } from "./_components/partner-institutions-section";
 
-export default async function HomeContent({ locale }: { locale: string }) {
+export default async function HomeContent({
+	locale,
+	catalog,
+}: {
+	locale: Locale;
+	catalog: HomeCatalogData;
+}) {
 	const [t, app] = await Promise.all([
 		getTranslations({ locale, namespace: "landing" }),
 		getTranslations({ locale, namespace: "app" }),
 	]);
 
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
-
-	const modules = [
-		{
-			key: "school",
-			icon: BookOpen,
-			href: routes.courses.page(),
-			art: "from-[#e8ddff] to-[#cfc7ff] text-[#6a46c7]",
-			symbol: "∑",
-		},
-		{
-			key: "flashcards",
-			icon: Zap,
-			href: routes.decks.page(),
-			art: "from-[#def8e7] to-[#b9e6d4] text-[#2a8c68]",
-			symbol: "✦",
-		},
-		{
-			key: "tests",
-			icon: FileText,
-			href: routes.quizzes.page(),
-			art: "from-[#ffe5d7] to-[#ffd2b6] text-[#c77849]",
-			symbol: "✳",
-		},
-		{
-			key: "library",
-			icon: Library,
-			href: routes.libraries.page(),
-			art: "from-[#ddebff] to-[#b8dafa] text-[#4678c3]",
-			symbol: "⌘",
-		},
-	] as const;
-
-	const roles = [
-		{
-			icon: GraduationCap,
-			title: t("showcase.studentTitle"),
-			description: t("showcase.studentDescription"),
-			feature: t("showcase.studentFeature"),
-			cta: t("showcase.studentCta"),
-			href: routes.auth.signup.page({ type: "student" }),
-			tint: "bg-[#e8e0ff] text-[#6246be]",
-		},
-		{
-			icon: BookOpen,
-			title: t("instructor.title"),
-			description: t("instructor.description"),
-			feature: t("showcase.teacherFeature"),
-			cta: t("instructor.cta"),
-			href: routes.auth.signup.page({ type: "instructor" }),
-			tint: "bg-[#dcf4e7] text-[#268064]",
-		},
-		{
-			icon: School,
-			title: t("school.title"),
-			description: t("school.description"),
-			feature: t("showcase.schoolFeature"),
-			cta: t("school.cta"),
-			href: routes.auth.signup.page({ type: "school" }),
-			tint: "bg-[#e0ecff] text-[#427dc5]",
-		},
-	] as const;
+	const viewMoreLabel = t("shelves.viewMore");
+	const learnersCount = `${new Intl.NumberFormat(locale).format(2480)}+`;
 
 	const stats = [
 		{
@@ -137,33 +94,60 @@ export default async function HomeContent({ locale }: { locale: string }) {
 		},
 	] as const;
 
+	const roles = [
+		{
+			icon: GraduationCap,
+			title: t("showcase.studentTitle"),
+			description: t("showcase.studentDescription"),
+			feature: t("showcase.studentFeature"),
+			cta: t("showcase.studentCta"),
+			href: routes.auth.signup.page({ type: "student" }),
+			tint: "bg-[#e8e0ff] text-[#6246be]",
+		},
+		{
+			icon: BookOpen,
+			title: t("instructor.title"),
+			description: t("instructor.description"),
+			feature: t("showcase.teacherFeature"),
+			cta: t("instructor.cta"),
+			href: routes.auth.signup.page({ type: "instructor" }),
+			tint: "bg-[#dcf4e7] text-[#268064]",
+		},
+		{
+			icon: School,
+			title: t("school.title"),
+			description: t("school.description"),
+			feature: t("showcase.schoolFeature"),
+			cta: t("school.cta"),
+			href: routes.auth.signup.page({ type: "school" }),
+			tint: "bg-[#e0ecff] text-[#427dc5]",
+		},
+	] as const;
+
 	const offlineModules = ["school", "flashcards", "tests"] as const;
 	const offlinePoints = [1, 2, 3] as const;
 	const heroFeatures = ["featureOne", "featureTwo", "featureThree"] as const;
 
 	return (
-		<div className="min-h-screen overflow-hidden bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+		<div className="min-h-screen overflow-x-clip bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
 			{/* Hero */}
-			<section className="mx-auto max-w-[1320px] px-4 pb-0 pt-4 sm:px-6 sm:pt-7 lg:px-8">
-				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_13%_105%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_94%_0%,rgba(137,100,255,.34),transparent_39%),linear-gradient(125deg,#101a2c_4%,#17233a_58%,#222340_100%)] px-5 py-12 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[36px] sm:px-9 sm:py-14 lg:px-14 lg:py-[78px]">
+			<section className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
+				<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px]">
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute inset-0 opacity-[.16] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:23px_23px]"
+						className="pointer-events-none absolute inset-0 opacity-[.13] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:24px_24px]"
 					/>
 
-					<div className="relative z-10 grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,.89fr)] lg:gap-14">
-						<div className="max-w-[630px]">
-							<span className="inline-flex flex-wrap items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-2 text-xs font-bold text-white/80">
+					<div className="relative z-10 grid items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(0,44%)]">
+						{/* Copy */}
+						<div className="px-5 py-10 sm:px-9 sm:py-12 lg:px-12 lg:py-14">
+							<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm">
 								<Sparkles className="size-3.5 text-[#b7f486]" />
 
 								{t("hero.badge")}
-
-								<span className="mx-1 size-1 rounded-full bg-[#b7f486]" />
-
-								{app("name")}
 							</span>
 
-							<h1 className="mt-6 text-[2.15rem] font-extrabold leading-[1.5] tracking-tight sm:text-[3.2rem] lg:text-[3.5rem]">
+							<h1 className="mt-5 max-w-[540px] text-[2rem] font-black leading-[1.4] tracking-tight sm:text-[2.8rem] lg:text-[3.1rem]">
 								{t.rich("hero.heading", {
 									accent: (chunks) => (
 										<span className="bg-gradient-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
@@ -173,14 +157,14 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								})}
 							</h1>
 
-							<p className="mt-5 max-w-[550px] text-sm leading-8 text-white/65 sm:text-base sm:leading-9">
+							<p className="mt-4 max-w-[500px] text-sm leading-7 text-white/60 sm:text-[15px] sm:leading-8">
 								{t("hero.subtitle")}
 							</p>
 
-							<div className="mt-8 flex flex-col gap-3 sm:flex-row">
+							<div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
 								<Link
-									href={routes.demo.page()}
-									className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
+									href={routes.courses.page()}
+									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 text-sm font-black text-[#17233a] shadow-lg shadow-black/20 transition hover:bg-[#c9f8a2]"
 								>
 									<Sparkles className="size-4" />
 
@@ -190,8 +174,8 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</Link>
 
 								<Link
-									href={routes.courses.page()}
-									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
+									href={routes.auth.signup.page()}
+									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.06] px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.14]"
 								>
 									{t("hero.ctaPrimary")}
 
@@ -199,140 +183,60 @@ export default async function HomeContent({ locale }: { locale: string }) {
 								</Link>
 							</div>
 
-							<div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[11px] font-semibold text-white/65">
+							<ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2.5 text-[11px] font-semibold text-white/60">
 								{heroFeatures.map((key) => (
-									<span key={key} className="inline-flex items-center gap-2">
-										<span className="flex size-5 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
-											<Check className="size-3" />
+									<li key={key} className="inline-flex items-center gap-1.5">
+										<span className="flex size-4 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
+											<Check className="size-2.5" strokeWidth={3.5} />
 										</span>
 
 										{t(`showcase.${key}`)}
-									</span>
+									</li>
 								))}
-							</div>
+							</ul>
 						</div>
 
-						{/* Hero preview card */}
-						<div className="relative mx-auto w-full max-w-[485px] pb-9 pt-8 sm:px-5">
-							<div
-								aria-hidden="true"
-								className="absolute -end-2 top-0 size-28 rounded-full bg-violet-500/35 blur-3xl"
-							/>
-
-							<div
-								aria-hidden="true"
-								className="absolute -start-2 bottom-0 size-28 rounded-full bg-emerald-300/20 blur-3xl"
-							/>
-
-							<div className="relative z-10 overflow-hidden rounded-[23px] border border-white/15 bg-[#0f182c]/85 shadow-[0_35px_70px_-25px_rgba(0,0,0,.65)] backdrop-blur-lg">
-								<div className="flex items-center justify-between border-b border-white/10 px-5 py-4 text-[11px] font-semibold text-white/65">
-									<span className="flex items-center gap-2">
-										<Target className="size-4 text-[#b7f486]" />
-
-										{t("showcase.previewTitle")}
-									</span>
-
-									<span className="flex items-center gap-1.5 text-[#b7f486]">
-										<Flame className="size-3.5" />
-
-										{t("showcase.previewBadge")}
-									</span>
-								</div>
-
-								<div className="p-5 sm:p-6">
-									<div className="flex items-start justify-between">
-										<div>
-											<p className="text-[11px] text-white/45">
-												{t("showcase.progress")}
-											</p>
-
-											<p className="mt-1.5 text-lg font-extrabold">
-												{t("showcase.previewHeading")}
-											</p>
-										</div>
-
-										<span className="rounded-full bg-[#b7f486]/15 px-2.5 py-1 text-xs font-bold text-[#b7f486]">
-											۷۶٪
-										</span>
-									</div>
-
-									<div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
-										<div className="h-full w-[76%] rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]" />
-									</div>
-
-									<div className="mt-6 space-y-4">
-										{subjects.map((item) => (
-											<div key={item.key}>
-												<div className="mb-2 flex items-center justify-between text-[11px]">
-													<span className="font-semibold text-white/75">
-														{t(`showcase.${item.key}`)}
-													</span>
-
-													<span className="text-white/45">{item.value}٪</span>
-												</div>
-
-												<div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-													<div
-														className="h-full rounded-full"
-														style={{
-															width: `${item.value}%`,
-															backgroundColor: item.color,
-														}}
-													/>
-												</div>
-											</div>
-										))}
-									</div>
-
-									<div className="mt-6 grid grid-cols-2 gap-2">
-										<div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.05] p-3">
-											<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-												<BookOpen className="size-4" />
-											</span>
-
-											<span>
-												<strong className="block text-xs">۱۲ / ۱۶</strong>
-
-												<small className="block text-[10px] text-white/45">
-													{t("showcase.lessons")}
-												</small>
-											</span>
-										</div>
-
-										<div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.05] p-3">
-											<span className="rounded-xl bg-violet-400/15 p-2 text-violet-200">
-												<Zap className="size-4" />
-											</span>
-
-											<span>
-												<strong className="block text-xs">۸۵٪</strong>
-
-												<small className="block text-[10px] text-white/45">
-													{t("showcase.quiz")}
-												</small>
-											</span>
-										</div>
-									</div>
-								</div>
+						{/* Student holding the app */}
+						<div className="relative mx-4 mb-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#0c1526] sm:mx-6 sm:mb-6 lg:m-0 lg:rounded-none lg:border-0 lg:border-s lg:border-white/10">
+							<div className="relative aspect-[4/5] w-full lg:absolute lg:inset-0 lg:aspect-auto">
+								<Image
+									src="/images/hero/hero-student.jpg"
+									alt={t("hero.imageAlt")}
+									fill
+									priority
+									sizes="(max-width: 1023px) 92vw, 44vw"
+									className="object-cover object-[42%_16%]"
+								/>
 							</div>
 
-							<div className="absolute -start-2 top-0 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-4 py-3 text-[11px] font-bold shadow-xl backdrop-blur sm:-start-3">
-								<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-									<Sparkles className="size-4" />
+							<div
+								aria-hidden="true"
+								className={`pointer-events-none absolute inset-0 ${
+									isRtl(locale)
+										? "bg-[linear-gradient(90deg,transparent_52%,rgba(15,26,44,.6)_100%)]"
+										: "bg-[linear-gradient(270deg,transparent_52%,rgba(15,26,44,.6)_100%)]"
+								}`}
+							/>
+
+							<div className="absolute start-3 top-3 flex items-center gap-1.5 rounded-xl border border-white/15 bg-[#1b2740]/80 px-2.5 py-1.5 text-[10px] font-bold text-white shadow-lg backdrop-blur sm:start-4 sm:top-4">
+								<span className="rounded-md bg-[#b7f486]/15 p-1 text-[#b7f486]">
+									<Sparkles className="size-3" />
 								</span>
 
 								{t("showcase.startHere")}
 							</div>
 
-							<div className="absolute -end-2 bottom-0 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#26324b]/95 px-4 py-3 shadow-xl backdrop-blur sm:-end-3">
-								<span className="rounded-xl bg-[#b7f486]/15 p-2 text-[#b7f486]">
-									<Users className="size-4" />
+							<div className="absolute end-3 bottom-3 flex items-center gap-2 rounded-xl border border-white/15 bg-[#1b2740]/80 px-2.5 py-1.5 shadow-lg backdrop-blur sm:end-4 sm:bottom-4">
+								<span className="flex size-7 items-center justify-center rounded-lg bg-[#b7f486]/15 text-[#b7f486]">
+									<Users className="size-3.5" />
 								</span>
 
-								<span>
-									<strong className="block text-xs">۲٬۴۸۰+</strong>
+								<span className="leading-tight">
+									<strong className="block text-[11px] font-extrabold text-white">
+										{learnersCount}
+									</strong>
 
-									<small className="block text-[10px] text-white/50">
+									<small className="block text-[9px] text-white/50">
 										{t("showcase.students")}
 									</small>
 								</span>
@@ -343,7 +247,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			{/* Stats */}
-			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 sm:px-6 lg:grid-cols-4 lg:px-8">
+			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
 				{stats.map(({ value, label, icon: Icon, tint }) => (
 					<div
 						key={label}
@@ -356,7 +260,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 						</span>
 
 						<div>
-							<p className="text-xl font-extrabold text-[#1d2841] dark:text-slate-100 sm:text-2xl">
+							<p className="text-xl font-extrabold text-[#1d2841] sm:text-2xl dark:text-slate-100">
 								{value}
 							</p>
 
@@ -368,73 +272,87 @@ export default async function HomeContent({ locale }: { locale: string }) {
 				))}
 			</section>
 
-			{/* Modules */}
-			<section
-				id="modules"
-				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+			{/* 1. School Courses Horizontal Row — Video Lesson Card Design */}
+			<HorizontalCardSection
+				id="school-courses"
+				title={t("shelves.courses.title")}
+				subtitle={t("shelves.courses.subtitle")}
+				viewMoreHref={routes.courses.page()}
+				viewMoreLabel={viewMoreLabel}
 			>
-				<div className="mb-9 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-					<div>
-						<span className="section-kicker">{t("showcase.modulesLabel")}</span>
+				{catalog.courses.map(({ item, href }) => (
+					<HomeCourseCard key={item.id} course={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<h2 className="section-title">{t("app.heading")}</h2>
+			{/* 2. Official School Textbooks Horizontal Row — Book-Spine Layout */}
+			<HorizontalCardSection
+				id="school-books"
+				title={t("shelves.schoolBooks.title")}
+				subtitle={t("shelves.schoolBooks.subtitle")}
+				viewMoreHref={routes.libraries.page()}
+				viewMoreLabel={viewMoreLabel}
+				surface="tinted"
+			>
+				{catalog.schoolBooks.map(({ item, href }) => (
+					<HomeSchoolBookCard key={item.id} book={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<p className="section-copy">{t("app.subtitle")}</p>
-					</div>
+			{/* 3. General Books & Guides Horizontal Row — Editorial Overlay Design */}
+			<HorizontalCardSection
+				id="general-books"
+				title={t("shelves.generalBooks.title")}
+				subtitle={t("shelves.generalBooks.subtitle")}
+				viewMoreHref={catalog.generalBooksMoreHref}
+				viewMoreLabel={viewMoreLabel}
+			>
+				{catalog.generalBooks.map(({ item, href }) => (
+					<HomeGeneralBookCard key={item.id} book={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-					<Link
-						href={routes.demo.page()}
-						className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline"
-					>
-						{t("showcase.previewCta")}
+			{/* 4. Smart Flashcards Horizontal Row — Stacked Deck Card Design */}
+			<HorizontalCardSection
+				id="flashcards"
+				title={t("shelves.decks.title")}
+				subtitle={t("shelves.decks.subtitle")}
+				viewMoreHref={routes.decks.page()}
+				viewMoreLabel={viewMoreLabel}
+				surface="tinted"
+			>
+				{catalog.decks.map(({ item, href }) => (
+					<HomeFlashcardDeckCard key={item.id} deck={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-						<Arrow className="size-4" />
-					</Link>
-				</div>
+			{/* 5. General Kankor Forms Horizontal Row — Structured Exam Sheet Design */}
+			<HorizontalCardSection
+				id="kankor-forms"
+				title={t("shelves.kankorForms.title")}
+				subtitle={t("shelves.kankorForms.subtitle")}
+				viewMoreHref={routes.quizzes.page()}
+				viewMoreLabel={viewMoreLabel}
+			>
+				{catalog.kankorForms.map(({ item, href }) => (
+					<HomeKankorFormCard key={item.id} quiz={item} href={href} />
+				))}
+			</HorizontalCardSection>
 
-				<div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-					{modules.map(({ key, icon: Icon, href, art, symbol }) => (
-						<Link
-							key={key}
-							href={href}
-							className="group soft-card card-hover flex flex-col overflow-hidden"
-						>
-							<div
-								className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${art}`}
-							>
-								<span className="absolute -end-12 -top-14 size-44 rounded-full border-2 border-white/45 shadow-[0_0_0_35px_rgba(255,255,255,.13)]" />
+			{/* 6. Collaborating Universities & Schools — Campus Card Design */}
+			<PartnerInstitutionsSection
+				institutions={catalog.partners}
+				labels={{
+					title: t("partners.title"),
+					subtitle: t("partners.subtitle"),
+					ctaTitle: t("partners.ctaTitle"),
+					ctaSubtitle: t("partners.ctaSubtitle"),
+					ctaButton: t("partners.ctaButton"),
+				}}
+			/>
 
-								<span className="font-serif text-[5rem] font-bold opacity-80">
-									{symbol}
-								</span>
-
-								<span className="absolute bottom-4 start-4 flex size-11 items-center justify-center rounded-2xl bg-white/60 shadow-sm">
-									<Icon className="size-5" />
-								</span>
-							</div>
-
-							<div className="flex flex-1 flex-col p-5">
-								<h3 className="text-base font-extrabold text-[#19243b] dark:text-slate-100">
-									{t(`app.${key}.title`)}
-								</h3>
-
-								<p className="mt-3 line-clamp-3 text-xs leading-7 text-slate-500 dark:text-slate-400">
-									{t(`app.${key}.description`)}
-								</p>
-
-								<span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-xs font-bold text-[#694bd2] dark:text-violet-300">
-									{t("showcase.explore")}
-
-									<Arrow className="size-4 transition-transform ltr:group-hover:translate-x-[3px] rtl:group-hover:-translate-x-[3px]" />
-								</span>
-							</div>
-						</Link>
-					))}
-				</div>
-			</section>
-
-			{/* Offline */}
-			<section className="border-y border-[#e9eaf2] bg-white/75 py-20 dark:border-white/10 dark:bg-[#1b2438] sm:py-24">
+			{/* Offline Mobile App Highlight */}
+			<section className="py-16 sm:py-22">
 				<div className="mx-auto grid max-w-[1320px] items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
 					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#e9e2ff] p-5 sm:p-8">
 						<div className="absolute -start-3 -top-5 flex size-20 items-center justify-center rounded-[26px] bg-[#b7f486] text-[#23304a] shadow-lg shadow-[#273953]/10">
@@ -534,7 +452,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			{/* Educators */}
 			<section
 				id="educators"
-				className="mx-auto max-w-[1320px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+				className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 lg:px-8 lg:py-22"
 			>
 				<div className="mx-auto mb-10 max-w-2xl text-center">
 					<span className="section-kicker">{t("showcase.educatorLabel")}</span>
@@ -587,7 +505,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 			</section>
 
 			{/* Final CTA */}
-			<section className="mx-auto max-w-[1320px] px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+			<section className="mx-auto max-w-[1320px] px-4 pb-20 sm:px-6 lg:px-8 lg:pb-24">
 				<div className="relative isolate overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_80%_15%,#413c82,transparent_42%),linear-gradient(130deg,#141f34,#222a46)] px-6 py-12 text-center text-white sm:px-10 sm:py-16">
 					<div
 						aria-hidden="true"
@@ -606,7 +524,7 @@ export default async function HomeContent({ locale }: { locale: string }) {
 
 					<div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
 						<Link
-							href={routes.demo.page()}
+							href={routes.courses.page()}
 							className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
 						>
 							{t("showcase.previewCta")}

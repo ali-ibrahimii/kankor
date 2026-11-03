@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Locale } from "@/i18n";
 import { serverEnv } from "@/lib/env/server-env";
-import { BaseParams } from "@/types/common.types";
+import type { BaseParams } from "@/types/common.types";
+import { getHomeCatalogData } from "./_components/home-catalog-data";
 import HomeContent from "./page-content";
 
 export const revalidate = 518400;
@@ -13,9 +15,10 @@ export default async function Home({
 	const { locale } = await params;
 	setRequestLocale(locale);
 
-	const [tApp, tMeta] = await Promise.all([
+	const [tApp, tMeta, catalog] = await Promise.all([
 		getTranslations({ locale, namespace: "app" }),
 		getTranslations({ locale, namespace: "metadata" }),
+		getHomeCatalogData(locale as Locale),
 	]);
 
 	const appName = tApp("name");
@@ -48,7 +51,7 @@ export default async function Home({
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
-			<HomeContent locale={locale} />
+			<HomeContent locale={locale as Locale} catalog={catalog} />
 		</>
 	);
 }

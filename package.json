@@ -80,7 +80,6 @@
 		"merge-refs": "^2.0.0",
 		"next": "16.2.10",
 		"next-intl": "^4.13.2",
-		"next-themes": "^0.4.6",
 		"nuqs": "^2.9.0",
 		"papaparse": "^5.5.4",
 		"pdf-lib": "^1.17.1",

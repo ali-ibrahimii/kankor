@@ -24,7 +24,7 @@ export default async function RoadmapPage({
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
 	const steps = [1, 2, 3, 4, 5] as const;
 	return (
-		<div className="min-h-screen bg-[#f8f9fd] px-4 py-12 text-[#19243b] sm:px-6 sm:py-20 lg:px-8">
+		<div className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-12 text-[#19243b] sm:px-6 sm:pt-12 sm:pb-20 lg:px-8">
 			<div className="mx-auto max-w-5xl">
 				<header className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_80%_0%,rgba(124,229,209,.2),transparent_32%),linear-gradient(125deg,#101a2c,#292747)] px-6 py-12 text-white sm:px-12 sm:py-16">
 					<div className="absolute -end-12 -top-16 size-56 rounded-full border-[35px] border-white/[.06]" />

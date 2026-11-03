@@ -57,6 +57,48 @@ export type CourseCtaCardProps = {
 };
 
 // ============================================================
+// HELPERS
+// ============================================================
+
+/**
+ * Total time of the curriculum, summed from each lesson's own duration.
+ * Course-level `estimated_duration_hours` is only the author's rough guess,
+ * so the real sum wins whenever any lesson carries a duration.
+ */
+export function totalLessonMinutes(
+	modules:
+		| ReadonlyArray<{
+				lessons: ReadonlyArray<{ estimated_duration_minutes?: number | null }>;
+		  }>
+		| null
+		| undefined
+): number {
+	if (!modules) return 0;
+	return modules.reduce(
+		(sum, module) =>
+			sum +
+			module.lessons.reduce(
+				(lessonSum, lesson) =>
+					lessonSum + (lesson.estimated_duration_minutes ?? 0),
+				0
+			),
+		0
+	);
+}
+
+/** "۳ ساعت و ۲۰ دقیقه" — or "{hours} ساعت کل" when the minutes are exact. */
+function formatCurriculumDuration(
+	minutes: number,
+	tDetail: ReturnType<typeof useTranslations<"courses.detail">>
+): string {
+	const hours = Math.floor(minutes / 60);
+	const rest = Math.round(minutes % 60);
+	if (hours === 0) return tDetail("minutesShort", { count: rest });
+	if (rest === 0) return tDetail("totalDuration", { hours });
+	return tDetail("hoursMinutes", { hours, minutes: rest });
+}
+
+// ============================================================
 // COURSE INFO
 // ============================================================
 
@@ -71,6 +113,15 @@ export function CourseInfo({ course, className }: CourseInfoProps) {
 	const instructorName = course.instructor.name?.trim() || null;
 
 	const rating = course.average_rating ?? 0;
+
+	const lessonMinutes = totalLessonMinutes(course.modules);
+	const durationText =
+		lessonMinutes > 0
+			? formatCurriculumDuration(lessonMinutes, tDetail)
+			: course.estimated_duration_hours != null &&
+					course.estimated_duration_hours > 0
+				? tDetail("totalDuration", { hours: course.estimated_duration_hours })
+				: null;
 
 	const formattedDate = course.updated_at
 		? new Date(course.updated_at).toLocaleDateString(undefined, {
@@ -218,20 +269,15 @@ export function CourseInfo({ course, className }: CourseInfoProps) {
 					</span>
 				)}
 
-				{course.estimated_duration_hours != null &&
-					course.estimated_duration_hours > 0 && (
-						<span className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
-							<Clock className="size-4 text-slate-400" />
+				{durationText && (
+					<span className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
+						<Clock className="size-4 text-slate-400" />
 
-							<span className="font-bold text-[#19243b] dark:text-white">
-								{course.estimated_duration_hours.toLocaleString()}
-							</span>
-
-							{tDetail("totalDuration", {
-								hours: course.estimated_duration_hours,
-							})}
+						<span className="font-bold text-[#19243b] dark:text-white">
+							{durationText}
 						</span>
-					)}
+					</span>
+				)}
 
 				{course.total_enrollments != null && course.total_enrollments > 0 && (
 					<span className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
@@ -318,6 +364,15 @@ export function CourseCtaCard({
 	const t = useTranslations("courses");
 	const { isAuthenticated } = useAuth();
 	const tDetail = useTranslations("courses.detail");
+
+	const ctaLessonMinutes = totalLessonMinutes(course.modules);
+	const ctaDurationText =
+		ctaLessonMinutes > 0
+			? formatCurriculumDuration(ctaLessonMinutes, tDetail)
+			: course.estimated_duration_hours != null &&
+					course.estimated_duration_hours > 0
+				? tDetail("totalDuration", { hours: course.estimated_duration_hours })
+				: null;
 
 	const enrollment = React.useMemo(
 		() => course.enrollment,
@@ -494,16 +549,13 @@ export function CourseCtaCard({
 						</li>
 					)}
 
-					{course.estimated_duration_hours != null &&
-						course.estimated_duration_hours > 0 && (
-							<li className="flex items-center gap-2.5 text-slate-600 dark:text-slate-300">
-								<Clock className="size-4 shrink-0 text-slate-400" />
+					{ctaDurationText && (
+						<li className="flex items-center gap-2.5 text-slate-600 dark:text-slate-300">
+							<Clock className="size-4 shrink-0 text-slate-400" />
 
-								{tDetail("totalDuration", {
-									hours: course.estimated_duration_hours,
-								})}
-							</li>
-						)}
+							{ctaDurationText}
+						</li>
+					)}
 
 					<li className="flex items-center gap-2.5 text-slate-600 dark:text-slate-300">
 						<Award className="size-4 shrink-0 text-slate-400" />

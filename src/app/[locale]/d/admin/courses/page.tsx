@@ -12,6 +12,8 @@ import {
 	CourseGridSkeleton,
 	CoursePagination,
 } from "@/components/blocks/course";
+import { usePlatformAuthors } from "@/components/blocks/course/course-author";
+import { useCourseCardStats } from "@/components/blocks/course/course-stats";
 import { NewCourseDialog } from "@/components/blocks/course-builder";
 import { Button } from "@/components/ui/button";
 import type { UseQueryFilters } from "@/hooks/filter/filter.hooks";
@@ -27,6 +29,10 @@ function toCourseMeta(row: AdminCourseRow): CourseMeta {
 	return {
 		...(row as unknown as Tables<"courses">),
 		average_rating: row.avg_rating ?? 0,
+		// admin_courses_view already aggregates these for every row, so the
+		// admin cards show lessons + students without an extra round-trip.
+		total_lessons: row.lessons_count ?? undefined,
+		total_enrollments: row.enrollments_count ?? undefined,
 		instructor: row.instructor_name
 			? {
 					full_name: row.instructor_name,
@@ -34,6 +40,9 @@ function toCourseMeta(row: AdminCourseRow): CourseMeta {
 				}
 			: null,
 		subject: row.subject_name ? { name: row.subject_name } : null,
+		grade: row.grade_name
+			? { id: row.grade_id ?? "", name: row.grade_name }
+			: null,
 	};
 }
 
@@ -55,7 +64,13 @@ export default function AdminCoursesPage() {
 	});
 
 	const rows = ((coursesQuery.data as any)?.data ?? []) as AdminCourseRow[];
-	const courses: CourseMeta[] = rows.map(toCourseMeta);
+	const baseCourses = React.useMemo(() => rows.map(toCourseMeta), [rows]);
+	// Refines the view's counts with the lessons' own durations (view keeps
+	// the course-level hour estimate; this gives the real total lesson time).
+	const coursesWithStats = useCourseCardStats(baseCourses);
+	// Courses authored by an admin are published as the platform, so the card
+	// never shows an individual admin's name.
+	const courses = usePlatformAuthors(coursesWithStats);
 	const total = (coursesQuery.data as any)?.count ?? null;
 	const page = coursesQuery.state.pagination?.page ?? 1;
 	const pageSize = coursesQuery.state.pagination?.pageSize ?? 12;
@@ -115,8 +130,11 @@ export default function AdminCoursesPage() {
 						<AdminCourseCard
 							key={course.id}
 							course={course}
-							href={routes.d.admin.courses.slug.page({
-								slug: course.slug ?? course.id,
+							// Addressed by id: the same URL the builder redirects to after
+							// creating a course, so a slug that is missing or was renamed
+							// can never send the admin to a dead page.
+							href={routes.d.admin.courses.new.page({
+								course_id: course.id,
 							})}
 						/>
 					))}
@@ -136,6 +154,7 @@ export default function AdminCoursesPage() {
 				open={dialogOpen}
 				onOpenChange={setDialogOpen}
 				basePath="/d/admin"
+				platformAuthored
 			/>
 		</div>
 	);

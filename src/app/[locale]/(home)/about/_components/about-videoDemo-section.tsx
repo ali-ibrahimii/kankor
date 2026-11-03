@@ -21,7 +21,10 @@ export function AboutVideoSection({
 	const handleClose = () => setIsPlaying(false);
 
 	return (
-		<section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28">
+		<section
+			id="demo"
+			className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+		>
 			<div className="absolute inset-0 overflow-hidden">
 				<div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
 				<div
@@ -124,7 +127,7 @@ export function AboutVideoSection({
 									/>
 									<button
 										onClick={handleClose}
-										className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-slate-950/80 text-white backdrop-blur-sm transition-all hover:bg-slate-950"
+										className="absolute end-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-slate-950/80 text-white backdrop-blur-sm transition-all hover:bg-slate-950"
 										aria-label={t("video.closeButton")}
 									>
 										<X className="h-5 w-5" />
@@ -133,7 +136,7 @@ export function AboutVideoSection({
 							)}
 						</div>
 					</div>
-					<div className="absolute -bottom-6 left-1/2 -z-10 h-32 w-3/4 -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl" />
+					<div className="absolute -bottom-6 start-1/2 -z-10 h-32 w-3/4 -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl" />
 				</motion.div>
 
 				{/* Features */}

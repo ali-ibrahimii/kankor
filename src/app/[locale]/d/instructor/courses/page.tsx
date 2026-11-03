@@ -14,6 +14,7 @@ import {
 	CoursePagination,
 	InstructorCourseCard,
 } from "@/components/blocks/course";
+import { useCourseCardStats } from "@/components/blocks/course/course-stats";
 import { NewCourseDialog } from "@/components/blocks/course-builder";
 import { Button } from "@/components/ui/button";
 import { useQueryFilters } from "@/hooks/filter/filter.hooks";
@@ -64,7 +65,9 @@ export default function InstructorCoursesPage() {
 		enabled: !!instructorId,
 	});
 
-	const courses = (coursesQuery.data as any)?.data ?? [];
+	// Lesson count / total lesson time / student count come from a bulk
+	// aggregate (RLS hides `enrollments` and `lessons` from plain card queries).
+	const courses = useCourseCardStats((coursesQuery.data as any)?.data ?? []);
 	const total = (coursesQuery.data as any)?.count ?? null;
 	const page = coursesQuery.state.pagination?.page ?? 1;
 	const pageSize = coursesQuery.state.pagination?.pageSize ?? 12;

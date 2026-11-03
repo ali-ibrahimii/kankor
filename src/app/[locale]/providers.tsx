@@ -1,7 +1,6 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
-import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { useState } from "react";
 import { Toaster } from "sonner";
@@ -10,6 +9,7 @@ import { PWAProvider } from "@/components/blocks/pwa/pwa-provider";
 import { DirectionProvider } from "@/components/ui/direction";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/providers/auth.provider";
+import { ThemeProvider } from "@/providers/theme.provider";
 
 export const Providers = ({
 	children,
@@ -30,12 +30,7 @@ export const Providers = ({
 		<JotaiProvider>
 			<QueryClientProvider client={queryClient}>
 				<NuqsAdapter>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="light"
-						enableSystem
-						disableTransitionOnChange
-					>
+					<ThemeProvider defaultTheme="light">
 						<DirectionProvider dir={dir}>
 							<TooltipProvider>
 								<PWAProvider>

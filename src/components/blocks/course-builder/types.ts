@@ -106,6 +106,45 @@ export interface NewCourseFormValues {
 	book_id?: string | null;
 	subject_id?: string | null;
 	grade_id?: string | null;
+	/** Public Cloudflare R2 URL shown on the course card (managed separately
+	 *  from the details form — see ImageUploadField). */
+	cover_image_url?: string | null;
+	// ── The rest of the course record, so a course can be fully described
+	// ── before/without leaving the builder.
+	/** One-per-line bullet list shown on the public course page. */
+	learning_objectives: string;
+	/** One-per-line list of what a student should know first. */
+	prerequisites: string;
+	/** Free-text number, kept as a string like price_credits. */
+	estimated_duration_hours: string;
+	promo_video_url: string;
+	welcome_message: string;
+	seo_title: string;
+	seo_description: string;
+}
+
+/**
+ * Splits a textarea into a de-duplicated list, dropping blank lines and
+ * trimming bullet characters people paste in ("- ", "• ", "۱. ").
+ */
+export function parseLines(value: string | null | undefined): string[] {
+	if (!value) return [];
+	const lines = value
+		.split(/\r?\n/)
+		// Also strips Persian/Arabic numbering (۱. ۲-) — course copy is often
+		// written in Dari/Pashto, where those are the usual list markers.
+		.map((line) =>
+			line
+				.replace(/^\s*(?:[-•*]|[0-9\u06F0-\u06F9\u0660-\u0669]+[.)-])\s*/, "")
+				.trim()
+		)
+		.filter((line) => line.length > 0);
+	return Array.from(new Set(lines));
+}
+
+/** Inverse of {@link parseLines} for form initialisation. */
+export function joinLines(items: readonly string[] | null | undefined): string {
+	return (items ?? []).join("\n");
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

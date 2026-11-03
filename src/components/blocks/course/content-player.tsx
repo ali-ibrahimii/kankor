@@ -2,11 +2,16 @@
 
 import { useQuery } from "@tanstack/react-query";
 import {
+	BookOpen,
 	CheckCircle2,
 	ChevronLeft,
 	ChevronRight,
+	Clock,
+	FileQuestion,
 	FileText,
 	Headphones,
+	ImageIcon,
+	Sparkles,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -60,11 +65,16 @@ function useSignedAssetUrl(storageKey?: string | null) {
 
 export type ContentPlayerProps = {
 	lessonTitle: string;
+	/** Module the lesson belongs to; hidden when the course has no modules. */
+	moduleTitle?: string | null;
 	lessonNumber: number;
 	totalLessons: number;
 	contentBlocks: ContentBlock[];
 	isCompleted: boolean;
 	isMarkingComplete?: boolean;
+	durationMinutes?: number | null;
+	nextLessonTitle?: string | null;
+	prevLessonTitle?: string | null;
 	onMarkComplete: () => void;
 	/** Called once when a video block has been watched past the threshold. */
 	onAutoComplete?: () => void;
@@ -178,7 +188,7 @@ function YouTubeVideo({
 	return (
 		<div
 			ref={containerRef}
-			className="aspect-video w-full overflow-hidden rounded-xl bg-black [&_iframe]:h-full [&_iframe]:w-full"
+			className="aspect-video w-full overflow-hidden bg-black [&_iframe]:h-full [&_iframe]:w-full"
 		/>
 	);
 }
@@ -193,6 +203,7 @@ function VideoPlayer({
 	onWatched?: () => void;
 }) {
 	const t = useTranslations("courses.learn");
+	const [failed, setFailed] = React.useState(false);
 
 	// YouTube embed
 	if (
@@ -208,14 +219,17 @@ function VideoPlayer({
 		}
 	}
 
+	if (failed) return <AssetUnavailable />;
+
 	// Native video
 	return (
-		<div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
+		<div className="aspect-video w-full overflow-hidden bg-black">
 			<video
 				src={url}
 				controls
 				className="h-full w-full"
 				preload="metadata"
+				onError={() => setFailed(true)}
 				onTimeUpdate={(event) => {
 					const video = event.currentTarget;
 					if (
@@ -248,13 +262,18 @@ function TextContent({ html }: { html: string }) {
 // ─── AudioPlayer ─────────────────────────────────────────────────────────────
 
 function AudioPlayer({ url }: { url: string }) {
+	const t = useTranslations("courses.learn");
+
 	return (
-		<div className="flex flex-col items-center gap-4 rounded-xl border bg-muted/30 px-6 py-8">
-			<div className="flex size-16 items-center justify-center rounded-full bg-primary/10">
-				<Headphones className="size-8 text-primary" />
+		<div className="flex flex-col items-center gap-4 px-4 py-6 sm:px-6">
+			<div className="flex items-center gap-3">
+				<span className="flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+					<Headphones className="size-5" />
+				</span>
+				<span className="text-sm font-semibold">{t("contentTypes.audio")}</span>
 			</div>
-			<audio controls src={url} className="w-full max-w-md">
-				Your browser does not support the audio element.
+			<audio controls src={url} className="w-full max-w-lg">
+				{t("videoNotSupported")}
 			</audio>
 		</div>
 	);
@@ -263,20 +282,22 @@ function AudioPlayer({ url }: { url: string }) {
 // ─── PdfViewer ────────────────────────────────────────────────────────────────
 
 function PdfViewer({ url, title }: { url: string; title?: string | null }) {
+	const t = useTranslations("courses.learn");
+
 	return (
 		<div className="space-y-3">
-			<div className="aspect-3/4 w-full overflow-hidden rounded-xl border">
+			<div className="aspect-3/4 w-full overflow-hidden rounded-xl border border-border/70 bg-muted/30">
 				<iframe
 					src={`${url}#toolbar=1`}
 					className="h-full w-full"
-					title={title ?? "PDF Document"}
+					title={title ?? "PDF"}
 				/>
 			</div>
 			<div className="flex justify-end">
-				<Button asChild variant="outline" size="sm">
+				<Button asChild variant="outline" size="sm" className="rounded-xl">
 					<a href={url} target="_blank" rel="noopener noreferrer">
 						<FileText className="size-3.5" />
-						Open PDF
+						{t("openDocument")}
 					</a>
 				</Button>
 			</div>
@@ -293,18 +314,28 @@ function ExternalResource({
 	url: string;
 	title?: string | null;
 }) {
+	const t = useTranslations("courses.learn");
+
 	return (
-		<div className="flex items-center gap-4 rounded-xl border bg-muted/30 p-5">
-			<div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-				<ChevronRight className="size-5 text-primary" />
+		<div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:p-5">
+			<div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+				<BookOpen className="size-5" />
 			</div>
-			<div className="min-w-0">
-				<p className="font-medium">{title ?? "External Resource"}</p>
-				<p className="mt-0.5 truncate text-sm text-muted-foreground">{url}</p>
+			<div className="min-w-0 flex-1">
+				<p className="truncate text-sm font-bold">
+					{title ?? t("contentTypes.external_resource")}
+				</p>
+				<p className="mt-0.5 truncate text-xs text-muted-foreground">{url}</p>
 			</div>
-			<Button asChild variant="outline" size="sm" className="shrink-0">
+			<Button
+				asChild
+				variant="outline"
+				size="sm"
+				className="shrink-0 rounded-xl"
+			>
 				<a href={url} target="_blank" rel="noopener noreferrer">
-					Open
+					{t("openResource")}
+					<ChevronRight className="size-3.5 rtl:rotate-180" />
 				</a>
 			</Button>
 		</div>
@@ -315,8 +346,10 @@ function ExternalResource({
 
 function AssetPending() {
 	return (
-		<div className="flex aspect-video w-full items-center justify-center rounded-xl border bg-muted/30">
-			<Spinner className="size-5" />
+		<div className="flex aspect-video w-full items-center justify-center bg-muted/40">
+			<div className="flex items-center gap-2 text-xs text-muted-foreground">
+				<Spinner className="size-4" />
+			</div>
 		</div>
 	);
 }
@@ -324,8 +357,11 @@ function AssetPending() {
 function AssetUnavailable() {
 	const t = useTranslations("courses.learn");
 	return (
-		<div className="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed bg-muted/30 px-4 text-center text-sm text-muted-foreground">
-			{t("assetUnavailable")}
+		<div className="flex aspect-video w-full flex-col items-center justify-center gap-2 bg-muted/40 px-4 text-center">
+			<FileQuestion className="size-6 text-muted-foreground" />
+			<p className="max-w-xs text-xs text-muted-foreground">
+				{t("assetUnavailable")}
+			</p>
 		</div>
 	);
 }
@@ -380,6 +416,74 @@ function PdfBlock({ block }: { block: ContentBlock }) {
 	return block.document_url ? <PdfViewer url={block.document_url} /> : null;
 }
 
+// ─── Unsupported / unrenderable blocks ────────────────────────────────────────
+//
+// `slide_presentation`, `quiz`, `assignment` and `code_playground` have no
+// renderer yet. Falling through to `null` used to leave the learner staring at
+// a blank pane, so every unrecognised block now shows what it is and how to
+// reach it.
+
+function UnsupportedBlock({ block }: { block: ContentBlock }) {
+	const t = useTranslations("courses.learn");
+	const label = (() => {
+		switch (block.block_type) {
+			case "slide_presentation":
+				return t("contentTypes.slide_presentation");
+			case "quiz":
+				return t("contentTypes.quiz");
+			case "assignment":
+				return t("contentTypes.assignment");
+			case "code_playground":
+				return t("contentTypes.code_playground");
+			default:
+				return t("contentTypes.text");
+		}
+	})();
+	const link =
+		block.external_resource_url ??
+		block.document_url ??
+		block.video_url ??
+		null;
+
+	return (
+		<div className="flex flex-col gap-4 p-4 sm:p-5">
+			{block.image_url && (
+				// biome-ignore lint/performance/noImgElement: instructor-provided URL of unknown size
+				<img
+					src={block.image_url}
+					alt={label}
+					className="w-full rounded-xl border border-border/70 object-contain"
+				/>
+			)}
+
+			<div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+				<div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+					<ImageIcon className="size-5" />
+				</div>
+				<div className="min-w-0 flex-1">
+					<p className="text-sm font-bold">{label}</p>
+					<p className="mt-0.5 text-xs text-muted-foreground">
+						{t("unsupportedBlock")}
+					</p>
+				</div>
+				{link && (
+					<Button
+						asChild
+						variant="outline"
+						size="sm"
+						className="shrink-0 rounded-xl"
+					>
+						<a href={link} target="_blank" rel="noopener noreferrer">
+							{t("openResource")}
+							<ChevronRight className="size-3.5 rtl:rotate-180" />
+						</a>
+					</Button>
+				)}
+			</div>
+		</div>
+	);
+}
+
 // ─── SingleBlock renderer ─────────────────────────────────────────────────────
 
 function RenderBlock({
@@ -391,41 +495,142 @@ function RenderBlock({
 }) {
 	switch (block.block_type) {
 		case "video":
-			return <VideoBlock block={block} onWatched={onVideoWatched} />;
+			return (
+				<div className="overflow-hidden rounded-2xl border border-border/70 bg-black shadow-sm">
+					<VideoBlock block={block} onWatched={onVideoWatched} />
+				</div>
+			);
 
 		case "text":
 			return block.text_content ? (
-				<TextContent html={block.text_content} />
+				<div className="rounded-2xl border border-border/70 bg-card p-4 shadow-sm sm:p-6 md:p-7">
+					<TextContent html={block.text_content} />
+				</div>
 			) : null;
 
 		case "audio":
-			return <AudioBlock block={block} />;
+			return (
+				<div className="rounded-2xl border border-border/70 bg-card shadow-sm">
+					<AudioBlock block={block} />
+				</div>
+			);
 
 		case "pdf_document":
-			return <PdfBlock block={block} />;
+			return (
+				<div className="rounded-2xl border border-border/70 bg-card p-3 shadow-sm sm:p-4">
+					<PdfBlock block={block} />
+				</div>
+			);
 
 		case "external_resource":
 			return block.external_resource_url ? (
-				<ExternalResource
-					url={block.external_resource_url}
-					title={block.external_resource_title}
-				/>
+				<div className="rounded-2xl border border-border/70 bg-card shadow-sm">
+					<ExternalResource
+						url={block.external_resource_url}
+						title={block.external_resource_title}
+					/>
+				</div>
 			) : null;
 
 		default:
-			return null;
+			return (
+				<div className="rounded-2xl border border-border/70 bg-card shadow-sm">
+					<UnsupportedBlock block={block} />
+				</div>
+			);
 	}
+}
+
+// ─── Empty lesson ─────────────────────────────────────────────────────────────
+
+function EmptyLesson({ onNextLesson }: { onNextLesson?: () => void }) {
+	const t = useTranslations("courses.learn");
+
+	return (
+		<div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-muted/20 px-6 py-14 text-center">
+			<span className="flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+				<Sparkles className="size-6" />
+			</span>
+			<div className="space-y-1">
+				<p className="text-sm font-bold">{t("noContentTitle")}</p>
+				<p className="mx-auto max-w-sm text-xs leading-6 text-muted-foreground">
+					{t("noContentDescription")}
+				</p>
+			</div>
+			{onNextLesson && (
+				<Button
+					size="sm"
+					variant="outline"
+					className="mt-1 rounded-xl"
+					onClick={onNextLesson}
+				>
+					{t("startNextLesson")}
+					<ChevronRight className="size-3.5 rtl:rotate-180" />
+				</Button>
+			)}
+		</div>
+	);
+}
+
+// ─── Lesson nav button ────────────────────────────────────────────────────────
+
+function LessonNavButton({
+	direction,
+	label,
+	lessonTitle,
+	onClick,
+	variant = "outline",
+}: {
+	direction: "prev" | "next";
+	label: string;
+	lessonTitle?: string | null;
+	onClick?: () => void;
+	variant?: "outline" | "default";
+}) {
+	const isPrev = direction === "prev";
+	const Chevron = isPrev ? ChevronLeft : ChevronRight;
+
+	return (
+		<Button
+			variant={variant}
+			onClick={onClick}
+			disabled={!onClick}
+			className={cn(
+				"h-11 min-w-11 gap-2 rounded-2xl px-3 text-start",
+				variant === "outline" && "border-border/70",
+				variant === "default" && "font-bold shadow-sm",
+				!isPrev && "justify-end"
+			)}
+		>
+			{isPrev && <Chevron className="size-4 shrink-0 rtl:rotate-180" />}
+			<span className="hidden min-w-0 flex-col sm:flex">
+				<span className="text-[10px] font-medium text-muted-foreground">
+					{label}
+				</span>
+				{lessonTitle && (
+					<span className="max-w-[160px] truncate text-xs font-bold">
+						{lessonTitle}
+					</span>
+				)}
+			</span>
+			{!isPrev && <Chevron className="size-4 shrink-0 rtl:rotate-180" />}
+		</Button>
+	);
 }
 
 // ─── ContentPlayer ────────────────────────────────────────────────────────────
 
 export function ContentPlayer({
 	lessonTitle,
+	moduleTitle,
 	lessonNumber,
 	totalLessons,
 	contentBlocks,
 	isCompleted,
 	isMarkingComplete,
+	durationMinutes,
+	nextLessonTitle,
+	prevLessonTitle,
 	onMarkComplete,
 	onAutoComplete,
 	onNextLesson,
@@ -447,77 +652,111 @@ export function ContentPlayer({
 		onAutoComplete?.();
 	}, [isCompleted, isMarkingComplete, onAutoComplete]);
 
+	const canGoNext = Boolean(onNextLesson);
+
 	return (
-		<div className={cn("flex flex-col gap-0", className)}>
+		<div className={cn("flex min-h-0 flex-1 flex-col bg-muted/20", className)}>
 			{/* Lesson header */}
-			<div className="border-b px-4 py-3 md:px-6">
-				<p className="text-xs text-muted-foreground">
-					{t("lessonOf", { current: lessonNumber, total: totalLessons })}
-				</p>
-				<h1 className="mt-0.5 text-lg font-semibold leading-snug">
-					{lessonTitle}
-				</h1>
-			</div>
+			<header className="shrink-0 border-b border-border/70 bg-background px-4 py-4 md:px-6">
+				<div className="mx-auto w-full max-w-3xl">
+					<div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
+						<span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-bold text-primary">
+							{t("lessonOf", {
+								current: lessonNumber,
+								total: totalLessons,
+							})}
+						</span>
+						{moduleTitle && (
+							<>
+								<span aria-hidden="true">·</span>
+								<span className="truncate">{moduleTitle}</span>
+							</>
+						)}
+						{durationMinutes ? (
+							<>
+								<span aria-hidden="true">·</span>
+								<span className="inline-flex items-center gap-1">
+									<Clock className="size-3" />
+									{t("minutes", { count: durationMinutes })}
+								</span>
+							</>
+						) : null}
+					</div>
+
+					<div className="mt-2 flex items-start justify-between gap-3">
+						<h1 className="text-lg font-black leading-snug tracking-tight md:text-xl">
+							{lessonTitle}
+						</h1>
+						{isCompleted && (
+							<span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+								<CheckCircle2 className="size-3.5" />
+								{t("completed")}
+							</span>
+						)}
+					</div>
+				</div>
+			</header>
 
 			{/* Content blocks */}
-			<div className="flex-1 space-y-8 overflow-y-auto px-4 py-6 md:px-6">
-				{sorted.map((block) => (
-					<RenderBlock
-						key={block.id}
-						block={block}
-						onVideoWatched={handleVideoWatched}
-					/>
-				))}
+			<div className="min-h-0 flex-1 overflow-y-auto">
+				<div className="mx-auto w-full max-w-3xl px-4 py-5 md:px-6 md:py-7">
+					{sorted.length === 0 ? (
+						<EmptyLesson onNextLesson={onNextLesson} />
+					) : (
+						<div className="space-y-5">
+							{sorted.map((block) => (
+								<RenderBlock
+									key={block.id}
+									block={block}
+									onVideoWatched={handleVideoWatched}
+								/>
+							))}
+						</div>
+					)}
+				</div>
 			</div>
 
 			{/* Footer nav */}
-			<div className="sticky bottom-0 border-t bg-background/95 px-4 py-3 backdrop-blur supports-backdrop-filter:bg-background/60 md:px-6">
-				<div className="flex items-center justify-between gap-3">
-					{/* Prev */}
-					<Button
-						variant="outline"
-						size="sm"
+			<footer className="shrink-0 border-t border-border/70 bg-background/95 px-4 py-3 backdrop-blur supports-backdrop-filter:bg-background/70 md:px-6">
+				<div className="mx-auto flex w-full max-w-3xl items-center gap-2">
+					<LessonNavButton
+						direction="prev"
+						label={t("previousLesson")}
+						lessonTitle={prevLessonTitle}
 						onClick={onPrevLesson}
-						disabled={!onPrevLesson}
-						className="gap-1.5"
-					>
-						<ChevronLeft className="size-4 rtl:rotate-180" />
-						<span className="hidden sm:inline">{t("previousLesson")}</span>
-					</Button>
+					/>
 
-					{/* Mark complete */}
-					<Button
-						size="sm"
-						variant={isCompleted ? "secondary" : "default"}
-						className={cn(
-							"gap-1.5",
-							isCompleted &&
-								"bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-950 dark:text-emerald-300"
-						)}
-						onClick={onMarkComplete}
-						disabled={isCompleted || isMarkingComplete}
-					>
-						{isMarkingComplete ? (
-							<Spinner className="size-4" />
+					<div className="flex flex-1 justify-center">
+						{isCompleted ? (
+							<span className="inline-flex h-11 items-center gap-1.5 rounded-2xl bg-emerald-500/10 px-4 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+								<CheckCircle2 className="size-4" />
+								{t("completed")}
+							</span>
 						) : (
-							<CheckCircle2 className="size-4" />
+							<Button
+								onClick={onMarkComplete}
+								disabled={isMarkingComplete}
+								className="h-11 gap-2 rounded-2xl px-5 font-bold shadow-sm"
+							>
+								{isMarkingComplete ? (
+									<Spinner className="size-4" />
+								) : (
+									<CheckCircle2 className="size-4" />
+								)}
+								{canGoNext ? t("completeAndNext") : t("markComplete")}
+							</Button>
 						)}
-						{isCompleted ? t("completed") : t("markComplete")}
-					</Button>
+					</div>
 
-					{/* Next */}
-					<Button
-						variant="outline"
-						size="sm"
+					<LessonNavButton
+						direction="next"
+						label={isCompleted ? t("nextLesson") : t("upNext")}
+						lessonTitle={nextLessonTitle}
 						onClick={onNextLesson}
-						disabled={!onNextLesson}
-						className="gap-1.5"
-					>
-						<span className="hidden sm:inline">{t("nextLesson")}</span>
-						<ChevronRight className="size-4 rtl:rotate-180" />
-					</Button>
+						variant={isCompleted && canGoNext ? "default" : "outline"}
+					/>
 				</div>
-			</div>
+			</footer>
 		</div>
 	);
 }

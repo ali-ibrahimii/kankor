@@ -34,7 +34,7 @@ export function LibraryLayoutClient({
 					</Link>
 
 					<div className="flex items-center gap-2">
-						<LocaleSwitcher type="group" />
+						<LocaleSwitcher />
 
 						<Link
 							href={isAuthenticated ? dashboardPath : signInUrl}

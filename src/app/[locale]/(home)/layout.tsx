@@ -16,7 +16,7 @@ export default async function HomeLayout({
 	return (
 		<div className="relative min-h-screen bg-slate-50/50 dark:bg-[#141b2c] flex flex-col">
 			<PublicNavbar />
-			<main className="flex-1 w-full pt-[62px] lg:pt-[84px]">{children}</main>
+			<main className="flex-1 w-full">{children}</main>
 			<PublicFooter />
 		</div>
 	);

@@ -10,13 +10,29 @@
 // Mirrors images.remotePatterns in next.config.ts
 const ALLOWED_COVER_HOSTS = ["storage.googleapis.com"];
 
-/** Returns the URL if next/image can render it, otherwise null. */
+/** Cloudflare R2 public host (custom domain or `pub-xxxx.r2.dev`), if configured. */
+function r2PublicHost(): string | null {
+	const host = process.env.NEXT_PUBLIC_R2_PUBLIC_HOSTNAME?.trim();
+	return host ? host.replace(/^https?:\/\//, "").replace(/\/+$/, "") : null;
+}
+
+/**
+ * Returns the URL if next/image can render it, otherwise null.
+ *
+ * Covers uploaded through the app live in Cloudflare R2: either on the public
+ * host (`NEXT_PUBLIC_R2_PUBLIC_HOSTNAME`) or, when that is unset, on the
+ * same-origin `/api/media/...` proxy — both are accepted here.
+ */
 export function resolveCoverSrc(url: string | null | undefined): string | null {
 	if (!url) return null;
-	if (url.startsWith("/")) return url; // local/public assets
+	if (url.startsWith("/")) return url; // local/public assets + /api/media proxy
 	try {
 		const { hostname } = new URL(url);
-		return ALLOWED_COVER_HOSTS.includes(hostname) ? url : null;
+		if (ALLOWED_COVER_HOSTS.includes(hostname)) return url;
+		const r2Host = r2PublicHost();
+		if (r2Host && hostname === r2Host) return url;
+		if (hostname.endsWith(".r2.dev")) return url;
+		return null;
 	} catch {
 		return null;
 	}

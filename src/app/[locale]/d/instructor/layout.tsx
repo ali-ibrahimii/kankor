@@ -156,7 +156,7 @@ export default async function InstructorLayout({
 				<DashboardTopbar
 					actions={
 						<>
-							<LocaleSwitcher responsive={false} />
+							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>
 					}

@@ -4,7 +4,6 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	BookOpen,
-	BookOpenCheck,
 	GraduationCap,
 	Layers3,
 	LibraryBig,
@@ -250,82 +249,6 @@ function CourseGroupSection({ group }: { group: CourseGroup }) {
 }
 
 // ============================================================
-// CATALOG HERO
-// ============================================================
-
-function CatalogHero({ total }: { total: number | null }) {
-	return (
-		<div className="relative isolate overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_90%_0%,rgba(137,100,255,.35),transparent_42%),radial-gradient(circle_at_5%_100%,rgba(94,207,173,.18),transparent_35%),linear-gradient(125deg,#101a2c,#192640_60%,#252541)] px-6 py-10 text-white shadow-[0_28px_65px_-40px_rgba(17,24,55,.65)] sm:px-10 sm:py-12 lg:px-14">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 opacity-[.12] [background-image:radial-gradient(white_.7px,transparent_.7px)] [background-size:22px_22px]"
-			/>
-
-			<div className="relative z-10 grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-				<div className="max-w-2xl">
-					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[11px] font-bold text-[#b7f486]">
-						<Sparkles className="size-4" />
-						کتابخانه آموزشی
-					</span>
-
-					<h1 className="mt-6 text-[2rem] font-extrabold leading-[1.5] tracking-tight sm:text-[2.7rem]">
-						هر مهارتی که می‌خواهی،
-						<br />
-						<span className="bg-gradient-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
-							از همین‌جا یاد بگیر
-						</span>
-					</h1>
-
-					<p className="mt-4 max-w-xl text-sm leading-8 text-white/65">
-						از درس‌های مکتب تا برنامه‌نویسی و مهارت‌های تخصصی؛ کورس مورد علاقه‌ات را
-						پیدا کن و مسیر یادگیری خود را شروع کن.
-					</p>
-
-					<div className="mt-7 flex flex-wrap gap-3">
-						<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.07] px-4 py-2.5 text-xs font-bold">
-							<BookOpenCheck className="size-4 text-[#b7f486]" />
-							{total ?? "—"} کورس آموزشی
-						</div>
-
-						<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.07] px-4 py-2.5 text-xs font-bold">
-							<School className="size-4 text-[#b7f486]" />
-							آموزش مکتب
-						</div>
-
-						<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.07] px-4 py-2.5 text-xs font-bold">
-							<Zap className="size-4 text-[#b7f486]" />
-							مهارت‌های تخصصی
-						</div>
-					</div>
-				</div>
-
-				<div className="hidden lg:block">
-					<div className="relative flex size-52 items-center justify-center">
-						<div className="absolute inset-0 rounded-full border border-white/10" />
-
-						<div className="absolute inset-6 rounded-full border border-white/10" />
-
-						<div className="absolute inset-12 rounded-full bg-[#b7f486]/10 blur-xl" />
-
-						<div className="relative flex size-28 items-center justify-center rounded-[35px] border border-white/15 bg-white/10 shadow-2xl backdrop-blur-md">
-							<LibraryBig className="size-14 text-[#b7f486]" />
-						</div>
-
-						<span className="absolute -end-2 top-5 flex size-12 items-center justify-center rounded-2xl bg-[#b7f486] text-[#19243b] shadow-xl">
-							<GraduationCap className="size-6" />
-						</span>
-
-						<span className="absolute -start-2 bottom-5 flex size-12 items-center justify-center rounded-2xl bg-[#a58cff] text-white shadow-xl">
-							<Zap className="size-6" />
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-// ============================================================
 // PUBLIC COURSE CATALOG
 // ============================================================
 
@@ -455,10 +378,6 @@ export function PublicCourseCatalog({
 
 	return (
 		<div className="flex flex-col gap-8 pb-12">
-			{/* HERO */}
-
-			<CatalogHero total={total} />
-
 			{/* FILTER CONTAINER */}
 
 			<div className="rounded-[26px] border border-[#e9eaf2] bg-white p-4 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-6">

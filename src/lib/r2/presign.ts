@@ -2,6 +2,7 @@ import {
 	DeleteObjectCommand,
 	GetObjectCommand,
 	HeadObjectCommand,
+	ListObjectsV2Command,
 	PutObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -76,5 +77,65 @@ export async function headObject(key: string): Promise<ObjectMetadata> {
 export async function deleteObject(key: string): Promise<void> {
 	await getR2Client().send(
 		new DeleteObjectCommand({ Bucket: r2Bucket(), Key: key })
+	);
+}
+
+export interface ObjectStream {
+	body: ReadableStream<Uint8Array> | null;
+	contentType: string | null;
+	contentLength: number | null;
+	etag: string | null;
+}
+
+/**
+ * Streams an object out of R2 without buffering it in memory — used by the
+ * `/api/media` route that serves public images when no R2 custom domain is
+ * configured.
+ */
+export async function getObjectStream(key: string): Promise<ObjectStream> {
+	const result = await getR2Client().send(
+		new GetObjectCommand({ Bucket: r2Bucket(), Key: key })
+	);
+	return {
+		body: (result.Body as ReadableStream<Uint8Array> | undefined) ?? null,
+		contentType: result.ContentType ?? null,
+		contentLength: result.ContentLength ?? null,
+		etag: result.ETag ?? null,
+	};
+}
+
+export interface BucketObject {
+	key: string;
+	sizeBytes: number;
+	lastModified: string | null;
+}
+
+/**
+ * Lists objects under a prefix — used by the storage health check so an
+ * operator can confirm the credentials point at the right bucket and see
+ * whether `courses/`, `schools/`… already hold uploads.
+ */
+export async function listBucketObjects(
+	prefix: string,
+	maxKeys = 5
+): Promise<BucketObject[]> {
+	const result = await getR2Client().send(
+		new ListObjectsV2Command({
+			Bucket: r2Bucket(),
+			Prefix: prefix,
+			MaxKeys: maxKeys,
+		})
+	);
+
+	return (result.Contents ?? []).flatMap((item) =>
+		item.Key
+			? [
+					{
+						key: item.Key,
+						sizeBytes: item.Size ?? 0,
+						lastModified: item.LastModified?.toISOString() ?? null,
+					},
+				]
+			: []
 	);
 }

@@ -21,6 +21,7 @@ import {
 	DotsBackground,
 	GridBackground,
 } from "@/components/global-background/background-variants";
+import { clientEnv } from "@/lib/env/client-env";
 import { cn } from "@/lib/utils";
 
 type ContactInfo = {
@@ -44,8 +45,8 @@ export function AboutContactSection() {
 		{
 			icon: <Mail className="h-6 w-6" />,
 			label: t("contact.email"),
-			value: "info@abzarkonkur.com",
-			href: "mailto:info@abzarkonkur.com",
+			value: clientEnv.app.email,
+			href: `mailto:${clientEnv.app.email}`,
 			color: "from-blue-500/20 to-cyan-500/20",
 		},
 		{
@@ -58,7 +59,7 @@ export function AboutContactSection() {
 		{
 			icon: <MapPin className="h-6 w-6" />,
 			label: t("contact.address"),
-			value: "کابل، افغانستان",
+			value: t("contact.addressValue"),
 			color: "from-fuchsia-500/20 to-pink-500/20",
 		},
 		{
@@ -103,18 +104,16 @@ export function AboutContactSection() {
 	};
 
 	return (
-		<section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28">
-			{/* Animated background orbs */}
-			<div className="absolute inset-0 overflow-hidden">
-				{/* <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
-        <div
-          className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="absolute -bottom-40 right-1/3 h-96 w-96 rounded-full bg-sky-500/20 blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        /> */}
+		<section
+			id="contact"
+			className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+		>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 overflow-hidden"
+			>
+				<div className="absolute -top-40 -end-40 size-96 rounded-full bg-indigo-500/20 blur-3xl" />
+				<div className="absolute bottom-0 -start-40 size-96 rounded-full bg-fuchsia-500/15 blur-3xl" />
 			</div>
 
 			<div className="relative mx-auto max-w-7xl px-6">

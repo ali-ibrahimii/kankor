@@ -10,6 +10,7 @@ import {
 	CourseGridSkeleton,
 	EnrolledCourseCard,
 } from "@/components/blocks/course";
+import { useCourseCardStats } from "@/components/blocks/course/course-stats";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
@@ -60,6 +61,20 @@ export default function MyCoursesPage() {
 		enabled: !!userId,
 	});
 
+	// Lesson count + total lesson time for the "my courses" cards.
+	const courseMetas = React.useMemo(
+		() =>
+			(enrollments ?? [])
+				.map((enrollment) => enrollment.courses as unknown as CourseMeta)
+				.filter((course): course is CourseMeta => Boolean(course)),
+		[enrollments]
+	);
+	const enrichedCourses = useCourseCardStats(courseMetas);
+	const statsById = React.useMemo(
+		() => new Map(enrichedCourses.map((course) => [course.id, course])),
+		[enrichedCourses]
+	);
+
 	return (
 		<div className="space-y-6 p-6">
 			{/* Header */}
@@ -93,8 +108,9 @@ export default function MyCoursesPage() {
 			) : (
 				<CourseGrid>
 					{enrollments.map((enrollment) => {
-						const course = enrollment.courses as unknown as CourseMeta;
-						if (!course) return null;
+						const raw = enrollment.courses as unknown as CourseMeta;
+						if (!raw) return null;
+						const course = statsById.get(raw.id) ?? raw;
 
 						const enrollmentMeta: EnrollmentMeta = {
 							progress_percentage: enrollment.progress_percentage,
