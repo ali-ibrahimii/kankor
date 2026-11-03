@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { defaultLocale, Locale } from "@/i18n";
+import { getPlatformAuthorId } from "@/lib/platform-author";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -71,7 +72,12 @@ export async function createCourse(
 	values: NewCourseFormValues,
 	/** When set, the course is owned by (and attributed to) this agency — RLS
 	 * requires the caller to hold `courses.manage_own` for it. */
-	agencyId?: string
+	agencyId?: string,
+	options: {
+		/** Admin panel: attribute the course to the platform profile instead of
+		 *  the signed-in admin, so their personal name never shows as author. */
+		platformAuthored?: boolean;
+	} = {}
 ): Promise<Result<{ courseId: string }>> {
 	const supabase = await createClient();
 
@@ -80,13 +86,19 @@ export async function createCourse(
 	} = await supabase.auth.getUser();
 	if (!user) return { success: false, error: "Unauthenticated" };
 
+	// Falls back to the admin's own id when no platform profile is configured,
+	// so creation never fails because of this.
+	const platformAuthorId = options.platformAuthored
+		? await getPlatformAuthorId()
+		: null;
+
 	const { data, error } = await supabase
 		.from("courses")
 		.insert({
 			...coursePayload(values),
 			agency_id: agencyId ?? null,
 			is_published: false,
-			instructor_id: user.id,
+			instructor_id: platformAuthorId ?? user.id,
 		})
 		.select("id")
 		.single();

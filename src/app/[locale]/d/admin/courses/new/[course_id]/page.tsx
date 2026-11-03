@@ -1,23 +1,12 @@
 import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { CourseBuilder } from "@/components/blocks/course-builder";
-import { loadCourseContent } from "@/components/blocks/course-builder/actions";
 import { getDashboardPath, isSuperAdmin } from "@/lib/auth/auth.util";
 import { getCurrentUser } from "@/lib/auth/session";
-import { createClient } from "@/lib/supabase/server";
-
-// ─── Data fetching ────────────────────────────────────────────────────────────
-
-async function fetchCourse(courseId: string) {
-	const supabase = await createClient();
-	const { data, error } = await supabase
-		.from("courses")
-		.select("id, title, is_published, instructor_id")
-		.eq("id", courseId)
-		.single();
-	if (error || !data) return null;
-	return data;
-}
+import {
+	findCourseForBuilder,
+	loadBuilderContent,
+} from "@/lib/courses/builder-loader";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 //
@@ -40,15 +29,12 @@ export default async function AdminNewCourseBuilderPage({
 	// actually owns instead of a dead end.
 	if (!isSuperAdmin(user)) redirect(getDashboardPath(user, locale));
 
-	const [course, contentResult] = await Promise.all([
-		fetchCourse(course_id),
-		loadCourseContent(course_id),
-	]);
-
+	const course = await findCourseForBuilder(course_id);
 	if (!course) notFound();
-	if (!contentResult.success) notFound();
 
-	const { modules, lessons, blocks } = contentResult.data;
+	const { modules, lessons, blocks, error } = await loadBuilderContent(
+		course.id
+	);
 
 	return (
 		<CourseBuilder
@@ -58,6 +44,7 @@ export default async function AdminNewCourseBuilderPage({
 			initialModules={modules}
 			initialLessons={lessons}
 			initialBlocks={blocks}
+			contentError={error}
 			basePath="/d/admin"
 		/>
 	);
@@ -72,7 +59,7 @@ export async function generateMetadata({
 }) {
 	const { course_id } = await params;
 	const t = await getTranslations("courseBuilder");
-	const course = await fetchCourse(course_id);
+	const course = await findCourseForBuilder(course_id);
 	return {
 		title: course
 			? `${t("meta.editCourse")} — ${course.title}`

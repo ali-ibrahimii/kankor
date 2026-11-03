@@ -599,7 +599,8 @@
 		"unpublished": "انتشار کورس لغو شد.",
 		"publishToggleFailed": "به‌روزرسانی وضعیت انتشار ناکام شد.",
 		"durationMinutes": "{minutes} دقیقه",
-		"durationHoursMinutes": "{hours} ساعت و {minutes} دقیقه"
+		"durationHoursMinutes": "{hours} ساعت و {minutes} دقیقه",
+		"platformAuthor": "ابزار کانکور"
 	},
 	"certificates": {
 		"list": {
@@ -1757,7 +1758,15 @@
 				"quiz": "امتحان",
 				"assignment": "تکلیف"
 			}
-		}
+		},
+		"contentLoadFailed": "محتوای این کورس بارگذاری نشد — لطفاً صفحه را دوباره بارگذاری کنید.",
+		"loading": "در حال بارگذاری سازندهٔ کورس…",
+		"notFoundTitle": "این کورس پیدا نشد",
+		"notFoundDescription": "ممکن است حذف شده باشد یا نشانی آن تغییر کرده باشد.",
+		"errorTitle": "بارگذاری این صفحه ممکن نشد",
+		"errorDescription": "یک خطای غیرمنتظره رخ داد. یک‌بار دیگر تلاش کنید؛ اگر تکرار شد این پیام را برای پشتیبانی بفرستید.",
+		"retry": "تلاش دوباره",
+		"backToCourses": "بازگشت به فهرست کورس‌ها"
 	},
 	"imageUpload": {
 		"dropHint": "برای بارگذاری تصویر کلیک کن یا فایل را اینجا رها کن",
