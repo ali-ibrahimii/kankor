@@ -36,9 +36,9 @@ import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
 import { decodeSlugParam } from "@/lib/utils";
-
 import type { BaseParams } from "@/types/common.types";
 import type { CourseDetail } from "@/types/queries.types";
 
@@ -287,14 +287,14 @@ export default async function CourseDetailPage({
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+					__html: safeJsonLd(jsonLd),
 				}}
 			/>
 
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
+					__html: safeJsonLd(breadcrumbJsonLd),
 				}}
 			/>
 
@@ -302,7 +302,7 @@ export default async function CourseDetailPage({
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
+						__html: safeJsonLd(faqJsonLd),
 					}}
 				/>
 			)}

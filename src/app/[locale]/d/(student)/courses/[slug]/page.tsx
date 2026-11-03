@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getCurrentUser } from "@/lib/auth/session";
+import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { decodeSlugParam } from "@/lib/utils";
 import { CourseDetail } from "@/types/queries.types";
@@ -32,7 +33,14 @@ export default async function StudentCourseDetailPage({
 
 	const user = await getCurrentUser();
 	if (!user) {
-		redirect(`/auth/login?next=/d/courses/${slug}`);
+		// Locale-aware: a bare "/auth/login" made the middleware fall back to the
+		// default locale, so an /en visitor was sent to the Persian login page.
+		redirect(
+			routes.auth.login.page(
+				{ next: routes.d.courses.slug.page({ slug }) },
+				{ locale }
+			)
+		);
 	}
 
 	try {

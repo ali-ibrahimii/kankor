@@ -4,6 +4,7 @@ import { getDashboardPath } from "@/lib/auth/auth.util";
 import { getCurrentUser } from "@/lib/auth/session";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import { safeNextPath } from "@/lib/security/redirect";
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
@@ -13,12 +14,11 @@ export async function GET(request: NextRequest) {
 	const token_hash = searchParams.get("token_hash");
 	const type = searchParams.get("type") as EmailOtpType | null;
 	const nextParam = searchParams.get("next");
+	// Same-origin paths only — see safeNextPath. An absolute `next` would turn
+	// this route into an open redirect right after a successful sign-in.
 	const next =
-		nextParam &&
-		nextParam !== "null" &&
-		nextParam !== "undefined" &&
-		nextParam.trim() !== ""
-			? nextParam
+		nextParam && nextParam !== "null" && nextParam !== "undefined"
+			? safeNextPath(nextParam, routes.home.page())
 			: null;
 	const fallbackNext = next ?? routes.home.page();
 	const source = searchParams.get("source");
@@ -26,14 +26,10 @@ export async function GET(request: NextRequest) {
 	const supabase = await createClient();
 	// Create redirect link without the secret token
 	const redirectTo = request.nextUrl.clone();
-	try {
-		const nextUrl = new URL(fallbackNext, request.url);
-		redirectTo.pathname = nextUrl.pathname;
-		for (const [key, val] of nextUrl.searchParams.entries()) {
-			redirectTo.searchParams.set(key, val);
-		}
-	} catch {
-		redirectTo.pathname = fallbackNext;
+	const nextUrl = new URL(fallbackNext, request.url);
+	redirectTo.pathname = nextUrl.pathname;
+	for (const [key, val] of nextUrl.searchParams.entries()) {
+		redirectTo.searchParams.set(key, val);
 	}
 	redirectTo.searchParams.delete("token_hash");
 	redirectTo.searchParams.delete("type");
@@ -42,7 +38,7 @@ export async function GET(request: NextRequest) {
 
 	// PKCE code exchange — used by OAuth providers (Google) and magic links
 	if (code) {
-		console.log("google login", code);
+		// The PKCE authorization code is a bearer credential — never log it.
 		const { error } = await supabase.auth.exchangeCodeForSession(code);
 		if (!error) {
 			if (source === "mobile") return mobileVerifiedResponse();

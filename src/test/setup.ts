@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
 
-process.env.NEXT_PUBLIC_SUPABASE_URL ||=
-	"https://xjzmpanstxgwwjupujwr.supabase.co";
+// Dummy values: unit tests never reach the network. A real project ref used to
+// live here, which needlessly published the production project reference.
+process.env.NEXT_PUBLIC_SUPABASE_URL ||= "https://test-project.supabase.co";
 process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||= "test-anon-key";
 
 // Radix UI (dialog, select, scroll-area) uses ResizeObserver, which jsdom does

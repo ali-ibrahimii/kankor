@@ -16,6 +16,7 @@ import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
 import { serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
 import { decodeSlugParam } from "@/lib/utils";
 import { BaseParams } from "@/types/common.types";
@@ -149,11 +150,11 @@ export default async function LibraryDetailPage({
 			{/* JSON-LD for SEO */}
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
 			/>
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+				dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
 			/>
 
 			{/* Visual Breadcrumbs */}

@@ -68,11 +68,9 @@ export default function InstructorCourseDetailPage() {
 			.update({ is_published: !course.is_published })
 			.eq("id", course.id);
 		if (error) {
-			toast.error("Failed to update publish status.");
+			toast.error(t("publishToggleFailed"));
 		} else {
-			toast.success(
-				course.is_published ? "Course unpublished." : "Course published."
-			);
+			toast.success(course.is_published ? t("unpublished") : t("published"));
 			router.refresh();
 		}
 	}
@@ -82,9 +80,9 @@ export default function InstructorCourseDetailPage() {
 		const client = createClient();
 		const { error } = await client.from("courses").delete().eq("id", course.id);
 		if (error) {
-			toast.error("Failed to delete course.");
+			toast.error(t("deleteCourseFailed"));
 		} else {
-			toast.success("Course deleted.");
+			toast.success(t("courseDeleted"));
 			router.push(routes.d.instructor.courses.page());
 		}
 	}
@@ -100,11 +98,11 @@ export default function InstructorCourseDetailPage() {
 	if (error || !course) {
 		return (
 			<div className="p-6 text-center">
-				<p className="text-sm text-muted-foreground">Course not found.</p>
+				<p className="text-sm text-muted-foreground">{t("courseNotFound")}</p>
 				<Button asChild variant="outline" size="sm" className="mt-3">
 					<Link href={routes.d.instructor.courses.page()}>
 						<ArrowLeft className="size-4" />
-						Back to Courses
+						{t("backToCourses")}
 					</Link>
 				</Button>
 			</div>

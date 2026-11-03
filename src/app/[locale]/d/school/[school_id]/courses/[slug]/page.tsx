@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, BarChart3, Edit3, Eye, Trash2, Users } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { toast } from "sonner";
@@ -21,7 +21,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 import { decodeSlugParam, getSlugOrIdColumn, isUuid } from "@/lib/utils";
 import { CourseDetail } from "@/types/queries.types";
@@ -48,9 +49,14 @@ async function fetchCourseDetail(rawSlug: string) {
 export default function InstructorCourseDetailPage() {
 	const t = useTranslations("courses");
 	const tDetail = useTranslations("courses.detail");
-	const params = useParams<{ slug: string }>();
+	const params = useParams<{ slug: string; school_id: string }>();
 	const router = useRouter();
 	const slug = useMemo(() => decodeSlugParam(params.slug), [params.slug]);
+	// This page lives under /d/school/{id}: leaving the school dashboard for the
+	// instructor one (as it used to) dropped the member out of their own scope.
+	const coursesHome = routes.d.school.courses.page({
+		school_id: params.school_id,
+	});
 
 	const {
 		data: course,
@@ -70,11 +76,9 @@ export default function InstructorCourseDetailPage() {
 			.update({ is_published: !course.is_published })
 			.eq(getSlugOrIdColumn(slug), slug);
 		if (error) {
-			toast.error("Failed to update publish status.");
+			toast.error(t("publishToggleFailed"));
 		} else {
-			toast.success(
-				course.is_published ? "Course unpublished." : "Course published."
-			);
+			toast.success(course.is_published ? t("unpublished") : t("published"));
 			router.refresh();
 		}
 	}
@@ -86,10 +90,10 @@ export default function InstructorCourseDetailPage() {
 			.delete()
 			.eq(getSlugOrIdColumn(slug), slug);
 		if (error) {
-			toast.error("Failed to delete course.");
+			toast.error(t("deleteCourseFailed"));
 		} else {
-			toast.success("Course deleted.");
-			router.push("/d/instructor/courses");
+			toast.success(t("courseDeleted"));
+			router.push(coursesHome);
 		}
 	}
 
@@ -104,11 +108,11 @@ export default function InstructorCourseDetailPage() {
 	if (error || !course) {
 		return (
 			<div className="p-6 text-center">
-				<p className="text-sm text-muted-foreground">Course not found.</p>
+				<p className="text-sm text-muted-foreground">{t("courseNotFound")}</p>
 				<Button asChild variant="outline" size="sm" className="mt-3">
-					<Link href="/d/instructor/courses">
+					<Link href={coursesHome}>
 						<ArrowLeft className="size-4" />
-						Back to Courses
+						{t("backToCourses")}
 					</Link>
 				</Button>
 			</div>
@@ -121,7 +125,7 @@ export default function InstructorCourseDetailPage() {
 			<div className="sticky top-14 z-10 flex items-center justify-between gap-3 border-b bg-background/95 px-6 py-3 backdrop-blur supports-backdrop-filter:bg-background/60">
 				<div className="flex items-center gap-3 min-w-0">
 					<Button asChild variant="ghost" size="icon-sm">
-						<Link href="/d/instructor/courses">
+						<Link href={coursesHome}>
 							<ArrowLeft className="size-4" />
 						</Link>
 					</Button>
