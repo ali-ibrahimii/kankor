@@ -21,7 +21,7 @@ import {
 	getUnreadNotificationCount,
 	NotificationBell,
 } from "@/components/blocks/notifications";
-import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardSidebar } from "@/components/blocks/sidebar/dashboard-sidebar";
 import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
 import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup, MenuParent } from "@/components/blocks/sidebar/types";
@@ -177,7 +177,7 @@ export default async function AdminLayout({
 
 	return (
 		<SidebarProvider>
-			<AppSidebar
+			<DashboardSidebar
 				menus={menus}
 				header={
 					<SidebarBrand

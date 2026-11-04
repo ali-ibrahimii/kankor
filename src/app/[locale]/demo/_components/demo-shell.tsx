@@ -21,7 +21,7 @@ import { AdminOverview } from "@/components/blocks/dashboard-overview/admin-over
 import { InstructorOverview } from "@/components/blocks/dashboard-overview/instructor-overview";
 import { SchoolOverview } from "@/components/blocks/dashboard-overview/school-overview";
 import { StudentOverview } from "@/components/blocks/dashboard-overview/student-overview";
-import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardSidebar } from "@/components/blocks/sidebar/dashboard-sidebar";
 import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
 import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
@@ -124,7 +124,7 @@ export async function DemoShell({ role }: { role: DemoRole }) {
 
 	return (
 		<SidebarProvider>
-			<AppSidebar
+			<DashboardSidebar
 				menus={menus}
 				header={
 					<SidebarBrand

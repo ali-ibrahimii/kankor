@@ -15,6 +15,29 @@ const rawSupabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
  */
 export const isSupabaseConfigured = Boolean(rawSupabaseUrl && rawSupabaseKey);
 
+/**
+ * True when the configured Supabase URL is a real, reachable Supabase
+ * project — not the inert `demo.invalid` / `example.invalid` placeholders.
+ *
+ * `isSupabaseConfigured` only checks that *some* value was provided. A
+ * deployment (or a copied `.env`) can still point at a placeholder host, and
+ * every `supabase.auth.getClaims()` / `.from(...)` call against it blocks on a
+ * DNS lookup that never resolves — which in practice means a multi-minute
+ * request hang rather than a fast, actionable error.
+ *
+ * Server-side code paths (middleware, Server Components, Server Actions) must
+ * use this check before touching the network; the client-only
+ * `isSupabaseConfigured` flag is not enough.
+ */
+export function isRealSupabaseUrl(url: string | undefined): boolean {
+	if (!url) return false;
+	return (
+		!url.includes("demo.invalid") &&
+		!url.includes("example.invalid") &&
+		/^https?:\/\//.test(url)
+	);
+}
+
 function parseClientEnv(): ClientEnv {
 	const env = {
 		app: {

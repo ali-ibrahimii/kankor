@@ -34,7 +34,7 @@ import {
 
 import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
-import { serverEnv } from "@/lib/env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
 import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
@@ -54,6 +54,10 @@ export async function generateMetadata({
 	params: Promise<BaseParams & { slug: string }>;
 }) {
 	const { slug, locale } = await params;
+
+	// Without a reachable Supabase project there is no course to describe,
+	// and the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) return {};
 
 	const supabase = await createClient();
 
@@ -100,6 +104,10 @@ export default async function CourseDetailPage({
 	const { slug, locale } = await params;
 
 	setRequestLocale(locale);
+
+	// Without a reachable Supabase project there is no course to show, and
+	// the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) notFound();
 
 	const supabase = await createClient();
 

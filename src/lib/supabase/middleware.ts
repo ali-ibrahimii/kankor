@@ -5,7 +5,7 @@ import { locales } from "@/i18n";
 import { getDashboardPath } from "../auth/auth.util";
 import { getCurrentUser } from "../auth/session";
 import { CurrentUser } from "../auth/types";
-import { serverEnv } from "../env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "../env/server-env";
 import { routes } from "../routes";
 import { Database } from "./database.types";
 
@@ -83,6 +83,30 @@ export async function updateSession(
 	if (!isInDashboardPage(pathname) && !isInAuthPage(pathname)) {
 		return { supabaseResponse };
 	}
+
+	// No usable Supabase project configured (missing credentials, or the
+	// inert demo.invalid placeholder). Every `supabase.auth.getClaims()` call
+	// against an unresolvable host blocks on DNS until it times out, which
+	// turned a missing-.env mistake into multi-minute request hangs.
+	//
+	// Without a backend there is no session to inspect, so treat every
+	// visitor as unauthenticated: protected dashboard pages redirect to the
+	// login form, and auth pages render normally.
+	if (!isSupabaseServerConfigured) {
+		if (isInDashboardPage(pathname)) {
+			const locale = localeFromPathname(pathname) ?? (await getLocale());
+			const loginUrl = new URL(
+				routes.auth.login.page(
+					{ next: pathname + request.nextUrl.search },
+					{ locale }
+				),
+				request.url
+			);
+			return { supabaseResponse: NextResponse.redirect(loginUrl) };
+		}
+		return { supabaseResponse };
+	}
+
 	const supabase = createServerClient<Database>(
 		serverEnv.supabase.url,
 		serverEnv.supabase.publishableKey,
@@ -105,6 +129,18 @@ export async function updateSession(
 						supabaseResponse.headers.set(key, value)
 					);
 				},
+			},
+			global: {
+				// Bound every middleware auth call so an unreachable Supabase
+				// host fails fast instead of stalling the whole request.
+				fetch: (input, init) =>
+					fetch(input, {
+						...init,
+						signal: AbortSignal.any([
+							...(init?.signal ? [init.signal] : []),
+							AbortSignal.timeout(10_000),
+						]),
+					}),
 			},
 		}
 	);

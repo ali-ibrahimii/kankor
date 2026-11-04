@@ -6,7 +6,7 @@ import type { PublicQuiz } from "@/components/blocks/quizzes/types";
 import { CARD_IMAGES } from "@/components/blocks/shared/card-images";
 import { serializeQuery } from "@/hooks/filter/filter.utils";
 import type { Locale } from "@/i18n";
-import { serverEnv } from "@/lib/env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
 import type { Database } from "@/lib/supabase/database.types";
 import { createClient } from "@/lib/supabase/server";
@@ -1076,10 +1076,7 @@ function getFallbackPartners(locale: Locale): PartnerInstitution[] {
 }
 
 function isPlaceholderSupabase(): boolean {
-	const url = serverEnv.supabase.url;
-	return (
-		!url || url.includes("demo.invalid") || url.includes("example.invalid")
-	);
+	return !isSupabaseServerConfigured;
 }
 
 /**

@@ -2,6 +2,7 @@
 
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 import { Eye, EyeOff, LoaderIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import { type ComponentProps, Fragment, useState } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -49,8 +50,29 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { LexicalEditor } from "@/features/editor/lexical-editor";
 import { cn } from "@/lib/utils";
+
+/**
+ * The rich-text editor (Lexical + its plugins) weighs ~400 KB minified.
+ *
+ * `use-form` is imported by ~30 components — every login/signup/profile form
+ * in the app — but only the course/lesson builders actually render a
+ * rich-text field. A static import here put the whole editor into the shared
+ * chunk that every page downloads, so it is loaded lazily instead: the
+ * placeholder keeps the layout stable while the editor streams in.
+ */
+const LexicalEditor = dynamic(
+	() => import("@/features/editor/lexical-editor").then((m) => m.LexicalEditor),
+	{
+		ssr: false,
+		loading: () => (
+			<div
+				className="min-h-32 w-full animate-pulse rounded-md border border-input bg-muted/40"
+				aria-hidden="true"
+			/>
+		),
+	}
+);
 
 export const { fieldContext, useFieldContext, useFormContext, formContext } =
 	createFormHookContexts();

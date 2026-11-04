@@ -1,4 +1,4 @@
-import { clientEnv } from "./client-env";
+import { clientEnv, isRealSupabaseUrl } from "./client-env";
 import { type ServerEnv, serverSchema } from "./schema";
 
 function parseServerEnv(): ServerEnv {
@@ -54,3 +54,16 @@ function parseServerEnv(): ServerEnv {
 }
 
 export const serverEnv = parseServerEnv();
+
+/**
+ * True when the server can actually talk to a Supabase project.
+ *
+ * Unlike the browser-side `isSupabaseConfigured`, this also rejects the
+ * inert placeholder hosts (`demo.invalid` / `example.invalid`). Server code
+ * that queries Supabase must check this first: a request to a placeholder host
+ * blocks on a DNS lookup that never resolves, turning a missing-credentials
+ * mistake into a multi-minute request hang.
+ */
+export const isSupabaseServerConfigured = isRealSupabaseUrl(
+	serverEnv.supabase.url
+);
