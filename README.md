@@ -38,14 +38,51 @@ If you are an AI agent working in this workspace, you **must** read and follow t
    pnpm install
    ```
 
-2. Start the app
+2. Configure the environment
+
+   ```bash
+   cp .env.example .env
+   # fill in NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+   ```
+
+3. Push the database schema
+
+   ```bash
+   pnpm push:db:production
+   pnpm gen:types
+   ```
+
+4. Load real reference data (universities, faculties, schools, teachers)
+
+   ```bash
+   pnpm seed:real-data            # reference data
+   pnpm seed:real-data:accounts   # + teacher accounts (needs the service-role key)
+   ```
+
+   Full walkthrough — including how to add your own teachers and schools — is in
+   **[docs/real-data.md](docs/real-data.md)**.
+
+5. Start the app
 
    ```bash
    pnpm dev
    ```
+
+The app boots without Supabase credentials too: the public site and the
+isolated `/demo` dashboard run against local placeholder data, and every
+server-side query fails fast instead of hanging.
 
 ### Install a package
 
 ```bash
 pnpm add <package-name>
 ```
+
+---
+
+## Performance
+
+Landing-page first-load JS is held under 2 MB. Heavy libraries (ExcelJS,
+Lexical, pdf.js) are loaded lazily only when a user actually opens the feature
+that needs them — see [docs/performance.md](docs/performance.md) for the bundle
+budget and the rules to keep it that way.

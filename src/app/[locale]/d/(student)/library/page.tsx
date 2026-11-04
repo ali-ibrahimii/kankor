@@ -1,23 +1,18 @@
-"use client";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
+import { LibraryCatalog } from "@/components/blocks/libraries";
+import { BaseParams } from "@/types/common.types";
+import { LibrarySectionResolver } from "./library-section-resolver";
 
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+export default async function StudentLibraryPage({
+	params,
+}: {
+	params: Promise<BaseParams>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
 
-import {
-	LibraryCatalog,
-	type LibrarySection,
-} from "@/components/blocks/libraries";
-
-const VALID_SECTIONS: LibrarySection[] = ["fields", "studies", "more"];
-
-export default function StudentLibraryPage() {
-	const t = useTranslations("libraries");
-	const searchParams = useSearchParams();
-
-	const rawSection = searchParams.get("section");
-	const section = VALID_SECTIONS.includes(rawSection as LibrarySection)
-		? (rawSection as LibrarySection)
-		: undefined;
+	const t = await getTranslations("libraries");
 
 	return (
 		<div className="flex flex-col gap-6 p-6">
@@ -28,7 +23,9 @@ export default function StudentLibraryPage() {
 				</p>
 			</div>
 
-			<LibraryCatalog fixedCategoryFilter={section} />
+			<Suspense fallback={<LibraryCatalog fixedCategoryFilter={undefined} />}>
+				<LibrarySectionResolver />
+			</Suspense>
 		</div>
 	);
 }

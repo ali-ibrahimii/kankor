@@ -20,7 +20,22 @@ export const Providers = ({
 			new QueryClient({
 				defaultOptions: {
 					queries: {
-						staleTime: 30 * 1000,
+						// Course/deck/quiz data changes rarely — a 5-minute
+						// stale window stops every route change from re-fetching
+						// the same catalogue rows (see docs/performance.md).
+						staleTime: 5 * 60 * 1000,
+						// Keep inactive queries around for 10 minutes so the
+						// back button and in-app navigation render instantly
+						// from cache instead of showing a loading skeleton.
+						gcTime: 10 * 60 * 1000,
+						// Refetching on every window focus costs a round-trip
+						// to Supabase and visibly janks the UI on mobile, where
+						// the app is switched to constantly.
+						refetchOnWindowFocus: false,
+						// Retrying three times with exponential backoff turns a
+						// brief network blip into a multi-second spinner.
+						retry: 1,
+						retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 8000),
 					},
 				},
 			})

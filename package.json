@@ -27,6 +27,8 @@
 		"gen:types": "supabase gen types typescript --local --schema public > src/lib/supabase/database.types.ts && pnpm gen:table-schema",
 		"gen:table-schema": "node scripts/generate-tables-metadata.js",
 		"gen:routes": "node scripts/generate-routes.js",
+		"seed:real-data": "node scripts/seed-real-data.js",
+		"seed:real-data:accounts": "node scripts/seed-real-data.js --accounts",
 		"setup:r2:cors": "dotenvx run -f .env -- node scripts/configure-r2-cors.js",
 		"prepare": "lefthook install"
 	},

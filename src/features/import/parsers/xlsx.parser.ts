@@ -1,4 +1,3 @@
-import ExcelJS from "exceljs";
 import type {
 	ImportSourceParser,
 	ParsedCellValue,
@@ -12,6 +11,12 @@ export const xlsxParser: ImportSourceParser = {
 		"application/vnd.ms-excel",
 	],
 	async parse(file) {
+		// Dynamically imported so the (very large) ExcelJS bundle is only
+		// downloaded when a user actually picks a spreadsheet. A static import
+		// pulls ~1 MB of parser code into the shared client chunk that every
+		// page downloads — see the identical treatment in pdf.parser.ts.
+		const { default: ExcelJS } = await import("exceljs");
+
 		const buffer = await file.arrayBuffer();
 		const workbook = new ExcelJS.Workbook();
 		await workbook.xlsx.load(buffer);
@@ -55,7 +60,7 @@ export const xlsxParser: ImportSourceParser = {
 };
 
 /** ExcelJS `row.values` is 1-indexed with a sparse hole at index 0. */
-function normalizeRow(row: ExcelJS.Row): ParsedCellValue[] {
+function normalizeRow(row: { values: unknown }): ParsedCellValue[] {
 	const raw = row.values as unknown[];
 	const values: ParsedCellValue[] = [];
 	for (let i = 1; i < raw.length; i++) {

@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveCoverSrc } from "@/components/blocks/course";
 import { Link } from "@/i18n/navigation";
+import { isSupabaseServerConfigured } from "@/lib/env/server-env";
 import { createClient } from "@/lib/supabase/server";
 import type { BaseParams } from "@/types/common.types";
 
@@ -22,6 +23,11 @@ export default async function SchoolPublicPage({
 	const { locale, school_id } = await params;
 	setRequestLocale(locale);
 	const t = await getTranslations({ locale, namespace: "publicProfile" });
+
+	// Without a reachable Supabase project there is no school to show, and
+	// the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) notFound();
+
 	const supabase = await createClient();
 	const { data: school } = await supabase
 		.from("schools")

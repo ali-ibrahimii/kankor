@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
-import { serverEnv } from "@/lib/env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
 import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
@@ -31,6 +31,9 @@ export const revalidate = 86400;
 
 async function fetchPublicQuiz(rawSlug: string) {
 	const slug = decodeSlugParam(rawSlug);
+	// Without a reachable Supabase project there is no quiz to load.
+	if (!isSupabaseServerConfigured) return null;
+
 	const client = await createClient();
 	const { data, error } = await client
 		.rpc("get_quiz_details", { p_quiz_slug: slug })
@@ -73,6 +76,10 @@ export default async function QuizDetailPage({
 	if (!quiz) {
 		notFound();
 	}
+
+	// Without a reachable Supabase project there is no related content to
+	// load, and the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) notFound();
 
 	const supabase = await createClient();
 	const t = await getTranslations({ locale, namespace: "quizzes" });

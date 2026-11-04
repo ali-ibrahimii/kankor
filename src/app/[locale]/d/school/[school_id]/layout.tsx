@@ -20,7 +20,7 @@ import {
 	NotificationBell,
 } from "@/components/blocks/notifications";
 import { SchoolHeaderClient } from "@/components/blocks/school/school-header-client";
-import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardSidebar } from "@/components/blocks/sidebar/dashboard-sidebar";
 import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -129,7 +129,11 @@ export default async function SchoolLayout({ children, params }: Props) {
 
 	return (
 		<SidebarProvider>
-			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
+			<DashboardSidebar
+				menus={menus}
+				header={header}
+				user={user ?? undefined}
+			/>
 			<SidebarInset>
 				<DashboardTopbar
 					actions={

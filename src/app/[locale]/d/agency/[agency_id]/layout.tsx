@@ -19,7 +19,7 @@ import {
 	getUnreadNotificationCount,
 	NotificationBell,
 } from "@/components/blocks/notifications";
-import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { DashboardSidebar } from "@/components/blocks/sidebar/dashboard-sidebar";
 import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
 import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
@@ -181,7 +181,11 @@ export default async function AgencyLayout({ children, params }: Props) {
 
 	return (
 		<SidebarProvider>
-			<AppSidebar menus={menus} header={header} user={user ?? undefined} />
+			<DashboardSidebar
+				menus={menus}
+				header={header}
+				user={user ?? undefined}
+			/>
 			<SidebarInset>
 				<DashboardTopbar
 					actions={

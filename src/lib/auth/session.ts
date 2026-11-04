@@ -1,4 +1,5 @@
 "use server";
+import { isSupabaseServerConfigured } from "@/lib/env/server-env";
 import { createClient } from "@/lib/supabase/server";
 import { CurrentUser } from "./types";
 
@@ -8,6 +9,10 @@ import { CurrentUser } from "./types";
  * rather than re-querying profiles ad hoc.
  */
 export async function getCurrentUser(): Promise<CurrentUser | null> {
+	// Without a reachable Supabase project there is no session to read, and
+	// `auth.getClaims()` against the inert placeholder host blocks on DNS.
+	if (!isSupabaseServerConfigured) return null;
+
 	const supabase = await createClient();
 	const { data: claims } = await supabase.auth.getClaims();
 

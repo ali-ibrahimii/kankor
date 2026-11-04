@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { serverEnv } from "@/lib/env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "@/lib/env/server-env";
 import { createClient } from "@/lib/supabase/server";
 import { BaseParams } from "@/types/common.types";
 
@@ -24,6 +24,10 @@ interface VerifiedCertificate {
 async function verifyCertificate(
 	code: string
 ): Promise<VerifiedCertificate | null> {
+	// Without a reachable Supabase project no certificate can be verified,
+	// and the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) return null;
+
 	const client = await createClient();
 	// Anon-callable security-definer RPC: exposes only name/course/dates —
 	// never ids or storage keys. See migration

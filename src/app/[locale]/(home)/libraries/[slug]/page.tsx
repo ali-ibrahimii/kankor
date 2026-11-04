@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { buildEntityMetadata } from "@/features/seo";
 import { Link } from "@/i18n/navigation";
-import { serverEnv } from "@/lib/env/server-env";
+import { isSupabaseServerConfigured, serverEnv } from "@/lib/env/server-env";
 import { routes } from "@/lib/routes";
 import { safeJsonLd } from "@/lib/seo/json-ld";
 import { createClient } from "@/lib/supabase/server";
@@ -26,6 +26,9 @@ export const revalidate = 86400;
 
 async function fetchLibraryBook(rawSlug: string) {
 	const slug = decodeSlugParam(rawSlug);
+	// Without a reachable Supabase project there is no book to load.
+	if (!isSupabaseServerConfigured) return null;
+
 	const client = await createClient();
 	const { data, error } = await client
 		.rpc("get_library_details", { p_library_slug: slug })
@@ -69,6 +72,10 @@ export default async function LibraryDetailPage({
 	if (!book) {
 		notFound();
 	}
+
+	// Without a reachable Supabase project there is no related content to
+	// load, and the query would otherwise block until the request timeout.
+	if (!isSupabaseServerConfigured) notFound();
 
 	const supabase = await createClient();
 	const t = await getTranslations({ locale, namespace: "libraries" });
