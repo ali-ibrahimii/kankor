@@ -3131,6 +3131,135 @@
 		}
 	},
 	"admin": {
+		"students": {
+			"title": "جزئیات شاگرد",
+			"unnamedStudent": "شاگرد بی‌نام",
+			"backToStudents": "بازگشت به شاگردان",
+			"profile": "مشخصات",
+			"academicSummary": "خلاصهٔ تحصیلی",
+			"activitySummary": "خلاصهٔ فعالیت",
+			"recentActivity": "فعالیت‌های اخیر",
+			"overviewUnavailable": "در حال حاضر داده‌های تفصیلی در دسترس نیست. مطمئن شوید که مهاجرت مربوط به نمای کلی شاگردان ادمین اعمال شده است.",
+			"tabs": {
+				"overview": "نمای کلی",
+				"courses": "صنف‌ها",
+				"quizzes": "نتایج آزمون‌ها",
+				"decks": "فلش‌کارت‌ها",
+				"classrooms": "کلاس‌ها",
+				"activity": "فعالیت",
+				"credits": "کریژنال"
+			},
+			"stats": {
+				"enrolledCourses": "صنف‌های ثبت‌نام‌شده",
+				"completedCourses": "صنف‌های تکمیل‌شده",
+				"averageScore": "میانگین نمرهٔ آزمون",
+				"quizAttempts": "تلاش‌های آزمون",
+				"quizzesPassed": "آزمون‌های پاس‌شده",
+				"activeDecks": "فلش‌کارت‌های فعال",
+				"lessonsCompleted": "درس‌های تکمیل‌شده",
+				"studyMinutes": "دقیقهٔ مطالعه",
+				"certificates": "گواهی‌نامه‌ها",
+				"classrooms": "کلاس‌ها",
+				"bookmarks": "نشانک‌ها",
+				"notes": "یادداشت‌ها"
+			},
+			"fields": {
+				"email": "ایمیل",
+				"phone": "شمارهٔ تماس",
+				"province": "ولایت",
+				"balance": "موجودی کریژنال",
+				"joined": "تاریخ عضویت",
+				"lastActivity": "آخرین فعالیت"
+			},
+			"summary": {
+				"grades": "صنف‌های پوشش‌داده‌شده",
+				"subjects": "مضامین پوشش‌داده‌شده",
+				"firstEnrolled": "اولین ثبت‌نام",
+				"lastActivity": "آخرین فعالیت",
+				"bestScore": "بهترین نمرهٔ آزمون",
+				"failedQuizzes": "آزمون‌های مردود",
+				"courses": "ثبت‌نام در صنف‌ها",
+				"decks": "فلش‌کارت‌ها",
+				"classrooms": "کلاس‌ها",
+				"lessons": "درس‌های تکمیل‌شده",
+				"studyTime": "مجموع زمان مطالعه",
+				"minutes": "{count, plural, one {# دقیقه} other {# دقیقه}}",
+				"bookmarks": "نشانک‌ها",
+				"notes": "یادداشت‌ها",
+				"certificates": "گواهی‌نامه‌ها",
+				"none": "ندارد"
+			},
+			"table": {
+				"classes": "ثبت‌نام‌ها",
+				"gradesSubjects": "صنف / مضمون",
+				"score": "نمره"
+			},
+			"list": {
+				"courses": "{count, plural, one {# صنف} other {# صنف}}",
+				"decks": "{count, plural, one {# فلش‌کارت} other {# فلش‌کارت}}",
+				"classrooms": "{count, plural, one {# کلاس} other {# کلاس}}",
+				"attempts": "{count, plural, one {# تلاش} other {# تلاش}}"
+			},
+			"coursesTable": {
+				"course": "صنف",
+				"gradeSubject": "صنف / مضمون",
+				"instructor": "استاد",
+				"progress": "پیشرفت",
+				"enrolledAt": "تاریخ ثبت‌نام",
+				"status": "وضعیت",
+				"completed": "تکمیل‌شده",
+				"inProgress": "در حال یادگیری",
+				"unknownCourse": "صنف نامشخص",
+				"lessons": "{completed} از {total} درس"
+			},
+			"quizzesTable": {
+				"quiz": "آزمون",
+				"subject": "صنف / مضمون",
+				"attempt": "تلاش",
+				"score": "نمره",
+				"result": "نتیجه",
+				"date": "تاریخ",
+				"feedback": "بازخورد استاد",
+				"unknownQuiz": "آزمون نامشخص"
+			},
+			"decksTable": {
+				"deck": "فلش‌کارت",
+				"subject": "صنف / مضمون",
+				"cards": "کارت‌های تسلط‌یافته",
+				"progress": "پیشرفت",
+				"lastLearned": "آخرین مطالعه",
+				"unknownDeck": "فلش‌کارت نامشخص",
+				"mastered": "{count} تسلط"
+			},
+			"classroomsTable": {
+				"classroom": "کلاس",
+				"teacher": "معلم",
+				"school": "مکتب",
+				"role": "نقش",
+				"joinedAt": "تاریخ عضویت"
+			},
+			"certificatesTable": {
+				"course": "صنف",
+				"issuedAt": "تاریخ صدور",
+				"code": "کد تأیید"
+			},
+			"activityTypes": {
+				"enrollment": "ثبت‌نام در صنف",
+				"quiz_attempt": "تلاش در آزمون",
+				"lesson_completed": "تکمیل درس",
+				"note": "یادداشت",
+				"bookmark": "نشانک",
+				"unknown": "فعالیت"
+			},
+			"empty": {
+				"noEnrollments": "این شاگرد هنوز در هیچ صنفی ثبت‌نام نکرده است.",
+				"noQuizAttempts": "این شاگرد هنوز در هیچ آزمونی شرکت نکرده است.",
+				"noDecks": "این شاگرد هنوز در هیچ فلش‌کارتی ثبت‌نام نکرده است.",
+				"noClassrooms": "این شاگرد عضو هیچ کلاسی نیست.",
+				"noCertificates": "هنوز گواهی‌نامه‌ای صادر نشده است.",
+				"noActivity": "هنوز فعالیتی ثبت نشده است."
+			}
+		},
 		"common": {
 			"all": "همه",
 			"loading": "در حال بارگذاری…",

@@ -29,6 +29,10 @@
 		"gen:routes": "node scripts/generate-routes.js",
 		"seed:real-data": "node scripts/seed-real-data.js",
 		"seed:real-data:accounts": "node scripts/seed-real-data.js --accounts",
+		"types:admin-students": "node scripts/add-admin-student-types.js",
+		"i18n:admin-students": "node scripts/add-admin-students-i18n.js",
+		"check:admin-students-i18n": "node scripts/check-admin-students-i18n.js",
+		"test:admin-student-migration": "node scripts/test-admin-student-migration.js",
 		"setup:r2:cors": "dotenvx run -f .env -- node scripts/configure-r2-cors.js",
 		"prepare": "lefthook install"
 	},
