@@ -3131,6 +3131,135 @@
 		}
 	},
 	"admin": {
+		"students": {
+			"title": "د شاګد جزئیات",
+			"unnamedStudent": "بې‌نومه شاګد",
+			"backToStudents": "شاتګ ته بېرته ستګه",
+			"profile": "معلومات",
+			"academicSummary": "د تحصیلي خلاصه",
+			"activitySummary": "د فعالیت خلاصه",
+			"recentActivity": "وروستي فعالیتونه",
+			"overviewUnavailable": "اوس جزئیات معلومات شتون نلري. ډاګه کړئ چې د ادمین د شاګد خلاصه مهاجرت پلی شوی وي.",
+			"tabs": {
+				"overview": "خلاصه",
+				"courses": "صنفونه",
+				"quizzes": "د ازموینو پایله",
+				"decks": "فلش‌کارتونه",
+				"classrooms": "کلاسونه",
+				"activity": "فعالیت",
+				"credits": "کریډټ"
+			},
+			"stats": {
+				"enrolledCourses": "ثبت‌شوي صنفونه",
+				"completedCourses": "بشپړ شوي صنفونه",
+				"averageScore": "د ازموین اوسط نمره",
+				"quizAttempts": "د ازموینو هڅې",
+				"quizzesPassed": "پاس شوي ازمونونه",
+				"activeDecks": "فعال فلش‌کارتونه",
+				"lessonsCompleted": "بشپړ شوي درسونه",
+				"studyMinutes": "د مطالعې دقیقې",
+				"certificates": "سندونه",
+				"classrooms": "کلاسونه",
+				"bookmarks": "نښانې",
+				"notes": "یادداشتونه"
+			},
+			"fields": {
+				"email": "برېښنالیک",
+				"phone": "د تلیفون شمېره",
+				"province": "ولایت",
+				"balance": "د کریډټ شات",
+				"joined": "د غړې نېټه",
+				"lastActivity": "وروستي فعالیت"
+			},
+			"summary": {
+				"grades": "پوښ شوي صنفونه",
+				"subjects": "پوښ شوي مضامین",
+				"firstEnrolled": "لومړی ثبت",
+				"lastActivity": "وروستي فعالیت",
+				"bestScore": "غوره نمره",
+				"failedQuizzes": "ناکام ازمونونه",
+				"courses": "د صنفونو ثبت",
+				"decks": "فلش‌کارتونه",
+				"classrooms": "کلاسونه",
+				"lessons": "بشپړ شوي درسونه",
+				"studyTime": "ټول وخت د مطالعې",
+				"minutes": "{count, plural, one {# دقیقه} other {# دقیقې}}",
+				"bookmarks": "نښانې",
+				"notes": "یادداشتونه",
+				"certificates": "سندونه",
+				"none": "هیڅ"
+			},
+			"table": {
+				"classes": "ثبت‌نامونه",
+				"gradesSubjects": "صنف / مضمون",
+				"score": "نمره"
+			},
+			"list": {
+				"courses": "{count, plural, one {# صنف} other {# صنفونه}}",
+				"decks": "{count, plural, one {# فلش‌کارت} other {# فلش‌کارتونه}}",
+				"classrooms": "{count, plural, one {# کلاس} other {# کلاسونه}}",
+				"attempts": "{count, plural, one {# هڅه} other {# هڅې}}"
+			},
+			"coursesTable": {
+				"course": "صنف",
+				"gradeSubject": "صنف / مضمون",
+				"instructor": "استاد",
+				"progress": "پرمختګ",
+				"enrolledAt": "د ثبت نېټه",
+				"status": "حالت",
+				"completed": "بشپړ",
+				"inProgress": "د زده‌کړې په حال کې",
+				"unknownCourse": "نامعلوم صنف",
+				"lessons": "{completed} له {total} درسونو"
+			},
+			"quizzesTable": {
+				"quiz": "ازموین",
+				"subject": "صنف / مضمون",
+				"attempt": "هڅه",
+				"score": "نمره",
+				"result": "پایله",
+				"date": "نېټه",
+				"feedback": "د استاد نظر",
+				"unknownQuiz": "نامعلوم ازموین"
+			},
+			"decksTable": {
+				"deck": "فلش‌کارت",
+				"subject": "صنف / مضمون",
+				"cards": "مسلط کارتونه",
+				"progress": "پرمختګ",
+				"lastLearned": "وروستي زده‌کړه",
+				"unknownDeck": "نامعلوم فلش‌کارت",
+				"mastered": "{count} مسلط"
+			},
+			"classroomsTable": {
+				"classroom": "کلاس",
+				"teacher": "معلم",
+				"school": "مکتب",
+				"role": "دور",
+				"joinedAt": "د غړې نېټه"
+			},
+			"certificatesTable": {
+				"course": "صنف",
+				"issuedAt": "د صدور نېټه",
+				"code": "د تایید کوډ"
+			},
+			"activityTypes": {
+				"enrollment": "د صنف ثبت",
+				"quiz_attempt": "د ازموین هڅه",
+				"lesson_completed": "درس بشپړ شو",
+				"note": "یادداشت",
+				"bookmark": "نښان",
+				"unknown": "فعالیت"
+			},
+			"empty": {
+				"noEnrollments": "دا شاګد لا په هیڅ صنف کې نه دی ثبت شوی.",
+				"noQuizAttempts": "دا شاګد لا په هیڅ ازموین کې نه دی ګډون کړی.",
+				"noDecks": "دا شاګد لا په هیڅ فلش‌کارت کې نه دی ثبت شوی.",
+				"noClassrooms": "دا شاګد د هیڅ کلاس غړی نه دی.",
+				"noCertificates": "لا څه سند نه دی صادر شوی.",
+				"noActivity": "لا څه فعالیت نه دی ثبت شوی."
+			}
+		},
 		"common": {
 			"all": "ټول",
 			"loading": "بارېږي…",

@@ -6144,6 +6144,45 @@ export type Database = {
 					},
 				];
 			};
+			admin_students_view: {
+				Row: {
+					active_decks_count: number | null;
+					average_quiz_score: number | null;
+					avatar_url: string | null;
+					bookmarks_count: number | null;
+					certificates_count: number | null;
+					classrooms_count: number | null;
+					completed_courses_count: number | null;
+					created_at: string | null;
+					credit_balance: number | null;
+					distinct_grades_count: number | null;
+					distinct_subjects_count: number | null;
+					email: string | null;
+					enrolled_courses_count: number | null;
+					full_name: string | null;
+					grade_names: string | null;
+					id: string | null;
+					last_activity_at: string | null;
+					notes_count: number | null;
+					phone: string | null;
+					province_id: string | null;
+					province_name: string | null;
+					quiz_attempts_count: number | null;
+					quizzes_passed_count: number | null;
+					student_status: Database["public"]["Enums"]["account_status"] | null;
+					subject_names: string | null;
+					updated_at: string | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: "profiles_province_id_fkey";
+						columns: ["province_id"];
+						isOneToOne: false;
+						referencedRelation: "provinces";
+						referencedColumns: ["id"];
+					},
+				];
+			};
 			agency_disputes_view: {
 				Row: {
 					agency_id: string | null;
@@ -7032,6 +7071,59 @@ export type Database = {
 					total_earnings_credits: number;
 					total_quizzes_count: number;
 					total_students_count: number;
+				}[];
+			};
+			get_admin_student_overview: {
+				Args: { p_student_id: string };
+				Returns: {
+					active_decks_count: number;
+					activity: Json;
+					average_quiz_score: number;
+					best_quiz_score: number;
+					bookmarks_count: number;
+					certificates: Json;
+					certificates_count: number;
+					classrooms: Json;
+					classrooms_count: number;
+					completed_courses_count: number;
+					course_enrollments: Json;
+					deck_progress: Json;
+					distinct_grades_count: number;
+					distinct_subjects_count: number;
+					enrolled_courses_count: number;
+					first_enrolled_at: string | null;
+					in_progress_courses_count: number;
+					last_activity_at: string | null;
+					lessons_completed_count: number;
+					notes_count: number;
+					quiz_attempts: Json;
+					quiz_attempts_count: number;
+					quizzes_failed_count: number;
+					quizzes_passed_count: number;
+					study_minutes_count: number;
+				}[];
+			};
+			get_admin_students_overview: {
+				Args: Record<PropertyKey, never>;
+				Returns: {
+					active_decks_count: number;
+					average_quiz_score: number;
+					bookmarks_count: number;
+					certificates_count: number;
+					classrooms_count: number;
+					completed_courses_count: number;
+					distinct_grades_count: number;
+					distinct_subjects_count: number;
+					email: string | null;
+					enrolled_courses_count: number;
+					full_name: string | null;
+					grade_names: string | null;
+					last_activity_at: string | null;
+					notes_count: number;
+					quiz_attempts_count: number;
+					quizzes_passed_count: number;
+					subject_names: string | null;
+					user_id: string;
 				}[];
 			};
 			get_agency_overview: { Args: { p_agency_id: string }; Returns: Json };
