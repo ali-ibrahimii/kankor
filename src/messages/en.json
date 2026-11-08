@@ -3733,6 +3733,16 @@
 			"title": "Account pending review",
 			"body": "Your account is awaiting approval. We'll notify you once it's been reviewed."
 		},
+		"suspended": {
+			"badge": "Account suspended",
+			"title": "Your account is suspended",
+			"body": "Your dashboard is locked while the suspension is active. If you think this is a mistake, please contact support."
+		},
+		"disabled": {
+			"badge": "Account disabled",
+			"title": "Your account is not active",
+			"body": "This account has been disabled, so the dashboard is unavailable. Please contact support if you believe this is a mistake."
+		},
 		"statusBadge": "Pending approval",
 		"backHome": "Back to home",
 		"signOut": "Sign out"
