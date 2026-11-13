@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { FlashcardBuilder } from "@/components/blocks/flashcard-builder";
 import { loadDeckWithFlashcards } from "@/components/blocks/flashcard-builder/actions";
+import { routes } from "@/lib/routes";
 
 export default async function InstructorDeckBuilderPage({
 	params,
@@ -20,7 +21,7 @@ export default async function InstructorDeckBuilderPage({
 			deckId={deck.id}
 			initialDeck={deck}
 			initialFlashcards={flashcards}
-			basePath="/d/instructor"
+			basePath={routes.d.instructor.page()}
 		/>
 	);
 }

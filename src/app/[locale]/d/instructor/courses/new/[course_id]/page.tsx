@@ -1,21 +1,9 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { CourseBuilder } from "@/components/blocks/course-builder";
-import { loadCourseContent } from "@/components/blocks/course-builder/actions";
-import { createClient } from "@/lib/supabase/server";
-
-// ─── Data fetching ────────────────────────────────────────────────────────────
-
-async function fetchCourse(courseId: string) {
-	const supabase = await createClient();
-	const { data, error } = await supabase
-		.from("courses")
-		.select("id, title, is_published, instructor_id")
-		.eq("id", courseId)
-		.single();
-	if (error || !data) return null;
-	return data;
-}
+import { loadBuilderContent } from "@/lib/courses/builder-loader";
+import { routes } from "@/lib/routes";
+import { findInstructorCourse } from "../../../_lib/instructor-data";
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
@@ -26,25 +14,26 @@ export default async function CourseBuilderPage({
 }) {
 	const { course_id } = await params;
 
-	const [course, contentResult] = await Promise.all([
-		fetchCourse(course_id),
-		loadCourseContent(course_id),
-	]);
-
+	// Ownership check (RLS + super-admin rule) — a foreign or missing id is a
+	// 404 inside the instructor shell, never someone else's builder.
+	const course = await findInstructorCourse(course_id);
 	if (!course) notFound();
-	if (!contentResult.success) notFound();
 
-	const { modules, lessons, blocks } = contentResult.data;
+	// Content may fail to load even when the course row is fine; the builder
+	// shows a banner and keeps editing the details possible (admin parity).
+	const content = await loadBuilderContent(course.id);
 
 	return (
 		<CourseBuilder
 			courseId={course.id}
 			courseTitle={course.title}
+			courseSlug={course.slug}
 			isPublished={course.is_published}
-			initialModules={modules}
-			initialLessons={lessons}
-			initialBlocks={blocks}
-			basePath="/d/instructor"
+			initialModules={content.modules}
+			initialLessons={content.lessons}
+			initialBlocks={content.blocks}
+			contentError={content.error}
+			basePath={routes.d.instructor.page()}
 		/>
 	);
 }
@@ -58,7 +47,7 @@ export async function generateMetadata({
 }) {
 	const { course_id } = await params;
 	const t = await getTranslations("courseBuilder");
-	const course = await fetchCourse(course_id);
+	const course = await findInstructorCourse(course_id);
 	return {
 		title: course
 			? `${t("meta.editCourse")} — ${course.title}`

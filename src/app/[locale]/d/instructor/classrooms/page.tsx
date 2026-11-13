@@ -53,8 +53,8 @@ export default function InstructorClassroomsPage() {
 		enabled: !!userId,
 	});
 
-	const classrooms = (classroomsQuery.data as any)?.data ?? [];
-	const total = (classroomsQuery.data as any)?.count ?? null;
+	const classrooms = classroomsQuery.data?.data ?? [];
+	const total = classroomsQuery.data?.count ?? null;
 
 	return (
 		<div className="space-y-6 p-6">
@@ -104,7 +104,7 @@ export default function InstructorClassroomsPage() {
 			<NewClassroomDialog
 				open={dialogOpen}
 				onOpenChange={setDialogOpen}
-				basePath="/d/instructor"
+				basePath={routes.d.instructor.page()}
 			/>
 		</div>
 	);

@@ -27,8 +27,16 @@ import { useQueryFilters } from "@/hooks/filter/filter.hooks";
 import type { QueryFn } from "@/hooks/filter/types";
 import { createClient } from "@/lib/supabase/client";
 import { useAuthProfile } from "@/providers/auth.provider";
+import type { ColumnName } from "@/types/db.types";
 
 // ─── Types & Query Config ───────────────────────────────────────────────────
+
+/**
+ * Virtual filter field: `classroom_id` is not a `profiles` column — the query
+ * function below translates it into a join filter. Typed once here so the
+ * list never needs an `any` to carry it through the generic filter state.
+ */
+const CLASSROOM_FILTER_FIELD = "classroom_id" as ColumnName<"profiles">;
 
 type StudentRow = {
 	id: string;
@@ -77,7 +85,7 @@ const studentsQueryFn = (
 
 		// Apply classroom filter if it exists in state
 		const classroomFilter = state?.filters?.find(
-			(f) => f.field === ("classroom_id" as any)
+			(f) => f.field === CLASSROOM_FILTER_FIELD
 		);
 		if (classroomFilter?.value) {
 			query = query.eq(
@@ -96,7 +104,7 @@ const studentsQueryFn = (
 		// Sort
 		if (state?.sort && state.sort.length > 0) {
 			for (const s of state.sort) {
-				query = query.order(s.field as string, {
+				query = query.order(s.field, {
 					ascending: s.direction === "asc",
 				});
 			}
@@ -157,12 +165,12 @@ export default function InstructorStudentsPage() {
 		enabled: !!instructorId,
 	});
 
-	const students = (studentsQuery.data as any)?.data ?? [];
-	const total = (studentsQuery.data as any)?.count ?? null;
+	const students = studentsQuery.data?.data ?? [];
+	const total = studentsQuery.data?.count ?? null;
 
 	// Extract active classroom filter ID
 	const activeClassroomFilter = studentsQuery.state.filters?.find(
-		(f) => f.field === ("classroom_id" as any)
+		(f) => f.field === CLASSROOM_FILTER_FIELD
 	);
 	const activeClassroomId = activeClassroomFilter?.value
 		? String(activeClassroomFilter.value)
@@ -170,10 +178,10 @@ export default function InstructorStudentsPage() {
 
 	const handleClassroomChange = (val: string) => {
 		if (val === "all") {
-			studentsQuery.removeFilter("classroom_id" as any);
+			studentsQuery.removeFilter(CLASSROOM_FILTER_FIELD);
 		} else {
 			studentsQuery.setFilter({
-				field: "classroom_id" as any,
+				field: CLASSROOM_FILTER_FIELD,
 				operator: "eq",
 				value: val,
 			});

@@ -8,15 +8,6 @@ import { toast } from "sonner";
 import { RelatedResourcesSelector } from "@/components/blocks/RelatedResourcesSelector";
 import { ImageUploadField } from "@/components/blocks/shared/image-upload-field";
 import { Button } from "@/components/ui/button";
-import { Dropzone } from "@/components/ui/dropzone";
-import { useRouter } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/client";
-
-interface FormOption {
-	value: string;
-	label: string;
-}
-
 import {
 	Dialog,
 	DialogContent,
@@ -25,6 +16,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
+import { Dropzone } from "@/components/ui/dropzone";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -43,14 +35,25 @@ import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { normalizedLocale } from "@/i18n";
+import { useRouter } from "@/i18n/navigation";
 import { IMAGE_ACCEPT, IMAGE_LIMITS } from "@/lib/r2/public-images";
 import {
 	formatImageLimit,
 	uploadImageFile,
 	validateImageFile,
 } from "@/lib/r2/upload-client";
-import { createCourse, getCourseForEdit, updateCourse } from "./actions";
+import { createClient } from "@/lib/supabase/client";
+import {
+	type ActionErrorCode,
+	createCourse,
+	getCourseForEdit,
+	updateCourse,
+} from "./actions";
 import type { NewCourseFormValues } from "./types";
+import {
+	ACTION_ERROR_TRANSLATION_KEYS,
+	validateCourseFormValues,
+} from "./validation";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -173,6 +176,22 @@ export function NewCourseDialog({
 		setValues((prev) => ({ ...prev, [key]: value }));
 	}
 
+	// Start every create-mode open with a clean form: a previous failed or
+	// cancelled attempt must not leak its values (or cover) into the next one,
+	// and the course language always follows the current UI locale.
+	React.useEffect(() => {
+		if (!open || courseId) return;
+		setValues({ ...DEFAULT_VALUES, language: normalizedLocale(locale) });
+		setPendingCover(null);
+	}, [open, courseId, locale]);
+
+	/** Toasts a localized message for an action failure; the raw server error
+	 *  is kept for the console only. */
+	function reportFailure(result: { error: string; code?: ActionErrorCode }) {
+		console.error("[NewCourseDialog]", result.error);
+		toast.error(t(ACTION_ERROR_TRANSLATION_KEYS[result.code ?? "database"]));
+	}
+
 	React.useEffect(() => {
 		if (!pendingCover) {
 			setPendingCoverPreview(null);
@@ -234,7 +253,8 @@ export function NewCourseDialog({
 			if (result.success) {
 				setValues(result.data);
 			} else {
-				toast.error(result.error);
+				reportFailure(result);
+				if (result.code === "not_found") onOpenChange(false);
 			}
 			setIsLoadingDetails(false);
 		});
@@ -245,8 +265,9 @@ export function NewCourseDialog({
 
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
-		if (!values.title.trim()) {
-			toast.error(t("validation.titleRequired"));
+		const issue = validateCourseFormValues(values);
+		if (issue) {
+			toast.error(t(`validation.${issue}`));
 			return;
 		}
 		setIsPending(true);
@@ -254,11 +275,11 @@ export function NewCourseDialog({
 			if (isEditMode && courseId) {
 				const result = await updateCourse(courseId, values);
 				if (!result.success) {
-					toast.error(result.error);
+					reportFailure(result);
 					return;
 				}
 				toast.success(t("editCourse.saved"));
-				onUpdated?.({ title: values.title });
+				onUpdated?.({ title: values.title.trim() });
 				onOpenChange(false);
 				return;
 			}
@@ -267,7 +288,7 @@ export function NewCourseDialog({
 				platformAuthored,
 			});
 			if (!result.success) {
-				toast.error(result.error);
+				reportFailure(result);
 				return;
 			}
 			await uploadPendingCover(result.data.courseId);
@@ -281,7 +302,11 @@ export function NewCourseDialog({
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-2xl">
-				<form onSubmit={handleSubmit}>
+				{/* noValidate: the browser's constraint validation silently blocks
+				    submission when e.g. the promo URL is malformed — clicking
+				    "create" would do nothing. handleSubmit validates everything and
+				    reports it with localized toasts instead. */}
+				<form onSubmit={handleSubmit} noValidate>
 					<DialogHeader>
 						<DialogTitle>
 							{isEditMode ? t("editCourse.title") : t("newCourse.title")}
@@ -475,7 +500,7 @@ export function NewCourseDialog({
 							{/* Book, Subject, and Grade Row */}
 							<div className="grid grid-cols-3 gap-3">
 								<div className="space-y-1.5">
-									<Label htmlFor="cb-book">Book</Label>
+									<Label htmlFor="cb-book">{t("newCourse.book")}</Label>
 									<Select
 										value={values.book_id || "none"}
 										onValueChange={(v) =>
@@ -483,10 +508,12 @@ export function NewCourseDialog({
 										}
 									>
 										<SelectTrigger id="cb-book" className="w-full">
-											<SelectValue placeholder="Select book" />
+											<SelectValue placeholder={t("newCourse.selectBook")} />
 										</SelectTrigger>
 										<SelectContent className="max-h-[300px]">
-											<SelectItem value="none">None</SelectItem>
+											<SelectItem value="none">
+												{t("newCourse.none")}
+											</SelectItem>
 											{books.map((b) => (
 												<SelectItem key={b.value} value={b.value}>
 													{b.label}
@@ -497,7 +524,7 @@ export function NewCourseDialog({
 								</div>
 
 								<div className="space-y-1.5">
-									<Label htmlFor="cb-subject">Subject</Label>
+									<Label htmlFor="cb-subject">{t("newCourse.subject")}</Label>
 									<Select
 										value={values.subject_id || "none"}
 										onValueChange={(v) =>
@@ -505,10 +532,12 @@ export function NewCourseDialog({
 										}
 									>
 										<SelectTrigger id="cb-subject" className="w-full">
-											<SelectValue placeholder="Select subject" />
+											<SelectValue placeholder={t("newCourse.selectSubject")} />
 										</SelectTrigger>
 										<SelectContent className="max-h-[300px]">
-											<SelectItem value="none">None</SelectItem>
+											<SelectItem value="none">
+												{t("newCourse.none")}
+											</SelectItem>
 											{subjects.map((s) => (
 												<SelectItem key={s.value} value={s.value}>
 													{s.label}
@@ -519,7 +548,7 @@ export function NewCourseDialog({
 								</div>
 
 								<div className="space-y-1.5">
-									<Label htmlFor="cb-grade">Grade</Label>
+									<Label htmlFor="cb-grade">{t("newCourse.grade")}</Label>
 									<Select
 										value={values.grade_id || "none"}
 										onValueChange={(v) =>
@@ -527,10 +556,12 @@ export function NewCourseDialog({
 										}
 									>
 										<SelectTrigger id="cb-grade" className="w-full">
-											<SelectValue placeholder="Select grade" />
+											<SelectValue placeholder={t("newCourse.selectGrade")} />
 										</SelectTrigger>
 										<SelectContent className="max-h-[300px]">
-											<SelectItem value="none">None</SelectItem>
+											<SelectItem value="none">
+												{t("newCourse.none")}
+											</SelectItem>
 											{grades.map((g) => (
 												<SelectItem key={g.value} value={g.value}>
 													{g.label}
@@ -698,22 +729,22 @@ export function NewCourseDialog({
 									resourceType="decks"
 									selectedIds={values.related_decks_ids || []}
 									onChange={(ids) => patch("related_decks_ids", ids)}
-									label="Related Decks"
-									placeholder="Select related decks"
+									label={t("newCourse.relatedDecks")}
+									placeholder={t("newCourse.relatedDecksPlaceholder")}
 								/>
 								<RelatedResourcesSelector
 									resourceType="quizzes"
 									selectedIds={values.related_quizzes_ids || []}
 									onChange={(ids) => patch("related_quizzes_ids", ids)}
-									label="Related Quizzes"
-									placeholder="Select related quizzes"
+									label={t("newCourse.relatedQuizzes")}
+									placeholder={t("newCourse.relatedQuizzesPlaceholder")}
 								/>
 								<RelatedResourcesSelector
 									resourceType="libraries"
 									selectedIds={values.related_libraries_ids || []}
 									onChange={(ids) => patch("related_libraries_ids", ids)}
-									label="Related Books"
-									placeholder="Select related books"
+									label={t("newCourse.relatedBooks")}
+									placeholder={t("newCourse.relatedBooksPlaceholder")}
 								/>
 							</div>
 						</div>

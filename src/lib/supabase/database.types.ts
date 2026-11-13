@@ -7191,6 +7191,16 @@ export type Database = {
 				Args: { check_section_id: string };
 				Returns: string;
 			};
+			get_course_students: {
+				Args: { p_course_id: string };
+				Returns: {
+					avatar_url: string | null;
+					enrolled_at: string;
+					full_name: string;
+					progress_percentage: number;
+					student_id: string;
+				}[];
+			};
 			get_current_user_role: {
 				Args: never;
 				Returns: Database["public"]["Enums"]["user_role"];

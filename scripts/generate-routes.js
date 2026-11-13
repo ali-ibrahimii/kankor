@@ -157,7 +157,9 @@ function buildTree(files) {
 		const staticSegs = segs.filter((s) => !/^\[.*\]$/.test(s));
 		const params = segs
 			.filter((s) => /^\[.*\]$/.test(s))
-			.map((s) => s.replace(/\[|\]/g, ""));
+			// paramName() strips the brackets and the catch-all "..." prefix —
+			// a raw "[...key]" would emit the invalid type `{ ...key: string }`.
+			.map((s) => paramName(s));
 
 		const pattern =
 			segs.length === 0 ? "/" : "/" + segs.map(segmentToPattern).join("/");

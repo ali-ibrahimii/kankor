@@ -8,7 +8,6 @@ import {
 	PencilIcon,
 	SaveIcon,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
@@ -16,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
+import { useRouter } from "@/i18n/navigation";
 import { saveCourseContent, setCoursePublished } from "./actions";
 import { ContentArea } from "./content-area";
 import { ModuleLessonTree } from "./module-lesson-tree";
@@ -27,6 +27,7 @@ import {
 	setSavingAtom,
 } from "./store";
 import type { DraftContentBlock, DraftLesson, DraftModule } from "./types";
+import { ACTION_ERROR_TRANSLATION_KEYS } from "./validation";
 
 // ─── Auto-save hook ───────────────────────────────────────────────────────────
 
@@ -146,6 +147,8 @@ export interface CourseBuilderProps {
 	initialBlocks: DraftContentBlock[];
 	/** Route prefix for back navigation, e.g. "/d/instructor" */
 	basePath: string;
+	/** Slug for the preview link — falls back to the course id when unknown. */
+	courseSlug?: string | null;
 	/** Set when the course exists but its modules/lessons could not be read. */
 	contentError?: string | null;
 }
@@ -156,6 +159,7 @@ function CourseBuilderInner({
 	courseTitle,
 	isPublished: initialIsPublished,
 	basePath,
+	courseSlug,
 	contentError,
 }: Omit<
 	CourseBuilderProps,
@@ -186,7 +190,9 @@ function CourseBuilderInner({
 				blocks
 			);
 			if (!result.success) {
-				toast.error(result.error);
+				toast.error(
+					t(ACTION_ERROR_TRANSLATION_KEYS[result.code ?? "database"])
+				);
 				return;
 			}
 			toast.success(t("header.savedDraft"));
@@ -206,13 +212,17 @@ function CourseBuilderInner({
 				blocks
 			);
 			if (!saveResult.success) {
-				toast.error(saveResult.error);
+				toast.error(
+					t(ACTION_ERROR_TRANSLATION_KEYS[saveResult.code ?? "database"])
+				);
 				return;
 			}
 
 			const publishResult = await setCoursePublished(courseId, !isPublished);
 			if (!publishResult.success) {
-				toast.error(publishResult.error);
+				toast.error(
+					t(ACTION_ERROR_TRANSLATION_KEYS[publishResult.code ?? "database"])
+				);
 				return;
 			}
 
@@ -274,7 +284,9 @@ function CourseBuilderInner({
 					<Button
 						variant="ghost"
 						size="sm"
-						onClick={() => router.push(`${basePath}/courses/${courseId}`)}
+						onClick={() =>
+							router.push(`${basePath}/courses/${courseSlug || courseId}`)
+						}
 					>
 						<EyeIcon className="size-4 me-1.5" />
 						{t("header.preview")}
@@ -352,6 +364,7 @@ export function CourseBuilder({
 	initialLessons,
 	initialBlocks,
 	basePath,
+	courseSlug,
 	contentError,
 }: CourseBuilderProps) {
 	return (
@@ -364,6 +377,7 @@ export function CourseBuilder({
 				initialLessons={initialLessons}
 				initialBlocks={initialBlocks}
 				basePath={basePath}
+				courseSlug={courseSlug}
 				contentError={contentError}
 			/>
 		</Provider>
@@ -380,6 +394,7 @@ function CourseBuilderInit({
 	initialLessons,
 	initialBlocks,
 	basePath,
+	courseSlug,
 	contentError,
 }: CourseBuilderProps) {
 	const t = useTranslations("courseBuilder");
@@ -417,6 +432,7 @@ function CourseBuilderInit({
 			courseTitle={courseTitle}
 			isPublished={isPublished}
 			basePath={basePath}
+			courseSlug={courseSlug}
 			contentError={contentError}
 		/>
 	);

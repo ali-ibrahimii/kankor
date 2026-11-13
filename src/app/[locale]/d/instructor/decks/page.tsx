@@ -58,8 +58,8 @@ export default function InstructorDecksPage() {
 		enabled: !!userId,
 	});
 
-	const decks = (decksQuery.data as any)?.data ?? [];
-	const total = (decksQuery.data as any)?.count ?? null;
+	const decks = decksQuery.data?.data ?? [];
+	const total = decksQuery.data?.count ?? null;
 	const page = decksQuery.state.pagination?.page ?? 1;
 	const pageSize = decksQuery.state.pagination?.pageSize ?? 12;
 
@@ -127,7 +127,7 @@ export default function InstructorDecksPage() {
 			<NewDeckDialog
 				open={dialogOpen}
 				onOpenChange={setDialogOpen}
-				basePath="/d/instructor"
+				basePath={routes.d.instructor.page()}
 			/>
 		</div>
 	);

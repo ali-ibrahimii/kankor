@@ -16,9 +16,58 @@ import {
 
 // ─── Result type ──────────────────────────────────────────────────────────────
 
-type Result<T = void> =
+/**
+ * Machine-readable failure kind. These actions run server-side and must not
+ * bake in a UI language, so callers translate `code` and keep `error` (the raw
+ * server message) for logs only.
+ */
+export type ActionErrorCode =
+	| "unauthorized"
+	| "forbidden"
+	| "not_found"
+	| "conflict"
+	| "invalid"
+	| "database";
+
+export type Result<T = void> =
 	| { success: true; data: T }
-	| { success: false; error: string };
+	| { success: false; error: string; code?: ActionErrorCode };
+
+type Failure = { success: false; error: string; code: ActionErrorCode };
+
+/**
+ * Maps a Postgres/PostgREST failure onto a stable code. RLS rejections show up
+ * in several disguises (SQLSTATE 42501, PGRST116 "no rows" on `.single()`, or
+ * plain "Permission denied" from SECURITY DEFINER RPCs), so match on both the
+ * SQLSTATE and the message.
+ */
+function failure(error: { code?: string | null; message: string }): Failure {
+	const sqlState = typeof error.code === "string" ? error.code : "";
+	if (sqlState === "42501" || /permission denied/i.test(error.message)) {
+		return { success: false, error: error.message, code: "forbidden" };
+	}
+	if (sqlState === "23505" || /duplicate key/i.test(error.message)) {
+		return { success: false, error: error.message, code: "conflict" };
+	}
+	if (
+		sqlState === "PGRST301" ||
+		/unauthenticated|jwt|invalid claim/i.test(error.message)
+	) {
+		return { success: false, error: error.message, code: "unauthorized" };
+	}
+	if (sqlState === "PGRST116" || /not found/i.test(error.message)) {
+		return { success: false, error: error.message, code: "not_found" };
+	}
+	if (
+		sqlState === "23502" ||
+		sqlState === "23503" ||
+		sqlState === "22P02" ||
+		/null value|violates|invalid input/i.test(error.message)
+	) {
+		return { success: false, error: error.message, code: "invalid" };
+	}
+	return { success: false, error: error.message, code: "database" };
+}
 
 // ─── Shared payload ───────────────────────────────────────────────────────────
 
@@ -30,7 +79,7 @@ type Result<T = void> =
 function coursePayload(values: NewCourseFormValues) {
 	const duration = Number(values.estimated_duration_hours);
 	return {
-		title: values.title,
+		title: values.title.trim(),
 		subtitle: values.subtitle || null,
 		description: values.description || null,
 		language: (values.language as Locale) || defaultLocale,
@@ -84,7 +133,9 @@ export async function createCourse(
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-	if (!user) return { success: false, error: "Unauthenticated" };
+	if (!user) {
+		return { success: false, error: "Unauthenticated", code: "unauthorized" };
+	}
 
 	// Falls back to the admin's own id when no platform profile is configured,
 	// so creation never fails because of this.
@@ -103,10 +154,10 @@ export async function createCourse(
 		.select("id")
 		.single();
 
-	if (error) return { success: false, error: error.message };
+	if (error) return failure(error);
 
-	revalidatePath("/d/instructor/courses");
-	revalidatePath("/d/admin/courses");
+	revalidatePath(routes.d.instructor.courses.page());
+	revalidatePath(routes.d.admin.courses.page());
 
 	return { success: true, data: { courseId: data.id } };
 }
@@ -126,7 +177,12 @@ export async function getCourseForEdit(
 		.eq("id", courseId)
 		.single();
 	if (error || !data) {
-		return { success: false, error: error?.message ?? "Course not found" };
+		if (error) return failure(error);
+		return {
+			success: false,
+			error: "Course not found",
+			code: "not_found",
+		};
 	}
 
 	return {
@@ -175,7 +231,7 @@ export async function updateCourse(
 		.select("id, slug")
 		.single();
 
-	if (error) return { success: false, error: error.message };
+	if (error) return failure(error);
 
 	const courseSlug = data?.slug ?? courseId;
 	revalidatePath(routes.d.instructor.courses.new.page({ course_id: courseId }));
@@ -440,29 +496,59 @@ export async function saveCourseContent(
 export async function setCoursePublished(
 	courseId: string,
 	isPublished: boolean
-): Promise<Result> {
+): Promise<Result<{ is_published: boolean; slug: string | null }>> {
 	const supabase = await createClient();
 
-	const { data: updatedCourse, error } = await supabase
-		.from("courses")
-		.update({
-			is_published: isPublished,
-			published_at: isPublished ? new Date().toISOString() : null,
-		})
-		.eq("id", courseId)
-		.select("slug")
-		.single();
+	// The SECURITY DEFINER RPC owns the publish rules (instructor-or-admin,
+	// `published_at` set on first publish and cleared on unpublish) — the same
+	// call the admin panel makes. A plain update would silently touch 0 rows
+	// when RLS rejects it.
+	const { data: updatedCourse, error } = await supabase.rpc(
+		"set_course_published_status",
+		{ p_course_id: courseId, p_is_published: isPublished }
+	);
 
-	if (error) return { success: false, error: error.message };
+	if (error) return failure(error);
 
-	const courseSlug = updatedCourse.slug ?? courseId;
+	const courseSlug = updatedCourse?.slug ?? courseId;
 	revalidatePath(routes.d.instructor.courses.slug.page({ slug: courseSlug }));
 	revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
-	revalidatePath(`/d/instructor/courses/new/${courseId}`);
-	revalidatePath("/d/instructor/courses");
+	revalidatePath(routes.d.instructor.courses.new.page({ course_id: courseId }));
+	revalidatePath(routes.d.instructor.courses.page());
 	revalidatePath(routes.d.admin.courses.new.page({ course_id: courseId }));
 	revalidatePath(routes.d.admin.courses.page());
 	revalidatePath(routes.d.admin.courses.slug.page({ slug: courseSlug }));
+
+	return {
+		success: true,
+		data: {
+			is_published: updatedCourse?.is_published ?? isPublished,
+			slug: updatedCourse?.slug ?? null,
+		},
+	};
+}
+
+// ─── Delete course ────────────────────────────────────────────────────────────
+
+export async function deleteCourse(courseId: string): Promise<Result> {
+	const supabase = await createClient();
+
+	// RLS: "Instructor can delete their course" (admins via their policies) —
+	// a rejected delete matches 0 rows, which .single() reports as PGRST116.
+	const { data, error } = await supabase
+		.from("courses")
+		.delete()
+		.eq("id", courseId)
+		.select("id, slug")
+		.single();
+
+	if (error) return failure(error);
+
+	const courseSlug = data?.slug ?? courseId;
+	revalidatePath(routes.d.instructor.courses.page());
+	revalidatePath(routes.d.admin.courses.page());
+	revalidatePath(routes.d.instructor.courses.slug.page({ slug: courseSlug }));
+	revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
 
 	return { success: true, data: undefined };
 }

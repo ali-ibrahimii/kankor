@@ -248,7 +248,33 @@
 			"earnings": "Earnings",
 			"discounts": "Discounts",
 			"settings": "Settings",
-			"notifications": "Notifications"
+			"notifications": "Notifications",
+			"account": "Account",
+			"analyticsPage": {
+				"title": "Analytics",
+				"description": "Track your courses, students and earnings performance.",
+				"perCourseTitle": "Per-course performance",
+				"columnCourse": "Course",
+				"columnStatus": "Status",
+				"columnRating": "Rating"
+			},
+			"settingsPage": {
+				"title": "Settings",
+				"description": "Manage your account, notifications and dashboard appearance.",
+				"accountTitle": "Account",
+				"accountDescription": "Edit your name, photo and personal details.",
+				"manageAccount": "Manage account",
+				"notificationsTitle": "Notifications",
+				"notificationsDescription": "View and manage your notifications.",
+				"manageNotifications": "Manage notifications",
+				"earningsTitle": "Earnings & credits",
+				"earningsDescription": "Track your earnings and transactions.",
+				"manageEarnings": "View earnings",
+				"appearanceTitle": "Appearance",
+				"appearanceDescription": "Change the dashboard language and light/dark theme.",
+				"languageLabel": "Language",
+				"themeLabel": "Theme"
+			}
 		},
 		"school": {
 			"roleLabel": "School Admin",
@@ -522,7 +548,20 @@
 			"completedOfTotal": "{completed}/{total} completed",
 			"hoursMinutes": "{hours}h {minutes}m",
 			"visitInstructor": "View instructor profile",
-			"visitSchool": "View school profile"
+			"visitSchool": "View school profile",
+			"analytics": "Analytics",
+			"price": "Price",
+			"noModules": "No modules have been added to this course yet.",
+			"noStudents": "No students have enrolled in this course yet.",
+			"studentName": "Student",
+			"enrolledAt": "Enrolled",
+			"progress": "Progress",
+			"ratingBreakdown": "Rating breakdown",
+			"notRated": "No ratings have been recorded for this course yet.",
+			"deleteCourse": "Delete Course",
+			"deleteTitle": "Delete course?",
+			"deleteDescription": "Deleting the course removes all of its modules, lessons and content permanently. This cannot be undone.",
+			"deleteConfirm": "Yes, delete it"
 		},
 		"learn": {
 			"markComplete": "Mark as complete",
@@ -1592,7 +1631,10 @@
 			"expand": "Expand"
 		},
 		"validation": {
-			"titleRequired": "Course title is required."
+			"titleRequired": "Course title is required.",
+			"priceRequired": "Enter a price for the paid course.",
+			"priceInvalid": "The price must be a positive whole number.",
+			"promoInvalid": "The promo video link is not a valid URL."
 		},
 		"newCourse": {
 			"title": "New Course",
@@ -1631,7 +1673,20 @@
 			"welcomePlaceholder": "Welcome to this course…",
 			"seoSection": "SEO (optional)",
 			"seoTitle": "SEO title",
-			"seoDescription": "SEO description"
+			"seoDescription": "SEO description",
+			"book": "Book",
+			"subject": "Subject",
+			"grade": "Grade",
+			"selectBook": "Select book",
+			"selectSubject": "Select subject",
+			"selectGrade": "Select grade",
+			"none": "None",
+			"relatedDecks": "Related Decks",
+			"relatedDecksPlaceholder": "Select related decks",
+			"relatedQuizzes": "Related Quizzes",
+			"relatedQuizzesPlaceholder": "Select related quizzes",
+			"relatedBooks": "Related Books",
+			"relatedBooksPlaceholder": "Select related books"
 		},
 		"editCourse": {
 			"title": "Edit Course Details",
@@ -1769,7 +1824,15 @@
 		"errorTitle": "This page could not be loaded",
 		"errorDescription": "Something unexpected went wrong. Try again — if it keeps happening, send this message to support.",
 		"retry": "Try again",
-		"backToCourses": "Back to courses"
+		"backToCourses": "Back to courses",
+		"actionErrors": {
+			"unauthorized": "You need to be signed in to do that.",
+			"forbidden": "You are not allowed to do that.",
+			"notFound": "The requested item was not found.",
+			"conflict": "A record with these details already exists.",
+			"invalid": "The submitted information is not valid.",
+			"database": "Saving failed. Please try again."
+		}
 	},
 	"imageUpload": {
 		"dropHint": "Click to upload an image, or drop a file here",

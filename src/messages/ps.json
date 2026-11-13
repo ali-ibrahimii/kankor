@@ -248,7 +248,33 @@
 			"earnings": "عاید",
 			"discounts": "تخفیفونه",
 			"settings": "ترتیبات",
-			"notifications": "خبرتیاوې"
+			"notifications": "خبرتیاوې",
+			"account": "حساب",
+			"analyticsPage": {
+				"title": "شننې",
+				"description": "خپل کورسونه، زده‌کوونکي او عاید تعقیب کړئ.",
+				"perCourseTitle": "د هر کورس فعالیت",
+				"columnCourse": "کورس",
+				"columnStatus": "حالت",
+				"columnRating": "نرې"
+			},
+			"settingsPage": {
+				"title": "تنظیمات",
+				"description": "خپل حساب، خبرتیاوې او د ډشبورډ بڼه اداره کړئ.",
+				"accountTitle": "حساب",
+				"accountDescription": "خپل نوم، انځور او شخصي معلومات سمون کړئ.",
+				"manageAccount": "حساب اداره کړئ",
+				"notificationsTitle": "خبرتیاوې",
+				"notificationsDescription": "خپلې خبرتیاوې وګورئ او اداره کړئ.",
+				"manageNotifications": "خبرتیاوې اداره کړئ",
+				"earningsTitle": "عاید او کریډیټونه",
+				"earningsDescription": "خپل عاید او لېږدولې تعقیب کړئ.",
+				"manageEarnings": "عاید وګورئ",
+				"appearanceTitle": "بڼه",
+				"appearanceDescription": "د ډشبورډ ژبه او روښانه/تیاره بڼه بدل کړئ.",
+				"languageLabel": "ژبه",
+				"themeLabel": "بڼه"
+			}
 		},
 		"school": {
 			"roleLabel": "د ښوونځي ادمین",
@@ -522,7 +548,20 @@
 			"completedOfTotal": "{completed}/{total} بشپړ شوي",
 			"hoursMinutes": "{hours} ساعته او {minutes} دقیقې",
 			"visitInstructor": "د ښوونکي پاڼه وګورئ",
-			"visitSchool": "د ښوونځي پاڼه وګورئ"
+			"visitSchool": "د ښوونځي پاڼه وګورئ",
+			"analytics": "شننې",
+			"price": "قیمت",
+			"noModules": "تر اوسه د دې کورس لپاره ماډل نه دی جوړ شوي.",
+			"noStudents": "تر اوسه په دې کورس کې زده‌کوونکی نه دی نوم‌لیک شوی.",
+			"studentName": "زده‌کوونکی",
+			"enrolledAt": "د نوم‌لیکنې نېټه",
+			"progress": "پرمختګ",
+			"ratingBreakdown": "د نرې توکو وېش",
+			"notRated": "تر اوسه د دې کورس لپاره نرې نه دی ثبت شوې.",
+			"deleteCourse": "کورس ړنګ کړئ",
+			"deleteTitle": "کورس ړنګ کړی؟",
+			"deleteDescription": "د کورس ړنګولو له امله ټول ماډلونه، ځنګولونه او منځپانګه له تلې ړنګېږي. دا بیرته نه کېږي.",
+			"deleteConfirm": "هو، یې ړنګ کړئ"
 		},
 		"learn": {
 			"markComplete": "د بشپړ شوي نښه‌ولو",
@@ -1592,7 +1631,10 @@
 			"expand": "خلاصول"
 		},
 		"validation": {
-			"titleRequired": "د کورس سرلیک اړین دی."
+			"titleRequired": "د کورس سرلیک اړین دی.",
+			"priceRequired": "د پولو کورس لپاره قیمت ولیکئ.",
+			"priceInvalid": "قیمت باید ټکیز مثبت عدد وي.",
+			"promoInvalid": "د معرفی ویډیو لینک سم نه دی."
 		},
 		"newCourse": {
 			"title": "نوی کورس",
@@ -1631,7 +1673,20 @@
 			"welcomePlaceholder": "دې کورس ته ښه راغلاست…",
 			"seoSection": "SEO (اختیاري)",
 			"seoTitle": "د SEO سرلیک",
-			"seoDescription": "د SEO تفصیل"
+			"seoDescription": "د SEO تفصیل",
+			"book": "کتاب",
+			"subject": "مضمون",
+			"grade": "صنف",
+			"selectBook": "کتاب وټاکئ",
+			"selectSubject": "مضمون وټاکئ",
+			"selectGrade": "صنف وټاکئ",
+			"none": "هیڅ",
+			"relatedDecks": "اړوند فلش‌کارتونه",
+			"relatedDecksPlaceholder": "اړوند فلش‌کارتونه وټاکئ",
+			"relatedQuizzes": "اړوند ازموونې",
+			"relatedQuizzesPlaceholder": "اړوند ازموونې وټاکئ",
+			"relatedBooks": "اړوند کتابونه",
+			"relatedBooksPlaceholder": "اړوند کتابونه وټاکئ"
 		},
 		"editCourse": {
 			"title": "د کورس جزئیاتو ایډیټ",
@@ -1769,7 +1824,15 @@
 		"errorTitle": "دا پاڼه پورته نشوه",
 		"errorDescription": "یوه ناځوانه تېروتنه رامنځته شوه. بیا هڅه وکړئ.",
 		"retry": "بیا هڅه",
-		"backToCourses": "کورسونو ته بیرته"
+		"backToCourses": "کورسونو ته بیرته",
+		"actionErrors": {
+			"unauthorized": "د دې کار لپاره باید خپل حساب ته ننوتلی وئ.",
+			"forbidden": "تاسو اجازه نه لرئ چې دا کار وکړئ.",
+			"notFound": "غوښتلو شوی توکی ونه موندل شو.",
+			"conflict": "د دې معلوماتو ریکارډ له مخکې شتون لري.",
+			"invalid": "لیکل شوي معلومات سم نه دي.",
+			"database": "خوندي کول ناکام شو. بیا هڅه وکړئ."
+		}
 	},
 	"imageUpload": {
 		"dropHint": "د انځور پورته کولو لپاره کلیک وکړئ یا فایل دلته پرېږدئ",
