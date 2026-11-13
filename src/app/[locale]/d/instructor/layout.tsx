@@ -7,6 +7,7 @@ import {
 	SchoolIcon,
 	Settings,
 	TicketPercent,
+	UserCircle,
 	Users,
 	Wallet,
 	Zap,
@@ -71,40 +72,40 @@ export default async function InstructorLayout({
 				},
 				{
 					label: t("myCourses"),
-					href: `${base}/courses`,
+					href: routes.d.instructor.courses.page(),
 					icon: <BookOpen />,
 					type: "collapsible",
 					menus: [
 						{
 							label: t("courses.published"),
-							href: `${base}/courses?status=published`,
+							href: routes.d.instructor.courses.page({ status: "published" }),
 						},
 						{
 							label: t("courses.drafts"),
-							href: `${base}/courses?status=draft`,
-						},
-						{
-							label: t("courses.archived"),
-							href: `${base}/courses?status=archived`,
+							href: routes.d.instructor.courses.page({ status: "draft" }),
 						},
 					],
 				} as MenuParent,
 				{
 					label: t("decks"),
-					href: `${base}/decks`,
+					href: routes.d.instructor.decks.page(),
 					icon: <Zap />,
 				},
 				{
 					label: t("quizBuilder"),
-					href: `${base}/quizzes`,
+					href: routes.d.instructor.quizzes.page(),
 					icon: <FileText />,
 				},
 				{
 					label: t("classrooms"),
-					href: `${base}/classrooms`,
+					href: routes.d.instructor.classrooms.page(),
 					icon: <SchoolIcon />,
 				},
-				{ label: t("students"), href: `${base}/students`, icon: <Users /> },
+				{
+					label: t("students"),
+					href: routes.d.instructor.students.page(),
+					icon: <Users />,
+				},
 			],
 		},
 		{
@@ -113,13 +114,17 @@ export default async function InstructorLayout({
 			menus: [
 				{
 					label: t("analytics"),
-					href: `${base}/analytics`,
+					href: routes.d.instructor.analytics.page(),
 					icon: <BarChart3 />,
 				},
-				{ label: t("earnings"), href: `${base}/earnings`, icon: <Wallet /> },
+				{
+					label: t("earnings"),
+					href: routes.d.instructor.earnings.page(),
+					icon: <Wallet />,
+				},
 				{
 					label: t("discounts"),
-					href: `${base}/discounts`,
+					href: routes.d.instructor.discounts.page(),
 					icon: <TicketPercent />,
 				},
 			],
@@ -127,10 +132,19 @@ export default async function InstructorLayout({
 		{
 			order: 2,
 			menus: [
-				{ label: t("settings"), href: `${base}/settings`, icon: <Settings /> },
+				{
+					label: t("settings"),
+					href: routes.d.instructor.settings.page(),
+					icon: <Settings />,
+				},
+				{
+					label: t("account"),
+					href: routes.d.instructor.account.page(),
+					icon: <UserCircle />,
+				},
 				{
 					label: t("notifications"),
-					href: `${base}/notifications`,
+					href: routes.d.instructor.notifications.page(),
 					icon: <Bell />,
 					notifications: unreadCount,
 				},
@@ -161,7 +175,9 @@ export default async function InstructorLayout({
 					actions={
 						<>
 							<LocaleSwitcher />
-							<NotificationBell notificationsHref={`${base}/notifications`} />
+							<NotificationBell
+								notificationsHref={routes.d.instructor.notifications.page()}
+							/>
 						</>
 					}
 				/>

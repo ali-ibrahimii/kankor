@@ -1,163 +1,32 @@
-"use client";
-
-import { useQueryClient } from "@tanstack/react-query";
-import { CirclePlus } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { toast } from "sonner";
-import type { CourseMeta } from "@/components/blocks/course";
-import {
-	CourseFilters,
-	CourseGrid,
-	CourseGridEmpty,
-	CourseGridSkeleton,
-	CoursePagination,
-	InstructorCourseCard,
-} from "@/components/blocks/course";
-import { useCourseCardStats } from "@/components/blocks/course/course-stats";
-import { NewCourseDialog } from "@/components/blocks/course-builder";
-import { Button } from "@/components/ui/button";
-import { useQueryFilters } from "@/hooks/filter/filter.hooks";
-import { scopedQueryFn } from "@/hooks/filter/query-state-mapping";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
-import { createClient } from "@/lib/supabase/client";
-import { useAuthProfile } from "@/providers/auth.provider";
+import { normalizeCourseStatus } from "../_lib/course-status";
+import { InstructorCoursesView } from "./_components/instructor-courses-view";
 
-// ─── Select columns ───────────────────────────────────────────────────────────
+export default async function InstructorCoursesPage({
+	params,
+	searchParams,
+}: {
+	params: Promise<{ locale: string }>;
+	searchParams: Promise<{ status?: string | string[] }>;
+}) {
+	const { locale } = await params;
+	const user = await getCurrentUser();
+	if (!user) redirect(routes.auth.login.page(undefined, { locale }));
 
-const SELECT =
-	"id, title, subtitle, cover_image_url, level, language, is_free, price_credits, is_published, estimated_duration_hours, instructor_id";
-const SEARCH_COLUMNS = ["title", "subtitle"] as const;
+	// The sidebar links here as ?status=published|draft; unknown values fold
+	// into "all" (courses have no archived state — see course-status.ts).
+	const status = normalizeCourseStatus((await searchParams).status);
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-export default function InstructorCoursesPage() {
-	const t = useTranslations("courses");
-	const profile = useAuthProfile();
-	const instructorId = profile?.id;
-	const [togglingId, setTogglingId] = React.useState<string | null>(null);
-	const [dialogOpen, setDialogOpen] = React.useState(false);
-	const queryClient = useQueryClient();
-
-	// Owner scope is enforced here, not via a URL-synced filter — RLS lets
-	// anyone read published courses, so a URL-tamperable filter would let an
-	// instructor widen this list to every published course on the platform.
-	const scopedFn = React.useMemo(
-		() =>
-			scopedQueryFn<"courses", CourseMeta[]>(
-				SELECT,
-				[...SEARCH_COLUMNS],
-				instructorId
-					? [{ field: "instructor_id", operator: "eq", value: instructorId }]
-					: []
-			),
-		[instructorId]
-	);
-
-	const coursesQuery = useQueryFilters<"courses", CourseMeta[]>({
-		table: "courses",
-		queryFn: scopedFn,
-		initialState: {
-			name: "instructor-courses",
-			sort: [{ field: "updated_at", direction: "desc" }],
-			pagination: { page: 1, pageSize: 12 },
-		},
-		enabled: !!instructorId,
-	});
-
-	// Lesson count / total lesson time / student count come from a bulk
-	// aggregate (RLS hides `enrollments` and `lessons` from plain card queries).
-	const courses = useCourseCardStats((coursesQuery.data as any)?.data ?? []);
-	const total = (coursesQuery.data as any)?.count ?? null;
-	const page = coursesQuery.state.pagination?.page ?? 1;
-	const pageSize = coursesQuery.state.pagination?.pageSize ?? 12;
-
-	async function handlePublishToggle(courseId: string, toPublish: boolean) {
-		setTogglingId(courseId);
-		try {
-			const client = createClient();
-			const { error } = await client
-				.from("courses")
-				.update({ is_published: toPublish })
-				.eq("id", courseId);
-			if (error) throw error;
-			queryClient.invalidateQueries({ queryKey: ["courses"] });
-			toast.success(toPublish ? "Course published." : "Course unpublished.");
-		} catch {
-			toast.error("Failed to update publish status.");
-		} finally {
-			setTogglingId(null);
-		}
-	}
-
+	// key={status}: the client list owns URL-synced filter state, so switching
+	// tabs remounts it with a fresh pinned `is_published` scope instead of
+	// letting stale nuqs state override the tab.
 	return (
-		<div className="space-y-6 p-6">
-			{/* Page header */}
-			<div className="flex items-center justify-between gap-4">
-				<div>
-					<h1 className="text-xl font-bold">{t("myCourses")}</h1>
-					{total != null && (
-						<p className="mt-0.5 text-sm text-muted-foreground">
-							{total} {total === 1 ? "course" : "courses"}
-						</p>
-					)}
-				</div>
-				<Button size="sm" onClick={() => setDialogOpen(true)}>
-					<CirclePlus className="size-4" />
-					{t("newCourse")}
-				</Button>
-			</div>
-
-			{/* Filters */}
-			<CourseFilters
-				queryState={coursesQuery}
-				options={{ showLevel: true, showLanguage: true, showPublished: true }}
-			/>
-
-			{/* Grid */}
-			{coursesQuery.isFetching && courses.length === 0 ? (
-				<CourseGridSkeleton count={6} />
-			) : courses.length === 0 ? (
-				<CourseGridEmpty
-					title={t("noCoursesFound")}
-					description={t("noCoursesDescription")}
-					action={
-						<Button size="sm" onClick={() => setDialogOpen(true)}>
-							<CirclePlus className="size-4" />
-							{t("newCourse")}
-						</Button>
-					}
-				/>
-			) : (
-				<CourseGrid>
-					{courses.map((course: CourseMeta) => (
-						<InstructorCourseCard
-							key={course.id}
-							course={course}
-							href={routes.d.instructor.courses.new.page({
-								course_id: course.id,
-							})}
-							onPublishToggle={handlePublishToggle}
-							isTogglingPublish={togglingId === course.id}
-						/>
-					))}
-				</CourseGrid>
-			)}
-
-			{/* Pagination */}
-			<CoursePagination
-				page={page}
-				pageSize={pageSize}
-				total={total}
-				onPageChange={(p) => coursesQuery.setPagination({ page: p })}
-			/>
-
-			{/* New course dialog */}
-			<NewCourseDialog
-				open={dialogOpen}
-				onOpenChange={setDialogOpen}
-				basePath={routes.d.instructor.page()}
-			/>
-		</div>
+		<InstructorCoursesView
+			key={status}
+			instructorId={user.id}
+			status={status}
+		/>
 	);
 }

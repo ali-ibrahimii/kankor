@@ -101,6 +101,13 @@ export const routes = {
 				) => buildPath("/api/import/google-sheet", {}, searchParams, options),
 			},
 		},
+		media: {
+			route: (
+				params: { key: string },
+				searchParams?: Record<string, string>,
+				options: { locale?: string; isAbsolute?: boolean } = {}
+			) => buildPath("/api/media/:key", params, searchParams, options),
+		},
 		omr: {
 			print: {
 				route: (
@@ -147,6 +154,14 @@ export const routes = {
 							options
 						),
 				},
+			},
+		},
+		storage: {
+			health: {
+				route: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/api/storage/health", {}, searchParams, options),
 			},
 		},
 		telegram: {
@@ -257,7 +272,6 @@ export const routes = {
 					searchParams?: Record<string, string>,
 					options: { locale?: string; isAbsolute?: boolean } = {}
 				) => buildPath("/d/admin/courses", {}, searchParams, options),
-				/** Course builder — where "New course" lands after creating a course. */
 				new: {
 					page: (
 						params: { course_id: string },
@@ -693,6 +707,12 @@ export const routes = {
 					options: { locale?: string; isAbsolute?: boolean } = {}
 				) => buildPath("/d/instructor/account", {}, searchParams, options),
 			},
+			analytics: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/instructor/analytics", {}, searchParams, options),
+			},
 			classrooms: {
 				page: (
 					searchParams?: Record<string, string>,
@@ -800,6 +820,12 @@ export const routes = {
 							options
 						),
 				},
+			},
+			settings: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/instructor/settings", {}, searchParams, options),
 			},
 			students: {
 				page: (
@@ -1066,19 +1092,19 @@ export const routes = {
 			searchParams?: Record<string, string>,
 			options: { locale?: string; isAbsolute?: boolean } = {}
 		) => buildPath("/demo", {}, searchParams, options),
-		verify: {
-			page: (
-				params: { code: string },
-				searchParams?: Record<string, string>,
-				options: { locale?: string; isAbsolute?: boolean } = {}
-			) => buildPath("/demo/verify/:code", params, searchParams, options),
-		},
 	},
 	home: {
 		page: (
 			searchParams?: Record<string, string>,
 			options: { locale?: string; isAbsolute?: boolean } = {}
 		) => buildPath("/", {}, searchParams, options),
+	},
+	instructors: {
+		page: (
+			params: { slug: string },
+			searchParams?: Record<string, string>,
+			options: { locale?: string; isAbsolute?: boolean } = {}
+		) => buildPath("/instructors/:slug", params, searchParams, options),
 	},
 	libraries: {
 		page: (
@@ -1123,6 +1149,19 @@ export const routes = {
 				options: { locale?: string; isAbsolute?: boolean } = {}
 			) => buildPath("/quizzes/:slug", params, searchParams, options),
 		},
+	},
+	roadmap: {
+		page: (
+			searchParams?: Record<string, string>,
+			options: { locale?: string; isAbsolute?: boolean } = {}
+		) => buildPath("/roadmap", {}, searchParams, options),
+	},
+	schools: {
+		page: (
+			params: { school_id: string },
+			searchParams?: Record<string, string>,
+			options: { locale?: string; isAbsolute?: boolean } = {}
+		) => buildPath("/schools/:school_id", params, searchParams, options),
 	},
 	search: {
 		page: (

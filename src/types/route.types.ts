@@ -8,6 +8,7 @@ export type StaticRoute =
 	| "/libraries"
 	| "/"
 	| "/quizzes"
+	| "/roadmap"
 	| "/search"
 	| "/verify"
 	| "/delete-account"
@@ -24,6 +25,7 @@ export type StaticRoute =
 	| "/d"
 	| "/d/account"
 	| "/d/bookmarks"
+	| "/d/certificates"
 	| "/d/classrooms"
 	| "/d/courses"
 	| "/d/decks"
@@ -32,10 +34,10 @@ export type StaticRoute =
 	| "/d/my-courses"
 	| "/d/my-decks"
 	| "/d/notifications"
+	| "/d/tests/kankor"
 	| "/d/tests/passed"
 	| "/d/tests/registered"
 	| "/d/wallet"
-	| "/d/certificates"
 	| "/d/admin"
 	| "/d/admin/agencies"
 	| "/d/admin/courses"
@@ -59,9 +61,11 @@ export type StaticRoute =
 	| "/d/instructor/notifications"
 	| "/d/instructor/quizzes"
 	| "/d/instructor/students"
+	| "/d/instructor/analytics"
+	| "/d/instructor/settings"
+	| "/demo"
 	| "/offline"
 	| "/verification-pending"
-	| "/demo"
 	| "/api/auth/callback"
 	| "/api/auth/signout"
 	| "/api/cron/deliver-push-notifications"
@@ -72,14 +76,17 @@ export type StaticRoute =
 	| "/api/slack/interactions"
 	| "/api/slack/webhook/instructor-signup"
 	| "/api/slack/webhook/school-created"
+	| "/api/storage/health"
 	| "/api/telegram/webhook"
 	| "/api/webhooks/notification-created";
 
 export type DynamicRoute =
 	| `/courses/:slug`
 	| `/decks/:slug`
+	| `/instructors/:slug`
 	| `/libraries/:slug`
 	| `/quizzes/:slug`
+	| `/schools/:school_id`
 	| `/verify/:code`
 	| `/d/classrooms/:classroom_id`
 	| `/d/courses/:slug/learn/:lesson_id`
@@ -89,6 +96,7 @@ export type DynamicRoute =
 	| `/d/my-courses/:slug`
 	| `/d/admin/agencies/:agency_id`
 	| `/d/admin/courses/:slug`
+	| `/d/admin/courses/new/:course_id`
 	| `/d/admin/decks/:slug/edit`
 	| `/d/admin/libraries/:slug`
 	| `/d/admin/quizzes/:slug`
@@ -129,6 +137,6 @@ export type DynamicRoute =
 	| `/d/school/:school_id/quizzes`
 	| `/d/school/:school_id/quizzes/:slug`
 	| `/watch/u/:id`
-	| `/demo/verify/:code`;
+	| `/api/media/:key*`;
 
 export type AppRoute = StaticRoute | DynamicRoute;

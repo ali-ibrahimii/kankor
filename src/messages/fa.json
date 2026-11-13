@@ -248,7 +248,33 @@
 			"earnings": "درآمد",
 			"discounts": "تخفیف‌ها",
 			"settings": "تنظیمات",
-			"notifications": "اعلان‌ها"
+			"notifications": "اعلان‌ها",
+			"account": "حساب کاربری",
+			"analyticsPage": {
+				"title": "تحلیل‌ها",
+				"description": "عملکرد کورس‌ها، شاگردان و عواید خود را دنبال کنید.",
+				"perCourseTitle": "عملکرد هر کورس",
+				"columnCourse": "کورس",
+				"columnStatus": "وضعیت",
+				"columnRating": "امتیاز"
+			},
+			"settingsPage": {
+				"title": "تنظیمات",
+				"description": "حساب، اعلان‌ها و ظاهر داشبورد خود را مدیریت کنید.",
+				"accountTitle": "حساب کاربری",
+				"accountDescription": "نام، تصویر و اطلاعات شخصی خود را ویرایش کنید.",
+				"manageAccount": "مدیریت حساب",
+				"notificationsTitle": "اعلان‌ها",
+				"notificationsDescription": "اعلان‌های خود را مشاهده و مدیریت کنید.",
+				"manageNotifications": "مدیریت اعلان‌ها",
+				"earningsTitle": "عواید و کردیت‌ها",
+				"earningsDescription": "عواید و تراکنش‌های خود را دنبال کنید.",
+				"manageEarnings": "مشاهدهٔ عواید",
+				"appearanceTitle": "ظاهر",
+				"appearanceDescription": "زبان و حالت روشن/تاریک داشبورد را تغییر دهید.",
+				"languageLabel": "زبان",
+				"themeLabel": "حالت نمایش"
+			}
 		},
 		"school": {
 			"roleLabel": "ادمین مکتب",
@@ -522,7 +548,20 @@
 			"completedOfTotal": "{completed}/{total} تکمیل شده",
 			"hoursMinutes": "{hours} ساعت و {minutes} دقیقه",
 			"visitInstructor": "مشاهده صفحه استاد",
-			"visitSchool": "مشاهده صفحه مکتب"
+			"visitSchool": "مشاهده صفحه مکتب",
+			"analytics": "تحلیل‌ها",
+			"price": "قیمت",
+			"noModules": "هنوز ماژولی برای این کورس ساخته نشده است.",
+			"noStudents": "هنوز شاگردی در این کورس ثبت‌نام نکرده است.",
+			"studentName": "شاگرد",
+			"enrolledAt": "تاریخ ثبت‌نام",
+			"progress": "پیشرفت",
+			"ratingBreakdown": "توزیع امتیازها",
+			"notRated": "هنوز امتیازی برای این کورس ثبت نشده است.",
+			"deleteCourse": "حذف کورس",
+			"deleteTitle": "حذف کورس؟",
+			"deleteDescription": "با حذف کورس، تمام ماژول‌ها، درس‌ها و محتوای آن برای همیشه حذف می‌شود. این عمل قابل بازگشت نیست.",
+			"deleteConfirm": "بله، حذف کن"
 		},
 		"learn": {
 			"markComplete": "علامت‌گذاری به عنوان تکمیل شده",
@@ -1592,7 +1631,10 @@
 			"expand": "باز کردن"
 		},
 		"validation": {
-			"titleRequired": "عنوان کورس الزامی است."
+			"titleRequired": "عنوان کورس الزامی است.",
+			"priceRequired": "برای کورس پولی، قیمت را وارد کنید.",
+			"priceInvalid": "قیمت باید یک عدد صحیح مثبت باشد.",
+			"promoInvalid": "لینک ویدیوی معرفی معتبر نیست."
 		},
 		"newCourse": {
 			"title": "کورس جدید",
@@ -1631,7 +1673,20 @@
 			"welcomePlaceholder": "به این کورس خوش آمدی…",
 			"seoSection": "سئو (اختیاری)",
 			"seoTitle": "عنوان سئو",
-			"seoDescription": "توضیح سئو"
+			"seoDescription": "توضیح سئو",
+			"book": "کتاب",
+			"subject": "مضمون",
+			"grade": "صنف",
+			"selectBook": "انتخاب کتاب",
+			"selectSubject": "انتخاب مضمون",
+			"selectGrade": "انتخاب صنف",
+			"none": "هیچ‌کدام",
+			"relatedDecks": "فلش‌کارت‌های مرتبط",
+			"relatedDecksPlaceholder": "انتخاب فلش‌کارت‌های مرتبط",
+			"relatedQuizzes": "آزمون‌های مرتبط",
+			"relatedQuizzesPlaceholder": "انتخاب آزمون‌های مرتبط",
+			"relatedBooks": "کتاب‌های مرتبط",
+			"relatedBooksPlaceholder": "انتخاب کتاب‌های مرتبط"
 		},
 		"editCourse": {
 			"title": "ویرایش جزئیات کورس",
@@ -1769,7 +1824,15 @@
 		"errorTitle": "بارگذاری این صفحه ممکن نشد",
 		"errorDescription": "یک خطای غیرمنتظره رخ داد. یک‌بار دیگر تلاش کنید؛ اگر تکرار شد این پیام را برای پشتیبانی بفرستید.",
 		"retry": "تلاش دوباره",
-		"backToCourses": "بازگشت به فهرست کورس‌ها"
+		"backToCourses": "بازگشت به فهرست کورس‌ها",
+		"actionErrors": {
+			"unauthorized": "برای انجام این کار باید وارد حساب خود شده باشید.",
+			"forbidden": "شما اجازهٔ انجام این کار را ندارید.",
+			"notFound": "مورد درخواستی پیدا نشد.",
+			"conflict": "رکوردی با این مشخصات از قبل وجود دارد.",
+			"invalid": "اطلاعات واردشده معتبر نیست.",
+			"database": "ذخیرهٔ اطلاعات ناموفق بود. دوباره تلاش کنید."
+		}
 	},
 	"imageUpload": {
 		"dropHint": "برای بارگذاری تصویر کلیک کن یا فایل را اینجا رها کن",
