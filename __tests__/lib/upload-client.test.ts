@@ -17,8 +17,13 @@ import {
 	validateImageFile,
 } from "@/lib/r2/upload-client";
 
-let lastRequest: { url: string; headers: Record<string, string> } | null = null;
-let failNext = false;
+let lastRequest: {
+	method: string;
+	url: string;
+	headers: Record<string, string>;
+} | null = null;
+let requests: { method: string; url: string }[] = [];
+let failuresLeft = 0;
 
 class FakeXHR {
 	upload: Record<string, unknown> = {};
@@ -26,8 +31,9 @@ class FakeXHR {
 	onload: (() => void) | null = null;
 	onerror: (() => void) | null = null;
 	private headers: Record<string, string> = {};
-	open(_method: string, url: string) {
-		lastRequest = { url, headers: this.headers };
+	open(method: string, url: string) {
+		lastRequest = { method, url, headers: this.headers };
+		requests.push({ method, url });
 	}
 	setRequestHeader(key: string, value: string) {
 		this.headers[key] = value;
@@ -40,7 +46,8 @@ class FakeXHR {
 			loaded: 100,
 			total: 100,
 		});
-		if (failNext) {
+		if (failuresLeft > 0) {
+			failuresLeft--;
 			this.onerror?.();
 			return;
 		}
@@ -55,7 +62,8 @@ const imageFile = (name = "cover.png", type = "image/png") =>
 beforeEach(() => {
 	vi.clearAllMocks();
 	lastRequest = null;
-	failNext = false;
+	requests = [];
+	failuresLeft = 0;
 	vi.stubGlobal("XMLHttpRequest", FakeXHR);
 });
 
@@ -171,8 +179,39 @@ describe("uploadImageFile", () => {
 		expect(mocks.finalizeImageUpload).not.toHaveBeenCalled();
 	});
 
-	it("explains a failed PUT — the usual cause is missing bucket CORS", async () => {
-		failNext = true;
+	it("falls back to the same-origin proxy when the direct PUT is blocked", async () => {
+		failuresLeft = 1; // first send (browser→R2) fails like a CORS block
+		mocks.requestImageUpload.mockResolvedValue({
+			success: true,
+			data: { assetId: "a3", uploadUrl: "https://r2/put", storageKey: "k" },
+		});
+		mocks.finalizeImageUpload.mockResolvedValue({
+			success: true,
+			data: {
+				url: "/api/media/schools/s1/cover/x.png",
+				storageKey: "k",
+				assetId: "a3",
+			},
+		});
+
+		const progress: number[] = [];
+		const result = await uploadImageFile({
+			scope: "course",
+			ownerId: "c1",
+			file: imageFile(),
+			onProgress: (percent) => progress.push(percent),
+		});
+
+		expect(requests.map((r) => r.method)).toEqual(["PUT", "POST"]);
+		expect(requests[0].url).toBe("https://r2/put");
+		expect(requests[1].url).toBe("/api/image-upload");
+		expect(mocks.finalizeImageUpload).toHaveBeenCalledWith("a3", "cover");
+		expect(result.url).toBe("/api/media/schools/s1/cover/x.png");
+		expect(progress).toContain(100);
+	});
+
+	it("fails after both the direct PUT and the proxy fail", async () => {
+		failuresLeft = 2;
 		mocks.requestImageUpload.mockResolvedValue({
 			success: true,
 			data: { assetId: "a3", uploadUrl: "https://r2/put", storageKey: "k" },
@@ -181,6 +220,7 @@ describe("uploadImageFile", () => {
 		await expect(
 			uploadImageFile({ scope: "course", ownerId: "c1", file: imageFile() })
 		).rejects.toBeInstanceOf(ImageUploadError);
+		expect(requests.map((r) => r.method)).toEqual(["PUT", "POST"]);
 		expect(mocks.finalizeImageUpload).not.toHaveBeenCalled();
 	});
 

@@ -1854,7 +1854,11 @@
 		"invalidType": "This file type is not supported",
 		"tooLarge": "Image is larger than {max}",
 		"storedInR2": "Stored in Cloudflare R2",
-		"notConfigured": "Image storage is not configured on the server, so image upload is unavailable."
+		"notConfigured": "Image storage is not configured on the server, so image upload is unavailable.",
+		"notAuthorized": "You are not allowed to upload images for this course or school.",
+		"permissionCheckFailed": "Could not verify image upload permission; please try again.",
+		"uploadRecordFailed": "The upload record could not be created; please try again.",
+		"uploadUrlFailed": "Could not create the upload link; please try again."
 	},
 	"flashcardBuilder": {
 		"meta": {

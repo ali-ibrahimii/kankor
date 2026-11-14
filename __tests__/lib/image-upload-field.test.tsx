@@ -186,6 +186,108 @@ describe("ImageUploadField", () => {
 		expect(onUploaded).not.toHaveBeenCalled();
 	});
 
+	it("explains a permission denial in the user's language", async () => {
+		mocks.requestImageUpload.mockResolvedValue({
+			success: false,
+			error: "Not authorized to upload images for this course or school.",
+			code: "not_authorized",
+		});
+
+		const onUploaded = vi.fn();
+		const { container } = render(
+			withIntl(
+				<ImageUploadField scope="course" ownerId="c1" onUploaded={onUploaded} />
+			)
+		);
+
+		dropFile(container, new File(["x"], "cover.png", { type: "image/png" }));
+
+		await waitFor(() =>
+			expect(mocks.toastError).toHaveBeenCalledWith(
+				"شما اجازهٔ آپلود تصویر برای این کورس یا مدرسه را ندارید."
+			)
+		);
+		expect(mocks.toastError).not.toHaveBeenCalledWith(
+			"Not authorized to upload images for this course or school."
+		);
+		expect(onUploaded).not.toHaveBeenCalled();
+	});
+
+	it("distinguishes a failed permission check from a denial", async () => {
+		mocks.requestImageUpload.mockResolvedValue({
+			success: false,
+			error: "Could not verify image upload permission.",
+			code: "permission_check_failed",
+		});
+
+		const onUploaded = vi.fn();
+		const { container } = render(
+			withIntl(
+				<ImageUploadField scope="course" ownerId="c1" onUploaded={onUploaded} />
+			)
+		);
+
+		dropFile(container, new File(["x"], "cover.png", { type: "image/png" }));
+
+		await waitFor(() =>
+			expect(mocks.toastError).toHaveBeenCalledWith(
+				"بررسی مجوز آپلود تصویر ناموفق بود؛ لطفاً دوباره تلاش کنید."
+			)
+		);
+		expect(onUploaded).not.toHaveBeenCalled();
+	});
+
+	it("renders previews from hosts outside the next/image allowlist without crashing", () => {
+		// Cover URLs can be external (or the config can lag behind a changed
+		// env): next/image throws for those hosts, so the field must fall back
+		// to a plain <img> instead of taking the dialog down.
+		const onUploaded = vi.fn();
+		const { container } = render(
+			withIntl(
+				<ImageUploadField
+					scope="course"
+					ownerId="c1"
+					value="https://unknown-host.example/cover.jpg"
+					onUploaded={onUploaded}
+				/>
+			)
+		);
+
+		const img = container.querySelector(
+			'img[src="https://unknown-host.example/cover.jpg"]'
+		);
+		expect(img).not.toBeNull();
+		expect(img?.getAttribute("srcset")).toBeNull();
+	});
+
+	it("localizes a failed upload-record creation", async () => {
+		mocks.requestImageUpload.mockResolvedValue({
+			success: false,
+			error:
+				'Could not create the upload record: relation "image_assets" does not exist (42P01)',
+			code: "upload_record_failed",
+		});
+
+		const onUploaded = vi.fn();
+		const { container } = render(
+			withIntl(
+				<ImageUploadField scope="course" ownerId="c1" onUploaded={onUploaded} />
+			)
+		);
+
+		dropFile(container, new File(["x"], "cover.png", { type: "image/png" }));
+
+		await waitFor(() =>
+			expect(mocks.toastError).toHaveBeenCalledWith(
+				"رکورد آپلود در دیتابیس ساخته نشد؛ لطفاً دوباره تلاش کنید."
+			)
+		);
+		expect(mocks.toastError).not.toHaveBeenCalledWith(
+			expect.stringContaining("image_assets")
+		);
+		expect(onUploaded).not.toHaveBeenCalled();
+	});
+
 	it("deletes the R2 object when an existing cover is removed", async () => {
 		mocks.deleteImageAsset.mockResolvedValue({
 			success: true,
