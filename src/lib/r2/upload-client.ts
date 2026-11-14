@@ -23,11 +23,18 @@ import {
  * path. Throws an `Error` with a user-facing message on any failure.
  */
 
+export type ImageUploadErrorCode =
+	| "not_configured"
+	| "not_authorized"
+	| "permission_check_failed"
+	| "upload_record_failed"
+	| "upload_url_failed";
+
 export class ImageUploadError extends Error {
 	/** Stable cause so UI code can localize instead of showing raw text. */
-	readonly code?: "not_configured";
+	readonly code?: ImageUploadErrorCode;
 
-	constructor(message: string, code?: "not_configured") {
+	constructor(message: string, code?: ImageUploadErrorCode) {
 		super(message);
 		this.name = "ImageUploadError";
 		this.code = code;
@@ -71,6 +78,43 @@ function putWithProgress(
 	});
 }
 
+/**
+ * Same-origin fallback used when the direct browser→R2 PUT is blocked
+ * (bucket CORS rules, corporate proxies, restricted networks): the file is
+ * posted to our own route handler, which stores it server-side. The server
+ * only accepts the pending `image_assets` row created by
+ * `requestImageUpload` for the signed-in user — the storage key always comes
+ * from that row, never from the client.
+ */
+function putViaProxy(
+	assetId: string,
+	file: File,
+	onProgress?: (percent: number) => void
+): Promise<void> {
+	return new Promise((resolve, reject) => {
+		const xhr = new XMLHttpRequest();
+		xhr.open("POST", "/api/image-upload");
+		xhr.upload.onprogress = (event) => {
+			if (event.lengthComputable) {
+				onProgress?.(Math.round((event.loaded / event.total) * 100));
+			}
+		};
+		xhr.onload = () => {
+			if (xhr.status >= 200 && xhr.status < 300) resolve();
+			else
+				reject(new ImageUploadError(`Fallback upload failed (${xhr.status})`));
+		};
+		xhr.onerror = () =>
+			reject(
+				new ImageUploadError("Fallback upload failed — server unreachable.")
+			);
+		const form = new FormData();
+		form.append("file", file);
+		form.append("assetId", assetId);
+		xhr.send(form);
+	});
+}
+
 /** Client-side guard so an obviously wrong file never costs a round-trip. */
 export function validateImageFile(file: File): string | null {
 	if (!isAllowedImageMimeType(file.type)) {
@@ -110,7 +154,15 @@ export async function uploadImageFile({
 		throw new ImageUploadError(requested.error, requested.code);
 
 	onProgress?.(0);
-	await putWithProgress(requested.data.uploadUrl, file, onProgress);
+	try {
+		await putWithProgress(requested.data.uploadUrl, file, onProgress);
+	} catch (directError) {
+		// Direct browser→R2 upload can be blocked (bucket CORS rules, network
+		// policies). Retry through the same-origin proxy — the object lands in
+		// the bucket either way, and `finalizeImageUpload` verifies it the same.
+		console.warn("direct R2 upload failed, using proxy fallback", directError);
+		await putViaProxy(requested.data.assetId, file, onProgress);
+	}
 
 	onProgress?.(100);
 	onFinalizing?.();

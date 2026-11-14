@@ -64,7 +64,7 @@ export async function generateMetadata({
 	const { data: course, error } = await supabase
 		.from("courses")
 		.select(
-			"id, slug, title, subtitle, description, seo_title, seo_description, cover_image_url, learning_objectives"
+			"id, slug, title, subtitle, description, seo_title, seo_description, cover_image_url, learning_objectives, prerequisites"
 		)
 		.eq("slug", decodeSlugParam(slug))
 		.eq("is_published", true)
@@ -378,93 +378,53 @@ export default async function CourseDetailPage({
 				{/* LEARNING OBJECTIVES AND PREREQUISITES */}
 				{/* ================================================= */}
 
-				{!course.description &&
-					(course.learning_objectives?.length > 0 ||
-						course.prerequisites?.length > 0) && (
-						<section className="space-y-7">
-							<div className="flex items-center gap-4">
-								<div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
-									<Target className="size-6" />
-								</div>
-
-								<div>
-									<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
-										{s("faqObjectives")}
-									</h2>
-
-									<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-										{course.title}
-									</p>
-								</div>
+				{(course.learning_objectives?.length > 0 ||
+					course.prerequisites?.length > 0) && (
+					<section className="space-y-7">
+						<div className="flex items-center gap-4">
+							<div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+								<Target className="size-6" />
 							</div>
 
-							<div className="grid gap-5 md:grid-cols-2">
-								{/* OBJECTIVES */}
+							<div>
+								<h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">
+									{s("faqObjectives")}
+								</h2>
 
-								{course.learning_objectives &&
-									course.learning_objectives.length > 0 && (
-										<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
-											<div className="absolute -end-10 -top-10 size-32 rounded-full bg-violet-100/60 blur-2xl dark:bg-violet-500/10" />
+								<p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+									{course.title}
+								</p>
+							</div>
+						</div>
 
-											<div className="relative">
-												<div className="mb-6 flex items-center gap-3">
-													<span className="flex size-11 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
-														<Target className="size-5" />
-													</span>
+						<div className="grid gap-5 md:grid-cols-2">
+							{/* OBJECTIVES */}
 
-													<h3 className="text-base font-extrabold">
-														{s("faqObjectives")}
-													</h3>
-												</div>
-
-												<ul className="space-y-4">
-													{course.learning_objectives.map(
-														(objective, index) => (
-															<li
-																key={index}
-																className="flex items-start gap-3"
-															>
-																<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
-																	<CheckCircle2 className="size-4" />
-																</span>
-
-																<span className="text-sm leading-7 text-slate-600 dark:text-slate-300">
-																	{objective}
-																</span>
-															</li>
-														)
-													)}
-												</ul>
-											</div>
-										</div>
-									)}
-
-								{/* PREREQUISITES */}
-
-								{course.prerequisites && course.prerequisites.length > 0 && (
+							{course.learning_objectives &&
+								course.learning_objectives.length > 0 && (
 									<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
-										<div className="absolute -end-10 -top-10 size-32 rounded-full bg-emerald-100/60 blur-2xl dark:bg-emerald-500/10" />
+										<div className="absolute -end-10 -top-10 size-32 rounded-full bg-violet-100/60 blur-2xl dark:bg-violet-500/10" />
 
 										<div className="relative">
 											<div className="mb-6 flex items-center gap-3">
-												<span className="flex size-11 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
-													<BookOpen className="size-5" />
+												<span className="flex size-11 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+													<Target className="size-5" />
 												</span>
 
 												<h3 className="text-base font-extrabold">
-													{s("faqPrerequisites")}
+													{s("faqObjectives")}
 												</h3>
 											</div>
 
 											<ul className="space-y-4">
-												{course.prerequisites.map((prerequisite, index) => (
+												{course.learning_objectives.map((objective, index) => (
 													<li key={index} className="flex items-start gap-3">
-														<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+														<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
 															<CheckCircle2 className="size-4" />
 														</span>
 
 														<span className="text-sm leading-7 text-slate-600 dark:text-slate-300">
-															{prerequisite}
+															{objective}
 														</span>
 													</li>
 												))}
@@ -472,9 +432,43 @@ export default async function CourseDetailPage({
 										</div>
 									</div>
 								)}
-							</div>
-						</section>
-					)}
+
+							{/* PREREQUISITES */}
+
+							{course.prerequisites && course.prerequisites.length > 0 && (
+								<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+									<div className="absolute -end-10 -top-10 size-32 rounded-full bg-emerald-100/60 blur-2xl dark:bg-emerald-500/10" />
+
+									<div className="relative">
+										<div className="mb-6 flex items-center gap-3">
+											<span className="flex size-11 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+												<BookOpen className="size-5" />
+											</span>
+
+											<h3 className="text-base font-extrabold">
+												{s("faqPrerequisites")}
+											</h3>
+										</div>
+
+										<ul className="space-y-4">
+											{course.prerequisites.map((prerequisite, index) => (
+												<li key={index} className="flex items-start gap-3">
+													<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+														<CheckCircle2 className="size-4" />
+													</span>
+
+													<span className="text-sm leading-7 text-slate-600 dark:text-slate-300">
+														{prerequisite}
+													</span>
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							)}
+						</div>
+					</section>
+				)}
 
 				{/* ================================================= */}
 				{/* RELATED RESOURCES */}

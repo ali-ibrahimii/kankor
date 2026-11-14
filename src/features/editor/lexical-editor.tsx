@@ -17,7 +17,6 @@ import {
 import {
 	$convertFromMarkdownString,
 	$convertToMarkdownString,
-	TRANSFORMERS,
 } from "@lexical/markdown";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
@@ -75,6 +74,7 @@ import {
 	Heading2,
 	Heading3,
 	Italic,
+	Lightbulb,
 	Link,
 	Link2Off,
 	List,
@@ -90,6 +90,20 @@ import {
 import type * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { MD_TRANSFORMERS } from "./markdown-table-transformer";
+
+/**
+ * Marker inserted by the callout (نکته مهم) toolbar/slash action, localized
+ * to the active document language so the rendered bold label matches what
+ * the author writes in.
+ */
+function defaultCalloutMarker(): string {
+	const lang =
+		typeof document !== "undefined" ? document.documentElement.lang : "en";
+	if (lang.startsWith("fa")) return "[نکته مهم]";
+	if (lang.startsWith("ps")) return "[مهمه نکته]";
+	return "[!important]";
+}
 
 const EDITOR_NODES = [
 	HeadingNode,
@@ -194,7 +208,7 @@ function MarkdownSyncPlugin({ content, onChange }: MarkdownSyncPluginProps) {
 		if (content !== undefined && content !== lastContentRef.current) {
 			lastContentRef.current = content;
 			editor.update(() => {
-				$convertFromMarkdownString(content, TRANSFORMERS);
+				$convertFromMarkdownString(content, MD_TRANSFORMERS);
 			});
 		}
 	}, [editor, content]);
@@ -203,7 +217,7 @@ function MarkdownSyncPlugin({ content, onChange }: MarkdownSyncPluginProps) {
 		<OnChangePlugin
 			onChange={(editorState) => {
 				editorState.read(() => {
-					const markdown = $convertToMarkdownString(TRANSFORMERS);
+					const markdown = $convertToMarkdownString(MD_TRANSFORMERS);
 					if (markdown !== lastContentRef.current) {
 						lastContentRef.current = markdown;
 						onChange?.(markdown);
@@ -532,6 +546,21 @@ const COMMAND_OPTIONS: CommandOption[] = [
 			const selection = $getSelection();
 			if ($isRangeSelection(selection)) {
 				$setBlocksType(selection, () => $createQuoteNode());
+			}
+		},
+	},
+	{
+		key: "callout",
+		label: "Callout",
+		description: "",
+		icon: Lightbulb,
+		action: (_editor) => {
+			const selection = $getSelection();
+			if ($isRangeSelection(selection)) {
+				$setBlocksType(selection, () => $createQuoteNode());
+				if (selection.isCollapsed()) {
+					selection.insertText(`${defaultCalloutMarker()} `);
+				}
 			}
 		},
 	},
@@ -990,7 +1019,7 @@ export function LexicalEditor({
 		nodes: EDITOR_NODES,
 		editorState: () => {
 			if (content) {
-				$convertFromMarkdownString(content, TRANSFORMERS);
+				$convertFromMarkdownString(content, MD_TRANSFORMERS);
 			}
 		},
 	};
@@ -1029,7 +1058,7 @@ export function LexicalEditor({
 				<TablePlugin />
 				<TabIndentationPlugin />
 				<ClearEditorPlugin />
-				<MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+				<MarkdownShortcutPlugin transformers={MD_TRANSFORMERS} />
 				<FloatingToolbarPlugin />
 				<SlashCommandsPlugin />
 			</div>

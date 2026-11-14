@@ -89,6 +89,9 @@ function TextField({ block }: { block: DraftContentBlock }) {
 				placeholder={t("block.textPlaceholder")}
 				className="font-mono text-sm resize-y"
 			/>
+			<p className="text-xs text-muted-foreground">
+				{t("block.textMarkdownHint")}
+			</p>
 		</div>
 	);
 }

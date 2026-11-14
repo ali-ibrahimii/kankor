@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import type { CourseMeta } from "@/components/blocks/course/course-card";
+import { CoverFillImage } from "@/components/blocks/course/cover-image";
 import type { PublicDeck } from "@/components/blocks/decks/public-deck-card";
 import type { LibraryBook } from "@/components/blocks/libraries/types";
 import type { PublicQuiz } from "@/components/blocks/quizzes/types";
@@ -45,10 +45,9 @@ export function HomeCourseCard({
 			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e7e8f3] bg-white shadow-[0_8px_24px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_36px_-18px_rgba(105,75,210,.28)] sm:w-[298px] dark:border-white/10 dark:bg-[#1b2438]"
 		>
 			<div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
-				<Image
+				<CoverFillImage
 					src={coverSrc}
 					alt={course.title}
-					fill
 					sizes="(max-width: 640px) 85vw, 300px"
 					className="object-cover transition-transform duration-700 group-hover:scale-105"
 				/>
@@ -143,10 +142,9 @@ export function HomeSchoolBookCard({
 		>
 			{/* Book Cover Spine */}
 			<div className="relative h-full w-[112px] shrink-0 overflow-hidden bg-slate-900 sm:w-[118px]">
-				<Image
+				<CoverFillImage
 					src={coverSrc}
 					alt={book.title}
-					fill
 					sizes="120px"
 					className="object-cover transition-transform duration-700 group-hover:scale-105"
 				/>
@@ -227,10 +225,9 @@ export function HomeGeneralBookCard({
 			href={href}
 			className="group relative flex h-[278px] w-[248px] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl border border-black/5 bg-slate-900 p-4 text-white shadow-[0_14px_30px_-16px_rgba(15,23,42,.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_40px_-16px_rgba(15,23,42,.6)] sm:w-[262px]"
 		>
-			<Image
+			<CoverFillImage
 				src={coverSrc}
 				alt={book.title}
-				fill
 				sizes="(max-width: 640px) 80vw, 265px"
 				className="object-cover transition-transform duration-700 group-hover:scale-108"
 			/>
@@ -311,10 +308,9 @@ export function HomeFlashcardDeckCard({
 			>
 				{/* Clean Image: Top-Start Free Tag + Top-End Vote Stats, Zero Floating Icons */}
 				<div className="relative h-34 w-full overflow-hidden bg-slate-900">
-					<Image
+					<CoverFillImage
 						src={coverSrc}
 						alt={deck.name}
-						fill
 						sizes="(max-width: 640px) 85vw, 295px"
 						className="object-cover transition-transform duration-700 group-hover:scale-105"
 					/>
@@ -409,10 +405,9 @@ export function HomeKankorFormCard({
 			<div className="h-1 w-full bg-gradient-to-l from-amber-500 via-orange-500 to-violet-600" />
 
 			<div className="relative h-30 w-full overflow-hidden bg-slate-900">
-				<Image
+				<CoverFillImage
 					src={coverSrc}
 					alt={quiz.title}
-					fill
 					sizes="(max-width: 640px) 85vw, 300px"
 					className="object-cover transition-transform duration-700 group-hover:scale-105"
 				/>
