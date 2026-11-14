@@ -13,6 +13,8 @@ const mocks = vi.hoisted(() => ({
 	refresh: vi.fn(),
 	toastError: vi.fn(),
 	toastSuccess: vi.fn(),
+	toastWarning: vi.fn(),
+	uploadImageFile: vi.fn(),
 }));
 
 vi.mock("@/components/blocks/course-builder/actions", () => ({
@@ -30,8 +32,30 @@ vi.mock("@/i18n/navigation", () => ({
 }));
 
 vi.mock("sonner", () => ({
-	toast: { error: mocks.toastError, success: mocks.toastSuccess },
+	toast: {
+		error: mocks.toastError,
+		success: mocks.toastSuccess,
+		warning: mocks.toastWarning,
+	},
 }));
+
+vi.mock("@/lib/r2/upload-client", () => {
+	class ImageUploadError extends Error {
+		readonly code?: "not_configured";
+
+		constructor(message: string, code?: "not_configured") {
+			super(message);
+			this.name = "ImageUploadError";
+			this.code = code;
+		}
+	}
+	return {
+		ImageUploadError,
+		uploadImageFile: mocks.uploadImageFile,
+		validateImageFile: () => null,
+		formatImageLimit: () => "5MB",
+	};
+});
 
 vi.mock("@/components/blocks/RelatedResourcesSelector", () => ({
 	RelatedResourcesSelector: ({ label }: { label: string }) => (
@@ -124,7 +148,8 @@ describe("NewCourseDialog — instructor create-course flow", () => {
 	it("translates server failures instead of showing raw database text", async () => {
 		mocks.createCourse.mockResolvedValue({
 			success: false,
-			error: 'duplicate key value violates unique constraint "courses_title_key"',
+			error:
+				'duplicate key value violates unique constraint "courses_title_key"',
 			code: "conflict",
 		});
 
@@ -191,5 +216,84 @@ describe("NewCourseDialog — instructor create-course flow", () => {
 				"/d/instructor/courses/new/course-1"
 			)
 		);
+	});
+
+	it("reports an unconfigured cover upload in Persian, not raw env text", async () => {
+		mocks.createCourse.mockResolvedValue({
+			success: true,
+			data: { courseId: "course-1" },
+		});
+		const { ImageUploadError } = await import("@/lib/r2/upload-client");
+		mocks.uploadImageFile.mockRejectedValue(
+			new ImageUploadError(
+				"Image storage is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME.",
+				"not_configured"
+			)
+		);
+
+		render(
+			withProviders(
+				<NewCourseDialog open onOpenChange={vi.fn()} basePath="/d/instructor" />
+			)
+		);
+
+		// Radix Dialog portals to document.body — query the document, not the
+		// render container.
+		const fileInput = document.querySelector('input[type="file"]');
+		expect(fileInput).not.toBeNull();
+		fireEvent.change(fileInput as HTMLInputElement, {
+			target: {
+				files: [new File(["img"], "cover.png", { type: "image/png" })],
+			},
+		});
+
+		fireEvent.click(fillTitle("کورس با کاور"));
+
+		await waitFor(() => expect(mocks.uploadImageFile).toHaveBeenCalledTimes(1));
+		await waitFor(() =>
+			expect(mocks.toastWarning).toHaveBeenCalledWith(
+				"آپلود کاور در دسترس نیست؛ ذخیرهٔ تصویر روی سرور پیکربندی نشده است. کورس بدون کاور ساخته شد."
+			)
+		);
+		expect(mocks.toastError).not.toHaveBeenCalled();
+		// The course is already saved — the builder still opens.
+		await waitFor(() =>
+			expect(mocks.push).toHaveBeenCalledWith(
+				"/d/instructor/courses/new/course-1"
+			)
+		);
+	});
+
+	it("translates generic cover upload failures instead of leaking server text", async () => {
+		mocks.createCourse.mockResolvedValue({
+			success: true,
+			data: { courseId: "course-1" },
+		});
+		const { ImageUploadError } = await import("@/lib/r2/upload-client");
+		mocks.uploadImageFile.mockRejectedValue(
+			new ImageUploadError("Upload failed (500)")
+		);
+
+		render(
+			withProviders(
+				<NewCourseDialog open onOpenChange={vi.fn()} basePath="/d/instructor" />
+			)
+		);
+
+		const fileInput = document.querySelector('input[type="file"]');
+		fireEvent.change(fileInput as HTMLInputElement, {
+			target: {
+				files: [new File(["img"], "cover.jpg", { type: "image/jpeg" })],
+			},
+		});
+
+		fireEvent.click(fillTitle("کورس دیگر"));
+
+		await waitFor(() =>
+			expect(mocks.toastError).toHaveBeenCalledWith(
+				"کورس ساخته شد ولی بارگذاری تصویر ناکام شد — از صفحهٔ ویرایش دوباره تلاش کن"
+			)
+		);
+		expect(mocks.toastError).not.toHaveBeenCalledWith("Upload failed (500)");
 	});
 });

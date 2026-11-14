@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
+import type { NewCourseFormValues } from "@/components/blocks/course-builder/types";
 import {
 	ACTION_ERROR_TRANSLATION_KEYS,
 	validateCourseFormValues,
 } from "@/components/blocks/course-builder/validation";
-import type { NewCourseFormValues } from "@/components/blocks/course-builder/types";
 
 const baseValues: NewCourseFormValues = {
 	title: "آموزش Next.js",

@@ -23,7 +23,16 @@ import {
  * path. Throws an `Error` with a user-facing message on any failure.
  */
 
-export class ImageUploadError extends Error {}
+export class ImageUploadError extends Error {
+	/** Stable cause so UI code can localize instead of showing raw text. */
+	readonly code?: "not_configured";
+
+	constructor(message: string, code?: "not_configured") {
+		super(message);
+		this.name = "ImageUploadError";
+		this.code = code;
+	}
+}
 
 export interface UploadImageFileOptions {
 	scope: ImageScope;
@@ -97,7 +106,8 @@ export async function uploadImageFile({
 		mimeType: file.type,
 		sizeBytes: file.size,
 	});
-	if (!requested.success) throw new ImageUploadError(requested.error);
+	if (!requested.success)
+		throw new ImageUploadError(requested.error, requested.code);
 
 	onProgress?.(0);
 	await putWithProgress(requested.data.uploadUrl, file, onProgress);
@@ -106,7 +116,8 @@ export async function uploadImageFile({
 	onFinalizing?.();
 
 	const finalized = await finalizeImageUpload(requested.data.assetId, target);
-	if (!finalized.success) throw new ImageUploadError(finalized.error);
+	if (!finalized.success)
+		throw new ImageUploadError(finalized.error, finalized.code);
 
 	return finalized.data;
 }

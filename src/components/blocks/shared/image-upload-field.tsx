@@ -14,7 +14,11 @@ import {
 	IMAGE_LIMITS,
 	type ImageScope,
 } from "@/lib/r2/public-images";
-import { uploadImageFile, validateImageFile } from "@/lib/r2/upload-client";
+import {
+	ImageUploadError,
+	uploadImageFile,
+	validateImageFile,
+} from "@/lib/r2/upload-client";
 import { cn } from "@/lib/utils";
 
 /**
@@ -112,7 +116,16 @@ export function ImageUploadField({
 			onUploaded(uploaded);
 			toast.success(t("uploaded"));
 		} catch (error) {
-			toast.error(error instanceof Error ? error.message : t("uploadFailed"));
+			// Never flash raw server/env text at the user — localize by cause.
+			if (
+				error instanceof ImageUploadError &&
+				error.code === "not_configured"
+			) {
+				toast.error(t("notConfigured"));
+			} else {
+				toast.error(t("uploadFailed"));
+			}
+			if (error instanceof Error) console.error(error);
 		} finally {
 			setProgress(null);
 			setIsFinalizing(false);

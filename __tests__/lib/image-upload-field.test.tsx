@@ -146,12 +146,43 @@ describe("ImageUploadField", () => {
 
 		dropFile(container, new File(["x"], "logo.png", { type: "image/png" }));
 
+		// The raw server text is kept out of the UI — the user gets the
+		// localized failure message instead.
 		await waitFor(() =>
-			expect(mocks.toastError).toHaveBeenCalledWith(
-				"Not authorized to upload images for this course or school."
-			)
+			expect(mocks.toastError).toHaveBeenCalledWith("بارگذاری تصویر ناکام شد")
+		);
+		expect(mocks.toastError).not.toHaveBeenCalledWith(
+			"Not authorized to upload images for this course or school."
 		);
 		expect(mocks.finalizeImageUpload).not.toHaveBeenCalled();
+		expect(onUploaded).not.toHaveBeenCalled();
+	});
+
+	it("explains an unconfigured image storage in the user's language", async () => {
+		mocks.requestImageUpload.mockResolvedValue({
+			success: false,
+			error:
+				"Image storage is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME.",
+			code: "not_configured",
+		});
+
+		const onUploaded = vi.fn();
+		const { container } = render(
+			withIntl(
+				<ImageUploadField scope="school" ownerId="s1" onUploaded={onUploaded} />
+			)
+		);
+
+		dropFile(container, new File(["x"], "logo.png", { type: "image/png" }));
+
+		await waitFor(() =>
+			expect(mocks.toastError).toHaveBeenCalledWith(
+				"ذخیرهٔ تصویر روی سرور پیکربندی نشده است؛ آپلود تصویر در دسترس نیست."
+			)
+		);
+		expect(mocks.toastError).not.toHaveBeenCalledWith(
+			expect.stringContaining("R2_ACCOUNT_ID")
+		);
 		expect(onUploaded).not.toHaveBeenCalled();
 	});
 
