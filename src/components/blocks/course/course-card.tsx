@@ -25,7 +25,6 @@ import {
 	Users,
 	Zap,
 } from "lucide-react";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import * as React from "react";
 import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
@@ -38,6 +37,7 @@ import { Link } from "@/i18n/navigation";
 import type { Tables } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
 import { splitDuration } from "./course-stats";
+import { CoverFillImage } from "./cover-image";
 
 // ============================================================
 // TYPES
@@ -294,10 +294,9 @@ function CourseCover({
 				theme.gradient
 			)}
 		>
-			<Image
+			<CoverFillImage
 				src={coverSrc}
 				alt={alt}
-				fill
 				className="object-cover transition-transform duration-700 group-hover/card:scale-[1.07]"
 				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw, 25vw"
 			/>

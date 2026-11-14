@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
-import { resolveCoverSrc } from "@/components/blocks/course/cover.utils";
+import { isNextImageSafe } from "@/components/blocks/course/cover.utils";
 import { Button } from "@/components/ui/button";
 import { Dropzone } from "@/components/ui/dropzone";
 import { Progress } from "@/components/ui/progress";
@@ -174,7 +174,7 @@ export function ImageUploadField({
 					// next/image throws for hosts missing from next.config's
 					// allowlist — cover URLs may be external or the config may lag
 					// behind a changed env, so fall back to a plain <img> there.
-					resolveCoverSrc(preview) ? (
+					isNextImageSafe(preview) ? (
 						<Image
 							src={preview}
 							alt={t("preview")}

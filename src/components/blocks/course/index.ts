@@ -53,8 +53,13 @@ export {
 	sortToValue,
 	valueToSort,
 } from "./course-sort-select";
+export {
+	coverPlaceholderClass,
+	isNextImageSafe,
+	resolveCoverSrc,
+} from "./cover.utils";
 // Cover helpers
-export { coverPlaceholderClass, resolveCoverSrc } from "./cover.utils";
+export { CoverFillImage } from "./cover-image";
 export type { LessonSidebarProps } from "./lesson-sidebar";
 // Learn page components
 export { LessonSidebar, LessonSidebarToggle } from "./lesson-sidebar";

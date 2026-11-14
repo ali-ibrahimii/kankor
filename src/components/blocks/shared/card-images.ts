@@ -82,7 +82,8 @@ function hashPick<T>(pool: readonly T[], seed: string): T {
 
 /**
  * Resolves a real cover photograph for any catalog card.
- * Respects explicit `customSrc` when valid and allowed by `next/image`, and
+ * Respects explicit `customSrc` when it is a valid image URL (foreign hosts
+ * render through the plain-`<img>` fallback of `CoverFillImage`), and
  * otherwise selects a topic-appropriate editorial cover photograph.
  */
 export function resolveEntityCardImage({

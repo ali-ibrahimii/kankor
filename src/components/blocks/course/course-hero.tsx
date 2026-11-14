@@ -11,22 +11,19 @@ import {
 	Star,
 	Users,
 } from "lucide-react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/auth.provider";
-
 import type { CourseDetail } from "@/types/queries.types";
 import type { EnrollmentMeta } from "./course-card";
 import { coverPlaceholderClass, resolveCoverSrc } from "./cover.utils";
+import { CoverFillImage } from "./cover-image";
 
 // ============================================================
 // TYPES
@@ -400,10 +397,9 @@ export function CourseCtaCard({
 
 			<div className="group/cover relative aspect-video w-full overflow-hidden">
 				{coverSrc ? (
-					<Image
+					<CoverFillImage
 						src={coverSrc}
 						alt={course.title}
-						fill
 						className="object-cover transition-transform duration-500 group-hover/cover:scale-[1.04]"
 						sizes="420px"
 					/>

@@ -9,9 +9,9 @@ import {
 	Sparkles,
 	Star,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { CoverFillImage } from "@/components/blocks/course/cover-image";
 
 import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export function HubTechCourseCard({ item }: { item: HubCourseItem }) {
 			className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/75 bg-card transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/45 hover:shadow-lg"
 		>
 			<div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
-				<Image
+				<CoverFillImage
 					src={resolveEntityCardImage({
 						customSrc: item.imageSrc,
 						text: `${item.categoryLabel} ${item.title}`,
@@ -48,7 +48,6 @@ export function HubTechCourseCard({ item }: { item: HubCourseItem }) {
 						seed: item.id,
 					})}
 					alt={item.title}
-					fill
 					sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 25vw"
 					className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 				/>
@@ -144,7 +143,7 @@ export function HubSkillCourseCard({ item }: { item: HubCourseItem }) {
 			className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/75 bg-card transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-500/45 hover:shadow-lg"
 		>
 			<div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
-				<Image
+				<CoverFillImage
 					src={resolveEntityCardImage({
 						customSrc: item.imageSrc,
 						text: `${item.categoryLabel} ${item.title}`,
@@ -152,7 +151,6 @@ export function HubSkillCourseCard({ item }: { item: HubCourseItem }) {
 						seed: item.id,
 					})}
 					alt={item.title}
-					fill
 					sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 25vw"
 					className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 				/>

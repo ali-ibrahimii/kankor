@@ -18,7 +18,7 @@ describe("resolveEntityCardImage", () => {
 		).toBe("https://storage.googleapis.com/bucket/course.png");
 	});
 
-	it("falls back cleanly when customSrc is null, malformed, or from an unconfigured host", () => {
+	it("falls back cleanly when customSrc is null or malformed", () => {
 		expect(
 			resolveEntityCardImage({
 				customSrc: "not-a-valid-path",
@@ -29,11 +29,24 @@ describe("resolveEntityCardImage", () => {
 
 		expect(
 			resolveEntityCardImage({
-				customSrc: "https://placehold.co/600x400",
+				customSrc: "   ",
 				text: "فزیک صنف دوازدهم",
 				kind: "course",
 			})
 		).toBe(CARD_IMAGES.physics);
+	});
+
+	it("keeps any valid custom cover URL so uploaded covers always win", () => {
+		// Even hosts outside next/image's allowlist must be preserved — they
+		// render through CoverFillImage's plain-<img> fallback instead of being
+		// replaced by an editorial substitute.
+		expect(
+			resolveEntityCardImage({
+				customSrc: "https://placehold.co/600x400",
+				text: "فزیک صنف دوازدهم",
+				kind: "course",
+			})
+		).toBe("https://placehold.co/600x400");
 	});
 
 	it("matches Dari, Pashto, and English subject names to topic photography", () => {
