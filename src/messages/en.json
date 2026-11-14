@@ -566,7 +566,8 @@
 			"deleteCourse": "Delete Course",
 			"deleteTitle": "Delete course?",
 			"deleteDescription": "Deleting the course removes all of its modules, lessons and content permanently. This cannot be undone.",
-			"deleteConfirm": "Yes, delete it"
+			"deleteConfirm": "Yes, delete it",
+			"certificates": "Certificates"
 		},
 		"learn": {
 			"markComplete": "Mark as complete",
@@ -706,7 +707,33 @@
 			"cameraPermissionError": "Camera access denied or not supported on this device.",
 			"cameraLoading": "Starting camera...",
 			"cameraError": "An error occurred starting the camera.",
-			"close": "Close"
+			"close": "Close",
+			"revokedTitle": "Certificate revoked",
+			"revokedDescription": "This certificate has been revoked by the issuing instructor or administrator."
+		},
+		"manage": {
+			"title": "Course certificate",
+			"description": "Control the certificate issued when students complete this course.",
+			"enableLabel": "Issue certificate on completion",
+			"enableHint": "When off, completing the course will not create a certificate.",
+			"enabledToast": "Certificate enabled for this course.",
+			"disabledToast": "Certificate disabled for this course.",
+			"saveFailed": "Could not save the change. Please try again.",
+			"issuedTitle": "Issued certificates",
+			"empty": "No certificates have been issued for this course yet.",
+			"loadError": "Could not load certificates. Please try again.",
+			"retry": "Retry",
+			"student": "Student",
+			"issuedAt": "Issued",
+			"code": "Verification code",
+			"status": "Status",
+			"actions": "Actions",
+			"statusActive": "Active",
+			"statusRevoked": "Revoked",
+			"revoke": "Revoke",
+			"restore": "Restore",
+			"revokedToast": "Certificate revoked.",
+			"restoredToast": "Certificate restored."
 		}
 	},
 	"libraries": {
@@ -1716,7 +1743,8 @@
 			"autoSaving": "Saving...",
 			"autoSaved": "Saved",
 			"autoSaveFailed": "Auto-save failed",
-			"editDetails": "Edit course details"
+			"editDetails": "Edit course details",
+			"certificates": "Certificate"
 		},
 		"tree": {
 			"title": "Curriculum",
@@ -1838,7 +1866,8 @@
 			"conflict": "A record with these details already exists.",
 			"invalid": "The submitted information is not valid.",
 			"database": "Saving failed. Please try again."
-		}
+		},
+		"certificatesHint": "Control whether this course issues a certificate and manage the certificates already issued."
 	},
 	"imageUpload": {
 		"dropHint": "Click to upload an image, or drop a file here",

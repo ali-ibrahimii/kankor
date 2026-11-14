@@ -3,6 +3,8 @@
 export type { CertificateClaimProps } from "./certificate-claim";
 // Certificate claim/download (learn page banner)
 export { CertificateClaim } from "./certificate-claim";
+// Cover helpers
+export { CertificateManager } from "./certificate-manager";
 export type { ContentBlock, ContentPlayerProps } from "./content-player";
 export { ContentPlayer } from "./content-player";
 export type {
@@ -58,7 +60,6 @@ export {
 	isNextImageSafe,
 	resolveCoverSrc,
 } from "./cover.utils";
-// Cover helpers
 export { CoverFillImage } from "./cover-image";
 export type { LessonSidebarProps } from "./lesson-sidebar";
 // Learn page components

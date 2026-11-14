@@ -835,6 +835,8 @@ export type Database = {
 					created_at: string;
 					id: string;
 					issued_at: string | null;
+					revoked_at: string | null;
+					revoked_by: string | null;
 					updated_at: string;
 					user_full_name: string;
 					user_id: string;
@@ -847,6 +849,8 @@ export type Database = {
 					created_at?: string;
 					id?: string;
 					issued_at?: string | null;
+					revoked_at?: string | null;
+					revoked_by?: string | null;
 					updated_at?: string;
 					user_full_name: string;
 					user_id: string;
@@ -859,6 +863,8 @@ export type Database = {
 					created_at?: string;
 					id?: string;
 					issued_at?: string | null;
+					revoked_at?: string | null;
+					revoked_by?: string | null;
 					updated_at?: string;
 					user_full_name?: string;
 					user_id?: string;
@@ -1512,6 +1518,7 @@ export type Database = {
 					agency_id: string | null;
 					average_rating: number | null;
 					book_id: string | null;
+					certificate_enabled: boolean;
 					cover_image_url: string | null;
 					created_at: string;
 					currency: string | null;
@@ -1550,6 +1557,7 @@ export type Database = {
 					agency_id?: string | null;
 					average_rating?: number | null;
 					book_id?: string | null;
+					certificate_enabled?: boolean;
 					cover_image_url?: string | null;
 					created_at?: string;
 					currency?: string | null;
@@ -1588,6 +1596,7 @@ export type Database = {
 					agency_id?: string | null;
 					average_rating?: number | null;
 					book_id?: string | null;
+					certificate_enabled?: boolean;
 					cover_image_url?: string | null;
 					created_at?: string;
 					currency?: string | null;
@@ -8253,6 +8262,7 @@ export type Database = {
 				Returns: {
 					course_title: string;
 					created_at: string;
+					is_revoked: boolean;
 					issued_at: string;
 					user_full_name: string;
 				}[];
