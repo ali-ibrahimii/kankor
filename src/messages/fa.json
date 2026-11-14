@@ -5,6 +5,11 @@
 	"common": {
 		"rateLimited": "درخواست‌های زیادی ارسال شده است. لطفاً کمی بعد دوباره تلاش کنید."
 	},
+	"loading": {
+		"title": "در حال بارگذاری...",
+		"description": "لطفاً کمی صبر کنید.",
+		"message": "در حال بارگذاری..."
+	},
 	"discussions": {
 		"new_thread": "بحث جدید",
 		"create_thread_title": "ایجاد موضوع بحث",
@@ -1686,7 +1691,8 @@
 			"relatedQuizzes": "آزمون‌های مرتبط",
 			"relatedQuizzesPlaceholder": "انتخاب آزمون‌های مرتبط",
 			"relatedBooks": "کتاب‌های مرتبط",
-			"relatedBooksPlaceholder": "انتخاب کتاب‌های مرتبط"
+			"relatedBooksPlaceholder": "انتخاب کتاب‌های مرتبط",
+			"coverNotConfigured": "آپلود کاور در دسترس نیست؛ ذخیرهٔ تصویر روی سرور پیکربندی نشده است. کورس بدون کاور ساخته شد."
 		},
 		"editCourse": {
 			"title": "ویرایش جزئیات کورس",
@@ -1847,7 +1853,8 @@
 		"finalizing": "در حال ثبت…",
 		"invalidType": "این نوع فایل پشتیبانی نمی‌شود",
 		"tooLarge": "حجم تصویر بیشتر از {max} است",
-		"storedInR2": "ذخیره‌شده در Cloudflare R2"
+		"storedInR2": "ذخیره‌شده در Cloudflare R2",
+		"notConfigured": "ذخیرهٔ تصویر روی سرور پیکربندی نشده است؛ آپلود تصویر در دسترس نیست."
 	},
 	"flashcardBuilder": {
 		"meta": {

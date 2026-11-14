@@ -45,21 +45,28 @@ beforeEach(() => {
 
 describe("findInstructorCourse", () => {
 	it("loads a course by slug", async () => {
-		mockGetCurrentUser.mockResolvedValue({ id: "author-1", role: "instructor" });
+		mockGetCurrentUser.mockResolvedValue({
+			id: "author-1",
+			role: "instructor",
+		});
 		byColumn.set("slug", { data: COURSE, error: null });
 		await expect(findInstructorCourse("nextjs")).resolves.toEqual(COURSE);
 	});
 
 	it("loads a course by id when the identifier is a uuid", async () => {
-		mockGetCurrentUser.mockResolvedValue({ id: "author-1", role: "instructor" });
+		mockGetCurrentUser.mockResolvedValue({
+			id: "author-1",
+			role: "instructor",
+		});
 		byColumn.set("id", { data: COURSE, error: null });
-		await expect(
-			findInstructorCourse(COURSE.id)
-		).resolves.toEqual(COURSE);
+		await expect(findInstructorCourse(COURSE.id)).resolves.toEqual(COURSE);
 	});
 
 	it("hides a foreign course from a non-admin instructor", async () => {
-		mockGetCurrentUser.mockResolvedValue({ id: "someone-else", role: "instructor" });
+		mockGetCurrentUser.mockResolvedValue({
+			id: "someone-else",
+			role: "instructor",
+		});
 		byColumn.set("slug", { data: COURSE, error: null });
 		await expect(findInstructorCourse("nextjs")).resolves.toBeNull();
 	});
@@ -78,7 +85,10 @@ describe("findInstructorCourse", () => {
 	});
 
 	it("returns null on a query error", async () => {
-		mockGetCurrentUser.mockResolvedValue({ id: "author-1", role: "instructor" });
+		mockGetCurrentUser.mockResolvedValue({
+			id: "author-1",
+			role: "instructor",
+		});
 		byColumn.set("slug", {
 			data: null,
 			error: { message: "boom", code: "XX000" },

@@ -5,6 +5,11 @@
 	"common": {
 		"rateLimited": "تر ټیرو درخواستونو. لمه‌نۍ څه وروسته بیا هڅه وکړئ."
 	},
+	"loading": {
+		"title": "بارېږي...",
+		"description": "مهرباني وکړئ، لږه صبر وکړئ.",
+		"message": "بارېږي..."
+	},
 	"discussions": {
 		"new_thread": "نوې بحث",
 		"create_thread_title": "د بحث موضوع جوړول",
@@ -1686,7 +1691,8 @@
 			"relatedQuizzes": "اړوند ازموونې",
 			"relatedQuizzesPlaceholder": "اړوند ازموونې وټاکئ",
 			"relatedBooks": "اړوند کتابونه",
-			"relatedBooksPlaceholder": "اړوند کتابونه وټاکئ"
+			"relatedBooksPlaceholder": "اړوند کتابونه وټاکئ",
+			"coverNotConfigured": "د کاور پورته کول وړ نه دي؛ د انځور ذخیره کول په سرور کې تنظیم نه شوی. کورس د کاور پرته جوړ شو."
 		},
 		"editCourse": {
 			"title": "د کورس جزئیاتو ایډیټ",
@@ -1847,7 +1853,8 @@
 		"finalizing": "ثبتیږي…",
 		"invalidType": "دا ډول فایل نه ملاتړ کیږي",
 		"tooLarge": "د انځور اندازه له {max} زیاته ده",
-		"storedInR2": "په Cloudflare R2 کې خوندي"
+		"storedInR2": "په Cloudflare R2 کې خوندي",
+		"notConfigured": "د انځور ذخیره کول په سرور کې تنظیم نه شوی؛ د انځور پورته کول وړ نه دي."
 	},
 	"flashcardBuilder": {
 		"meta": {

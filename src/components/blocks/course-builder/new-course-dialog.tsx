@@ -39,6 +39,7 @@ import { useRouter } from "@/i18n/navigation";
 import { IMAGE_ACCEPT, IMAGE_LIMITS } from "@/lib/r2/public-images";
 import {
 	formatImageLimit,
+	ImageUploadError,
 	uploadImageFile,
 	validateImageFile,
 } from "@/lib/r2/upload-client";
@@ -235,9 +236,17 @@ export function NewCourseDialog({
 			setPendingCover(null);
 			toast.success(t("newCourse.coverUploaded"));
 		} catch (error) {
-			toast.error(
-				error instanceof Error ? error.message : t("newCourse.coverFailed")
-			);
+			// The course itself is already saved — report the cover failure in
+			// the user's language instead of surfacing raw server/env text.
+			if (
+				error instanceof ImageUploadError &&
+				error.code === "not_configured"
+			) {
+				toast.warning(t("newCourse.coverNotConfigured"));
+			} else {
+				toast.error(t("newCourse.coverFailed"));
+			}
+			if (error instanceof Error) console.error(error);
 		} finally {
 			setIsUploadingCover(false);
 		}

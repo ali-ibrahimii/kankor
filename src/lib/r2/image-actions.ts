@@ -22,7 +22,7 @@ import {
 
 type Result<T = void> =
 	| { success: true; data: T }
-	| { success: false; error: string };
+	| { success: false; error: string; code?: "not_configured" };
 
 /** Which column on the owner row receives the finished URL. */
 export type ImageTarget = "cover" | "logo";
@@ -66,6 +66,7 @@ export async function requestImageUpload(
 			success: false,
 			error:
 				"Image storage is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME.",
+			code: "not_configured",
 		};
 	}
 	if (!isImageScope(input.scope)) {
@@ -152,7 +153,11 @@ export async function finalizeImageUpload(
 	target: ImageTarget = "cover"
 ): Promise<Result<FinalizeImageUploadResult>> {
 	if (!isR2Configured()) {
-		return { success: false, error: "Image storage is not configured." };
+		return {
+			success: false,
+			error: "Image storage is not configured.",
+			code: "not_configured",
+		};
 	}
 
 	const supabase = await createClient();

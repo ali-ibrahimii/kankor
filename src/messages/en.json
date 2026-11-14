@@ -5,6 +5,11 @@
 	"common": {
 		"rateLimited": "Too many requests. Please try again in a few minutes."
 	},
+	"loading": {
+		"title": "Loading...",
+		"description": "Please wait a moment.",
+		"message": "Loading..."
+	},
 	"discussions": {
 		"new_thread": "New Thread",
 		"create_thread_title": "Create a Discussion Thread",
@@ -1686,7 +1691,8 @@
 			"relatedQuizzes": "Related Quizzes",
 			"relatedQuizzesPlaceholder": "Select related quizzes",
 			"relatedBooks": "Related Books",
-			"relatedBooksPlaceholder": "Select related books"
+			"relatedBooksPlaceholder": "Select related books",
+			"coverNotConfigured": "Cover upload is unavailable — image storage is not configured on the server. The course was created without a cover."
 		},
 		"editCourse": {
 			"title": "Edit Course Details",
@@ -1847,7 +1853,8 @@
 		"finalizing": "Saving…",
 		"invalidType": "This file type is not supported",
 		"tooLarge": "Image is larger than {max}",
-		"storedInR2": "Stored in Cloudflare R2"
+		"storedInR2": "Stored in Cloudflare R2",
+		"notConfigured": "Image storage is not configured on the server, so image upload is unavailable."
 	},
 	"flashcardBuilder": {
 		"meta": {
