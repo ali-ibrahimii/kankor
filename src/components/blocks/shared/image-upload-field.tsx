@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { isNextImageSafe } from "@/components/blocks/course/cover.utils";
 import { Button } from "@/components/ui/button";
 import { Dropzone } from "@/components/ui/dropzone";
 import { Progress } from "@/components/ui/progress";
@@ -117,14 +118,15 @@ export function ImageUploadField({
 			toast.success(t("uploaded"));
 		} catch (error) {
 			// Never flash raw server/env text at the user — localize by cause.
-			if (
-				error instanceof ImageUploadError &&
-				error.code === "not_configured"
-			) {
-				toast.error(t("notConfigured"));
-			} else {
-				toast.error(t("uploadFailed"));
-			}
+			const code = error instanceof ImageUploadError ? error.code : undefined;
+			const messages: Record<string, string> = {
+				not_configured: t("notConfigured"),
+				not_authorized: t("notAuthorized"),
+				permission_check_failed: t("permissionCheckFailed"),
+				upload_record_failed: t("uploadRecordFailed"),
+				upload_url_failed: t("uploadUrlFailed"),
+			};
+			toast.error((code && messages[code]) || t("uploadFailed"));
 			if (error instanceof Error) console.error(error);
 		} finally {
 			setProgress(null);
@@ -169,15 +171,26 @@ export function ImageUploadField({
 				aria-label={t("dropHint")}
 			>
 				{preview ? (
-					<Image
-						src={preview}
-						alt={t("preview")}
-						fill
-						sizes={
-							aspect === "cover" ? "(max-width: 768px) 100vw, 480px" : "112px"
-						}
-						className="object-cover"
-					/>
+					// next/image throws for hosts missing from next.config's
+					// allowlist — cover URLs may be external or the config may lag
+					// behind a changed env, so fall back to a plain <img> there.
+					isNextImageSafe(preview) ? (
+						<Image
+							src={preview}
+							alt={t("preview")}
+							fill
+							sizes={
+								aspect === "cover" ? "(max-width: 768px) 100vw, 480px" : "112px"
+							}
+							className="object-cover"
+						/>
+					) : (
+						<img
+							src={preview}
+							alt={t("preview")}
+							className="absolute inset-0 size-full object-cover"
+						/>
+					)
 				) : (
 					<div className="flex h-full flex-col items-center justify-center gap-1.5 p-3 text-center">
 						<ImagePlus className="size-6 text-muted-foreground" />

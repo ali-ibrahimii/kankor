@@ -3,6 +3,7 @@
 import { Provider, useAtomValue, useSetAtom } from "jotai";
 import {
 	ArrowLeftIcon,
+	AwardIcon,
 	CheckIcon,
 	EyeIcon,
 	PencilIcon,
@@ -11,8 +12,16 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { CertificateManager } from "@/components/blocks/course/certificate-manager";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { useRouter } from "@/i18n/navigation";
@@ -176,6 +185,8 @@ function CourseBuilderInner({
 	const [isPublished, setIsPublished] = React.useState(initialIsPublished);
 	const [displayTitle, setDisplayTitle] = React.useState(courseTitle);
 	const [editDialogOpen, setEditDialogOpen] = React.useState(false);
+	const [certificateDialogOpen, setCertificateDialogOpen] =
+		React.useState(false);
 
 	const autoSaveStatus = useAutoSave(courseId, modules, lessons, blocks);
 	const isBusy = isSaving || isPublishing || autoSaveStatus === "saving";
@@ -280,6 +291,16 @@ function CourseBuilderInner({
 
 					<Separator orientation="vertical" className="h-5" />
 
+					{/* Certificates */}
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={() => setCertificateDialogOpen(true)}
+					>
+						<AwardIcon className="size-4 me-1.5" />
+						{t("header.certificates")}
+					</Button>
+
 					{/* Preview */}
 					<Button
 						variant="ghost"
@@ -350,6 +371,20 @@ function CourseBuilderInner({
 					router.refresh();
 				}}
 			/>
+
+			{/* Certificate management (instructor + admin) */}
+			<Dialog
+				open={certificateDialogOpen}
+				onOpenChange={setCertificateDialogOpen}
+			>
+				<DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+					<DialogHeader>
+						<DialogTitle>{t("header.certificates")}</DialogTitle>
+						<DialogDescription>{t("certificatesHint")}</DialogDescription>
+					</DialogHeader>
+					<CertificateManager courseId={courseId} />
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 }

@@ -3,6 +3,8 @@
 export type { CertificateClaimProps } from "./certificate-claim";
 // Certificate claim/download (learn page banner)
 export { CertificateClaim } from "./certificate-claim";
+// Cover helpers
+export { CertificateManager } from "./certificate-manager";
 export type { ContentBlock, ContentPlayerProps } from "./content-player";
 export { ContentPlayer } from "./content-player";
 export type {
@@ -53,8 +55,12 @@ export {
 	sortToValue,
 	valueToSort,
 } from "./course-sort-select";
-// Cover helpers
-export { coverPlaceholderClass, resolveCoverSrc } from "./cover.utils";
+export {
+	coverPlaceholderClass,
+	isNextImageSafe,
+	resolveCoverSrc,
+} from "./cover.utils";
+export { CoverFillImage } from "./cover-image";
 export type { LessonSidebarProps } from "./lesson-sidebar";
 // Learn page components
 export { LessonSidebar, LessonSidebarToggle } from "./lesson-sidebar";

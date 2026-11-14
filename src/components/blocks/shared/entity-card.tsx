@@ -1,8 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import Image from "next/image";
 import type { ReactNode } from "react";
+import { CoverFillImage } from "@/components/blocks/course/cover-image";
 import {
 	type EntityCardKind,
 	resolveEntityCardImage,
@@ -112,10 +112,9 @@ export function EntityCardArt({
 				artTones[tone]
 			)}
 		>
-			<Image
+			<CoverFillImage
 				src={resolvedSrc}
 				alt={imageAlt || label || ""}
-				fill
 				sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 310px"
 				className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
 			/>

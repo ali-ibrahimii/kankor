@@ -13,6 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { CertificateManager } from "@/components/blocks/course";
 import {
 	deleteCourse,
 	setCoursePublished,
@@ -231,6 +232,9 @@ export function CourseDetailView({
 						<TabsTrigger value="overview">{t("detail.overview")}</TabsTrigger>
 						<TabsTrigger value="students">{t("detail.students")}</TabsTrigger>
 						<TabsTrigger value="analytics">{t("detail.analytics")}</TabsTrigger>
+						<TabsTrigger value="certificates">
+							{t("detail.certificates")}
+						</TabsTrigger>
 					</TabsList>
 				</div>
 
@@ -398,6 +402,13 @@ export function CourseDetailView({
 								</Table>
 							</div>
 						)}
+					</div>
+				</TabsContent>
+
+				{/* Certificates */}
+				<TabsContent value="certificates" className="flex-1 p-6">
+					<div className="max-w-3xl">
+						<CertificateManager courseId={course.id} />
 					</div>
 				</TabsContent>
 
