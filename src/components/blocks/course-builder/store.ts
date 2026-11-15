@@ -7,6 +7,7 @@ import type {
 	DraftLesson,
 	DraftModule,
 } from "./types";
+import { deriveLessonContentType } from "./types";
 
 // ─── Initial state ────────────────────────────────────────────────────────────
 
@@ -210,14 +211,34 @@ export const reorderLessonsInModuleAtom = atom(
 
 // ─── Content block write atoms ────────────────────────────────────────────────
 
+/** Re-derive a lesson's content type from its live blocks after a block change. */
+function syncLessonType(
+	state: CourseBuilderState,
+	lessonId: string | null | undefined
+): CourseBuilderState {
+	if (!lessonId) return state;
+	let changed = false;
+	const lessons = state.lessons.map((lesson) => {
+		if (lesson.id !== lessonId || lesson._deleted) return lesson;
+		const derived = deriveLessonContentType(lesson, state.blocks);
+		if (derived === lesson.content_type) return lesson;
+		changed = true;
+		return { ...lesson, content_type: derived };
+	});
+	return changed ? { ...state, lessons } : state;
+}
+
 export const addBlockAtom = atom(
 	null,
 	(_get, set, block: DraftContentBlock) => {
-		set(courseBuilderAtom, (prev) => ({
-			...prev,
-			blocks: [...prev.blocks, block],
-			activeBlockId: block.id,
-		}));
+		set(courseBuilderAtom, (prev) => {
+			const next: CourseBuilderState = {
+				...prev,
+				blocks: [...prev.blocks, block],
+				activeBlockId: block.id,
+			};
+			return syncLessonType(next, block.lesson_id);
+		});
 	}
 );
 
@@ -228,21 +249,28 @@ export const patchBlockAtom = atom(
 		set,
 		{ id, patch }: { id: string; patch: Partial<DraftContentBlock> }
 	) => {
-		set(courseBuilderAtom, (prev) => ({
-			...prev,
-			blocks: prev.blocks.map((b) => (b.id === id ? { ...b, ...patch } : b)),
-		}));
+		set(courseBuilderAtom, (prev) => {
+			const blocks = prev.blocks.map((b) =>
+				b.id === id ? { ...b, ...patch } : b
+			);
+			const target = blocks.find((b) => b.id === id);
+			return syncLessonType({ ...prev, blocks }, target?.lesson_id);
+		});
 	}
 );
 
 export const deleteBlockAtom = atom(null, (_get, set, blockId: string) => {
-	set(courseBuilderAtom, (prev) => ({
-		...prev,
-		blocks: prev.blocks.map((b) =>
+	set(courseBuilderAtom, (prev) => {
+		const target = prev.blocks.find((b) => b.id === blockId);
+		const blocks = prev.blocks.map((b) =>
 			b.id === blockId ? { ...b, _deleted: true } : b
-		),
-		activeBlockId: prev.activeBlockId === blockId ? null : prev.activeBlockId,
-	}));
+		);
+		const next = syncLessonType({ ...prev, blocks }, target?.lesson_id);
+		return {
+			...next,
+			activeBlockId: next.activeBlockId === blockId ? null : next.activeBlockId,
+		};
+	});
 });
 
 export const reorderBlocksAtom = atom(

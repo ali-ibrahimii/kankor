@@ -187,6 +187,47 @@ export function createEmptyLesson(
 	};
 }
 
+const CONTENT_TYPE_PRIORITY: readonly LessonContentType[] = [
+	"video",
+	"pdf_document",
+	"slide_presentation",
+	"audio",
+	"code_playground",
+	"external_resource",
+	"quiz",
+	"assignment",
+	"text",
+];
+
+/**
+ * A lesson's "main" content type is the most prominent of its live blocks
+ * (video beats pdf beats ... beats text), falling back to the stored
+ * `content_type` when the lesson has no blocks yet.
+ *
+ * New lessons default to `content_type: "video"`, so without deriving here
+ * every lesson shows a VID badge / video chip no matter what it actually
+ * contains.
+ */
+export function deriveLessonContentType(
+	lesson: Pick<DraftLesson, "id" | "content_type">,
+	blocks: readonly Pick<
+		DraftContentBlock,
+		"lesson_id" | "block_type" | "_deleted"
+	>[]
+): LessonContentType {
+	const liveTypes = new Set(
+		blocks
+			.filter((block) => block.lesson_id === lesson.id && !block._deleted)
+			.map((block) => block.block_type)
+	);
+	for (const type of CONTENT_TYPE_PRIORITY) {
+		if (liveTypes.has(type)) {
+			return type;
+		}
+	}
+	return lesson.content_type;
+}
+
 export function createEmptyBlock(
 	lessonId: string,
 	courseId: string,

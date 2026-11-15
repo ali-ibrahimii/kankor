@@ -51,7 +51,11 @@ import {
 	reorderBlocksAtom,
 } from "./store";
 import type { DraftContentBlock, LessonContentType } from "./types";
-import { ADDABLE_BLOCK_TYPES, createEmptyBlock } from "./types";
+import {
+	ADDABLE_BLOCK_TYPES,
+	createEmptyBlock,
+	deriveLessonContentType,
+} from "./types";
 
 // ─── Block type icon map (for the "Add block" dropdown) ──────────────────────
 
@@ -166,7 +170,11 @@ export function ContentArea() {
 					</h2>
 				</div>
 				<Badge variant="secondary" className="shrink-0 text-xs capitalize">
-					{t(`contentType.${lesson.content_type}` as Parameters<typeof t>[0])}
+					{t(
+						`contentType.${deriveLessonContentType(lesson, blocks)}` as Parameters<
+							typeof t
+						>[0]
+					)}
 				</Badge>
 				{lesson.is_previewable && (
 					<Badge variant="outline" className="shrink-0 text-xs">

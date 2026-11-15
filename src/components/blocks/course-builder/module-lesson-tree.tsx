@@ -58,7 +58,11 @@ import {
 	toggleModuleExpandAtom,
 } from "./store";
 import type { DraftLesson, DraftModule } from "./types";
-import { createEmptyLesson, createEmptyModule } from "./types";
+import {
+	createEmptyLesson,
+	createEmptyModule,
+	deriveLessonContentType,
+} from "./types";
 
 // ─── Inline Edit Input ────────────────────────────────────────────────────────
 
@@ -200,7 +204,7 @@ function SortableLessonRow({
 						}
 					/>
 
-					<ContentTypeBadge type={lesson.content_type} />
+					<LessonContentTypeBadge lesson={lesson} />
 				</div>
 			</ContextMenuTrigger>
 
@@ -408,6 +412,11 @@ const TYPE_SHORT: Record<string, string> = {
 	external_resource: "EXT",
 	code_playground: "COD",
 };
+
+function LessonContentTypeBadge({ lesson }: { lesson: DraftLesson }) {
+	const { blocks } = useAtomValue(courseBuilderAtom);
+	return <ContentTypeBadge type={deriveLessonContentType(lesson, blocks)} />;
+}
 
 function ContentTypeBadge({ type }: { type: string }) {
 	return (
