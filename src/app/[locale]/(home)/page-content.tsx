@@ -273,83 +273,95 @@ export default async function HomeContent({
 			</section>
 
 			{/* 1. School Courses Horizontal Row — Video Lesson Card Design */}
-			<HorizontalCardSection
-				id="school-courses"
-				title={t("shelves.courses.title")}
-				subtitle={t("shelves.courses.subtitle")}
-				viewMoreHref={routes.courses.page()}
-				viewMoreLabel={viewMoreLabel}
-			>
-				{catalog.courses.map(({ item, href }) => (
-					<HomeCourseCard key={item.id} course={item} href={href} />
-				))}
-			</HorizontalCardSection>
+			{catalog.courses.length > 0 && (
+				<HorizontalCardSection
+					id="school-courses"
+					title={t("shelves.courses.title")}
+					subtitle={t("shelves.courses.subtitle")}
+					viewMoreHref={routes.courses.page()}
+					viewMoreLabel={viewMoreLabel}
+				>
+					{catalog.courses.map(({ item, href }) => (
+						<HomeCourseCard key={item.id} course={item} href={href} />
+					))}
+				</HorizontalCardSection>
+			)}
 
 			{/* 2. Official School Textbooks Horizontal Row — Book-Spine Layout */}
-			<HorizontalCardSection
-				id="school-books"
-				title={t("shelves.schoolBooks.title")}
-				subtitle={t("shelves.schoolBooks.subtitle")}
-				viewMoreHref={routes.libraries.page()}
-				viewMoreLabel={viewMoreLabel}
-				surface="tinted"
-			>
-				{catalog.schoolBooks.map(({ item, href }) => (
-					<HomeSchoolBookCard key={item.id} book={item} href={href} />
-				))}
-			</HorizontalCardSection>
+			{catalog.schoolBooks.length > 0 && (
+				<HorizontalCardSection
+					id="school-books"
+					title={t("shelves.schoolBooks.title")}
+					subtitle={t("shelves.schoolBooks.subtitle")}
+					viewMoreHref={routes.libraries.page()}
+					viewMoreLabel={viewMoreLabel}
+					surface="tinted"
+				>
+					{catalog.schoolBooks.map(({ item, href }) => (
+						<HomeSchoolBookCard key={item.id} book={item} href={href} />
+					))}
+				</HorizontalCardSection>
+			)}
 
 			{/* 3. General Books & Guides Horizontal Row — Editorial Overlay Design */}
-			<HorizontalCardSection
-				id="general-books"
-				title={t("shelves.generalBooks.title")}
-				subtitle={t("shelves.generalBooks.subtitle")}
-				viewMoreHref={catalog.generalBooksMoreHref}
-				viewMoreLabel={viewMoreLabel}
-			>
-				{catalog.generalBooks.map(({ item, href }) => (
-					<HomeGeneralBookCard key={item.id} book={item} href={href} />
-				))}
-			</HorizontalCardSection>
+			{catalog.generalBooks.length > 0 && (
+				<HorizontalCardSection
+					id="general-books"
+					title={t("shelves.generalBooks.title")}
+					subtitle={t("shelves.generalBooks.subtitle")}
+					viewMoreHref={catalog.generalBooksMoreHref}
+					viewMoreLabel={viewMoreLabel}
+				>
+					{catalog.generalBooks.map(({ item, href }) => (
+						<HomeGeneralBookCard key={item.id} book={item} href={href} />
+					))}
+				</HorizontalCardSection>
+			)}
 
 			{/* 4. Smart Flashcards Horizontal Row — Stacked Deck Card Design */}
-			<HorizontalCardSection
-				id="flashcards"
-				title={t("shelves.decks.title")}
-				subtitle={t("shelves.decks.subtitle")}
-				viewMoreHref={routes.decks.page()}
-				viewMoreLabel={viewMoreLabel}
-				surface="tinted"
-			>
-				{catalog.decks.map(({ item, href }) => (
-					<HomeFlashcardDeckCard key={item.id} deck={item} href={href} />
-				))}
-			</HorizontalCardSection>
+			{catalog.decks.length > 0 && (
+				<HorizontalCardSection
+					id="flashcards"
+					title={t("shelves.decks.title")}
+					subtitle={t("shelves.decks.subtitle")}
+					viewMoreHref={routes.decks.page()}
+					viewMoreLabel={viewMoreLabel}
+					surface="tinted"
+				>
+					{catalog.decks.map(({ item, href }) => (
+						<HomeFlashcardDeckCard key={item.id} deck={item} href={href} />
+					))}
+				</HorizontalCardSection>
+			)}
 
 			{/* 5. General Kankor Forms Horizontal Row — Structured Exam Sheet Design */}
-			<HorizontalCardSection
-				id="kankor-forms"
-				title={t("shelves.kankorForms.title")}
-				subtitle={t("shelves.kankorForms.subtitle")}
-				viewMoreHref={routes.quizzes.page()}
-				viewMoreLabel={viewMoreLabel}
-			>
-				{catalog.kankorForms.map(({ item, href }) => (
-					<HomeKankorFormCard key={item.id} quiz={item} href={href} />
-				))}
-			</HorizontalCardSection>
+			{catalog.kankorForms.length > 0 && (
+				<HorizontalCardSection
+					id="kankor-forms"
+					title={t("shelves.kankorForms.title")}
+					subtitle={t("shelves.kankorForms.subtitle")}
+					viewMoreHref={routes.quizzes.page()}
+					viewMoreLabel={viewMoreLabel}
+				>
+					{catalog.kankorForms.map(({ item, href }) => (
+						<HomeKankorFormCard key={item.id} quiz={item} href={href} />
+					))}
+				</HorizontalCardSection>
+			)}
 
 			{/* 6. Collaborating Universities & Schools — Campus Card Design */}
-			<PartnerInstitutionsSection
-				institutions={catalog.partners}
-				labels={{
-					title: t("partners.title"),
-					subtitle: t("partners.subtitle"),
-					ctaTitle: t("partners.ctaTitle"),
-					ctaSubtitle: t("partners.ctaSubtitle"),
-					ctaButton: t("partners.ctaButton"),
-				}}
-			/>
+			{catalog.partners.length > 0 && (
+				<PartnerInstitutionsSection
+					institutions={catalog.partners}
+					labels={{
+						title: t("partners.title"),
+						subtitle: t("partners.subtitle"),
+						ctaTitle: t("partners.ctaTitle"),
+						ctaSubtitle: t("partners.ctaSubtitle"),
+						ctaButton: t("partners.ctaButton"),
+					}}
+				/>
+			)}
 
 			{/* Offline Mobile App Highlight */}
 			<section className="py-16 sm:py-22">

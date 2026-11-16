@@ -216,7 +216,8 @@
 				"cards": "Cards",
 				"tests": "Tests & Quizzes",
 				"library": "Library",
-				"discounts": "Discounts"
+				"discounts": "Discounts",
+				"roadmaps": "Roadmaps"
 			},
 			"kankor": {
 				"label": "Kankor",
@@ -279,7 +280,8 @@
 				"appearanceDescription": "Change the dashboard language and light/dark theme.",
 				"languageLabel": "Language",
 				"themeLabel": "Theme"
-			}
+			},
+			"roadmaps": "Roadmaps"
 		},
 		"school": {
 			"roleLabel": "School Admin",
@@ -1088,7 +1090,7 @@
 			"previewBadge": "Today’s progress",
 			"previewHeading": "Ready for what’s next",
 			"progress": "This week’s progress",
-			"subjectMath": "Kankor mathematics",
+			"subjectMath": "Mathematics",
 			"subjectPhysics": "Physics",
 			"subjectBio": "Biology",
 			"lessons": "Lessons completed",
@@ -1107,7 +1109,7 @@
 			"schoolFeature": "Manage your school community",
 			"studentFeature": "Learn and earn certificates",
 			"ctaHeading": "Your learning story starts here",
-			"ctaDescription": "Whether you’re a student, teacher, or school, there’s a place for you at Abzar Kankor.",
+			"ctaDescription": "Whether you are a student, teacher, or school — there is a place for you here.",
 			"ctaSecondary": "Browse courses"
 		},
 		"user": {
@@ -1133,8 +1135,8 @@
 		"hero": {
 			"badge": "For Afghan students",
 			"imageAlt": "A student showing the Abzar Kankor learning dashboard on her smartphone",
-			"heading": "Study anywhere. <accent>Pass the Kankor.</accent>",
-			"subtitle": "The complete offline learning app — curriculum-aligned school courses, 13,000+ flashcards, mock Kankor exams, and a full digital library. No internet required.",
+			"heading": "Read anywhere. <accent>Reach your learning goals.</accent>",
+			"subtitle": "A complete offline learning program — curriculum-aligned lessons, 13,000+ flashcards, virtual exams, and a digital library. No internet required.",
 			"ctaPrimary": "Explore the App",
 			"ctaSecondary": "For Schools & Instructors",
 			"signInPrompt": "Already have an account?",
@@ -1157,7 +1159,7 @@
 		},
 		"app": {
 			"heading": "Four modules. One app.",
-			"subtitle": "Everything an Afghan student needs — from daily lessons to Kankor university entrance exam preparation.",
+			"subtitle": "Everything you need to learn — from daily lessons to exam readiness.",
 			"school": {
 				"title": "School Courses",
 				"description": "Video lessons aligned with Afghanistan's official curriculum for all grade levels, complete with PDF presentations and built-in note-taking."
@@ -1226,7 +1228,7 @@
 		"coursesMenu": {
 			"eyebrow": "Find your next course",
 			"title": "Learn with a clear plan",
-			"description": "Explore structured lessons, expert guidance and exam-focused practice—all in one place.",
+			"description": "Find structured lessons, instructor guidance, and focused practice for every subject.",
 			"all": "Browse all courses",
 			"subjects": "Popular study paths",
 			"paths": ["Mathematics", "Physics", "Biology", "Chemistry"],
@@ -1235,10 +1237,10 @@
 		},
 		"schoolMenu": {
 			"eyebrow": "School Learning Hub",
-			"title": "Every school & Kankor resource in one place",
-			"description": "Jump straight into school courses, official textbooks, general reading, and Kankor forms.",
+			"title": "All learning resources in one place",
+			"description": "Quick access to video lessons, official school textbooks, the public library, and exam forms.",
 			"all": "View all courses",
-			"subjects": "Key Kankor subjects",
+			"subjects": "Key subjects",
 			"gradesLabel": "High-school grades",
 			"grades": ["Grade 10", "Grade 11", "Grade 12"],
 			"paths": [
@@ -1249,7 +1251,7 @@
 				"History & Geography",
 				"Dari & Pashto"
 			],
-			"cardTitle": "From classroom lessons to Kankor day",
+			"cardTitle": "From school classes to exam success",
 			"cardText": "Learn every subject step by step, review with Leitner flashcards, and test yourself with real exam forms.",
 			"verify": "Verify certificate",
 			"classrooms": "Live classrooms",
@@ -1267,8 +1269,8 @@
 					"description": "General reading, study guides, and university major handbooks"
 				},
 				"kankorForms": {
-					"title": "General Kankor Forms",
-					"description": "Provincial Kankor exam forms and timed mock tests"
+					"title": "Exam forms",
+					"description": "A bank of provincial exam forms and timed tests"
 				},
 				"flashcards": {
 					"title": "Smart Flashcards",
@@ -1287,7 +1289,7 @@
 			"courses": {
 				"eyebrow": "Step-by-step video lessons",
 				"title": "School Courses",
-				"subtitle": "Core high-school subjects and Kankor problem-solving taught clearly by experienced teachers."
+				"subtitle": "Core high-school subjects and university entrance prerequisites, taught by experienced instructors with solved key questions."
 			},
 			"schoolBooks": {
 				"eyebrow": "Official curriculum",
@@ -1306,7 +1308,7 @@
 			},
 			"kankorForms": {
 				"eyebrow": "Authentic exam simulation",
-				"title": "General Kankor Forms",
+				"title": "Exam forms",
 				"subtitle": "Timed provincial exam forms and subject drills to benchmark your readiness."
 			}
 		},
@@ -4237,8 +4239,8 @@
 		}
 	},
 	"roadmap": {
-		"title": "A clear path to your Kankor goal",
-		"subtitle": "A practical roadmap that turns a big exam goal into small, steady wins. Start where you are and move at your own pace.",
+		"title": "Step-by-step learning paths",
+		"subtitle": "Every roadmap is a clear, ordered path of courses that takes you from your starting point to your goal. Move at your own pace.",
 		"steps": [
 			[
 				"01",
@@ -4267,7 +4269,21 @@
 			]
 		],
 		"cta": "Explore courses",
-		"note": "Your roadmap is flexible. Adjust the pace around your school schedule and keep showing up."
+		"note": "These roadmaps are flexible. Align them with your own schedule and keep going steadily.",
+		"heroMeta": "{count} published roadmaps",
+		"emptyTitle": "No roadmaps published yet",
+		"emptyBody": "Instructors and admins publish their learning paths here. Until then, browse all courses and build your own path.",
+		"viewRoadmap": "View roadmap",
+		"coursesCount": "{count} courses",
+		"moreCourses": "and {count} more courses",
+		"courseFallback": "Course",
+		"detail": {
+			"backToAll": "All roadmaps",
+			"trackLabel": "Learning path",
+			"stepNumber": "Step {number}",
+			"openCourse": "Open course",
+			"emptyItems": "No courses have been added to this roadmap yet."
+		}
 	},
 	"publicProfile": {
 		"teacherLabel": "Instructor",
@@ -4303,11 +4319,11 @@
 		}
 	},
 	"schoolHub": {
-		"metaTitle": "Kankor Preparation & School Subjects — Abzar Kankor",
-		"metaDescription": "Abzar Kankor exam-prep courses: mathematics, physics, chemistry, biology, Dari, Pashto, English, Islamic studies, social sciences and test-taking skills, taught by experienced teachers.",
-		"heroBadge": "Abzar Kankor preparation centre",
-		"heroTitle": "From school subjects to Kankor, one clear path",
-		"heroSubtitle": "Curated courses from Abzar Kankor teachers for every Kankor subject, with drills, spaced revision and mock exams.",
+		"metaTitle": "Courses for every subject — Abzar Kankor",
+		"metaDescription": "Abzar Kankor courses: math, physics, chemistry, biology, Dari, Pashto, English, Islamic studies, social sciences, and exam prep — all in one clear path.",
+		"heroBadge": "Abzar Kankor learning hub",
+		"heroTitle": "From school lessons to exams, one clear path",
+		"heroSubtitle": "Featured instructor courses for every subject — with practice tests, spaced review, and mock exams.",
 		"searchPlaceholder": "Search a subject: limits, genetics, history, test technique…",
 		"searchClear": "Clear",
 		"statCoursesLabel": "Structured Courses",
@@ -4341,13 +4357,13 @@
 		"languagesSubtitle": "Grammar, literary devices, vocabulary and reading-comprehension technique.",
 		"schoolBadge": "Grade packages",
 		"schoolTitle": "Complete Grade 11 and Grade 12 programme",
-		"schoolSubtitle": "Every subject of a grade in one path and one order, up to Kankor day.",
+		"schoolSubtitle": "Every subject of a grade in one path and one order, up to exam day.",
 		"lessonsUnit": "{count} lessons",
 		"hoursUnit": "{count} hrs",
 		"startCourseBtn": "Explore & Start Learning",
 		"hostCtaBadge": "For teachers, schools and study centres",
 		"hostCtaTitle": "Are you a teacher? Publish your course on Abzar Kankor",
-		"hostCtaDesc": "Publish structured lessons so students learn at their own pace and arrive ready for Kankor.",
+		"hostCtaDesc": "Build structured, quality courses so students learn at their own pace and get ready for their exams.",
 		"hostCtaPrimary": "Register as an instructor",
 		"hostCtaSecondary": "Verify a Certificate",
 		"statFeaturedLabel": "Featured Courses",
@@ -4369,12 +4385,12 @@
 		"tabScience": "Natural sciences",
 		"tabSocial": "Social studies",
 		"tabExam": "Exam skills",
-		"mathBadge": "Kankor maths foundation",
-		"mathTitle": "Mathematics for Kankor",
+		"mathBadge": "Computational foundations",
+		"mathTitle": "Mathematics",
 		"mathSubtitle": "From algebra and geometry to trigonometry, limits and derivatives, at exam level.",
 		"scienceBadge": "Natural sciences",
 		"scienceTitle": "Physics, chemistry and biology",
-		"scienceSubtitle": "Concepts and numeric problems built around the questions Kankor repeats.",
+		"scienceSubtitle": "Concepts and numerical problems in science subjects, focused on frequently tested questions.",
 		"socialBadge": "Social & Islamic studies",
 		"socialTitle": "History, geography, economics and Islamic studies",
 		"socialSubtitle": "Memory-heavy subjects organised with timelines, maps and a revision routine.",
@@ -4582,7 +4598,8 @@
 			"labels": {
 				"course": "Course",
 				"allLevels": "All levels",
-				"team": "Abzar Kankor Learning Team"
+				"team": "Abzar Kankor Learning Team",
+				"hoursUnit": "hours"
 			}
 		},
 		"kankorExam": {
@@ -4883,5 +4900,39 @@
 		"quizPassRates": "Exam pass rates",
 		"noAttempts": "No exam attempts recorded yet",
 		"passRateOf": "{rate}% pass · {count} attempts"
+	},
+	"roadmapManager": {
+		"title": "Roadmap manager",
+		"subtitle": "Create learning paths, arrange their courses, and publish them.",
+		"newRoadmap": "New roadmap",
+		"newRoadmapDescription": "Give the roadmap a title and description. You can add courses next.",
+		"titleLabel": "Title",
+		"descriptionLabel": "Description",
+		"empty": "You have not created a roadmap yet. Create your first one.",
+		"published": "Published",
+		"draft": "Draft",
+		"coursesCount": "{count} courses",
+		"manageItems": "Manage courses",
+		"publish": "Publish",
+		"unpublish": "Unpublish",
+		"publishToast": "Roadmap published",
+		"unpublishToast": "Roadmap unpublished",
+		"delete": "Delete",
+		"deleteConfirmTitle": "Delete roadmap?",
+		"deleteConfirmDescription": "This roadmap and all of its courses will be removed. This cannot be undone.",
+		"created": "Roadmap created",
+		"deleted": "Roadmap deleted",
+		"itemsSaved": "Course list saved",
+		"error": "Something went wrong. Please try again.",
+		"searchPlaceholder": "Search courses…",
+		"search": "Search",
+		"add": "Add",
+		"remove": "Remove",
+		"moveUp": "Move up",
+		"moveDown": "Move down",
+		"saveItems": "Save course list",
+		"cancel": "Cancel",
+		"confirmDelete": "Delete",
+		"create": "Create"
 	}
 }

@@ -350,6 +350,12 @@ export const routes = {
 					options: { locale?: string; isAbsolute?: boolean } = {}
 				) => buildPath("/d/admin/notifications", {}, searchParams, options),
 			},
+			roadmaps: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/admin/roadmaps", {}, searchParams, options),
+			},
 			provinces: {
 				page: (
 					searchParams?: Record<string, string>,
@@ -802,6 +808,12 @@ export const routes = {
 				) =>
 					buildPath("/d/instructor/notifications", {}, searchParams, options),
 			},
+			roadmaps: {
+				page: (
+					searchParams?: Record<string, string>,
+					options: { locale?: string; isAbsolute?: boolean } = {}
+				) => buildPath("/d/instructor/roadmaps", {}, searchParams, options),
+			},
 			quizzes: {
 				page: (
 					searchParams?: Record<string, string>,
@@ -1207,6 +1219,13 @@ export const routes = {
 			searchParams?: Record<string, string>,
 			options: { locale?: string; isAbsolute?: boolean } = {}
 		) => buildPath("/roadmap", {}, searchParams, options),
+		slug: {
+			page: (
+				params: { slug: string },
+				searchParams?: Record<string, string>,
+				options: { locale?: string; isAbsolute?: boolean } = {}
+			) => buildPath("/roadmap/:slug", params, searchParams, options),
+		},
 	},
 	schools: {
 		page: (

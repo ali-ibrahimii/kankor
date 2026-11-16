@@ -1113,6 +1113,7 @@ export async function getHomeCatalogData(
 			decksRes,
 			quizzesRes,
 			schoolsRes,
+			universitiesRes,
 		] = await Promise.all([
 			supabase
 				.from("courses")
@@ -1141,14 +1142,14 @@ export async function getHomeCatalogData(
 				.limit(8),
 			supabase
 				.from("decks")
-				.select("id, slug, name, description, is_free")
+				.select("id, slug, name, description, is_free, cover_image_url")
 				.eq("visibility", "public")
 				.order("created_at", { ascending: false })
 				.limit(8),
 			supabase
 				.from("quizzes")
 				.select(
-					"id, slug, title, description, instructions, time_limit_minutes, passing_score_percentage, max_attempts, created_at"
+					"id, slug, title, description, instructions, time_limit_minutes, passing_score_percentage, max_attempts, created_at, cover_image_url"
 				)
 				.eq("visibility", "public")
 				.order("created_at", { ascending: false })
@@ -1159,107 +1160,135 @@ export async function getHomeCatalogData(
 				.eq("status", "active")
 				.order("created_at", { ascending: false })
 				.limit(8),
+			supabase
+				.from("universities")
+				.select("id, name, cover_image_url, provinces(name)")
+				.order("name", { ascending: true })
+				.limit(8),
 		]);
 
-		const courses =
-			coursesRes.data && coursesRes.data.length > 0
-				? coursesRes.data.map((row) => ({
-						item: {
-							...row,
-							average_rating: row.average_rating ?? 0,
-							subject: Array.isArray(row.subject)
-								? (row.subject[0] ?? null)
-								: row.subject,
-							grade: Array.isArray(row.grade)
-								? (row.grade[0] ?? null)
-								: row.grade,
-							instructor: Array.isArray(row.instructor)
-								? (row.instructor[0] ?? null)
-								: row.instructor,
-						},
-						href: routes.courses.slug.page({ slug: row.slug ?? row.id }),
-					}))
-				: fallback.courses;
+		const courses = (coursesRes.data ?? []).map((row) => ({
+			item: {
+				...row,
+				average_rating: row.average_rating ?? 0,
+				subject: Array.isArray(row.subject)
+					? (row.subject[0] ?? null)
+					: row.subject,
+				grade: Array.isArray(row.grade) ? (row.grade[0] ?? null) : row.grade,
+				instructor: Array.isArray(row.instructor)
+					? (row.instructor[0] ?? null)
+					: row.instructor,
+			},
+			href: routes.courses.slug.page({ slug: row.slug ?? row.id }),
+		}));
 
-		const schoolBooks =
-			schoolBooksRes.data && schoolBooksRes.data.length > 0
-				? (schoolBooksRes.data as unknown as LibraryBook[]).map((book) => ({
-						item: book,
-						href: routes.libraries.slug.page({ slug: book.slug ?? book.id }),
-					}))
-				: fallback.schoolBooks;
+		const schoolBooks = (
+			(schoolBooksRes.data as unknown as LibraryBook[] | null) ?? []
+		).map((book) => ({
+			item: book,
+			href: routes.libraries.slug.page({ slug: book.slug ?? book.id }),
+		}));
 
-		const generalBooks =
-			generalBooksRes.data && generalBooksRes.data.length > 0
-				? (generalBooksRes.data as unknown as LibraryBook[]).map((book) => ({
-						item: book,
-						href: routes.libraries.slug.page({ slug: book.slug ?? book.id }),
-					}))
-				: fallback.generalBooks;
+		const generalBooks = (
+			(generalBooksRes.data as unknown as LibraryBook[] | null) ?? []
+		).map((book) => ({
+			item: book,
+			href: routes.libraries.slug.page({ slug: book.slug ?? book.id }),
+		}));
 
-		const decks =
-			decksRes.data && decksRes.data.length > 0
-				? decksRes.data.map((deck) => ({
-						item: deck,
-						href: routes.decks.slug.page({ slug: deck.slug ?? deck.id }),
-					}))
-				: fallback.decks;
+		const decks = (decksRes.data ?? []).map((deck) => ({
+			item: deck,
+			href: routes.decks.slug.page({ slug: deck.slug ?? deck.id }),
+		}));
 
-		const kankorForms =
-			quizzesRes.data && quizzesRes.data.length > 0
-				? quizzesRes.data.map((quiz) => ({
-						item: quiz,
-						href: routes.quizzes.slug.page({ slug: quiz.slug ?? quiz.id }),
-					}))
-				: fallback.kankorForms;
+		const kankorForms = (quizzesRes.data ?? []).map((quiz) => ({
+			item: quiz,
+			href: routes.quizzes.slug.page({ slug: quiz.slug ?? quiz.id }),
+		}));
 
-		const liveSchools: PartnerInstitution[] =
-			schoolsRes.data && schoolsRes.data.length > 0
-				? schoolsRes.data.map((school) => {
-						const provinceRel = Array.isArray(school.provinces)
-							? school.provinces[0]
-							: school.provinces;
-						return {
-							id: school.id,
-							name:
-								school.name ??
-								localizedText(locale, {
-									fa: "مکتب همکار",
-									ps: "همکار ښوونځی",
-									en: "Partner School",
-								}),
-							kind: "school",
-							province:
-								provinceRel?.name ??
-								localizedText(locale, {
-									fa: "افغانستان",
-									ps: "افغانستان",
-									en: "Afghanistan",
-								}),
-							summary:
-								school.address ??
-								localizedText(locale, {
-									fa: "مکتب همکار فعال در پلتفرم آموزشی ابزار کانکور.",
-									ps: "د ابزار کانکور همکاره ښوونځی.",
-									en: "Active partner school on the Abzar Kankor learning platform.",
-								}),
-							collaborationTag: localizedText(locale, {
-								fa: "مکتب همکار",
-								ps: "همکار ښوونځی",
-								en: "Partner School",
-							}),
-							studentsLabel: localizedText(locale, {
-								fa: "عضو رسمی",
-								ps: "رسمي غړی",
-								en: "Verified School",
-							}),
-							// School covers live in Cloudflare R2 (`schools/{id}/…`);
-							// resolveEntityCardImage falls back to the stock card art.
-							imageSrc: school.cover_image_url ?? CARD_IMAGES.school,
-							href: `/schools/${school.id}`,
-						};
-					})
-				: [];
+		const liveSchools: PartnerInstitution[] = (schoolsRes.data ?? []).map(
+			(school) => {
+				const provinceRel = Array.isArray(school.provinces)
+					? school.provinces[0]
+					: school.provinces;
+				return {
+					id: school.id,
+					name:
+						school.name ??
+						localizedText(locale, {
+							fa: "مکتب همکار",
+							ps: "همکار ښوونځی",
+							en: "Partner School",
+						}),
+					kind: "school",
+					province:
+						provinceRel?.name ??
+						localizedText(locale, {
+							fa: "افغانستان",
+							ps: "افغانستان",
+							en: "Afghanistan",
+						}),
+					summary:
+						school.address ??
+						localizedText(locale, {
+							fa: "مکتب همکار فعال در پلتفرم آموزشی ابزار کانکور.",
+							ps: "د ابزار کانکور همکاره ښوونځی.",
+							en: "Active partner school on the Abzar Kankor learning platform.",
+						}),
+					collaborationTag: localizedText(locale, {
+						fa: "مکتب همکار",
+						ps: "همکار ښوونځی",
+						en: "Partner School",
+					}),
+					studentsLabel: localizedText(locale, {
+						fa: "عضو رسمی",
+						ps: "رسمي غړی",
+						en: "Verified School",
+					}),
+					// School covers live in Cloudflare R2 (`schools/{id}/…`);
+					// resolveEntityCardImage falls back to the stock card art.
+					imageSrc: school.cover_image_url ?? CARD_IMAGES.school,
+					href: `/schools/${school.id}`,
+				};
+			}
+		);
+
+		const liveUniversities: PartnerInstitution[] = (
+			universitiesRes.data ?? []
+		).map((university) => {
+			const provinceRel = Array.isArray(university.provinces)
+				? university.provinces[0]
+				: university.provinces;
+			return {
+				id: university.id,
+				name: university.name,
+				kind: "university" as const,
+				province:
+					provinceRel?.name ??
+					localizedText(locale, {
+						fa: "افغانستان",
+						ps: "افغانستان",
+						en: "Afghanistan",
+					}),
+				summary: localizedText(locale, {
+					fa: "پوهنتون همکار در پلتفرم آموزشی ابزار کانکور.",
+					ps: "د ابزار کانکور همکار پوهنتون.",
+					en: "Partner university on the Abzar Kankor learning platform.",
+				}),
+				collaborationTag: localizedText(locale, {
+					fa: "پوهنتون همکار",
+					ps: "همکار پوهنتون",
+					en: "Partner University",
+				}),
+				studentsLabel: localizedText(locale, {
+					fa: "عضو رسمی",
+					ps: "رسمي غړی",
+					en: "Verified University",
+				}),
+				imageSrc: university.cover_image_url ?? CARD_IMAGES.university,
+				href: routes.search.page({ q: university.name }),
+			};
+		});
 
 		return {
 			courses,
@@ -1267,10 +1296,10 @@ export async function getHomeCatalogData(
 			generalBooks,
 			decks,
 			kankorForms,
-			partners:
-				liveSchools.length > 0
-					? [...liveSchools, ...fallback.partners]
-					: fallback.partners,
+			// Real institutions from the database only — universities first,
+			// then schools. The static partners are demo content for the
+			// placeholder database, never mixed into live data.
+			partners: [...liveUniversities, ...liveSchools],
 			generalBooksMoreHref,
 		};
 	} catch {

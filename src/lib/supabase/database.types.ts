@@ -740,6 +740,7 @@ export type Database = {
 			};
 			books: {
 				Row: {
+					cover_image_url: string | null;
 					created_at: string;
 					file_path: string;
 					full_name: string;
@@ -750,6 +751,7 @@ export type Database = {
 					updated_at: string;
 				};
 				Insert: {
+					cover_image_url?: string | null;
 					created_at?: string;
 					file_path: string;
 					full_name: string;
@@ -760,6 +762,7 @@ export type Database = {
 					updated_at?: string;
 				};
 				Update: {
+					cover_image_url?: string | null;
 					created_at?: string;
 					file_path?: string;
 					full_name?: string;
@@ -1898,6 +1901,7 @@ export type Database = {
 			};
 			decks: {
 				Row: {
+					cover_image_url: string | null;
 					agency_id: string | null;
 					algorithm: Database["public"]["Enums"]["flashcard_algorithm"];
 					average_rating: number | null;
@@ -1929,6 +1933,7 @@ export type Database = {
 					visibility: Database["public"]["Enums"]["visibility"];
 				};
 				Insert: {
+					cover_image_url?: string | null;
 					agency_id?: string | null;
 					algorithm?: Database["public"]["Enums"]["flashcard_algorithm"];
 					average_rating?: number | null;
@@ -1960,6 +1965,7 @@ export type Database = {
 					visibility?: Database["public"]["Enums"]["visibility"];
 				};
 				Update: {
+					cover_image_url?: string | null;
 					agency_id?: string | null;
 					algorithm?: Database["public"]["Enums"]["flashcard_algorithm"];
 					average_rating?: number | null;
@@ -3856,6 +3862,7 @@ export type Database = {
 			};
 			libraries: {
 				Row: {
+					cover_image_url: string | null;
 					book_id: string | null;
 					category_id: string | null;
 					created_at: string;
@@ -3874,6 +3881,7 @@ export type Database = {
 					uri: string;
 				};
 				Insert: {
+					cover_image_url?: string | null;
 					book_id?: string | null;
 					category_id?: string | null;
 					created_at?: string;
@@ -3892,6 +3900,7 @@ export type Database = {
 					uri: string;
 				};
 				Update: {
+					cover_image_url?: string | null;
 					book_id?: string | null;
 					category_id?: string | null;
 					created_at?: string;
@@ -5043,6 +5052,7 @@ export type Database = {
 			};
 			quizzes: {
 				Row: {
+					cover_image_url: string | null;
 					agency_id: string | null;
 					book_id: string | null;
 					created_at: string;
@@ -5077,6 +5087,7 @@ export type Database = {
 					visibility: Database["public"]["Enums"]["visibility"];
 				};
 				Insert: {
+					cover_image_url?: string | null;
 					agency_id?: string | null;
 					book_id?: string | null;
 					created_at?: string;
@@ -5111,6 +5122,7 @@ export type Database = {
 					visibility?: Database["public"]["Enums"]["visibility"];
 				};
 				Update: {
+					cover_image_url?: string | null;
 					agency_id?: string | null;
 					book_id?: string | null;
 					created_at?: string;
@@ -5313,6 +5325,98 @@ export type Database = {
 						columns: ["user_id"];
 						isOneToOne: false;
 						referencedRelation: "profiles";
+						referencedColumns: ["id"];
+					},
+				];
+			};
+			roadmap_items: {
+				Row: {
+					course_id: string;
+					created_at: string;
+					id: string;
+					note: string | null;
+					order_index: number;
+					roadmap_id: string;
+				};
+				Insert: {
+					course_id: string;
+					created_at?: string;
+					id?: string;
+					note?: string | null;
+					order_index?: number;
+					roadmap_id: string;
+				};
+				Update: {
+					course_id?: string;
+					created_at?: string;
+					id?: string;
+					note?: string | null;
+					order_index?: number;
+					roadmap_id?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: "roadmap_items_course_id_fkey";
+						columns: ["course_id"];
+						isOneToOne: false;
+						referencedRelation: "courses";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "roadmap_items_roadmap_id_fkey";
+						columns: ["roadmap_id"];
+						isOneToOne: false;
+						referencedRelation: "roadmaps";
+						referencedColumns: ["id"];
+					},
+				];
+			};
+			roadmaps: {
+				Row: {
+					accent: string;
+					cover_image_url: string | null;
+					created_at: string;
+					created_by: string;
+					description: string | null;
+					id: string;
+					is_published: boolean;
+					school_id: string | null;
+					slug: string;
+					title: string;
+					updated_at: string;
+				};
+				Insert: {
+					accent?: string;
+					cover_image_url?: string | null;
+					created_at?: string;
+					created_by: string;
+					description?: string | null;
+					id?: string;
+					is_published?: boolean;
+					school_id?: string | null;
+					slug: string;
+					title: string;
+					updated_at?: string;
+				};
+				Update: {
+					accent?: string;
+					cover_image_url?: string | null;
+					created_at?: string;
+					created_by?: string;
+					description?: string | null;
+					id?: string;
+					is_published?: boolean;
+					school_id?: string | null;
+					slug?: string;
+					title?: string;
+					updated_at?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: "roadmaps_school_id_fkey";
+						columns: ["school_id"];
+						isOneToOne: false;
+						referencedRelation: "schools";
 						referencedColumns: ["id"];
 					},
 				];
@@ -5671,6 +5775,7 @@ export type Database = {
 			};
 			universities: {
 				Row: {
+					cover_image_url: string | null;
 					created_at: string;
 					id: string;
 					name: string;
@@ -5678,6 +5783,7 @@ export type Database = {
 					updated_at: string;
 				};
 				Insert: {
+					cover_image_url?: string | null;
 					created_at?: string;
 					id?: string;
 					name: string;
@@ -5685,6 +5791,7 @@ export type Database = {
 					updated_at?: string;
 				};
 				Update: {
+					cover_image_url?: string | null;
 					created_at?: string;
 					id?: string;
 					name?: string;

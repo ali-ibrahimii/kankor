@@ -8,6 +8,7 @@ import {
 	LayoutDashboard,
 	Library,
 	MapPin,
+	Route,
 	Settings,
 	ShieldCheck,
 	TicketPercent,
@@ -93,6 +94,11 @@ export default async function AdminLayout({
 					label: t("content.courses"),
 					href: `${base}/courses`,
 					icon: <GraduationCap />,
+				},
+				{
+					label: t("content.roadmaps"),
+					href: `${base}/roadmaps`,
+					icon: <Route />,
 				},
 				{
 					label: t("content.flashcards"),
