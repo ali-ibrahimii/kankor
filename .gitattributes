@@ -1,0 +1,23 @@
+# Normalize line endings to LF on commit AND checkout, so Windows
+# (core.autocrlf) and Unix checkouts agree and Git stops warning
+# "LF will be replaced by the next time Git touches it" on every file.
+* text=auto eol=lf
+
+# Binary assets must never be line-ending-normalized.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary
+*.mp3 binary
+*.mp4 binary
+*.webm binary
+*.ogg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary

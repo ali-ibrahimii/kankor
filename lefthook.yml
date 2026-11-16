@@ -6,7 +6,11 @@ pre-commit:
   commands:
     check:
       glob: "*.{js,ts,jsx,tsx,json,css}"
-      run: pnpm biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      # Windows-safe: expanding `{staged_files}` puts every staged path on one
+      # command line, which overflows the 8191-char Windows limit on large
+      # commits ("The command line is too long") and blocks the commit.
+      # Biome's `--staged` reads the staged set from git directly instead.
+      run: pnpm biome check --write --staged --no-errors-on-unmatched --files-ignore-unknown=true
       stage_fixed: true
     type-check:
       run: pnpm check:type
