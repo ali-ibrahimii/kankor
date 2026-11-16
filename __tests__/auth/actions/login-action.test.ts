@@ -3,10 +3,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mockSignInWithPassword = vi.hoisted(() => vi.fn());
 const mockSingle = vi.hoisted(() => vi.fn());
 const mockFrom = vi.hoisted(() => vi.fn());
+const mockSessionSingle = vi.hoisted(() => vi.fn());
+const mockSessionFrom = vi.hoisted(() => vi.fn());
 
 vi.mock("@/lib/supabase/server", () => ({
 	createClient: vi.fn().mockResolvedValue({
 		auth: { signInWithPassword: mockSignInWithPassword },
+		from: mockSessionFrom,
 	}),
 	// The post-login profile fetch (with school/agency memberships) runs on
 	// the service-role client so RLS can't hide the row.
@@ -32,6 +35,13 @@ describe("loginAction", () => {
 		mockFrom.mockReturnValue({
 			select: vi.fn().mockReturnValue({
 				eq: vi.fn().mockReturnValue({ single: mockSingle }),
+			}),
+		});
+		mockSessionFrom.mockReset();
+		mockSessionSingle.mockReset();
+		mockSessionFrom.mockReturnValue({
+			select: vi.fn().mockReturnValue({
+				eq: vi.fn().mockReturnValue({ single: mockSessionSingle }),
 			}),
 		});
 	});
@@ -95,5 +105,23 @@ describe("loginAction", () => {
 		expect(mockSignInWithPassword).toHaveBeenCalledWith(
 			expect.objectContaining({ password: "  My Pass  " })
 		);
+	});
+
+	it("falls back to the session client when the service-role read finds nothing", async () => {
+		mockSignInWithPassword.mockResolvedValueOnce({
+			data: { user: { id: "user-id" } },
+			error: null,
+		});
+		// Service-role reads return nothing (e.g. wrong SUPABASE_SERVICE_ROLE_KEY).
+		mockSingle.mockResolvedValue({ data: null, error: { message: "no rows" } });
+		mockSessionSingle.mockResolvedValue({ data: PROFILE, error: null });
+
+		const result = await loginAction({
+			email: "user@example.com",
+			password: "Password1",
+		});
+
+		expect(result).toEqual({ error: null, user: PROFILE });
+		expect(mockSessionFrom).toHaveBeenCalledWith("profiles");
 	});
 });

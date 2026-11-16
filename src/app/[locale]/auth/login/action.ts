@@ -39,5 +39,21 @@ export async function loginAction(values: { email: string; password: string }) {
 		await new Promise((res) => setTimeout(res, 300));
 	}
 
+	// Fallback: if the service-role client can't read (missing/incorrect
+	// SUPABASE_SERVICE_ROLE_KEY), read through the caller's own session —
+	// RLS already scopes this to their own profile and memberships. Without
+	// this, login would return `user: null` and the user could never be
+	// routed to their dashboard.
+	if (!profile) {
+		const { data: row } = await supabase
+			.from("profiles")
+			.select(
+				"*, schoolMemberships:school_members(school_id, role), agencyMemberships:agency_members(agency_id, role, status)"
+			)
+			.eq("id", data.user.id)
+			.single();
+		if (row) profile = row;
+	}
+
 	return { error: null, user: profile };
 }

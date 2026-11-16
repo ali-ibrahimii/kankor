@@ -954,7 +954,7 @@
 		"pendingReviewTitle": "Account pending review",
 		"pendingReviewBody": "Your account is awaiting approval. We'll email you once it's reviewed.",
 		"common": {
-			"42501": "You have limited access. Please contact support.",
+			"42501": "Your access level is restricted. Please contact support.",
 			"orDivider": "OR",
 			"emailLabel": "Email Address",
 			"emailPlaceholder": "hello@example.com",
@@ -976,7 +976,8 @@
 			"email_address_not_authorized": "This email address is not authorized for registration.",
 			"signup_disabled": "New registrations are currently disabled.",
 			"unknown_error": "Something went wrong. Please try again.",
-			"otp_expired": "The code has expired. Please request a new one."
+			"otp_expired": "The code has expired. Please request a new one.",
+			"schoolCreationFailed": "Could not create the school. Please try again later or contact support."
 		},
 		"validation": {
 			"invalidEmail": "Invalid email address",
