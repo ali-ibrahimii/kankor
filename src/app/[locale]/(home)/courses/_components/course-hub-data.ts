@@ -79,7 +79,12 @@ type ContentPath = {
 type SchoolHubContent = {
 	courses: Record<string, ContentCourse>;
 	paths: Record<string, ContentPath>;
-	labels: { course: string; allLevels: string; team: string };
+	labels: {
+		course: string;
+		allLevels: string;
+		team: string;
+		hoursUnit: string;
+	};
 };
 
 type CoverKey = keyof typeof CARD_IMAGES;
@@ -474,6 +479,123 @@ function buildFallbackPaths(content: SchoolHubContent): LearningPathItem[] {
 		.filter((path): path is LearningPathItem => path !== null);
 }
 
+type RoadmapItemJoin = {
+	id: string;
+	course_id: string;
+	order_index: number;
+	course: {
+		id: string;
+		slug: string | null;
+		title: string;
+		subtitle: string | null;
+		cover_image_url: string | null;
+		estimated_duration_hours: number | null;
+		level: string | null;
+		is_free: boolean | null;
+		price_credits: number | null;
+		grade_id: string | null;
+	} | null;
+};
+
+type RoadmapJoin = {
+	id: string;
+	slug: string;
+	title: string;
+	description: string | null;
+	accent: string | null;
+	roadmap_items: RoadmapItemJoin[];
+};
+
+const PATH_ACCENTS: LearningPathItem["accent"][] = [
+	"violet",
+	"sky",
+	"amber",
+	"emerald",
+];
+
+function parseAccent(accent: string | null): LearningPathItem["accent"] {
+	return PATH_ACCENTS.includes(accent as LearningPathItem["accent"])
+		? (accent as LearningPathItem["accent"])
+		: "violet";
+}
+
+/**
+ * Real learning paths: the instructor/admin-authored `roadmaps` with their
+ * ordered course items. Also returns the joined courses so the hub course
+ * list can include every roadmap course even beyond the 24-course page.
+ */
+async function buildLivePaths(
+	supabase: Awaited<ReturnType<typeof createClient>>,
+	content: SchoolHubContent
+): Promise<{ paths: LearningPathItem[]; extraCourses: HubCourseItem[] }> {
+	const { data, error } = await supabase
+		.from("roadmaps")
+		.select(
+			"id, slug, title, description, accent, roadmap_items(id, course_id, order_index, course:courses(id, slug, title, subtitle, cover_image_url, estimated_duration_hours, level, is_free, price_credits, grade_id))"
+		)
+		.eq("is_published", true)
+		.order("order_index", {
+			referencedTable: "roadmap_items",
+			ascending: true,
+		});
+
+	if (error || !data) return { paths: [], extraCourses: [] };
+
+	const paths: LearningPathItem[] = [];
+	const extraCourses: HubCourseItem[] = [];
+
+	for (const roadmap of data as unknown as RoadmapJoin[]) {
+		const items = [...roadmap.roadmap_items].sort(
+			(a, b) => a.order_index - b.order_index
+		);
+		if (items.length === 0) continue;
+
+		const totalHours = items.reduce(
+			(sum, item) => sum + (item.course?.estimated_duration_hours ?? 0),
+			0
+		);
+
+		paths.push({
+			id: roadmap.id,
+			track: inferTrackFromTitle(roadmap.title, null),
+			title: roadmap.title,
+			subtitle: roadmap.description ?? "",
+			steps: items.map((item) => item.course?.title ?? content.labels.course),
+			courseIds: items.map((item) => item.course_id),
+			coursesCount: items.length,
+			durationLabel: `${totalHours} ${content.labels.hoursUnit}`,
+			accent: parseAccent(roadmap.accent),
+		});
+
+		for (const item of items) {
+			const course = item.course;
+			if (!course) continue;
+			extraCourses.push({
+				id: course.id,
+				title: course.title,
+				subtitle: course.subtitle ?? "",
+				track: inferTrackFromTitle(course.title, course.grade_id),
+				isFeatured: false,
+				categoryLabel: content.labels.course,
+				subLabel: content.labels.allLevels,
+				instructorName: content.labels.team,
+				level: "all_levels",
+				isFree: Boolean(course.is_free),
+				priceCredits: course.price_credits ?? 0,
+				lessonsCount: 24,
+				durationHours: course.estimated_duration_hours ?? 12,
+				tags: [],
+				rating: 4.9,
+				votes: 0,
+				imageSrc: course.cover_image_url ?? "",
+				href: routes.courses.slug.page({ slug: course.slug ?? course.id }),
+			});
+		}
+	}
+
+	return { paths, extraCourses };
+}
+
 const TRACK_MATCHERS: { track: HubTrackId; pattern: RegExp }[] = [
 	{
 		track: "math",
@@ -595,19 +717,31 @@ export async function getSchoolHubData(locale: Locale): Promise<SchoolHubData> {
 			return { courses: fallbackCourses, learningPaths };
 		}
 
+		const live = await buildLivePaths(supabase, content);
+
+		// Merge roadmap courses the 24-course page didn't include, so every
+		// path step resolves to a real hub course card.
+		const knownIds = new Set(publishedCourses.map((course) => course.id));
+		const mergedCourses = [
+			...publishedCourses,
+			...live.extraCourses.filter((course) => !knownIds.has(course.id)),
+		];
+
 		const featuredCourseIds = new Set(
-			[...publishedCourses]
+			[...mergedCourses]
 				.sort((a, b) => b.rating - a.rating || b.votes - a.votes)
-				.slice(0, Math.min(6, publishedCourses.length))
+				.slice(0, Math.min(6, mergedCourses.length))
 				.map((course) => course.id)
 		);
 
 		return {
-			courses: publishedCourses.map((course) => ({
+			courses: mergedCourses.map((course) => ({
 				...course,
 				isFeatured: featuredCourseIds.has(course.id),
 			})),
-			learningPaths,
+			// Real instructor/admin roadmaps when there are any; the curated
+			// fallback paths only remain for the placeholder demo database.
+			learningPaths: live.paths,
 		};
 	} catch {
 		return { courses: fallbackCourses, learningPaths };

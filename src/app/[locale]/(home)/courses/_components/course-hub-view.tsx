@@ -390,101 +390,107 @@ export function SchoolHubView({
 				</section>
 			)}
 
+			{/* Scroll target for the hero's "browse courses" button. */}
+			<span
+				id="course-catalog"
+				className="block scroll-mt-28"
+				aria-hidden="true"
+			/>
+
 			{/* ════════════════════════════════════════════════════════════════
 			    SECTION 2 — GUIDED STEP-BY-STEP LEARNING PATHS
 			   ════════════════════════════════════════════════════════════════ */}
-			{activeTab === "all" && !normalizedQuery && (
-				<section
-					id="course-catalog"
-					className="scroll-mt-28 border-b border-border/60 bg-muted/20 py-11"
-				>
-					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-						<div className="mb-6">
-							<span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
-								<Compass className="size-3.5" aria-hidden="true" />
-								{t("pathsBadge")}
-							</span>
-							<h2 className="text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
-								{t("pathsTitle")}
-							</h2>
-							<p className="mt-1 text-sm text-muted-foreground">
-								{t("pathsSubtitle")}
-							</p>
-						</div>
+			{activeTab === "all" &&
+				!normalizedQuery &&
+				data.learningPaths.length > 0 && (
+					<section className="scroll-mt-28 border-b border-border/60 bg-muted/20 py-11">
+						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+							<div className="mb-6">
+								<span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
+									<Compass className="size-3.5" aria-hidden="true" />
+									{t("pathsBadge")}
+								</span>
+								<h2 className="text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
+									{t("pathsTitle")}
+								</h2>
+								<p className="mt-1 text-sm text-muted-foreground">
+									{t("pathsSubtitle")}
+								</p>
+							</div>
 
-						<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-							{data.learningPaths.map((path) => (
-								<LearningPathCard
-									key={path.id}
-									path={path}
-									selected={selectedPathId === path.id}
-									onSelectPath={() =>
-										setSelectedPathId((current) =>
-											current === path.id ? null : path.id
-										)
-									}
-								/>
-							))}
-						</div>
+							<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+								{data.learningPaths.map((path) => (
+									<LearningPathCard
+										key={path.id}
+										path={path}
+										selected={selectedPathId === path.id}
+										onSelectPath={() =>
+											setSelectedPathId((current) =>
+												current === path.id ? null : path.id
+											)
+										}
+									/>
+								))}
+							</div>
 
-						{selectedPath && (
-							<section
-								id="path-course-sequence"
-								aria-labelledby="path-course-sequence-title"
-								className="mt-7 scroll-mt-28 rounded-3xl border border-border/70 bg-background p-4 shadow-sm sm:p-6"
-							>
-								<div className="mb-5 flex flex-wrap items-start justify-between gap-3">
-									<div>
-										<span className="inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
-											<Compass className="size-3.5" aria-hidden="true" />
-											{t("pathSequenceEyebrow")}
-										</span>
-										<h3
-											id="path-course-sequence-title"
-											className="mt-2 text-lg font-extrabold tracking-tight text-foreground"
+							{selectedPath && (
+								<section
+									id="path-course-sequence"
+									aria-labelledby="path-course-sequence-title"
+									className="mt-7 scroll-mt-28 rounded-3xl border border-border/70 bg-background p-4 shadow-sm sm:p-6"
+								>
+									<div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+										<div>
+											<span className="inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
+												<Compass className="size-3.5" aria-hidden="true" />
+												{t("pathSequenceEyebrow")}
+											</span>
+											<h3
+												id="path-course-sequence-title"
+												className="mt-2 text-lg font-extrabold tracking-tight text-foreground"
+											>
+												{selectedPath.title}
+											</h3>
+											<p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+												{t("pathSequenceSubtitle")}
+											</p>
+										</div>
+										<button
+											type="button"
+											onClick={() => setSelectedPathId(null)}
+											className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-card px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:text-foreground"
 										>
-											{selectedPath.title}
-										</h3>
-										<p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-											{t("pathSequenceSubtitle")}
-										</p>
+											<X className="size-3.5" aria-hidden="true" />
+											{t("pathCloseBtn")}
+										</button>
 									</div>
-									<button
-										type="button"
-										onClick={() => setSelectedPathId(null)}
-										className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-card px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:text-foreground"
-									>
-										<X className="size-3.5" aria-hidden="true" />
-										{t("pathCloseBtn")}
-									</button>
-								</div>
-								<ol className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-									{selectedPathCourses.map((course, index) => {
-										const courseSection = courseSections.find(
-											(item) => item.id === course.track
-										);
-										return (
-											<li key={course.id} className="min-w-0">
-												<div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/8 px-3 py-1 text-xs font-bold text-primary">
-													<span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
-														{index + 1}
-													</span>
-													{t("pathStepLabel", { number: index + 1 })}
-												</div>
-												{courseSection?.variant === "tech" ? (
-													<HubTechCourseCard item={course} />
-												) : (
-													<HubSkillCourseCard item={course} />
-												)}
-											</li>
-										);
-									})}
-								</ol>
-							</section>
-						)}
-					</div>
-				</section>
-			)}
+									<ol className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+										{selectedPathCourses.map((course, index) => {
+											const courseSection = courseSections.find(
+												(item) => item.id === course.track
+											);
+											return (
+												<li key={course.id} className="min-w-0">
+													<div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/8 px-3 py-1 text-xs font-bold text-primary">
+														<span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+															{index + 1}
+														</span>
+														{t("pathStepLabel", { number: index + 1 })}
+													</div>
+													{courseSection?.variant === "tech" ? (
+														<HubTechCourseCard item={course} />
+													) : (
+														<HubSkillCourseCard item={course} />
+													)}
+												</li>
+											);
+										})}
+									</ol>
+								</section>
+							)}
+						</div>
+					</section>
+				)}
 
 			{/* ════════════════════════════════════════════════════════════════
 			    SECTIONS 3–8 — ALL COURSE TRACKS

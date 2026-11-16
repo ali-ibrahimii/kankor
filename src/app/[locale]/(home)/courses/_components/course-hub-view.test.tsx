@@ -28,7 +28,7 @@ describe("SchoolHubView (/courses)", () => {
 		expect(container).not.toHaveTextContent(/کلاس زنده|کلاس‌های زنده|صنف زنده/);
 
 		for (const title of [
-			/ریاضی برای کانکور/,
+			"ریاضی",
 			/فزیک، کیمیا و بیولوژی/,
 			/دری، پشتو و انگلیسی/,
 			/تاریخ، جغرافیه، اقتصاد و اسلامیات/,

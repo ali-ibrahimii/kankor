@@ -73,6 +73,24 @@ export async function createClient() {
 }
 
 /**
+ * True when SUPABASE_SERVICE_ROLE_KEY holds a plausible service-role key.
+ *
+ * The env fallback ("not-supported-in-client-env") and a copy/paste of the
+ * publishable/anon key both produce a client that silently runs as `anon` —
+ * whose INSERT grant on `schools` was revoked — surfacing as a cryptic 42501
+ * during school signup. Callers should treat `false` as "use the DB-trigger
+ * path instead of service-role writes".
+ */
+export function hasServiceRoleKey(): boolean {
+	const key = serverEnv.supabase.secretKey;
+	return (
+		key.length > 0 &&
+		key !== "not-supported-in-client-env" &&
+		key !== serverEnv.supabase.publishableKey
+	);
+}
+
+/**
  * Service-role client — bypasses RLS entirely. Only use server-side for
  * trusted admin operations (e.g. approving a pending school/instructor
  * signup). Never import this in anything that runs in the browser.

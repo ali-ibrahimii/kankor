@@ -4,6 +4,7 @@ import {
 	BookOpen,
 	FileText,
 	LayoutDashboard,
+	Route,
 	SchoolIcon,
 	Settings,
 	TicketPercent,
@@ -69,6 +70,11 @@ export default async function InstructorLayout({
 					href: base,
 					icon: <LayoutDashboard />,
 					exact: true,
+				},
+				{
+					label: t("roadmaps"),
+					href: routes.d.instructor.roadmaps.page(),
+					icon: <Route />,
 				},
 				{
 					label: t("myCourses"),
