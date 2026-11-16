@@ -1155,7 +1155,7 @@ export async function getHomeCatalogData(
 				.limit(8),
 			supabase
 				.from("schools")
-				.select("id, name, address, provinces(name)")
+				.select("id, name, address, cover_image_url, logo_url, provinces(name)")
 				.eq("status", "active")
 				.order("created_at", { ascending: false })
 				.limit(8),
@@ -1253,7 +1253,9 @@ export async function getHomeCatalogData(
 								ps: "رسمي غړی",
 								en: "Verified School",
 							}),
-							imageSrc: CARD_IMAGES.school,
+							// School covers live in Cloudflare R2 (`schools/{id}/…`);
+							// resolveEntityCardImage falls back to the stock card art.
+							imageSrc: school.cover_image_url ?? CARD_IMAGES.school,
 							href: `/schools/${school.id}`,
 						};
 					})
