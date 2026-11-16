@@ -19,6 +19,7 @@ interface VerifiedCertificate {
 	course_title: string;
 	issued_at: string | null;
 	created_at: string;
+	is_revoked?: boolean;
 }
 
 async function verifyCertificate(
@@ -75,16 +76,34 @@ export default async function VerifyCertificatePage({
 			</div>
 
 			{certificate ? (
-				<Card className="border-emerald-200 dark:border-emerald-900">
+				<Card
+					className={
+						certificate.is_revoked
+							? "border-destructive/30"
+							: "border-emerald-200 dark:border-emerald-900"
+					}
+				>
 					<CardHeader>
 						<div className="flex items-center gap-2">
-							<CheckCircle2 className="size-6 shrink-0 text-emerald-600 dark:text-emerald-400" />
-							<CardTitle className="text-emerald-700 dark:text-emerald-400">
-								{t("validTitle")}
+							{certificate.is_revoked ? (
+								<ShieldX className="size-6 shrink-0 text-destructive" />
+							) : (
+								<CheckCircle2 className="size-6 shrink-0 text-emerald-600 dark:text-emerald-400" />
+							)}
+							<CardTitle
+								className={
+									certificate.is_revoked
+										? "text-destructive"
+										: "text-emerald-700 dark:text-emerald-400"
+								}
+							>
+								{certificate.is_revoked ? t("revokedTitle") : t("validTitle")}
 							</CardTitle>
 						</div>
 						<CardDescription>
-							{t("validDescription", { platform: serverEnv.app.name })}
+							{certificate.is_revoked
+								? t("revokedDescription")
+								: t("validDescription", { platform: serverEnv.app.name })}
 						</CardDescription>
 					</CardHeader>
 					<CardContent>

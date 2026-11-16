@@ -13,6 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { toast } from "sonner";
+import { CertificateManager } from "@/components/blocks/course";
 import {
 	deleteCourse,
 	setCoursePublished,
@@ -43,6 +44,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MDXView } from "@/components/widgets/markdown-view";
 import { StatCard } from "@/components/widgets/stat-card";
 import { Link, useRouter } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
@@ -231,6 +233,9 @@ export function CourseDetailView({
 						<TabsTrigger value="overview">{t("detail.overview")}</TabsTrigger>
 						<TabsTrigger value="students">{t("detail.students")}</TabsTrigger>
 						<TabsTrigger value="analytics">{t("detail.analytics")}</TabsTrigger>
+						<TabsTrigger value="certificates">
+							{t("detail.certificates")}
+						</TabsTrigger>
 					</TabsList>
 				</div>
 
@@ -240,9 +245,10 @@ export function CourseDetailView({
 						{course.description && (
 							<section className="space-y-2">
 								<h3 className="text-sm font-bold">{t("detail.about")}</h3>
-								<p className="text-sm leading-6 text-muted-foreground">
-									{course.description}
-								</p>
+								<MDXView
+									markdown={course.description}
+									className="text-sm text-muted-foreground"
+								/>
 							</section>
 						)}
 
@@ -398,6 +404,13 @@ export function CourseDetailView({
 								</Table>
 							</div>
 						)}
+					</div>
+				</TabsContent>
+
+				{/* Certificates */}
+				<TabsContent value="certificates" className="flex-1 p-6">
+					<div className="max-w-3xl">
+						<CertificateManager courseId={course.id} />
 					</div>
 				</TabsContent>
 

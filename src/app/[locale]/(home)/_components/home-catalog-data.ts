@@ -295,6 +295,7 @@ function getFallbackCourses(locale: Locale): CardEntry<CourseMeta>[] {
 			subtitle: localizedText(locale, spec.subtitle),
 			description: localizedText(locale, spec.subtitle),
 			cover_image_url: spec.cover,
+			certificate_enabled: true,
 			promo_video_url: null,
 			welcome_message: null,
 			instructor_id: null,

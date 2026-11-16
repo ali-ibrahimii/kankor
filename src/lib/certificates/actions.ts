@@ -188,3 +188,140 @@ export async function getCertificateDownloadUrl(input: {
 		data: { certificateId: cert.id, url, expiresAt: downloadExpiry() },
 	};
 }
+
+// ─── Course certificate management (instructor + admin) ─────────────────────
+//
+// Lets the course instructor and admins decide whether a course issues a
+// certificate at all and revoke/restore the certificates already issued.
+// Authorization is double-layered: explicit `can_manage_course` RPC checks
+// here plus the manager RLS policies from the course-certificate-management
+// migration. Errors are short machine codes — the UI maps them to localized
+// messages and never surfaces raw server text.
+
+export type ManagedCertificate = {
+	id: string;
+	userFullName: string;
+	issuedAt: string | null;
+	verificationCode: string | null;
+	revokedAt: string | null;
+};
+
+export type CourseCertificateAdminState = {
+	enabled: boolean;
+	certificates: ManagedCertificate[];
+};
+
+type SupabaseClientLike = Awaited<ReturnType<typeof createClient>>;
+
+async function canManageCourse(
+	supabase: SupabaseClientLike,
+	courseId: string
+): Promise<boolean> {
+	const { data, error } = await supabase.rpc("can_manage_course", {
+		p_course_id: courseId,
+	});
+	if (error) return false;
+	return data === true;
+}
+
+export async function getCourseCertificateAdmin(input: {
+	courseId: string;
+}): Promise<Result<CourseCertificateAdminState>> {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { success: false, error: "unauthorized" };
+
+	if (!(await canManageCourse(supabase, input.courseId))) {
+		return { success: false, error: "unauthorized" };
+	}
+
+	const { data: course, error: courseError } = await supabase
+		.from("courses")
+		.select("certificate_enabled")
+		.eq("id", input.courseId)
+		.maybeSingle();
+	if (courseError) return { success: false, error: "database" };
+	if (!course) return { success: false, error: "not_found" };
+
+	const { data: rows, error: listError } = await supabase
+		.from("certificates")
+		.select(
+			"id, user_full_name, issued_at, verification_code, revoked_at, created_at"
+		)
+		.eq("course_id", input.courseId)
+		.order("created_at", { ascending: false });
+	if (listError) return { success: false, error: "database" };
+
+	return {
+		success: true,
+		data: {
+			enabled: course.certificate_enabled,
+			certificates: (rows ?? []).map((row) => ({
+				id: row.id,
+				userFullName: row.user_full_name,
+				issuedAt: row.issued_at ?? row.created_at,
+				verificationCode: row.verification_code,
+				revokedAt: row.revoked_at,
+			})),
+		},
+	};
+}
+
+export async function setCourseCertificateEnabled(input: {
+	courseId: string;
+	enabled: boolean;
+}): Promise<Result<{ enabled: boolean }>> {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { success: false, error: "unauthorized" };
+
+	if (!(await canManageCourse(supabase, input.courseId))) {
+		return { success: false, error: "unauthorized" };
+	}
+
+	const { error } = await supabase
+		.from("courses")
+		.update({ certificate_enabled: input.enabled })
+		.eq("id", input.courseId);
+	if (error) return { success: false, error: "database" };
+
+	return { success: true, data: { enabled: input.enabled } };
+}
+
+export async function setCertificateRevoked(input: {
+	certificateId: string;
+	revoked: boolean;
+}): Promise<Result<{ revoked: boolean }>> {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { success: false, error: "unauthorized" };
+
+	const { data: cert, error: certError } = await supabase
+		.from("certificates")
+		.select("id, course_id")
+		.eq("id", input.certificateId)
+		.maybeSingle();
+	if (certError) return { success: false, error: "database" };
+	if (!cert) return { success: false, error: "not_found" };
+
+	if (!(await canManageCourse(supabase, cert.course_id))) {
+		return { success: false, error: "unauthorized" };
+	}
+
+	const { error } = await supabase
+		.from("certificates")
+		.update({
+			revoked_at: input.revoked ? new Date().toISOString() : null,
+			revoked_by: input.revoked ? user.id : null,
+		})
+		.eq("id", input.certificateId);
+	if (error) return { success: false, error: "database" };
+
+	return { success: true, data: { revoked: input.revoked } };
+}

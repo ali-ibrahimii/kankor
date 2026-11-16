@@ -252,7 +252,7 @@ function VideoPlayer({
 function TextContent({ html }: { html: string }) {
 	return (
 		<MDXView
-			className="prose prose-sm max-w-none dark:prose-invert"
+			className="prose prose-sm max-w-none dark:prose-invert prose-p:my-2 prose-p:leading-[1.9] prose-li:my-0.5 prose-li:leading-[1.9] prose-headings:mt-5 prose-headings:mb-2 prose-headings:font-extrabold prose-ul:my-3 prose-ol:my-3 prose-pre:my-4 prose-table:my-4 sm:prose-base"
 			// Safe: instructor-authored rich text content
 			markdown={html}
 		/>
@@ -503,7 +503,7 @@ function RenderBlock({
 
 		case "text":
 			return block.text_content ? (
-				<div className="rounded-2xl border border-border/70 bg-card p-4 shadow-sm sm:p-6 md:p-7">
+				<div className="rounded-2xl border border-border/70 bg-card p-4 shadow-sm sm:p-5 md:p-6">
 					<TextContent html={block.text_content} />
 				</div>
 			) : null;
@@ -596,7 +596,7 @@ function LessonNavButton({
 			onClick={onClick}
 			disabled={!onClick}
 			className={cn(
-				"h-11 min-w-11 gap-2 rounded-2xl px-3 text-start",
+				"h-10 min-w-11 gap-2 rounded-xl px-3 text-start",
 				variant === "outline" && "border-border/70",
 				variant === "default" && "font-bold shadow-sm",
 				!isPrev && "justify-end"
@@ -656,54 +656,51 @@ export function ContentPlayer({
 
 	return (
 		<div className={cn("flex min-h-0 flex-1 flex-col bg-muted/20", className)}>
-			{/* Lesson header */}
-			<header className="shrink-0 border-b border-border/70 bg-background px-4 py-4 md:px-6">
-				<div className="mx-auto w-full max-w-3xl">
-					<div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
-						<span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-bold text-primary">
+			{/* Lesson header — compact: title row + meta row */}
+			<header className="shrink-0 border-b border-border/70 bg-background">
+				<div className="mx-auto flex w-full max-w-3xl flex-col gap-1 px-4 py-2.5 md:px-6 md:py-3">
+					<div className="flex items-center gap-2.5">
+						<span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary">
 							{t("lessonOf", {
 								current: lessonNumber,
 								total: totalLessons,
 							})}
 						</span>
-						{moduleTitle && (
-							<>
-								<span aria-hidden="true">·</span>
-								<span className="truncate">{moduleTitle}</span>
-							</>
-						)}
-						{durationMinutes ? (
-							<>
-								<span aria-hidden="true">·</span>
-								<span className="inline-flex items-center gap-1">
-									<Clock className="size-3" />
-									{t("minutes", { count: durationMinutes })}
-								</span>
-							</>
-						) : null}
-					</div>
-
-					<div className="mt-2 flex items-start justify-between gap-3">
-						<h1 className="text-lg font-black leading-snug tracking-tight md:text-xl">
+						<h1 className="min-w-0 flex-1 truncate text-base font-extrabold tracking-tight md:text-xl">
 							{lessonTitle}
 						</h1>
 						{isCompleted && (
 							<span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-								<CheckCircle2 className="size-3.5" />
+								<CheckCircle2 className="size-3" />
 								{t("completed")}
 							</span>
 						)}
+					</div>
+
+					<div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
+						{moduleTitle && (
+							<span className="inline-flex items-center gap-1">
+								<BookOpen className="size-3" />
+								{moduleTitle}
+							</span>
+						)}
+						{durationMinutes ? (
+							<span className="inline-flex items-center gap-1">
+								<Clock className="size-3" />
+								{t("minutes", { count: durationMinutes })}
+							</span>
+						) : null}
 					</div>
 				</div>
 			</header>
 
 			{/* Content blocks */}
 			<div className="min-h-0 flex-1 overflow-y-auto">
-				<div className="mx-auto w-full max-w-3xl px-4 py-5 md:px-6 md:py-7">
+				<div className="mx-auto w-full max-w-3xl px-4 py-4 md:px-6 md:py-5">
 					{sorted.length === 0 ? (
 						<EmptyLesson onNextLesson={onNextLesson} />
 					) : (
-						<div className="space-y-5">
+						<div className="space-y-4">
 							{sorted.map((block) => (
 								<RenderBlock
 									key={block.id}
@@ -717,7 +714,7 @@ export function ContentPlayer({
 			</div>
 
 			{/* Footer nav */}
-			<footer className="shrink-0 border-t border-border/70 bg-background/95 px-4 py-3 backdrop-blur supports-backdrop-filter:bg-background/70 md:px-6">
+			<footer className="shrink-0 border-t border-border/70 bg-background/95 px-4 py-2.5 backdrop-blur supports-backdrop-filter:bg-background/70 md:px-6">
 				<div className="mx-auto flex w-full max-w-3xl items-center gap-2">
 					<LessonNavButton
 						direction="prev"
@@ -728,7 +725,7 @@ export function ContentPlayer({
 
 					<div className="flex flex-1 justify-center">
 						{isCompleted ? (
-							<span className="inline-flex h-11 items-center gap-1.5 rounded-2xl bg-emerald-500/10 px-4 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+							<span className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-emerald-500/10 px-4 text-xs font-bold text-emerald-600 dark:text-emerald-400">
 								<CheckCircle2 className="size-4" />
 								{t("completed")}
 							</span>
@@ -736,7 +733,7 @@ export function ContentPlayer({
 							<Button
 								onClick={onMarkComplete}
 								disabled={isMarkingComplete}
-								className="h-11 gap-2 rounded-2xl px-5 font-bold shadow-sm"
+								className="h-10 gap-2 rounded-xl px-5 font-bold shadow-sm"
 							>
 								{isMarkingComplete ? (
 									<Spinner className="size-4" />

@@ -6,10 +6,9 @@ import {
 	MapPin,
 	Sparkles,
 } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { resolveCoverSrc } from "@/components/blocks/course";
+import { CoverFillImage, resolveCoverSrc } from "@/components/blocks/course";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n/navigation";
 import { isSupabaseServerConfigured } from "@/lib/env/server-env";
@@ -144,10 +143,9 @@ export default async function InstructorPublicPage({
 										>
 											<div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-violet-200 to-emerald-100">
 												{cover && (
-													<Image
+													<CoverFillImage
 														src={cover}
 														alt={course.title}
-														fill
 														className="object-cover transition group-hover:scale-105"
 														sizes="(max-width: 640px) 100vw, 50vw"
 													/>

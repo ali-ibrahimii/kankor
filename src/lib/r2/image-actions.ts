@@ -22,7 +22,16 @@ import {
 
 type Result<T = void> =
 	| { success: true; data: T }
-	| { success: false; error: string; code?: "not_configured" };
+	| {
+			success: false;
+			error: string;
+			code?:
+				| "not_configured"
+				| "not_authorized"
+				| "permission_check_failed"
+				| "upload_record_failed"
+				| "upload_url_failed";
+	  };
 
 /** Which column on the owner row receives the finished URL. */
 export type ImageTarget = "cover" | "logo";
@@ -43,17 +52,61 @@ export interface RequestImageUploadInput {
 // error before touching R2) and again by the `image_assets` RLS policies when
 // the row is written.
 
+type ManageCheck = "allowed" | "denied" | "check_failed";
+
 async function canManageOwner(
 	supabase: Awaited<ReturnType<typeof createClient>>,
 	scope: ImageScope,
 	ownerId: string
-): Promise<boolean> {
+): Promise<ManageCheck> {
 	const { data, error } = await supabase.rpc("can_manage_image_owner", {
 		p_scope: scope,
 		p_owner_id: ownerId,
 	});
-	if (error) return false;
-	return Boolean(data);
+	if (error) {
+		// A missing migration or a malformed id must not masquerade as a
+		// permission denial — log the real cause and report it separately.
+		console.error("can_manage_image_owner failed", error);
+		return "check_failed";
+	}
+	return data ? "allowed" : "denied";
+}
+
+/**
+ * Render any error shape (PostgREST, gateway `msg`/`error_description`,
+ * arrays, bare strings) into one readable line — some proxies answer with
+ * non-standard bodies that carry no `message` field at all.
+ */
+function describeError(error: unknown): string | null {
+	if (error == null) return null;
+	if (typeof error === "string") return error || null;
+	if (typeof error === "object") {
+		const e = error as Record<string, unknown>;
+		for (const key of [
+			"message",
+			"msg",
+			"error_description",
+			"error",
+			"details",
+		]) {
+			const value = e[key];
+			if (typeof value === "string" && value.length > 0) {
+				const code = e["code"];
+				return code == null || code === ""
+					? value
+					: `${value} (${String(code)})`;
+			}
+		}
+		try {
+			const json = JSON.stringify(error);
+			// Empty or unhelpful serialization (e.g. `{}` class instances) must
+			// not mask a more descriptive error from the other attempt.
+			return json && json !== "{}" ? json : null;
+		} catch {
+			return String(error);
+		}
+	}
+	return String(error);
 }
 
 // ─── 1. Ask for an upload slot ──────────────────────────────────────────────
@@ -89,10 +142,19 @@ export async function requestImageUpload(
 	} = await supabase.auth.getUser();
 	if (!user) return { success: false, error: "Unauthenticated" };
 
-	if (!(await canManageOwner(supabase, input.scope, input.ownerId))) {
+	const check = await canManageOwner(supabase, input.scope, input.ownerId);
+	if (check === "check_failed") {
+		return {
+			success: false,
+			error: "Could not verify image upload permission.",
+			code: "permission_check_failed",
+		};
+	}
+	if (check === "denied") {
 		return {
 			success: false,
 			error: "Not authorized to upload images for this course or school.",
+			code: "not_authorized",
 		};
 	}
 
@@ -103,24 +165,62 @@ export async function requestImageUpload(
 		variant: input.variant ?? "cover",
 	});
 
-	const { data: asset, error: insertError } = await supabase
+	// Plain insert (no insert+returning): exotic gateway/proxy setups answer
+	// object-coerced POSTs with non-standard error bodies. Success leaves no
+	// body either way, so the row is resolved by its unique key below.
+	const {
+		error: insertError,
+		status: insertStatus,
+		statusText: insertStatusText,
+	} = await supabase.from("image_assets").insert({
+		scope: input.scope,
+		owner_id: input.ownerId,
+		storage_key: storageKey,
+		original_filename: input.filename,
+		mime_type: input.mimeType,
+		size_bytes: input.sizeBytes,
+		status: "pending",
+		uploaded_by: user.id,
+	});
+
+	// The unique storage key always identifies the record — including when the
+	// insert answered empty under RLS, or the row already exists from an
+	// earlier attempt (unique violation).
+	const {
+		data: row,
+		error: selectError,
+		status: selectStatus,
+	} = await supabase
 		.from("image_assets")
-		.insert({
-			scope: input.scope,
-			owner_id: input.ownerId,
-			storage_key: storageKey,
-			original_filename: input.filename,
-			mime_type: input.mimeType,
-			size_bytes: input.sizeBytes,
-			status: "pending",
-			uploaded_by: user.id,
-		})
 		.select("id")
-		.single();
-	if (insertError || !asset) {
+		.eq("storage_key", storageKey)
+		.eq("uploaded_by", user.id)
+		.maybeSingle();
+
+	const assetId = row?.id ?? null;
+
+	if (!assetId) {
+		// Keep the real cause visible: the raw DB/gateway error and HTTP status
+		// go to the server log and into the message, never into the toast.
+		console.error("image_assets insert failed", {
+			insertError,
+			insertStatus,
+			insertStatusText,
+			selectError,
+			selectStatus,
+			scope: input.scope,
+			ownerId: input.ownerId,
+		});
+		const causes = [
+			insertError ? `insert: ${describeError(insertError)}` : null,
+			selectError ? `lookup: ${describeError(selectError)}` : null,
+		].filter((part): part is string => Boolean(part));
+		const cause = causes.join("; ") || "no row and no error";
+		const httpStatus = insertError ? insertStatus : selectStatus;
 		return {
 			success: false,
-			error: insertError?.message ?? "Could not start the upload.",
+			error: `Could not create the upload record (HTTP ${httpStatus}): ${cause}`,
+			code: "upload_record_failed",
 		};
 	}
 
@@ -128,14 +228,16 @@ export async function requestImageUpload(
 		const uploadUrl = await createUploadUrl(storageKey, input.mimeType);
 		return {
 			success: true,
-			data: { assetId: asset.id, uploadUrl, storageKey },
+			data: { assetId, uploadUrl, storageKey },
 		};
 	} catch (err) {
-		await supabase.from("image_assets").delete().eq("id", asset.id);
+		console.error("createUploadUrl failed", err);
+		await supabase.from("image_assets").delete().eq("id", assetId);
 		return {
 			success: false,
 			error:
 				err instanceof Error ? err.message : "Could not create upload URL.",
+			code: "upload_url_failed",
 		};
 	}
 }
@@ -173,7 +275,11 @@ export async function finalizeImageUpload(
 		.single();
 	if (error || !asset) return { success: false, error: "Upload not found." };
 	if (asset.uploaded_by !== user.id) {
-		return { success: false, error: "Not authorized to finalize this upload." };
+		return {
+			success: false,
+			error: "Not authorized to finalize this upload.",
+			code: "not_authorized",
+		};
 	}
 
 	let meta: Awaited<ReturnType<typeof headObject>>;

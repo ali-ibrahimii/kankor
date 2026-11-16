@@ -6,10 +6,9 @@ import {
 	Sparkles,
 	Users,
 } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { resolveCoverSrc } from "@/components/blocks/course";
+import { CoverFillImage, resolveCoverSrc } from "@/components/blocks/course";
 import { Link } from "@/i18n/navigation";
 import { isSupabaseServerConfigured } from "@/lib/env/server-env";
 import { createClient } from "@/lib/supabase/server";
@@ -68,10 +67,9 @@ export default async function SchoolPublicPage({
 							<div className="flex items-center gap-3">
 								{resolveCoverSrc(school.logo_url) ? (
 									<span className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-white/10">
-										<Image
+										<CoverFillImage
 											src={resolveCoverSrc(school.logo_url) as string}
 											alt={school.name ?? ""}
-											fill
 											sizes="56px"
 											className="object-cover"
 										/>
@@ -140,10 +138,9 @@ export default async function SchoolPublicPage({
 										>
 											<div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-blue-200 to-emerald-100">
 												{cover && (
-													<Image
+													<CoverFillImage
 														src={cover}
 														alt={course.title}
-														fill
 														className="object-cover transition group-hover:scale-105"
 														sizes="(max-width: 640px) 100vw, 50vw"
 													/>

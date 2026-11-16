@@ -436,3 +436,61 @@
 		transition-duration: 0.01ms !important;
 	}
 }
+
+/* ─── Markdown content (lesson text blocks, course descriptions) ──────────── */
+
+/* «نکته مهم» callouts — see src/lib/remark-callouts.ts */
+.prose .callout {
+	--callout-accent: #694bd2;
+	border-inline-start: 4px solid var(--callout-accent);
+	border-radius: 0.75rem;
+	background: color-mix(in oklab, var(--callout-accent) 8%, transparent);
+	padding: 0.9rem 1.15rem;
+	margin-block: 1.25rem;
+	font-style: normal;
+}
+.prose .callout > :first-child {
+	margin-top: 0;
+}
+.prose .callout > :last-child {
+	margin-bottom: 0;
+}
+.prose .callout > p:first-of-type > strong:first-child {
+	color: var(--callout-accent);
+	font-weight: 800;
+}
+.prose .callout-important {
+	--callout-accent: #e11d48;
+}
+.prose .callout-warning {
+	--callout-accent: #d97706;
+}
+.prose .callout-note {
+	--callout-accent: #0284c7;
+}
+.prose .callout-tip {
+	--callout-accent: #059669;
+}
+.dark .prose .callout-important {
+	--callout-accent: #fb7185;
+}
+.dark .prose .callout-warning {
+	--callout-accent: #fbbf24;
+}
+.dark .prose .callout-note {
+	--callout-accent: #38bdf8;
+}
+.dark .prose .callout-tip {
+	--callout-accent: #34d399;
+}
+
+/* Code blocks read LTR even inside RTL pages */
+.prose pre {
+	direction: ltr;
+	text-align: left;
+}
+
+/* Tables use the full readable width */
+.prose table {
+	width: 100%;
+}

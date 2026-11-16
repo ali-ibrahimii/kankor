@@ -25,6 +25,7 @@ import {
 } from "@/components/blocks/discounts";
 import { ResourceDiscussionView } from "@/components/blocks/discussions/ResourceDiscussionView";
 import { Button } from "@/components/ui/button";
+import { MDXView } from "@/components/widgets/markdown-view";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
@@ -329,9 +330,10 @@ export default function CourseDetailClient({
 							<SectionHeading icon={BookOpen} title={tDetail("about")} />
 
 							<div className="max-w-3xl">
-								<p className="whitespace-pre-line break-words text-[15px] leading-[2.2] text-slate-600 dark:text-slate-300">
-									{course.description}
-								</p>
+								<MDXView
+									markdown={course.description}
+									className="text-[15px] prose-slate"
+								/>
 							</div>
 						</section>
 					)}
