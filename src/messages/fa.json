@@ -569,7 +569,9 @@
 			"deleteTitle": "حذف کورس؟",
 			"deleteDescription": "با حذف کورس، تمام ماژول‌ها، درس‌ها و محتوای آن برای همیشه حذف می‌شود. این عمل قابل بازگشت نیست.",
 			"deleteConfirm": "بله، حذف کن",
-			"certificates": "گواهینامه‌ها"
+			"certificates": "گواهینامه‌ها",
+			"examBadge": "امتحان",
+			"lockedByPreviousQuiz": "نیازمند کامیابی در امتحان فصل قبلی"
 		},
 		"learn": {
 			"markComplete": "علامت‌گذاری به عنوان تکمیل شده",
@@ -607,7 +609,65 @@
 			"openResource": "باز کردن",
 			"lastLessonHint": "این آخرین درس کورس است؛ با تکمیل آن، کورس شما کامل می‌شود.",
 			"upNext": "پیش‌رو",
-			"unsupportedBlock": "این بخش از درس در این نسخه قابل نمایش نیست؛ در صورت وجود لینک، از دکمهٔ باز کردن استفاده کنید."
+			"unsupportedBlock": "این بخش از درس در این نسخه قابل نمایش نیست؛ در صورت وجود لینک، از دکمهٔ باز کردن استفاده کنید.",
+			"passQuizToComplete": "برای تکمیل و ادامه، امتحان را پاس کنید",
+			"nextChapterLocked": "نیازمند امتحان",
+			"chapterLockedHint": "برای باز شدن این فصل، ابتدا امتحان فصل قبلی را با موفقیت سپری کنید.",
+			"quizBadge": "امتحان",
+			"quiz": {
+				"notConfigured": "این امتحان هنوز تنظیم نشده است.",
+				"loading": "در حال بارگذاری امتحان…",
+				"loadError": "بارگذاری امتحان ناموفق بود. دوباره تلاش کنید.",
+				"chapterLockedError": "لطفاً ابتدا امتحان فصل قبلی را با موفقیت سپری کنید.",
+				"retryLoad": "تلاش دوباره",
+				"statusPassed": "کامیاب",
+				"statusFailed": "ناکامی",
+				"statusPendingGrade": "در انتظار نمره‌دهی",
+				"statusRequired": "الزامی برای عبور از فصل",
+				"metaQuestions": "{count} سوال",
+				"metaPassingScore": "نمرهٔ کامیابی: {score}%",
+				"metaTimeLimit": "زمان: {minutes} دقیقه",
+				"metaNoTimeLimit": "بدون محدودیت زمان",
+				"metaAttemptsLimited": "تلاش‌ها: {used} از {max}",
+				"metaAttemptsUnlimited": "تلاش نامحدود",
+				"startExam": "شروع امتحان",
+				"retryExam": "امتحان مجدد",
+				"retakePassed": "تمرین دوباره",
+				"remainingAttempts": "{count} تلاش باقی‌مانده",
+				"noAttemptsLeft": "تعداد دفعات مجاز شرکت در این امتحان به پایان رسیده است.",
+				"noQuestions": "هنوز سوالی برای این امتحان ثبت نشده است.",
+				"startError": "شروع امتحان ناموفق بود. دوباره تلاش کنید.",
+				"submitError": "ثبت پاسخ‌ها ناموفق بود. دوباره تلاش کنید.",
+				"attemptProgress": "تلاش شمارهٔ {attempt} · {answered} از {total} پاسخ داده‌شده",
+				"questionLabel": "سوال {number}",
+				"pointsLabel": "{points} نمره",
+				"selectAllThatApply": "همهٔ گزینه‌های درست را انتخاب کنید.",
+				"blankPlaceholder": "جای خالی {number}",
+				"matchSelectPlaceholder": "گزینهٔ مرتبط را انتخاب کنید…",
+				"orderingHint": "با دکمه‌های بالا و پایین گزینه‌ها را به ترتیب درست بچینید.",
+				"moveUp": "انتقال به بالا",
+				"moveDown": "انتقال به پایین",
+				"shortAnswerPlaceholder": "پاسخ خود را بنویسید…",
+				"longAnswerPlaceholder": "پاسخ تشریحی خود را بنویسید…",
+				"showHint": "نمایش راهنما",
+				"hideHint": "بستن راهنما",
+				"unansweredWarning": "{count} سوال بدون پاسخ باقی مانده است. برای ثبت نهایی دوباره کلیک کنید.",
+				"answeredSummary": "{answered} از {total} پاسخ داده‌شده",
+				"submitExam": "ثبت و پایان امتحان",
+				"confirmSubmit": "ثبت با وجود سوالات بی‌پاسخ",
+				"passedToast": "تبریک! در امتحان کامیاب شدید و فصل بعدی باز شد.",
+				"failedToast": "به نمرهٔ کامیابی نرسیدید. مطالب فصل را مرور کرده و دوباره تلاش کنید.",
+				"awaitingGradeToast": "پاسخ‌های شما ثبت شد و در انتظار بررسی استاد است.",
+				"resultPassedTitle": "تبریک! شما در این امتحان کامیاب شدید",
+				"resultFailedTitle": "به نمرهٔ کامیابی نرسیدید",
+				"resultPendingTitle": "ثبت شد — در انتظار نمره‌دهی استاد",
+				"resultPendingDescription": "این امتحان دارای سوالات تشریحی است. پس از نمره‌دهی استاد و کسب نمرهٔ کامیابی، فصل بعدی باز خواهد شد.",
+				"resultScoreSummary": "نمرهٔ شما: {score} از {max} ({percentage}%) — حدنصاب کامیابی: {required}%",
+				"reviewHeading": "مرور پاسخ‌ها",
+				"correctAnswerLabel": "پاسخ درست",
+				"previousAttempts": "تلاش‌های قبلی",
+				"attemptNumber": "تلاش #{number}"
+			}
 		},
 		"view": "مشاهده کورس",
 		"sortBy": "مرتب‌سازی",
@@ -1347,7 +1407,8 @@
 			"addOption": "افزودن گزینه",
 			"addPair": "افزودن جفت",
 			"addBlankAnswer": "افزودن پاسخ جای خالی",
-			"addItem": "افزودن مورد"
+			"addItem": "افزودن مورد",
+			"copyLink": "کپی لینک"
 		},
 		"status": {
 			"editing": "ویرایش"
@@ -1360,7 +1421,8 @@
 			"loadError": "بارگیری امتحان ناموفق بود: {error}",
 			"deleteError": "حذف امتحان ناموفق بود.",
 			"importSuccess": "{count} امتحان وارد شد.",
-			"importPartial": "{inserted} مورد وارد شد، {failed} مورد ناموفق یا رد شد."
+			"importPartial": "{inserted} مورد وارد شد، {failed} مورد ناموفق یا رد شد.",
+			"linkCopied": "لینک امتحان کپی شد"
 		},
 		"validation": {
 			"titleRequired": "عنوان امتحان الزامی است.",
@@ -1413,7 +1475,19 @@
 			"pricing": "قیمت‌گذاری",
 			"isFreeLabel": "امتحان رایگان",
 			"isFreeDescription": "شاگردان می‌توانند بدون پرداخت ثبت‌نام کنند.",
-			"priceCreditsLabel": "قیمت (اعتبار)"
+			"priceCreditsLabel": "قیمت (اعتبار)",
+			"visibilitySection": "نمایش و دسترسی امتحان",
+			"visibilityPublic": "نمایش در عموم",
+			"visibilityPublicDesc": "در صفحهٔ عمومی امتحانات و جست‌وجو نمایش داده می‌شود و همهٔ شاگردان می‌توانند آن را ببینند.",
+			"visibilityCourseOnly": "فقط در کورس (عدم نمایش در عموم)",
+			"visibilityCourseOnlyDesc": "در صفحات عمومی نشان داده نمی‌شود و فقط زمانی در یک کورس نمایش داده می‌شود که معلم یا ادمین کد را وارد کند یا کورس را انتخاب نماید.",
+			"visibilityClassmate": "فقط هم‌صنفی‌ها",
+			"visibilityClassmateDesc": "محدود به اعضای صنف و دروس متصل‌شده در کورس.",
+			"associatedCourseLabel": "انتخاب کورس مرتبط (اختیاری)",
+			"anyCourseByCode": "هر کورسی (با وارد کردن کد امتحان)",
+			"draftCourseBadge": "پیش‌نویس",
+			"anyCourseByCodeHint": "این امتحان در عموم مخفی می‌ماند و فقط در کورسی که معلم یا ادمین کد آن را وارد کند قابل نمایش است.",
+			"selectedCourseHint": "محدود به کورس انتخاب‌شده — در عموم نمایش داده نمی‌شود و مستقیماً در لیست امتحانات همان کورس در دسترس است."
 		},
 		"questionTypes": {
 			"multiple_choice_single_correct": "چندگزینه‌ای (یک پاسخ)",
@@ -1489,7 +1563,9 @@
 				"showAnswers": "نمایش پاسخ",
 				"noLimit": "بدون محدودیت",
 				"unlimited": "∞",
-				"shuffled": "تصادفی"
+				"shuffled": "تصادفی",
+				"public": "عمومی",
+				"courseOnly": "فقط در کورس"
 			},
 			"showAnswersLabels": {
 				"attempt": "بعد از تلاش",
@@ -1730,7 +1806,8 @@
 			"creating": "در حال ایجاد…",
 			"dragToReorder": "برای مرتب‌سازی بکشید",
 			"collapse": "بستن",
-			"expand": "باز کردن"
+			"expand": "باز کردن",
+			"optional": "اختیاری"
 		},
 		"validation": {
 			"titleRequired": "عنوان کورس الزامی است.",
@@ -1920,7 +1997,43 @@
 				"quiz": "امتحان",
 				"assignment": "تکلیف"
 			},
-			"textMarkdownHint": "مارک‌داون پشتیبانی می‌شود: عنوان‌ها، متن بولد، لیست‌های شماره‌دار و نقطه‌ای، جدول‌ها، بلوک‌های کد و نکتهٔ مهم با ‎> [نکته مهم]."
+			"textMarkdownHint": "مارک‌داون پشتیبانی می‌شود: عنوان‌ها، متن بولد، لیست‌های شماره‌دار و نقطه‌ای، جدول‌ها، بلوک‌های کد و نکتهٔ مهم با ‎> [نکته مهم].",
+			"quiz": {
+				"inputLabel": "کد یا لینک امتحان",
+				"inputPlaceholder": "مثلاً C61F0662 یا https://…/quizzes/chapter-1-exam",
+				"inputHint": "کد امتحان (مثلاً C61F0662) یا لینک آن را از صفحهٔ امتحانات وارد کنید تا در این درس نمایش داده شود.",
+				"attachButton": "افزودن امتحان",
+				"orPickExisting": "یا از میان امتحانات موجود انتخاب کنید",
+				"selectPlaceholder": "انتخاب امتحان…",
+				"loading": "در حال بارگذاری اطلاعات امتحان…",
+				"linkedToast": "امتحان «{title}» به این درس متصل شد.",
+				"codeCopied": "کد امتحان کپی شد.",
+				"copyCode": "کپی کد امتحان",
+				"change": "تغییر",
+				"unlink": "حذف اتصال",
+				"publicBadge": "عمومی",
+				"courseOnlyBadge": "فقط در کورس",
+				"questionCount": "{count} سوال",
+				"passingScore": "نمرهٔ کامیابی: {score}%",
+				"noPassingScore": "بدون حدنصاب",
+				"timeLimit": "{minutes} دقیقه",
+				"noTimeLimit": "بدون محدودیت زمان",
+				"maxAttempts": "{count} بار تلاش",
+				"unlimitedAttempts": "تلاش نامحدود",
+				"shuffled": "تصادفی",
+				"emptyQuizWarning": "این امتحان هنوز هیچ سوالی ندارد. از صفحهٔ امتحانات سوالات را اضافه کنید تا شاگردان بتوانند امتحان بدهند.",
+				"passGateNotice": "شاگردان برای تکمیل این درس و باز شدن فصل‌های بعدی باید این امتحان را با موفقیت سپری کنند.",
+				"unavailable": "امتحان متصل‌شده دیگر در دسترس نیست یا حذف شده است. لطفاً امتحان دیگری متصل کنید.",
+				"noteLabel": "یادداشت برای شاگردان",
+				"notePlaceholder": "توضیح یا راهنمایی اختیاری که بالای امتحان نمایش داده می‌شود…",
+				"errors": {
+					"invalidReference": "لطفاً یک کد یا لینک معتبر امتحان وارد کنید.",
+					"notFound": "هیچ امتحانی با این کد یا لینک پیدا نشد.",
+					"boundToOtherCourse": "این امتحان به کورس دیگری اختصاص داده شده و در این کورس قابل استفاده نیست.",
+					"forbidden": "شما اجازهٔ افزودن امتحان به این کورس را ندارید.",
+					"database": "بررسی امتحان ناموفق بود. دوباره تلاش کنید."
+				}
+			}
 		},
 		"contentLoadFailed": "محتوای این کورس بارگذاری نشد — لطفاً صفحه را دوباره بارگذاری کنید.",
 		"loading": "در حال بارگذاری سازندهٔ کورس…",

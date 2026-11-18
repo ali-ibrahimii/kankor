@@ -5,6 +5,7 @@ import {
 	CheckCircle2,
 	ChevronDown,
 	Circle,
+	ClipboardCheck,
 	Clock,
 	Code2,
 	ExternalLink,
@@ -20,6 +21,7 @@ import * as React from "react";
 import { Enums } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
 import { CourseDetail, LessonItem } from "@/types/queries.types";
+import { computeChapterLocks } from "./learning.utils";
 
 export type CourseModuleListProps = {
 	modules: CourseDetail["modules"];
@@ -43,7 +45,7 @@ const CONTENT_TYPE_ICONS: Record<
 	audio: Headphones,
 	pdf_document: BookOpen,
 	slide_presentation: PresentationIcon,
-	quiz: FileText,
+	quiz: ClipboardCheck,
 	assignment: FileText,
 	external_resource: ExternalLink,
 	code_playground: Code2,
@@ -54,27 +56,39 @@ const CONTENT_TYPE_ICONS: Record<
 
 function LessonRow({
 	lesson,
+	isChapterLocked = false,
 	onClick,
 }: {
 	lesson: LessonItem;
+	isChapterLocked?: boolean;
 	onClick?: (id: string) => void;
 }) {
 	const t = useTranslations("courses.detail");
-	const Icon = CONTENT_TYPE_ICONS[lesson.content_type] ?? FileText;
-	const isClickable = !!onClick || lesson.is_previewable;
+	const hasQuiz = Boolean(lesson.has_quiz) || lesson.content_type === "quiz";
+	const Icon = hasQuiz
+		? ClipboardCheck
+		: (CONTENT_TYPE_ICONS[lesson.content_type] ?? FileText);
+	const isCompleted =
+		Boolean(lesson.lesson_progress?.is_completed) &&
+		(!lesson.has_quiz || lesson.quiz_passed === true);
+	const isClickable =
+		!isChapterLocked && (Boolean(onClick) || Boolean(lesson.is_previewable));
 
 	const content = (
 		<div
 			className={cn(
 				"group flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
-				lesson.is_active
-					? "bg-primary/10 text-primary"
-					: "hover:bg-muted/60 text-foreground",
-				isClickable ? "cursor-pointer" : "cursor-default"
+				isChapterLocked
+					? "cursor-not-allowed text-muted-foreground opacity-60"
+					: lesson.is_active
+						? "bg-primary/10 text-primary"
+						: "hover:bg-muted/60 text-foreground",
+				!isChapterLocked && (isClickable ? "cursor-pointer" : "cursor-default")
 			)}
 			onClick={() => isClickable && onClick?.(lesson.id)}
 			role={isClickable ? "button" : undefined}
 			tabIndex={isClickable ? 0 : undefined}
+			aria-disabled={isChapterLocked || undefined}
 			onKeyDown={
 				isClickable
 					? (e) => {
@@ -83,9 +97,11 @@ function LessonRow({
 					: undefined
 			}
 		>
-			{/* Completion indicator */}
+			{/* Completion / lock indicator */}
 			<span className="shrink-0">
-				{lesson.lesson_progress?.is_completed ? (
+				{isChapterLocked ? (
+					<Lock className="size-4 text-muted-foreground/70" />
+				) : isCompleted ? (
 					<CheckCircle2 className="size-4 text-emerald-500" />
 				) : (
 					<Circle className="size-4 text-muted-foreground/40" />
@@ -103,15 +119,20 @@ function LessonRow({
 			{/* Title */}
 			<span className="flex-1 truncate leading-snug">{lesson.title}</span>
 
-			{/* Right side: duration or preview badge or lock */}
+			{/* Right side: exam / duration / preview badge / lock */}
 			<div className="flex shrink-0 items-center gap-1.5 text-xs text-muted-foreground">
+				{Boolean(lesson.has_quiz) && !isCompleted && !isChapterLocked && (
+					<span className="rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-400">
+						{t("examBadge")}
+					</span>
+				)}
 				{lesson.is_previewable && !onClick && (
 					<span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">
 						{t("preview")}
 					</span>
 				)}
-				{!lesson.is_previewable && !onClick && (
-					<Lock className="size-3 text-muted-foreground/40" />
+				{((!lesson.is_previewable && !onClick) || isChapterLocked) && (
+					<Lock className="size-3 text-muted-foreground/50" />
 				)}
 				{lesson.estimated_duration_minutes != null &&
 					lesson.estimated_duration_minutes > 0 && (
@@ -133,18 +154,24 @@ function ModuleSection({
 	module,
 	index,
 	isOpen,
+	isModuleLocked = false,
+	lockedLessonIds,
 	onToggle,
 	onLessonClick,
 }: {
 	module: CourseDetail["modules"][number];
 	index: number;
 	isOpen: boolean;
+	isModuleLocked?: boolean;
+	lockedLessonIds?: Set<string>;
 	onToggle: () => void;
 	onLessonClick?: (id: string) => void;
 }) {
 	const t = useTranslations("courses.detail");
 	const completedCount = module.lessons.filter(
-		(l) => l.lesson_progress?.is_completed
+		(l) =>
+			Boolean(l.lesson_progress?.is_completed) &&
+			(!l.has_quiz || l.quiz_passed === true)
 	).length;
 	const totalCount = module.lessons.length;
 	const totalMinutes = module.lessons.reduce(
@@ -159,6 +186,7 @@ function ModuleSection({
 		meta.push(
 			t("completedOfTotal", { completed: completedCount, total: totalCount })
 		);
+	if (isModuleLocked) meta.push(t("lockedByPreviousQuiz"));
 
 	return (
 		<div
@@ -173,16 +201,24 @@ function ModuleSection({
 				onClick={onToggle}
 				aria-expanded={isOpen}
 			>
-				{/* Module number / completion */}
+				{/* Module number / lock / completion */}
 				<span
 					className={cn(
 						"flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
-						isModuleComplete
-							? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
-							: "bg-primary/10 text-primary"
+						isModuleLocked
+							? "bg-muted text-muted-foreground"
+							: isModuleComplete
+								? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+								: "bg-primary/10 text-primary"
 					)}
 				>
-					{isModuleComplete ? <CheckCircle2 className="size-4" /> : index + 1}
+					{isModuleLocked ? (
+						<Lock className="size-3.5" />
+					) : isModuleComplete ? (
+						<CheckCircle2 className="size-4" />
+					) : (
+						index + 1
+					)}
 				</span>
 
 				<div className="flex-1 min-w-0">
@@ -210,6 +246,7 @@ function ModuleSection({
 							<LessonRow
 								key={lesson.id}
 								lesson={lesson}
+								isChapterLocked={Boolean(lockedLessonIds?.has(lesson.id))}
 								onClick={onLessonClick}
 							/>
 						))}
@@ -270,6 +307,11 @@ export function CourseModuleList({
 		);
 	}
 
+	const chapterLocks = React.useMemo(
+		() => (onLessonClick ? computeChapterLocks(modules) : null),
+		[modules, onLessonClick]
+	);
+
 	return (
 		<div className={cn("space-y-3", className)}>
 			{/* Header row */}
@@ -285,13 +327,19 @@ export function CourseModuleList({
 			{/* Module sections */}
 			{modules
 				.slice()
-				.sort((a, b) => a.order_index - b.order_index)
+				.sort(
+					(a, b) => a.order_index - b.order_index || a.id.localeCompare(b.id)
+				)
 				.map((module, index) => (
 					<ModuleSection
 						key={module.id}
 						module={module}
 						index={index}
 						isOpen={effectiveOpenIds.has(module.id)}
+						isModuleLocked={Boolean(
+							chapterLocks?.lockedModuleIds.has(module.id)
+						)}
+						lockedLessonIds={chapterLocks?.lockedLessonIds}
 						onToggle={() => toggleModule(module.id)}
 						onLessonClick={onLessonClick}
 					/>

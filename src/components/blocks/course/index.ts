@@ -61,6 +61,8 @@ export {
 	resolveCoverSrc,
 } from "./cover.utils";
 export { CoverFillImage } from "./cover-image";
+export type { LessonQuizPlayerProps } from "./lesson-quiz-player";
+export { LessonQuizPlayer } from "./lesson-quiz-player";
 export type { LessonSidebarProps } from "./lesson-sidebar";
 // Learn page components
 export { LessonSidebar, LessonSidebarToggle } from "./lesson-sidebar";

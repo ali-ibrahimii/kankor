@@ -569,7 +569,9 @@
 			"deleteTitle": "Delete course?",
 			"deleteDescription": "Deleting the course removes all of its modules, lessons and content permanently. This cannot be undone.",
 			"deleteConfirm": "Yes, delete it",
-			"certificates": "Certificates"
+			"certificates": "Certificates",
+			"examBadge": "Exam",
+			"lockedByPreviousQuiz": "Pass previous chapter exam to unlock"
 		},
 		"learn": {
 			"markComplete": "Mark as complete",
@@ -607,7 +609,65 @@
 			"openResource": "Open",
 			"lastLessonHint": "This is the last lesson — completing it finishes the course.",
 			"upNext": "Up next",
-			"unsupportedBlock": "This part of the lesson cannot be displayed here yet — use the open button if a link is available."
+			"unsupportedBlock": "This part of the lesson cannot be displayed here yet — use the open button if a link is available.",
+			"passQuizToComplete": "Pass the exam to complete & continue",
+			"nextChapterLocked": "Pass exam first",
+			"chapterLockedHint": "Pass the previous chapter's exam to unlock this chapter.",
+			"quizBadge": "Exam",
+			"quiz": {
+				"notConfigured": "This exam has not been configured yet.",
+				"loading": "Loading exam…",
+				"loadError": "Could not load this exam. Please try again.",
+				"chapterLockedError": "Please pass the previous chapter's exam before opening this exam.",
+				"retryLoad": "Retry",
+				"statusPassed": "Passed",
+				"statusFailed": "Not passed",
+				"statusPendingGrade": "Pending review",
+				"statusRequired": "Required to advance",
+				"metaQuestions": "{count} questions",
+				"metaPassingScore": "Passing score: {score}%",
+				"metaTimeLimit": "{minutes} min limit",
+				"metaNoTimeLimit": "No time limit",
+				"metaAttemptsLimited": "Attempts: {used}/{max}",
+				"metaAttemptsUnlimited": "Unlimited attempts",
+				"startExam": "Start Exam",
+				"retryExam": "Retake Exam",
+				"retakePassed": "Practice Again",
+				"remainingAttempts": "{count} attempts remaining",
+				"noAttemptsLeft": "You have used all available attempts for this exam.",
+				"noQuestions": "This exam does not have any questions yet.",
+				"startError": "Could not start the exam. Please try again.",
+				"submitError": "Could not submit your answers. Please try again.",
+				"attemptProgress": "Attempt #{attempt} · {answered} of {total} answered",
+				"questionLabel": "Question {number}",
+				"pointsLabel": "{points} pts",
+				"selectAllThatApply": "Select all correct answers.",
+				"blankPlaceholder": "Blank #{number}",
+				"matchSelectPlaceholder": "Select match…",
+				"orderingHint": "Use the arrows to arrange items in the correct order.",
+				"moveUp": "Move up",
+				"moveDown": "Move down",
+				"shortAnswerPlaceholder": "Type your answer…",
+				"longAnswerPlaceholder": "Write your full response…",
+				"showHint": "Show hint",
+				"hideHint": "Hide hint",
+				"unansweredWarning": "You still have {count} unanswered questions. Click again to submit anyway.",
+				"answeredSummary": "{answered}/{total} answered",
+				"submitExam": "Submit Exam",
+				"confirmSubmit": "Submit Anyway",
+				"passedToast": "Congratulations! You passed the exam and unlocked the next step.",
+				"failedToast": "You did not reach the passing score. Review and try again.",
+				"awaitingGradeToast": "Your answers were submitted and are awaiting instructor grading.",
+				"resultPassedTitle": "You passed this exam!",
+				"resultFailedTitle": "Passing score not reached",
+				"resultPendingTitle": "Submitted for instructor review",
+				"resultPendingDescription": "This exam includes open-ended questions. Your chapter progress will unlock once your instructor finishes grading.",
+				"resultScoreSummary": "Score: {score}/{max} ({percentage}%) — Required to pass: {required}%",
+				"reviewHeading": "Answer Review",
+				"correctAnswerLabel": "Correct answer",
+				"previousAttempts": "Previous Attempts",
+				"attemptNumber": "Attempt #{number}"
+			}
 		},
 		"view": "View Course",
 		"sortBy": "Sort by",
@@ -1347,7 +1407,8 @@
 			"addOption": "Add Option",
 			"addPair": "Add Pair",
 			"addBlankAnswer": "Add Blank Answer",
-			"addItem": "Add Item"
+			"addItem": "Add Item",
+			"copyLink": "Copy link"
 		},
 		"status": {
 			"editing": "Editing"
@@ -1360,7 +1421,8 @@
 			"loadError": "Could not load quiz: {error}",
 			"deleteError": "Failed to delete quiz.",
 			"importSuccess": "Imported {count} quiz(zes).",
-			"importPartial": "Imported {inserted}, {failed} row(s) failed or were skipped."
+			"importPartial": "Imported {inserted}, {failed} row(s) failed or were skipped.",
+			"linkCopied": "Quiz link copied to clipboard"
 		},
 		"validation": {
 			"titleRequired": "Quiz title is required.",
@@ -1413,7 +1475,19 @@
 			"pricing": "Pricing",
 			"isFreeLabel": "Free quiz",
 			"isFreeDescription": "Students can register without paying.",
-			"priceCreditsLabel": "Price (credits)"
+			"priceCreditsLabel": "Price (credits)",
+			"visibilitySection": "Visibility & Course Access",
+			"visibilityPublic": "Show publicly",
+			"visibilityPublicDesc": "Listed on the public Quizzes catalog and search so any learner can view or register.",
+			"visibilityCourseOnly": "Course only (not public)",
+			"visibilityCourseOnlyDesc": "Hidden from public pages. Shown only inside a course when an instructor or admin enters its code or selects a course.",
+			"visibilityClassmate": "Classroom only",
+			"visibilityClassmateDesc": "Restricted to classroom members and linked course lessons.",
+			"associatedCourseLabel": "Associated course (optional)",
+			"anyCourseByCode": "Any course (attach via quiz code)",
+			"draftCourseBadge": "Draft",
+			"anyCourseByCodeHint": "This quiz stays hidden from the public and appears only in courses where an instructor or admin enters its code.",
+			"selectedCourseHint": "Restricted to the selected course — hidden publicly and ready to attach directly inside that course's lessons."
 		},
 		"questionTypes": {
 			"multiple_choice_single_correct": "Multiple Choice (Single)",
@@ -1489,7 +1563,9 @@
 				"showAnswers": "Show Answers",
 				"noLimit": "No limit",
 				"unlimited": "∞",
-				"shuffled": "Shuffled"
+				"shuffled": "Shuffled",
+				"public": "Public",
+				"courseOnly": "Course only"
 			},
 			"showAnswersLabels": {
 				"attempt": "After attempt",
@@ -1730,7 +1806,8 @@
 			"creating": "Creating…",
 			"dragToReorder": "Drag to reorder",
 			"collapse": "Collapse",
-			"expand": "Expand"
+			"expand": "Expand",
+			"optional": "Optional"
 		},
 		"validation": {
 			"titleRequired": "Course title is required.",
@@ -1920,7 +1997,43 @@
 				"quiz": "Quiz",
 				"assignment": "Assignment"
 			},
-			"textMarkdownHint": "Markdown is supported: headings, bold, ordered/bullet lists, tables, code blocks, and callouts via > [Important]."
+			"textMarkdownHint": "Markdown is supported: headings, bold, ordered/bullet lists, tables, code blocks, and callouts via > [Important].",
+			"quiz": {
+				"inputLabel": "Quiz code or link",
+				"inputPlaceholder": "e.g. C61F0662 or https://…/quizzes/chapter-1-exam",
+				"inputHint": "Paste a quiz entrance code (e.g. C61F0662) or link from the Quizzes page to embed it as this lesson's exam.",
+				"attachButton": "Link Quiz",
+				"orPickExisting": "Or select from your quizzes",
+				"selectPlaceholder": "Choose an existing quiz…",
+				"loading": "Loading linked quiz…",
+				"linkedToast": "Linked quiz \"{title}\".",
+				"codeCopied": "Quiz code copied to clipboard.",
+				"copyCode": "Copy quiz code",
+				"change": "Change",
+				"unlink": "Unlink",
+				"publicBadge": "Public",
+				"courseOnlyBadge": "Course only",
+				"questionCount": "{count} questions",
+				"passingScore": "Pass: {score}%",
+				"noPassingScore": "No min score",
+				"timeLimit": "{minutes} min",
+				"noTimeLimit": "No time limit",
+				"maxAttempts": "{count} attempts",
+				"unlimitedAttempts": "Unlimited attempts",
+				"shuffled": "Shuffled",
+				"emptyQuizWarning": "This quiz has no questions yet. Add questions in the Quizzes page so students can start it.",
+				"passGateNotice": "Students must pass this exam to complete the lesson and unlock subsequent chapters.",
+				"unavailable": "The linked quiz is no longer available or was deleted. Please attach another quiz.",
+				"noteLabel": "Note for students",
+				"notePlaceholder": "Optional instructions or chapter reminder shown above the exam…",
+				"errors": {
+					"invalidReference": "Please enter a valid quiz code or link.",
+					"notFound": "No quiz found for that code or link.",
+					"boundToOtherCourse": "This quiz is restricted to another course and cannot be linked here.",
+					"forbidden": "You do not have permission to attach quizzes to this course.",
+					"database": "Could not look up the quiz. Please try again."
+				}
+			}
 		},
 		"contentLoadFailed": "This course's content could not be loaded — try reloading the page.",
 		"loading": "Loading the course builder…",

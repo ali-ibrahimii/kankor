@@ -47,7 +47,7 @@ import {
 // ─── Props ────────────────────────────────────────────────────────────────
 
 export interface QuizBuilderProps {
-	initialDraft?: QuizDraft & { entrance_code?: string };
+	initialDraft?: QuizDraft;
 	lessonId?: string;
 	schoolId?: string;
 	/** When set, new quizzes are created as agency-owned (see saveQuiz). */
@@ -91,9 +91,10 @@ function QuizBuilderInner({
 	React.useEffect(() => {
 		initQuiz({
 			id: initialDraft?.id,
-			entrance_code: initialDraft?.entrance_code,
+			entrance_code: initialDraft?.entrance_code ?? undefined,
 			lesson_id: lessonIdProp ?? initialDraft?.lesson_id ?? undefined,
 			school_id: schoolIdProp ?? initialDraft?.school_id ?? undefined,
+			agency_id: agencyIdProp ?? initialDraft?.agency_id ?? undefined,
 			questions: initialDraft?.questions ?? [],
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,9 +128,23 @@ function QuizBuilderInner({
 	const form = useAppForm({
 		defaultValues: quizDraftToFormValues(initialDraft),
 		onSubmit: async ({ value }: { value: QuizSettingsValues }) => {
+			if (!value.title.trim()) {
+				setQuiz((prev) => ({
+					...prev,
+					activeTab: "settings",
+					validationErrors: [t("validation.titleRequired")],
+				}));
+				toast.error(t("validation.titleRequired"));
+				return;
+			}
+
 			const qErrors = validateQuestions();
 			if (qErrors.length > 0) {
-				setQuiz((prev) => ({ ...prev, validationErrors: qErrors }));
+				setQuiz((prev) => ({
+					...prev,
+					activeTab: "questions",
+					validationErrors: qErrors,
+				}));
 				toast.error(t("validation.fixIssues"));
 				return;
 			}
@@ -149,7 +164,13 @@ function QuizBuilderInner({
 					toast.success(
 						isEditing ? t("toast.quizUpdated") : t("toast.quizCreated")
 					);
-					if (!quizId) setQuiz((prev) => ({ ...prev, id: result.quizId }));
+					if (!quizId) {
+						setQuiz((prev) => ({
+							...prev,
+							id: result.quizId,
+							entrance_code: result.entranceCode ?? prev.entrance_code,
+						}));
+					}
 					onSave?.(result.quizId);
 				} else {
 					toast.error(result.error);

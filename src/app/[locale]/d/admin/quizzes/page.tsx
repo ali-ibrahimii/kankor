@@ -17,7 +17,9 @@ function toQuizListItem(row: AdminQuizRow): QuizListItem {
 	return {
 		id: row.id ?? "",
 		title: row.title ?? "",
+		slug: row.slug,
 		entrance_code: row.entrance_code ?? "",
+		visibility: row.visibility,
 		time_limit_minutes: row.time_limit_minutes,
 		max_attempts: row.max_attempts,
 		passing_score_percentage: row.passing_score_percentage,
@@ -26,6 +28,7 @@ function toQuizListItem(row: AdminQuizRow): QuizListItem {
 		created_at: row.created_at ?? "",
 		question_count: row.question_count ?? 0,
 		lesson_title: row.lesson_title,
+		course_title: row.course_title,
 		school_id: row.school_id,
 	};
 }

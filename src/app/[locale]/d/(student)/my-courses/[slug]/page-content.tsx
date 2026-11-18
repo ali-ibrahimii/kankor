@@ -15,6 +15,7 @@ import {
 import type { ContentBlock } from "@/components/blocks/course/content-player";
 import {
 	allLessonsCompleted,
+	computeChapterLocks,
 	flattenLessonIds,
 	resolveActiveLessonId,
 } from "@/components/blocks/course/learning.utils";
@@ -44,7 +45,7 @@ async function fetchLessonContentBlocks(lessonId: string) {
 	const { data, error } = await client
 		.from("lesson_content_blocks")
 		.select(
-			"id, block_type, order_index, text_content, video_url, video_provider, video_storage_key, audio_url, audio_storage_key, document_url, document_storage_key, external_resource_url, external_resource_title, image_url"
+			"id, block_type, order_index, text_content, video_url, video_provider, video_storage_key, audio_url, audio_storage_key, document_url, document_storage_key, external_resource_url, external_resource_title, image_url, quiz_id"
 		)
 		.eq("lesson_id", lessonId)
 		.order("order_index");
@@ -84,7 +85,20 @@ export default function CourseLearningContent({
 		enabled: !!slug,
 	});
 
-	// ── Derived lesson ordering / selection ──────────────────────────────────
+	// ── Derived lesson ordering / selection / chapter lock state ─────────────
+	const chapterLocks = React.useMemo(
+		() =>
+			data
+				? computeChapterLocks(data.modules)
+				: {
+						lockedLessonIds: new Set<string>(),
+						lockedModuleIds: new Set<string>(),
+						blockingQuizLesson: null,
+						blockingModule: null,
+					},
+		[data]
+	);
+
 	const orderedLessonIds = React.useMemo(
 		() => (data ? flattenLessonIds(data.modules) : []),
 		[data]
@@ -133,6 +147,9 @@ export default function CourseLearningContent({
 
 	const prevLessonTitle = prevLessonId ? lessonById.get(prevLessonId) : null;
 	const nextLessonTitle = nextLessonId ? lessonById.get(nextLessonId) : null;
+	const isNextLessonLocked = Boolean(
+		nextLessonId && chapterLocks.lockedLessonIds.has(nextLessonId)
+	);
 
 	const allCompleted = !data?.modules?.length
 		? false
@@ -144,6 +161,19 @@ export default function CourseLearningContent({
 		queryFn: () => fetchLessonContentBlocks(activeLessonId!),
 		enabled: !!activeLessonId,
 	});
+
+	const hasQuizInBlocks = React.useMemo(
+		() =>
+			(contentBlocks ?? []).some(
+				(b) => b.block_type === "quiz" && Boolean(b.quiz_id)
+			),
+		[contentBlocks]
+	);
+
+	const handleQuizPassed = React.useCallback(() => {
+		queryClient.invalidateQueries({ queryKey: ["course-learning", slug] });
+		queryClient.invalidateQueries({ queryKey: ["enrollments"] });
+	}, [queryClient, slug]);
 
 	// ── Mark complete ─────────────────────────────────────────────────────────
 	// `advance: false` is used by video auto-complete so the user isn't pulled
@@ -162,10 +192,22 @@ export default function CourseLearningContent({
 			});
 			queryClient.invalidateQueries({ queryKey: ["enrollments"] });
 			toast.success(t("learn.completed"));
-			if (advance && nextLessonId) setLessonParam(nextLessonId);
+			if (advance && nextLessonId) {
+				if (!chapterLocks.lockedLessonIds.has(nextLessonId)) {
+					setLessonParam(nextLessonId);
+				} else if (chapterLocks.blockingQuizLesson) {
+					setLessonParam(chapterLocks.blockingQuizLesson.id);
+					toast.info(tLearn("chapterLockedHint"));
+				}
+			}
 		},
-		onError: () => {
-			toast.error(tLearning("markCompleteFailed"));
+		onError: (err) => {
+			const msg = err instanceof Error ? err.message : "";
+			if (/quiz must be passed/i.test(msg)) {
+				toast.error(tLearn("passQuizToComplete"));
+			} else {
+				toast.error(tLearning("markCompleteFailed"));
+			}
 		},
 	});
 
@@ -218,6 +260,10 @@ export default function CourseLearningContent({
 
 	const progress = Math.round(data.enrollment.progress_percentage ?? 0);
 	const moduleTitle = readableModuleTitle(activeModule?.title) ?? null;
+	const lessonHasQuiz = Boolean(activeLesson.has_quiz) || hasQuizInBlocks;
+	const requiresQuizPass = lessonHasQuiz && activeLesson.quiz_passed !== true;
+	const isActiveCompleted =
+		Boolean(activeLesson.lesson_progress?.is_completed) && !requiresQuizPass;
 
 	return (
 		<div className="flex h-[calc(100dvh-3.5rem)] min-h-0 overflow-hidden bg-background">
@@ -291,6 +337,7 @@ export default function CourseLearningContent({
 				) : (
 					<ContentPlayer
 						key={activeLessonId}
+						lessonId={activeLessonId}
 						lessonTitle={activeLesson.title}
 						moduleTitle={moduleTitle}
 						lessonNumber={currentIndex + 1}
@@ -299,19 +346,24 @@ export default function CourseLearningContent({
 						prevLessonTitle={prevLessonTitle}
 						nextLessonTitle={nextLessonTitle}
 						contentBlocks={contentBlocks ?? []}
-						isCompleted={activeLesson.lesson_progress?.is_completed ?? false}
+						isCompleted={isActiveCompleted}
 						isMarkingComplete={markCompleteMutation.isPending}
+						requiresQuizPass={requiresQuizPass}
+						isNextLessonLocked={isNextLessonLocked}
 						onMarkComplete={() =>
 							markCompleteMutation.mutate({ advance: true })
 						}
 						onAutoComplete={() =>
 							markCompleteMutation.mutate({ advance: false })
 						}
+						onQuizPassed={handleQuizPassed}
 						onPrevLesson={
 							prevLessonId ? () => setLessonParam(prevLessonId) : undefined
 						}
 						onNextLesson={
-							nextLessonId ? () => setLessonParam(nextLessonId) : undefined
+							nextLessonId && !isNextLessonLocked
+								? () => setLessonParam(nextLessonId)
+								: undefined
 						}
 					/>
 				)}
@@ -333,7 +385,13 @@ export default function CourseLearningContent({
 				modules={data.modules}
 				activeLessonId={activeLessonId}
 				totalProgress={data.enrollment.progress_percentage ?? 0}
-				onLessonSelect={(id) => setLessonParam(id)}
+				onLessonSelect={(id) => {
+					if (chapterLocks.lockedLessonIds.has(id)) {
+						toast.info(tLearn("chapterLockedHint"));
+						return;
+					}
+					setLessonParam(id);
+				}}
 				isOpen={sidebarOpen}
 				onClose={() => setSidebarOpen(false)}
 			/>

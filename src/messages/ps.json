@@ -569,7 +569,9 @@
 			"deleteTitle": "کورس ړنګ کړی؟",
 			"deleteDescription": "د کورس ړنګولو له امله ټول ماډلونه، ځنګولونه او منځپانګه له تلې ړنګېږي. دا بیرته نه کېږي.",
 			"deleteConfirm": "هو، یې ړنګ کړئ",
-			"certificates": "سنده"
+			"certificates": "سنده",
+			"examBadge": "ازموینه",
+			"lockedByPreviousQuiz": "لومړی د تېر فصل ازموینه بریالۍ کړئ"
 		},
 		"learn": {
 			"markComplete": "د بشپړ شوي نښه‌ولو",
@@ -607,7 +609,65 @@
 			"openResource": "پرانیستل",
 			"lastLessonHint": "دا د کورس وروستی درس دی؛ په بشپړولو سره کورس بشپړېږي.",
 			"upNext": "بل درس",
-			"unsupportedBlock": "د دې درس دا برخه لا تر اوسه دلته نه ښکاري؛ که لینک وي، د پرانیستلو تڼۍ وکاروئ."
+			"unsupportedBlock": "د دې درس دا برخه لا تر اوسه دلته نه ښکاري؛ که لینک وي، د پرانیستلو تڼۍ وکاروئ.",
+			"passQuizToComplete": "د بشپړولو او دوام لپاره ازموینه بریالۍ کړئ",
+			"nextChapterLocked": "ازموینه اړینه ده",
+			"chapterLockedHint": "د دې فصل د خلاصولو لپاره لومړی د تېر فصل ازموینه بریالۍ تېره کړئ.",
+			"quizBadge": "ازموینه",
+			"quiz": {
+				"notConfigured": "دا ازموینه لا تر اوسه نه ده تنظیم شوې.",
+				"loading": "ازموینه بارېږي…",
+				"loadError": "د ازموینې بارول ناکام شول. بیا هڅه وکړئ.",
+				"chapterLockedError": "مهرباني وکړئ لومړی د تېر فصل ازموینه بریالۍ تېره کړئ.",
+				"retryLoad": "بیا هڅه",
+				"statusPassed": "بریالی",
+				"statusFailed": "نابریالی",
+				"statusPendingGrade": "د نمرې په تمه",
+				"statusRequired": "د فصل تېرولو لپاره اړینه",
+				"metaQuestions": "{count} پوښتنې",
+				"metaPassingScore": "د بریالیتوب نمره: {score}%",
+				"metaTimeLimit": "وخت: {minutes} دقیقې",
+				"metaNoTimeLimit": "بې له وخت محدودیت",
+				"metaAttemptsLimited": "هڅې: {used} له {max}",
+				"metaAttemptsUnlimited": "نامحدودې هڅې",
+				"startExam": "ازموینه پیل کړئ",
+				"retryExam": "بیا ازموینه ورکړئ",
+				"retakePassed": "بیا تمرین وکړئ",
+				"remainingAttempts": "{count} هڅې پاتې دي",
+				"noAttemptsLeft": "تاسو د دې ازموینې ټولې مجاز هڅې کارولې دي.",
+				"noQuestions": "دا ازموینه لا تر اوسه پوښتنې نه لري.",
+				"startError": "د ازموینې پیل ناکام شو. بیا هڅه وکړئ.",
+				"submitError": "د ځوابونو سپارل ناکام شول. بیا هڅه وکړئ.",
+				"attemptProgress": "هڅه #{attempt} · له {total} څخه {answered} ځواب شوي",
+				"questionLabel": "پوښتنه {number}",
+				"pointsLabel": "{points} نمرې",
+				"selectAllThatApply": "ټول سم ځوابونه وټاکئ.",
+				"blankPlaceholder": "تش ځای #{number}",
+				"matchSelectPlaceholder": "اړوند ځواب وټاکئ…",
+				"orderingHint": "د پورته او ښکته تڼیو په مرسته سم ترتیب جوړ کړئ.",
+				"moveUp": "پورته لېږدول",
+				"moveDown": "ښکته لېږدول",
+				"shortAnswerPlaceholder": "خپل ځواب ولیکئ…",
+				"longAnswerPlaceholder": "خپل بشپړ ځواب ولیکئ…",
+				"showHint": "لارښود وښایئ",
+				"hideHint": "لارښود پټ کړئ",
+				"unansweredWarning": "لا هم {count} پوښتنې بې ځوابه پاتې دي. د سپارلو لپاره بیا کلیک وکړئ.",
+				"answeredSummary": "{answered}/{total} ځواب شوي",
+				"submitExam": "ازموینه وسپارئ",
+				"confirmSubmit": "بیا هم وسپارئ",
+				"passedToast": "مبارک شه! تاسو ازموینه بریالۍ کړه او راتلونکی فصل خلاص شو.",
+				"failedToast": "تاسو د بریالیتوب نمرې ته ونه رسېدئ. درسونه تکرار کړئ او بیا هڅه وکړئ.",
+				"awaitingGradeToast": "ستاسو ځوابونه وسپارل شول او د ښوونکي د ارزونې په تمه دي.",
+				"resultPassedTitle": "مبارک شه! تاسو دا ازموینه بریالۍ کړه",
+				"resultFailedTitle": "د بریالیتوب نمره پوره نه شوه",
+				"resultPendingTitle": "د ښوونکي د ارزونې لپاره وسپارل شوه",
+				"resultPendingDescription": "دا ازموینه تشریحي پوښتنې لري. د ښوونکي له نمرې ورکولو او بریالیتوب وروسته به راتلونکی فصل خلاص شي.",
+				"resultScoreSummary": "ستاسو نمره: {score}/{max} ({percentage}%) — د بریالیتوب حد: {required}%",
+				"reviewHeading": "د ځوابونو کتنه",
+				"correctAnswerLabel": "سم ځواب",
+				"previousAttempts": "پخوانۍ هڅې",
+				"attemptNumber": "هڅه #{number}"
+			}
 		},
 		"view": "کورس وګورئ",
 		"sortBy": "ترتیب",
@@ -1347,7 +1407,8 @@
 			"addOption": "انتخاب زياتول",
 			"addPair": "جوړه زياتول",
 			"addBlankAnswer": "د خالي ځای ځواب زياتول",
-			"addItem": "توکی زياتول"
+			"addItem": "توکی زياتول",
+			"copyLink": "لینک کاپي کړئ"
 		},
 		"status": {
 			"editing": "سمول"
@@ -1360,7 +1421,8 @@
 			"loadError": "ازموینه پورته نه شوه: {error}",
 			"deleteError": "د ازموینې ړنګول ناکام شو.",
 			"importSuccess": "{count} ازموینې واردې شوې.",
-			"importPartial": "{inserted} واردې شوې، {failed} ناکامې یا پریښودل شوې."
+			"importPartial": "{inserted} واردې شوې، {failed} ناکامې یا پریښودل شوې.",
+			"linkCopied": "د ازموینې لینک کاپي شو"
 		},
 		"validation": {
 			"titleRequired": "د ازموینې سرلیک اړین دی.",
@@ -1413,7 +1475,19 @@
 			"pricing": "قیمت ټاکل",
 			"isFreeLabel": "وړیا ازموینه",
 			"isFreeDescription": "زده‌کوونکي کولای شي پرته له تادیې ثبت نوم وکړي.",
-			"priceCreditsLabel": "قیمت (کریډیټ)"
+			"priceCreditsLabel": "قیمت (کریډیټ)",
+			"visibilitySection": "د ازموینې ښکاره‌توب او لاسرسی",
+			"visibilityPublic": "په عموم کې ښودل",
+			"visibilityPublicDesc": "د ازموینو په عمومي پاڼه او لټون کې ښودل کېږي او هر زده‌کوونکی ورته لاسرسی لرلای شي.",
+			"visibilityCourseOnly": "یوازې په کورس کې (په عموم کې نه ښودل کېږي)",
+			"visibilityCourseOnlyDesc": "له عمومي پاڼو پټه ده او یوازې هغه وخت په کورس کې ښودل کېږي کله چې ښوونکی یا اډمین یې کوډ دننه کړي یا کورس وټاکي.",
+			"visibilityClassmate": "یوازې ټولګیوال",
+			"visibilityClassmateDesc": "یوازې د ټولګي غړو او د کورس اړوندو درسونو ته محدوده ده.",
+			"associatedCourseLabel": "اړوند کورس وټاکئ (اختیاري)",
+			"anyCourseByCode": "هر کورس (د ازموینې د کوډ په داخلولو سره)",
+			"draftCourseBadge": "مسوده",
+			"anyCourseByCodeHint": "دا ازموینه په عموم کې پټه پاتې کېږي او یوازې په هغه کورس کې ښودل کېږي چې ښوونکی یا اډمین یې کوډ دننه کړي.",
+			"selectedCourseHint": "یوازې ټاکل شوي کورس ته محدوده ده — په عموم کې نه ښودل کېږي او نېغ په نېغه د هماغه کورس په درسونو کې د کارولو لپاره چمتو ده."
 		},
 		"questionTypes": {
 			"multiple_choice_single_correct": "ډیر انتخابي (یو ځواب)",
@@ -1489,7 +1563,9 @@
 				"showAnswers": "ځوابونه ښودل",
 				"noLimit": "محدودیت نشته",
 				"unlimited": "∞",
-				"shuffled": "ګډ شوي"
+				"shuffled": "ګډ شوي",
+				"public": "عمومي",
+				"courseOnly": "یوازې په کورس کې"
 			},
 			"showAnswersLabels": {
 				"attempt": "د هڅې وروسته",
@@ -1730,7 +1806,8 @@
 			"creating": "جوړیږي…",
 			"dragToReorder": "د ترتیب لپاره کش کړئ",
 			"collapse": "پټول",
-			"expand": "خلاصول"
+			"expand": "خلاصول",
+			"optional": "اختیاري"
 		},
 		"validation": {
 			"titleRequired": "د کورس سرلیک اړین دی.",
@@ -1920,7 +1997,43 @@
 				"quiz": "ازموینه",
 				"assignment": "دنده"
 			},
-			"textMarkdownHint": "مارک‌داون ملات: سرلیکونه، ټیټ متن، د شمېرې او نقطې لړلیکونه، جدولونه، کوډ او مهم نکته د ‎> [مهمه نکته] له لارې."
+			"textMarkdownHint": "مارک‌داون ملات: سرلیکونه، ټیټ متن، د شمېرې او نقطې لړلیکونه، جدولونه، کوډ او مهم نکته د ‎> [مهمه نکته] له لارې.",
+			"quiz": {
+				"inputLabel": "د ازموینې کوډ یا لینک",
+				"inputPlaceholder": "د بېلګې په توګه C61F0662 یا https://…/quizzes/chapter-1-exam",
+				"inputHint": "د ازموینو له پاڼې څخه د ازموینې کوډ (لکه C61F0662) یا لینک دننه کړئ ترڅو په دې درس کې وښودل شي.",
+				"attachButton": "ازموینه نښلول",
+				"orPickExisting": "یا له خپلو شته ازموینو څخه وټاکئ",
+				"selectPlaceholder": "ازموینه وټاکئ…",
+				"loading": "د ازموینې معلومات بارېږي…",
+				"linkedToast": "د «{title}» ازموینه له دې درس سره ونښلول شوه.",
+				"codeCopied": "د ازموینې کوډ کاپي شو.",
+				"copyCode": "د ازموینې کوډ کاپي کړئ",
+				"change": "بدلول",
+				"unlink": "اړیکه لرې کول",
+				"publicBadge": "عمومي",
+				"courseOnlyBadge": "یوازې په کورس کې",
+				"questionCount": "{count} پوښتنې",
+				"passingScore": "د بریالیتوب نمره: {score}%",
+				"noPassingScore": "بې له حدنصاب",
+				"timeLimit": "{minutes} دقیقې",
+				"noTimeLimit": "بې له وخت محدودیت",
+				"maxAttempts": "{count} هڅې",
+				"unlimitedAttempts": "نامحدودې هڅې",
+				"shuffled": "ګډوډ شوي",
+				"emptyQuizWarning": "دا ازموینه لا تر اوسه پوښتنې نه لري. د ازموینو په پاڼه کې پوښتنې ورزیاتې کړئ ترڅو زده‌کوونکي یې پیل کړای شي.",
+				"passGateNotice": "زده‌کوونکي باید د دې درس د بشپړولو او راتلونکو فصلونو د خلاصولو لپاره دا ازموینه بریالۍ تېره کړي.",
+				"unavailable": "نښلول شوې ازموینه نوره د لاسرسي وړ نه ده یا ړنګه شوې ده. مهرباني وکړئ بله ازموینه ونښلوئ.",
+				"noteLabel": "د زده‌کوونکو لپاره یادښت",
+				"notePlaceholder": "اختیاري لارښوونه چې د ازموینې پورته ښودل کېږي…",
+				"errors": {
+					"invalidReference": "مهرباني وکړئ د ازموینې سم کوډ یا لینک دننه کړئ.",
+					"notFound": "په دې کوډ یا لینک هېڅ ازموینه ونه موندل شوه.",
+					"boundToOtherCourse": "دا ازموینه بل کورس ته ځانګړې شوې او دلته نه شي کارول کېدای.",
+					"forbidden": "تاسو دې کورس ته د ازموینې د زیاتولو اجازه نه لرئ.",
+					"database": "د ازموینې پلټنه ناکامه شوه. بیا هڅه وکړئ."
+				}
+			}
 		},
 		"contentLoadFailed": "د دې کورس منځپانګه پورته نشوه — مهرباني وکړئ پاڼه بیا پورته کړئ.",
 		"loading": "د کورس جوړونکی پورته کیږي…",

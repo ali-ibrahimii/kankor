@@ -67,12 +67,31 @@ export interface DraftContentBlock {
 	// External resource
 	external_resource_url: string | null;
 	external_resource_title: string | null;
+	// Quiz reference (resolved via quiz entrance code, link/slug, or picker)
+	quiz_id: string | null;
 	// Playlist
 	playlist: string | null;
 	// Slug
 	slug: string | null;
 	_isNew?: boolean;
 	_deleted?: boolean;
+}
+
+export interface ResolvedQuizSummary {
+	id: string;
+	title: string;
+	description: string | null;
+	entrance_code: string;
+	slug: string | null;
+	visibility: Enums<"visibility">;
+	course_id: string | null;
+	course_title: string | null;
+	question_count: number;
+	passing_score_percentage: number | null;
+	time_limit_minutes: number | null;
+	max_attempts: number | null;
+	shuffle_questions: boolean;
+	show_correct_answers_after: Enums<"show_correct_answers"> | null;
 }
 
 // ─── Builder UI state ─────────────────────────────────────────────────────────
@@ -189,12 +208,12 @@ export function createEmptyLesson(
 
 const CONTENT_TYPE_PRIORITY: readonly LessonContentType[] = [
 	"video",
+	"quiz",
 	"pdf_document",
 	"slide_presentation",
 	"audio",
 	"code_playground",
 	"external_resource",
-	"quiz",
 	"assignment",
 	"text",
 ];
@@ -256,6 +275,7 @@ export function createEmptyBlock(
 		solution_code: null,
 		external_resource_url: null,
 		external_resource_title: null,
+		quiz_id: null,
 		playlist: null,
 		slug: null,
 		_isNew: true,
@@ -282,4 +302,5 @@ export const ADDABLE_BLOCK_TYPES: LessonContentType[] = [
 	"slide_presentation",
 	"external_resource",
 	"code_playground",
+	"quiz",
 ];

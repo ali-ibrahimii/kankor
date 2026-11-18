@@ -134,6 +134,7 @@ function block(
 		solution_code: null,
 		external_resource_url: null,
 		external_resource_title: null,
+		quiz_id: null,
 		playlist: null,
 		slug: null,
 		...over,
