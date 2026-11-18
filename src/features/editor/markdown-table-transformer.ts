@@ -1,5 +1,13 @@
-import type { MultilineElementTransformer } from "@lexical/markdown";
+import type {
+	ElementTransformer,
+	MultilineElementTransformer,
+} from "@lexical/markdown";
 import { isTableRowDivider, TRANSFORMERS } from "@lexical/markdown";
+import {
+	$createHorizontalRuleNode,
+	$isHorizontalRuleNode,
+	HorizontalRuleNode,
+} from "@lexical/react/LexicalHorizontalRuleNode";
 import {
 	$createTableCellNode,
 	$createTableNode,
@@ -131,9 +139,31 @@ export const TABLE_TRANSFORMER: MultilineElementTransformer = {
 	},
 };
 
+// ─── Horizontal rule ⇄ Markdown `---` ───────────────────────────────────────
+//
+// @lexical/markdown ships no HR transformer, so `---` lines were left as
+// plain text. This round-trips them with the HorizontalRuleNode.
+
+const HR_REGEXP = /^\s*(?:-{3,}|\*{3,}|_{3,})\s*$/;
+
+export const HR_TRANSFORMER: ElementTransformer = {
+	type: "element",
+	dependencies: [HorizontalRuleNode],
+	regExp: HR_REGEXP,
+	replace: (parentNode) => {
+		parentNode.append($createHorizontalRuleNode());
+		return true;
+	},
+	export: (node) => ($isHorizontalRuleNode(node) ? "---" : null),
+};
+
 /**
  * The markdown transformers used across the course editor: the standard
- * set plus GFM table round-tripping (tables would otherwise be dropped on
- * export).
+ * set plus GFM table round-tripping and horizontal rules (neither ships
+ * with @lexical/markdown).
  */
-export const MD_TRANSFORMERS = [...TRANSFORMERS, TABLE_TRANSFORMER];
+export const MD_TRANSFORMERS = [
+	...TRANSFORMERS,
+	TABLE_TRANSFORMER,
+	HR_TRANSFORMER,
+];

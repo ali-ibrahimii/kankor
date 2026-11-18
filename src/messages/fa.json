@@ -1651,6 +1651,73 @@
 			"questionN": "سوال {n}"
 		}
 	},
+	"editor": {
+		"tabs": {
+			"write": "نوشتن",
+			"preview": "پیش‌نمایش",
+			"source": "کد"
+		},
+		"preview": {
+			"empty": "هنوز چیزی برای نمایش نیست. ابتدا متنی بنویسید."
+		},
+		"source": {
+			"placeholder": "مارک‌داون را اینجا بنویسید…",
+			"hint": "این کد، همان متن اصلی است؛ هر تغییری اینجا در «نوشتن» و «پیش‌نمایش» هم اعمال می‌شود."
+		},
+		"link": {
+			"placeholder": "نشانی پیوند را وارد کنید…",
+			"apply": "ثبت پیوند"
+		},
+		"image": {
+			"altPlaceholder": "متن جایگزین",
+			"urlPlaceholder": "نشانی تصویر",
+			"apply": "افزودن تصویر"
+		},
+		"toolbar": {
+			"undo": "برگشت",
+			"redo": "بازانجام",
+			"paragraph": "متن عادی",
+			"heading1": "عنوان ۱",
+			"heading2": "عنوان ۲",
+			"heading3": "عنوان ۳",
+			"quote": "نقل‌قول",
+			"codeBlock": "بلاک کد",
+			"bulletList": "فهرست نقطه‌ای",
+			"orderedList": "فهرست شماره‌دار",
+			"checklist": "فهرست چک‌باکس",
+			"bold": "پررنگ",
+			"italic": "ایتالیک",
+			"underline": "زیرخط‌دار",
+			"strikethrough": "خط‌خورده",
+			"inlineCode": "کد درون‌خطی",
+			"link": "پیوند",
+			"removeLink": "حذف پیوند",
+			"image": "تصویر",
+			"table": "جدول",
+			"hr": "خط افقی",
+			"callout": "نکته مهم",
+			"alignRight": "چینش راست",
+			"alignCenter": "چینش وسط",
+			"alignLeft": "چینش چپ",
+			"alignJustify": "چینش کشیده",
+			"clear": "پاک‌سازی متن"
+		},
+		"slash": {
+			"h1": "عنوان درجه ۱",
+			"h2": "عنوان درجه ۲",
+			"h3": "عنوان درجه ۳",
+			"bullet": "فهرست نقطه‌ای",
+			"numbered": "فهرست شماره‌دار",
+			"checklist": "فهرست چک‌باکس",
+			"quote": "نقل‌قول",
+			"callout": "نکته مهم",
+			"code": "بلاک کد",
+			"table": "جدول",
+			"hr": "خط افقی",
+			"image": "تصویر",
+			"clear": "پاک‌سازی متن"
+		}
+	},
 	"courseBuilder": {
 		"meta": {
 			"newCourse": "کورس جدید",

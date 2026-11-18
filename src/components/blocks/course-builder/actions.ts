@@ -355,20 +355,67 @@ export async function saveCourseContent(
 	const supabase = await createClient();
 
 	try {
-		// ── Modules ──────────────────────────────────────────────────────────────
+		// Deletes run children-first (blocks → lessons → modules): both
+		// `lesson_content_blocks.lesson_id` and `lessons.module_id` are plain
+		// foreign keys without ON DELETE CASCADE, so parents must outlive their
+		// children inside this transaction.
 
 		const deletedModuleIds = modules
 			.filter((m) => m._deleted && !m._isNew)
 			.map((m) => m.id);
 		const activeModules = modules.filter((m) => !m._deleted);
+		const deletedLessonIds = lessons
+			.filter(
+				(l) =>
+					(l._deleted && !l._isNew) ||
+					(l.module_id !== null && deletedModuleIds.includes(l.module_id))
+			)
+			.map((l) => l.id);
+		const activeLessons = lessons.filter(
+			(l) => !l._deleted && !deletedLessonIds.includes(l.id)
+		);
+		const deletedBlockIds = blocks
+			.filter(
+				(b) =>
+					(b._deleted && !b._isNew) ||
+					(b.lesson_id !== null && deletedLessonIds.includes(b.lesson_id))
+			)
+			.map((b) => b.id);
+		const activeBlocks = blocks.filter(
+			(b) => !b._deleted && !deletedBlockIds.includes(b.id)
+		);
+
+		// ── Content blocks (delete first: children of lessons) ─────────────────────
+
+		if (deletedBlockIds.length > 0) {
+			const { error } = await supabase
+				.from("lesson_content_blocks")
+				.delete()
+				.in("id", deletedBlockIds);
+			if (error) return failure(error);
+		}
+
+		// ── Lessons (before the modules that reference them) ──────────────────────
+
+		if (deletedLessonIds.length > 0) {
+			const { error } = await supabase
+				.from("lessons")
+				.delete()
+				.in("id", deletedLessonIds);
+			if (error) return failure(error);
+		}
+
+		// ── Modules ──────────────────────────────────────────────────────────────
 
 		if (deletedModuleIds.length > 0) {
 			const { error } = await supabase
 				.from("modules")
 				.delete()
 				.in("id", deletedModuleIds);
-			if (error) throw new Error(error.message);
+			if (error) return failure(error);
 		}
+
+		// ── Upserts run parents-first (modules → lessons → blocks) ────────────────
 
 		if (activeModules.length > 0) {
 			const { error } = await supabase.from("modules").upsert(
@@ -383,22 +430,7 @@ export async function saveCourseContent(
 				})),
 				{ onConflict: "id" }
 			);
-			if (error) throw new Error(error.message);
-		}
-
-		// ── Lessons ───────────────────────────────────────────────────────────────
-
-		const deletedLessonIds = lessons
-			.filter((l) => l._deleted && !l._isNew)
-			.map((l) => l.id);
-		const activeLessons = lessons.filter((l) => !l._deleted);
-
-		if (deletedLessonIds.length > 0) {
-			const { error } = await supabase
-				.from("lessons")
-				.delete()
-				.in("id", deletedLessonIds);
-			if (error) throw new Error(error.message);
+			if (error) return failure(error);
 		}
 
 		if (activeLessons.length > 0) {
@@ -418,22 +450,7 @@ export async function saveCourseContent(
 				})),
 				{ onConflict: "id" }
 			);
-			if (error) throw new Error(error.message);
-		}
-
-		// ── Content blocks ────────────────────────────────────────────────────────
-
-		const deletedBlockIds = blocks
-			.filter((b) => b._deleted && !b._isNew)
-			.map((b) => b.id);
-		const activeBlocks = blocks.filter((b) => !b._deleted);
-
-		if (deletedBlockIds.length > 0) {
-			const { error } = await supabase
-				.from("lesson_content_blocks")
-				.delete()
-				.in("id", deletedBlockIds);
-			if (error) throw new Error(error.message);
+			if (error) return failure(error);
 		}
 
 		if (activeBlocks.length > 0) {
@@ -465,7 +482,7 @@ export async function saveCourseContent(
 				})),
 				{ onConflict: "id" }
 			);
-			if (error) throw new Error(error.message);
+			if (error) return failure(error);
 		}
 
 		const { data: courseRow } = await supabase

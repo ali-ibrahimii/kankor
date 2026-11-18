@@ -1,6 +1,11 @@
 "use client";
 
-import { $createCodeNode, CodeHighlightNode, CodeNode } from "@lexical/code";
+import {
+	$createCodeNode,
+	$isCodeNode,
+	CodeHighlightNode,
+	CodeNode,
+} from "@lexical/code";
 import {
 	$isLinkNode,
 	AutoLinkNode,
@@ -8,6 +13,8 @@ import {
 	TOGGLE_LINK_COMMAND,
 } from "@lexical/link";
 import {
+	$isListItemNode,
+	$isListNode,
 	INSERT_CHECK_LIST_COMMAND,
 	INSERT_ORDERED_LIST_COMMAND,
 	INSERT_UNORDERED_LIST_COMMAND,
@@ -18,7 +25,6 @@ import {
 	$convertFromMarkdownString,
 	$convertToMarkdownString,
 } from "@lexical/markdown";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ClearEditorPlugin } from "@lexical/react/LexicalClearEditorPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -26,6 +32,12 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import {
+	$createHorizontalRuleNode,
+	HorizontalRuleNode,
+	INSERT_HORIZONTAL_RULE_COMMAND,
+} from "@lexical/react/LexicalHorizontalRuleNode";
+import { HorizontalRulePlugin } from "@lexical/react/LexicalHorizontalRulePlugin";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
@@ -36,6 +48,8 @@ import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import {
 	$createHeadingNode,
 	$createQuoteNode,
+	$isHeadingNode,
+	$isQuoteNode,
 	HeadingNode,
 	QuoteNode,
 } from "@lexical/rich-text";
@@ -47,16 +61,20 @@ import {
 	TableRowNode,
 } from "@lexical/table";
 import {
+	$createParagraphNode,
 	$getSelection,
 	$isElementNode,
 	$isRangeSelection,
+	$isRootNode,
 	CAN_REDO_COMMAND,
 	CAN_UNDO_COMMAND,
 	CLEAR_EDITOR_COMMAND,
 	COMMAND_PRIORITY_LOW,
+	type ElementNode,
 	FORMAT_ELEMENT_COMMAND,
 	FORMAT_TEXT_COMMAND,
 	type LexicalEditor as LexicalEditorType,
+	type LexicalNode,
 	REDO_COMMAND,
 	SELECTION_CHANGE_COMMAND,
 	UNDO_COMMAND,
@@ -70,15 +88,20 @@ import {
 	Check,
 	CheckSquare,
 	Code,
+	Code2,
+	Eye,
 	Heading1,
 	Heading2,
 	Heading3,
+	Image as ImageIcon,
 	Italic,
 	Lightbulb,
 	Link,
-	Link2Off,
 	List,
 	ListOrdered,
+	Minus,
+	PenLine,
+	Pilcrow,
 	Quote,
 	Redo2,
 	Strikethrough,
@@ -87,8 +110,18 @@ import {
 	Underline,
 	Undo2,
 } from "lucide-react";
-import type * as React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import {
+	type ComponentType,
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MDXView } from "@/components/widgets/markdown-view";
 import { cn } from "@/lib/utils";
 import { MD_TRANSFORMERS } from "./markdown-table-transformer";
 
@@ -117,41 +150,42 @@ const EDITOR_NODES = [
 	TableNode,
 	TableCellNode,
 	TableRowNode,
+	HorizontalRuleNode,
 ];
 
 const theme = {
 	ltr: "text-left",
 	rtl: "text-right",
 	placeholder:
-		"text-text-disabled-300 absolute pointer-events-none select-none top-4 left-4 right-4",
-	paragraph: "text-paragraph-md mb-2 relative leading-relaxed",
+		"text-muted-foreground absolute pointer-events-none select-none top-4 start-4 end-4",
+	paragraph: "text-sm text-foreground mb-2 relative leading-relaxed",
 	quote:
-		"border-l-4 border-primary-500 pl-4 italic text-text-sub-600 my-4 bg-bg-weak-50/50 py-2 pr-2 rounded-r-lg",
+		"border-s-4 border-primary ps-4 italic text-muted-foreground my-4 bg-muted/40 py-2 pe-2 rounded-e-lg",
 	heading: {
-		h1: "text-3xl font-bold text-text-strong-950 mt-6 mb-2 leading-tight tracking-tight",
-		h2: "text-2xl font-semibold text-text-strong-950 mt-5 mb-2 leading-snug tracking-tight",
-		h3: "text-xl font-semibold text-text-strong-950 mt-4 mb-2 leading-normal tracking-tight",
+		h1: "text-2xl font-bold text-foreground mt-5 mb-2 leading-tight tracking-tight",
+		h2: "text-xl font-semibold text-foreground mt-4 mb-2 leading-snug tracking-tight",
+		h3: "text-lg font-semibold text-foreground mt-3 mb-2 leading-normal tracking-tight",
 	},
 	list: {
 		nested: {
 			listitem: "list-none",
 		},
-		ol: "list-decimal pl-6 my-2 space-y-1",
-		ul: "list-disc pl-6 my-2 space-y-1",
-		listitem: "text-text-strong-950",
+		ol: "list-decimal ps-6 my-2 space-y-1",
+		ul: "list-disc ps-6 my-2 space-y-1",
+		listitem: "text-foreground",
 		listitemChecked: "editor-listitem-checked",
 		listitemUnchecked: "editor-listitem-unchecked",
 	},
-	checklist: "pl-6 my-2 space-y-1 list-none",
-	link: "text-primary-600 underline hover:text-primary-700 cursor-pointer transition duration-150",
+	checklist: "ps-6 my-2 space-y-1 list-none",
+	link: "text-primary underline underline-offset-2 hover:opacity-80 cursor-pointer transition duration-150",
 	text: {
 		bold: "font-bold",
 		italic: "italic",
 		underline: "underline",
 		strikethrough: "line-through",
-		code: "font-mono text-sm bg-bg-weak-100 text-text-strong-950 px-1.5 py-0.5 rounded border border-stroke-soft-200",
+		code: "font-mono text-[0.9em] bg-muted text-foreground px-1.5 py-0.5 rounded border border-border",
 	},
-	code: "font-mono text-sm bg-slate-900 text-slate-100 p-4 rounded-xl my-4 overflow-x-auto block leading-relaxed shadow-inner border border-slate-800",
+	code: "font-mono text-sm bg-slate-900 text-slate-100 p-4 rounded-xl my-3 overflow-x-auto block leading-relaxed shadow-inner border border-slate-800",
 	codeHighlight: {
 		atrule: "text-pink-400",
 		attr: "text-yellow-200",
@@ -228,9 +262,47 @@ function MarkdownSyncPlugin({ content, onChange }: MarkdownSyncPluginProps) {
 	);
 }
 
+// ─── Shared toolbar atoms ─────────────────────────────────────────────────────
+
+function ToolbarButton({
+	onClick,
+	active = false,
+	disabled = false,
+	title,
+	children,
+}: {
+	onClick: () => void;
+	active?: boolean;
+	disabled?: boolean;
+	title: string;
+	children: ReactNode;
+}) {
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			disabled={disabled}
+			title={title}
+			aria-label={title}
+			aria-pressed={active}
+			className={cn(
+				"inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40 disabled:hover:bg-transparent",
+				active && "bg-primary/10 text-primary ring-1 ring-primary/30"
+			)}
+		>
+			{children}
+		</button>
+	);
+}
+
+function ToolbarSeparator() {
+	return <div className="mx-0.5 h-5 w-px bg-border" aria-hidden="true" />;
+}
+
 // Floating Selection Toolbar Component
 function FloatingToolbarPlugin() {
 	const [editor] = useLexicalComposerContext();
+	const t = useTranslations("editor");
 	const [visible, setVisible] = useState(false);
 	const [position, setPosition] = useState({ top: 0, left: 0 });
 	const [isBold, setIsBold] = useState(false);
@@ -325,12 +397,9 @@ function FloatingToolbarPlugin() {
 		};
 	}, [editor, visible, updateToolbar]);
 
-	if (!visible) return null;
-
 	const toggleLink = () => {
 		if (isLink) {
 			editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-			setShowLinkInput(false);
 		} else {
 			setShowLinkInput(true);
 		}
@@ -339,9 +408,11 @@ function FloatingToolbarPlugin() {
 	const applyLink = () => {
 		if (linkUrl.trim()) {
 			editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl.trim());
+			setShowLinkInput(false);
 		}
-		setShowLinkInput(false);
 	};
+
+	if (!visible) return null;
 
 	return (
 		<div
@@ -350,102 +421,67 @@ function FloatingToolbarPlugin() {
 				left: `${position.left}px`,
 				transform: "translateX(-50%)",
 			}}
-			className="absolute z-40 flex items-center gap-1 p-1 bg-bg-white-0 border border-stroke-soft-200 shadow-regular-md rounded-xl backdrop-blur-md animate-in fade-in-0 zoom-in-95 duration-100"
+			className="absolute z-50 flex items-center gap-0.5 rounded-lg border border-border bg-popover p-1 shadow-md"
 		>
 			{!showLinkInput ? (
 				<>
-					<button
-						type="button"
+					<ToolbarButton
+						title={t("toolbar.bold")}
+						active={isBold}
 						onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isBold
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 font-bold"
-								: ""
-						}`}
-						title="Bold"
 					>
-						<Bold className="w-4 h-4" />
-					</button>
-					<button
-						type="button"
+						<Bold className="size-4" />
+					</ToolbarButton>
+					<ToolbarButton
+						title={t("toolbar.italic")}
+						active={isItalic}
 						onClick={() =>
 							editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")
 						}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isItalic
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 italic"
-								: ""
-						}`}
-						title="Italic"
 					>
-						<Italic className="w-4 h-4" />
-					</button>
-					<button
-						type="button"
+						<Italic className="size-4" />
+					</ToolbarButton>
+					<ToolbarButton
+						title={t("toolbar.underline")}
+						active={isUnderline}
 						onClick={() =>
 							editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
 						}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isUnderline
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 underline"
-								: ""
-						}`}
-						title="Underline"
 					>
-						<Underline className="w-4 h-4" />
-					</button>
-					<button
-						type="button"
+						<Underline className="size-4" />
+					</ToolbarButton>
+					<ToolbarButton
+						title={t("toolbar.strikethrough")}
+						active={isStrikethrough}
 						onClick={() =>
 							editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
 						}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isStrikethrough
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 line-through"
-								: ""
-						}`}
-						title="Strikethrough"
 					>
-						<Strikethrough className="w-4 h-4" />
-					</button>
-					<button
-						type="button"
+						<Strikethrough className="size-4" />
+					</ToolbarButton>
+					<ToolbarButton
+						title={t("toolbar.inlineCode")}
+						active={isCode}
 						onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code")}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isCode
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 font-mono"
-								: ""
-						}`}
-						title="Inline Code"
 					>
-						<Code className="w-4 h-4" />
-					</button>
-					<div className="w-px h-4 bg-stroke-soft-200 mx-1" />
-					<button
-						type="button"
+						<Code className="size-4" />
+					</ToolbarButton>
+					<ToolbarButton
+						title={isLink ? t("toolbar.removeLink") : t("toolbar.link")}
+						active={isLink}
 						onClick={toggleLink}
-						className={`p-1.5 rounded-md hover:bg-bg-weak-50 text-text-sub-600 transition-colors ${
-							isLink
-								? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50"
-								: ""
-						}`}
-						title={isLink ? "Remove Link" : "Add Link"}
 					>
-						{isLink ? (
-							<Link2Off className="w-4 h-4" />
-						) : (
-							<Link className="w-4 h-4" />
-						)}
-					</button>
+						<Link className="size-4" />
+					</ToolbarButton>
 				</>
 			) : (
-				<div className="flex items-center gap-1 px-2 py-1">
+				<div className="flex items-center gap-1 px-1">
 					<input
 						type="text"
 						value={linkUrl}
 						onChange={(e) => setLinkUrl(e.target.value)}
-						placeholder="Paste link URL..."
-						className="text-xs bg-bg-weak-50 outline-none px-2 py-1 rounded border border-stroke-soft-200 w-44"
+						placeholder={t("link.placeholder")}
+						className="w-44 rounded-md border border-border bg-background px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-ring"
 						onKeyDown={(e) => {
 							if (e.key === "Enter") applyLink();
 							if (e.key === "Escape") setShowLinkInput(false);
@@ -454,9 +490,11 @@ function FloatingToolbarPlugin() {
 					<button
 						type="button"
 						onClick={applyLink}
-						className="p-1 rounded bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+						title={t("link.apply")}
+						aria-label={t("link.apply")}
+						className="rounded-md bg-primary p-1 text-primary-foreground transition-colors hover:opacity-90"
 					>
-						<Check className="w-3.5 h-3.5" />
+						<Check className="size-3.5" />
 					</button>
 				</div>
 			)}
@@ -464,147 +502,174 @@ function FloatingToolbarPlugin() {
 	);
 }
 
-// Slash Commands Definition
+// ─── Slash commands ──────────────────────────────────────────────────────────
+
 type CommandOption = {
 	key: string;
 	label: string;
-	description: string;
-	icon: React.ComponentType<{ className?: string }>;
+	icon: ComponentType<{ className?: string }>;
 	action: (editor: LexicalEditorType) => void;
 };
 
-const COMMAND_OPTIONS: CommandOption[] = [
-	{
-		key: "h1",
-		label: "Heading 1",
-		description: "",
-		icon: Heading1,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createHeadingNode("h1"));
-			}
-		},
-	},
-	{
-		key: "h2",
-		label: "Heading 2",
-		description: "",
-		icon: Heading2,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createHeadingNode("h2"));
-			}
-		},
-	},
-	{
-		key: "h3",
-		label: "Heading 3",
-		description: "",
-		icon: Heading3,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createHeadingNode("h3"));
-			}
-		},
-	},
-	{
-		key: "bullet",
-		label: "Bullet List",
-		description: "",
-		icon: List,
-		action: (editor) => {
-			editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
-		},
-	},
-	{
-		key: "numbered",
-		label: "Numbered List",
-		description: "",
-		icon: ListOrdered,
-		action: (editor) => {
-			editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
-		},
-	},
-	{
-		key: "checklist",
-		label: "Checklist",
-		description: "",
-		icon: CheckSquare,
-		action: (editor) => {
-			editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
-		},
-	},
-	{
-		key: "quote",
-		label: "Quote",
-		description: "",
-		icon: Quote,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createQuoteNode());
-			}
-		},
-	},
-	{
-		key: "callout",
-		label: "Callout",
-		description: "",
-		icon: Lightbulb,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createQuoteNode());
-				if (selection.isCollapsed()) {
-					selection.insertText(`${defaultCalloutMarker()} `);
+function insertMarkdownImage(
+	editor: LexicalEditorType,
+	alt: string,
+	url: string
+) {
+	editor.update(() => {
+		const selection = $getSelection();
+		if ($isRangeSelection(selection)) {
+			selection.insertText(`![${alt}](${url})`);
+		}
+	});
+}
+
+function getCommandOptions(
+	t: ReturnType<typeof useTranslations>
+): CommandOption[] {
+	return [
+		{
+			key: "h1",
+			label: t("slash.h1"),
+			icon: Heading1,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createHeadingNode("h1"));
 				}
-			}
+			},
 		},
-	},
-	{
-		key: "code",
-		label: "Code Block",
-		description: "",
-		icon: Code,
-		action: (_editor) => {
-			const selection = $getSelection();
-			if ($isRangeSelection(selection)) {
-				$setBlocksType(selection, () => $createCodeNode());
-			}
+		{
+			key: "h2",
+			label: t("slash.h2"),
+			icon: Heading2,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createHeadingNode("h2"));
+				}
+			},
 		},
-	},
-	{
-		key: "table",
-		label: "Table",
-		description: "",
-		icon: Table,
-		action: (editor) => {
-			editor.dispatchCommand(INSERT_TABLE_COMMAND, { columns: "3", rows: "3" });
+		{
+			key: "h3",
+			label: t("slash.h3"),
+			icon: Heading3,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createHeadingNode("h3"));
+				}
+			},
 		},
-	},
-	{
-		key: "clear",
-		label: "Clear",
-		description: "",
-		icon: Trash2,
-		action: (editor) => {
-			editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+		{
+			key: "bullet",
+			label: t("slash.bullet"),
+			icon: List,
+			action: (editor) => {
+				editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+			},
 		},
-	},
-];
+		{
+			key: "numbered",
+			label: t("slash.numbered"),
+			icon: ListOrdered,
+			action: (editor) => {
+				editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+			},
+		},
+		{
+			key: "checklist",
+			label: t("slash.checklist"),
+			icon: CheckSquare,
+			action: (editor) => {
+				editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
+			},
+		},
+		{
+			key: "quote",
+			label: t("slash.quote"),
+			icon: Quote,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createQuoteNode());
+				}
+			},
+		},
+		{
+			key: "callout",
+			label: t("slash.callout"),
+			icon: Lightbulb,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createQuoteNode());
+					if (selection.isCollapsed()) {
+						selection.insertText(`${defaultCalloutMarker()} `);
+					}
+				}
+			},
+		},
+		{
+			key: "code",
+			label: t("slash.code"),
+			icon: Code2,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createCodeNode());
+				}
+			},
+		},
+		{
+			key: "table",
+			label: t("slash.table"),
+			icon: Table,
+			action: (editor) => {
+				editor.dispatchCommand(INSERT_TABLE_COMMAND, {
+					columns: "3",
+					rows: "3",
+				});
+			},
+		},
+		{
+			key: "hr",
+			label: t("slash.hr"),
+			icon: Minus,
+			action: (editor) => {
+				editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined);
+			},
+		},
+		{
+			key: "image",
+			label: t("slash.image"),
+			icon: ImageIcon,
+			action: (editor) => {
+				insertMarkdownImage(editor, "alt", "https://");
+			},
+		},
+		{
+			key: "clear",
+			label: t("slash.clear"),
+			icon: Trash2,
+			action: (editor) => {
+				editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+			},
+		},
+	];
+}
 
 // Slash Commands Trigger & Dropdown Menu Component
 function SlashCommandsPlugin() {
 	const [editor] = useLexicalComposerContext();
+	const t = useTranslations("editor");
+	const options = useMemo(() => getCommandOptions(t), [t]);
 	const [visible, setVisible] = useState(false);
 	const [position, setPosition] = useState({ top: 0, left: 0 });
 	const [search, setSearch] = useState("");
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
-	const filteredOptions = COMMAND_OPTIONS.filter(
+	const filteredOptions = options.filter(
 		(option) =>
 			option.label.toLowerCase().includes(search.toLowerCase()) ||
 			option.key.toLowerCase().includes(search.toLowerCase())
@@ -651,7 +716,8 @@ function SlashCommandsPlugin() {
 	}, [editor]);
 
 	const executeOption = useCallback(
-		(option: CommandOption) => {
+		(option: CommandOption | undefined) => {
+			if (!option) return;
 			editor.update(() => {
 				const selection = $getSelection();
 				if ($isRangeSelection(selection)) {
@@ -725,7 +791,7 @@ function SlashCommandsPlugin() {
 
 	useEffect(() => {
 		setSelectedIndex(0);
-	}, []);
+	}, [search]);
 
 	if (!visible || filteredOptions.length === 0) return null;
 
@@ -735,7 +801,7 @@ function SlashCommandsPlugin() {
 				top: `${position.top}px`,
 				left: `${position.left}px`,
 			}}
-			className="absolute z-50 w-64 max-h-80 overflow-y-auto bg-bg-white-0 border border-stroke-soft-200 shadow-regular-md rounded-2xl p-1 flex flex-col gap-0.5 animate-in fade-in-0 slide-in-from-top-2 duration-100"
+			className="absolute z-50 flex max-h-80 w-64 flex-col gap-0.5 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-md"
 		>
 			{filteredOptions.map((option, idx) => {
 				const Icon = option.icon;
@@ -746,27 +812,24 @@ function SlashCommandsPlugin() {
 						type="button"
 						onClick={() => executeOption(option)}
 						onMouseEnter={() => setSelectedIndex(idx)}
-						className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-xl transition duration-200 ${
+						className={cn(
+							"flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-start transition-colors",
 							isSelected
-								? "bg-bg-weak-50 text-text-strong-950 shadow-sm"
-								: "text-text-sub-600 hover:bg-bg-weak-50/50"
-						}`}
+								? "bg-muted text-foreground"
+								: "text-muted-foreground hover:bg-muted/50"
+						)}
 					>
 						<div
-							className={`p-1.5 rounded-md border ${
+							className={cn(
+								"rounded-md border p-1.5",
 								isSelected
-									? "bg-bg-white-0 border-stroke-soft-200 text-primary-600"
-									: "bg-bg-weak-50/50 border-transparent text-text-sub-600"
-							}`}
+									? "border-border bg-background text-primary"
+									: "border-transparent bg-muted/50 text-muted-foreground"
+							)}
 						>
-							<Icon className="w-4 h-4" />
+							<Icon className="size-4" />
 						</div>
-						<div>
-							<div className="text-sm font-medium">{option.label}</div>
-							<div className="text-xxs text-text-sub-400">
-								{option.description}
-							</div>
-						</div>
+						<div className="text-sm font-medium">{option.label}</div>
 					</button>
 				);
 			})}
@@ -774,8 +837,30 @@ function SlashCommandsPlugin() {
 	);
 }
 
+// ─── Main toolbar ────────────────────────────────────────────────────────────
+
+function getBlockTypeName(): string {
+	const selection = $getSelection();
+	if (!$isRangeSelection(selection)) return "paragraph";
+	let node: LexicalNode = selection.anchor.getNode();
+	while (node.getParent() && !$isRootNode(node.getParent())) {
+		const parent: LexicalNode = node.getParent() as LexicalNode;
+		node = parent;
+	}
+	if ($isHeadingNode(node)) return node.getTag();
+	if ($isQuoteNode(node)) return "quote";
+	if ($isCodeNode(node)) return "code";
+	if ($isListNode(node)) return node.getListType();
+	if ($isListItemNode(node)) {
+		const parent = node.getParent();
+		if ($isListNode(parent)) return parent.getListType();
+	}
+	return "paragraph";
+}
+
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext();
+	const t = useTranslations("editor");
 	const [canUndo, setCanUndo] = useState(false);
 	const [canRedo, setCanRedo] = useState(false);
 	const [isBold, setIsBold] = useState(false);
@@ -783,9 +868,13 @@ function ToolbarPlugin() {
 	const [isUnderline, setIsUnderline] = useState(false);
 	const [isStrikethrough, setIsStrikethrough] = useState(false);
 	const [isCode, setIsCode] = useState(false);
+	const [blockType, setBlockType] = useState("paragraph");
 	const [alignment, setAlignment] = useState<
 		"left" | "center" | "right" | "justify" | ""
 	>("");
+	const [showImageInput, setShowImageInput] = useState(false);
+	const [imageAlt, setImageAlt] = useState("");
+	const [imageUrl, setImageUrl] = useState("");
 
 	const updateToolbar = useCallback(() => {
 		const selection = $getSelection();
@@ -795,6 +884,7 @@ function ToolbarPlugin() {
 			setIsUnderline(selection.hasFormat("underline"));
 			setIsStrikethrough(selection.hasFormat("strikethrough"));
 			setIsCode(selection.hasFormat("code"));
+			setBlockType(getBlockTypeName());
 
 			const node = selection.getNodes()[0];
 			let parent: import("lexical").LexicalNode | null = node
@@ -857,147 +947,290 @@ function ToolbarPlugin() {
 		);
 	}, [editor]);
 
+	const setBlock = (create: () => ElementNode) => {
+		editor.update(() => {
+			const selection = $getSelection();
+			if ($isRangeSelection(selection)) {
+				$setBlocksType(selection, create);
+			}
+		});
+	};
+
+	const applyImage = () => {
+		if (imageUrl.trim()) {
+			insertMarkdownImage(editor, imageAlt.trim() || "image", imageUrl.trim());
+			setShowImageInput(false);
+			setImageAlt("");
+			setImageUrl("");
+		}
+	};
+
 	return (
-		<div className="flex flex-wrap items-center gap-1 p-2 bg-bg-weak-50 border-b border-stroke-soft-200 rounded-t-2xl sticky top-0 z-10">
-			<button
-				type="button"
+		<div className="flex flex-wrap items-center gap-0.5 border-b border-border bg-muted/40 p-1.5">
+			<ToolbarButton
+				title={t("toolbar.undo")}
 				disabled={!canUndo}
 				onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
-				className="p-1.5 rounded-md hover:bg-bg-weak-100 disabled:opacity-30 disabled:hover:bg-transparent text-text-sub-600 transition-colors"
-				title="Undo"
 			>
-				<Undo2 className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<Undo2 className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.redo")}
 				disabled={!canRedo}
 				onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
-				className="p-1.5 rounded-md hover:bg-bg-weak-100 disabled:opacity-30 disabled:hover:bg-transparent text-text-sub-600 transition-colors"
-				title="Redo"
 			>
-				<Redo2 className="w-4 h-4" />
-			</button>
+				<Redo2 className="size-4" />
+			</ToolbarButton>
 
-			<div className="w-px h-4 bg-stroke-soft-200 mx-1" />
+			<ToolbarSeparator />
 
-			<button
-				type="button"
+			<ToolbarButton
+				title={t("toolbar.paragraph")}
+				active={blockType === "paragraph"}
+				onClick={() => setBlock(() => $createParagraphNode())}
+			>
+				<Pilcrow className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.heading1")}
+				active={blockType === "h1"}
+				onClick={() => setBlock(() => $createHeadingNode("h1"))}
+			>
+				<Heading1 className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.heading2")}
+				active={blockType === "h2"}
+				onClick={() => setBlock(() => $createHeadingNode("h2"))}
+			>
+				<Heading2 className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.heading3")}
+				active={blockType === "h3"}
+				onClick={() => setBlock(() => $createHeadingNode("h3"))}
+			>
+				<Heading3 className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.quote")}
+				active={blockType === "quote"}
+				onClick={() => setBlock(() => $createQuoteNode())}
+			>
+				<Quote className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.codeBlock")}
+				active={blockType === "code"}
+				onClick={() => setBlock(() => $createCodeNode())}
+			>
+				<Code2 className="size-4" />
+			</ToolbarButton>
+
+			<ToolbarSeparator />
+
+			<ToolbarButton
+				title={t("toolbar.bulletList")}
+				active={blockType === "bullet"}
+				onClick={() =>
+					editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)
+				}
+			>
+				<List className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.orderedList")}
+				active={blockType === "number"}
+				onClick={() =>
+					editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined)
+				}
+			>
+				<ListOrdered className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.checklist")}
+				active={blockType === "check"}
+				onClick={() =>
+					editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined)
+				}
+			>
+				<CheckSquare className="size-4" />
+			</ToolbarButton>
+
+			<ToolbarSeparator />
+
+			<ToolbarButton
+				title={t("toolbar.bold")}
+				active={isBold}
 				onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					isBold
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 font-bold"
-						: ""
-				}`}
-				title="Bold"
 			>
-				<Bold className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<Bold className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.italic")}
+				active={isItalic}
 				onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					isItalic
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 italic"
-						: ""
-				}`}
-				title="Italic"
 			>
-				<Italic className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<Italic className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.underline")}
+				active={isUnderline}
 				onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					isUnderline
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 underline"
-						: ""
-				}`}
-				title="Underline"
 			>
-				<Underline className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<Underline className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.strikethrough")}
+				active={isStrikethrough}
 				onClick={() =>
 					editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
 				}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					isStrikethrough
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 line-through"
-						: ""
-				}`}
-				title="Strikethrough"
 			>
-				<Strikethrough className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<Strikethrough className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.inlineCode")}
+				active={isCode}
 				onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					isCode
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50 font-mono"
-						: ""
-				}`}
-				title="Inline Code"
 			>
-				<Code className="w-4 h-4" />
-			</button>
+				<Code className="size-4" />
+			</ToolbarButton>
 
-			<div className="w-px h-4 bg-stroke-soft-200 mx-1" />
+			<ToolbarSeparator />
 
-			<button
-				type="button"
-				onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					alignment === "left"
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50"
-						: ""
-				}`}
-				title="Align Left"
+			<ToolbarButton
+				title={t("toolbar.link")}
+				onClick={() => {
+					const selection = $getSelection();
+					if ($isRangeSelection(selection)) {
+						editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
+					}
+				}}
 			>
-				<AlignLeft className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					alignment === "center"
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50"
-						: ""
-				}`}
-				title="Align Center"
+				<Link className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.image")}
+				active={showImageInput}
+				onClick={() => setShowImageInput((prev) => !prev)}
 			>
-				<AlignCenter className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<ImageIcon className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.table")}
+				onClick={() =>
+					editor.dispatchCommand(INSERT_TABLE_COMMAND, {
+						columns: "3",
+						rows: "3",
+					})
+				}
+			>
+				<Table className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.hr")}
+				onClick={() =>
+					editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined)
+				}
+			>
+				<Minus className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.callout")}
+				onClick={() =>
+					editor.update(() => {
+						const selection = $getSelection();
+						if ($isRangeSelection(selection)) {
+							$setBlocksType(selection, () => $createQuoteNode());
+							if (selection.isCollapsed()) {
+								selection.insertText(`${defaultCalloutMarker()} `);
+							}
+						}
+					})
+				}
+			>
+				<Lightbulb className="size-4" />
+			</ToolbarButton>
+
+			<ToolbarSeparator />
+
+			<ToolbarButton
+				title={t("toolbar.alignRight")}
+				active={alignment === "right"}
 				onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					alignment === "right"
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50"
-						: ""
-				}`}
-				title="Align Right"
 			>
-				<AlignRight className="w-4 h-4" />
-			</button>
-			<button
-				type="button"
+				<AlignRight className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.alignCenter")}
+				active={alignment === "center"}
+				onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")}
+			>
+				<AlignCenter className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.alignLeft")}
+				active={alignment === "left"}
+				onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
+			>
+				<AlignLeft className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.alignJustify")}
+				active={alignment === "justify"}
 				onClick={() =>
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
 				}
-				className={`p-1.5 rounded-md hover:bg-bg-weak-100 text-text-sub-600 transition-colors ${
-					alignment === "justify"
-						? "bg-primary-lighter text-primary-base ring-1 ring-primary-light/50"
-						: ""
-				}`}
-				title="Align Justify"
 			>
-				<AlignJustify className="w-4 h-4" />
-			</button>
+				<AlignJustify className="size-4" />
+			</ToolbarButton>
+
+			<ToolbarSeparator />
+
+			<ToolbarButton
+				title={t("toolbar.clear")}
+				onClick={() => editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)}
+			>
+				<Trash2 className="size-4" />
+			</ToolbarButton>
+
+			{showImageInput ? (
+				<div className="ms-1 flex flex-wrap items-center gap-1 rounded-lg border border-border bg-background p-1">
+					<input
+						type="text"
+						value={imageAlt}
+						onChange={(e) => setImageAlt(e.target.value)}
+						placeholder={t("image.altPlaceholder")}
+						className="w-28 rounded-md border border-border bg-background px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-ring"
+					/>
+					<input
+						type="text"
+						value={imageUrl}
+						onChange={(e) => setImageUrl(e.target.value)}
+						placeholder={t("image.urlPlaceholder")}
+						className="w-44 rounded-md border border-border bg-background px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-ring"
+						onKeyDown={(e) => {
+							if (e.key === "Enter") applyImage();
+							if (e.key === "Escape") setShowImageInput(false);
+						}}
+					/>
+					<button
+						type="button"
+						onClick={applyImage}
+						title={t("image.apply")}
+						aria-label={t("image.apply")}
+						className="rounded-md bg-primary p-1 text-primary-foreground transition-colors hover:opacity-90"
+					>
+						<Check className="size-3.5" />
+					</button>
+				</div>
+			) : null}
 		</div>
 	);
 }
+
+// ─── Public component (tabbed markdown editor) ───────────────────────────────
 
 type Props = {
 	content?: string;
@@ -1006,62 +1239,145 @@ type Props = {
 	className?: string;
 };
 
+const PANEL_HEIGHT = "max-h-[480px] overflow-y-auto";
+
 export function LexicalEditor({
 	content,
 	onChange,
 	placeholder = 'Start typing (or press "/" for commands)...',
 	className,
 }: Props) {
-	const initialConfig = {
-		namespace: "MyEditor",
-		theme,
-		onError,
-		nodes: EDITOR_NODES,
-		editorState: () => {
-			if (content) {
-				$convertFromMarkdownString(content, MD_TRANSFORMERS);
-			}
+	const t = useTranslations("editor");
+	const [markdown, setMarkdown] = useState(content ?? "");
+	const [tab, setTab] = useState("write");
+	const lastPropRef = useRef(content ?? "");
+	const markdownRef = useRef(markdown);
+	markdownRef.current = markdown;
+
+	// Parent → local (external content resets).
+	useEffect(() => {
+		if (content !== undefined && content !== lastPropRef.current) {
+			lastPropRef.current = content;
+			setMarkdown(content);
+		}
+	}, [content]);
+
+	const emit = useCallback(
+		(next: string) => {
+			lastPropRef.current = next;
+			setMarkdown(next);
+			onChange?.(next);
 		},
-	};
+		[onChange]
+	);
+
+	// Built once; reads the live markdown through a ref so tab remounts of the
+	// composer always import the latest content (including source-tab edits).
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const initialConfig = useMemo(
+		() => ({
+			namespace: "CourseMarkdownEditor",
+			theme,
+			onError,
+			nodes: EDITOR_NODES,
+			editorState: () => {
+				const md = markdownRef.current;
+				if (md) {
+					$convertFromMarkdownString(md, MD_TRANSFORMERS);
+				}
+			},
+		}),
+		[]
+	);
 
 	return (
-		<LexicalComposer initialConfig={initialConfig}>
-			<div
-				className={cn(
-					"relative border border-stroke-soft-200 rounded-2xl bg-bg-white-0 shadow-regular-sm focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-500 transition-all duration-200",
-					className
-				)}
-			>
-				<ToolbarPlugin />
-				<div className="prose max-w-none p-4 min-h-[220px] relative prose-p:mt-0">
-					<RichTextPlugin
-						contentEditable={
-							<ContentEditable
-								aria-placeholder={placeholder}
-								placeholder={
-									<div className="text-text-disabled-300 absolute pointer-events-none select-none top-4 left-4 right-4">
-										{placeholder}
-									</div>
-								}
-								className="min-h-[200px] outline-none max-h-[600px] overflow-y-auto"
-							/>
-						}
-						ErrorBoundary={LexicalErrorBoundary}
-					/>
-				</div>
-				<HistoryPlugin />
-				<MarkdownSyncPlugin content={content} onChange={onChange} />
-				<AutoFocusPlugin defaultSelection="rootEnd" />
-				<LinkPlugin />
-				<ListPlugin />
-				<CheckListPlugin />
-				<TablePlugin />
-				<TabIndentationPlugin />
-				<ClearEditorPlugin />
-				<MarkdownShortcutPlugin transformers={MD_TRANSFORMERS} />
-				<FloatingToolbarPlugin />
-				<SlashCommandsPlugin />
-			</div>
-		</LexicalComposer>
+		<div
+			className={cn(
+				"overflow-hidden rounded-xl border border-border bg-background shadow-xs transition-all duration-200 focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/20",
+				className
+			)}
+		>
+			<Tabs value={tab} onValueChange={setTab}>
+				<TabsList className="h-9 w-full justify-start gap-1 rounded-none border-b border-border bg-muted/30 px-2">
+					<TabsTrigger value="write" className="gap-1.5 text-xs">
+						<PenLine className="size-3.5" />
+						{t("tabs.write")}
+					</TabsTrigger>
+					<TabsTrigger value="preview" className="gap-1.5 text-xs">
+						<Eye className="size-3.5" />
+						{t("tabs.preview")}
+					</TabsTrigger>
+					<TabsTrigger value="source" className="gap-1.5 text-xs">
+						<Code2 className="size-3.5" />
+						{t("tabs.source")}
+					</TabsTrigger>
+				</TabsList>
+
+				<TabsContent value="write" className="mt-0">
+					<LexicalComposer initialConfig={initialConfig}>
+						<ToolbarPlugin />
+						<div className={cn("relative", PANEL_HEIGHT)}>
+							<div className="relative p-4">
+								<RichTextPlugin
+									contentEditable={
+										<ContentEditable
+											aria-placeholder={placeholder}
+											placeholder={
+												<div className="text-muted-foreground absolute pointer-events-none select-none top-4 start-4 end-4">
+													{placeholder}
+												</div>
+											}
+											className="min-h-[220px] outline-none"
+										/>
+									}
+									ErrorBoundary={LexicalErrorBoundary}
+								/>
+							</div>
+							<FloatingToolbarPlugin />
+							<SlashCommandsPlugin />
+						</div>
+						<HistoryPlugin />
+						<MarkdownSyncPlugin content={markdown} onChange={emit} />
+						<LinkPlugin />
+						<ListPlugin />
+						<CheckListPlugin />
+						<TablePlugin />
+						<HorizontalRulePlugin />
+						<TabIndentationPlugin />
+						<ClearEditorPlugin />
+						<MarkdownShortcutPlugin transformers={MD_TRANSFORMERS} />
+					</LexicalComposer>
+				</TabsContent>
+
+				<TabsContent value="preview" className="mt-0">
+					<div className={cn("bg-background p-4", PANEL_HEIGHT)}>
+						{markdown.trim() ? (
+							<MDXView markdown={markdown} className="max-w-none" />
+						) : (
+							<p className="text-muted-foreground text-sm">
+								{t("preview.empty")}
+							</p>
+						)}
+					</div>
+				</TabsContent>
+
+				<TabsContent value="source" className="mt-0">
+					<div className={cn("bg-background p-3", PANEL_HEIGHT)}>
+						<textarea
+							value={markdown}
+							onChange={(e) => emit(e.target.value)}
+							dir="auto"
+							spellCheck={false}
+							aria-label={t("tabs.source")}
+							placeholder={t("source.placeholder")}
+							className="min-h-[300px] w-full resize-y rounded-lg border border-border bg-muted/20 p-3 font-mono text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
+						/>
+						<p className="mt-2 text-muted-foreground text-xs">
+							{t("source.hint")}
+						</p>
+					</div>
+				</TabsContent>
+			</Tabs>
+		</div>
 	);
 }
