@@ -148,7 +148,7 @@ export function ContentArea() {
 
 	if (!lesson) {
 		return (
-			<div className="flex h-full flex-col items-center justify-center gap-3 text-center text-muted-foreground p-8">
+			<div className="flex h-full min-h-0 flex-col items-center justify-center gap-3 p-8 text-center text-muted-foreground">
 				<div className="rounded-full bg-muted p-4">
 					<FileTextIcon className="size-8" />
 				</div>
@@ -161,7 +161,7 @@ export function ContentArea() {
 	}
 
 	return (
-		<div className="flex h-full flex-col">
+		<div className="flex h-full min-h-0 flex-col">
 			{/* Lesson header */}
 			<div className="flex items-center gap-3 border-b px-6 py-3">
 				<div className="flex-1 min-w-0">
@@ -184,7 +184,7 @@ export function ContentArea() {
 			</div>
 
 			{/* Block list */}
-			<ScrollArea className="flex-1">
+			<ScrollArea className="min-h-0 flex-1">
 				<div className="px-6 py-4 space-y-4">
 					{blocks.length === 0 ? (
 						<div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">

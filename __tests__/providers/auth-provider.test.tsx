@@ -53,7 +53,7 @@ describe("AuthProvider without Supabase credentials", () => {
 		expect(screen.getByTestId("state")).not.toHaveTextContent("loading");
 	});
 
-	it("exposes a locale-prefixed fallback dashboard path", async () => {
+	it("exposes a locale-free fallback path for next-intl links", async () => {
 		function PathProbe() {
 			return <span data-testid="path">{useAuth().dashboardPath}</span>;
 		}
@@ -64,6 +64,6 @@ describe("AuthProvider without Supabase credentials", () => {
 			</AuthProvider>
 		);
 
-		expect(screen.getByTestId("path")).toHaveTextContent("/fa");
+		expect(screen.getByTestId("path")).toHaveTextContent("/");
 	});
 });

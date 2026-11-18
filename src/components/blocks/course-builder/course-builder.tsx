@@ -5,7 +5,6 @@ import {
 	ArrowLeftIcon,
 	AwardIcon,
 	CheckIcon,
-	EyeIcon,
 	PencilIcon,
 	SaveIcon,
 } from "lucide-react";
@@ -162,8 +161,6 @@ export interface CourseBuilderProps {
 	initialBlocks: DraftContentBlock[];
 	/** Route prefix for back navigation, e.g. "/d/instructor" */
 	basePath: string;
-	/** Slug for the preview link — falls back to the course id when unknown. */
-	courseSlug?: string | null;
 	/** Set when the course exists but its modules/lessons could not be read. */
 	contentError?: string | null;
 }
@@ -174,7 +171,6 @@ function CourseBuilderInner({
 	courseTitle,
 	isPublished: initialIsPublished,
 	basePath,
-	courseSlug,
 	contentError,
 }: Omit<
 	CourseBuilderProps,
@@ -253,9 +249,9 @@ function CourseBuilderInner({
 	}
 
 	return (
-		<div className="flex h-screen flex-col overflow-hidden">
+		<div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
 			{/* Header */}
-			<header className="flex shrink-0 items-center gap-3 border-b px-4 py-2.5">
+			<header className="flex shrink-0 items-center gap-2 border-b px-4 py-2.5">
 				<Button
 					variant="ghost"
 					size="icon"
@@ -291,11 +287,14 @@ function CourseBuilderInner({
 
 				<Separator orientation="vertical" className="h-5" />
 
-				<div className="flex items-center gap-3">
+				<div className="flex shrink-0 items-center gap-1.5">
 					{/* Auto-save status */}
-					<AutoSaveIndicator status={autoSaveStatus} t={t} />
-
-					<Separator orientation="vertical" className="h-5" />
+					{autoSaveStatus !== "idle" && (
+						<>
+							<AutoSaveIndicator status={autoSaveStatus} t={t} />
+							<Separator orientation="vertical" className="h-5" />
+						</>
+					)}
 
 					{/* Certificates */}
 					<Button
@@ -307,17 +306,7 @@ function CourseBuilderInner({
 						{t("header.certificates")}
 					</Button>
 
-					{/* Preview */}
-					<Button
-						variant="ghost"
-						size="sm"
-						onClick={() =>
-							router.push(`${basePath}/courses/${courseSlug || courseId}`)
-						}
-					>
-						<EyeIcon className="size-4 me-1.5" />
-						{t("header.preview")}
-					</Button>
+					<Separator orientation="vertical" className="h-5" />
 
 					{/* Save draft */}
 					<Button
@@ -333,6 +322,8 @@ function CourseBuilderInner({
 						)}
 						{t("header.saveDraft")}
 					</Button>
+
+					<Separator orientation="vertical" className="h-5" />
 
 					{/* Publish */}
 					<Button
@@ -355,14 +346,14 @@ function CourseBuilderInner({
 			)}
 
 			{/* Two-panel layout */}
-			<div className="flex flex-1 overflow-hidden">
+			<div className="flex min-h-0 flex-1 overflow-hidden">
 				{/* Left panel: Module / Lesson tree */}
-				<aside className="w-72 shrink-0 border-e overflow-hidden flex flex-col">
+				<aside className="flex min-h-0 w-72 shrink-0 flex-col overflow-hidden border-e">
 					<ModuleLessonTree />
 				</aside>
 
 				{/* Center panel: Content block editor */}
-				<main className="flex-1 overflow-hidden">
+				<main className="min-h-0 flex-1 overflow-hidden">
 					<ContentArea />
 				</main>
 			</div>
@@ -405,7 +396,6 @@ export function CourseBuilder({
 	initialLessons,
 	initialBlocks,
 	basePath,
-	courseSlug,
 	contentError,
 }: CourseBuilderProps) {
 	return (
@@ -418,7 +408,6 @@ export function CourseBuilder({
 				initialLessons={initialLessons}
 				initialBlocks={initialBlocks}
 				basePath={basePath}
-				courseSlug={courseSlug}
 				contentError={contentError}
 			/>
 		</Provider>
@@ -435,7 +424,6 @@ function CourseBuilderInit({
 	initialLessons,
 	initialBlocks,
 	basePath,
-	courseSlug,
 	contentError,
 }: CourseBuilderProps) {
 	const t = useTranslations("courseBuilder");
@@ -456,7 +444,7 @@ function CourseBuilderInit({
 		// Render the course identity while the builder initialises. A bare
 		// spinner made a slow/failed hydration look like "the page is blank".
 		return (
-			<div className="flex h-screen flex-col">
+			<div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
 				<header className="flex shrink-0 items-center gap-3 border-b px-4 py-2.5">
 					<h1 className="truncate text-sm font-semibold">{courseTitle}</h1>
 				</header>
@@ -473,7 +461,6 @@ function CourseBuilderInit({
 			courseTitle={courseTitle}
 			isPublished={isPublished}
 			basePath={basePath}
-			courseSlug={courseSlug}
 			contentError={contentError}
 		/>
 	);

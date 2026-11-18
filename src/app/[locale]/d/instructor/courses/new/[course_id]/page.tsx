@@ -27,7 +27,6 @@ export default async function CourseBuilderPage({
 		<CourseBuilder
 			courseId={course.id}
 			courseTitle={course.title}
-			courseSlug={course.slug}
 			isPublished={course.is_published}
 			initialModules={content.modules}
 			initialLessons={content.lessons}
