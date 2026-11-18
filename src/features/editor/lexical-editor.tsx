@@ -55,6 +55,11 @@ import {
 } from "@lexical/rich-text";
 import { $setBlocksType } from "@lexical/selection";
 import {
+	$getTableCellNodeFromLexicalNode,
+	$insertTableRowAtSelection,
+	$isTableCellNode,
+	$isTableRowNode,
+	$isTableSelection,
 	INSERT_TABLE_COMMAND,
 	TableCellNode,
 	TableNode,
@@ -99,6 +104,7 @@ import {
 	Link,
 	List,
 	ListOrdered,
+	ListPlus,
 	Minus,
 	PenLine,
 	Pilcrow,
@@ -1127,6 +1133,30 @@ function ToolbarPlugin() {
 				}
 			>
 				<Table className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.addTableRow")}
+				onClick={() =>
+					editor.update(() => {
+						const selection = $getSelection();
+						if (!$isRangeSelection(selection) && !$isTableSelection(selection))
+							return;
+						const focusNode = $isTableSelection(selection)
+							? selection.focus.getNode()
+							: selection.anchor.getNode();
+						const cell = $getTableCellNodeFromLexicalNode(focusNode);
+						if (!$isTableCellNode(cell)) return;
+						const row = cell.getParent();
+						if (!$isTableRowNode(row)) return;
+						$insertTableRowAtSelection(true);
+						const newRow = row.getNextSibling();
+						if (!$isTableRowNode(newRow)) return;
+						const firstCell = newRow.getFirstChild();
+						if ($isTableCellNode(firstCell)) firstCell.selectStart();
+					})
+				}
+			>
+				<ListPlus className="size-4" />
 			</ToolbarButton>
 			<ToolbarButton
 				title={t("toolbar.hr")}
