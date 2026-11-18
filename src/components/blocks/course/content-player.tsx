@@ -11,6 +11,7 @@ import {
 	FileText,
 	Headphones,
 	ImageIcon,
+	Lock,
 	Sparkles,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -21,6 +22,7 @@ import { MDXView } from "@/components/widgets/markdown-view";
 import { getAssetSignedUrl } from "@/lib/r2/actions";
 import { Enums } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
+import { LessonQuizPlayer } from "./lesson-quiz-player";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -39,6 +41,7 @@ export type ContentBlock = {
 	external_resource_url?: string | null;
 	external_resource_title?: string | null;
 	image_url?: string | null;
+	quiz_id?: string | null;
 };
 
 // ─── Self-hosted (R2) asset resolution ─────────────────────────────────────
@@ -64,6 +67,7 @@ function useSignedAssetUrl(storageKey?: string | null) {
 }
 
 export type ContentPlayerProps = {
+	lessonId?: string;
 	lessonTitle: string;
 	/** Module the lesson belongs to; hidden when the course has no modules. */
 	moduleTitle?: string | null;
@@ -72,12 +76,18 @@ export type ContentPlayerProps = {
 	contentBlocks: ContentBlock[];
 	isCompleted: boolean;
 	isMarkingComplete?: boolean;
+	/** When true, learner must pass the lesson exam instead of clicking Mark Complete. */
+	requiresQuizPass?: boolean;
+	/** When true, the next lesson sits in a chapter gated by an unpassed quiz. */
+	isNextLessonLocked?: boolean;
 	durationMinutes?: number | null;
 	nextLessonTitle?: string | null;
 	prevLessonTitle?: string | null;
 	onMarkComplete: () => void;
 	/** Called once when a video block has been watched past the threshold. */
 	onAutoComplete?: () => void;
+	/** Called when the learner passes an embedded lesson exam. */
+	onQuizPassed?: () => void;
 	onNextLesson?: () => void;
 	onPrevLesson?: () => void;
 	className?: string;
@@ -488,10 +498,14 @@ function UnsupportedBlock({ block }: { block: ContentBlock }) {
 
 function RenderBlock({
 	block,
+	lessonId,
 	onVideoWatched,
+	onQuizPassed,
 }: {
 	block: ContentBlock;
+	lessonId?: string;
 	onVideoWatched?: () => void;
+	onQuizPassed?: () => void;
 }) {
 	switch (block.block_type) {
 		case "video":
@@ -531,6 +545,16 @@ function RenderBlock({
 					/>
 				</div>
 			) : null;
+
+		case "quiz":
+			return (
+				<LessonQuizPlayer
+					lessonId={lessonId ?? ""}
+					quizId={block.quiz_id}
+					note={block.text_content}
+					onQuizPassed={onQuizPassed}
+				/>
+			);
 
 		default:
 			return (
@@ -578,23 +602,25 @@ function LessonNavButton({
 	direction,
 	label,
 	lessonTitle,
+	locked = false,
 	onClick,
 	variant = "outline",
 }: {
 	direction: "prev" | "next";
 	label: string;
 	lessonTitle?: string | null;
+	locked?: boolean;
 	onClick?: () => void;
 	variant?: "outline" | "default";
 }) {
 	const isPrev = direction === "prev";
-	const Chevron = isPrev ? ChevronLeft : ChevronRight;
+	const Chevron = locked ? Lock : isPrev ? ChevronLeft : ChevronRight;
 
 	return (
 		<Button
 			variant={variant}
 			onClick={onClick}
-			disabled={!onClick}
+			disabled={!onClick || locked}
 			className={cn(
 				"h-10 min-w-11 gap-2 rounded-xl px-3 text-start",
 				variant === "outline" && "border-border/70",
@@ -602,7 +628,11 @@ function LessonNavButton({
 				!isPrev && "justify-end"
 			)}
 		>
-			{isPrev && <Chevron className="size-4 shrink-0 rtl:rotate-180" />}
+			{isPrev && (
+				<Chevron
+					className={cn("size-4 shrink-0", !locked && "rtl:rotate-180")}
+				/>
+			)}
 			<span className="hidden min-w-0 flex-col sm:flex">
 				<span className="text-[10px] font-medium text-muted-foreground">
 					{label}
@@ -613,7 +643,11 @@ function LessonNavButton({
 					</span>
 				)}
 			</span>
-			{!isPrev && <Chevron className="size-4 shrink-0 rtl:rotate-180" />}
+			{!isPrev && (
+				<Chevron
+					className={cn("size-4 shrink-0", !locked && "rtl:rotate-180")}
+				/>
+			)}
 		</Button>
 	);
 }
@@ -621,6 +655,7 @@ function LessonNavButton({
 // ─── ContentPlayer ────────────────────────────────────────────────────────────
 
 export function ContentPlayer({
+	lessonId,
 	lessonTitle,
 	moduleTitle,
 	lessonNumber,
@@ -628,11 +663,14 @@ export function ContentPlayer({
 	contentBlocks,
 	isCompleted,
 	isMarkingComplete,
+	requiresQuizPass = false,
+	isNextLessonLocked = false,
 	durationMinutes,
 	nextLessonTitle,
 	prevLessonTitle,
 	onMarkComplete,
 	onAutoComplete,
+	onQuizPassed,
 	onNextLesson,
 	onPrevLesson,
 	className,
@@ -644,15 +682,22 @@ export function ContentPlayer({
 		[contentBlocks]
 	);
 
-	// Auto-complete once per lesson when a video crosses the watched threshold.
+	// Auto-complete once per lesson when a video crosses the watched threshold
+	// (skipped when the lesson has an exam — passing the exam completes it).
 	const autoCompletedRef = React.useRef(false);
 	const handleVideoWatched = React.useCallback(() => {
-		if (autoCompletedRef.current || isCompleted || isMarkingComplete) return;
+		if (
+			requiresQuizPass ||
+			autoCompletedRef.current ||
+			isCompleted ||
+			isMarkingComplete
+		)
+			return;
 		autoCompletedRef.current = true;
 		onAutoComplete?.();
-	}, [isCompleted, isMarkingComplete, onAutoComplete]);
+	}, [requiresQuizPass, isCompleted, isMarkingComplete, onAutoComplete]);
 
-	const canGoNext = Boolean(onNextLesson);
+	const canGoNext = Boolean(onNextLesson) && !isNextLessonLocked;
 
 	return (
 		<div className={cn("flex min-h-0 flex-1 flex-col bg-muted/20", className)}>
@@ -705,7 +750,9 @@ export function ContentPlayer({
 								<RenderBlock
 									key={block.id}
 									block={block}
+									lessonId={lessonId}
 									onVideoWatched={handleVideoWatched}
+									onQuizPassed={onQuizPassed}
 								/>
 							))}
 						</div>
@@ -729,6 +776,11 @@ export function ContentPlayer({
 								<CheckCircle2 className="size-4" />
 								{t("completed")}
 							</span>
+						) : requiresQuizPass ? (
+							<span className="inline-flex min-h-10 items-center gap-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-center text-xs font-semibold text-amber-800 dark:text-amber-300">
+								<Lock className="size-3.5 shrink-0" />
+								<span>{t("passQuizToComplete")}</span>
+							</span>
 						) : (
 							<Button
 								onClick={onMarkComplete}
@@ -747,9 +799,16 @@ export function ContentPlayer({
 
 					<LessonNavButton
 						direction="next"
-						label={isCompleted ? t("nextLesson") : t("upNext")}
+						label={
+							isNextLessonLocked
+								? t("nextChapterLocked")
+								: isCompleted
+									? t("nextLesson")
+									: t("upNext")
+						}
 						lessonTitle={nextLessonTitle}
-						onClick={onNextLesson}
+						locked={isNextLessonLocked}
+						onClick={canGoNext ? onNextLesson : undefined}
 						variant={isCompleted && canGoNext ? "default" : "outline"}
 					/>
 				</div>

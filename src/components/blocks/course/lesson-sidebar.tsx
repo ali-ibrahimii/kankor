@@ -6,11 +6,13 @@ import {
 	ChevronDown,
 	ChevronLeft,
 	ChevronRight,
+	ClipboardCheck,
 	Clock,
 	Code2,
 	ExternalLink,
 	FileText,
 	Headphones,
+	Lock,
 	Play,
 	PresentationIcon,
 	X,
@@ -21,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { LessonItem, ModuleItem } from "@/types/queries.types";
+import { computeChapterLocks } from "./learning.utils";
 
 // ─── Content type icon map ────────────────────────────────────────────────────
 
@@ -30,7 +33,7 @@ const TYPE_ICONS: Record<string, React.ElementType> = {
 	audio: Headphones,
 	pdf_document: BookOpen,
 	slide_presentation: PresentationIcon,
-	quiz: FileText,
+	quiz: ClipboardCheck,
 	assignment: FileText,
 	external_resource: ExternalLink,
 	code_playground: Code2,
@@ -107,38 +110,57 @@ const SidebarLessonRow = React.forwardRef<
 		lesson: LessonItem;
 		index: number;
 		isActive: boolean;
+		isLocked: boolean;
 		onSelect: () => void;
 	}
->(function SidebarLessonRow({ lesson, index, isActive, onSelect }, ref) {
+>(function SidebarLessonRow(
+	{ lesson, index, isActive, isLocked, onSelect },
+	ref
+) {
 	const t = useTranslations("courses.learn");
-	const Icon = TYPE_ICONS[lesson.content_type] ?? FileText;
-	const isCompleted = Boolean(lesson.lesson_progress?.is_completed);
+	const hasQuiz = Boolean(lesson.has_quiz) || lesson.content_type === "quiz";
+	const Icon = hasQuiz
+		? ClipboardCheck
+		: (TYPE_ICONS[lesson.content_type] ?? FileText);
+	const isCompleted =
+		Boolean(lesson.lesson_progress?.is_completed) &&
+		(!lesson.has_quiz || lesson.quiz_passed === true);
 
 	return (
 		<button
 			ref={ref}
 			type="button"
-			onClick={onSelect}
+			disabled={isLocked}
+			onClick={() => {
+				if (!isLocked) onSelect();
+			}}
 			aria-current={isActive ? "step" : undefined}
+			title={isLocked ? t("chapterLockedHint") : undefined}
 			className={cn(
 				"group relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-start transition-colors",
-				isActive
-					? "bg-primary/10 text-primary ring-1 ring-primary/20"
-					: "hover:bg-muted/60"
+				isLocked
+					? "cursor-not-allowed opacity-55"
+					: isActive
+						? "bg-primary/10 text-primary ring-1 ring-primary/20"
+						: "hover:bg-muted/60"
 			)}
 		>
 			{/* Step indicator */}
 			<span
 				className={cn(
 					"flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold tabular-nums transition-colors",
-					isCompleted
-						? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-						: isActive
-							? "bg-primary text-primary-foreground"
-							: "bg-muted text-muted-foreground"
+					isLocked
+						? "bg-muted text-muted-foreground"
+						: isCompleted
+							? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+							: isActive
+								? "bg-primary text-primary-foreground"
+								: "bg-muted text-muted-foreground"
 				)}
 			>
-				{isCompleted ? (
+				{isLocked ? (
+					<Lock className="size-3" />
+				) : isCompleted ? (
 					<CheckCircle2 className="size-3.5" />
 				) : (
 					<>
@@ -157,6 +179,13 @@ const SidebarLessonRow = React.forwardRef<
 			>
 				{lesson.title}
 			</span>
+
+			{/* Exam badge when lesson requires passing a quiz */}
+			{Boolean(lesson.has_quiz) && !isCompleted && !isLocked && (
+				<span className="shrink-0 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-bold text-amber-700 dark:text-amber-400">
+					{t("quizBadge")}
+				</span>
+			)}
 
 			{/* Duration */}
 			{lesson.estimated_duration_minutes != null && (
@@ -177,11 +206,15 @@ function SidebarModuleSection({
 	module,
 	moduleIndex,
 	activeLessonId,
+	isModuleLocked,
+	lockedLessonIds,
 	onLessonSelect,
 }: {
 	module: ModuleItem;
 	moduleIndex: number;
 	activeLessonId: string;
+	isModuleLocked: boolean;
+	lockedLessonIds: Set<string>;
 	onLessonSelect: (id: string) => void;
 }) {
 	const t = useTranslations("courses.learn");
@@ -195,7 +228,9 @@ function SidebarModuleSection({
 	);
 
 	const completedCount = orderedLessons.filter(
-		(l) => l.lesson_progress?.is_completed
+		(l) =>
+			Boolean(l.lesson_progress?.is_completed) &&
+			(!l.has_quiz || l.quiz_passed === true)
 	).length;
 	const percent =
 		orderedLessons.length > 0
@@ -225,8 +260,14 @@ function SidebarModuleSection({
 					)}
 				/>
 				<span className="flex min-w-0 flex-1 flex-col">
-					<span className="truncate text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-						{title}
+					<span className="flex items-center gap-1.5 truncate text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+						<span className="truncate">{title}</span>
+						{isModuleLocked && (
+							<Lock
+								className="size-3 shrink-0 text-amber-600 dark:text-amber-400"
+								aria-label={t("chapterLockedHint")}
+							/>
+						)}
 					</span>
 					<span className="mt-1 flex items-center gap-2">
 						<span className="h-1 w-full max-w-24 overflow-hidden rounded-full bg-muted">
@@ -245,6 +286,12 @@ function SidebarModuleSection({
 				</span>
 			</button>
 
+			{isOpen && isModuleLocked && (
+				<p className="mx-2.5 mb-1 rounded-lg bg-amber-500/10 px-2.5 py-1.5 text-[11px] text-amber-800 dark:text-amber-300">
+					{t("chapterLockedHint")}
+				</p>
+			)}
+
 			{isOpen && (
 				<div className="mt-1 space-y-0.5">
 					{orderedLessons.map((lesson, index) => (
@@ -254,6 +301,7 @@ function SidebarModuleSection({
 							lesson={lesson}
 							index={index + 1}
 							isActive={lesson.id === activeLessonId}
+							isLocked={lockedLessonIds.has(lesson.id)}
 							onSelect={() => onLessonSelect(lesson.id)}
 						/>
 					))}
@@ -288,7 +336,17 @@ export function LessonSidebar({
 		(totalLessons ? (completedLessons / totalLessons) * 100 : 0);
 
 	const orderedModules = React.useMemo(
-		() => modules.slice().sort((a, b) => a.order_index - b.order_index),
+		() =>
+			modules
+				.slice()
+				.sort(
+					(a, b) => a.order_index - b.order_index || a.id.localeCompare(b.id)
+				),
+		[modules]
+	);
+
+	const { lockedLessonIds, lockedModuleIds } = React.useMemo(
+		() => computeChapterLocks(modules),
 		[modules]
 	);
 
@@ -352,7 +410,10 @@ export function LessonSidebar({
 								module={module}
 								moduleIndex={moduleIndex}
 								activeLessonId={activeLessonId}
+								isModuleLocked={lockedModuleIds.has(module.id)}
+								lockedLessonIds={lockedLessonIds}
 								onLessonSelect={(id) => {
+									if (lockedLessonIds.has(id)) return;
 									onLessonSelect(id);
 									onClose();
 								}}

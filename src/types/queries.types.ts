@@ -19,6 +19,9 @@ export type LessonItem = Pick<
 	| "is_previewable"
 > & {
 	is_active?: boolean;
+	is_mandatory?: boolean | null;
+	has_quiz?: boolean | null;
+	quiz_passed?: boolean | null;
 	lesson_progress: LessonProgressItem | null;
 };
 

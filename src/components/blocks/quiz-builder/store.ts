@@ -12,6 +12,7 @@ export interface QuizBuilderState {
 	entrance_code: string | undefined;
 	lesson_id: string | undefined;
 	school_id: string | undefined;
+	agency_id: string | undefined;
 	questions: DraftQuestion[];
 	// UI / async state
 	expandedIds: Set<string>;
@@ -26,9 +27,10 @@ const INITIAL_STATE: QuizBuilderState = {
 	entrance_code: undefined,
 	lesson_id: undefined,
 	school_id: undefined,
+	agency_id: undefined,
 	questions: [],
 	expandedIds: new Set(),
-	activeTab: "questions",
+	activeTab: "settings",
 	isSaving: false,
 	isDeleting: false,
 	validationErrors: [],
@@ -56,8 +58,10 @@ export const totalPointsAtom = atom((get) =>
 // not on every keystroke in a question title.
 export const expandedIdsAtom = atom((get) => get(quizAtom).expandedIds);
 
-// Convenience slice used by quiz-settings.tsx
+// Convenience slices used by quiz-settings.tsx
 export const entranceCodeAtom = atom((get) => get(quizAtom).entrance_code);
+export const quizSchoolIdAtom = atom((get) => get(quizAtom).school_id);
+export const quizAgencyIdAtom = atom((get) => get(quizAtom).agency_id);
 
 // ── Initializer ────────────────────────────────────────────────────────────
 
@@ -68,12 +72,18 @@ export const initQuizAtom = atom(
 		set,
 		payload: Pick<
 			QuizBuilderState,
-			"id" | "entrance_code" | "lesson_id" | "school_id" | "questions"
+			| "id"
+			| "entrance_code"
+			| "lesson_id"
+			| "school_id"
+			| "agency_id"
+			| "questions"
 		>
 	) => {
 		set(quizAtom, {
 			...INITIAL_STATE,
 			...payload,
+			activeTab: payload.id ? "questions" : "settings",
 		});
 	}
 );

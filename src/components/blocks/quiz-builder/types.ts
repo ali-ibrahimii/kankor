@@ -3,6 +3,13 @@ import type { Database } from "@/lib/supabase/database.types";
 export type QuestionType = Database["public"]["Enums"]["question_type"];
 export type ShowCorrectAnswers =
 	Database["public"]["Enums"]["show_correct_answers"];
+export type QuizVisibility = Database["public"]["Enums"]["visibility"];
+
+export interface ManageableCourseOption {
+	id: string;
+	title: string;
+	is_published: boolean;
+}
 
 export const QUESTION_TYPE_LABELS: Record<QuestionType, string> = {
 	multiple_choice_single_correct: "Multiple Choice (Single)",
@@ -60,9 +67,12 @@ export interface DraftQuestion {
 
 export interface QuizDraft {
 	id?: string;
+	entrance_code?: string | null;
 	title: string;
 	description: string | null;
 	instructions: string | null;
+	visibility: QuizVisibility;
+	course_id: string | null;
 	lesson_id: string | null;
 	school_id: string | null;
 	/** When set, the quiz is agency-owned (attribution + `quizzes.manage_own` RLS). */
@@ -241,6 +251,8 @@ export function createEmptyQuizDraft(
 		title: "",
 		description: null,
 		instructions: null,
+		visibility: "public",
+		course_id: null,
 		lesson_id: lessonId ?? null,
 		school_id: schoolId ?? null,
 		agency_id: agencyId ?? null,
@@ -262,6 +274,8 @@ export type QuizSettingsValues = {
 	title: string;
 	description: string;
 	instructions: string;
+	visibility: QuizVisibility;
+	course_id: string | null;
 	time_limit_minutes: string;
 	max_attempts: string;
 	passing_score_percentage: string;
@@ -281,6 +295,8 @@ export function quizDraftToFormValues(draft?: QuizDraft): QuizSettingsValues {
 		title: draft?.title ?? "",
 		description: draft?.description ?? "",
 		instructions: draft?.instructions ?? "",
+		visibility: draft?.visibility ?? "public",
+		course_id: draft?.course_id ?? null,
 		time_limit_minutes: draft?.time_limit_minutes?.toString() ?? "",
 		max_attempts: draft?.max_attempts?.toString() ?? "",
 		passing_score_percentage:
@@ -301,12 +317,16 @@ export function formValuesToQuizPatch(
 	values: QuizSettingsValues
 ): Omit<
 	QuizDraft,
-	"id" | "lesson_id" | "school_id" | "agency_id" | "questions"
+	"id" | "entrance_code" | "lesson_id" | "school_id" | "agency_id" | "questions"
 > {
+	const visibility: QuizVisibility = values.visibility || "public";
+	const isCourseOnly = visibility === "private";
 	return {
 		title: values.title,
 		description: values.description || null,
 		instructions: values.instructions || null,
+		visibility,
+		course_id: isCourseOnly ? values.course_id || null : null,
 		time_limit_minutes: values.time_limit_minutes
 			? Number(values.time_limit_minutes)
 			: null,
@@ -317,12 +337,13 @@ export function formValuesToQuizPatch(
 		show_correct_answers_after:
 			(values.show_correct_answers_after as ShowCorrectAnswers) || null,
 		shuffle_questions: values.shuffle_questions,
-		is_free: values.is_free,
-		price_credits: values.is_free
-			? 0
-			: values.price_credits
-				? Number(values.price_credits)
-				: 0,
+		is_free: isCourseOnly ? true : values.is_free,
+		price_credits:
+			isCourseOnly || values.is_free
+				? 0
+				: values.price_credits
+					? Number(values.price_credits)
+					: 0,
 		related_courses_ids: values.related_courses_ids || [],
 		related_decks_ids: values.related_decks_ids || [],
 		book_id: values.book_id || null,

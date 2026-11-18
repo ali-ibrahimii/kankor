@@ -30,6 +30,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { LexicalEditor } from "@/features/editor/lexical-editor";
 import { cn } from "@/lib/utils";
 import { AssetUpload } from "./asset-upload";
+import { QuizBlockField } from "./quiz-block-field";
 import { deleteBlockAtom, patchBlockAtom, setActiveBlockAtom } from "./store";
 import type { DraftContentBlock, LessonContentType } from "./types";
 
@@ -521,7 +522,8 @@ export function BlockEditor({
 				{block.block_type === "code_playground" && (
 					<CodePlaygroundField block={block} />
 				)}
-				{(block.block_type === "quiz" || block.block_type === "assignment") && (
+				{block.block_type === "quiz" && <QuizBlockField block={block} />}
+				{block.block_type === "assignment" && (
 					<div className="flex items-center justify-center py-6 text-center text-sm text-muted-foreground">
 						<p>{t("block.quizManagedSeparately")}</p>
 					</div>

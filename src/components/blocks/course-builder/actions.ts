@@ -5,6 +5,7 @@ import { defaultLocale, Locale } from "@/i18n";
 import { getPlatformAuthorId } from "@/lib/platform-author";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
+import { parseQuizReference } from "./quiz-reference";
 import {
 	type DraftContentBlock,
 	type DraftLesson,
@@ -12,6 +13,7 @@ import {
 	joinLines,
 	type NewCourseFormValues,
 	parseLines,
+	type ResolvedQuizSummary,
 } from "./types";
 
 // ─── Result type ──────────────────────────────────────────────────────────────
@@ -337,6 +339,7 @@ export async function loadCourseContent(courseId: string): Promise<
 					(b.external_resource_url as string | null) ?? null,
 				external_resource_title:
 					(b.external_resource_title as string | null) ?? null,
+				quiz_id: (b.quiz_id as string | null) ?? null,
 				playlist: (b.playlist as string | null) ?? null,
 				slug: (b.slug as string | null) ?? null,
 			})),
@@ -577,6 +580,7 @@ export async function saveCourseContent(
 					solution_code: b.solution_code,
 					external_resource_url: b.external_resource_url,
 					external_resource_title: b.external_resource_title,
+					quiz_id: b.quiz_id ?? null,
 					playlist: b.playlist,
 					slug: b.slug,
 				})),
@@ -593,6 +597,8 @@ export async function saveCourseContent(
 		const courseSlug = courseRow?.slug ?? courseId;
 
 		revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
+		revalidatePath(routes.d.myCourses.slug.page({ slug: courseSlug }));
+		revalidatePath(routes.d.courses.slug.page({ slug: courseSlug }));
 		revalidatePath(routes.d.instructor.courses.slug.page({ slug: courseSlug }));
 		revalidatePath(
 			routes.d.instructor.courses.new.page({ course_id: courseId })
@@ -668,4 +674,157 @@ export async function deleteCourse(courseId: string): Promise<Result> {
 	revalidatePath(routes.courses.slug.page({ slug: courseSlug }));
 
 	return { success: true, data: undefined };
+}
+
+// ─── Quiz block lookup & picker ───────────────────────────────────────────────
+
+export type QuizBlockLookupErrorCode =
+	| "invalid_reference"
+	| "not_found"
+	| "bound_to_other_course"
+	| "forbidden"
+	| "database";
+
+export type ResolveQuizForBlockResult =
+	| { success: true; data: ResolvedQuizSummary }
+	| { success: false; code: QuizBlockLookupErrorCode; error: string };
+
+export async function resolveQuizForBlock(
+	courseId: string,
+	rawInput: string
+): Promise<ResolveQuizForBlockResult> {
+	const parsed = parseQuizReference(rawInput);
+	if (!parsed) {
+		return {
+			success: false,
+			code: "invalid_reference",
+			error: "Invalid quiz code or link",
+		};
+	}
+
+	const supabase = await createClient();
+	const { data, error } = await supabase.rpc("resolve_quiz_for_course_block", {
+		p_course_id: courseId,
+		p_code: parsed.code,
+		p_slug: parsed.slug,
+		p_quiz_id: parsed.quizId,
+	});
+
+	if (error) {
+		const msg = error.message ?? "";
+		if (msg.includes("quiz_bound_to_other_course")) {
+			return {
+				success: false,
+				code: "bound_to_other_course",
+				error: msg,
+			};
+		}
+		if (/permission denied|unauthenticated/i.test(msg)) {
+			return { success: false, code: "forbidden", error: msg };
+		}
+		return { success: false, code: "database", error: msg };
+	}
+
+	if (!data) {
+		return {
+			success: false,
+			code: "not_found",
+			error: "Quiz not found",
+		};
+	}
+
+	return {
+		success: true,
+		data: data as unknown as ResolvedQuizSummary,
+	};
+}
+
+export async function getQuizSummaryForBlock(
+	courseId: string,
+	quizId: string
+): Promise<ResolvedQuizSummary | null> {
+	if (!courseId || !quizId) return null;
+	const supabase = await createClient();
+	const { data, error } = await supabase.rpc("resolve_quiz_for_course_block", {
+		p_course_id: courseId,
+		p_quiz_id: quizId,
+	});
+	if (error || !data) return null;
+	return data as unknown as ResolvedQuizSummary;
+}
+
+export async function listAttachableQuizzesForCourse(
+	courseId: string
+): Promise<ResolvedQuizSummary[]> {
+	if (!courseId) return [];
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return [];
+
+	const { data: course } = await supabase
+		.from("courses")
+		.select("id, school_id, agency_id, instructor_id")
+		.eq("id", courseId)
+		.maybeSingle();
+	if (!course) return [];
+
+	const { data: isAdmin } = await supabase.rpc("is_admin", {
+		user_id: user.id,
+	});
+
+	let query = supabase
+		.from("quizzes")
+		.select(
+			"id, title, description, entrance_code, slug, visibility, course_id, passing_score_percentage, time_limit_minutes, max_attempts, shuffle_questions, show_correct_answers_after, courses(title), questions(count)"
+		)
+		.order("updated_at", { ascending: false })
+		.limit(100);
+
+	if (!isAdmin) {
+		const orClauses = [`user_id.eq.${user.id}`, `course_id.eq.${courseId}`];
+		if (course.school_id) {
+			orClauses.push(`school_id.eq.${course.school_id}`);
+		}
+		if (course.agency_id) {
+			orClauses.push(`agency_id.eq.${course.agency_id}`);
+		}
+		query = query.or(orClauses.join(","));
+	}
+
+	const { data: rows } = await query;
+
+	const mapped: ResolvedQuizSummary[] = (rows ?? [])
+		// Exclude quizzes explicitly restricted to a different course
+		.filter((row) => !row.course_id || row.course_id === courseId)
+		.map((row) => {
+			const countArr = row.questions as unknown as { count: number }[] | null;
+			const courseRel = row.courses as unknown as { title: string } | null;
+			return {
+				id: row.id,
+				title: row.title,
+				description: row.description,
+				entrance_code: row.entrance_code,
+				slug: row.slug,
+				visibility: row.visibility,
+				course_id: row.course_id,
+				course_title: courseRel?.title ?? null,
+				question_count: countArr?.[0]?.count ?? 0,
+				passing_score_percentage: row.passing_score_percentage,
+				time_limit_minutes: row.time_limit_minutes,
+				max_attempts: row.max_attempts,
+				shuffle_questions: row.shuffle_questions ?? false,
+				show_correct_answers_after: row.show_correct_answers_after,
+			};
+		});
+
+	// Sort quizzes assigned directly to this course first for instant access
+	mapped.sort((a, b) => {
+		const aForCourse = a.course_id === courseId ? 0 : 1;
+		const bForCourse = b.course_id === courseId ? 0 : 1;
+		return aForCourse - bForCourse;
+	});
+
+	return mapped;
 }

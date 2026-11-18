@@ -21,6 +21,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
+	ClipboardCheckIcon,
 	Code2Icon,
 	FileTextIcon,
 	LinkIcon,
@@ -67,6 +68,7 @@ const ADD_BLOCK_ICONS: Partial<Record<LessonContentType, React.ElementType>> = {
 	slide_presentation: PresentationIcon,
 	external_resource: LinkIcon,
 	code_playground: Code2Icon,
+	quiz: ClipboardCheckIcon,
 };
 
 // ─── Sortable block wrapper ───────────────────────────────────────────────────

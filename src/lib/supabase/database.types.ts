@@ -3618,6 +3618,7 @@ export type Database = {
 					lesson_id: string | null;
 					order_index: number;
 					playlist: string | null;
+					quiz_id: string | null;
 					slug: string | null;
 					solution_code: string | null;
 					text_content: string | null;
@@ -3645,6 +3646,7 @@ export type Database = {
 					lesson_id?: string | null;
 					order_index?: number;
 					playlist?: string | null;
+					quiz_id?: string | null;
 					slug?: string | null;
 					solution_code?: string | null;
 					text_content?: string | null;
@@ -3672,6 +3674,7 @@ export type Database = {
 					lesson_id?: string | null;
 					order_index?: number;
 					playlist?: string | null;
+					quiz_id?: string | null;
 					slug?: string | null;
 					solution_code?: string | null;
 					text_content?: string | null;
@@ -3701,6 +3704,20 @@ export type Database = {
 						columns: ["lesson_id"];
 						isOneToOne: false;
 						referencedRelation: "lessons";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "lesson_content_blocks_quiz_id_fkey";
+						columns: ["quiz_id"];
+						isOneToOne: false;
+						referencedRelation: "admin_quizzes_view";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "lesson_content_blocks_quiz_id_fkey";
+						columns: ["quiz_id"];
+						isOneToOne: false;
+						referencedRelation: "quizzes";
 						referencedColumns: ["id"];
 					},
 				];
@@ -5055,6 +5072,7 @@ export type Database = {
 					cover_image_url: string | null;
 					agency_id: string | null;
 					book_id: string | null;
+					course_id: string | null;
 					created_at: string;
 					description: string | null;
 					entrance_code: string;
@@ -5090,6 +5108,7 @@ export type Database = {
 					cover_image_url?: string | null;
 					agency_id?: string | null;
 					book_id?: string | null;
+					course_id?: string | null;
 					created_at?: string;
 					description?: string | null;
 					entrance_code?: string;
@@ -5125,6 +5144,7 @@ export type Database = {
 					cover_image_url?: string | null;
 					agency_id?: string | null;
 					book_id?: string | null;
+					course_id?: string | null;
 					created_at?: string;
 					description?: string | null;
 					entrance_code?: string;
@@ -5176,6 +5196,20 @@ export type Database = {
 						columns: ["book_id"];
 						isOneToOne: false;
 						referencedRelation: "books";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "quizzes_course_id_fkey";
+						columns: ["course_id"];
+						isOneToOne: false;
+						referencedRelation: "admin_courses_view";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "quizzes_course_id_fkey";
+						columns: ["course_id"];
+						isOneToOne: false;
+						referencedRelation: "courses";
 						referencedColumns: ["id"];
 					},
 					{
@@ -8189,6 +8223,43 @@ export type Database = {
 					isSetofReturn: false;
 				};
 			};
+			can_edit_course_content: {
+				Args: { p_course_id: string; p_user_id?: string };
+				Returns: boolean;
+			};
+			get_lesson_quiz_state: {
+				Args: { p_lesson_id: string; p_quiz_id: string };
+				Returns: Json;
+			};
+			has_user_passed_lesson_quizzes: {
+				Args: { p_lesson_id: string; p_user_id?: string };
+				Returns: boolean;
+			};
+			is_lesson_unlocked_for_user: {
+				Args: { p_lesson_id: string; p_user_id?: string };
+				Returns: boolean;
+			};
+			is_quiz_attached_to_lesson: {
+				Args: { p_lesson_id: string; p_quiz_id: string };
+				Returns: boolean;
+			};
+			lesson_has_quiz: {
+				Args: { p_lesson_id: string };
+				Returns: boolean;
+			};
+			resolve_quiz_for_course_block: {
+				Args: {
+					p_code?: string;
+					p_course_id: string;
+					p_quiz_id?: string;
+					p_slug?: string;
+				};
+				Returns: Json;
+			};
+			start_lesson_quiz_attempt: {
+				Args: { p_lesson_id: string; p_quiz_id: string };
+				Returns: Json;
+			};
 			start_standalone_quiz_attempt: {
 				Args: { p_entrance_code: string; p_user_id?: string };
 				Returns: {
@@ -8212,6 +8283,14 @@ export type Database = {
 					isOneToOne: true;
 					isSetofReturn: false;
 				};
+			};
+			submit_lesson_quiz_attempt: {
+				Args: {
+					p_answers?: Json;
+					p_attempt_id: string;
+					p_lesson_id: string;
+				};
+				Returns: Json;
 			};
 			submit_quiz_answer: {
 				Args: {

@@ -6,8 +6,11 @@ import {
 	EditIcon,
 	EllipsisIcon,
 	FileTextIcon,
+	GlobeIcon,
+	Link2Icon,
 	ListChecksIcon,
 	Loader2Icon,
+	LockIcon,
 	PlusIcon,
 	PrinterIcon,
 	RotateCcwIcon,
@@ -67,7 +70,9 @@ import type { QuizDraft } from "./types";
 export interface QuizListItem {
 	id: string;
 	title: string;
+	slug?: string | null;
 	entrance_code: string;
+	visibility?: string | null;
 	time_limit_minutes: number | null;
 	max_attempts: number | null;
 	passing_score_percentage: number | null;
@@ -76,6 +81,7 @@ export interface QuizListItem {
 	created_at: string;
 	question_count: number;
 	lesson_title: string | null;
+	course_title?: string | null;
 	school_id: string | null;
 }
 
@@ -211,6 +217,16 @@ export function QuizzesView({
 	function copyCode(code: string) {
 		navigator.clipboard.writeText(code);
 		toast.success(t("toast.codeCopied"));
+	}
+
+	function copyQuizLink(quiz: QuizListItem) {
+		const origin = typeof window !== "undefined" ? window.location.origin : "";
+		const basePath = quiz.slug
+			? routes.quizzes.slug.page({ slug: quiz.slug })
+			: routes.quizzes.page();
+		const url = `${origin}${basePath}?code=${encodeURIComponent(quiz.entrance_code)}`;
+		navigator.clipboard.writeText(url);
+		toast.success(t("toast.linkCopied"));
 	}
 
 	function omrHref(quiz: { id: string; slug?: string | null }) {
@@ -383,12 +399,28 @@ export function QuizzesView({
 								<TableRow key={quiz.id}>
 									<TableCell>
 										<div className="flex flex-col gap-0.5">
-											<span className="font-medium leading-snug">
-												{quiz.title}
-											</span>
-											{quiz.lesson_title && (
-												<span className="text-xs text-muted-foreground truncate max-w-48">
-													{quiz.lesson_title}
+											<div className="flex flex-wrap items-center gap-1.5">
+												<span className="font-medium leading-snug">
+													{quiz.title}
+												</span>
+												{quiz.visibility === "private" && (
+													<span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-700 dark:text-amber-400">
+														<LockIcon className="size-2.5" />
+														{tTable("courseOnly")}
+													</span>
+												)}
+												{quiz.visibility === "public" && (
+													<span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:text-emerald-400">
+														<GlobeIcon className="size-2.5" />
+														{tTable("public")}
+													</span>
+												)}
+											</div>
+											{(quiz.course_title || quiz.lesson_title) && (
+												<span className="text-xs text-muted-foreground truncate max-w-60">
+													{quiz.course_title && quiz.lesson_title
+														? `${quiz.course_title} · ${quiz.lesson_title}`
+														: (quiz.course_title ?? quiz.lesson_title)}
 												</span>
 											)}
 											{quiz.shuffle_questions && (
@@ -478,6 +510,10 @@ export function QuizzesView({
 												>
 													<CopyIcon className="size-4" />
 													{t("actions.copyCode")}
+												</DropdownMenuItem>
+												<DropdownMenuItem onClick={() => copyQuizLink(quiz)}>
+													<Link2Icon className="size-4" />
+													{t("actions.copyLink")}
 												</DropdownMenuItem>
 												<DropdownMenuSeparator />
 												<DropdownMenuItem onClick={() => openEditQuiz(quiz)}>

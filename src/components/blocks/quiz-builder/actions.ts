@@ -2,10 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import type { QuizDraft } from "./types";
+import type { ManageableCourseOption, QuizDraft } from "./types";
 
 export type SaveQuizResult =
-	| { success: true; quizId: string }
+	| { success: true; quizId: string; entranceCode?: string }
 	| { success: false; error: string };
 
 export type LoadQuizResult =
@@ -16,10 +16,28 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 	const supabase = await createClient();
 
 	try {
+		const visibility = draft.visibility ?? "public";
+		const isCourseOnly = visibility === "private";
+		const courseId = isCourseOnly ? draft.course_id || null : null;
+
+		if (courseId) {
+			const { data: canEditCourse, error: permError } = await supabase.rpc(
+				"can_edit_course_content",
+				{ p_course_id: courseId }
+			);
+			if (permError || !canEditCourse) {
+				throw new Error("Permission denied for the selected course");
+			}
+		}
+
+		const isFree = isCourseOnly ? true : draft.is_free;
+
 		const quizPayload = {
 			title: draft.title,
 			description: draft.description,
 			instructions: draft.instructions,
+			visibility,
+			course_id: courseId,
 			lesson_id: draft.lesson_id,
 			school_id: draft.school_id,
 			// Agency ownership — safe to take from the client: the restrictive
@@ -31,8 +49,8 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 			show_correct_answers_after: draft.show_correct_answers_after,
 			shuffle_questions: draft.shuffle_questions ?? false,
 			time_limit_minutes: draft.time_limit_minutes,
-			is_free: draft.is_free,
-			price_credits: draft.is_free ? 0 : (draft.price_credits ?? 0),
+			is_free: isFree,
+			price_credits: isFree ? 0 : (draft.price_credits ?? 0),
 			related_courses_ids: draft.related_courses_ids || [],
 			related_decks_ids: draft.related_decks_ids || [],
 			book_id: draft.book_id || null,
@@ -41,6 +59,7 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 		};
 
 		let quizId: string;
+		let entranceCode: string | undefined;
 
 		if (!draft.id && !draft.school_id) {
 			// Standalone (non-school-scoped) quiz: ownership is the creating
@@ -59,18 +78,20 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 				.from("quizzes")
 				.update(quizPayload)
 				.eq("id", draft.id)
-				.select("id")
+				.select("id, entrance_code")
 				.single();
 			if (error) throw new Error(error.message);
 			quizId = data.id;
+			entranceCode = data.entrance_code;
 		} else {
 			const { data, error } = await supabase
 				.from("quizzes")
 				.insert(quizPayload)
-				.select("id")
+				.select("id, entrance_code")
 				.single();
 			if (error) throw new Error(error.message);
 			quizId = data.id;
+			entranceCode = data.entrance_code;
 		}
 
 		const deletedQuestions = draft.questions.filter(
@@ -126,6 +147,7 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 
 			for (const o of activeOptions) {
 				const optionPayload = {
+					quiz_id: quizId,
 					question_id: questionId,
 					option_text: o.option_text,
 					is_correct: o.is_correct ?? false,
@@ -151,7 +173,7 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 
 		revalidatePath("/dashboard");
 
-		return { success: true, quizId };
+		return { success: true, quizId, entranceCode };
 	} catch (err) {
 		return {
 			success: false,
@@ -187,9 +209,12 @@ export async function loadQuizForEditing(
 
 	const draft: QuizDraft = {
 		id: quiz.id,
+		entrance_code: quiz.entrance_code,
 		title: quiz.title,
 		description: quiz.description,
 		instructions: quiz.instructions,
+		visibility: quiz.visibility,
+		course_id: quiz.course_id,
 		lesson_id: quiz.lesson_id,
 		school_id: quiz.school_id,
 		agency_id: quiz.agency_id,
@@ -251,4 +276,52 @@ export async function deleteQuiz(
 	if (error) return { success: false, error: error.message };
 	revalidatePath("/dashboard");
 	return { success: true };
+}
+
+export async function listManageableCoursesForQuiz(scope?: {
+	schoolId?: string | null;
+	agencyId?: string | null;
+}): Promise<ManageableCourseOption[]> {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return [];
+
+	if (scope?.schoolId) {
+		const { data } = await supabase
+			.from("courses")
+			.select("id, title, is_published")
+			.eq("school_id", scope.schoolId)
+			.order("updated_at", { ascending: false })
+			.limit(200);
+		return data ?? [];
+	}
+
+	if (scope?.agencyId) {
+		const { data } = await supabase
+			.from("courses")
+			.select("id, title, is_published")
+			.eq("agency_id", scope.agencyId)
+			.order("updated_at", { ascending: false })
+			.limit(200);
+		return data ?? [];
+	}
+
+	const { data: isAdmin } = await supabase.rpc("is_admin", {
+		user_id: user.id,
+	});
+
+	let query = supabase
+		.from("courses")
+		.select("id, title, is_published")
+		.order("updated_at", { ascending: false })
+		.limit(200);
+
+	if (!isAdmin) {
+		query = query.eq("instructor_id", user.id);
+	}
+
+	const { data } = await query;
+	return data ?? [];
 }

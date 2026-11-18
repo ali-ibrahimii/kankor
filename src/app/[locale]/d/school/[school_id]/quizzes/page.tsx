@@ -22,7 +22,7 @@ export default async function SchoolQuizzesPage({ params }: Props) {
 	const { data: rows } = await supabase
 		.from("quizzes")
 		.select(
-			"id, title, entrance_code, time_limit_minutes, max_attempts, passing_score_percentage, show_correct_answers_after, shuffle_questions, created_at, school_id, lesson_id, lessons(title), questions(count)"
+			"id, title, slug, entrance_code, visibility, time_limit_minutes, max_attempts, passing_score_percentage, show_correct_answers_after, shuffle_questions, created_at, school_id, course_id, lesson_id, courses(title), lessons(title), questions(count)"
 		)
 		.eq("school_id", school_id)
 		.order("created_at", { ascending: false });
@@ -30,10 +30,13 @@ export default async function SchoolQuizzesPage({ params }: Props) {
 	const quizzes: QuizListItem[] = (rows ?? []).map((row) => {
 		const countArr = row.questions as unknown as { count: number }[];
 		const lesson = row.lessons as unknown as { title: string } | null;
+		const course = row.courses as unknown as { title: string } | null;
 		return {
 			id: row.id,
 			title: row.title,
+			slug: row.slug,
 			entrance_code: row.entrance_code,
+			visibility: row.visibility,
 			time_limit_minutes: row.time_limit_minutes,
 			max_attempts: row.max_attempts,
 			passing_score_percentage: row.passing_score_percentage,
@@ -42,6 +45,7 @@ export default async function SchoolQuizzesPage({ params }: Props) {
 			created_at: row.created_at,
 			question_count: countArr?.[0]?.count ?? 0,
 			lesson_title: lesson?.title ?? null,
+			course_title: course?.title ?? null,
 			school_id: row.school_id,
 		};
 	});
