@@ -1651,6 +1651,73 @@
 			"questionN": "Question {n}"
 		}
 	},
+	"editor": {
+		"tabs": {
+			"write": "Write",
+			"preview": "Preview",
+			"source": "Code"
+		},
+		"preview": {
+			"empty": "Nothing to preview yet. Start writing first."
+		},
+		"source": {
+			"placeholder": "Write your markdown here…",
+			"hint": "This is the raw markdown source; changes here apply to Write and Preview too."
+		},
+		"link": {
+			"placeholder": "Paste link URL…",
+			"apply": "Apply link"
+		},
+		"image": {
+			"altPlaceholder": "Alt text",
+			"urlPlaceholder": "Image URL",
+			"apply": "Add image"
+		},
+		"toolbar": {
+			"undo": "Undo",
+			"redo": "Redo",
+			"paragraph": "Paragraph",
+			"heading1": "Heading 1",
+			"heading2": "Heading 2",
+			"heading3": "Heading 3",
+			"quote": "Quote",
+			"codeBlock": "Code block",
+			"bulletList": "Bullet list",
+			"orderedList": "Numbered list",
+			"checklist": "Checklist",
+			"bold": "Bold",
+			"italic": "Italic",
+			"underline": "Underline",
+			"strikethrough": "Strikethrough",
+			"inlineCode": "Inline code",
+			"link": "Link",
+			"removeLink": "Remove link",
+			"image": "Image",
+			"table": "Table",
+			"hr": "Horizontal rule",
+			"callout": "Important note",
+			"alignRight": "Align right",
+			"alignCenter": "Align center",
+			"alignLeft": "Align left",
+			"alignJustify": "Justify",
+			"clear": "Clear content"
+		},
+		"slash": {
+			"h1": "Heading 1",
+			"h2": "Heading 2",
+			"h3": "Heading 3",
+			"bullet": "Bullet list",
+			"numbered": "Numbered list",
+			"checklist": "Checklist",
+			"quote": "Quote",
+			"callout": "Important note",
+			"code": "Code block",
+			"table": "Table",
+			"hr": "Horizontal rule",
+			"image": "Image",
+			"clear": "Clear content"
+		}
+	},
 	"courseBuilder": {
 		"meta": {
 			"newCourse": "New Course",

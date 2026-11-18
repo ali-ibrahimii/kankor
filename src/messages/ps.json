@@ -1651,6 +1651,73 @@
 			"questionN": "پوښتنه {n}"
 		}
 	},
+	"editor": {
+		"tabs": {
+			"write": "لیکل",
+			"preview": "مخکتنه",
+			"source": "کوډ"
+		},
+		"preview": {
+			"empty": "تر اوسه څه د ښودنې لپاره نشته.لومړه یو متن ولیکئ."
+		},
+		"source": {
+			"placeholder": "خپل مارک‌داون دلته ولیکئ…",
+			"hint": "دا اصلي مارک‌داون کوډ دی؛ دلته بدلونونه په «لیکل» او «مخکتنه» کې هم پلي کېږي."
+		},
+		"link": {
+			"placeholder": "د لنک پته ولیکئ…",
+			"apply": "لنک ثبت کړئ"
+		},
+		"image": {
+			"altPlaceholder": "بدیلي متن",
+			"urlPlaceholder": "د انځور پته",
+			"apply": "انځور زیاتول"
+		},
+		"toolbar": {
+			"undo": "بېرته",
+			"redo": "بیاکول",
+			"paragraph": "ساده متن",
+			"heading1": "سرلیک ۱",
+			"heading2": "سرلیک ۲",
+			"heading3": "سرلیک ۳",
+			"quote": "اقتباس",
+			"codeBlock": "د کوډ بلاک",
+			"bulletList": "ټکي لړ",
+			"orderedList": "شمېرې لړ",
+			"checklist": "د نښه لړ",
+			"bold": "جر",
+			"italic": "ایتالیکي",
+			"underline": "لاندې کرښه",
+			"strikethrough": "لارې کرښه",
+			"inlineCode": "په کرښه کې کوډ",
+			"link": "لنک",
+			"removeLink": "لنک ړنګول",
+			"image": "انځور",
+			"table": "جدول",
+			"hr": "افقۍ کرښه",
+			"callout": "مهمه نکته",
+			"alignRight": "ښي سمون",
+			"alignCenter": "منځنی سمون",
+			"alignLeft": "کیڼ سمون",
+			"alignJustify": "ټول سمون",
+			"clear": "متن پاکول"
+		},
+		"slash": {
+			"h1": "سرلیک ۱",
+			"h2": "سرلیک ۲",
+			"h3": "سرلیک ۳",
+			"bullet": "ټکي لړ",
+			"numbered": "شمېرې لړ",
+			"checklist": "د نښه لړ",
+			"quote": "اقتباس",
+			"callout": "مهمه نکته",
+			"code": "د کوډ بلاک",
+			"table": "جدول",
+			"hr": "افقۍ کرښه",
+			"image": "انځور",
+			"clear": "متن پاکول"
+		}
+	},
 	"courseBuilder": {
 		"meta": {
 			"newCourse": "نوی کورس",

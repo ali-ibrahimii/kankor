@@ -50,6 +50,7 @@ function useAutoSave(
 	debounceMs = 1500
 ) {
 	const [status, setStatus] = React.useState<SaveStatus>("idle");
+	const t = useTranslations("courseBuilder");
 
 	// Avoid saving on the initial render (data just loaded from server)
 	const initializedRef = React.useRef(false);
@@ -86,7 +87,12 @@ function useAutoSave(
 				idleTimerRef.current = setTimeout(() => setStatus("idle"), 2500);
 			} else {
 				setStatus("error");
-				toast.error(result.error);
+				// Raw server errors go to the console only — the toast stays
+				// localized (see the server-action error contract).
+				console.error("course content autosave failed:", result.error);
+				toast.error(
+					t(ACTION_ERROR_TRANSLATION_KEYS[result.code ?? "database"])
+				);
 			}
 		}, debounceMs);
 

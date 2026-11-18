@@ -437,6 +437,56 @@
 	}
 }
 
+/* ─── Lexical markdown editor: checklists & tables ───────────────────── */
+.editor-listitem-checked,
+.editor-listitem-unchecked {
+	list-style: none;
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	margin-block: 0.15rem;
+	cursor: pointer;
+}
+.editor-listitem-checked::before,
+.editor-listitem-unchecked::before {
+	font-family: var(--font-geist-mono), monospace;
+	font-size: 1rem;
+	line-height: 1;
+	color: var(--primary);
+}
+.editor-listitem-checked {
+	text-decoration: none;
+}
+.editor-listitem-checked::before {
+	content: "☑";
+}
+.editor-listitem-unchecked::before {
+	content: "☐";
+}
+
+.editor-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-block: 0.75rem;
+	table-layout: fixed;
+	border: 1px solid var(--border);
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+.editor-table-cell,
+.editor-table-cell-header {
+	border: 1px solid var(--border);
+	padding: 0.5rem 0.75rem;
+	vertical-align: top;
+	position: relative;
+	color: var(--foreground);
+	font-size: 0.875rem;
+}
+.editor-table-cell-header {
+	background: color-mix(in oklab, var(--muted) 70%, transparent);
+	font-weight: 600;
+}
+
 /* ─── Markdown content (lesson text blocks, course descriptions) ──────────── */
 
 /* «نکته مهم» callouts — see src/lib/remark-callouts.ts */
