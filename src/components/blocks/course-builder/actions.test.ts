@@ -234,6 +234,66 @@ describe("saveCourseContent (FK-safe delete order)", () => {
 		expect(callLog).not.toContain("lesson_content_blocks.upsert");
 	});
 
+	it("clears lesson dependents (quizzes, progress, threads) before deleting lessons", async () => {
+		resultsByKey["quizzes.select"] = { data: [{ id: "quiz-1" }], error: null };
+		resultsByKey["questions.select"] = {
+			data: [{ id: "question-1" }],
+			error: null,
+		};
+		resultsByKey["quiz_attempts.select"] = {
+			data: [{ id: "attempt-1" }],
+			error: null,
+		};
+
+		const result = await saveCourseContent(
+			"course-1",
+			[mod("m-del", { _deleted: true, _isNew: false })],
+			[lesson("l-del", "m-del", { _deleted: true, _isNew: false })],
+			[]
+		);
+		expect(result).toEqual({ success: true, data: undefined });
+
+		const idx = (entry: string) => callLog.indexOf(entry);
+		expect(idx("answers.delete")).toBeGreaterThanOrEqual(0);
+		expect(idx("question_options.delete")).toBeLessThan(
+			idx("questions.delete")
+		);
+		expect(idx("answers.delete")).toBeLessThan(idx("quiz_attempts.delete"));
+		expect(idx("questions.delete")).toBeLessThan(idx("quizzes.delete"));
+		expect(idx("quiz_attempts.delete")).toBeLessThan(idx("quizzes.delete"));
+		expect(idx("quizzes.delete")).toBeLessThan(idx("lessons.delete"));
+		expect(idx("lesson_progress.delete")).toBeLessThan(idx("lessons.delete"));
+		// Discussions are user content: detach the lesson link, never delete.
+		expect(idx("discussion_threads.update")).toBeLessThan(
+			idx("lessons.delete")
+		);
+		expect(callLog).not.toContain("discussion_threads.delete");
+		expect(callLog).not.toContain("discussion_posts.delete");
+	});
+
+	it("detaches quiz-question image references before deleting blocks", async () => {
+		const result = await saveCourseContent(
+			"course-1",
+			[],
+			[lesson("l-keep", null)],
+			[block("b-del", "l-keep", { _deleted: true, _isNew: false })]
+		);
+		expect(result).toEqual({ success: true, data: undefined });
+
+		expect(callLog.indexOf("questions.update")).toBeGreaterThanOrEqual(0);
+		expect(callLog.indexOf("questions.update")).toBeLessThan(
+			callLog.indexOf("lesson_content_blocks.delete")
+		);
+		expect(
+			inCalls.some(
+				(c) =>
+					c.table === "questions" &&
+					Array.isArray(c.args[1]) &&
+					(c.args[1] as string[]).includes("b-del")
+			)
+		).toBe(true);
+	});
+
 	it("never throws on database errors — returns a mapped failure code instead", async () => {
 		resultsByKey["lessons.delete"] = {
 			data: null,

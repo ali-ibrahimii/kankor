@@ -385,9 +385,109 @@ export async function saveCourseContent(
 			(b) => !b._deleted && !deletedBlockIds.includes(b.id)
 		);
 
-		// ── Content blocks (delete first: children of lessons) ─────────────────────
+		// ── Lesson-owned dependents (children of the rows being deleted) ─────────
+		//
+		// Most of these foreign keys are plain NO ACTION (core_schema +
+		// school_changes), so dependent rows must be cleared before their
+		// parents or the whole save aborts: quizzes and their questions /
+		// options / answers / attempts, learner lesson_progress rows, then
+		// content blocks, lessons and modules. (answer_sheets already cascades
+		// and enrollments.last_accessed_lesson_id is ON DELETE SET NULL at the
+		// database level.)
+
+		if (deletedLessonIds.length > 0) {
+			// ── Quiz artifacts of the deleted lessons ────────────────────────────────
+
+			const { data: quizRows, error: quizSelError } = await supabase
+				.from("quizzes")
+				.select("id")
+				.in("lesson_id", deletedLessonIds);
+			if (quizSelError) return failure(quizSelError);
+			const quizIds = (quizRows ?? []).map((r) => r.id as string);
+
+			if (quizIds.length > 0) {
+				const { data: questionRows, error: questionSelError } = await supabase
+					.from("questions")
+					.select("id")
+					.in("quiz_id", quizIds);
+				if (questionSelError) return failure(questionSelError);
+				const questionIds = (questionRows ?? []).map((r) => r.id as string);
+
+				const { data: attemptRows, error: attemptSelError } = await supabase
+					.from("quiz_attempts")
+					.select("id")
+					.in("quiz_id", quizIds);
+				if (attemptSelError) return failure(attemptSelError);
+				const attemptIds = (attemptRows ?? []).map((r) => r.id as string);
+
+				if (questionIds.length > 0) {
+					const { error } = await supabase
+						.from("answers")
+						.delete()
+						.in("question_id", questionIds);
+					if (error) return failure(error);
+				}
+				if (attemptIds.length > 0) {
+					const { error } = await supabase
+						.from("answers")
+						.delete()
+						.in("quiz_attempt_id", attemptIds);
+					if (error) return failure(error);
+				}
+				if (questionIds.length > 0) {
+					const { error } = await supabase
+						.from("question_options")
+						.delete()
+						.in("question_id", questionIds);
+					if (error) return failure(error);
+					const { error: questionError } = await supabase
+						.from("questions")
+						.delete()
+						.in("id", questionIds);
+					if (questionError) return failure(questionError);
+				}
+				if (attemptIds.length > 0) {
+					const { error } = await supabase
+						.from("quiz_attempts")
+						.delete()
+						.in("id", attemptIds);
+					if (error) return failure(error);
+				}
+				const { error } = await supabase
+					.from("quizzes")
+					.delete()
+					.in("id", quizIds);
+				if (error) return failure(error);
+			}
+
+			// ── Discussions: user content — detach instead of deleting ──────────────
+
+			const { error: threadError } = await supabase
+				.from("discussion_threads")
+				.update({ lesson_id: null })
+				.in("lesson_id", deletedLessonIds);
+			if (threadError) return failure(threadError);
+
+			// ── Learner progress rows (meaningless without their lesson) ─────────────
+
+			const { error: progressError } = await supabase
+				.from("lesson_progress")
+				.delete()
+				.in("lesson_id", deletedLessonIds);
+			if (progressError) return failure(progressError);
+		}
+
+		// ── Content blocks (children of lessons) ─────────────────────────────────
 
 		if (deletedBlockIds.length > 0) {
+			// A quiz question may point at a block as its image — detach those
+			// references (user content) before the block disappears.
+			const { error: detachError } = await supabase
+				.from("questions")
+				.update({ image_content_block_id: null })
+				.in("image_content_block_id", deletedBlockIds);
+			if (detachError) return failure(detachError);
+
 			const { error } = await supabase
 				.from("lesson_content_blocks")
 				.delete()
