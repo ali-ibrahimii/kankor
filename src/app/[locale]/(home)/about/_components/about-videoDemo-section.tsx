@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play, Volume2, X } from "lucide-react";
+import { BarChart3, Clock, Play, Sparkles, WifiOff, X } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useAboutMotion } from "./about-motion";
 
 interface AboutVideoSectionProps {
 	videoId?: string;
@@ -11,163 +13,150 @@ interface AboutVideoSectionProps {
 }
 
 export function AboutVideoSection({
-	videoId,
-	thumbnailUrl,
+	videoId = "2REnqD3JLtQ",
+	thumbnailUrl = "/og-image.png",
 }: AboutVideoSectionProps) {
 	const t = useTranslations("aboutUs");
+	const aboutMotion = useAboutMotion();
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	const handlePlay = () => setIsPlaying(true);
-	const handleClose = () => setIsPlaying(false);
+	const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+
+	const highlights = [
+		{
+			key: "feature1",
+			icon: Sparkles,
+			title: t("video.feature1Title"),
+			desc: t("video.feature1Desc"),
+		},
+		{
+			key: "feature2",
+			icon: WifiOff,
+			title: t("video.feature2Title"),
+			desc: t("video.feature2Desc"),
+		},
+		{
+			key: "feature3",
+			icon: BarChart3,
+			title: t("video.feature3Title"),
+			desc: t("video.feature3Desc"),
+		},
+	] as const;
 
 	return (
-		<section
+		<motion.section
 			id="demo"
-			className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+			className="scroll-mt-32 mx-auto max-w-[1320px] px-4 py-6 sm:px-6 sm:py-10 lg:scroll-mt-36 lg:px-8"
+			variants={aboutMotion.section}
+			initial="hidden"
+			whileInView="show"
+			viewport={aboutMotion.viewport}
 		>
-			<div className="absolute inset-0 overflow-hidden">
-				<div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
+			<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_8%_108%,rgba(94,207,173,.2),transparent_38%),radial-gradient(circle_at_90%_-8%,rgba(137,100,255,.34),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] px-5 py-10 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-14 lg:px-14 lg:py-16">
 				<div
-					className="absolute top-1/2 -right-40 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl animate-pulse"
-					style={{ animationDelay: "1s" }}
+					aria-hidden="true"
+					className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.12)_0.7px,transparent_0.7px)] bg-size-[24px_24px]"
 				/>
 				<div
-					className="absolute -bottom-40 left-1/3 h-96 w-96 rounded-full bg-sky-500/20 blur-3xl animate-pulse"
-					style={{ animationDelay: "2s" }}
+					aria-hidden="true"
+					className="pointer-events-none absolute -start-20 -top-24 -z-10 size-72 rounded-full border-[42px] border-white/[.03]"
 				/>
-			</div>
 
-			<div className="relative mx-auto max-w-6xl px-6">
 				{/* Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="mb-12 text-center"
-				>
-					<div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-5 py-2 text-sm font-semibold text-indigo-300 backdrop-blur-sm">
-						<Play className="h-4 w-4" />
+				<div className="mx-auto max-w-2xl text-center">
+					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-xs font-bold text-white/90 backdrop-blur">
+						<Play className="size-3.5 fill-current text-[#b7f486]" />
 						{t("video.badge")}
-					</div>
+					</span>
 
-					<h2 className="mx-auto max-w-4xl text-4xl font-black tracking-tight md:text-5xl lg:text-6xl">
-						<span className="bg-gradient-to-r from-white via-indigo-200 to-fuchsia-200 bg-clip-text text-transparent">
-							{t("video.title")}
-						</span>
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-white sm:text-3xl lg:text-4xl">
+						{t("video.title")}
 					</h2>
 
-					<p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+					<p className="mt-3 text-sm leading-8 text-white/65 sm:text-base">
 						{t("video.subtitle")}
 					</p>
-				</motion.div>
+				</div>
 
-				{/* Video Container */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.2 }}
-					className="relative mx-auto max-w-5xl"
-				>
-					<div className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-1 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:shadow-indigo-500/20">
-						<div className="relative aspect-video overflow-hidden rounded-lg bg-slate-950">
+				{/* Contained 16:9 Cinema Frame */}
+				<div className="mx-auto mt-9 max-w-4xl sm:mt-11">
+					<div className="overflow-hidden rounded-[22px] border border-white/14 bg-[#09101f] shadow-[0_30px_70px_-32px_rgba(0,0,0,.75)] sm:rounded-[26px]">
+						<div className="relative aspect-video">
 							{!isPlaying ? (
-								<>
-									{/* Thumbnail */}
-									<div className="absolute inset-0">
-										<img
-											src={
-												thumbnailUrl ||
-												`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-											}
-											alt={t("video.title")}
-											className="h-full w-full object-cover"
-										/>
-										<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent" />
-									</div>
+								<div className="group relative size-full">
+									<Image
+										src={thumbnailUrl}
+										alt={t("video.title")}
+										fill
+										sizes="(max-width: 1024px) 100vw, 896px"
+										className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+									/>
+									<div
+										aria-hidden="true"
+										className="absolute inset-0 bg-linear-to-t from-[#09101f]/85 via-[#09101f]/35 to-[#09101f]/25 transition-opacity duration-300 group-hover:opacity-90"
+									/>
 
-									{/* Play Button */}
 									<button
-										onClick={handlePlay}
-										className="group/btn absolute inset-0 flex items-center justify-center"
+										type="button"
+										onClick={() => setIsPlaying(true)}
 										aria-label={t("video.playButton")}
+										className="absolute inset-0 flex flex-col items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b7f486] focus-visible:ring-inset"
 									>
-										<motion.div
-											initial={{ scale: 1 }}
-											whileHover={{ scale: 1.1 }}
-											whileTap={{ scale: 0.95 }}
-											className="relative"
-										>
-											<div className="absolute inset-0 animate-ping rounded-full bg-indigo-500/30" />
-											<div className="absolute inset-0 animate-pulse rounded-full bg-indigo-500/20" />
-											<div className="relative flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-500 shadow-2xl shadow-indigo-500/50 transition-all duration-300 group-hover/btn:shadow-indigo-500/70 md:size-24">
-												<Play className="h-8 w-8 text-white fill-white md:h-10 md:w-10" />
-											</div>
-										</motion.div>
+										<span className="flex size-16 items-center justify-center rounded-full bg-[#b7f486] text-[#17233a] shadow-[0_18px_45px_rgba(0,0,0,.45)] ring-8 ring-white/10 transition duration-300 group-hover:scale-105 group-hover:bg-[#c9f8a2] sm:size-20">
+											<Play className="size-7 translate-x-0.5 fill-current sm:size-8" />
+										</span>
+										<span className="rounded-full border border-white/15 bg-[#0f1a2c]/75 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+											{t("video.playButton")}
+										</span>
 									</button>
 
-									{/* Duration Info */}
-									<div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-										<div className="flex items-center gap-3 text-sm text-slate-300">
-											<Volume2 className="h-4 w-4" />
-											<span>{t("video.duration")}</span>
-										</div>
+									{/* Duration Pill */}
+									<div className="pointer-events-none absolute bottom-3.5 start-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#0f1a2c]/80 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur-md sm:bottom-5 sm:start-5">
+										<Clock className="size-3.5 text-[#b7f486]" />
+										<span>{t("video.duration")}</span>
 									</div>
-								</>
+								</div>
 							) : (
-								<>
-									{/* YouTube Embed */}
+								<div className="relative size-full">
 									<iframe
-										src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+										src={embedUrl}
 										title={t("video.title")}
-										className="absolute inset-0 h-full w-full"
+										className="size-full"
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 										allowFullScreen
 									/>
 									<button
-										onClick={handleClose}
-										className="absolute end-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-slate-950/80 text-white backdrop-blur-sm transition-all hover:bg-slate-950"
+										type="button"
+										onClick={() => setIsPlaying(false)}
 										aria-label={t("video.closeButton")}
+										className="absolute end-3.5 top-3.5 flex size-9 items-center justify-center rounded-full border border-white/20 bg-[#09101f]/80 text-white backdrop-blur-md transition hover:bg-[#09101f]"
 									>
-										<X className="h-5 w-5" />
+										<X className="size-4" />
 									</button>
-								</>
+								</div>
 							)}
 						</div>
 					</div>
-					<div className="absolute -bottom-6 start-1/2 -z-10 h-32 w-3/4 -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl" />
-				</motion.div>
+				</div>
 
-				{/* Features */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.4 }}
-					className="mt-16 grid gap-6 md:grid-cols-3"
-				>
-					{[
-						{ title: t("video.feature1Title"), desc: t("video.feature1Desc") },
-						{ title: t("video.feature2Title"), desc: t("video.feature2Desc") },
-						{ title: t("video.feature3Title"), desc: t("video.feature3Desc") },
-					].map((feature, index) => (
-						<motion.div
-							key={index}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-							className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10"
+				{/* 3 Glass Feature Highlights */}
+				<div className="mx-auto mt-8 grid max-w-4xl gap-3.5 sm:grid-cols-3 sm:gap-4">
+					{highlights.map(({ key, icon: Icon, title, desc }) => (
+						<div
+							key={key}
+							className="rounded-2xl border border-white/10 bg-white/[.055] p-5 backdrop-blur-sm transition hover:border-white/20 hover:bg-white/[.08]"
 						>
-							<h3 className="mb-2 text-lg font-bold text-white">
-								{feature.title}
-							</h3>
-							<p className="text-sm leading-6 text-slate-400">{feature.desc}</p>
-						</motion.div>
+							<div className="flex items-center gap-3">
+								<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#b7f486]/14 text-[#b7f486]">
+									<Icon className="size-4" />
+								</span>
+								<h3 className="text-sm font-extrabold text-white">{title}</h3>
+							</div>
+							<p className="mt-2.5 text-xs leading-7 text-white/65">{desc}</p>
+						</div>
 					))}
-				</motion.div>
+				</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 }

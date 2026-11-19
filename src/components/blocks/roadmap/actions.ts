@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { isSupabaseServerConfigured } from "@/lib/env/server-env";
 import type { Tables } from "@/lib/supabase/database.types";
 import { createClient } from "@/lib/supabase/server";
 
@@ -68,6 +69,10 @@ export async function listManagedRoadmaps(): Promise<
 export async function listPublishedRoadmaps(): Promise<
 	Result<RoadmapWithItems[]>
 > {
+	if (!isSupabaseServerConfigured) {
+		return { success: true, data: [] };
+	}
+
 	const supabase = await createClient();
 	const { data, error } = await supabase
 		.from("roadmaps")
@@ -87,6 +92,10 @@ export async function listPublishedRoadmaps(): Promise<
 export async function getPublishedRoadmapBySlug(
 	slug: string
 ): Promise<Result<RoadmapWithItems | null>> {
+	if (!isSupabaseServerConfigured) {
+		return { success: true, data: null };
+	}
+
 	const supabase = await createClient();
 	const { data, error } = await supabase
 		.from("roadmaps")

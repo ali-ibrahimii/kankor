@@ -1,332 +1,321 @@
 "use client";
 
-// src/app/[locale]/(home)/about/_components/about-team-section.tsx
-
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
-	ArrowRight,
 	ChevronDown,
-	ExternalLink,
+	Globe2,
 	Mail,
 	MapPin,
-	Phone,
+	Sparkles,
+	Users,
 } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import {
-	FacebookIcon,
-	InstagramIcon,
-	TwitterIcon,
-} from "@/components/blocks/navbar/icons/social-icons";
 import { cn } from "@/lib/utils";
+import { ABOUT_TONE_CYCLE, ABOUT_TONES, useAboutMotion } from "./about-motion";
 
-type SocialLink = {
+interface SocialLink {
 	platform: string;
 	url: string;
-};
+}
 
-type TeamMember = {
+interface TeamMember {
 	id: string;
 	name: string;
 	role: string;
-	imageUrl: string;
+	imageUrl?: string;
 	email?: string;
 	phone?: string;
 	location?: string;
 	shortBio: string;
-	fullBio: string;
-	socialLinks: SocialLink[];
+	fullBio?: string;
+	socialLinks?: SocialLink[];
+}
+
+/**
+ * Per-asset portrait framing for files verified in `public/`.
+ * Missing or legacy paths (e.g. `/img/team/4.jpg`) render a crisp monogram tile.
+ */
+const VERIFIED_PORTRAITS: Record<string, string> = {
+	"/team-ali.png":
+		"scale-[2.25] origin-[50%_13%] object-cover object-[50%_12%]",
+	"/team-nilo.png": "object-cover object-[50%_18%]",
+	"/team-sara.jpg":
+		"scale-[2.25] origin-[50%_13%] object-cover object-[50%_12%]",
 };
+
+function SocialGlyph({ platform, url }: { platform: string; url: string }) {
+	const token = `${platform} ${url}`.toLowerCase();
+
+	if (
+		token.includes("twitter") ||
+		token.includes("x.com") ||
+		token.includes("توییتر") ||
+		token.includes("ټویټر")
+	) {
+		return (
+			<svg
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				className="size-3.5"
+				aria-hidden="true"
+			>
+				<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+			</svg>
+		);
+	}
+
+	if (
+		token.includes("instagram") ||
+		token.includes("اینستاگرام") ||
+		token.includes("انسټاګرام")
+	) {
+		return (
+			<svg
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				className="size-3.5"
+				aria-hidden="true"
+			>
+				<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+				<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+				<line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+			</svg>
+		);
+	}
+
+	if (token.includes("facebook") || token.includes("فیسبوک")) {
+		return (
+			<svg
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				className="size-3.5"
+				aria-hidden="true"
+			>
+				<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+			</svg>
+		);
+	}
+
+	return <Globe2 className="size-3.5" aria-hidden="true" />;
+}
+
+function getMemberInitials(name: string): string {
+	const parts = name.trim().split(/\s+/).filter(Boolean);
+	if (parts.length === 0) return "•";
+	if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+	return `${parts[0][0] ?? ""}\u200C${parts[parts.length - 1][0] ?? ""}`.toUpperCase();
+}
+
+function TeamMemberAvatar({
+	member,
+	toneIcon,
+}: {
+	member: TeamMember;
+	toneIcon: string;
+}) {
+	const [failed, setFailed] = useState(false);
+	const portraitClass = member.imageUrl
+		? VERIFIED_PORTRAITS[member.imageUrl]
+		: undefined;
+	const showImage = Boolean(member.imageUrl && portraitClass && !failed);
+
+	return (
+		<div className="relative size-20 shrink-0 overflow-hidden rounded-[22px] border-4 border-white bg-white shadow-md shadow-slate-900/8 dark:border-[#1b2438] dark:bg-[#232e47]">
+			{showImage && member.imageUrl ? (
+				<Image
+					src={member.imageUrl}
+					alt={member.name}
+					fill
+					sizes="240px"
+					onError={() => setFailed(true)}
+					className={portraitClass}
+				/>
+			) : (
+				<div
+					className={cn(
+						"flex size-full items-center justify-center text-xl font-black tracking-tight",
+						toneIcon
+					)}
+				>
+					{getMemberInitials(member.name)}
+				</div>
+			)}
+		</div>
+	);
+}
 
 export function AboutTeamSection() {
 	const t = useTranslations("aboutUs");
-	const membersRaw = t.raw("team.members");
-	const members = Array.isArray(membersRaw) ? (membersRaw as TeamMember[]) : [];
-	const [expandedMember, setExpandedMember] = useState<string | null>(null);
+	const aboutMotion = useAboutMotion();
+	const [expandedId, setExpandedId] = useState<string | null>(null);
 
-	const socialIcons: Record<string, React.ReactNode> = {
-		twitter: <TwitterIcon className="h-4 w-4" />,
-		instagram: <InstagramIcon className="h-4 w-4" />,
-		facebook: <FacebookIcon className="h-4 w-4" />,
-	};
+	const raw = t.raw("team.members");
+	const members: TeamMember[] = Array.isArray(raw) ? raw : [];
 
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		show: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.15,
-			},
-		},
-	};
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 30 },
-		show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-	};
+	if (members.length === 0) return null;
 
 	return (
-		<section
+		<motion.section
 			id="team"
-			className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+			className="scroll-mt-32 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24"
+			variants={aboutMotion.section}
+			initial="hidden"
+			whileInView="show"
+			viewport={aboutMotion.viewport}
 		>
-			{/* Animated gradient orbs */}
-			<div className="absolute inset-0 overflow-hidden">
-				<div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
-				<div
-					className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl animate-pulse"
-					style={{ animationDelay: "1s" }}
-				/>
-				<div
-					className="absolute -bottom-40 right-1/3 h-96 w-96 rounded-full bg-sky-500/20 blur-3xl animate-pulse"
-					style={{ animationDelay: "2s" }}
-				/>
-			</div>
-
-			<div className="relative mx-auto max-w-7xl px-6">
-				{/* Section Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="mb-20 text-center"
-				>
-					<motion.div
-						initial={{ scale: 0.9 }}
-						whileInView={{ scale: 1 }}
-						viewport={{ once: true }}
-						className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-5 py-2 text-sm font-semibold text-indigo-300 backdrop-blur-sm"
-					>
-						<span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
-						{t("team.badge")}
-					</motion.div>
-
-					<h2 className="mx-auto max-w-4xl text-4xl font-black tracking-tight md:text-5xl lg:text-6xl">
-						<span className="bg-gradient-to-r from-white via-indigo-200 to-fuchsia-200 bg-clip-text text-transparent">
-							{t("team.title")}
+			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+				{/* Split Header + Culture Note */}
+				<div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+					<div className="max-w-2xl">
+						<span className="section-kicker">
+							<Users className="size-3.5" />
+							{t("team.badge")}
 						</span>
-					</h2>
+						<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+							{t("team.title")}
+						</h2>
+						<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
+							{t("team.subtitle")}
+						</p>
+					</div>
 
-					<p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-						{t("team.subtitle")}
-					</p>
-				</motion.div>
-
-				{/* Featured Member - Hero Section */}
-				{members.length > 0 && (
-					<motion.div
-						initial={{ opacity: 0, y: 40 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.8 }}
-						className="mb-16"
-					>
-						<div className="group relative overflow-hidden rounded-[3rem] border border-white/10 bg-gradient-to-br from-white/5 via-white/10 to-white/5 p-1 shadow-2xl backdrop-blur-xl">
-							<div className="relative overflow-hidden rounded-[2.85rem] bg-slate-950/50">
-								<div className="grid lg:grid-cols-2">
-									{/* Image Side */}
-									<div className="relative h-[400px] lg:h-[600px] overflow-hidden">
-										<Image
-											src={members[0].imageUrl}
-											alt={members[0].name}
-											fill
-											sizes="(max-width: 1024px) 100vw, 50vw"
-											className="object-cover transition-transform duration-700 group-hover:scale-105"
-										/>
-										<div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-										<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-transparent to-fuchsia-500/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-										{/* Floating Badge */}
-										<div className="absolute top-8 left-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur-md">
-											<span className="flex h-2 w-2 items-center justify-center">
-												<span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
-											</span>
-											{members[0].role}
-										</div>
-									</div>
-
-									{/* Content Side */}
-									<div className="relative flex flex-col justify-center p-8 lg:p-12">
-										<div className="space-y-6">
-											<div>
-												<h3 className="text-4xl font-black text-white lg:text-5xl">
-													{members[0].name}
-												</h3>
-												<p className="mt-3 text-xl font-semibold text-indigo-300">
-													{members[0].role}
-												</p>
-											</div>
-
-											<p className="text-base leading-7 text-slate-300">
-												{members[0].shortBio}
-											</p>
-
-											{/* Contact Info */}
-											<div className="space-y-3">
-												{members[0].email && (
-													<a
-														href={`mailto:${members[0].email}`}
-														className="flex items-center gap-3 text-sm text-slate-400 transition-colors hover:text-indigo-300"
-													>
-														<Mail className="h-4 w-4" />
-														{members[0].email}
-													</a>
-												)}
-												{members[0].phone && (
-													<div className="flex items-center gap-3 text-sm text-slate-400">
-														<Phone className="h-4 w-4" />
-														{members[0].phone}
-													</div>
-												)}
-												{members[0].location && (
-													<div className="flex items-center gap-3 text-sm text-slate-400">
-														<MapPin className="h-4 w-4" />
-														{members[0].location}
-													</div>
-												)}
-											</div>
-
-											{/* Social Links */}
-											{members[0].socialLinks &&
-												members[0].socialLinks.length > 0 && (
-													<div className="flex flex-wrap gap-2">
-														{members[0].socialLinks.map((link) => (
-															<a
-																key={link.platform}
-																href={link.url}
-																target="_blank"
-																rel="noreferrer"
-																className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-400 transition-all duration-300 hover:scale-110 hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-white"
-																title={link.platform}
-																aria-label={link.platform}
-															>
-																{socialIcons[link.platform.toLowerCase()] || (
-																	<ExternalLink
-																		className="h-4 w-4"
-																		aria-hidden="true"
-																	/>
-																)}
-															</a>
-														))}
-													</div>
-												)}
-
-											<div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-												<p className="text-sm leading-7 text-slate-300">
-													{members[0].fullBio}
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
+					<div className="soft-card max-w-md border-[#e6e9f4] bg-white px-5 py-4 dark:border-white/10 dark:bg-[#1b2438]">
+						<div className="flex items-start gap-3">
+							<span
+								className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl ${ABOUT_TONES.violet.icon}`}
+							>
+								<Sparkles className="size-4" />
+							</span>
+							<div className="min-w-0">
+								<p className="text-xs font-extrabold text-[#19243b] sm:text-sm dark:text-slate-100">
+									{t("team.panelTitle")}
+								</p>
+								<p className="mt-1 text-xs leading-6 text-slate-500 dark:text-slate-400">
+									{t("team.panelDesc")}
+								</p>
 							</div>
 						</div>
-					</motion.div>
-				)}
+					</div>
+				</div>
 
-				{/* Other Team Members Grid */}
-				{members.length > 1 && (
-					<motion.div
-						variants={containerVariants}
-						initial="hidden"
-						whileInView="show"
-						viewport={{ once: true }}
-						className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-					>
-						{members.slice(1).map((member) => (
-							<motion.div
+				{/* 4 Unified Editorial Member Cards */}
+				<motion.div
+					className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+					variants={aboutMotion.stagger}
+					initial="hidden"
+					whileInView="show"
+					viewport={aboutMotion.viewport}
+				>
+					{members.map((member, idx) => {
+						const tone =
+							ABOUT_TONES[ABOUT_TONE_CYCLE[idx % ABOUT_TONE_CYCLE.length]];
+						const isExpanded = expandedId === member.id;
+						const hasExtraBio =
+							Boolean(member.fullBio) && member.fullBio !== member.shortBio;
+
+						return (
+							<motion.article
 								key={member.id}
-								variants={itemVariants}
-								className="group relative"
+								variants={aboutMotion.card}
+								className="soft-card card-hover group flex flex-col overflow-hidden border-[#e5e8f3] bg-white dark:border-white/10 dark:bg-[#1b2438]"
 							>
-								<div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-1 backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:shadow-2xl hover:shadow-indigo-500/20">
-									<div className="relative overflow-hidden rounded-[1.4rem] bg-slate-950/60">
-										{/* Image */}
-										<div className="relative h-72 overflow-hidden">
-											<Image
-												src={member.imageUrl}
-												alt={member.name}
-												fill
-												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-												className="object-cover transition-transform duration-700 group-hover:scale-110"
-											/>
-											<div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+								{/* Soft Pastel Studio Banner */}
+								<div className={`relative h-20 bg-linear-to-br ${tone.banner}`}>
+									<div
+										aria-hidden="true"
+										className={`absolute inset-x-0 top-0 h-1 bg-linear-to-r ${tone.bar} opacity-75`}
+									/>
+									{member.location && (
+										<span className="absolute end-3.5 top-3.5 inline-flex items-center gap-1 rounded-full border border-white/70 bg-white/80 px-2.5 py-1 text-[10px] font-bold text-slate-600 backdrop-blur-sm dark:border-white/10 dark:bg-[#141b2c]/70 dark:text-slate-300">
+											<MapPin className="size-3 text-primary" />
+											{member.location}
+										</span>
+									)}
+								</div>
 
-											{/* Role Badge */}
-											<div className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md">
-												{member.role}
-											</div>
-										</div>
+								{/* Card Body */}
+								<div className="flex flex-1 flex-col px-6 pb-6">
+									<div className="-mt-10 flex items-end justify-between gap-3">
+										<TeamMemberAvatar member={member} toneIcon={tone.icon} />
 
-										{/* Content */}
-										<div className="space-y-4 p-6">
-											<div>
-												<h3 className="text-2xl font-bold text-white">
-													{member.name}
-												</h3>
-											</div>
-
-											<p className="line-clamp-3 text-sm leading-6 text-slate-300">
-												{member.shortBio}
-											</p>
-
-											{/* Contact Info */}
-											<div className="space-y-2">
-												{member.email && (
-													<a
-														href={`mailto:${member.email}`}
-														className="flex items-center gap-2 text-xs text-slate-400 transition-colors hover:text-indigo-300"
-													>
-														<Mail className="h-3.5 w-3.5" />
-														<span className="truncate">{member.email}</span>
-													</a>
-												)}
-												{member.location && (
-													<div className="flex items-center gap-2 text-xs text-slate-400">
-														<MapPin className="h-3.5 w-3.5" />
-														{member.location}
-													</div>
-												)}
-											</div>
-
-											{/* Social Links */}
-											{member.socialLinks && member.socialLinks.length > 0 && (
-												<div className="flex flex-wrap gap-2">
-													{member.socialLinks.slice(0, 3).map((link) => (
-														<a
-															key={link.platform}
-															href={link.url}
-															target="_blank"
-															rel="noreferrer"
-															className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-400 transition-all duration-300 hover:scale-110 hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-white"
-															title={link.platform}
-															aria-label={link.platform}
-														>
-															{socialIcons[link.platform.toLowerCase()] || (
-																<ExternalLink
-																	className="h-4 w-4"
-																	aria-hidden="true"
-																/>
-															)}
-														</a>
-													))}
-													{member.socialLinks.length > 3 && (
-														<div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-xs font-bold text-slate-400">
-															+{member.socialLinks.length - 3}
-														</div>
+										{hasExtraBio && (
+											<button
+												type="button"
+												onClick={() =>
+													setExpandedId(isExpanded ? null : member.id)
+												}
+												aria-expanded={isExpanded}
+												aria-label={member.name}
+												className="inline-flex size-8 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-500 transition hover:border-primary/30 hover:bg-primary/5 hover:text-primary dark:border-white/10 dark:bg-white/[.05] dark:text-slate-400 dark:hover:text-violet-200"
+											>
+												<ChevronDown
+													className={cn(
+														"size-4 transition-transform duration-200",
+														isExpanded && "rotate-180"
 													)}
-												</div>
+												/>
+											</button>
+										)}
+									</div>
+
+									<h3 className="mt-4 text-lg font-extrabold text-[#19243b] dark:text-slate-100">
+										{member.name}
+									</h3>
+
+									<p className="mt-1 text-xs font-bold text-primary dark:text-violet-300">
+										{member.role}
+									</p>
+
+									<p className="mt-3 flex-1 text-xs leading-7 text-slate-500 sm:text-[13px] dark:text-slate-400">
+										{isExpanded && member.fullBio
+											? member.fullBio
+											: member.shortBio}
+									</p>
+
+									{/* Footer Links */}
+									{(member.email || (member.socialLinks?.length ?? 0) > 0) && (
+										<div className="mt-5 flex items-center justify-between gap-2 border-t border-slate-100 pt-4 dark:border-white/[.08]">
+											<div className="flex items-center gap-1.5">
+												{member.socialLinks?.map((social) => (
+													<a
+														key={`${member.id}-${social.platform}`}
+														href={social.url}
+														target="_blank"
+														rel="noopener noreferrer"
+														aria-label={`${member.name} — ${social.platform}`}
+														className="flex size-8 items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/80 text-slate-500 transition hover:border-primary/35 hover:bg-primary/6 hover:text-primary dark:border-white/10 dark:bg-white/[.04] dark:text-slate-400 dark:hover:border-violet-400/40 dark:hover:text-violet-200"
+													>
+														<SocialGlyph
+															platform={social.platform}
+															url={social.url}
+														/>
+													</a>
+												))}
+											</div>
+
+											{member.email && (
+												<a
+													href={`mailto:${member.email}`}
+													aria-label={member.email}
+													className="flex size-8 items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/80 text-slate-500 transition hover:border-primary/35 hover:bg-primary/6 hover:text-primary dark:border-white/10 dark:bg-white/[.04] dark:text-slate-400 dark:hover:border-violet-400/40 dark:hover:text-violet-200"
+												>
+													<Mail className="size-3.5" />
+												</a>
 											)}
 										</div>
-									</div>
+									)}
 								</div>
-							</motion.div>
-						))}
-					</motion.div>
-				)}
+							</motion.article>
+						);
+					})}
+				</motion.div>
 			</div>
-		</section>
+		</motion.section>
 	);
 }

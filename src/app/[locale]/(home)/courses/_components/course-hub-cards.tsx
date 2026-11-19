@@ -9,11 +9,10 @@ import {
 	Sparkles,
 	Star,
 } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { CoverFillImage } from "@/components/blocks/course/cover-image";
-
 import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 import type { HubCourseItem, LearningPathItem } from "./course-hub-data";

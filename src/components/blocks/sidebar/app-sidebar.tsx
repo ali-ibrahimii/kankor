@@ -128,7 +128,7 @@ function CollapsibleMenuParent({ item }: { item: MenuParent }) {
 				<ChevronRight
 					className={cn(
 						"ms-auto size-4 shrink-0 transition-transform duration-200",
-						open && "rotate-90"
+						open ? "rotate-90" : "rtl:rotate-180"
 					)}
 				/>
 			</SidebarMenuButton>

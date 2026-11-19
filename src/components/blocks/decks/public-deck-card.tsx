@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
 	EntityCardArt,
@@ -85,7 +85,7 @@ export function PublicDeckCard({
 
 				<span className="inline-flex shrink-0 items-center gap-1 font-bold text-primary transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
 					{t("practiceNow")}
-					<ArrowLeft className="rtl:rotate-180" size={12} />
+					<ArrowRight className="rtl:rotate-180" size={12} />
 				</span>
 			</div>
 		</EntityCardShell>

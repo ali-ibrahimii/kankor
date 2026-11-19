@@ -13,6 +13,7 @@ import {
 	applySort,
 } from "@/hooks/filter/query-state-mapping";
 import type { QueryFn } from "@/hooks/filter/types";
+import { isSupabaseConfigured } from "@/lib/env/client-env";
 import { createClient } from "@/lib/supabase/client";
 import { useIsAuthenticated } from "@/providers/auth.provider";
 import { LibraryCard } from "./library-card";
@@ -113,6 +114,7 @@ export function LibraryCatalog({
 	const optionsQuery = useQuery({
 		queryKey: ["library-options"],
 		queryFn: fetchLibraryOptions,
+		enabled: isSupabaseConfigured,
 		staleTime: 5 * 60 * 1000,
 	});
 
@@ -121,6 +123,7 @@ export function LibraryCatalog({
 		selectColumns: BOOK_SELECT,
 		searchColumns: ["title", "desc"],
 		initialData,
+		enabled: isSupabaseConfigured,
 		queryFn: fixedCategoryFilter
 			? fixedSectionQueryFn(fixedCategoryFilter)
 			: undefined,

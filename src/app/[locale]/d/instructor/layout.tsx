@@ -31,6 +31,7 @@ import {
 	SidebarProvider,
 } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
 import { NewCourseButton } from "./_components/new-course-button";
@@ -42,9 +43,10 @@ export default async function InstructorLayout({
 	const { locale } = await params;
 	const base = routes.d.instructor.page();
 
-	const [t, ta, user] = await Promise.all([
+	const [t, ta, tl, user] = await Promise.all([
 		getTranslations("dashboard.instructor"),
 		getTranslations("app"),
+		getTranslations("landing"),
 		getCurrentUser(),
 	]);
 
@@ -180,6 +182,7 @@ export default async function InstructorLayout({
 				<DashboardTopbar
 					actions={
 						<>
+							<ThemeSwitcher label={tl("header.themeToggle")} />
 							<LocaleSwitcher />
 							<NotificationBell
 								notificationsHref={routes.d.instructor.notifications.page()}

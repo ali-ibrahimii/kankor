@@ -48,33 +48,33 @@ export async function LibraryDetailView({
 			</div>
 
 			{/* Main Grid */}
-			<div className=" relative grid grid-cols-1 lg:grid-cols-3 gap-8 items- pb-12">
+			<div className="relative grid grid-cols-1 items-start gap-8 pb-12 lg:grid-cols-3">
 				{/* Left Column: PDF Viewer */}
-				<div className="lg:col-span-2 flex flex-col gap-4">
-					<Card className="overflow-hidden border-slate-200/80 shadow-md bg-white">
-						<CardHeader className="bg-slate-50/50 border-b border-slate-100 py-4 px-6 flex flex-row items-center justify-between">
-							<CardTitle className="text-sm font-medium flex items-center gap-2 text-slate-700">
-								<FileText className="size-4 text-[#1461B8]" />
+				<div className="flex flex-col gap-4 lg:col-span-2">
+					<Card className="overflow-hidden border-border/80 bg-card shadow-md">
+						<CardHeader className="flex flex-row items-center justify-between border-b border-border/70 bg-muted/35 px-6 py-4">
+							<CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
+								<FileText className="size-4 text-primary" />
 								{t("viewPdf")}
 							</CardTitle>
 							<Badge
 								variant="outline"
-								className="font-normal text-xs text-slate-500"
+								className="text-xs font-normal text-muted-foreground"
 							>
 								PDF
 							</Badge>
 						</CardHeader>
 						<CardContent className="p-0">
-							<div className="w-full aspect-3/4 min-h-[500px] sm:min-h-[600px] lg:min-h-[750px] relative bg-slate-100">
+							<div className="relative aspect-3/4 min-h-[500px] w-full bg-muted/50 sm:min-h-[600px] lg:min-h-[750px]">
 								<iframe
 									src={`${book.uri}#toolbar=1`}
-									className="absolute inset-0 w-full h-full border-0"
+									className="absolute inset-0 h-full w-full border-0"
 									title={book.title}
 								/>
 								{/* Fallback for no iframe support */}
-								<div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-slate-50 pointer-events-none z-[-1]">
-									<FileText className="size-12 text-slate-300 mb-3" />
-									<p className="text-sm font-medium text-slate-600 mb-2">
+								<div className="pointer-events-none absolute inset-0 z-[-1] flex flex-col items-center justify-center bg-muted/30 p-6 text-center">
+									<FileText className="mb-3 size-12 text-muted-foreground/40" />
+									<p className="mb-2 text-sm font-medium text-muted-foreground">
 										{t("noPdfViewer")}
 									</p>
 									<Button asChild size="sm" className="pointer-events-auto">
@@ -93,22 +93,22 @@ export async function LibraryDetailView({
 				</div>
 
 				{/* Right Column: Book details */}
-				<div className="lg:col-span-1 flex flex-col gap-6 sticky top-20">
-					<Card className="border-slate-200/80 shadow-md bg-white sticky top-24">
-						<CardContent className="p-6 flex flex-col gap-6">
+				<div className="sticky top-20 flex flex-col gap-6 lg:col-span-1">
+					<Card className="sticky top-24 border-border/80 bg-card shadow-md">
+						<CardContent className="flex flex-col gap-6 p-6">
 							<div>
-								<h1 className="text-2xl font-bold tracking-tight text-slate-900 leading-tight">
+								<h1 className="text-2xl leading-tight font-bold tracking-tight text-foreground">
 									{book.title}
 								</h1>
 								{book.desc && (
-									<p className="mt-3 text-slate-600 text-sm leading-relaxed">
+									<p className="mt-3 text-sm leading-relaxed text-muted-foreground">
 										{book.desc}
 									</p>
 								)}
 							</div>
 
 							{/* Badges container */}
-							<div className="flex flex-wrap gap-1.5 border-t border-slate-100 pt-4">
+							<div className="flex flex-wrap gap-1.5 border-t border-border/70 pt-4">
 								{book.category?.name && (
 									<Badge variant="secondary" className="gap-1 font-normal">
 										<Tag className="size-3" />
@@ -130,7 +130,7 @@ export async function LibraryDetailView({
 							</div>
 
 							{/* Actions */}
-							<div className="border-t border-slate-100 pt-4 mt-2">
+							<div className="mt-2 border-t border-border/70 pt-4">
 								<Button
 									asChild
 									size="lg"

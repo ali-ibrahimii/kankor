@@ -6,7 +6,7 @@ import type { PublicQuiz } from "./types";
 // but the entrance code (and question content, via other tables) must stay
 // out of any signed-out-accessible query.
 export const PUBLIC_QUIZ_SELECT =
-	"id, slug, title, description, instructions, time_limit_minutes, passing_score_percentage, max_attempts, created_at";
+	"id, slug, title, description, instructions, cover_image_url, is_free, price_credits, time_limit_minutes, passing_score_percentage, max_attempts, created_at";
 
 /** Quiz listing query scoped to public quizzes — safe for signed-out visitors. */
 export const publicQuizzesQueryFn: QueryFn<"quizzes", PublicQuiz[]> = (

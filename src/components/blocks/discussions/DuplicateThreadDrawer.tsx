@@ -1,11 +1,11 @@
 "use client";
 
 import { ExternalLink, HelpCircle, Sparkles } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { findSimilarThreadsAction } from "@/lib/actions/discussions";
 import { routes } from "@/lib/routes";
 import type { DiscussionResourceType } from "@/types/discussion.types";

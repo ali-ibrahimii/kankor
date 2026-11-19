@@ -104,7 +104,10 @@ export default async function AboutUsPage({
 			: null;
 
 	return (
-		<div dir={rtl ? "rtl" : "ltr"} className="min-h-screen">
+		<div
+			dir={rtl ? "rtl" : "ltr"}
+			className="min-h-screen bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100"
+		>
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: safeJsonLd(organizationLd) }}
@@ -121,12 +124,12 @@ export default async function AboutUsPage({
 			<AboutNav />
 			<AboutStorySection />
 			<AboutMissionSection />
+			<AboutValuesSection />
 			<AboutFeaturesSection />
 			<AboutAudienceSection />
-			<AboutValuesSection />
-			<AboutFaqSection />
 			<AboutVideoSection videoId="2REnqD3JLtQ" thumbnailUrl="/og-image.png" />
 			<AboutTeamSection />
+			<AboutFaqSection />
 			<AboutContactSection />
 			<AboutDownloadSection />
 		</div>

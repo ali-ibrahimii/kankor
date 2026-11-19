@@ -63,7 +63,7 @@ export function AccountProfileForm({ user }: AccountProfileFormProps) {
 		if (!file) return;
 
 		if (file.size > 2 * 1024 * 1024) {
-			toast.error("Avatar image must be smaller than 2MB.");
+			toast.error(t("avatarTooLarge"));
 			return;
 		}
 
@@ -233,9 +233,7 @@ export function AccountProfileForm({ user }: AccountProfileFormProps) {
 						</form.AppField>
 
 						<div className="flex justify-end pt-2">
-							<form.SubmitButton>
-								{t("saveSuccess").replace(".", "")}
-							</form.SubmitButton>
+							<form.SubmitButton>{t("saveButton")}</form.SubmitButton>
 						</div>
 					</form>
 				</form.AppForm>

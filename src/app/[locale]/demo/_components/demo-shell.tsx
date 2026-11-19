@@ -208,7 +208,10 @@ export async function DemoShell({ role }: { role: DemoRole }) {
 					</div>
 
 					{role === "student" ? (
-						<StudentOverview overview={overviewByRole.student} />
+						<StudentOverview
+							overview={overviewByRole.student}
+							userName={profile.full_name}
+						/>
 					) : null}
 					{role === "instructor" ? (
 						<InstructorOverview overview={overviewByRole.instructor} />

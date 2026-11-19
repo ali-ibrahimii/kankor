@@ -7,6 +7,9 @@ export type PublicQuiz = {
 	title: string;
 	description: string | null;
 	instructions: string | null;
+	cover_image_url?: string | null;
+	is_free?: boolean;
+	price_credits?: number;
 	time_limit_minutes: number | null;
 	passing_score_percentage: number | null;
 	max_attempts: number | null;

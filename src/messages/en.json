@@ -3,7 +3,21 @@
 		"name": "Abzar Kankor"
 	},
 	"common": {
-		"rateLimited": "Too many requests. Please try again in a few minutes."
+		"rateLimited": "Too many requests. Please try again in a few minutes.",
+		"errorPage": {
+			"title": "Something went wrong",
+			"description": "We ran into an unexpected issue while loading this page. Please try again.",
+			"retry": "Try again",
+			"goHome": "Back to home",
+			"goDashboard": "Back to overview"
+		},
+		"notFoundPage": {
+			"code": "404",
+			"title": "Page not found",
+			"description": "The page you are looking for may have moved or no longer exists.",
+			"goHome": "Back to home",
+			"goDashboard": "Back to overview"
+		}
 	},
 	"loading": {
 		"title": "Loading...",
@@ -176,7 +190,9 @@
 				"empty": {
 					"title": "No passed quizzes yet",
 					"subtitle": "Quizzes you pass will show up here."
-				}
+				},
+				"browseTests": "Browse practice quizzes",
+				"openQuiz": "View quiz"
 			},
 			"registeredQuizzes": {
 				"title": "Registered Quizzes",
@@ -186,7 +202,8 @@
 				"empty": {
 					"title": "No registered quizzes",
 					"subtitle": "Ask your instructor or school to register you for a quiz."
-				}
+				},
+				"browseTests": "Browse practice quizzes"
 			},
 			"personal": "Personal",
 			"notes": "Notes",
@@ -194,7 +211,44 @@
 			"wallet": "Wallet",
 			"notifications": "Notifications",
 			"classrooms": "Classrooms",
-			"certificates": "Certificates"
+			"certificates": "Certificates",
+			"subjectTests": {
+				"title": "Subject Tests",
+				"description": "Focus on a single school subject and sharpen specific topics at your own pace.",
+				"allSubjects": "All subjects",
+				"searchPlaceholder": "Search subject tests...",
+				"timeLimit": "{count} min",
+				"passingScore": "Pass {score}%",
+				"free": "Free",
+				"credits": "{count} credits",
+				"startTest": "Start test",
+				"kankorBannerTitle": "Want a full timed Kankor simulation?",
+				"kankorBannerSubtitle": "Practice with a realistic multi-subject exam session anytime.",
+				"kankorBannerCta": "Open Kankor test",
+				"emptyTitle": "No subject tests found",
+				"emptySubtitle": "Try selecting another subject or clearing your search filter.",
+				"clearFilters": "Reset filters"
+			},
+			"practiceQuizzes": {
+				"title": "Practice Quizzes",
+				"description": "Short, repeatable quizzes to check your understanding and build exam confidence.",
+				"searchPlaceholder": "Search practice quizzes...",
+				"filterAll": "All",
+				"filterFree": "Free",
+				"filterTimed": "Timed",
+				"timeLimit": "{count} min",
+				"untimed": "Self-paced",
+				"passingScore": "Pass {score}%",
+				"free": "Free",
+				"credits": "{count} credits",
+				"startQuiz": "Start quiz",
+				"passedLink": "Passed quizzes",
+				"registeredLink": "Registered quizzes",
+				"kankorLink": "Kankor exam",
+				"emptyTitle": "No practice quizzes available yet",
+				"emptySubtitle": "Check back soon or try a simulated Kankor exam right now.",
+				"clearFilters": "Clear filters"
+			}
 		},
 		"admin": {
 			"roleLabel": "Super Admin",
@@ -478,7 +532,9 @@
 			"gpaCalculatorDesc": "Calculate your grade point average",
 			"faq": "FAQ",
 			"faqDesc": "Answers to commonly asked questions"
-		}
+		},
+		"account": "Account",
+		"logOut": "Log out"
 	},
 	"courses": {
 		"title": "Courses",
@@ -2709,7 +2765,7 @@
 					"id": "ali-hosseini",
 					"name": "Ali Hosseini",
 					"role": "Content Manager",
-					"imageUrl": "/img/team/4.jpg",
+					"imageUrl": "",
 					"email": "ali@abzarkonkur.com",
 					"phone": "+93 700 123 456",
 					"shortBio": "Ali oversees educational content quality and works with top teachers across Afghanistan.",
@@ -2949,7 +3005,74 @@
 		"registrationClosed": "Registration for this quiz is closed.",
 		"registrationSuccess": "Registered successfully!",
 		"registrationFailed": "Registration failed. Please try again.",
-		"insufficientCredits": "You don't have enough credits. Please top up your balance."
+		"insufficientCredits": "You don't have enough credits. Please top up your balance.",
+		"hub": {
+			"badge": "Kankor Mock Exams & Practice Quizzes",
+			"heroTitle": "Build exam-day confidence with <accent>standard mock exams</accent>",
+			"browseCta": "Browse Quizzes",
+			"hostCta": "Create a Quiz",
+			"chipTimed": "Realistic timing",
+			"chipScored": "Clear passing benchmarks",
+			"chipSubjects": "School & Kankor subjects",
+			"panel": {
+				"eyebrow": "Exam Simulation",
+				"title": "General Kankor Practice Form",
+				"timerValue": "180 min",
+				"progressLabel": "Questions completed",
+				"progressValue": "120 / 160",
+				"statDurationLabel": "Pacing",
+				"statDurationValue": "Timed mode",
+				"statPassLabel": "Pass mark",
+				"statPassValue": "60% or higher",
+				"resultTitle": "Instant score breakdown",
+				"resultDesc": "Review your score, pass status, and focus areas right after finishing",
+				"verifiedBadge": "Auto-graded"
+			},
+			"filters": {
+				"all": "All quizzes",
+				"free": "Free",
+				"timed": "Timed",
+				"sortNewest": "Newest",
+				"sortShortest": "Shortest duration",
+				"sortLongest": "Longest duration",
+				"reset": "Reset filters",
+				"count": "{count, plural, =0 {No quizzes} one {# quiz} other {# quizzes}}"
+			},
+			"emptyFilteredTitle": "No quizzes match your filters",
+			"emptyFilteredDesc": "Try a different search keyword or clear the active filters.",
+			"emptyCatalogDesc": "New practice quizzes and Kankor mock forms are published regularly. Explore courses and flashcard decks in the meantime.",
+			"exploreCourses": "Explore Courses",
+			"exploreDecks": "Practice Flashcards",
+			"steps": {
+				"badge": "How It Works",
+				"title": "Three simple steps to exam readiness",
+				"subtitle": "Every quiz helps you sharpen your pacing, check comprehension, and lock in key concepts before exam day.",
+				"item1Title": "Pick a subject or mock form",
+				"item1Desc": "Choose from focused topic quizzes across school grades or full-length Kankor simulations.",
+				"item2Title": "Practice under standard timing",
+				"item2Desc": "Follow clear exam instructions and manage your time just like the official test session.",
+				"item3Title": "Review results & reinforce gaps",
+				"item3Desc": "Measure your performance against the pass mark and revisit linked courses and flashcards."
+			},
+			"cta": {
+				"badge": "For Instructors & Schools",
+				"title": "Host timed quizzes and Kankor simulations for your students",
+				"subtitle": "Build question banks, set time limits and passing scores, and evaluate student results automatically.",
+				"primary": "Start as an Instructor",
+				"secondary": "Browse Prep Courses"
+			},
+			"detail": {
+				"durationLabel": "Time limit",
+				"passingLabel": "Passing score",
+				"attemptsLabel": "Allowed attempts",
+				"unlimited": "Unlimited",
+				"flexible": "Untimed",
+				"registrationTitle": "Exam Registration & Access",
+				"statusOpen": "Registration open",
+				"statusClosed": "Registration closed",
+				"accessLabel": "Access"
+			}
+		}
 	},
 	"bookmarks": {
 		"title": "Bookmarks",
@@ -3352,7 +3475,73 @@
 			"studyActivitySubtitle": "Cards reviewed over the last 14 days",
 			"cardsReviewed": "Cards reviewed",
 			"passed": "Passed",
-			"failed": "Failed"
+			"failed": "Failed",
+			"studySpace": {
+				"eyebrow": "Personal study desk",
+				"greetingNamed": "Hello {name}",
+				"greetingDefault": "Welcome to your study space",
+				"subtitleDue": "You have {count, plural, =1 {# card} other {# cards}} ready for a calm review today. Take it one step at a time.",
+				"subtitleCourse": "Your bookmark is right where you left it — even fifteen focused minutes moves you forward.",
+				"subtitleFresh": "No rush and no pressure. Pick one subject or a short practice session to begin your rhythm today.",
+				"kankorLabel": "Kankor horizon",
+				"kankorDays": "{count} days",
+				"kankorAction": "Practice simulation",
+				"currentBookLabel": "Currently reading & learning",
+				"progressCaption": "{percent}% of this course completed",
+				"resumeReading": "Continue lesson",
+				"seeMyCourses": "All my courses ({count})",
+				"seeAllCourses": "Explore catalog",
+				"firstStepsLabel": "Where would you like to begin?",
+				"firstStepsTitle": "Set your first book on the desk",
+				"firstStepsCopy": "Choose whichever path feels lightest right now — you can switch anytime.",
+				"stepCourseTitle": "Pick your first course",
+				"stepCourseHint": "Step-by-step lessons in school and Kankor subjects",
+				"stepCardsTitle": "Try a 5-minute flashcard session",
+				"stepCardsHint": "Remember formulas and definitions effortlessly",
+				"stepTestTitle": "Take a practice Kankor check",
+				"stepTestHint": "See how the exam feels with zero pressure",
+				"memoryLabel": "Daily memory stack",
+				"dueTitle": "{count, plural, =1 {# card waiting today} other {# cards waiting today}}",
+				"dueBody": "A short spaced-repetition session keeps what you studied fresh in memory.",
+				"caughtUpTitle": "Your review deck is clear",
+				"caughtUpBody": "Add a flashcard deck or review freely whenever you have a spare moment.",
+				"startReview": "Start review",
+				"exploreDecks": "Browse decks",
+				"rhythmLabel": "Past 14 days",
+				"rhythmActive": "{days, plural, =1 {# active day} other {# active days}} · {cards} cards reviewed",
+				"rhythmEmpty": "Your first study session lights up today's stone.",
+				"rhythmDayTooltip": "{date}: {count, plural, =0 {Rest day} =1 {# card reviewed} other {# cards reviewed}}",
+				"rhythmEarlier": "2 weeks ago",
+				"rhythmToday": "Today",
+				"shelfLabel": "Your study shelf",
+				"shelfCourses": "Courses",
+				"shelfCoursesCount": "{count, plural, =1 {# enrolled} other {# enrolled}}",
+				"shelfCoursesEmpty": "Browse subjects",
+				"shelfPractice": "Practice & Exams",
+				"shelfPracticeCount": "{passed} of {total} passed",
+				"shelfPracticeEmpty": "Try a short quiz",
+				"shelfLibrary": "Reading room",
+				"shelfLibraryHint": "Textbooks & guides",
+				"shelfBookmarks": "Saved items",
+				"shelfBookmarksCount": "{count} saved",
+				"shelfBookmarksEmpty": "Keep key lessons",
+				"shelfWallet": "Study wallet",
+				"shelfWalletCount": "{count} credits",
+				"shelfWalletEmpty": "View balance",
+				"notebookTitle": "Study notebook",
+				"notebookCount": "{count, plural, =1 {# note} other {# notes}}",
+				"openNotebook": "Open notebook",
+				"writeNote": "Write a note",
+				"untitledNote": "Untitled note",
+				"notebookEmptyTitle": "A clean page is waiting",
+				"notebookEmptyCopy": "Jot down formulas, summaries, or questions you want to revisit before exam day.",
+				"reflectionsTitle": "Recent practice log",
+				"exploreQuizzes": "Practice quizzes",
+				"reflectionsEmptyTitle": "No practice sessions logged yet",
+				"reflectionsEmptyCopy": "When you try a subject quiz or mock exam, your reflections appear here.",
+				"startFirstQuiz": "Try a practice quiz",
+				"needsReview": "Review again"
+			}
 		},
 		"instructor": {
 			"stats": {
@@ -4100,7 +4289,8 @@
 		"goFlashcards": "Go to Flashcards",
 		"goLibrary": "Go to Library",
 		"statusOffline": "Offline Mode",
-		"statusOnline": "Back Online"
+		"statusOnline": "Back Online",
+		"availableOffline": "Available offline"
 	},
 	"demo": {
 		"pageTitle": "Abzar Kankor demo dashboard",
@@ -5134,5 +5324,172 @@
 		"cancel": "Cancel",
 		"confirmDelete": "Delete",
 		"create": "Create"
+	},
+	"account": {
+		"title": "Account Settings",
+		"subtitle": "Manage your personal profile, security preferences, and connected accounts.",
+		"tabs": {
+			"profile": "Profile",
+			"security": "Security",
+			"dangerZone": "Danger Zone"
+		},
+		"profile": {
+			"title": "Personal Information",
+			"subtitle": "Update your photo, display name, preferred language, and public details.",
+			"changeAvatar": "Change photo",
+			"removeAvatar": "Remove photo",
+			"avatarTooLarge": "Avatar image must be smaller than 2 MB.",
+			"fullName": "Full name",
+			"fullNamePlaceholder": "Enter your full name",
+			"language": "Preferred language",
+			"phone": "Phone number",
+			"phonePlaceholder": "+93 700 000 000",
+			"websiteUrl": "Website",
+			"websiteUrlPlaceholder": "https://example.com",
+			"bio": "Bio",
+			"bioPlaceholder": "Write a short introduction about yourself...",
+			"saveButton": "Save changes",
+			"saveSuccess": "Profile updated successfully.",
+			"saveError": "Could not update your profile. Please try again."
+		},
+		"security": {
+			"title": "Email & Password",
+			"subtitle": "Keep your account secure by updating your email address or password.",
+			"email": "Email address",
+			"emailHelp": "We will send a confirmation link to your new email address.",
+			"updateEmail": "Update email",
+			"emailError": "Could not update your email address.",
+			"changePasswordTitle": "Change password",
+			"newPassword": "New password",
+			"confirmPassword": "Confirm new password",
+			"passwordMinLength": "Password must be at least 6 characters.",
+			"passwordMismatch": "Passwords do not match.",
+			"passwordSuccess": "Password updated successfully.",
+			"passwordError": "Could not update your password.",
+			"googleAccount": "Google Account",
+			"googleLinked": "Connected to your Google account for quick sign-in.",
+			"googleNotLinked": "Link your Google account for faster one-click sign-in.",
+			"linkGoogle": "Connect Google",
+			"unlinkGoogle": "Disconnect",
+			"googleUnlinkSuccess": "Google account disconnected successfully.",
+			"googleUnlinkError": "Could not disconnect your Google account.",
+			"googleLinkError": "Could not connect to Google."
+		},
+		"dangerZone": {
+			"title": "Delete Account",
+			"subtitle": "Permanently remove your account and all associated learning data.",
+			"deleteAccount": "Delete my account",
+			"deleteWarning": "Once deleted, your courses, progress, notes, and certificates cannot be recovered.",
+			"confirmTitle": "Are you sure you want to delete your account?",
+			"confirmDescription": "This action is permanent and cannot be undone. All of your personal data and study progress will be erased.",
+			"typeDeleteToConfirm": "Type DELETE to confirm",
+			"cancelButton": "Cancel",
+			"confirmButton": "Delete permanently",
+			"deleteSuccess": "Your account has been deleted.",
+			"deleteError": "Could not delete your account. Please try again."
+		}
+	},
+	"studentNotes": {
+		"title": "My Notebook",
+		"description": "Capture formulas, lesson summaries, and personal reminders in one quiet place.",
+		"newNote": "New note",
+		"editNote": "Edit note",
+		"searchPlaceholder": "Search in your notes...",
+		"titleLabel": "Title",
+		"titlePlaceholder": "e.g. Key derivative formulas",
+		"contentLabel": "Note content",
+		"contentPlaceholder": "Write your summary, formula, or question...",
+		"untitled": "Untitled note",
+		"save": "Save note",
+		"saving": "Saving...",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"deleting": "Deleting...",
+		"deleteConfirmTitle": "Delete this note?",
+		"deleteConfirmDescription": "This note will be permanently removed from your notebook.",
+		"createdSuccess": "Note saved to your notebook.",
+		"updatedSuccess": "Note updated.",
+		"deletedSuccess": "Note deleted.",
+		"saveError": "Could not save note. Please try again.",
+		"deleteError": "Could not delete note. Please try again.",
+		"contentRequired": "Please write something in your note.",
+		"updatedAt": "Updated {date}",
+		"countLabel": "{count, plural, =0 {No notes} =1 {# note} other {# notes}}",
+		"emptyTitle": "Your notebook is empty",
+		"emptySubtitle": "Start your first note to keep important formulas, vocabulary, and chapter summaries handy.",
+		"noSearchMatch": "No notes matched your search.",
+		"clearSearch": "Clear search"
+	},
+	"adminCatalog": {
+		"searchPlaceholder": "Search...",
+		"loading": "Loading records...",
+		"empty": "No records found.",
+		"add": "Add new",
+		"edit": "Edit",
+		"delete": "Delete",
+		"save": "Save",
+		"saving": "Saving...",
+		"cancel": "Cancel",
+		"actions": "Actions",
+		"name": "Name",
+		"createdAt": "Created",
+		"totalCount": "{count} total",
+		"previous": "Previous",
+		"next": "Next",
+		"pageOf": "Page {page} of {total}",
+		"deleteConfirmTitle": "Delete this record?",
+		"deleteConfirmDescription": "This action cannot be undone.",
+		"createSuccess": "Created successfully.",
+		"updateSuccess": "Updated successfully.",
+		"deleteSuccess": "Deleted successfully.",
+		"actionError": "Operation failed. Please try again.",
+		"staff": {
+			"title": "Staff & Administrators",
+			"description": "Platform administrators with full management access.",
+			"email": "Email",
+			"phone": "Phone",
+			"role": "Role",
+			"adminBadge": "Admin"
+		},
+		"cards": {
+			"title": "Flashcards",
+			"description": "Browse and inspect flashcards across all decks on the platform.",
+			"question": "Question",
+			"hint": "Hint",
+			"page": "Page",
+			"manageDecks": "Manage decks"
+		},
+		"forms": {
+			"title": "Kankor Exam Papers",
+			"description": "Past Kankor exam booklets organized by year and round.",
+			"formTitle": "Title",
+			"year": "Year",
+			"round": "Round",
+			"filePath": "File path"
+		},
+		"universities": {
+			"title": "Universities",
+			"description": "Manage public and private universities referenced in Kankor codes.",
+			"province": "Province",
+			"noProvince": "Unassigned"
+		},
+		"faculties": {
+			"title": "Faculties",
+			"description": "Manage university faculties used across Kankor choice lists."
+		},
+		"departments": {
+			"title": "Departments",
+			"description": "Manage academic departments and their parent faculties.",
+			"faculty": "Faculty",
+			"selectFaculty": "Select faculty"
+		},
+		"codes": {
+			"title": "Kankor Score Codes",
+			"description": "University and department admission codes with minimum and maximum score ranges.",
+			"code": "Code",
+			"university": "University",
+			"department": "Department",
+			"scoreRange": "Score range"
+		}
 	}
 }

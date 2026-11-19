@@ -62,7 +62,7 @@ export function AccountSecurityForm({ user }: AccountSecurityFormProps) {
 			if (res.success) {
 				toast.success(t("emailHelp"));
 			} else {
-				toast.error(res.error || t("passwordError"));
+				toast.error(res.error || t("emailError"));
 			}
 		},
 	});
@@ -177,7 +177,7 @@ export function AccountSecurityForm({ user }: AccountSecurityFormProps) {
 									{t("emailHelp")}
 								</span>
 								<emailForm.SubmitButton size="sm" variant="outline">
-									{t("email")}
+									{t("updateEmail")}
 								</emailForm.SubmitButton>
 							</div>
 						</form>
@@ -201,9 +201,7 @@ export function AccountSecurityForm({ user }: AccountSecurityFormProps) {
 								<passwordForm.AppField
 									name="password"
 									validators={{
-										onBlur: z
-											.string()
-											.min(6, "Password must be at least 6 characters."),
+										onBlur: z.string().min(6, t("passwordMinLength")),
 									}}
 								>
 									{(field) => (
@@ -218,9 +216,7 @@ export function AccountSecurityForm({ user }: AccountSecurityFormProps) {
 								<passwordForm.AppField
 									name="confirmPassword"
 									validators={{
-										onBlur: z
-											.string()
-											.min(6, "Password must be at least 6 characters."),
+										onBlur: z.string().min(6, t("passwordMinLength")),
 									}}
 								>
 									{(field) => (

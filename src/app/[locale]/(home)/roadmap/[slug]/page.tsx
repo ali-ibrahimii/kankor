@@ -41,11 +41,11 @@ export default async function RoadmapDetailPage({
 	});
 
 	return (
-		<div className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-12 text-[#19243b] sm:px-6 sm:pt-12 sm:pb-20 lg:px-8">
+		<div className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-12 text-[#19243b] sm:px-6 sm:pt-12 sm:pb-20 lg:px-8 dark:bg-background dark:text-foreground">
 			<div className="mx-auto max-w-5xl">
 				<Link
 					href={routes.roadmap.page()}
-					className="inline-flex items-center gap-2 text-sm font-bold text-[#6546cb] transition hover:text-[#5234b8]"
+					className="inline-flex items-center gap-2 text-sm font-bold text-primary transition hover:opacity-80"
 				>
 					<Arrow className="size-4 rotate-180" />
 					{t("detail.backToAll")}
@@ -71,8 +71,8 @@ export default async function RoadmapDetailPage({
 				</header>
 
 				{roadmap.roadmap_items.length === 0 ? (
-					<section className="mt-10 rounded-[24px] border border-[#e8eaf1] bg-white p-8 text-center">
-						<p className="text-sm leading-7 text-slate-500">
+					<section className="mt-10 rounded-[24px] border border-[#e8eaf1] bg-white p-8 text-center dark:border-border dark:bg-card">
+						<p className="text-sm leading-7 text-slate-500 dark:text-muted-foreground">
 							{t("detail.emptyItems")}
 						</p>
 					</section>
@@ -83,7 +83,7 @@ export default async function RoadmapDetailPage({
 							{roadmap.roadmap_items.map((item, index) => {
 								const courseSlug = item.course?.slug ?? null;
 								const inner = (
-									<article className="relative flex gap-4 rounded-[24px] border border-[#e8eaf1] bg-white p-5 shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)] sm:gap-6 sm:p-7">
+									<article className="relative flex gap-4 rounded-[24px] border border-[#e8eaf1] bg-white p-5 shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)] sm:gap-6 sm:p-7 dark:border-border dark:bg-card">
 										<div
 											className={`relative z-10 flex size-12 shrink-0 items-center justify-center rounded-2xl ${index % 2 ? "bg-[#e4f7ed] text-[#288364]" : "bg-[#eee9ff] text-[#694bd2]"}`}
 										>
@@ -129,8 +129,8 @@ export default async function RoadmapDetailPage({
 					</section>
 				)}
 
-				<footer className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[24px] bg-[#eeecfa] p-6 sm:flex-row sm:items-center sm:p-8">
-					<p className="max-w-xl text-sm leading-7 text-[#53566e]">
+				<footer className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[24px] bg-[#eeecfa] p-6 sm:flex-row sm:items-center sm:p-8 dark:border dark:border-border dark:bg-card/80">
+					<p className="max-w-xl text-sm leading-7 text-[#53566e] dark:text-muted-foreground">
 						{t("note")}
 					</p>
 					<Link

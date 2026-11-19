@@ -25,6 +25,7 @@ import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -39,8 +40,9 @@ export default async function AgencyLayout({ children, params }: Props) {
 	const base = `/d/agency/${agency_id}`;
 
 	const supabase = await createClient();
-	const [t, user, { data: agency }, { data: grants }] = await Promise.all([
+	const [t, tl, user, { data: agency }, { data: grants }] = await Promise.all([
 		getTranslations("dashboard.agency"),
+		getTranslations("landing"),
 		getCurrentUser(),
 		// RLS: only members (and super admins) can read the agency row, so a
 		// non-member gets null here and is bounced to the generic dashboard.
@@ -190,6 +192,7 @@ export default async function AgencyLayout({ children, params }: Props) {
 				<DashboardTopbar
 					actions={
 						<>
+							<ThemeSwitcher label={tl("header.themeToggle")} />
 							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>

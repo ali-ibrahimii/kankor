@@ -1,101 +1,128 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Flag, Rocket, Sparkles, Users2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
-import { useAboutMotion } from "./about-motion";
+import {
+	Compass,
+	GraduationCap,
+	Lightbulb,
+	Smartphone,
+	Users2,
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { ABOUT_TONE_CYCLE, ABOUT_TONES, useAboutMotion } from "./about-motion";
 
-type StoryItem = {
+interface StoryItem {
 	year: string;
 	title: string;
 	description: string;
-};
+}
 
-const icons = [Flag, Rocket, Users2, Sparkles] as const;
-
-const tones = [
-	"bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200",
-	"bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200",
-	"bg-[#e6f1ff] text-[#3a79c2] dark:bg-sky-400/15 dark:text-sky-200",
-	"bg-[#ffeddf] text-[#c87949] dark:bg-amber-400/15 dark:text-amber-200",
-] as const;
+const MILESTONE_ICONS = [Lightbulb, Smartphone, GraduationCap, Users2] as const;
 
 export function AboutStorySection() {
 	const t = useTranslations("aboutUs");
+	const locale = useLocale();
 	const aboutMotion = useAboutMotion();
 	const raw = t.raw("story.items");
-	const items = Array.isArray(raw) ? (raw as StoryItem[]) : [];
+	const items: StoryItem[] = Array.isArray(raw) ? raw : [];
+
+	if (items.length === 0) return null;
+
+	const numberFormatter = new Intl.NumberFormat(locale, {
+		minimumIntegerDigits: 2,
+	});
 
 	return (
 		<motion.section
 			id="story"
-			className="mx-auto max-w-[1160px] px-4 pt-20 sm:px-6 sm:pt-24"
+			className="scroll-mt-32 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24"
 			variants={aboutMotion.section}
 			initial="hidden"
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div className="mx-auto max-w-2xl text-center">
-				<span className="section-kicker">
-					<Flag className="size-3.5" />
+			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+				{/* Section Header */}
+				<div className="max-w-2xl">
+					<span className="section-kicker">
+						<Compass className="size-3.5" />
+						{t("story.badge")}
+					</span>
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+						{t("story.title")}
+					</h2>
+					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
+						{t("story.subtitle")}
+					</p>
+				</div>
 
-					{t("story.badge")}
-				</span>
+				{/* Connected 4-Milestone Timeline */}
+				<div className="relative mt-11 sm:mt-14">
+					<div
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-x-10 top-[52px] hidden h-px bg-linear-to-r from-[#6b4dd7]/25 via-[#258263]/25 to-[#c87949]/25 lg:block dark:from-violet-400/20 dark:via-emerald-400/20 dark:to-amber-400/20"
+					/>
 
-				<h2 className="section-title text-center">{t("story.title")}</h2>
+					<motion.ol
+						className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"
+						variants={aboutMotion.stagger}
+						initial="hidden"
+						whileInView="show"
+						viewport={aboutMotion.viewport}
+					>
+						{items.map((item, idx) => {
+							const Icon = MILESTONE_ICONS[idx % MILESTONE_ICONS.length];
+							const tone =
+								ABOUT_TONES[ABOUT_TONE_CYCLE[idx % ABOUT_TONE_CYCLE.length]];
 
-				<p className="section-copy mx-auto text-center">
-					{t("story.subtitle")}
-				</p>
-			</div>
-
-			<motion.ol
-				variants={aboutMotion.stagger}
-				initial="hidden"
-				whileInView="show"
-				viewport={aboutMotion.viewport}
-				className="relative mt-12 grid gap-4 lg:grid-cols-4 lg:gap-5"
-			>
-				<div
-					aria-hidden="true"
-					className="pointer-events-none absolute inset-x-8 top-11 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block"
-				/>
-
-				{items.map((item, index) => {
-					const Icon = icons[index % icons.length];
-					return (
-						<motion.li
-							key={item.title}
-							variants={aboutMotion.card}
-							className="soft-card card-hover relative flex flex-col p-5"
-						>
-							<div className="flex items-center justify-between gap-2">
-								<span
-									className={cn(
-										"flex size-11 items-center justify-center rounded-2xl",
-										tones[index % tones.length]
-									)}
+							return (
+								<motion.li
+									key={`${item.year}-${item.title}`}
+									variants={aboutMotion.card}
+									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]"
 								>
-									<Icon className="size-5" />
-								</span>
+									{/* Top Accent Strip */}
+									<div
+										aria-hidden="true"
+										className={`absolute inset-x-0 top-0 h-1 bg-linear-to-r ${tone.bar} opacity-75 transition-opacity group-hover:opacity-100`}
+									/>
 
-								<span className="rounded-full border border-border/80 bg-muted/50 px-3 py-1 text-[11px] font-black text-foreground/70">
-									{item.year}
-								</span>
-							</div>
+									<div className="flex items-center justify-between gap-3">
+										<div
+											className={`flex size-12 shrink-0 items-center justify-center rounded-2xl ${tone.icon}`}
+										>
+											<Icon className="size-5" />
+										</div>
 
-							<h3 className="mt-5 text-base font-extrabold text-foreground">
-								{item.title}
-							</h3>
+										<span
+											className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-extrabold ${tone.badge}`}
+										>
+											<span
+												aria-hidden="true"
+												className={`size-1.5 rounded-full ${tone.dot}`}
+											/>
+											{item.year}
+										</span>
+									</div>
 
-							<p className="mt-2 text-xs leading-6 text-muted-foreground">
-								{item.description}
-							</p>
-						</motion.li>
-					);
-				})}
-			</motion.ol>
+									<h3 className="mt-6 text-lg font-extrabold leading-snug text-[#19243b] dark:text-slate-100">
+										{item.title}
+									</h3>
+
+									<p className="mt-2.5 flex-1 text-sm leading-7 text-slate-500 dark:text-slate-400">
+										{item.description}
+									</p>
+
+									<div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5 text-[11px] font-bold text-slate-400 dark:border-white/[.07] dark:text-slate-500">
+										<span>{numberFormatter.format(idx + 1)}</span>
+										<span className="h-1 w-8 rounded-full bg-slate-100 transition-colors group-hover:bg-primary/25 dark:bg-white/10 dark:group-hover:bg-primary/40" />
+									</div>
+								</motion.li>
+							);
+						})}
+					</motion.ol>
+				</div>
+			</div>
 		</motion.section>
 	);
 }
