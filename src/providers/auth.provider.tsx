@@ -36,7 +36,7 @@ type AuthContextValue = {
 	isAuthenticated: boolean;
 	/** Sign the current user out and navigate to /login. */
 	signOut: () => Promise<void>;
-	/** Role-appropriate dashboard path for the current user. */
+	/** Locale-free role dashboard route, intended for next-intl Link/router. */
 	dashboardPath: string;
 	/** Manually refetch the profile (e.g. after a role change). */
 	refetchProfile: () => Promise<void>;
@@ -173,12 +173,12 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
 	}, [authState, fetchProfile]);
 
 	const dashboardPath = React.useMemo((): string => {
+		// This value is consumed by next-intl's locale-aware Link. Keep it
+		// locale-free here; embedding `/${locale}` would produce `/fa/fa/...`.
 		if (authState.status === "authenticated")
-			// Pass the locale so the path is localized (`/fa/d/admin`), matching
-			// what the middleware and the server components generate.
-			return getDashboardPath(authState.profile, locale);
-		return `/${locale}`;
-	}, [authState, locale]);
+			return getDashboardPath(authState.profile);
+		return "/";
+	}, [authState]);
 
 	const value = React.useMemo<AuthContextValue>(
 		() => ({

@@ -198,7 +198,9 @@ export default async function AgencyLayout({ children, params }: Props) {
 						</>
 					}
 				/>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex min-h-0 flex-1 flex-col bg-muted/20">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);
