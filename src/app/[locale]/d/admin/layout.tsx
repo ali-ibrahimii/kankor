@@ -32,11 +32,8 @@ import { getCurrentUser } from "@/lib/auth/session";
 
 export default async function AdminLayout({
 	children,
-	params,
-}: React.PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
-	const { locale } = await params;
+}: React.PropsWithChildren) {
 	const base = `/d/admin`;
-	const localizedBase = `/${locale}/d/admin`;
 
 	const [t, user] = await Promise.all([
 		getTranslations("dashboard.admin"),
@@ -188,7 +185,7 @@ export default async function AdminLayout({
 				header={
 					<SidebarBrand
 						name="Abzar Kankor"
-						href={localizedBase}
+						href={base}
 						subtitle={
 							<span className="inline-flex items-center gap-1">
 								<ShieldCheck className="size-3" />
@@ -209,7 +206,9 @@ export default async function AdminLayout({
 						</>
 					}
 				/>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex min-h-0 flex-1 flex-col bg-muted/20">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);

@@ -37,7 +37,6 @@ type Props = React.PropsWithChildren<{
 export default async function SchoolLayout({ children, params }: Props) {
 	const { school_id, locale } = await params;
 	const base = `/d/school/${school_id}`;
-	const localizedBase = `/${locale}/d/school/${school_id}`;
 
 	const supabase = await createClient();
 	const [t, user, { data: school }] = await Promise.all([
@@ -143,7 +142,9 @@ export default async function SchoolLayout({ children, params }: Props) {
 						</>
 					}
 				/>
-				<div className="flex flex-1 flex-col bg-muted/20">{children}</div>
+				<div className="flex min-h-0 flex-1 flex-col bg-muted/20">
+					{children}
+				</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);

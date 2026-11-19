@@ -470,7 +470,7 @@ export function ModuleLessonTree() {
 
 	return (
 		<>
-			<div className="flex h-full flex-col">
+			<div className="flex h-full min-h-0 flex-col">
 				{/* Header */}
 				<div className="flex items-center justify-between border-b px-4 py-3">
 					<h2 className="text-sm font-semibold">{t("tree.title")}</h2>
@@ -486,7 +486,7 @@ export function ModuleLessonTree() {
 				</div>
 
 				{/* Module list */}
-				<ScrollArea className="flex-1 px-3 py-3">
+				<ScrollArea className="min-h-0 flex-1 px-3 py-3">
 					{modules.length === 0 ? (
 						<div className="flex flex-col items-center justify-center py-10 text-center text-sm text-muted-foreground">
 							<p>{t("tree.emptyTitle")}</p>
