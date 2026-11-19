@@ -42,6 +42,9 @@ export type ContentBlock = {
 	external_resource_title?: string | null;
 	image_url?: string | null;
 	quiz_id?: string | null;
+	code_language?: string | null;
+	default_code?: string | null;
+	solution_code?: string | null;
 };
 
 // ─── Self-hosted (R2) asset resolution ─────────────────────────────────────
@@ -253,6 +256,54 @@ function VideoPlayer({
 			>
 				<p>{t("videoNotSupported")}</p>
 			</video>
+		</div>
+	);
+}
+
+function formatFencedCode(code: string, lang?: string | null): string {
+	const tag = (lang ?? "").trim() || "text";
+	const backticks = code.match(/`{3,}/g);
+	const fence = backticks
+		? "`".repeat(Math.max(...backticks.map((m) => m.length)) + 1)
+		: "```";
+	return `${fence}${tag}\n${code}\n${fence}`;
+}
+
+function CodePlaygroundBlock({ block }: { block: ContentBlock }) {
+	const t = useTranslations("courses.learn");
+	const [showSolution, setShowSolution] = React.useState(false);
+	const starter = block.default_code ?? "";
+	const solution = block.solution_code?.trim() ? block.solution_code : null;
+
+	if (!starter.trim() && !solution) return null;
+
+	return (
+		<div className="space-y-3">
+			{starter.trim() ? (
+				<MDXView
+					markdown={formatFencedCode(starter, block.code_language)}
+					className="max-w-none [&>.code-block]:my-0"
+				/>
+			) : null}
+			{solution ? (
+				<div className="space-y-2">
+					<Button
+						type="button"
+						variant="outline"
+						size="sm"
+						className="rounded-xl text-xs"
+						onClick={() => setShowSolution((prev) => !prev)}
+					>
+						{showSolution ? t("hideSolution") : t("showSolution")}
+					</Button>
+					{showSolution ? (
+						<MDXView
+							markdown={formatFencedCode(solution, block.code_language)}
+							className="max-w-none [&>.code-block]:my-0"
+						/>
+					) : null}
+				</div>
+			) : null}
 		</div>
 	);
 }
@@ -543,6 +594,13 @@ function RenderBlock({
 						url={block.external_resource_url}
 						title={block.external_resource_title}
 					/>
+				</div>
+			) : null;
+
+		case "code_playground":
+			return block.default_code?.trim() || block.solution_code?.trim() ? (
+				<div className="rounded-2xl border border-border/70 bg-card p-3 shadow-sm sm:p-4">
+					<CodePlaygroundBlock block={block} />
 				</div>
 			) : null;
 

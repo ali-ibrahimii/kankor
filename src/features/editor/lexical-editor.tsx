@@ -62,6 +62,7 @@ import {
 } from "@lexical/table";
 import {
 	$createParagraphNode,
+	$createTextNode,
 	$getSelection,
 	$isElementNode,
 	$isRangeSelection,
@@ -90,6 +91,8 @@ import {
 	Code,
 	Code2,
 	Eye,
+	FileText,
+	FolderTree,
 	Heading1,
 	Heading2,
 	Heading3,
@@ -122,7 +125,16 @@ import {
 } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MDXView } from "@/components/widgets/markdown-view";
+import {
+	DEFAULT_PROJECT_TREE_TEMPLATE,
+	LEXICAL_CODE_HIGHLIGHT_THEME,
+	resolveCodeBlockMeta,
+} from "@/lib/code-highlight";
 import { cn } from "@/lib/utils";
+import {
+	CodeBlockControlsPlugin,
+	CodeHighlightPlugin,
+} from "./code-block-plugin";
 import { MD_TRANSFORMERS } from "./markdown-table-transformer";
 
 /**
@@ -185,39 +197,8 @@ const theme = {
 		strikethrough: "line-through",
 		code: "font-mono text-[0.9em] bg-muted text-foreground px-1.5 py-0.5 rounded border border-border",
 	},
-	code: "font-mono text-sm bg-slate-900 text-slate-100 p-4 rounded-xl my-3 overflow-x-auto block leading-relaxed shadow-inner border border-slate-800",
-	codeHighlight: {
-		atrule: "text-pink-400",
-		attr: "text-yellow-200",
-		boolean: "text-purple-400",
-		builtin: "text-emerald-400",
-		cdata: "text-slate-400",
-		char: "text-emerald-400",
-		class: "text-blue-400",
-		"class-name": "text-blue-400",
-		comment: "text-slate-500 italic",
-		constant: "text-purple-400",
-		deleted: "text-red-400",
-		doctype: "text-slate-500",
-		entity: "text-amber-400 cursor-help",
-		function: "text-sky-400",
-		important: "text-amber-400 font-bold",
-		inserted: "text-emerald-400",
-		keyword: "text-indigo-400 font-medium",
-		namespace: "text-amber-400",
-		number: "text-amber-400",
-		operator: "text-teal-400",
-		prolog: "text-slate-500",
-		property: "text-pink-400",
-		punctuation: "text-slate-400",
-		regex: "text-amber-400",
-		selector: "text-emerald-400",
-		string: "text-emerald-300",
-		symbol: "text-amber-400",
-		tag: "text-pink-400",
-		url: "text-cyan-400 underline",
-		variable: "text-violet-400",
-	},
+	code: "editor-code",
+	codeHighlight: LEXICAL_CODE_HIGHLIGHT_THEME,
 	table: "editor-table",
 	tableCell: "editor-table-cell",
 	tableCellHeader: "editor-table-cell-header",
@@ -617,7 +598,32 @@ function getCommandOptions(
 			action: () => {
 				const selection = $getSelection();
 				if ($isRangeSelection(selection)) {
-					$setBlocksType(selection, () => $createCodeNode());
+					$setBlocksType(selection, () => $createCodeNode("html"));
+				}
+			},
+		},
+		{
+			key: "text",
+			label: t("slash.textBlock"),
+			icon: FileText,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					$setBlocksType(selection, () => $createCodeNode("text"));
+				}
+			},
+		},
+		{
+			key: "tree",
+			label: t("slash.projectTree"),
+			icon: FolderTree,
+			action: () => {
+				const selection = $getSelection();
+				if ($isRangeSelection(selection)) {
+					const codeNode = $createCodeNode("text");
+					codeNode.append($createTextNode(DEFAULT_PROJECT_TREE_TEMPLATE));
+					selection.insertNodes([codeNode]);
+					codeNode.selectEnd();
 				}
 			},
 		},
@@ -849,7 +855,11 @@ function getBlockTypeName(): string {
 	}
 	if ($isHeadingNode(node)) return node.getTag();
 	if ($isQuoteNode(node)) return "quote";
-	if ($isCodeNode(node)) return "code";
+	if ($isCodeNode(node)) {
+		return resolveCodeBlockMeta(node.getLanguage()).kind === "text"
+			? "text-code"
+			: "code";
+	}
 	if ($isListNode(node)) return node.getListType();
 	if ($isListItemNode(node)) {
 		const parent = node.getParent();
@@ -1022,9 +1032,54 @@ function ToolbarPlugin() {
 			<ToolbarButton
 				title={t("toolbar.codeBlock")}
 				active={blockType === "code"}
-				onClick={() => setBlock(() => $createCodeNode())}
+				onClick={() =>
+					editor.update(() => {
+						const selection = $getSelection();
+						if (!$isRangeSelection(selection)) return;
+						let top: LexicalNode = selection.anchor.getNode();
+						while (top.getParent() && !$isRootNode(top.getParent())) {
+							top = top.getParent() as LexicalNode;
+						}
+						if ($isCodeNode(top)) {
+							const meta = resolveCodeBlockMeta(top.getLanguage());
+							if (meta.kind === "code") {
+								$setBlocksType(selection, () => $createParagraphNode());
+							} else {
+								top.setLanguage("html");
+							}
+							return;
+						}
+						$setBlocksType(selection, () => $createCodeNode("html"));
+					})
+				}
 			>
 				<Code2 className="size-4" />
+			</ToolbarButton>
+			<ToolbarButton
+				title={t("toolbar.textBlock")}
+				active={blockType === "text-code"}
+				onClick={() =>
+					editor.update(() => {
+						const selection = $getSelection();
+						if (!$isRangeSelection(selection)) return;
+						let top: LexicalNode = selection.anchor.getNode();
+						while (top.getParent() && !$isRootNode(top.getParent())) {
+							top = top.getParent() as LexicalNode;
+						}
+						if ($isCodeNode(top)) {
+							const meta = resolveCodeBlockMeta(top.getLanguage());
+							if (meta.kind === "text") {
+								$setBlocksType(selection, () => $createParagraphNode());
+							} else {
+								top.setLanguage("text");
+							}
+							return;
+						}
+						$setBlocksType(selection, () => $createCodeNode("text"));
+					})
+				}
+			>
+				<FolderTree className="size-4" />
 			</ToolbarButton>
 
 			<ToolbarSeparator />
@@ -1251,6 +1306,7 @@ export function LexicalEditor({
 	const [markdown, setMarkdown] = useState(content ?? "");
 	const [tab, setTab] = useState("write");
 	const lastPropRef = useRef(content ?? "");
+	const editorSurfaceRef = useRef<HTMLDivElement>(null);
 	const markdownRef = useRef(markdown);
 	markdownRef.current = markdown;
 
@@ -1317,7 +1373,7 @@ export function LexicalEditor({
 					<LexicalComposer initialConfig={initialConfig}>
 						<ToolbarPlugin />
 						<div className={cn("relative", PANEL_HEIGHT)}>
-							<div className="relative p-4">
+							<div ref={editorSurfaceRef} className="relative p-4">
 								<RichTextPlugin
 									contentEditable={
 										<ContentEditable
@@ -1332,10 +1388,12 @@ export function LexicalEditor({
 									}
 									ErrorBoundary={LexicalErrorBoundary}
 								/>
+								<CodeBlockControlsPlugin containerRef={editorSurfaceRef} />
 							</div>
 							<FloatingToolbarPlugin />
 							<SlashCommandsPlugin />
 						</div>
+						<CodeHighlightPlugin />
 						<HistoryPlugin />
 						<MarkdownSyncPlugin content={markdown} onChange={emit} />
 						<LinkPlugin />

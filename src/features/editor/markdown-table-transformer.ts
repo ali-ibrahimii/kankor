@@ -1,8 +1,9 @@
+import { $createCodeNode, $isCodeNode, CodeNode } from "@lexical/code";
 import type {
 	ElementTransformer,
 	MultilineElementTransformer,
 } from "@lexical/markdown";
-import { isTableRowDivider, TRANSFORMERS } from "@lexical/markdown";
+import { CODE, isTableRowDivider, TRANSFORMERS } from "@lexical/markdown";
 import {
 	$createHorizontalRuleNode,
 	$isHorizontalRuleNode,
@@ -157,13 +158,122 @@ export const HR_TRANSFORMER: ElementTransformer = {
 	export: (node) => ($isHorizontalRuleNode(node) ? "---" : null),
 };
 
+// ─── Fenced code / text block ⇄ Lexical CodeNode ─────────────────────────────
+//
+// Preserves exact leading indentation on every line (fixing @lexical/markdown's
+// built-in CODE transformer trimming a leading space from line 1), defaults
+// untagged fences to `text`, and escapes nested backtick fences on export.
+
+const CODE_START_REGEXP = /^([ \t]*`{3,})([\w#+-]+)?[ \t]?/;
+const CODE_END_REGEXP = /^[ \t]*`{3,}[ \t]*$/;
+
+export const CODE_BLOCK_TRANSFORMER: MultilineElementTransformer = {
+	type: "multiline-element",
+	dependencies: [CodeNode],
+	regExpStart: CODE_START_REGEXP,
+	regExpEnd: { optional: true, regExp: CODE_END_REGEXP },
+
+	handleImportAfterStartMatch: ({
+		lines,
+		rootNode,
+		startLineIndex,
+		startMatch,
+	}) => {
+		const rawFence = startMatch[1] ?? "```";
+		const fenceLength = rawFence.trim().length;
+		const currentLine = lines[startLineIndex] ?? "";
+		const language = (startMatch[2] ?? "").trim() || "text";
+		const endRegex = new RegExp(`^[ \\t]*\`{${fenceLength},}[ \\t]*$`);
+
+		for (let i = startLineIndex + 1; i < lines.length; i += 1) {
+			const line = lines[i] ?? "";
+			if (endRegex.test(line)) {
+				const bodyLines = lines.slice(startLineIndex + 1, i);
+				const codeNode = $createCodeNode(language);
+				const body = bodyLines.join("\n");
+				if (body.length > 0) {
+					codeNode.append($createTextNode(body));
+				}
+				rootNode.append(codeNode);
+				return [true, i];
+			}
+		}
+
+		// Handle single-line ```` ```content``` ```` fences gracefully.
+		const afterFence = currentLine.slice(
+			(startMatch.index ?? 0) + rawFence.length
+		);
+		const inlineEndRegex = new RegExp(`\`{${fenceLength},}[ \\t]*$`);
+		const inlineEnd = inlineEndRegex.exec(afterFence);
+		if (inlineEnd) {
+			const content = afterFence.slice(0, inlineEnd.index).trim();
+			const codeNode = $createCodeNode("text");
+			if (content) codeNode.append($createTextNode(content));
+			rootNode.append(codeNode);
+			return [true, startLineIndex];
+		}
+
+		// Unclosed fence: consume through EOF.
+		const bodyLines = lines.slice(startLineIndex + 1);
+		const codeNode = $createCodeNode(language);
+		const body = bodyLines.join("\n");
+		if (body.length > 0) {
+			codeNode.append($createTextNode(body));
+		}
+		rootNode.append(codeNode);
+		return [true, lines.length - 1];
+	},
+
+	replace: (
+		rootNode,
+		children,
+		startMatch,
+		_endMatch,
+		linesInBetween,
+		isImport
+	) => {
+		const language = (startMatch[2] ?? "").trim() || "text";
+		if (!children && linesInBetween) {
+			const codeNode = $createCodeNode(language);
+			const body = linesInBetween.join("\n");
+			if (body.length > 0) {
+				codeNode.append($createTextNode(body));
+			}
+			rootNode.append(codeNode);
+			return;
+		}
+		if (children) {
+			const codeNode = $createCodeNode(language);
+			codeNode.append(...children);
+			rootNode.replace(codeNode);
+			if (!isImport) {
+				codeNode.select(0, 0);
+			}
+		}
+	},
+
+	export: (node) => {
+		if (!$isCodeNode(node)) return null;
+		const textContent = node.getTextContent();
+		const lang = (node.getLanguage() || "text").trim();
+		let fence = "```";
+		const backticks = textContent.match(/`{3,}/g);
+		if (backticks) {
+			const longest = Math.max(...backticks.map((b) => b.length));
+			fence = "`".repeat(longest + 1);
+		}
+		return `${fence}${lang}${textContent ? `\n${textContent}` : ""}\n${fence}`;
+	},
+};
+
 /**
  * The markdown transformers used across the course editor: the standard
- * set plus GFM table round-tripping and horizontal rules (neither ships
- * with @lexical/markdown).
+ * set (with improved fenced code/text round-tripping) plus GFM table
+ * round-tripping and horizontal rules.
  */
 export const MD_TRANSFORMERS = [
-	...TRANSFORMERS,
+	...TRANSFORMERS.filter((t) => t !== CODE),
+	CODE_BLOCK_TRANSFORMER,
 	TABLE_TRANSFORMER,
 	HR_TRANSFORMER,
 ];

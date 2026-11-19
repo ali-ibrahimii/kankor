@@ -667,7 +667,9 @@
 				"correctAnswerLabel": "Correct answer",
 				"previousAttempts": "Previous Attempts",
 				"attemptNumber": "Attempt #{number}"
-			}
+			},
+			"showSolution": "Show solution",
+			"hideSolution": "Hide solution"
 		},
 		"view": "View Course",
 		"sortBy": "Sort by",
@@ -1776,7 +1778,8 @@
 			"alignCenter": "Align center",
 			"alignLeft": "Align left",
 			"alignJustify": "Justify",
-			"clear": "Clear content"
+			"clear": "Clear content",
+			"textBlock": "Text / project structure"
 		},
 		"slash": {
 			"h1": "Heading 1",
@@ -1791,7 +1794,22 @@
 			"table": "Table",
 			"hr": "Horizontal rule",
 			"image": "Image",
-			"clear": "Clear content"
+			"clear": "Clear content",
+			"textBlock": "Text block",
+			"projectTree": "Project structure"
+		},
+		"codeBlock": {
+			"kindCode": "Code",
+			"kindText": "Text",
+			"languageLabel": "Code language",
+			"insertTree": "Project tree",
+			"insertTreeHint": "Insert starter project structure",
+			"insertBranch": "Insert branch (├──)",
+			"insertLastBranch": "Insert last item (└──)",
+			"insertPipe": "Insert vertical guide (│)",
+			"addLineBelow": "Insert paragraph below",
+			"copy": "Copy",
+			"copied": "Copied"
 		}
 	},
 	"courseBuilder": {
@@ -2033,7 +2051,8 @@
 					"forbidden": "You do not have permission to attach quizzes to this course.",
 					"database": "Could not look up the quiz. Please try again."
 				}
-			}
+			},
+			"plainTextOption": "Plain text / Project structure"
 		},
 		"contentLoadFailed": "This course's content could not be loaded — try reloading the page.",
 		"loading": "Loading the course builder…",

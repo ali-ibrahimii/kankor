@@ -35,11 +35,75 @@ describe("markdownToHTML — course authoring kit", () => {
 		expect(html).toContain("<del>قدیمی</del>");
 	});
 
-	it("renders code blocks and inline code", async () => {
+	it("renders syntax-highlighted code blocks with type badge, copy button, and inline code", async () => {
 		const html = await render("```js\nconst a = 1;\n```\n\nمتن `کد` داخلی");
+		expect(html).toContain('class="code-block not-prose"');
+		expect(html).toContain('data-code-kind="code"');
+		expect(html).toContain('data-code-lang="javascript"');
+		expect(html).toContain('dir="ltr"');
+		expect(html).toContain('<span class="code-block-lang">javascript</span>');
+		expect(html).toContain('<span class="code-block-kind">code</span>');
+		expect(html).toContain("data-copy-code");
 		expect(html).toContain("<pre>");
-		expect(html).toContain("const a = 1;");
+		expect(html).toContain('<span class="token keyword">const</span>');
+		expect(html).toContain('<span class="token number">1</span>');
 		expect(html).toContain("<code>کد</code>");
+	});
+
+	it("renders plain text and project structure trees with {} text header, copy button, and no token colors", async () => {
+		const md = [
+			"```text",
+			"index.html",
+			"```",
+			"",
+			"ساختار پروژه فعلاً چنین است:",
+			"",
+			"```text",
+			"html-course/",
+			"├── index.html",
+			"├── css/",
+			"│   └── style.css",
+			"└── js/",
+			"    └── app.js",
+			"```",
+		].join("\n");
+
+		const html = await render(md);
+		expect(html.match(/data-code-kind="text"/g)?.length).toBe(2);
+		expect(html).toContain(
+			'<span class="code-block-glyph" aria-hidden="true">{}</span>'
+		);
+		expect(html).toContain('<span class="code-block-lang">text</span>');
+		expect(html).not.toContain('class="token');
+		expect(html).toContain(
+			"html-course/\n├── index.html\n├── css/\n│   └── style.css\n└── js/\n    └── app.js"
+		);
+		expect(html).toContain("<p>ساختار پروژه فعلاً چنین است:</p>");
+	});
+
+	it("highlights HTML, CSS, Python, Bash, JSON, and SQL code blocks", async () => {
+		const samples: Array<[string, string, string]> = [
+			["html", '<h1 class="hero">سلام</h1>', "token tag"],
+			["css", ".hero { color: red; }", "token property"],
+			["python", "def greet():\n    return 42", "token keyword"],
+			["bash", "mkdir html-course # folder", "token comment"],
+			["json", '{"name": "kankor", "ok": true}', "token boolean"],
+			["sql", "SELECT id FROM courses;", "token keyword"],
+		];
+
+		for (const [lang, code, expectedToken] of samples) {
+			const html = await render(`\`\`\`${lang}\n${code}\n\`\`\``);
+			expect(html).toContain('data-code-kind="code"');
+			expect(html).toContain(`data-code-lang="${lang}"`);
+			expect(html).toContain(expectedToken);
+		}
+	});
+
+	it("defaults untagged fenced blocks to plain text", async () => {
+		const html = await render("```\nhtml-course/\n└── index.html\n```");
+		expect(html).toContain('data-code-kind="text"');
+		expect(html).toContain('data-code-lang="text"');
+		expect(html).not.toContain('class="token');
 	});
 
 	it("keeps single newlines as line breaks and blank lines as paragraphs", async () => {
@@ -100,7 +164,18 @@ describe("markdownToHTML — sanitization", () => {
 	});
 
 	it("still strips classes that are not callouts", async () => {
-		const html = await render('<blockquote class="evil">متن</blockquote>');
+		const html = await render(
+			'<blockquote class="evil">متن</blockquote>\n\n<button data-copy-code>fake</button>\n\n<span class="token keyword">spoof</span>'
+		);
 		expect(html).not.toContain("evil");
+		expect(html).not.toContain("<button");
+		expect(html).not.toContain("token keyword");
+	});
+
+	it("safely escapes raw HTML tags inside highlighted html code blocks", async () => {
+		const html = await render("```html\n<script>alert(1)</script>\n```");
+		expect(html).not.toContain("<script>");
+		expect(html).toContain("token tag");
+		expect(html).toContain("script");
 	});
 });

@@ -143,3 +143,42 @@ describe("TABLE_TRANSFORMER", () => {
 		expect(MD_TRANSFORMERS).toContain(TABLE_TRANSFORMER);
 	});
 });
+
+describe("CODE_BLOCK_TRANSFORMER", () => {
+	it("round-trips project structure trees and indented code without losing leading spaces", () => {
+		const sample = [
+			"```text",
+			"index.html",
+			"```",
+			"",
+			"ساختار پروژه فعلاً چنین است:",
+			"",
+			"```text",
+			"html-course/",
+			"├── index.html",
+			"└── css/",
+			"    └── style.css",
+			"```",
+			"",
+			"```html",
+			'  <div class="box">',
+			"    <h1>سلام</h1>",
+			"  </div>",
+			"```",
+		].join("\n");
+
+		const editor = makeEditor();
+		editor.update(
+			() => {
+				$convertFromMarkdownString(sample, MD_TRANSFORMERS);
+			},
+			{ discrete: true }
+		);
+
+		let exported = "";
+		editor.getEditorState().read(() => {
+			exported = $convertToMarkdownString(MD_TRANSFORMERS);
+		});
+		expect(exported).toBe(sample);
+	});
+});

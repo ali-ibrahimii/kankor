@@ -667,7 +667,9 @@
 				"correctAnswerLabel": "سم ځواب",
 				"previousAttempts": "پخوانۍ هڅې",
 				"attemptNumber": "هڅه #{number}"
-			}
+			},
+			"showSolution": "حل ښودل",
+			"hideSolution": "حل پټول"
 		},
 		"view": "کورس وګورئ",
 		"sortBy": "ترتیب",
@@ -1776,7 +1778,8 @@
 			"alignCenter": "منځنی سمون",
 			"alignLeft": "کیڼ سمون",
 			"alignJustify": "ټول سمون",
-			"clear": "متن پاکول"
+			"clear": "متن پاکول",
+			"textBlock": "د متن / پروژې جوړښت چوکاټ"
 		},
 		"slash": {
 			"h1": "سرلیک ۱",
@@ -1791,7 +1794,22 @@
 			"table": "جدول",
 			"hr": "افقۍ کرښه",
 			"image": "انځور",
-			"clear": "متن پاکول"
+			"clear": "متن پاکول",
+			"textBlock": "د ساده متن چوکاټ",
+			"projectTree": "د پروژې جوړښت"
+		},
+		"codeBlock": {
+			"kindCode": "کوډ",
+			"kindText": "متن",
+			"languageLabel": "د کوډ ژبه",
+			"insertTree": "د پروژې جوړښت",
+			"insertTreeHint": "د فولډر او فایل بېلګه جوړښت داخلول",
+			"insertBranch": "څانګه داخلول (├──)",
+			"insertLastBranch": "وروستی توکی داخلول (└──)",
+			"insertPipe": "عمودي کرښه داخلول (│)",
+			"addLineBelow": "لاندې نوې کرښه زیاتول",
+			"copy": "کاپي",
+			"copied": "کاپي شو"
 		}
 	},
 	"courseBuilder": {
@@ -2033,7 +2051,8 @@
 					"forbidden": "تاسو دې کورس ته د ازموینې د زیاتولو اجازه نه لرئ.",
 					"database": "د ازموینې پلټنه ناکامه شوه. بیا هڅه وکړئ."
 				}
-			}
+			},
+			"plainTextOption": "ساده متن / د پروژې جوړښت"
 		},
 		"contentLoadFailed": "د دې کورس منځپانګه پورته نشوه — مهرباني وکړئ پاڼه بیا پورته کړئ.",
 		"loading": "د کورس جوړونکی پورته کیږي…",

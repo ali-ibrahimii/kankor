@@ -540,6 +540,419 @@
 	text-align: left;
 }
 
+/* Clean inline code pills (no decorative backticks around `index.html`) */
+.prose :not(pre) > code {
+	font-family:
+		ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
+	font-size: 0.875em;
+	font-weight: 500;
+	padding: 0.15rem 0.4rem;
+	border-radius: 0.375rem;
+	background: var(--muted);
+	border: 1px solid var(--border);
+	color: var(--foreground);
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+	content: none;
+}
+
+/* ─── Typed Code & Text/Tree Blocks (Markdown view + Lexical editor) ─────── */
+
+.code-block,
+.editor-code {
+	--code-mono-font:
+		ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
+	--code-surface: #ffffff;
+	--code-header-bg: #f8f9fb;
+	--code-border: #e5e7eb;
+	--code-header-border: #eceff3;
+	--code-fg: #1f2328;
+	--code-muted: #57606a;
+	--code-glyph: #6e7781;
+}
+
+.dark .code-block,
+.dark .editor-code {
+	--code-surface: #0d1321;
+	--code-header-bg: #151d30;
+	--code-border: rgba(255, 255, 255, 0.11);
+	--code-header-border: rgba(255, 255, 255, 0.08);
+	--code-fg: #e6edf3;
+	--code-muted: #cbd5e1;
+	--code-glyph: #8b949e;
+}
+
+.code-block {
+	margin-block: 1rem;
+	border: 1px solid var(--code-border);
+	border-radius: 0.75rem;
+	background: var(--code-surface);
+	overflow: hidden;
+	direction: ltr;
+	text-align: left;
+	unicode-bidi: isolate;
+}
+
+.code-block-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	min-height: 2.3rem;
+	padding: 0.35rem 0.75rem 0.35rem 0.9rem;
+	background: var(--code-header-bg);
+	border-bottom: 1px solid var(--code-header-border);
+	direction: ltr;
+}
+
+.code-block-meta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	min-width: 0;
+	font-family: var(--code-mono-font);
+	font-size: 0.8125rem;
+	line-height: 1.2;
+	user-select: none;
+}
+
+.code-block-glyph {
+	color: var(--code-glyph);
+	font-size: 0.76rem;
+	font-weight: 500;
+	letter-spacing: -0.03em;
+}
+
+.code-block-lang {
+	color: var(--code-muted);
+	font-weight: 500;
+}
+
+.code-block-kind {
+	font-size: 0.65rem;
+	font-weight: 600;
+	line-height: 1;
+	padding: 0.18rem 0.42rem;
+	border-radius: 999px;
+	background: color-mix(in oklab, var(--primary) 11%, transparent);
+	color: var(--primary);
+	border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
+}
+
+.code-block-copy {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.75rem;
+	height: 1.75rem;
+	border-radius: 0.425rem;
+	border: 0;
+	background: transparent;
+	color: var(--code-glyph);
+	cursor: pointer;
+	flex-shrink: 0;
+	transition:
+		background-color 140ms ease,
+		color 140ms ease;
+}
+
+.code-block-copy:hover {
+	background: color-mix(in oklab, var(--code-fg) 7%, transparent);
+	color: var(--code-fg);
+}
+
+.code-block-copy .code-block-icon-check {
+	display: none;
+}
+
+.code-block-copy[data-copied="true"] {
+	color: #059669;
+}
+.dark .code-block-copy[data-copied="true"] {
+	color: #34d399;
+}
+.code-block-copy[data-copied="true"] .code-block-icon-copy {
+	display: none;
+}
+.code-block-copy[data-copied="true"] .code-block-icon-check {
+	display: block;
+}
+
+.code-block pre {
+	margin: 0;
+	padding: 0.9rem 1rem;
+	overflow-x: auto;
+	background: transparent;
+	color: var(--code-fg);
+	font-family: var(--code-mono-font);
+	font-size: 0.845rem;
+	line-height: 1.65;
+	tab-size: 2;
+	direction: ltr;
+	text-align: left;
+}
+
+.code-block pre > code {
+	display: block;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	white-space: pre;
+	background: transparent;
+	padding: 0;
+	border: 0;
+	color: inherit;
+}
+
+/* Lexical Write-tab code block surface (paired with CodeBlockControlsPlugin) */
+.editor-code {
+	display: block;
+	position: relative;
+	margin-block: 0.875rem;
+	padding: 2.95rem 1rem 0.95rem;
+	border: 1px solid var(--code-border);
+	border-radius: 0.75rem;
+	background: var(--code-surface);
+	color: var(--code-fg);
+	font-family: var(--code-mono-font);
+	font-size: 0.845rem;
+	line-height: 1.65;
+	tab-size: 2;
+	white-space: pre;
+	overflow-x: auto;
+	direction: ltr !important;
+	text-align: left !important;
+	unicode-bidi: isolate;
+}
+
+/* Syntax highlighting tokens — Light mode (GitHub Light palette) */
+.code-block .token.comment,
+.code-block .token.prolog,
+.code-block .token.cdata,
+.editor-code .token.comment,
+.editor-code .token.prolog,
+.editor-code .token.cdata {
+	color: #6e7781;
+	font-style: italic;
+}
+
+.code-block .token.doctype,
+.code-block .token.doctype-tag,
+.editor-code .token.doctype,
+.editor-code .token.doctype-tag {
+	color: #6e7781;
+}
+
+.code-block .token.tag,
+.code-block .token.selector,
+.code-block .token.inserted,
+.editor-code .token.tag,
+.editor-code .token.selector,
+.editor-code .token.inserted {
+	color: #116329;
+}
+
+.code-block .token.keyword,
+.code-block .token.atrule,
+.code-block .token.important,
+.code-block .token.deleted,
+.editor-code .token.keyword,
+.editor-code .token.atrule,
+.editor-code .token.important,
+.editor-code .token.deleted {
+	color: #cf222e;
+	font-weight: 500;
+}
+
+.code-block .token.operator,
+.code-block .token.attr-equals,
+.code-block .token.entity,
+.editor-code .token.operator,
+.editor-code .token.attr-equals,
+.editor-code .token.entity {
+	color: #cf222e;
+}
+
+.code-block .token.attr-name,
+.code-block .token.property,
+.code-block .token.number,
+.code-block .token.boolean,
+.code-block .token.constant,
+.code-block .token.symbol,
+.code-block .token.coord,
+.editor-code .token.attr-name,
+.editor-code .token.property,
+.editor-code .token.number,
+.editor-code .token.boolean,
+.editor-code .token.constant,
+.editor-code .token.symbol,
+.editor-code .token.coord {
+	color: #0550ae;
+}
+
+.code-block .token.string,
+.code-block .token.attr-value,
+.code-block .token.char,
+.code-block .token.regex,
+.editor-code .token.string,
+.editor-code .token.attr-value,
+.editor-code .token.char,
+.editor-code .token.regex {
+	color: #0a3069;
+}
+
+.code-block .token.function,
+.code-block .token.decorator,
+.editor-code .token.function,
+.editor-code .token.decorator {
+	color: #8250df;
+}
+
+.code-block .token.class-name,
+.code-block .token.builtin,
+.code-block .token.namespace,
+.code-block .token.variable,
+.code-block .token.name,
+.code-block .token.parameter,
+.editor-code .token.class-name,
+.editor-code .token.builtin,
+.editor-code .token.namespace,
+.editor-code .token.variable,
+.editor-code .token.name,
+.editor-code .token.parameter {
+	color: #953800;
+}
+
+.code-block .token.url,
+.editor-code .token.url {
+	color: #0969da;
+	text-decoration: underline;
+}
+
+.code-block .token.punctuation,
+.editor-code .token.punctuation {
+	color: #57606a;
+}
+
+.code-block .token.important,
+.editor-code .token.important {
+	font-weight: 700;
+}
+
+/* Syntax highlighting tokens — Dark mode (GitHub Dark palette) */
+.dark .code-block .token.comment,
+.dark .code-block .token.prolog,
+.dark .code-block .token.cdata,
+.dark .editor-code .token.comment,
+.dark .editor-code .token.prolog,
+.dark .editor-code .token.cdata {
+	color: #8b949e;
+	font-style: italic;
+}
+
+.dark .code-block .token.doctype,
+.dark .code-block .token.doctype-tag,
+.dark .editor-code .token.doctype,
+.dark .editor-code .token.doctype-tag {
+	color: #8b949e;
+}
+
+.dark .code-block .token.tag,
+.dark .code-block .token.selector,
+.dark .code-block .token.inserted,
+.dark .editor-code .token.tag,
+.dark .editor-code .token.selector,
+.dark .editor-code .token.inserted {
+	color: #7ee787;
+}
+
+.dark .code-block .token.keyword,
+.dark .code-block .token.atrule,
+.dark .code-block .token.important,
+.dark .code-block .token.deleted,
+.dark .editor-code .token.keyword,
+.dark .editor-code .token.atrule,
+.dark .editor-code .token.important,
+.dark .editor-code .token.deleted {
+	color: #ff7b72;
+	font-weight: 500;
+}
+
+.dark .code-block .token.operator,
+.dark .code-block .token.attr-equals,
+.dark .code-block .token.entity,
+.dark .editor-code .token.operator,
+.dark .editor-code .token.attr-equals,
+.dark .editor-code .token.entity {
+	color: #ff7b72;
+}
+
+.dark .code-block .token.attr-name,
+.dark .code-block .token.property,
+.dark .code-block .token.number,
+.dark .code-block .token.boolean,
+.dark .code-block .token.constant,
+.dark .code-block .token.symbol,
+.dark .code-block .token.coord,
+.dark .editor-code .token.attr-name,
+.dark .editor-code .token.property,
+.dark .editor-code .token.number,
+.dark .editor-code .token.boolean,
+.dark .editor-code .token.constant,
+.dark .editor-code .token.symbol,
+.dark .editor-code .token.coord {
+	color: #79c0ff;
+}
+
+.dark .code-block .token.string,
+.dark .code-block .token.attr-value,
+.dark .code-block .token.char,
+.dark .code-block .token.regex,
+.dark .editor-code .token.string,
+.dark .editor-code .token.attr-value,
+.dark .editor-code .token.char,
+.dark .editor-code .token.regex {
+	color: #a5d6ff;
+}
+
+.dark .code-block .token.function,
+.dark .code-block .token.decorator,
+.dark .editor-code .token.function,
+.dark .editor-code .token.decorator {
+	color: #d2a8ff;
+}
+
+.dark .code-block .token.class-name,
+.dark .code-block .token.builtin,
+.dark .code-block .token.namespace,
+.dark .code-block .token.variable,
+.dark .code-block .token.name,
+.dark .code-block .token.parameter,
+.dark .editor-code .token.class-name,
+.dark .editor-code .token.builtin,
+.dark .editor-code .token.namespace,
+.dark .editor-code .token.variable,
+.dark .editor-code .token.name,
+.dark .editor-code .token.parameter {
+	color: #ffa657;
+}
+
+.dark .code-block .token.url,
+.dark .editor-code .token.url {
+	color: #58a6ff;
+	text-decoration: underline;
+}
+
+.dark .code-block .token.punctuation,
+.dark .editor-code .token.punctuation {
+	color: #94a3b8;
+}
+
 /* Tables use the full readable width */
 .prose table {
 	width: 100%;
