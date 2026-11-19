@@ -667,7 +667,9 @@
 				"correctAnswerLabel": "پاسخ درست",
 				"previousAttempts": "تلاش‌های قبلی",
 				"attemptNumber": "تلاش #{number}"
-			}
+			},
+			"showSolution": "نمایش راه‌حل",
+			"hideSolution": "پنهان کردن راه‌حل"
 		},
 		"view": "مشاهده کورس",
 		"sortBy": "مرتب‌سازی",
@@ -1776,7 +1778,8 @@
 			"alignCenter": "چینش وسط",
 			"alignLeft": "چینش چپ",
 			"alignJustify": "چینش کشیده",
-			"clear": "پاک‌سازی متن"
+			"clear": "پاک‌سازی متن",
+			"textBlock": "کادر متن / ساختار پروژه"
 		},
 		"slash": {
 			"h1": "عنوان درجه ۱",
@@ -1791,7 +1794,22 @@
 			"table": "جدول",
 			"hr": "خط افقی",
 			"image": "تصویر",
-			"clear": "پاک‌سازی متن"
+			"clear": "پاک‌سازی متن",
+			"textBlock": "کادر متن ساده",
+			"projectTree": "ساختار پروژه"
+		},
+		"codeBlock": {
+			"kindCode": "کد",
+			"kindText": "متن",
+			"languageLabel": "زبان کد",
+			"insertTree": "ساختار پروژه",
+			"insertTreeHint": "درج نمونه ساختار پوشه و فایل",
+			"insertBranch": "درج شاخه (├──)",
+			"insertLastBranch": "درج آخرین مورد (└──)",
+			"insertPipe": "درج خط عمودی (│)",
+			"addLineBelow": "افزودن خط متن در پایین",
+			"copy": "کپی",
+			"copied": "کپی شد"
 		}
 	},
 	"courseBuilder": {
@@ -2033,7 +2051,8 @@
 					"forbidden": "شما اجازهٔ افزودن امتحان به این کورس را ندارید.",
 					"database": "بررسی امتحان ناموفق بود. دوباره تلاش کنید."
 				}
-			}
+			},
+			"plainTextOption": "متن ساده / ساختار پروژه"
 		},
 		"contentLoadFailed": "محتوای این کورس بارگذاری نشد — لطفاً صفحه را دوباره بارگذاری کنید.",
 		"loading": "در حال بارگذاری سازندهٔ کورس…",

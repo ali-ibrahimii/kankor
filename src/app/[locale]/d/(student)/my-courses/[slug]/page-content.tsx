@@ -45,7 +45,7 @@ async function fetchLessonContentBlocks(lessonId: string) {
 	const { data, error } = await client
 		.from("lesson_content_blocks")
 		.select(
-			"id, block_type, order_index, text_content, video_url, video_provider, video_storage_key, audio_url, audio_storage_key, document_url, document_storage_key, external_resource_url, external_resource_title, image_url, quiz_id"
+			"id, block_type, order_index, text_content, video_url, video_provider, video_storage_key, audio_url, audio_storage_key, document_url, document_storage_key, external_resource_url, external_resource_title, image_url, quiz_id, code_language, default_code, solution_code"
 		)
 		.eq("lesson_id", lessonId)
 		.order("order_index");

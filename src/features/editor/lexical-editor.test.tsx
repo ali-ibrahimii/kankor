@@ -43,6 +43,7 @@ describe("LexicalEditor (tabbed markdown editor)", () => {
 			"عنوان ۳",
 			"نقل‌قول",
 			"بلاک کد",
+			"کادر متن / ساختار پروژه",
 			"فهرست نقطه‌ای",
 			"فهرست شماره‌دار",
 			"فهرست چک‌باکس",
@@ -77,5 +78,81 @@ describe("LexicalEditor (tabbed markdown editor)", () => {
 		await user.clear(area);
 		await user.type(area, "متن تازه");
 		expect(onChange).toHaveBeenLastCalledWith("متن تازه");
+	});
+
+	it("lets authors toggle code vs text type, pick language with live syntax tokens, insert project trees, and copy", async () => {
+		const user = userEvent.setup();
+		const onChange = vi.fn();
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		Object.defineProperty(navigator, "clipboard", {
+			value: { writeText },
+			configurable: true,
+		});
+
+		const { container } = renderEditor({
+			content: "```text\nhtml-course/\n└── index.html\n```",
+			onChange,
+		});
+
+		// Header renders with Text/Code kind toggle, tree helpers, and Copy button.
+		const copyBtn = await screen.findByRole("button", { name: "کپی" });
+		await user.click(copyBtn);
+		expect(writeText).toHaveBeenCalledWith("html-course/\n└── index.html");
+
+		// Switch block type from Text -> Code and pick JavaScript.
+		await user.click(screen.getByRole("button", { name: "کد" }));
+		const langSelect = await screen.findByRole("combobox", {
+			name: "زبان کد",
+		});
+		await user.selectOptions(langSelect, "javascript");
+		await waitFor(() =>
+			expect(onChange).toHaveBeenLastCalledWith(
+				"```javascript\nhtml-course/\n└── index.html\n```"
+			)
+		);
+
+		// Switch back to Text and confirm tree helper restores ```text fence.
+		await user.click(screen.getByRole("button", { name: "متن" }));
+		await waitFor(() =>
+			expect(onChange).toHaveBeenLastCalledWith(
+				"```text\nhtml-course/\n└── index.html\n```"
+			)
+		);
+		expect(container.querySelector(".editor-code .token")).toBeNull();
+	});
+
+	it("renders live syntax-highlight token spans for code blocks and inserts project trees on empty text blocks", async () => {
+		const user = userEvent.setup();
+		const onChange = vi.fn();
+		const { container } = renderEditor({
+			content: "```javascript\nconst total = 42;\n```",
+			onChange,
+		});
+
+		await waitFor(() =>
+			expect(
+				container.querySelector(".editor-code .token.keyword")
+			).toHaveTextContent("const")
+		);
+		expect(
+			container.querySelector(".editor-code .token.number")
+		).toHaveTextContent("42");
+
+		// Switch to an empty text block via Source, return to Write, click Project Tree.
+		await user.click(screen.getByRole("tab", { name: "کد" }));
+		const area = await screen.findByPlaceholderText(
+			/مارک‌داون را اینجا بنویسید/
+		);
+		await user.clear(area);
+		await user.type(area, "```text\n```");
+		await user.click(screen.getByRole("tab", { name: "نوشتن" }));
+
+		const treeBtn = await screen.findByTitle("درج نمونه ساختار پوشه و فایل");
+		await user.click(treeBtn);
+		await waitFor(() =>
+			expect(onChange).toHaveBeenLastCalledWith(
+				expect.stringContaining("├── index.html")
+			)
+		);
 	});
 });

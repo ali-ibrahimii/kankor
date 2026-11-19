@@ -27,7 +27,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { MDXView } from "@/components/widgets/markdown-view";
 import { LexicalEditor } from "@/features/editor/lexical-editor";
+import { CODE_LANGUAGE_OPTIONS } from "@/lib/code-highlight";
 import { cn } from "@/lib/utils";
 import { AssetUpload } from "./asset-upload";
 import { QuizBlockField } from "./quiz-block-field";
@@ -364,15 +366,25 @@ function ExternalResourceField({ block }: { block: DraftContentBlock }) {
 	);
 }
 
+function toFencedMarkdown(code: string, lang: string): string {
+	const matches = code.match(/`{3,}/g);
+	const fence = matches
+		? "`".repeat(Math.max(...matches.map((m) => m.length)) + 1)
+		: "```";
+	return `${fence}${lang}\n${code}\n${fence}`;
+}
+
 function CodePlaygroundField({ block }: { block: DraftContentBlock }) {
 	const t = useTranslations("courseBuilder");
 	const patchBlock = useSetAtom(patchBlockAtom);
+	const lang = block.code_language ?? "text";
+
 	return (
 		<div className="space-y-4">
 			<div className="space-y-2">
 				<Label>{t("block.codeLanguage")}</Label>
 				<Select
-					value={block.code_language ?? ""}
+					value={lang}
 					onValueChange={(v) =>
 						patchBlock({ id: block.id, patch: { code_language: v || null } })
 					}
@@ -381,20 +393,12 @@ function CodePlaygroundField({ block }: { block: DraftContentBlock }) {
 						<SelectValue placeholder={t("block.languagePlaceholder")} />
 					</SelectTrigger>
 					<SelectContent>
-						{[
-							"javascript",
-							"typescript",
-							"python",
-							"java",
-							"c",
-							"cpp",
-							"go",
-							"rust",
-							"html",
-							"css",
-						].map((lang) => (
-							<SelectItem key={lang} value={lang}>
-								{lang}
+						<SelectItem value="text">
+							{`{} ${t("block.plainTextOption")} (text)`}
+						</SelectItem>
+						{CODE_LANGUAGE_OPTIONS.map((opt) => (
+							<SelectItem key={opt.value} value={opt.value}>
+								{`${opt.label} (${opt.value})`}
 							</SelectItem>
 						))}
 					</SelectContent>
@@ -403,6 +407,8 @@ function CodePlaygroundField({ block }: { block: DraftContentBlock }) {
 			<div className="space-y-2">
 				<Label>{t("block.defaultCode")}</Label>
 				<Textarea
+					dir="ltr"
+					spellCheck={false}
 					value={block.default_code ?? ""}
 					onChange={(e) =>
 						patchBlock({
@@ -412,12 +418,20 @@ function CodePlaygroundField({ block }: { block: DraftContentBlock }) {
 					}
 					placeholder={t("block.codePlaceholder")}
 					rows={8}
-					className="font-mono text-sm resize-y"
+					className="resize-y text-left font-mono text-sm"
 				/>
 			</div>
+			{block.default_code?.trim() ? (
+				<MDXView
+					markdown={toFencedMarkdown(block.default_code, lang)}
+					className="max-w-none"
+				/>
+			) : null}
 			<div className="space-y-2">
 				<Label>{t("block.solutionCode")}</Label>
 				<Textarea
+					dir="ltr"
+					spellCheck={false}
 					value={block.solution_code ?? ""}
 					onChange={(e) =>
 						patchBlock({
@@ -427,7 +441,7 @@ function CodePlaygroundField({ block }: { block: DraftContentBlock }) {
 					}
 					placeholder={t("block.solutionPlaceholder")}
 					rows={6}
-					className="font-mono text-sm resize-y"
+					className="resize-y text-left font-mono text-sm"
 				/>
 			</div>
 		</div>
