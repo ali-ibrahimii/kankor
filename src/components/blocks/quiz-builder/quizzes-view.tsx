@@ -1,5 +1,6 @@
 "use client";
 
+import { QueryClientContext } from "@tanstack/react-query";
 import {
 	ClockIcon,
 	CopyIcon,
@@ -161,6 +162,7 @@ export function QuizzesView({
 	footerSlot,
 }: QuizzesViewProps) {
 	const router = useRouter();
+	const queryClient = React.useContext(QueryClientContext);
 	const t = useTranslations("quizBuilder");
 	const tTable = useTranslations("quizBuilder.list.table");
 	const tAnswers = useTranslations("quizBuilder.list.showAnswersLabels");
@@ -195,23 +197,41 @@ export function QuizzesView({
 		setSheetOpen(true);
 	}
 
-	async function confirmDelete() {
-		if (!deleteTarget) return;
+	function refreshQuizzes() {
+		queryClient?.invalidateQueries({ queryKey: ["admin_quizzes_view"] });
+		queryClient?.invalidateQueries({ queryKey: ["quizzes"] });
+		queryClient?.invalidateQueries({ queryKey: ["course-attachable-quizzes"] });
+		queryClient?.invalidateQueries({ queryKey: ["course-block-quiz"] });
+		router.refresh();
+	}
+
+	async function confirmDelete(event?: React.MouseEvent<HTMLButtonElement>) {
+		event?.preventDefault();
+		if (!deleteTarget || isDeleting) return;
 		setIsDeleting(true);
-		const result = await deleteQuiz(deleteTarget.id);
-		setIsDeleting(false);
-		if (result.success) {
-			toast.success(t("toast.quizDeleted", { title: deleteTarget.title }));
-			setDeleteTarget(null);
-			router.refresh();
-		} else {
-			toast.error(result.error ?? t("toast.deleteError"));
+		try {
+			const result = await deleteQuiz(deleteTarget.id);
+			if (result.success) {
+				toast.success(t("toast.quizDeleted", { title: deleteTarget.title }));
+				setDeleteTarget(null);
+				refreshQuizzes();
+			} else {
+				toast.error(result.error ?? t("toast.deleteError"));
+			}
+		} finally {
+			setIsDeleting(false);
 		}
 	}
 
 	function handleSaved() {
 		setSheetOpen(false);
-		router.refresh();
+		refreshQuizzes();
+	}
+
+	function handleBuilderDeleted() {
+		setSheetOpen(false);
+		setEditingDraft(null);
+		refreshQuizzes();
 	}
 
 	function copyCode(code: string) {
@@ -243,7 +263,7 @@ export function QuizzesView({
 
 	function handleImportComplete(summary: ImportRunSummary) {
 		if (summary.insertedCount > 0) {
-			router.refresh();
+			refreshQuizzes();
 		}
 		if (summary.errors.length === 0) {
 			toast.success(t("toast.importSuccess", { count: summary.insertedCount }));
@@ -573,6 +593,7 @@ export function QuizzesView({
 							schoolId={schoolId}
 							agencyId={agencyId}
 							onSave={handleSaved}
+							onDelete={handleBuilderDeleted}
 							onCancel={() => setSheetOpen(false)}
 						/>
 					</div>
@@ -590,7 +611,9 @@ export function QuizzesView({
 			{/* Delete Confirmation */}
 			<AlertDialog
 				open={!!deleteTarget}
-				onOpenChange={(o) => !o && setDeleteTarget(null)}
+				onOpenChange={(o) => {
+					if (!o && !isDeleting) setDeleteTarget(null);
+				}}
 			>
 				<AlertDialogContent>
 					<AlertDialogHeader>

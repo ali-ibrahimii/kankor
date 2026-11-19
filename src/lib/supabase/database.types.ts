@@ -7134,6 +7134,7 @@ export type Database = {
 			};
 			custom_access_token_hook: { Args: { event: Json }; Returns: Json };
 			delete_discount: { Args: { p_discount_id: string }; Returns: undefined };
+			delete_quiz_cascade: { Args: { p_quiz_id: string }; Returns: boolean };
 			delete_user_account: { Args: never; Returns: undefined };
 			enroll_user_in_course: {
 				Args: { p_course_id: string; p_user_id?: string };

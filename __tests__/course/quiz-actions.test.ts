@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
+	deleteQuiz,
 	loadQuizForEditing,
 	saveQuiz,
 } from "@/components/blocks/quiz-builder/actions";
@@ -7,6 +8,8 @@ import { createEmptyQuizDraft } from "@/components/blocks/quiz-builder/types";
 
 const mockRpc = vi.fn();
 const mockFrom = vi.fn();
+const mockServiceFrom = vi.fn();
+const mockHasServiceRoleKey = vi.fn();
 const mockGetUser = vi.fn();
 const mockRevalidatePath = vi.fn();
 
@@ -22,6 +25,10 @@ vi.mock("@/lib/supabase/server", () => ({
 		auth: { getUser: mockGetUser },
 		rpc: mockRpc,
 		from: mockFrom,
+	}),
+	hasServiceRoleKey: () => mockHasServiceRoleKey(),
+	createServiceRoleClient: () => ({
+		from: mockServiceFrom,
 	}),
 }));
 
@@ -87,10 +94,15 @@ function wireSupabaseMock() {
 					error: null,
 				}),
 				order: async () => ({ data: [], error: null }),
+				in: async () => ({ data: [], error: null }),
 			}),
 		}),
 		delete: () => ({
-			eq: async () => ({ error: null }),
+			eq: () => ({
+				error: null,
+				in: async () => ({ error: null }),
+			}),
+			in: async () => ({ error: null }),
 		}),
 	}));
 }
@@ -98,10 +110,13 @@ function wireSupabaseMock() {
 beforeEach(() => {
 	mockRpc.mockReset();
 	mockFrom.mockReset();
+	mockServiceFrom.mockReset();
+	mockHasServiceRoleKey.mockReset();
 	mockGetUser.mockReset();
 	mockRevalidatePath.mockReset();
 	for (const k of Object.keys(insertedRows)) delete insertedRows[k];
 	for (const k of Object.keys(updatedRows)) delete updatedRows[k];
+	mockHasServiceRoleKey.mockReturnValue(false);
 	mockGetUser.mockResolvedValue({ data: { user: { id: "instructor-1" } } });
 	wireSupabaseMock();
 });
@@ -184,6 +199,77 @@ describe("saveQuiz & loadQuizForEditing — visibility and course scoping", () =
 		expect(insertedRows.quizzes).toBeUndefined();
 	});
 
+	it("deletes answers and question_options before deleting removed questions", async () => {
+		const operations: string[] = [];
+
+		mockFrom.mockImplementation((table: string) => ({
+			update: () => ({
+				eq: () => ({
+					select: () => ({
+						single: async () => ({
+							data: { id: "quiz-1", entrance_code: "AA11BB22" },
+							error: null,
+						}),
+					}),
+				}),
+			}),
+			select: () => ({
+				eq: (_col: string, val: string) => ({
+					in: async (_inCol: string, ids: string[]) => {
+						operations.push(`select:${table}:quiz=${val}:ids=${ids.join(",")}`);
+						return { data: [{ id: "q-old-1" }], error: null };
+					},
+				}),
+			}),
+			delete: () => ({
+				in: async (_col: string, ids: string[]) => {
+					operations.push(`delete:${table}:ids=${ids.join(",")}`);
+					return { error: null };
+				},
+				eq: (_col: string, val: string) => ({
+					in: async (_inCol: string, ids: string[]) => {
+						operations.push(`delete:${table}:quiz=${val}:ids=${ids.join(",")}`);
+						return { error: null };
+					},
+				}),
+			}),
+		}));
+
+		const res = await saveQuiz({
+			...createEmptyQuizDraft(),
+			id: "quiz-1",
+			title: "Updated Quiz",
+			visibility: "public",
+			questions: [
+				{
+					id: "q-old-1",
+					quiz_id: "quiz-1",
+					question_text: "Removed question",
+					question_type: "multiple_choice_single_correct",
+					order_index: 0,
+					points: 1,
+					hint: null,
+					explanation: null,
+					image_content_block_id: null,
+					_deleted: true,
+					options: [],
+				},
+			],
+		});
+
+		expect(res).toEqual({
+			success: true,
+			quizId: "quiz-1",
+			entranceCode: "AA11BB22",
+		});
+		expect(operations).toEqual([
+			"select:questions:quiz=quiz-1:ids=q-old-1",
+			"delete:answers:ids=q-old-1",
+			"delete:question_options:ids=q-old-1",
+			"delete:questions:quiz=quiz-1:ids=q-old-1",
+		]);
+	});
+
 	it("round-trips entrance_code, visibility, and course_id when loading for edit", async () => {
 		const res = await loadQuizForEditing("existing-quiz-id");
 		expect(res.success).toBe(true);
@@ -192,5 +278,178 @@ describe("saveQuiz & loadQuizForEditing — visibility and course scoping", () =
 			expect(res.draft.visibility).toBe("private");
 			expect(res.draft.course_id).toBe("course-1");
 		}
+	});
+});
+
+describe("deleteQuiz — cascade RPC and pre-migration child-first fallback", () => {
+	it("deletes via delete_quiz_cascade RPC and revalidates admin/instructor quiz routes", async () => {
+		mockRpc.mockResolvedValue({ data: true, error: null });
+
+		const res = await deleteQuiz("quiz-123");
+
+		expect(res).toEqual({ success: true });
+		expect(mockRpc).toHaveBeenCalledWith("delete_quiz_cascade", {
+			p_quiz_id: "quiz-123",
+		});
+		expect(mockFrom).not.toHaveBeenCalled();
+		expect(mockRevalidatePath).toHaveBeenCalledWith("/d/admin/quizzes");
+		expect(mockRevalidatePath).toHaveBeenCalledWith("/d/instructor/quizzes");
+	});
+
+	it("surfaces authorization/domain errors from delete_quiz_cascade without falling back", async () => {
+		mockRpc.mockResolvedValue({
+			data: null,
+			error: {
+				code: "P0001",
+				message: "Permission denied: cannot delete this quiz.",
+			},
+		});
+
+		const res = await deleteQuiz("quiz-123");
+
+		expect(res).toEqual({
+			success: false,
+			error: "Permission denied: cannot delete this quiz.",
+		});
+		expect(mockFrom).not.toHaveBeenCalled();
+		expect(mockServiceFrom).not.toHaveBeenCalled();
+	});
+
+	it("falls back to authorized child-first deletion when delete_quiz_cascade is not deployed yet", async () => {
+		const operations: string[] = [];
+		mockHasServiceRoleKey.mockReturnValue(true);
+
+		mockRpc.mockImplementation(
+			async (fn: string, args: Record<string, unknown>) => {
+				if (fn === "delete_quiz_cascade") {
+					return {
+						data: null,
+						error: {
+							code: "PGRST202",
+							message:
+								"Could not find the function public.delete_quiz_cascade(p_quiz_id) in the schema cache",
+						},
+					};
+				}
+				if (fn === "can_manage_quiz") {
+					expect(args).toEqual({
+						p_quiz_id: "quiz-locked",
+						p_user_id: "instructor-1",
+					});
+					return { data: true, error: null };
+				}
+				return { data: null, error: null };
+			}
+		);
+
+		mockServiceFrom.mockImplementation((table: string) => ({
+			select: () => ({
+				eq: (_col: string, val: string) => {
+					if (table === "quizzes") {
+						return {
+							maybeSingle: async () => ({
+								data: { id: val, locked_at: "2026-11-18T10:00:00Z" },
+								error: null,
+							}),
+						};
+					}
+					if (table === "questions") {
+						return Promise.resolve({
+							data: [{ id: "q-1" }, { id: "q-2" }],
+							error: null,
+						});
+					}
+					if (table === "quiz_attempts") {
+						return Promise.resolve({
+							data: [{ id: "att-1" }],
+							error: null,
+						});
+					}
+					return Promise.resolve({ data: [], error: null });
+				},
+				contains: async () => ({
+					data: [
+						{ id: "course-9", related_quizzes_ids: ["quiz-locked", "quiz-2"] },
+					],
+					error: null,
+				}),
+			}),
+			update: (payload: Record<string, unknown>) => ({
+				eq: async (col: string, val: string) => {
+					operations.push(
+						`update:${table}:${col}=${val}:${JSON.stringify(payload)}`
+					);
+					return { error: null };
+				},
+			}),
+			delete: () => ({
+				eq: (col: string, val: string) => {
+					if (table === "classroom_resources") {
+						return {
+							eq: async (col2: string, val2: string) => {
+								operations.push(
+									`delete:${table}:${col}=${val}&${col2}=${val2}`
+								);
+								return { error: null };
+							},
+						};
+					}
+					operations.push(`delete:${table}:${col}=${val}`);
+					return Promise.resolve({ error: null });
+				},
+				in: async (col: string, ids: string[]) => {
+					operations.push(`delete:${table}:${col}=[${ids.join(",")}]`);
+					return { error: null };
+				},
+			}),
+		}));
+
+		const res = await deleteQuiz("quiz-locked");
+
+		expect(res).toEqual({ success: true });
+		expect(operations).toEqual([
+			'update:quizzes:id=quiz-locked:{"locked_at":null}',
+			'update:lesson_content_blocks:quiz_id=quiz-locked:{"quiz_id":null}',
+			"delete:classroom_resources:resource_type=quiz&resource_id=quiz-locked",
+			'update:courses:id=course-9:{"related_quizzes_ids":["quiz-2"]}',
+			"delete:answers:quiz_attempt_id=[att-1]",
+			"delete:answers:question_id=[q-1,q-2]",
+			"delete:question_options:question_id=[q-1,q-2]",
+			"delete:question_options:quiz_id=quiz-locked",
+			"delete:questions:quiz_id=quiz-locked",
+			"delete:quiz_attempts:quiz_id=quiz-locked",
+			"delete:quizzes:id=quiz-locked",
+		]);
+		expect(mockRevalidatePath).toHaveBeenCalledWith("/d/admin/quizzes");
+	});
+
+	it("blocks unauthorized users in fallback mode before touching child rows", async () => {
+		mockHasServiceRoleKey.mockReturnValue(true);
+		mockRpc.mockImplementation(async (fn: string) => {
+			if (fn === "delete_quiz_cascade") {
+				return {
+					data: null,
+					error: { code: "PGRST202", message: "Could not find the function" },
+				};
+			}
+			if (fn === "can_manage_quiz") {
+				return { data: false, error: null };
+			}
+			return { data: null, error: null };
+		});
+
+		const res = await deleteQuiz("someone-elses-quiz");
+
+		expect(res).toEqual({
+			success: false,
+			error: "Permission denied: cannot delete this quiz.",
+		});
+		expect(mockServiceFrom).not.toHaveBeenCalled();
+	});
+
+	it("rejects empty quizId immediately", async () => {
+		const res = await deleteQuiz("   ");
+		expect(res).toEqual({ success: false, error: "Quiz not found" });
+		expect(mockRpc).not.toHaveBeenCalled();
 	});
 });
