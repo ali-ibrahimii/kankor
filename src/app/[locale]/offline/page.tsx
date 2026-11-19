@@ -89,7 +89,7 @@ export default function OfflinePage() {
 				<div className="relative flex py-1 items-center">
 					<div className="flex-grow border-t border-border/60" />
 					<span className="flex-shrink mx-3 text-xs text-muted-foreground">
-						Available Offline
+						{t("availableOffline")}
 					</span>
 					<div className="flex-grow border-t border-border/60" />
 				</div>

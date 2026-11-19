@@ -25,6 +25,7 @@ import { DashboardTopbar } from "@/components/blocks/sidebar/dashboard-topbar";
 import type { MenuGroup } from "@/components/blocks/sidebar/types";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -37,11 +38,11 @@ type Props = React.PropsWithChildren<{
 export default async function SchoolLayout({ children, params }: Props) {
 	const { school_id, locale } = await params;
 	const base = `/d/school/${school_id}`;
-	const localizedBase = `/${locale}/d/school/${school_id}`;
 
 	const supabase = await createClient();
-	const [t, user, { data: school }] = await Promise.all([
+	const [t, tl, user, { data: school }] = await Promise.all([
 		getTranslations("dashboard.school"),
+		getTranslations("landing"),
 		getCurrentUser(),
 		supabase.from("schools").select("status").eq("id", school_id).maybeSingle(),
 	]);
@@ -138,6 +139,7 @@ export default async function SchoolLayout({ children, params }: Props) {
 				<DashboardTopbar
 					actions={
 						<>
+							<ThemeSwitcher label={tl("header.themeToggle")} />
 							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>

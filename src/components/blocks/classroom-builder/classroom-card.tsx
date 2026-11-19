@@ -7,7 +7,6 @@ import {
 	TrashIcon,
 	UsersIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +25,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "@/i18n/navigation";
 import type { ClassroomMeta } from "./types";
 
 // ─── Props ────────────────────────────────────────────────────────────────────

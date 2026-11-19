@@ -224,38 +224,38 @@ export default async function DeckDetailPage({
 				<BookmarkButton itemType="deck" itemId={deck.id} />
 			</div>
 
-			<Card className="border-slate-200/80 shadow-md bg-white">
+			<Card className="border-border/80 bg-card shadow-md">
 				<CardContent className="flex flex-col gap-6 p-6">
 					<div className="flex items-start gap-3">
 						<div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
 							<Layers className="size-6" />
 						</div>
 						<div className="min-w-0 flex-1">
-							<h1 className="text-2xl font-bold tracking-tight text-slate-900 leading-tight">
+							<h1 className="text-2xl leading-tight font-bold tracking-tight text-foreground">
 								{deck.name}
 							</h1>
 							{deck.average_rating != null && deck.average_rating > 0 && (
 								<div className="mt-1.5 flex items-center gap-2 text-sm">
 									<StarRating value={deck.average_rating} size="sm" />
-									<span className="font-semibold text-amber-600">
+									<span className="font-semibold text-amber-600 dark:text-amber-400">
 										{deck.average_rating.toFixed(1)}
 									</span>
 									{deck.total_reviews > 0 && (
-										<span className="text-slate-500">
+										<span className="text-muted-foreground">
 											({deck.total_reviews.toLocaleString()})
 										</span>
 									)}
 								</div>
 							)}
 							{deck.description && (
-								<p className="mt-2 text-sm leading-relaxed text-slate-600">
+								<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
 									{deck.description}
 								</p>
 							)}
 						</div>
 					</div>
 
-					<div className="flex flex-wrap gap-1.5 border-t border-slate-100 pt-4">
+					<div className="flex flex-wrap gap-1.5 border-t border-border/70 pt-4">
 						<Badge className="gap-1 font-normal">
 							<SquareStack className="size-3" />
 							{t("cardCount", { count: deck.total_flashcards })}
@@ -266,13 +266,13 @@ export default async function DeckDetailPage({
 						{deck.is_free ? (
 							<Badge
 								variant="outline"
-								className="gap-1 font-normal border-emerald-200 text-emerald-700"
+								className="gap-1 border-emerald-300 font-normal text-emerald-700 dark:border-emerald-500/40 dark:text-emerald-300"
 							>
 								<Sparkles className="size-3" />
 								{t("free")}
 							</Badge>
 						) : (
-							<Badge className="gap-1 font-normal bg-[#1461B8] text-white">
+							<Badge className="gap-1 bg-[#1461B8] font-normal text-white">
 								{t("priceCredits", { count: deck.price_credits ?? 0 })}
 							</Badge>
 						)}
@@ -283,26 +283,26 @@ export default async function DeckDetailPage({
 						)}
 					</div>
 
-					<div className="border-t border-slate-100 pt-4">
+					<div className="border-t border-border/70 pt-4">
 						<DeckDetailActions deck={deck} isEnrolled={!!deck.enrollment} />
 					</div>
 				</CardContent>
 			</Card>
 
 			{/* Fallback FAQ Section */}
-			<div className="rounded-xl border border-slate-100 bg-slate-50/50 p-6">
-				<h3 className="text-base font-semibold text-slate-900 mb-2">
+			<div className="rounded-xl border border-border/70 bg-muted/35 p-6">
+				<h3 className="mb-2 text-base font-semibold text-foreground">
 					{s("faqStudy")}
 				</h3>
-				<p className="text-sm text-slate-600 leading-relaxed">
+				<p className="text-sm leading-relaxed text-muted-foreground">
 					{s("faqStudyAnswer")}
 				</p>
 			</div>
 
 			{/* Related resources section */}
 			{(relatedCourses.length > 0 || relatedBooks.length > 0) && (
-				<div className="mt-12 border-t border-slate-200/80 pt-10">
-					<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
+				<div className="mt-12 border-t border-border/80 pt-10">
+					<h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
 						{s("relatedResources")}
 					</h2>
 					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -323,7 +323,7 @@ export default async function DeckDetailPage({
 			)}
 
 			{/* Reviews Section — below related resources, above discussions */}
-			<div className="mt-12 border-t border-slate-200/80 pt-10">
+			<div className="mt-12 border-t border-border/80 pt-10">
 				<ReviewsSection
 					target={{ type: "deck", id: deck.id }}
 					averageRating={deck.average_rating}
@@ -334,8 +334,8 @@ export default async function DeckDetailPage({
 			</div>
 
 			{/* Deck Public Read-Only Discussions Section */}
-			<div className="mt-12 border-t border-slate-200/80 pt-10">
-				<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
+			<div className="mt-12 border-t border-border/80 pt-10">
+				<h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
 					{s("discussions", { defaultValue: "Deck Discussions" })}
 				</h2>
 				<ResourceDiscussionView

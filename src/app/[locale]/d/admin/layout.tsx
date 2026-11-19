@@ -28,18 +28,18 @@ import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup, MenuParent } from "@/components/blocks/sidebar/types";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 
 export default async function AdminLayout({
 	children,
-	params,
-}: React.PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
-	const { locale } = await params;
+}: React.PropsWithChildren) {
 	const base = `/d/admin`;
-	const localizedBase = `/${locale}/d/admin`;
 
-	const [t, user] = await Promise.all([
+	const [t, ta, tl, user] = await Promise.all([
 		getTranslations("dashboard.admin"),
+		getTranslations("app"),
+		getTranslations("landing"),
 		getCurrentUser(),
 	]);
 	const unreadCount = user ? await getUnreadNotificationCount(user.id) : 0;
@@ -187,8 +187,8 @@ export default async function AdminLayout({
 				menus={menus}
 				header={
 					<SidebarBrand
-						name="Abzar Kankor"
-						href={localizedBase}
+						name={ta("name")}
+						href={base}
 						subtitle={
 							<span className="inline-flex items-center gap-1">
 								<ShieldCheck className="size-3" />
@@ -204,6 +204,7 @@ export default async function AdminLayout({
 				<DashboardTopbar
 					actions={
 						<>
+							<ThemeSwitcher label={tl("header.themeToggle")} />
 							<LocaleSwitcher />
 							<NotificationBell notificationsHref={`${base}/notifications`} />
 						</>

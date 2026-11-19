@@ -3,7 +3,21 @@
 		"name": "ابزار کانکور"
 	},
 	"common": {
-		"rateLimited": "تر ټیرو درخواستونو. لمه‌نۍ څه وروسته بیا هڅه وکړئ."
+		"rateLimited": "تر ټیرو درخواستونو. لمه‌نۍ څه وروسته بیا هڅه وکړئ.",
+		"errorPage": {
+			"title": "یوه ستونزه رامنځته شوه",
+			"description": "د دې پاڼې د پرانیستلو پر مهال ناڅاپي تېروتنه پېښه شوه. مهرباني وکړئ بیا هڅه وکړئ.",
+			"retry": "بیا هڅه وکړئ",
+			"goHome": "کور پاڼې ته ستنېدل",
+			"goDashboard": "د مطالعې مېز ته ستنېدل"
+		},
+		"notFoundPage": {
+			"code": "۴۰۴",
+			"title": "پاڼه ونه موندل شوه",
+			"description": "هغه پاڼه چې لټوئ ښايي لېږدول شوې وي یا نوره شتون ونه لري.",
+			"goHome": "کور پاڼې ته ستنېدل",
+			"goDashboard": "د مطالعې مېز ته ستنېدل"
+		}
 	},
 	"loading": {
 		"title": "بارېږي...",
@@ -176,7 +190,9 @@
 				"empty": {
 					"title": "تر اوسه هیڅ بریالۍ ازموینه نشته",
 					"subtitle": "هغه ازموینې چې بریالي شئ به دلته ښکاره شي."
-				}
+				},
+				"browseTests": "د ازموینې تمرینونه وګورئ",
+				"openQuiz": "ازموینه وګورئ"
 			},
 			"registeredQuizzes": {
 				"title": "ثبت شوې ازموینې",
@@ -186,7 +202,8 @@
 				"empty": {
 					"title": "هیڅ ثبت شوې ازموینه نشته",
 					"subtitle": "له خپل استاد یا ښوونځي وغواړئ چې تاسو یوې ازموینې ته ثبت کړي."
-				}
+				},
+				"browseTests": "د ازموینې تمرینونه وګورئ"
 			},
 			"personal": "شخصي",
 			"notes": "یادښتونه",
@@ -194,7 +211,44 @@
 			"wallet": "کیسه",
 			"notifications": "خبرتیاوې",
 			"classrooms": "ټولګي",
-			"certificates": "سندونه"
+			"certificates": "سندونه",
+			"subjectTests": {
+				"title": "مضموني ازموینې",
+				"description": "پر یوه ځانګړي ښوونیز مضمون تمرکز وکړئ او خپله پوهه ګام په ګام وازمایئ.",
+				"allSubjects": "ټول مضامین",
+				"searchPlaceholder": "په مضموني ازموینو کې لټون...",
+				"timeLimit": "{count} دقیقې",
+				"passingScore": "بریالیتوب {score}٪",
+				"free": "وړیا",
+				"credits": "{count} کریډیټ",
+				"startTest": "ازموینه پیل کړئ",
+				"kankorBannerTitle": "بشپړې ازمایښتي کانکور ازموینې ته چمتو یاست؟",
+				"kankorBannerSubtitle": "له معیاري وخت او څومضموني پوښتنو سره خپل چمتووالی وارزوئ.",
+				"kankorBannerCta": "د کانکور ازموینه پرانیزئ",
+				"emptyTitle": "هیڅ مضموني ازموینه ونه موندل شوه",
+				"emptySubtitle": "بل مضمون وټاکئ یا د لټون فلټر پاک کړئ.",
+				"clearFilters": "فلټرونه پاک کړئ"
+			},
+			"practiceQuizzes": {
+				"title": "د ازموینې تمرین",
+				"description": "لنډې او د تکرار وړ ازموینې د زده‌کړې ارزولو او باور لوړولو لپاره.",
+				"searchPlaceholder": "په تمرینونو کې لټون...",
+				"filterAll": "ټول",
+				"filterFree": "وړیا",
+				"filterTimed": "وخت‌لرونکي",
+				"timeLimit": "{count} دقیقې",
+				"untimed": "بې‌مهلت",
+				"passingScore": "بریالیتوب {score}٪",
+				"free": "وړیا",
+				"credits": "{count} کریډیټ",
+				"startQuiz": "تمرین پیل کړئ",
+				"passedLink": "بریالۍ ازموینې",
+				"registeredLink": "نوم‌لیکل شوې ازموینې",
+				"kankorLink": "د کانکور ازموینه",
+				"emptyTitle": "تر اوسه هیڅ تمرین نه دی خپور شوی",
+				"emptySubtitle": "ډېر ژر به نوي تمرینونه زیات شي؛ تر هغې ازمایښتي کانکور وازمایئ.",
+				"clearFilters": "فلټرونه پاک کړئ"
+			}
 		},
 		"admin": {
 			"roleLabel": "اصلي ادمین",
@@ -478,7 +532,9 @@
 			"gpaCalculatorDesc": "خپل عامه نمره اسانه محاسبه کړئ",
 			"faq": "عامه پوښتنې",
 			"faqDesc": "د عامه پوښتنو ځوابونه"
-		}
+		},
+		"account": "حساب",
+		"logOut": "وتل"
 	},
 	"courses": {
 		"title": "کورسونه",
@@ -2708,7 +2764,7 @@
 					"id": "ali-hosseini",
 					"name": "علي حسیني",
 					"role": "د محتوا مدیر",
-					"imageUrl": "/img/team/4.jpg",
+					"imageUrl": "",
 					"email": "ali@abzarkonkur.com",
 					"phone": "+93 700 123 456",
 					"shortBio": "علي د تعلیمي محتوا په کیفیت څارنه کوي او په ټول افغانستان کې له تکړه ښوونکو سره کار کوي.",
@@ -2948,7 +3004,74 @@
 		"registrationClosed": "د دې ازموینې ثبت نوم بند شوی دی.",
 		"registrationSuccess": "په بریالیتوب سره ثبت نوم شو!",
 		"registrationFailed": "ثبت نوم ونه شو. بیا هڅه وکړئ.",
-		"insufficientCredits": "ستاسو سره کافي کریډیټ نشته. مهرباني وکړئ حساب مو بشپړ کړئ."
+		"insufficientCredits": "ستاسو سره کافي کریډیټ نشته. مهرباني وکړئ حساب مو بشپړ کړئ.",
+		"hub": {
+			"badge": "د کانکور ازموینې او تمریني فورمونه",
+			"heroTitle": "له معیاري ازموینو او <accent>کانکور فورمونو</accent> سره ډاډمن چمتووالی",
+			"browseCta": "ازموینې وګورئ",
+			"hostCta": "زده‌کوونکو ته ازموینه جوړول",
+			"chipTimed": "معیاري وخت‌بندي",
+			"chipScored": "دقیقه نمره او د بریالیتوب کچه",
+			"chipSubjects": "د ښوونځي او کانکور مضامین",
+			"panel": {
+				"eyebrow": "د ازموینې شبیه‌ساز",
+				"title": "د عمومي کانکور ازمایښتي فورم",
+				"timerValue": "۱۸۰ دقیقې",
+				"progressLabel": "د ځواب ویلو پرمختګ",
+				"progressValue": "۱۲۰ / ۱۶۰",
+				"statDurationLabel": "معیاري موده",
+				"statDurationValue": "وخت‌لرونکې",
+				"statPassLabel": "د بریالیتوب کچه",
+				"statPassValue": "۶۰٪ او پورته",
+				"resultTitle": "سملاسي پایله او تحلیل",
+				"resultDesc": "له ازموینې وروسته د نمرې، بریالیتوب حالت او کمزورو ټکو ښودنه",
+				"verifiedBadge": "اتومات ارزونه"
+			},
+			"filters": {
+				"all": "ټولې ازموینې",
+				"free": "وړیا",
+				"timed": "وخت‌لرونکې",
+				"sortNewest": "تر ټولو نوې",
+				"sortShortest": "لنډ وخت",
+				"sortLongest": "اوږد وخت",
+				"reset": "فلټرونه پاک کړئ",
+				"count": "{count, plural, =0 {پایله نشته} one {# ازموینه} other {# ازموینې}}"
+			},
+			"emptyFilteredTitle": "په دې فلټر هېڅ ازموینه ونه موندل شوه",
+			"emptyFilteredDesc": "د لټون کلیمه بدله کړئ یا ټاکل شوي فلټرونه پاک کړئ.",
+			"emptyCatalogDesc": "ډېر ژر به نوې ازموینې او د کانکور فورمونه خپاره شي. تر هغې پورې کورسونه او فلش‌کارټونه وګورئ.",
+			"exploreCourses": "کورسونه وګورئ",
+			"exploreDecks": "فلش‌کارټونه تمرین کړئ",
+			"steps": {
+				"badge": "د تمرین تګلاره",
+				"title": "د ازموینې ورځې بریا ته درې اسانه ګامونه",
+				"subtitle": "هره ازموینه درسره مرسته کوي چې د وخت مدیریت تمرین کړئ او مهم موضوعات پیاوړي کړئ.",
+				"item1Title": "مضمون یا فورم وټاکئ",
+				"item1Desc": "د ښوونځي موضوعي ازموینو یا د کانکور بشپړو فورمونو له منځه خپله ازموینه غوره کړئ.",
+				"item2Title": "په معیاري وخت کې ځواب ورکړئ",
+				"item2Desc": "له دقیق وخت‌شمېر او روښانه لارښوونو سره د اصلي ازموینې تجربه ترلاسه کړئ.",
+				"item3Title": "پایله وګورئ او کمزوري ټکي پیاوړي کړئ",
+				"item3Desc": "خپله نمره د بریالیتوب له معیار سره پرتله کړئ او له اړوندو کورسونو سره بیاکتنه وکړئ."
+			},
+			"cta": {
+				"badge": "د استادانو او ښوونځیو لپاره",
+				"title": "خپلې آنلاین ازموینې او د کانکور فورمونه جوړ کړئ",
+				"subtitle": "د پوښتنو بانک جوړ کړئ، وخت او د بریالیتوب نمره وټاکئ او د زده‌کوونکو پایلې په دقیق ډول وارزوئ.",
+				"primary": "د استاد په توګه پیل کړئ",
+				"secondary": "د چمتووالي کورسونه"
+			},
+			"detail": {
+				"durationLabel": "موده",
+				"passingLabel": "د بریالیتوب نمره",
+				"attemptsLabel": "د هڅو شمېر",
+				"unlimited": "بې‌محدودیته",
+				"flexible": "آزاد",
+				"registrationTitle": "په ازموینه کې نوم‌لیکنه او ګډون",
+				"statusOpen": "نوم‌لیکنه پرانیستې ده",
+				"statusClosed": "نوم‌لیکنه بنده ده",
+				"accessLabel": "د ګډون بیه"
+			}
+		}
 	},
 	"bookmarks": {
 		"title": "نښه‌ګانې",
@@ -3351,7 +3474,73 @@
 			"studyActivitySubtitle": "په تېرو ۱۴ ورځو کې کتل‌شوي کارتونه",
 			"cardsReviewed": "کتل‌شوي کارتونه",
 			"passed": "بریالی",
-			"failed": "ناکام"
+			"failed": "ناکام",
+			"studySpace": {
+				"eyebrow": "د مطالعې ځانګړی مېز",
+				"greetingNamed": "سلام {name}",
+				"greetingDefault": "خپلې د مطالعې خونې ته ښه راغلاست",
+				"subtitleDue": "نن {count} فلش‌کارتونه ارامې کتنې ته چمتو دي — ګام په ګام مخته لاړ شه.",
+				"subtitleCourse": "ستاسو د کتاب نښه هماغلته ده چې پرېښې مو وه؛ ان پنځلس دقیقې تمرکز بسنه کوي.",
+				"subtitleFresh": "هیڅ بېړه نشته؛ یو مضمون یا لنډ تمرین وټاکئ څو له ننه ستاسو د مطالعې بهیر پیل شي.",
+				"kankorLabel": "تر کانکور ازموینې",
+				"kankorDays": "{count} ورځې",
+				"kankorAction": "ازمایښتي ازموینه",
+				"currentBookLabel": "پر مېز پرانیستی کتاب",
+				"progressCaption": "د دې کورس {percent}٪ برخه مو بشپړه کړې ده",
+				"resumeReading": "درس ته دوام ورکړئ",
+				"seeMyCourses": "زما ټول کورسونه ({count})",
+				"seeAllCourses": "کورسونه وپلټئ",
+				"firstStepsLabel": "له کومه ځایه پیل وکړو؟",
+				"firstStepsTitle": "خپل لومړنی کتاب پر مېز کېږدئ",
+				"firstStepsCopy": "هره لاره چې درته اسانه او خوندوره ښکاري غوره کړئ؛ هر وخت یې بدلولی شئ.",
+				"stepCourseTitle": "لومړنی ښوونیز کورس وټاکئ",
+				"stepCourseHint": "د ښوونځي مضامینو او کانکور چمتووالي ګام‌په‌ګام درسونه",
+				"stepCardsTitle": "پنځه دقیقې د فلش‌کارت کتنه",
+				"stepCardsHint": "فورمولونه او مهم ټکي په اسانۍ په یاد وساتئ",
+				"stepTestTitle": "له کانکور بڼې سره ارامه بلدتیا",
+				"stepTestHint": "له فشار پرته یوه ازمایښتي ازموینه د پیل کچې معلومولو لپاره",
+				"memoryLabel": "د ورځنۍ حافظې بکس",
+				"dueTitle": "نن {count} کارتونه کتنې ته سترګې په لار دي",
+				"dueBody": "یوه لنډه تکراري کتنه ستاسو زده‌کړي مطالب په ذهن کې پیاوړي ساتي.",
+				"caughtUpTitle": "د نن ورځې کتنه مو بشپړه ده",
+				"caughtUpBody": "هر کله چې لږ وخت ولرئ، نوې ټولګه وټاکئ یا پخواني کارتونه واړوئ.",
+				"startReview": "کتنه پیل کړئ",
+				"exploreDecks": "ډیکونه وګورئ",
+				"rhythmLabel": "د تېرو ۱۴ ورځو بهیر",
+				"rhythmActive": "{days} فعالې ورځې · {cards} کتل‌شوي کارتونه",
+				"rhythmEmpty": "د نن ورځې په لومړۍ مطالعې سره ستاسو لومړۍ نښه روښانه کېږي.",
+				"rhythmDayTooltip": "{date}: {count, plural, =0 {د دمه ورځ} other {# کتل‌شوي کارتونه}}",
+				"rhythmEarlier": "دوه اوونۍ مخکې",
+				"rhythmToday": "نن",
+				"shelfLabel": "ستاسو د مطالعې المارۍ",
+				"shelfCourses": "زما کورسونه",
+				"shelfCoursesCount": "{count} فعال کورسونه",
+				"shelfCoursesEmpty": "مضامین وګورئ",
+				"shelfPractice": "تمرین او ازموینې",
+				"shelfPracticeCount": "له {total} څخه {passed} بریالۍ",
+				"shelfPracticeEmpty": "یو تمرین پیل کړئ",
+				"shelfLibrary": "د کتاب خونه",
+				"shelfLibraryHint": "درسي کتابونه او لارښودونه",
+				"shelfBookmarks": "ساتل‌شوي مطالب",
+				"shelfBookmarksCount": "{count} ساتل‌شوي",
+				"shelfBookmarksEmpty": "مهم درسونه وساتئ",
+				"shelfWallet": "ښوونیز بټوه",
+				"shelfWalletCount": "{count} کریډیټ",
+				"shelfWalletEmpty": "بیلانس وګورئ",
+				"notebookTitle": "د یادښت کتابچه",
+				"notebookCount": "{count} یادښتونه",
+				"openNotebook": "کتابچه پرانیزئ",
+				"writeNote": "نوی یادښت",
+				"untitledNote": "بې‌سرلیکه یادښت",
+				"notebookEmptyTitle": "یوه سپینه پاڼه ستاسو په تمه ده",
+				"notebookEmptyCopy": "مهم فورمولونه، د درس لنډیزونه یا پوښتنې دلته ولیکئ څو تر ازموینې مخکې یې وګورئ.",
+				"reflectionsTitle": "د وروستیو تمرینونو یادښت",
+				"exploreQuizzes": "د ازموینې تمرین",
+				"reflectionsEmptyTitle": "تر اوسه هیڅ تمرین نه دی ثبت شوی",
+				"reflectionsEmptyCopy": "کله چې یوه مضموني یا ازمایښتي ازموینه بشپړه کړئ، پایله یې دلته ښکاري.",
+				"startFirstQuiz": "یو لنډ تمرین پیل کړئ",
+				"needsReview": "بیا کتنې ته اړتیا"
+			}
 		},
 		"instructor": {
 			"stats": {
@@ -4099,7 +4288,8 @@
 		"goFlashcards": "فلش کارتونو ته تګ",
 		"goLibrary": "کتابتون ته تګ",
 		"statusOffline": "آفلاین حالت",
-		"statusOnline": "بیرته آنلاين"
+		"statusOnline": "بیرته آنلاين",
+		"availableOffline": "له انټرنېټ پرته د لاسرسي وړ"
 	},
 	"demo": {
 		"pageTitle": "د ابزار کانکور بېلګه ډشبورډ",
@@ -5125,5 +5315,172 @@
 		"cancel": "لغوه",
 		"confirmDelete": "ړنګول",
 		"create": "جوړول"
+	},
+	"account": {
+		"title": "د حساب ترتیبات",
+		"subtitle": "خپل شخصي معلومات، د حساب امنیت او تړلي حسابونه اداره کړئ.",
+		"tabs": {
+			"profile": "پروفایل",
+			"security": "امنیت",
+			"dangerZone": "د حساب ړنګول"
+		},
+		"profile": {
+			"title": "شخصي معلومات",
+			"subtitle": "خپل انځور، نوم، غوره شوې ژبه او عامه معلومات سم کړئ.",
+			"changeAvatar": "انځور بدلول",
+			"removeAvatar": "انځور لرې کول",
+			"avatarTooLarge": "د پروفایل انځور باید له ۲ مېګابایټو کم وي.",
+			"fullName": "بشپړ نوم",
+			"fullNamePlaceholder": "خپل بشپړ نوم ولیکئ",
+			"language": "غوره ژبه",
+			"phone": "د اړیکې شمېره",
+			"phonePlaceholder": "+93 700 000 000",
+			"websiteUrl": "وېب‌پاڼه",
+			"websiteUrlPlaceholder": "https://example.com",
+			"bio": "زما په اړه",
+			"bioPlaceholder": "د خپل ځان په اړه لنډه پېژندنه ولیکئ...",
+			"saveButton": "بدلونونه خوندي کړئ",
+			"saveSuccess": "پروفایل په بریالیتوب سره تازه شو.",
+			"saveError": "د پروفایل تازه کول ترسره نه شول. مهرباني وکړئ بیا هڅه وکړئ."
+		},
+		"security": {
+			"title": "برېښنالیک او پټنوم",
+			"subtitle": "د خپل حساب د خوندیتوب لپاره برېښنالیک یا پټنوم تازه کړئ.",
+			"email": "د برېښنالیک پته",
+			"emailHelp": "ستاسو نوې برېښنالیک پتې ته به د تایید لینک واستول شي.",
+			"updateEmail": "برېښنالیک تازه کړئ",
+			"emailError": "د برېښنالیک تازه کول ترسره نه شول.",
+			"changePasswordTitle": "پټنوم بدلول",
+			"newPassword": "نوی پټنوم",
+			"confirmPassword": "د نوي پټنوم تایید",
+			"passwordMinLength": "پټنوم باید لږ تر لږه ۶ توري ولري.",
+			"passwordMismatch": "پټنومونه سره ورته نه دي.",
+			"passwordSuccess": "پټنوم په بریالیتوب سره بدل شو.",
+			"passwordError": "د پټنوم بدلول ترسره نه شول.",
+			"googleAccount": "د ګوګل حساب",
+			"googleLinked": "د چټک ننوتلو لپاره ستاسو د ګوګل حساب سره تړل شوی.",
+			"googleNotLinked": "په یوه کلیک د اسانه ننوتلو لپاره خپل ګوګل حساب وتړئ.",
+			"linkGoogle": "له ګوګل سره نښلول",
+			"unlinkGoogle": "اړیکه پرې کول",
+			"googleUnlinkSuccess": "د ګوګل حساب اړیکه په بریالیتوب سره پرې شوه.",
+			"googleUnlinkError": "د ګوګل حساب پرې کول ترسره نه شول.",
+			"googleLinkError": "له ګوګل سره نښلول ترسره نه شول."
+		},
+		"dangerZone": {
+			"title": "د حساب ړنګول",
+			"subtitle": "خپل حساب او ټول اړوند زده‌کړییز معلومات د تل لپاره لرې کړئ.",
+			"deleteAccount": "زما حساب ړنګ کړئ",
+			"deleteWarning": "له ړنګولو وروسته ستاسو کورسونه، پرمختګ، یادښتونه او بریالیکونه بېرته نه راګرځي.",
+			"confirmTitle": "ایا ډاډه یاست چې خپل حساب ړنګول غواړئ؟",
+			"confirmDescription": "دا کړنه دایمي ده او نه بېرته ګرځېدونکې ده. ستاسو ټول شخصي معلومات او د زده‌کړې ریکارډونه به پاک شي.",
+			"typeDeleteToConfirm": "د تایید لپاره DELETE ولیکئ",
+			"cancelButton": "لغوه کول",
+			"confirmButton": "د تل لپاره ړنګ کړئ",
+			"deleteSuccess": "ستاسو حساب په بریالیتوب سره ړنګ شو.",
+			"deleteError": "د حساب ړنګول ترسره نه شول. مهرباني وکړئ بیا هڅه وکړئ."
+		}
+	},
+	"studentNotes": {
+		"title": "زما د یادښت کتابچه",
+		"description": "فورمولونه، د درسونو لنډیزونه او مهم ټکي په یوه ارام ځای کې ولیکئ او وساتئ.",
+		"newNote": "نوی یادښت",
+		"editNote": "یادښت سمول",
+		"searchPlaceholder": "په یادښتونو کې لټون...",
+		"titleLabel": "سرلیک",
+		"titlePlaceholder": "د بېلګې په توګه: د مشتق او انتګرال مهم فورمولونه",
+		"contentLabel": "د یادښت متن",
+		"contentPlaceholder": "د درس لنډیز، فورمول یا پوښتنه ولیکئ...",
+		"untitled": "بې‌سرلیکه یادښت",
+		"save": "یادښت خوندي کړئ",
+		"saving": "خوندي کېږي...",
+		"cancel": "لغوه کول",
+		"delete": "ړنګول",
+		"deleting": "ړنګېږي...",
+		"deleteConfirmTitle": "دا یادښت ړنګ شي؟",
+		"deleteConfirmDescription": "دا یادښت به د تل لپاره ستاسو له کتابچې لرې شي.",
+		"createdSuccess": "یادښت په کتابچه کې خوندي شو.",
+		"updatedSuccess": "یادښت تازه شو.",
+		"deletedSuccess": "یادښت ړنګ شو.",
+		"saveError": "د یادښت خوندي کول ترسره نه شول. مهرباني وکړئ بیا هڅه وکړئ.",
+		"deleteError": "د یادښت ړنګول ترسره نه شول. مهرباني وکړئ بیا هڅه وکړئ.",
+		"contentRequired": "مهرباني وکړئ د یادښت متن ولیکئ.",
+		"updatedAt": "تازه شوی په {date}",
+		"countLabel": "{count, plural, =0 {هیڅ یادښت نشته} other {# یادښتونه}}",
+		"emptyTitle": "ستاسو کتابچه لا تشه ده",
+		"emptySubtitle": "خپل لومړنی یادښت ولیکئ څو مهم فورمولونه، لغتونه او د فصلونو لنډیزونه تل درسره وي.",
+		"noSearchMatch": "ستاسو له لټون سره سم یادښت ونه موندل شو.",
+		"clearSearch": "لټون پاک کړئ"
+	},
+	"adminCatalog": {
+		"searchPlaceholder": "لټون...",
+		"loading": "معلومات رابرسېره کېږي...",
+		"empty": "هیڅ مورد ونه موندل شو.",
+		"add": "نوی زیات کړئ",
+		"edit": "سمول",
+		"delete": "ړنګول",
+		"save": "خوندي کول",
+		"saving": "خوندي کېږي...",
+		"cancel": "لغوه کول",
+		"actions": "کړنې",
+		"name": "نوم",
+		"createdAt": "د جوړېدو نېټه",
+		"totalCount": "ټول: {count}",
+		"previous": "مخکینی",
+		"next": "بل",
+		"pageOf": "پاڼه {page} له {total}",
+		"deleteConfirmTitle": "دا مورد ړنګ شي؟",
+		"deleteConfirmDescription": "دا کړنه بېرته نه ګرځي.",
+		"createSuccess": "په بریالیتوب سره جوړ شو.",
+		"updateSuccess": "په بریالیتوب سره تازه شو.",
+		"deleteSuccess": "په بریالیتوب سره ړنګ شو.",
+		"actionError": "کړنه ترسره نه شوه. مهرباني وکړئ بیا هڅه وکړئ.",
+		"staff": {
+			"title": "کارکوونکي او مدیران",
+			"description": "د پلټفارم مدیران چې بشپړ مدیریتي لاسرسی لري.",
+			"email": "برېښنالیک",
+			"phone": "د اړیکې شمېره",
+			"role": "رول",
+			"adminBadge": "مدیر"
+		},
+		"cards": {
+			"title": "فلش‌کارتونه",
+			"description": "په ټولو ښوونیزو ډیکونو کې ثبت شوي فلش‌کارتونه وګورئ او وپلټئ.",
+			"question": "پوښتنه",
+			"hint": "لارښود",
+			"page": "پاڼه",
+			"manageDecks": "ډیکونه اداره کړئ"
+		},
+		"forms": {
+			"title": "د کانکور فورمونه",
+			"description": "د کانکور تېرو ازموینو پاڼې د کال او دورې له مخې.",
+			"formTitle": "سرلیک",
+			"year": "کال",
+			"round": "دوره",
+			"filePath": "د فایل لاره"
+		},
+		"universities": {
+			"title": "پوهنتونونه",
+			"description": "د کانکور کوډونو کې شامل دولتي او خصوصي پوهنتونونه اداره کړئ.",
+			"province": "ولایت",
+			"noProvince": "ناټاکلی"
+		},
+		"faculties": {
+			"title": "پوهنځي",
+			"description": "د کانکور څانګو لپاره د پوهنتونونو پوهنځي اداره کړئ."
+		},
+		"departments": {
+			"title": "ډیپارټمنټونه",
+			"description": "علمي ډیپارټمنټونه او اړوند پوهنځي اداره کړئ.",
+			"faculty": "پوهنځی",
+			"selectFaculty": "پوهنځی وټاکئ"
+		},
+		"codes": {
+			"title": "د کانکور نمرو کوډونه",
+			"description": "د پوهنتونونو او ډیپارټمنټونو کوډونه له لږ تر لږه او لوړو نمرو سره.",
+			"code": "کوډ",
+			"university": "پوهنتون",
+			"department": "ډیپارټمنټ",
+			"scoreRange": "د نمرو کچه"
+		}
 	}
 }

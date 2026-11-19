@@ -34,7 +34,7 @@ export default async function RoadmapPage({
 	const roadmaps = result.success ? result.data : [];
 
 	return (
-		<div className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-12 text-[#19243b] sm:px-6 sm:pt-12 sm:pb-20 lg:px-8">
+		<div className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-12 text-[#19243b] sm:px-6 sm:pt-12 sm:pb-20 lg:px-8 dark:bg-background dark:text-foreground">
 			<div className="mx-auto max-w-5xl">
 				<header className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_80%_0%,rgba(124,229,209,.2),transparent_32%),linear-gradient(125deg,#101a2c,#292747)] px-6 py-12 text-white sm:px-12 sm:py-16">
 					<div className="absolute -end-12 -top-16 size-56 rounded-full border-[35px] border-white/[.06]" />
@@ -55,11 +55,11 @@ export default async function RoadmapPage({
 				</header>
 
 				{roadmaps.length === 0 ? (
-					<section className="mt-10 rounded-[24px] border border-[#e8eaf1] bg-white p-8 text-center shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)] sm:p-12">
+					<section className="mt-10 rounded-[24px] border border-[#e8eaf1] bg-white p-8 text-center shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)] sm:p-12 dark:border-border dark:bg-card">
 						<h2 className="text-xl font-extrabold sm:text-2xl">
 							{t("emptyTitle")}
 						</h2>
-						<p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-500">
+						<p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-500 dark:text-muted-foreground">
 							{t("emptyBody")}
 						</p>
 						<Link
@@ -83,7 +83,7 @@ export default async function RoadmapPage({
 							return (
 								<article
 									key={roadmap.id}
-									className="relative overflow-hidden rounded-[24px] border border-[#e8eaf1] bg-white shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)]"
+									className="relative overflow-hidden rounded-[24px] border border-[#e8eaf1] bg-white shadow-[0_18px_48px_-38px_rgba(31,41,75,.35)] dark:border-border dark:bg-card"
 								>
 									<div className="flex flex-col sm:flex-row">
 										<span className="relative block h-44 w-full overflow-hidden sm:h-auto sm:w-56 sm:shrink-0">
@@ -162,8 +162,8 @@ export default async function RoadmapPage({
 					</section>
 				)}
 
-				<footer className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[24px] bg-[#eeecfa] p-6 sm:flex-row sm:items-center sm:p-8">
-					<p className="max-w-xl text-sm leading-7 text-[#53566e]">
+				<footer className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[24px] bg-[#eeecfa] p-6 sm:flex-row sm:items-center sm:p-8 dark:border dark:border-border dark:bg-card/80">
+					<p className="max-w-xl text-sm leading-7 text-[#53566e] dark:text-muted-foreground">
 						{t("note")}
 					</p>
 					<Link

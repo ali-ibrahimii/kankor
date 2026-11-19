@@ -1,12 +1,11 @@
 "use client";
 
 import {
-	BellIcon,
 	CircleUserRoundIcon,
-	CreditCardIcon,
 	EllipsisVerticalIcon,
 	LogOutIcon,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -24,15 +23,18 @@ import {
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { useRouter } from "@/i18n/navigation";
+import { isRtl } from "@/i18n/routing";
 import { CurrentUser } from "@/lib/auth/types";
 import { routes } from "@/lib/routes";
 import { getInitial } from "@/utils/str.util";
 
 export function NavUser({ user }: { user: CurrentUser | null }) {
 	const router = useRouter();
+	const locale = useLocale();
+	const t = useTranslations("nav");
 	const { isMobile } = useSidebar();
+	const menuSide = isMobile ? "bottom" : isRtl(locale) ? "left" : "right";
 
 	async function logout() {
 		fetch(routes.api.auth.signout.route(), { method: "POST" }).then((res) => {
@@ -40,7 +42,8 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 		});
 	}
 
-	if (!user) return <NavUserSkeleton logout={logout} />;
+	if (!user)
+		return <NavUserSkeleton logout={logout} logoutLabel={t("logOut")} />;
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
@@ -70,7 +73,7 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
 						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-						side={isMobile ? "bottom" : "right"}
+						side={menuSide}
 						align="end"
 						sideOffset={4}
 					>
@@ -99,34 +102,33 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 						<DropdownMenuGroup>
 							<DropdownMenuItem
 								onClick={() => {
+									const managedSchool = user.schoolMemberships?.find(
+										(m) => m.role === "owner" || m.role === "admin"
+									);
 									if (user.role === "instructor") {
 										router.push(routes.d.instructor.account.page());
-									} else if (
-										user.active_school_id ||
-										user.school_id ||
-										(user.schoolMemberships &&
-											user.schoolMemberships.length > 0)
-									) {
-										const schoolId =
-											user.active_school_id ||
-											user.school_id ||
-											user.schoolMemberships[0].school_id;
+									} else if (managedSchool) {
 										router.push(
-											routes.d.school.account.page({ school_id: schoolId })
+											routes.d.school.account.page({
+												school_id:
+													user.active_school_id || managedSchool.school_id,
+											})
 										);
+									} else if (user.role === "admin") {
+										router.push("/d/admin/settings");
 									} else {
 										router.push(routes.d.account.page());
 									}
 								}}
 							>
 								<CircleUserRoundIcon />
-								Account
+								{t("account")}
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={logout}>
 							<LogOutIcon />
-							Log out
+							{t("logOut")}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
@@ -135,8 +137,17 @@ export function NavUser({ user }: { user: CurrentUser | null }) {
 	);
 }
 
-export function NavUserSkeleton({ logout }: { logout: () => Promise<void> }) {
-	const isMobile = useIsMobile();
+export function NavUserSkeleton({
+	logout,
+	logoutLabel,
+}: {
+	logout: () => Promise<void>;
+	logoutLabel?: string;
+}) {
+	const { isMobile } = useSidebar();
+	const locale = useLocale();
+	const t = useTranslations("nav");
+	const menuSide = isMobile ? "bottom" : isRtl(locale) ? "left" : "right";
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
@@ -164,13 +175,13 @@ export function NavUserSkeleton({ logout }: { logout: () => Promise<void> }) {
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
 						className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-						side={isMobile ? "bottom" : "right"}
+						side={menuSide}
 						align="end"
 						sideOffset={4}
 					>
 						<DropdownMenuItem onClick={logout}>
 							<LogOutIcon />
-							Log out
+							{logoutLabel ?? t("logOut")}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

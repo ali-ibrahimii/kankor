@@ -25,17 +25,17 @@ import { SidebarBrand } from "@/components/blocks/sidebar/sidebar-brand";
 import type { MenuGroup, MenuParent } from "@/components/blocks/sidebar/types";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/widgets/locale-switcher";
+import { ThemeSwitcher } from "@/components/widgets/theme-switcher";
 import { getCurrentUser } from "@/lib/auth/session";
 import { routes } from "@/lib/routes";
 
 export default async function DashboardLayout({
 	children,
-	params,
-}: React.PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
-	const { locale } = await params;
-	const [t, ta, user] = await Promise.all([
+}: React.PropsWithChildren) {
+	const [t, ta, tl, user] = await Promise.all([
 		getTranslations("dashboard.student"),
 		getTranslations("app"),
+		getTranslations("landing"),
 		getCurrentUser(),
 	]);
 	const unreadCount = user ? await getUnreadNotificationCount(user.id) : 0;
@@ -67,7 +67,7 @@ export default async function DashboardLayout({
 				},
 				{
 					label: t("flashcards"),
-					href: "#",
+					href: "/d/decks",
 					icon: <Zap />,
 					type: "collapsible",
 					menus: [
@@ -157,6 +157,7 @@ export default async function DashboardLayout({
 				<DashboardTopbar
 					actions={
 						<>
+							<ThemeSwitcher label={tl("header.themeToggle")} />
 							<LocaleSwitcher />
 							<NotificationBell
 								notificationsHref={routes.d.notifications.page()}

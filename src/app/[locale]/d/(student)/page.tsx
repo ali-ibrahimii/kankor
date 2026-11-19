@@ -1,4 +1,5 @@
 import { StudentOverview } from "@/components/blocks/dashboard-overview/student-overview";
+import { getCurrentUser } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import type { StudentDashboardOverview } from "@/types/queries.types";
 
@@ -16,6 +17,6 @@ async function getOverview(): Promise<StudentDashboardOverview | null> {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function StudentDashboardPage() {
-	const overview = await getOverview();
-	return <StudentOverview overview={overview} />;
+	const [overview, user] = await Promise.all([getOverview(), getCurrentUser()]);
+	return <StudentOverview overview={overview} userName={user?.full_name} />;
 }

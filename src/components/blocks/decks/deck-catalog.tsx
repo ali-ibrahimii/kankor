@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useQueryFilters } from "@/hooks/filter/filter.hooks";
+import { isSupabaseConfigured } from "@/lib/env/client-env";
 import { cn } from "@/lib/utils";
 import type { PublicDeck } from "./public-deck-card";
 import { PublicDeckCard, PublicDeckCardSkeleton } from "./public-deck-card";
@@ -27,6 +28,7 @@ export function DeckCatalog({
 		table: "decks",
 		queryFn: publicDecksQueryFn,
 		initialData,
+		enabled: isSupabaseConfigured,
 		initialState: {
 			name: "public-decks",
 			sort: [{ field: "created_at", direction: "desc" }],

@@ -193,8 +193,8 @@ export default async function LibraryDetailPage({
 
 			{/* Related resources section */}
 			{(relatedCourses.length > 0 || relatedDecks.length > 0) && (
-				<div className="mt-16 border-t border-slate-200/80 pt-10">
-					<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
+				<div className="mt-16 border-t border-border/80 pt-10">
+					<h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
 						{s("relatedResources")}
 					</h2>
 					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,8 +215,8 @@ export default async function LibraryDetailPage({
 			)}
 
 			{/* Library Public Read-Only Discussions Section */}
-			<div className="mt-16 border-t border-slate-200/80 pt-10">
-				<h2 className="text-xl font-bold tracking-tight text-slate-900 mb-6">
+			<div className="mt-16 border-t border-border/80 pt-10">
+				<h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
 					{s("discussions", { defaultValue: "Book Discussions" })}
 				</h2>
 				<ResourceDiscussionView

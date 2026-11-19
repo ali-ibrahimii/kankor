@@ -1,8 +1,11 @@
-import { CheckCircle2, ClipboardList } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { ArrowRight, CheckCircle2, ClipboardList } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
+import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 
 async function fetchPassedQuizzes(userId: string) {
@@ -10,7 +13,7 @@ async function fetchPassedQuizzes(userId: string) {
 	const { data, error } = await client
 		.from("quiz_attempts")
 		.select(
-			"id, score, max_score_possible, completed_at, quizzes(id, title, description)"
+			"id, score, max_score_possible, completed_at, quizzes(id, slug, title, description)"
 		)
 		.eq("user_id", userId)
 		.eq("passed", true)
@@ -21,26 +24,41 @@ async function fetchPassedQuizzes(userId: string) {
 }
 
 export default async function PassedQuizzesPage() {
-	const [t, user] = await Promise.all([
+	const [t, locale, user] = await Promise.all([
 		getTranslations("dashboard.student.passedQuizzes"),
+		getLocale(),
 		getCurrentUser(),
 	]);
+
+	const dateFormatter = new Intl.DateTimeFormat(
+		locale === "en" ? "en-US" : locale === "ps" ? "ps-AF" : "fa-AF",
+		{ dateStyle: "medium" }
+	);
 
 	const attempts = user ? await fetchPassedQuizzes(user.id) : [];
 
 	return (
-		<div className="space-y-6 p-6">
+		<div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-5 py-8 sm:px-8">
 			<div>
-				<h1 className="text-xl font-bold">{t("title")}</h1>
-				<p className="mt-0.5 text-sm text-muted-foreground">
-					{t("description")}
-				</p>
+				<h1 className="text-2xl font-extrabold tracking-tight">{t("title")}</h1>
+				<p className="mt-1 text-sm text-muted-foreground">{t("description")}</p>
 			</div>
 
 			{attempts.length === 0 ? (
-				<div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-muted/30 py-20 text-center">
-					<p className="text-sm font-medium">{t("empty.title")}</p>
+				<div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed bg-card/70 px-6 py-20 text-center">
+					<p className="text-sm font-semibold">{t("empty.title")}</p>
 					<p className="text-xs text-muted-foreground">{t("empty.subtitle")}</p>
+					<Button
+						asChild
+						variant="outline"
+						size="sm"
+						className="mt-2 rounded-full"
+					>
+						<Link href="/d/tests/quiz">
+							{t("browseTests")}
+							<ArrowRight className="size-3.5 rtl:rotate-180" />
+						</Link>
+					</Button>
 				</div>
 			) : (
 				<div className="flex flex-col gap-3">
@@ -55,9 +73,18 @@ export default async function PassedQuizzesPage() {
 										<CheckCircle2 className="size-5" />
 									</div>
 									<div className="min-w-0 flex-1">
-										<h3 className="text-sm font-semibold leading-snug">
-											{quiz.title}
-										</h3>
+										{quiz.slug ? (
+											<Link
+												href={routes.quizzes.slug.page({ slug: quiz.slug })}
+												className="text-sm font-semibold leading-snug hover:text-primary hover:underline"
+											>
+												{quiz.title}
+											</Link>
+										) : (
+											<h3 className="text-sm font-semibold leading-snug">
+												{quiz.title}
+											</h3>
+										)}
 										{quiz.description && (
 											<p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
 												{quiz.description}
@@ -80,9 +107,9 @@ export default async function PassedQuizzesPage() {
 											{attempt.completed_at && (
 												<span className="text-xs text-muted-foreground">
 													{t("completedOn", {
-														date: new Date(
-															attempt.completed_at
-														).toLocaleDateString(),
+														date: dateFormatter.format(
+															new Date(attempt.completed_at)
+														),
 													})}
 												</span>
 											)}
