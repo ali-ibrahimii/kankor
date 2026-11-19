@@ -2,19 +2,16 @@
 
 import { motion } from "framer-motion";
 import {
-	BadgeCheck,
-	Cloud,
+	Award,
+	BookOpen,
 	Globe2,
-	GraduationCap,
-	Languages,
-	Library,
 	ShieldCheck,
+	Sparkles,
 	WifiOff,
 	Zap,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
-import { useAboutMotion } from "./about-motion";
+import { ABOUT_TONES, useAboutMotion } from "./about-motion";
 
 export function AboutFeaturesSection() {
 	const t = useTranslations("aboutUs");
@@ -22,131 +19,145 @@ export function AboutFeaturesSection() {
 
 	const features = [
 		{
+			key: "offline",
 			icon: WifiOff,
 			title: t("features.offline.title"),
 			desc: t("features.offline.desc"),
-			tone: "bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200",
+			tint: ABOUT_TONES.mint.icon,
 		},
 		{
-			icon: Cloud,
+			key: "sync",
+			icon: Globe2,
 			title: t("features.sync.title"),
 			desc: t("features.sync.desc"),
-			tone: "bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200",
+			tint: ABOUT_TONES.sky.icon,
 		},
 		{
+			key: "secure",
 			icon: ShieldCheck,
 			title: t("features.secure.title"),
 			desc: t("features.secure.desc"),
-			tone: "bg-[#e6f1ff] text-[#3a79c2] dark:bg-sky-400/15 dark:text-sky-200",
+			tint: ABOUT_TONES.violet.icon,
 		},
 		{
+			key: "fast",
 			icon: Zap,
 			title: t("features.fast.title"),
 			desc: t("features.fast.desc"),
-			tone: "bg-[#ffeddf] text-[#c87949] dark:bg-amber-400/15 dark:text-amber-200",
+			tint: ABOUT_TONES.peach.icon,
 		},
 		{
-			icon: Library,
+			key: "library",
+			icon: BookOpen,
 			title: t("features.library.title"),
 			desc: t("features.library.desc"),
-			tone: "bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200",
+			tint: ABOUT_TONES.violet.icon,
 		},
 		{
-			icon: GraduationCap,
+			key: "certified",
+			icon: Award,
 			title: t("features.certified.title"),
 			desc: t("features.certified.desc"),
-			tone: "bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200",
+			tint: ABOUT_TONES.mint.icon,
 		},
-	];
+	] as const;
 
 	const specs = [
-		{ icon: Globe2, key: "platforms" },
-		{ icon: Languages, key: "languages" },
-		{ icon: WifiOff, key: "offline" },
-		{ icon: BadgeCheck, key: "price" },
+		{
+			key: "platforms",
+			label: t("features.specs.platforms.label"),
+			value: t("features.specs.platforms.value"),
+		},
+		{
+			key: "languages",
+			label: t("features.specs.languages.label"),
+			value: t("features.specs.languages.value"),
+		},
+		{
+			key: "offline",
+			label: t("features.specs.offline.label"),
+			value: t("features.specs.offline.value"),
+		},
+		{
+			key: "price",
+			label: t("features.specs.price.label"),
+			value: t("features.specs.price.value"),
+		},
 	] as const;
 
 	return (
 		<motion.section
 			id="features"
-			className="relative overflow-hidden py-20 sm:py-24"
+			className="scroll-mt-32 border-y border-[#e9eaf2] bg-white/75 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24 dark:border-white/10 dark:bg-[#1b2438]/60"
 			variants={aboutMotion.section}
 			initial="hidden"
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div
-				aria-hidden="true"
-				className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(106,75,212,0.07),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(37,130,99,0.07),transparent_30%)]"
-			/>
+			<div className="mx-auto grid max-w-[1320px] items-start gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-12 lg:px-8">
+				{/* Sticky Deep-Navy Specs Summary Panel */}
+				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_10%_110%,rgba(94,207,173,.2),transparent_42%),radial-gradient(circle_at_90%_-10%,rgba(137,100,255,.34),transparent_46%),linear-gradient(135deg,#101a2c_0%,#18243d_60%,#212442_100%)] p-6 text-white shadow-[0_28px_68px_-40px_rgba(14,19,49,.65)] sm:p-8 lg:sticky lg:top-36">
+					<div
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.11)_0.7px,transparent_0.7px)] bg-size-[22px_22px]"
+					/>
 
-			<div className="relative mx-auto grid max-w-[1160px] gap-6 px-4 sm:px-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-start lg:gap-8">
-				<motion.div
-					className="soft-card p-6 sm:p-8 lg:sticky lg:top-28"
-					variants={aboutMotion.item}
-				>
-					<span className="section-kicker">
-						<Zap className="size-3.5" />
-
+					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.08] px-3.5 py-1.5 text-xs font-bold text-[#b7f486]">
+						<Sparkles className="size-3.5" />
 						{t("features.badge")}
 					</span>
 
-					<h2 className="mt-4 text-2xl font-black leading-[1.5] tracking-tight text-foreground sm:text-3xl">
+					<h2 className="mt-5 text-2xl font-black leading-[1.45] tracking-tight text-white sm:text-3xl">
 						{t("features.title")}
 					</h2>
 
-					<p className="mt-3 text-sm leading-7 text-muted-foreground">
+					<p className="mt-3 text-sm leading-8 text-white/65">
 						{t("features.subtitle")}
 					</p>
 
-					<div className="mt-7 grid gap-2.5 sm:grid-cols-2">
-						{specs.map(({ icon: Icon, key }) => (
+					<dl className="mt-7 grid grid-cols-2 gap-3">
+						{specs.map((spec) => (
 							<div
-								key={key}
-								className="rounded-2xl border border-border/70 bg-muted/40 px-3.5 py-3"
+								key={spec.key}
+								className="rounded-2xl border border-white/10 bg-white/[.055] p-3.5 backdrop-blur-sm"
 							>
-								<span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-									<Icon className="size-3" />
-
-									{t(`features.specs.${key}.label`)}
-								</span>
-
-								<p className="mt-1 text-[11px] font-extrabold text-foreground">
-									{t(`features.specs.${key}.value`)}
-								</p>
+								<dt className="text-[11px] font-medium text-white/50">
+									{spec.label}
+								</dt>
+								<dd className="mt-1.5 text-xs font-extrabold leading-snug text-white sm:text-sm">
+									{spec.value}
+								</dd>
 							</div>
 						))}
-					</div>
-				</motion.div>
+					</dl>
+				</div>
 
+				{/* 6 Capability Bento Cards */}
 				<motion.div
-					className="grid gap-4 sm:grid-cols-2"
+					className="grid gap-4 sm:grid-cols-2 sm:gap-5"
 					variants={aboutMotion.stagger}
 					initial="hidden"
 					whileInView="show"
 					viewport={aboutMotion.viewport}
 				>
-					{features.map((feature) => (
+					{features.map(({ key, icon: Icon, title, desc, tint }) => (
 						<motion.article
-							key={feature.title}
+							key={key}
 							variants={aboutMotion.card}
-							className="group soft-card card-hover flex flex-col p-5"
+							className="soft-card card-hover border-[#e5e8f3] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]"
 						>
-							<span
-								className={cn(
-									"flex size-11 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-translate-y-0.5",
-									feature.tone
-								)}
+							<div
+								className={`flex size-12 items-center justify-center rounded-2xl ${tint}`}
 							>
-								<feature.icon className="size-5" />
-							</span>
+								<Icon className="size-5" />
+							</div>
 
-							<h3 className="mt-4 text-sm font-extrabold text-foreground">
-								{feature.title}
+							<h3 className="mt-5 text-base font-extrabold text-[#19243b] sm:text-lg dark:text-slate-100">
+								{title}
 							</h3>
 
-							<p className="mt-1.5 text-[11px] leading-6 text-muted-foreground">
-								{feature.desc}
+							<p className="mt-2 text-sm leading-7 text-slate-500 dark:text-slate-400">
+								{desc}
 							</p>
 						</motion.article>
 					))}

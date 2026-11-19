@@ -1,262 +1,230 @@
 "use client";
 
-// src/app/[locale]/(home)/about/_components/about-contact-section.tsx
-
 import { motion } from "framer-motion";
-import {
-	ArrowUpRight,
-	Clock,
-	Mail,
-	MapPin,
-	MessageCircle,
-	Phone,
-} from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
-import {
-	FacebookIcon,
-	InstagramIcon,
-	TwitterIcon,
-} from "@/components/blocks/navbar/icons/social-icons";
-import {
-	DotsBackground,
-	GridBackground,
-} from "@/components/global-background/background-variants";
 import { clientEnv } from "@/lib/env/client-env";
-import { cn } from "@/lib/utils";
+import { ABOUT_TONES, useAboutMotion } from "./about-motion";
 
-type ContactInfo = {
-	icon: React.ReactNode;
-	label: string;
-	value: string;
-	href?: string;
-	color: string;
-};
-
-type SocialLink = {
-	platform: string;
-	url: string;
-	icon: React.ReactNode;
-};
+const SOCIAL_PROFILES = [
+	{
+		name: "Twitter / X",
+		url: "https://twitter.com/abzarkonkur",
+		icon: (
+			<svg
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				className="size-4"
+				aria-hidden="true"
+			>
+				<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+			</svg>
+		),
+	},
+	{
+		name: "Instagram",
+		url: "https://instagram.com/abzarkonkur",
+		icon: (
+			<svg
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				className="size-4"
+				aria-hidden="true"
+			>
+				<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+				<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+				<line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+			</svg>
+		),
+	},
+	{
+		name: "Facebook",
+		url: "https://facebook.com/abzarkonkur",
+		icon: (
+			<svg
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				className="size-4"
+				aria-hidden="true"
+			>
+				<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+			</svg>
+		),
+	},
+] as const;
 
 export function AboutContactSection() {
 	const t = useTranslations("aboutUs");
+	const aboutMotion = useAboutMotion();
 
-	const contactInfo: ContactInfo[] = [
+	const contactEmail = clientEnv.app.email;
+	const contactPhone = "+93 700 123 456";
+
+	const contactItems = [
 		{
-			icon: <Mail className="h-6 w-6" />,
+			id: "email",
+			icon: Mail,
 			label: t("contact.email"),
-			value: clientEnv.app.email,
-			href: `mailto:${clientEnv.app.email}`,
-			color: "from-blue-500/20 to-cyan-500/20",
+			value: contactEmail,
+			href: `mailto:${contactEmail}`,
+			ltr: true,
+			tone: ABOUT_TONES.violet,
 		},
 		{
-			icon: <Phone className="h-6 w-6" />,
+			id: "phone",
+			icon: Phone,
 			label: t("contact.phone"),
-			value: "+93 700 123 456",
+			value: contactPhone,
 			href: "tel:+93700123456",
-			color: "from-emerald-500/20 to-green-500/20",
+			ltr: true,
+			tone: ABOUT_TONES.mint,
 		},
 		{
-			icon: <MapPin className="h-6 w-6" />,
+			id: "address",
+			icon: MapPin,
 			label: t("contact.address"),
 			value: t("contact.addressValue"),
-			color: "from-fuchsia-500/20 to-pink-500/20",
+			href: null,
+			ltr: false,
+			tone: ABOUT_TONES.sky,
 		},
 		{
-			icon: <Clock className="h-6 w-6" />,
+			id: "hours",
+			icon: Clock,
 			label: t("contact.hours"),
 			value: t("contact.hoursValue"),
-			color: "from-amber-500/20 to-orange-500/20",
+			href: null,
+			ltr: false,
+			tone: ABOUT_TONES.peach,
 		},
-	];
-
-	const socialLinks: SocialLink[] = [
-		{
-			platform: "Twitter",
-			url: "https://twitter.com/abzarkonkur",
-			icon: <TwitterIcon className="h-5 w-5" />,
-		},
-		{
-			platform: "Instagram",
-			url: "https://instagram.com/abzarkonkur",
-			icon: <InstagramIcon className="h-5 w-5" />,
-		},
-		{
-			platform: "Facebook",
-			url: "https://facebook.com/abzarkonkur",
-			icon: <FacebookIcon className="h-5 w-5" />,
-		},
-	];
-
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		show: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.1,
-			},
-		},
-	};
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 30 },
-		show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-	};
+	] as const;
 
 	return (
-		<section
+		<motion.section
 			id="contact"
-			className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-20 text-white lg:py-28"
+			className="scroll-mt-32 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24"
+			variants={aboutMotion.section}
+			initial="hidden"
+			whileInView="show"
+			viewport={aboutMotion.viewport}
 		>
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 overflow-hidden"
-			>
-				<div className="absolute -top-40 -end-40 size-96 rounded-full bg-indigo-500/20 blur-3xl" />
-				<div className="absolute bottom-0 -start-40 size-96 rounded-full bg-fuchsia-500/15 blur-3xl" />
-			</div>
-
-			<div className="relative mx-auto max-w-7xl px-6">
-				{/* Section Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="mb-16 text-center"
-				>
-					<motion.div
-						initial={{ scale: 0.9 }}
-						whileInView={{ scale: 1 }}
-						viewport={{ once: true }}
-						className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-5 py-2 text-sm font-semibold text-indigo-300 backdrop-blur-sm"
-					>
-						<MessageCircle className="h-4 w-4" />
+			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+				{/* Header */}
+				<div className="mx-auto max-w-2xl text-center">
+					<span className="section-kicker">
+						<Send className="size-3.5" />
 						{t("contact.badge")}
-					</motion.div>
-
-					<h2 className="mx-auto max-w-4xl text-4xl font-black tracking-tight md:text-5xl lg:text-6xl">
-						<span className="bg-gradient-to-r from-white via-indigo-200 to-fuchsia-200 bg-clip-text text-transparent">
-							{t("contact.title")}
-						</span>
+					</span>
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+						{t("contact.title")}
 					</h2>
-
-					<p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
 						{t("contact.subtitle")}
 					</p>
-				</motion.div>
+				</div>
 
-				{/* Contact Info Grid */}
+				{/* 4 Contact Cards */}
 				<motion.div
-					variants={containerVariants}
+					className="mt-11 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"
+					variants={aboutMotion.stagger}
 					initial="hidden"
 					whileInView="show"
-					viewport={{ once: true }}
-					className="mb-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4"
+					viewport={aboutMotion.viewport}
 				>
-					{contactInfo.map((info, index) => (
-						<motion.div
-							key={index}
-							variants={itemVariants}
-							className="group relative"
-						>
-							<div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-1 backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:shadow-2xl hover:shadow-indigo-500/20">
-								<div className="relative h-full rounded-[1.4rem] bg-slate-950/60 p-6">
-									{/* Icon */}
+					{contactItems.map(
+						({ id, icon: Icon, label, value, href, ltr, tone }) => {
+							const body = (
+								<>
 									<div
-										className={cn(
-											"mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br ring-1 ring-white/10 transition-all duration-300 group-hover:scale-110 group-hover:ring-white/20",
-											info.color
-										)}
-									>
-										<div className="text-white">{info.icon}</div>
-									</div>
-
-									{/* Content */}
-									<div>
-										<p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
-											{info.label}
-										</p>
-										{info.href ? (
-											<a
-												href={info.href}
-												className="group/link flex items-center gap-2 text-base font-semibold text-white transition-colors hover:text-indigo-300"
-											>
-												<span className="flex-1">{info.value}</span>
-												<ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-											</a>
-										) : (
-											<p className="text-base font-semibold text-white">
-												{info.value}
-											</p>
+										aria-hidden="true"
+										className={`absolute inset-x-0 top-0 h-1 bg-linear-to-r ${tone.bar} opacity-75 transition-opacity group-hover:opacity-100`}
+									/>
+									<div className="flex items-start justify-between gap-3">
+										<div
+											className={`flex size-12 shrink-0 items-center justify-center rounded-2xl ${tone.icon}`}
+										>
+											<Icon className="size-5" />
+										</div>
+										{href && (
+											<span className="flex size-8 items-center justify-center rounded-xl bg-slate-50 text-slate-400 transition group-hover:bg-primary/8 group-hover:text-primary dark:bg-white/[.05] dark:text-slate-500 dark:group-hover:text-violet-200">
+												<ArrowUpRight className="size-4 rtl:-scale-x-100" />
+											</span>
 										)}
 									</div>
-								</div>
-							</div>
-						</motion.div>
-					))}
-				</motion.div>
 
-				{/* Social Links Card */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.2 }}
-					className="mx-auto max-w-4xl"
-				>
-					<div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-1 backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:shadow-2xl hover:shadow-indigo-500/20">
-						<div className="relative rounded-[1.4rem] bg-slate-950/60 p-8">
-							<div className="mb-6 text-center">
-								<h3 className="text-2xl font-bold text-white">
-									{t("contact.socialTitle")}
-								</h3>
-								<p className="mt-2 text-sm text-slate-400">
-									{t("contact.socialSubtitle")}
-								</p>
-							</div>
-
-							<div className="flex flex-wrap items-center justify-center gap-4">
-								{socialLinks.map((social, index) => (
-									<motion.a
-										key={social.platform}
-										href={social.url}
-										target="_blank"
-										rel="noreferrer"
-										initial={{ opacity: 0, scale: 0.8 }}
-										whileInView={{ opacity: 1, scale: 1 }}
-										viewport={{ once: true }}
-										transition={{ delay: 0.3 + index * 0.1 }}
-										className="group/social flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-base font-semibold text-slate-300 transition-all duration-300 hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-white hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/20"
+									<p className="mt-5 text-xs font-semibold text-slate-400 dark:text-slate-500">
+										{label}
+									</p>
+									<p
+										dir={ltr ? "ltr" : undefined}
+										className={`mt-1.5 break-words text-sm font-extrabold leading-7 text-[#19243b] dark:text-slate-100 ${ltr ? "text-start" : ""}`}
 									>
-										<span className="transition-transform duration-300 group-hover/social:rotate-12 group-hover/social:scale-110">
-											{social.icon}
-										</span>
-										<span>{social.platform}</span>
-										<ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover/social:opacity-100 group-hover/social:translate-x-1 group-hover/social:-translate-y-1" />
-									</motion.a>
-								))}
-							</div>
-						</div>
-					</div>
+										{value}
+									</p>
+								</>
+							);
+
+							return href ? (
+								<motion.a
+									key={id}
+									href={href}
+									variants={aboutMotion.card}
+									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 dark:border-white/10 dark:bg-[#1b2438]"
+								>
+									{body}
+								</motion.a>
+							) : (
+								<motion.div
+									key={id}
+									variants={aboutMotion.card}
+									className="soft-card group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 dark:border-white/10 dark:bg-[#1b2438]"
+								>
+									{body}
+								</motion.div>
+							);
+						}
+					)}
 				</motion.div>
 
-				{/* Bottom CTA */}
+				{/* Social Community & Response Time Strip */}
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.4 }}
-					className="mt-16 text-center"
+					variants={aboutMotion.card}
+					className="soft-card mt-5 flex flex-col justify-between gap-6 border-[#e5e8f3] bg-white p-6 sm:p-8 lg:flex-row lg:items-center dark:border-white/10 dark:bg-[#1b2438]"
 				>
-					<div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-sm">
-						<MessageCircle className="h-5 w-5 text-indigo-300" />
-						<p className="text-sm text-slate-300">
+					<div>
+						<div className="inline-flex items-center gap-2 rounded-full border border-[#c7eedc] bg-[#eaf9f1] px-3 py-1 text-xs font-bold text-[#1f7558] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200">
+							<span className="size-2 rounded-full bg-[#258263] dark:bg-emerald-400" />
 							{t("contact.responseTime")}
+						</div>
+						<h3 className="mt-3 text-lg font-extrabold text-[#19243b] sm:text-xl dark:text-slate-100">
+							{t("contact.socialTitle")}
+						</h3>
+						<p className="mt-1 text-xs leading-7 text-slate-500 sm:text-sm dark:text-slate-400">
+							{t("contact.socialSubtitle")}
 						</p>
+					</div>
+
+					<div className="flex flex-wrap items-center gap-2.5">
+						{SOCIAL_PROFILES.map((social) => (
+							<a
+								key={social.name}
+								href={social.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label={social.name}
+								className="inline-flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-xs font-bold text-[#19243b] transition hover:-translate-y-0.5 hover:border-primary/35 hover:bg-primary/6 hover:text-primary dark:border-white/10 dark:bg-white/[.04] dark:text-slate-200 dark:hover:border-violet-400/40 dark:hover:bg-violet-400/10 dark:hover:text-violet-200"
+							>
+								{social.icon}
+								<span>{social.name}</span>
+							</a>
+						))}
 					</div>
 				</motion.div>
 			</div>
-		</section>
+		</motion.section>
 	);
 }

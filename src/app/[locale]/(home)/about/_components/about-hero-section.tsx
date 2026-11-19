@@ -5,228 +5,251 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	Award,
-	BadgeCheck,
 	BookOpen,
+	Check,
+	CheckCircle2,
 	Flame,
 	GraduationCap,
-	Sparkles,
-	WifiOff,
+	Play,
+	Trophy,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { routes } from "@/lib/routes";
 import { useAboutMotion } from "./about-motion";
 
-export function AboutHeroSection({ isRtl }: { isRtl: boolean }) {
+interface AboutHeroSectionProps {
+	isRtl: boolean;
+}
+
+export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 	const t = useTranslations("aboutUs");
-	const tApp = useTranslations("app");
 	const aboutMotion = useAboutMotion();
 	const Arrow = isRtl ? ArrowLeft : ArrowRight;
 
-	const highlights = [
-		{ key: "offline", icon: WifiOff },
-		{ key: "sync", icon: Sparkles },
-		{ key: "certified", icon: Award },
-	] as const;
+	const trustPills = [
+		t("features.offline.title"),
+		t("features.sync.title"),
+		t("features.certified.title"),
+	];
 
 	return (
-		<section className="relative overflow-hidden bg-[#0b1222] text-white">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(124,229,209,0.22),transparent_38%),radial-gradient(circle_at_88%_12%,rgba(137,100,255,0.4),transparent_42%),radial-gradient(circle_at_50%_120%,rgba(106,75,212,0.28),transparent_48%)]"
-			/>
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 opacity-[.14] [background-image:radial-gradient(rgba(255,255,255,.65)_.7px,transparent_.7px)] [background-size:24px_24px]"
-			/>
+		<section className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
+			<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] px-5 py-8 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+				{/* Subtle micro-dot grid matching landing hero */}
+				<div
+					aria-hidden="true"
+					className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.13)_0.7px,transparent_0.7px)] bg-size-[24px_24px]"
+				/>
+				{/* Soft architectural corner ring */}
+				<div
+					aria-hidden="true"
+					className="pointer-events-none absolute -end-20 -bottom-28 -z-10 size-80 rounded-full border-[44px] border-white/[.03]"
+				/>
 
-			<div className="relative mx-auto grid max-w-[1320px] items-center gap-14 px-5 pb-28 pt-14 sm:px-6 sm:pb-32 sm:pt-18 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,.92fr)] lg:gap-16 lg:px-8 lg:pb-36 lg:pt-24">
-				<motion.div
-					variants={aboutMotion.stagger}
-					initial="hidden"
-					animate="show"
-				>
-					<motion.span
-						variants={aboutMotion.item}
-						className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-2 text-xs font-bold text-white/80 backdrop-blur-sm"
-					>
-						<GraduationCap className="size-3.5 text-[#b7f486]" />
-
-						{t("hero.badge")}
-					</motion.span>
-
-					<motion.h1
-						variants={aboutMotion.item}
-						className="mt-6 max-w-[600px] text-[1.9rem] font-black leading-[1.35] tracking-tight sm:text-[2.6rem] lg:text-[3rem]"
-					>
-						{t.rich("hero.title", {
-							accent: (chunks) => (
-								<span className="bg-gradient-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
-									{chunks}
-								</span>
-							),
-						})}
-					</motion.h1>
-
-					<motion.p
-						variants={aboutMotion.item}
-						className="mt-5 max-w-[560px] text-sm leading-8 text-white/65 sm:text-base sm:leading-9"
-					>
-						{t("hero.subtitle")}
-					</motion.p>
-
+				<div className="grid items-center gap-9 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
+					{/* Narrative Column */}
 					<motion.div
-						variants={aboutMotion.item}
-						className="mt-8 flex flex-col gap-3 sm:flex-row"
+						variants={aboutMotion.stagger}
+						initial="hidden"
+						animate="show"
 					>
-						<Link
-							href={routes.courses.page()}
-							className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
+						<motion.div
+							variants={aboutMotion.item}
+							className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-xs font-bold text-white/90 backdrop-blur"
 						>
-							<Sparkles className="size-4" />
+							<GraduationCap className="size-4 text-[#b7f486]" />
+							<span>{t("hero.badge")}</span>
+						</motion.div>
 
-							{t("hero.cta.primary")}
-
-							<Arrow className="size-4" />
-						</Link>
-
-						<Link
-							href="#demo"
-							className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
+						<motion.h1
+							variants={aboutMotion.item}
+							className="mt-5 text-[1.95rem] font-black leading-[1.38] tracking-tight text-white sm:text-[2.7rem] lg:text-[3.15rem]"
 						>
-							{t("hero.cta.secondary")}
-						</Link>
+							{t.rich("hero.title", {
+								accent: (chunks) => (
+									<span className="bg-linear-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
+										{chunks}
+									</span>
+								),
+							})}
+						</motion.h1>
+
+						<motion.p
+							variants={aboutMotion.item}
+							className="mt-4 max-w-xl text-sm leading-8 text-white/75 sm:text-base"
+						>
+							{t("hero.description")}
+						</motion.p>
+
+						<motion.p
+							variants={aboutMotion.item}
+							className="mt-2.5 max-w-xl text-xs leading-7 text-white/55 sm:text-sm"
+						>
+							{t("hero.subtitle")}
+						</motion.p>
+
+						<motion.div
+							variants={aboutMotion.item}
+							className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center"
+						>
+							<Link
+								href={routes.courses.page()}
+								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 py-3 text-sm font-extrabold text-[#17233a] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#c9f8a2]"
+							>
+								<span>{t("hero.cta.primary")}</span>
+								<Arrow className="size-4" />
+							</Link>
+
+							<a
+								href="#demo"
+								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.06] px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:border-white/35 hover:bg-white/[.12]"
+							>
+								<Play className="size-4 fill-current text-[#b7f486]" />
+								<span>{t("hero.cta.secondary")}</span>
+							</a>
+						</motion.div>
+
+						<motion.ul
+							variants={aboutMotion.item}
+							className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-white/70"
+						>
+							{trustPills.map((pill) => (
+								<li key={pill} className="inline-flex items-center gap-1.5">
+									<span className="inline-flex size-4 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
+										<Check className="size-2.5 stroke-[3]" />
+									</span>
+									<span>{pill}</span>
+								</li>
+							))}
+						</motion.ul>
 					</motion.div>
 
+					{/* Live Product Learning Window */}
 					<motion.div
-						variants={aboutMotion.item}
-						className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-[11px] font-semibold text-white/65"
+						variants={aboutMotion.card}
+						initial="hidden"
+						animate="show"
+						className="relative mx-auto w-full max-w-[490px] lg:max-w-none"
 					>
-						{highlights.map(({ key, icon: Icon }) => (
-							<span key={key} className="inline-flex items-center gap-2">
-								<span className="flex size-5 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
-									<Icon className="size-3" />
-								</span>
+						<div className="hero-window overflow-hidden">
+							{/* Window Top Bar */}
+							<div className="hero-window-top">
+								<div className="flex items-center gap-2.5">
+									<div className="flex items-center gap-1.5" aria-hidden="true">
+										<span className="size-2.5 rounded-full bg-white/20" />
+										<span className="size-2.5 rounded-full bg-white/20" />
+										<span className="size-2.5 rounded-full bg-[#b7f486]/70" />
+									</div>
+									<span className="text-[11px] font-semibold text-white/55">
+										{t("hero.panel.eyebrow")}
+									</span>
+								</div>
 
-								{t(`features.${key}.title`)}
-							</span>
-						))}
+								<div className="inline-flex items-center gap-1.5 rounded-full border border-[#b7f486]/25 bg-[#b7f486]/12 px-2.5 py-1 text-[11px] font-bold text-[#b7f486]">
+									<Flame className="size-3.5 fill-current" />
+									<span>{t("hero.panel.streakValue")}</span>
+								</div>
+							</div>
+
+							{/* Window Body */}
+							<div className="p-5 sm:p-6">
+								<div className="flex items-center justify-between gap-3">
+									<p className="text-base font-extrabold text-white sm:text-lg">
+										{t("hero.panel.title")}
+									</p>
+									<span className="text-[11px] font-medium text-white/45">
+										{t("hero.panel.streak")}
+									</span>
+								</div>
+
+								{/* Subject Progress Card */}
+								<div className="mt-4 rounded-2xl border border-white/10 bg-white/[.045] p-4">
+									<div className="flex items-center justify-between text-xs sm:text-sm">
+										<span className="font-semibold text-white/85">
+											{t("hero.panel.progressLabel")}
+										</span>
+										<span className="font-black text-[#b7f486]">
+											{t("hero.panel.progressValue")}
+										</span>
+									</div>
+									<div
+										className="mt-3 h-2.5 overflow-hidden rounded-full bg-white/10"
+										role="progressbar"
+										aria-valuenow={76}
+										aria-valuemin={0}
+										aria-valuemax={100}
+										aria-label={t("hero.panel.progressLabel")}
+									>
+										<motion.div
+											className="h-full rounded-full bg-linear-to-r from-[#b7f486] via-[#7ce5d1] to-[#a58cff]"
+											initial={{ width: aboutMotion.reduceMotion ? "76%" : 0 }}
+											animate={{ width: "76%" }}
+											transition={{
+												duration: aboutMotion.reduceMotion ? 0 : 0.95,
+												delay: aboutMotion.reduceMotion ? 0 : 0.2,
+												ease: [0.22, 1, 0.36, 1],
+											}}
+										/>
+									</div>
+								</div>
+
+								{/* Metric Pair */}
+								<div className="mt-3 grid grid-cols-2 gap-3">
+									<div className="rounded-2xl border border-white/10 bg-white/[.04] p-3.5">
+										<div className="flex items-center gap-2 text-white/60">
+											<span className="flex size-7 items-center justify-center rounded-lg bg-[#a58cff]/20 text-[#c9bcff]">
+												<BookOpen className="size-3.5" />
+											</span>
+											<span className="truncate text-[11px] font-medium">
+												{t("hero.panel.lesson")}
+											</span>
+										</div>
+										<p className="mt-2.5 text-lg font-black text-white">
+											{t("hero.panel.lessonValue")}
+										</p>
+									</div>
+
+									<div className="rounded-2xl border border-white/10 bg-white/[.04] p-3.5">
+										<div className="flex items-center gap-2 text-white/60">
+											<span className="flex size-7 items-center justify-center rounded-lg bg-[#7ce5d1]/20 text-[#7ce5d1]">
+												<Trophy className="size-3.5" />
+											</span>
+											<span className="truncate text-[11px] font-medium">
+												{t("hero.panel.quiz")}
+											</span>
+										</div>
+										<p className="mt-2.5 text-lg font-black text-white">
+											{t("hero.panel.quizValue")}
+										</p>
+									</div>
+								</div>
+
+								{/* Verified Certificate Strip */}
+								<Link
+									href={routes.verify.page()}
+									className="group mt-3 flex items-center gap-3.5 rounded-2xl border border-[#b7f486]/20 bg-[#b7f486]/[.07] p-3.5 transition hover:border-[#b7f486]/40 hover:bg-[#b7f486]/[.11]"
+								>
+									<span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#b7f486] text-[#17233a] shadow-sm">
+										<Award className="size-5" />
+									</span>
+									<div className="min-w-0 flex-1">
+										<p className="truncate text-xs font-extrabold text-white sm:text-sm">
+											{t("hero.panel.certificate")}
+										</p>
+										<p className="mt-0.5 truncate text-[11px] text-white/60">
+											{t("hero.panel.certificateDesc")}
+										</p>
+									</div>
+									<span className="hidden shrink-0 items-center gap-1 rounded-full border border-[#b7f486]/30 bg-[#b7f486]/12 px-2.5 py-1 text-[10px] font-bold text-[#b7f486] sm:inline-flex">
+										<CheckCircle2 className="size-3" />
+										{t("hero.panel.verified")}
+									</span>
+								</Link>
+							</div>
+						</div>
 					</motion.div>
-				</motion.div>
-
-				{/* Product preview — mirrors the real dashboard, no images needed */}
-				<motion.div
-					variants={aboutMotion.card}
-					initial="hidden"
-					animate="show"
-					className="relative mx-auto w-full max-w-[430px] lg:max-w-[460px]"
-				>
-					<div
-						aria-hidden="true"
-						className="absolute -top-6 -end-4 size-32 rounded-full bg-violet-500/30 blur-3xl"
-					/>
-
-					<div className="relative overflow-hidden rounded-[26px] border border-white/15 bg-[#0f182c]/90 shadow-[0_40px_80px_-32px_rgba(0,0,0,.8)] backdrop-blur-xl">
-						<div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-							<span className="flex items-center gap-2 text-[11px] font-bold text-white/70">
-								<span className="flex size-6 items-center justify-center rounded-lg bg-[#b7f486]/15 text-[#b7f486]">
-									<BookOpen className="size-3.5" />
-								</span>
-
-								{t("hero.panel.eyebrow")}
-							</span>
-
-							<span className="flex items-center gap-1.5 rounded-full bg-[#b7f486]/12 px-2.5 py-1 text-[10px] font-bold text-[#b7f486]">
-								<Flame className="size-3" />
-
-								{t("hero.panel.streakValue")}
-							</span>
-						</div>
-
-						<div className="px-5 py-5">
-							<div className="flex items-end justify-between gap-3">
-								<p className="text-sm font-extrabold text-white">
-									{t("hero.panel.title")}
-								</p>
-
-								<span className="text-lg font-black text-[#b7f486]">
-									{t("hero.panel.progressValue")}
-								</span>
-							</div>
-
-							<div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
-								<motion.div
-									className="h-full rounded-full bg-gradient-to-r from-[#b7f486] to-[#7ce5d1]"
-									initial={{ width: 0 }}
-									animate={{ width: "76%" }}
-									transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-								/>
-							</div>
-
-							<div className="mt-5 flex items-center justify-between text-[11px]">
-								<span className="font-semibold text-white/70">
-									{t("hero.panel.progressLabel")}
-								</span>
-
-								<span className="text-white/45">
-									{t("hero.panel.progressValue")}
-								</span>
-							</div>
-
-							<div className="mt-4 grid grid-cols-2 gap-2.5">
-								<div className="rounded-2xl border border-white/10 bg-white/[.05] p-3">
-									<p className="text-[10px] text-white/45">
-										{t("hero.panel.lesson")}
-									</p>
-
-									<p className="mt-1 text-sm font-extrabold">
-										{t("hero.panel.lessonValue")}
-									</p>
-								</div>
-
-								<div className="rounded-2xl border border-white/10 bg-white/[.05] p-3">
-									<p className="text-[10px] text-white/45">
-										{t("hero.panel.quiz")}
-									</p>
-
-									<p className="mt-1 text-sm font-extrabold">
-										{t("hero.panel.quizValue")}
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div className="mx-5 mb-5 flex items-start gap-3 rounded-2xl border border-[#b7f486]/20 bg-[#b7f486]/[.07] p-3.5">
-							<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#b7f486]/15 text-[#b7f486]">
-								<Award className="size-4" />
-							</span>
-
-							<div className="min-w-0">
-								<p className="text-[11px] font-extrabold text-white">
-									{t("hero.panel.certificate")}
-								</p>
-
-								<p className="mt-1 text-[10px] leading-5 text-white/50">
-									{t("hero.panel.certificateDesc")}
-								</p>
-							</div>
-
-							<span className="flex shrink-0 items-center gap-1 rounded-full bg-[#b7f486]/15 px-2 py-1 text-[9px] font-bold text-[#b7f486]">
-								<BadgeCheck className="size-3" />
-
-								{t("hero.panel.verified")}
-							</span>
-						</div>
-					</div>
-
-					<div className="absolute -top-3 -start-2 hidden items-center gap-2 rounded-2xl border border-white/15 bg-[#222d44]/95 px-3 py-2 text-[10px] font-bold shadow-xl backdrop-blur sm:flex">
-						<span className="rounded-lg bg-violet-400/15 p-1.5 text-violet-200">
-							<Sparkles className="size-3.5" />
-						</span>
-
-						{tApp("name")}
-					</div>
-				</motion.div>
+				</div>
 			</div>
 		</section>
 	);
