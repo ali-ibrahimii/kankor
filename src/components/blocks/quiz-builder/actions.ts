@@ -1,8 +1,33 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import {
+	createClient,
+	createServiceRoleClient,
+	hasServiceRoleKey,
+} from "@/lib/supabase/server";
 import type { ManageableCourseOption, QuizDraft } from "./types";
+
+function isMissingRpcError(error: {
+	code?: string | null;
+	message?: string | null;
+}): boolean {
+	if (error.code === "PGRST202" || error.code === "42883") {
+		return true;
+	}
+	const message = error.message ?? "";
+	return /could not find the function|function .* does not exist/i.test(
+		message
+	);
+}
+
+function revalidateQuizPaths() {
+	revalidatePath("/dashboard");
+	revalidatePath("/d", "layout");
+	revalidatePath("/d/admin/quizzes");
+	revalidatePath("/d/instructor/quizzes");
+	revalidatePath("/quizzes");
+}
 
 export type SaveQuizResult =
 	| { success: true; quizId: string; entranceCode?: string }
@@ -99,10 +124,41 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 		);
 		const activeQuestions = draft.questions.filter((q) => !q._deleted);
 
-		// Delete removed questions — options cascade via FK in Supabase, but to be safe delete options first
-		for (const q of deletedQuestions) {
-			await supabase.from("question_options").delete().eq("question_id", q.id);
-			await supabase.from("questions").delete().eq("id", q.id);
+		// Delete removed questions (scoped to this quiz) and dependent answers/options first
+		if (deletedQuestions.length > 0) {
+			const candidateIds = deletedQuestions.map((q) => q.id);
+			const { data: ownedQuestions, error: ownedError } = await supabase
+				.from("questions")
+				.select("id")
+				.eq("quiz_id", quizId)
+				.in("id", candidateIds);
+			if (ownedError) throw new Error(ownedError.message);
+
+			const deletedQuestionIds = (ownedQuestions ?? []).map((q) => q.id);
+			if (deletedQuestionIds.length > 0) {
+				const deleteDb = hasServiceRoleKey()
+					? createServiceRoleClient()
+					: supabase;
+
+				const { error: delAnswersError } = await deleteDb
+					.from("answers")
+					.delete()
+					.in("question_id", deletedQuestionIds);
+				if (delAnswersError) throw new Error(delAnswersError.message);
+
+				const { error: delOptionsError } = await deleteDb
+					.from("question_options")
+					.delete()
+					.in("question_id", deletedQuestionIds);
+				if (delOptionsError) throw new Error(delOptionsError.message);
+
+				const { error: delQuestionsError } = await deleteDb
+					.from("questions")
+					.delete()
+					.eq("quiz_id", quizId)
+					.in("id", deletedQuestionIds);
+				if (delQuestionsError) throw new Error(delQuestionsError.message);
+			}
 		}
 
 		for (const q of activeQuestions) {
@@ -141,8 +197,16 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 			const deletedOptions = q.options.filter((o) => o._deleted && !o._isNew);
 			const activeOptions = q.options.filter((o) => !o._deleted);
 
-			for (const o of deletedOptions) {
-				await supabase.from("question_options").delete().eq("id", o.id);
+			if (deletedOptions.length > 0) {
+				const { error: delOptError } = await supabase
+					.from("question_options")
+					.delete()
+					.eq("question_id", questionId)
+					.in(
+						"id",
+						deletedOptions.map((o) => o.id)
+					);
+				if (delOptError) throw new Error(delOptError.message);
 			}
 
 			for (const o of activeOptions) {
@@ -171,7 +235,7 @@ export async function saveQuiz(draft: QuizDraft): Promise<SaveQuizResult> {
 			}
 		}
 
-		revalidatePath("/dashboard");
+		revalidateQuizPaths();
 
 		return { success: true, quizId, entranceCode };
 	} catch (err) {
@@ -271,10 +335,187 @@ export async function loadQuizForEditing(
 export async function deleteQuiz(
 	quizId: string
 ): Promise<{ success: boolean; error?: string }> {
+	if (!quizId?.trim()) {
+		return { success: false, error: "Quiz not found" };
+	}
+
 	const supabase = await createClient();
-	const { error } = await supabase.from("quizzes").delete().eq("id", quizId);
-	if (error) return { success: false, error: error.message };
-	revalidatePath("/dashboard");
+
+	// Preferred path: atomic, authorized RPC with cascading FK + soft-ref cleanup.
+	const { error: rpcError } = await supabase.rpc("delete_quiz_cascade", {
+		p_quiz_id: quizId,
+	});
+
+	if (!rpcError) {
+		revalidateQuizPaths();
+		return { success: true };
+	}
+
+	if (!isMissingRpcError(rpcError)) {
+		return { success: false, error: rpcError.message };
+	}
+
+	// Fallback when the `delete_quiz_cascade` migration has not yet been applied:
+	// verify caller permission first, then delete dependent child rows in FK order.
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) {
+		return { success: false, error: "Not authenticated" };
+	}
+
+	const { data: canManage, error: permError } = await supabase.rpc(
+		"can_manage_quiz",
+		{
+			p_quiz_id: quizId,
+			p_user_id: user.id,
+		}
+	);
+	if (permError || !canManage) {
+		return {
+			success: false,
+			error:
+				permError?.message ?? "Permission denied: cannot delete this quiz.",
+		};
+	}
+
+	const db = hasServiceRoleKey() ? createServiceRoleClient() : supabase;
+
+	const { data: quiz, error: quizLookupError } = await db
+		.from("quizzes")
+		.select("id, locked_at")
+		.eq("id", quizId)
+		.maybeSingle();
+	if (quizLookupError) {
+		return { success: false, error: quizLookupError.message };
+	}
+	if (!quiz) {
+		return { success: false, error: "Quiz not found" };
+	}
+
+	// Clear OMR print lock so `prevent_edit_when_quiz_locked` allows child removal.
+	if (quiz.locked_at) {
+		const { error: unlockError } = await db
+			.from("quizzes")
+			.update({ locked_at: null })
+			.eq("id", quizId);
+		if (unlockError) {
+			return { success: false, error: unlockError.message };
+		}
+	}
+
+	// Detach course content blocks and polymorphic links before deleting the quiz.
+	const { error: detachBlockError } = await db
+		.from("lesson_content_blocks")
+		.update({ quiz_id: null })
+		.eq("quiz_id", quizId);
+	if (detachBlockError && detachBlockError.code !== "42703") {
+		return { success: false, error: detachBlockError.message };
+	}
+
+	await db
+		.from("classroom_resources")
+		.delete()
+		.eq("resource_type", "quiz")
+		.eq("resource_id", quizId);
+
+	const { data: relatedCourses } = await db
+		.from("courses")
+		.select("id, related_quizzes_ids")
+		.contains("related_quizzes_ids", [quizId]);
+	if (relatedCourses?.length) {
+		for (const course of relatedCourses) {
+			await db
+				.from("courses")
+				.update({
+					related_quizzes_ids: (course.related_quizzes_ids ?? []).filter(
+						(id) => id !== quizId
+					),
+				})
+				.eq("id", course.id);
+		}
+	}
+
+	const [
+		{ data: questions, error: questionsError },
+		{ data: attempts, error: attemptsError },
+	] = await Promise.all([
+		db.from("questions").select("id").eq("quiz_id", quizId),
+		db.from("quiz_attempts").select("id").eq("quiz_id", quizId),
+	]);
+	if (questionsError) {
+		return { success: false, error: questionsError.message };
+	}
+	if (attemptsError) {
+		return { success: false, error: attemptsError.message };
+	}
+
+	const questionIds = (questions ?? []).map((q) => q.id);
+	const attemptIds = (attempts ?? []).map((a) => a.id);
+
+	if (attemptIds.length > 0) {
+		const { error } = await db
+			.from("answers")
+			.delete()
+			.in("quiz_attempt_id", attemptIds);
+		if (error) return { success: false, error: error.message };
+	}
+
+	if (questionIds.length > 0) {
+		const { error: ansByQuestionError } = await db
+			.from("answers")
+			.delete()
+			.in("question_id", questionIds);
+		if (ansByQuestionError) {
+			return { success: false, error: ansByQuestionError.message };
+		}
+
+		const { error: optByQuestionError } = await db
+			.from("question_options")
+			.delete()
+			.in("question_id", questionIds);
+		if (optByQuestionError) {
+			return { success: false, error: optByQuestionError.message };
+		}
+	}
+
+	const { error: optByQuizError } = await db
+		.from("question_options")
+		.delete()
+		.eq("quiz_id", quizId);
+	if (optByQuizError) {
+		return { success: false, error: optByQuizError.message };
+	}
+
+	if (questionIds.length > 0) {
+		const { error: delQuestionsError } = await db
+			.from("questions")
+			.delete()
+			.eq("quiz_id", quizId);
+		if (delQuestionsError) {
+			return { success: false, error: delQuestionsError.message };
+		}
+	}
+
+	if (attemptIds.length > 0) {
+		const { error: delAttemptsError } = await db
+			.from("quiz_attempts")
+			.delete()
+			.eq("quiz_id", quizId);
+		if (delAttemptsError) {
+			return { success: false, error: delAttemptsError.message };
+		}
+	}
+
+	const { error: deleteError } = await db
+		.from("quizzes")
+		.delete()
+		.eq("id", quizId);
+	if (deleteError) {
+		return { success: false, error: deleteError.message };
+	}
+
+	revalidateQuizPaths();
 	return { success: true };
 }
 
