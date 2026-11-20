@@ -34,7 +34,7 @@ export type SchoolMegaMenuItem = {
 const ITEM_META = {
 	courses: {
 		icon: GraduationCap,
-		tint: "bg-violet-500/12 text-violet-600 dark:text-violet-300",
+		tint: "bg-emerald-500/12 text-emerald-700 dark:text-emerald-300",
 	},
 	schoolBooks: {
 		icon: BookOpen,

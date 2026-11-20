@@ -183,7 +183,7 @@ export function GlobalSearch({
 				aria-label={t("openSearch")}
 				title={t("openSearch")}
 				onClick={() => setMobileDialogOpen(true)}
-				className="size-9 shrink-0 rounded-xl text-slate-600 hover:bg-violet-50 hover:text-violet-700 md:hidden dark:text-slate-200 dark:hover:bg-white/10"
+				className="size-9 shrink-0 rounded-xl text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 md:hidden dark:text-slate-200 dark:hover:bg-white/10"
 			>
 				<Search className="size-4" />
 			</Button>

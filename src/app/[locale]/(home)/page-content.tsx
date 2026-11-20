@@ -1,7 +1,6 @@
 import {
 	ArrowLeft,
 	ArrowRight,
-	Award,
 	BookOpen,
 	Check,
 	CloudDownload,
@@ -9,14 +8,17 @@ import {
 	GraduationCap,
 	Play,
 	School,
-	Sparkles,
-	Target,
+	Star,
 	Users,
 	WifiOff,
 	Zap,
 } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import {
+	EduleArrowDoodle,
+	EduleStitch,
+} from "@/components/widgets/edule-sprites";
 import type { Locale } from "@/i18n";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
@@ -32,6 +34,8 @@ import {
 import type { HomeCatalogData } from "./_components/home-catalog-data";
 import { HorizontalCardSection } from "./_components/horizontal-card-section";
 import { PartnerInstitutionsSection } from "./_components/partner-institutions-section";
+import { ShelfChips } from "./_components/shelf-chips";
+import { ShelfSearchBox } from "./_components/shelf-search-box";
 
 export default async function HomeContent({
 	locale,
@@ -47,7 +51,6 @@ export default async function HomeContent({
 
 	const Arrow = isRtl(locale) ? ArrowLeft : ArrowRight;
 	const viewMoreLabel = t("shelves.viewMore");
-	const learnersCount = `${new Intl.NumberFormat(locale).format(2480)}+`;
 
 	const stats = [
 		{
@@ -126,128 +129,112 @@ export default async function HomeContent({
 
 	const offlineModules = ["school", "flashcards", "tests"] as const;
 	const offlinePoints = [1, 2, 3] as const;
-	const heroFeatures = ["featureOne", "featureTwo", "featureThree"] as const;
 
 	return (
-		<div className="min-h-screen overflow-x-clip bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
-			{/* Hero */}
-			<section className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-				<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px]">
-					<div
-						aria-hidden="true"
-						className="pointer-events-none absolute inset-0 opacity-[.13] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:24px_24px]"
-					/>
+		<div className="min-h-screen overflow-x-clip bg-white text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+			{/* Hero — EduLe light-mint template skin */}
+			<section className="bg-[#eaf6ef] dark:bg-[#12241b]">
+				<div className="relative mx-auto max-w-[1320px] px-4 pt-6 pb-12 sm:px-6 sm:pt-8 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-20">
+					{/* difyuzel stitches */}
+					<EduleStitch className="absolute start-10 top-10 hidden rotate-[14deg] sm:block" />
+					<EduleStitch className="absolute start-44 top-4 hidden -rotate-6 sm:block" />
+					<EduleStitch className="absolute bottom-16 start-6 hidden rotate-3 lg:block" />
 
-					<div className="relative z-10 grid items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(0,44%)]">
+					<div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,44%)] lg:gap-6">
 						{/* Copy */}
-						<div className="px-5 py-10 sm:px-9 sm:py-12 lg:px-12 lg:py-14">
-							<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm">
-								<Sparkles className="size-3.5 text-[#b7f486]" />
+						<div className="relative z-10">
+							<p className="text-[13px] font-bold text-emerald-900/70 sm:text-sm dark:text-emerald-300/80">
+								{t("hero.eyebrow")}
+							</p>
 
-								{t("hero.badge")}
-							</span>
-
-							<h1 className="mt-5 max-w-[540px] text-[2rem] font-black leading-[1.4] tracking-tight sm:text-[2.8rem] lg:text-[3.1rem]">
+							<h1 className="mt-3 max-w-[560px] text-[1.85rem] font-black leading-[1.55] tracking-tight text-[#17332b] sm:text-[2.4rem] lg:text-[2.75rem] dark:text-slate-100">
 								{t.rich("hero.heading", {
 									accent: (chunks) => (
-										<span className="bg-gradient-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
+										<span className="relative inline-block text-[#1d9a63] dark:text-emerald-400">
 											{chunks}
+
+											<span
+												aria-hidden="true"
+												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#1d9a63]/55 dark:bg-emerald-400/50"
+											/>
 										</span>
 									),
 								})}
 							</h1>
 
-							<p className="mt-4 max-w-[500px] text-sm leading-7 text-white/60 sm:text-[15px] sm:leading-8">
+							<p className="mt-4 max-w-[500px] text-sm leading-7 text-slate-600 sm:leading-8 dark:text-slate-400">
 								{t("hero.subtitle")}
 							</p>
 
-							<div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
+							<div className="mt-7 flex flex-col gap-3 sm:flex-row">
 								<Link
 									href={routes.courses.page()}
-									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 text-sm font-black text-[#17233a] shadow-lg shadow-black/20 transition hover:bg-[#c9f8a2]"
+									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-edule-green px-7 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/25 transition hover:-translate-y-0.5 hover:bg-edule-green/90"
 								>
-									<Sparkles className="size-4" />
-
-									{t("showcase.previewCta")}
-
-									<Arrow className="size-4" />
+									{t("hero.ctaCourses")}
 								</Link>
 
 								<Link
 									href={routes.auth.signup.page()}
-									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.06] px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.14]"
+									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-emerald-700/25 bg-white/70 px-6 text-sm font-bold text-emerald-800 backdrop-blur-sm transition hover:bg-white dark:border-emerald-400/25 dark:bg-white/5 dark:text-emerald-300 dark:hover:bg-white/10"
 								>
-									{t("hero.ctaPrimary")}
+									{t("user.signUp")}
 
 									<Arrow className="size-4" />
 								</Link>
 							</div>
-
-							<ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2.5 text-[11px] font-semibold text-white/60">
-								{heroFeatures.map((key) => (
-									<li key={key} className="inline-flex items-center gap-1.5">
-										<span className="flex size-4 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
-											<Check className="size-2.5" strokeWidth={3.5} />
-										</span>
-
-										{t(`showcase.${key}`)}
-									</li>
-								))}
-							</ul>
 						</div>
 
-						{/* Student holding the app */}
-						<div className="relative mx-4 mb-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#0c1526] sm:mx-6 sm:mb-6 lg:m-0 lg:rounded-none lg:border-0 lg:border-s lg:border-white/10">
-							<div className="relative aspect-[4/5] w-full lg:absolute lg:inset-0 lg:aspect-auto">
+						{/* Student illustration + floating bubbles */}
+						<div className="relative mx-auto w-full max-w-[440px] lg:max-w-none">
+							<div className="relative aspect-[922/980] w-full">
 								<Image
-									src="/images/hero/hero-student.jpg"
+									src="/images/hero/hero-cutout.png"
 									alt={t("hero.imageAlt")}
 									fill
 									priority
-									sizes="(max-width: 1023px) 92vw, 44vw"
-									className="object-cover object-[42%_16%]"
+									sizes="(max-width: 1024px) 88vw, 44vw"
+									className="object-contain object-bottom"
 								/>
 							</div>
 
-							<div
-								aria-hidden="true"
-								className={`pointer-events-none absolute inset-0 ${
-									isRtl(locale)
-										? "bg-[linear-gradient(90deg,transparent_52%,rgba(15,26,44,.6)_100%)]"
-										: "bg-[linear-gradient(270deg,transparent_52%,rgba(15,26,44,.6)_100%)]"
-								}`}
-							/>
+							{/* 1,235 Courses bubble */}
+							<div className="absolute start-1 top-3 flex size-24 flex-col items-center justify-center rounded-full bg-[#17845a] text-center text-white shadow-xl shadow-emerald-900/25 sm:size-28 dark:bg-emerald-700">
+								<strong className="text-lg font-black sm:text-xl">
+									{t("hero.badgeCoursesValue")}
+								</strong>
 
-							<div className="absolute start-3 top-3 flex items-center gap-1.5 rounded-xl border border-white/15 bg-[#1b2740]/80 px-2.5 py-1.5 text-[10px] font-bold text-white shadow-lg backdrop-blur sm:start-4 sm:top-4">
-								<span className="rounded-md bg-[#b7f486]/15 p-1 text-[#b7f486]">
-									<Sparkles className="size-3" />
+								<span className="text-[10px] font-bold text-white/80">
+									{t("hero.badgeCoursesLabel")}
 								</span>
-
-								{t("showcase.startHere")}
 							</div>
 
-							<div className="absolute end-3 bottom-3 flex items-center gap-2 rounded-xl border border-white/15 bg-[#1b2740]/80 px-2.5 py-1.5 shadow-lg backdrop-blur sm:end-4 sm:bottom-4">
-								<span className="flex size-7 items-center justify-center rounded-lg bg-[#b7f486]/15 text-[#b7f486]">
-									<Users className="size-3.5" />
+							{/* 4.8 Rating bubble */}
+							<div className="absolute end-0 top-0 flex items-center gap-2 rounded-full bg-white/90 py-2 ps-2 pe-3.5 shadow-lg shadow-emerald-900/10 backdrop-blur-sm dark:bg-white/10 sm:-top-1 sm:end-2">
+								<span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-amber-400/20 text-amber-500">
+									<Star className="size-3.5 fill-amber-400" />
 								</span>
 
 								<span className="leading-tight">
-									<strong className="block text-[11px] font-extrabold text-white">
-										{learnersCount}
+									<strong className="block text-sm font-black text-[#17332b] dark:text-slate-100">
+										{t("hero.ratingTitle")}
 									</strong>
 
-									<small className="block text-[9px] text-white/50">
-										{t("showcase.students")}
+									<small className="block text-[9px] text-slate-500 dark:text-slate-400">
+										{t("hero.ratingLabel")}
 									</small>
 								</span>
 							</div>
+
+							{/* hand-drawn arrow toward the illustration */}
+							<EduleArrowDoodle className="absolute start-2 top-[42%] hidden -scale-x-100 lg:block rtl:scale-x-100" />
 						</div>
 					</div>
 				</div>
 			</section>
 
 			{/* Stats */}
-			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-5 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
+			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-6 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
 				{stats.map(({ value, label, icon: Icon, tint }) => (
 					<div
 						key={label}
@@ -280,6 +267,13 @@ export default async function HomeContent({
 					subtitle={t("shelves.courses.subtitle")}
 					viewMoreHref={routes.courses.page()}
 					viewMoreLabel={viewMoreLabel}
+					searchSlot={
+						<ShelfSearchBox
+							placeholder={t("user.searchPlaceholder")}
+							searchLabel={t("user.searchPlaceholder")}
+						/>
+					}
+					chipsSlot={<ShelfChips />}
 				>
 					{catalog.courses.map(({ item, href }) => (
 						<HomeCourseCard key={item.id} course={item} href={href} />
@@ -349,6 +343,16 @@ export default async function HomeContent({
 				</HorizontalCardSection>
 			)}
 
+			{/* EduLe "Other Courses" pill */}
+			<div className="flex justify-center pb-2">
+				<Link
+					href={routes.courses.page()}
+					className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-600/35 bg-white px-6 text-[13px] font-extrabold text-emerald-800 shadow-sm transition hover:bg-edule-green hover:text-white dark:border-emerald-400/30 dark:bg-white/5 dark:text-emerald-300 dark:hover:bg-edule-green dark:hover:text-white"
+				>
+					{t("footer.otherCourses")}
+				</Link>
+			</div>
+
 			{/* 6. Collaborating Universities & Schools — Campus Card Design */}
 			{catalog.partners.length > 0 && (
 				<PartnerInstitutionsSection
@@ -366,15 +370,15 @@ export default async function HomeContent({
 			{/* Offline Mobile App Highlight */}
 			<section className="py-16 sm:py-22">
 				<div className="mx-auto grid max-w-[1320px] items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
-					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#e9e2ff] p-5 sm:p-8">
-						<div className="absolute -start-3 -top-5 flex size-20 items-center justify-center rounded-[26px] bg-[#b7f486] text-[#23304a] shadow-lg shadow-[#273953]/10">
+					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#dcf4e7] p-5 sm:p-8">
+						<div className="absolute -start-3 -top-5 flex size-20 items-center justify-center rounded-[26px] bg-edule-green text-white shadow-lg shadow-emerald-600/25">
 							<CloudDownload className="size-9" />
 						</div>
 
 						<div className="rounded-[25px] border border-white/65 bg-white p-5 shadow-[0_24px_50px_-31px_rgba(40,32,96,.35)] sm:p-7">
 							<div className="flex items-center justify-between border-b border-slate-100 pb-4">
 								<span className="flex items-center gap-2 text-sm font-extrabold text-[#19243b]">
-									<WifiOff className="size-5 text-[#6a4bd4]" />
+									<WifiOff className="size-5 text-[#1d9a63]" />
 
 									{t("offline.badgeLabel")}
 								</span>
@@ -385,7 +389,7 @@ export default async function HomeContent({
 							{offlineModules.map((key, index) => (
 								<div
 									key={key}
-									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f8f7fd] p-3"
+									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f2faf4] p-3"
 								>
 									<span
 										className={`flex size-10 items-center justify-center rounded-xl ${
@@ -452,7 +456,7 @@ export default async function HomeContent({
 							href={serverEnv.app.playStoreUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-[#17233a] px-5 py-3 text-xs font-bold text-white transition hover:bg-[#293c5e]"
+							className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-edule-green px-5 py-3 text-xs font-bold text-white transition hover:bg-edule-green/90"
 						>
 							<Play className="size-4" />
 							{t("download.getItOn")} Google Play
@@ -516,40 +520,58 @@ export default async function HomeContent({
 				</div>
 			</section>
 
-			{/* Final CTA */}
-			<section className="mx-auto max-w-[1320px] px-4 pb-20 sm:px-6 lg:px-8 lg:pb-24">
-				<div className="relative isolate overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_80%_15%,#413c82,transparent_42%),linear-gradient(130deg,#141f34,#222a46)] px-6 py-12 text-center text-white sm:px-10 sm:py-16">
-					<div
-						aria-hidden="true"
-						className="pointer-events-none absolute -start-16 -top-28 size-72 rounded-full border-[45px] border-white/[.035]"
-					/>
+			{/* Final CTA — EduLe mint banner with hand-drawn arrow */}
+			<section className="mx-auto max-w-[1320px] px-4 pt-10 pb-20 sm:px-6 lg:px-8 lg:pb-24">
+				<div className="relative isolate overflow-hidden rounded-[26px] bg-[#eaf6ef] px-6 py-12 sm:px-12 sm:py-14 dark:bg-[#12241b]">
+					<EduleStitch className="absolute start-8 top-6 hidden rotate-[10deg] sm:block" />
+					<EduleStitch className="absolute bottom-8 start-24 hidden -rotate-6 sm:block" />
+					<EduleStitch className="absolute start-10 top-1/2 hidden rotate-45 lg:block" />
 
-					<Award className="mx-auto size-9 text-[#b7f486]" />
+					<div className="relative z-10 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+						<div className="max-w-xl">
+							<p className="text-sm font-bold text-emerald-900/70 dark:text-emerald-300/80">
+								{t("footer.tagline")}
+							</p>
 
-					<h2 className="mx-auto mt-5 max-w-2xl text-2xl font-extrabold leading-[1.5] sm:text-3xl">
-						{t("showcase.ctaHeading")}
-					</h2>
+							<h2 className="mt-3 text-2xl font-black leading-[1.55] text-[#17332b] sm:text-3xl dark:text-slate-100">
+								{t.rich("showcase.ctaHeading", {
+									accent: (chunks) => (
+										<span className="relative inline-block text-[#1d9a63] dark:text-emerald-400">
+											{chunks}
 
-					<p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-white/60">
-						{t("showcase.ctaDescription")}
-					</p>
+											<span
+												aria-hidden="true"
+												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#1d9a63]/55 dark:bg-emerald-400/50"
+											/>
+										</span>
+									),
+								})}
+							</h2>
 
-					<div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-						<Link
-							href={routes.courses.page()}
-							className="button-primary bg-[#b7f486] text-[#17233a] shadow-black/20 hover:bg-[#c9f8a2] hover:shadow-primary/25"
-						>
-							{t("showcase.previewCta")}
+							<p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+								{t("showcase.ctaDescription")}
+							</p>
+						</div>
 
-							<Arrow className="size-4" />
-						</Link>
+						<EduleArrowDoodle className="hidden xl:block" />
 
-						<Link
-							href={routes.courses.page()}
-							className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
-						>
-							{t("showcase.ctaSecondary")}
-						</Link>
+						<div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+							<Link
+								href={routes.courses.page()}
+								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-edule-green px-7 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/25 transition hover:-translate-y-0.5 hover:bg-edule-green/90"
+							>
+								{t("showcase.previewCta")}
+
+								<Arrow className="size-4" />
+							</Link>
+
+							<Link
+								href={routes.courses.page()}
+								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-emerald-700/25 bg-white/70 px-6 text-sm font-bold text-emerald-800 transition hover:bg-white dark:border-emerald-400/25 dark:bg-white/5 dark:text-emerald-300 dark:hover:bg-white/10"
+							>
+								{t("showcase.ctaSecondary")}
+							</Link>
+						</div>
 					</div>
 				</div>
 			</section>

@@ -40,6 +40,29 @@ const fontVazirmatn = localFont({
 	display: "swap",
 });
 
+// Latin identity font for the EduLe-style public shell (headings/brand in English).
+const fontEduleLatin = localFont({
+	src: [
+		{
+			path: "../../../public/fonts/roboto/roboto-latin-400-normal.woff2",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../../public/fonts/roboto/roboto-latin-500-normal.woff2",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../../public/fonts/roboto/roboto-latin-700-normal.woff2",
+			weight: "700",
+			style: "normal",
+		},
+	],
+	variable: "--font-edule-latin",
+	display: "swap",
+});
+
 export { generateMetadata } from "./metadata";
 export { viewport } from "./viewport";
 
@@ -72,7 +95,7 @@ export default async function RootLayout({
 			dir={dir}
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
-			className={`${fontVazirmatn.variable} antialiased`}
+			className={`${fontVazirmatn.variable} ${fontEduleLatin.variable} antialiased`}
 		>
 			<body className="relative">
 				<NextIntlClientProvider locale={locale} messages={messages}>

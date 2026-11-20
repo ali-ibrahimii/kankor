@@ -69,3 +69,45 @@ export const LogoWhiteRounded = (props: SVGProps<SVGSVGElement>) => (
 		</g>
 	</svg>
 );
+
+/**
+ * EduLe-style brand mark: green rounded square with an open book,
+ * from the green education template skin.
+ */
+export const LogoEdule = (props: SVGProps<SVGSVGElement>) => (
+	<svg
+		width={48}
+		height={48}
+		viewBox="0 0 48 48"
+		fill="none"
+		aria-hidden="true"
+		{...props}
+	>
+		<rect
+			x="2.75"
+			y="2.75"
+			width="42.5"
+			height="42.5"
+			rx="10.5"
+			stroke="#24AA6D"
+			strokeWidth="3.2"
+		/>
+		<g fill="#24AA6D">
+			<path d="M13.4 20.9c3.1-1.55 6.3-1.55 9.4 0v12.6c-3.1-1.55-6.3-1.55-9.4 0V20.9Z" />
+			<path d="M25.2 20.9c3.1-1.55 6.3-1.55 9.4 0v12.6c-3.1-1.55-6.3-1.55-9.4 0V20.9Z" />
+			<path
+				d="M24 18.6v16.4"
+				stroke="#24AA6D"
+				strokeWidth="1.7"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M13.4 17.9c3.4-1.7 7-1.7 10.6.4 3.6-2.1 7.2-2.1 10.6-.4"
+				stroke="#24AA6D"
+				strokeWidth="1.7"
+				strokeLinecap="round"
+				fill="none"
+			/>
+		</g>
+	</svg>
+);

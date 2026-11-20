@@ -87,11 +87,12 @@ export function PublicNavbarAuthButton({
 			href={isAuthenticated ? dashboardPath : signInUrl}
 			aria-label={isAuthenticated ? dashboardLabel : signInLabel}
 			className={buttonVariants({
-				variant: isAuthenticated ? "ghost" : "default",
+				variant: isAuthenticated ? "ghost" : "ghost",
 				class: cn(
 					"hidden border-none text-xs font-bold transition-colors lg:inline-flex",
 					{
-						"button-primary min-h-10 px-4 py-2": !isAuthenticated,
+						"min-h-10 rounded-full border border-emerald-600/30 bg-transparent px-4 py-2 text-emerald-700 hover:bg-emerald-600/10 dark:text-emerald-300":
+							!isAuthenticated,
 						"px-0!": isAuthenticated,
 					}
 				),
@@ -110,6 +111,27 @@ export function PublicNavbarAuthButton({
 			) : (
 				signInLabel
 			)}
+		</Link>
+	);
+}
+
+/** EduLe-style green Sign-Up pill next to the auth-aware button (hidden once signed in). */
+export function PublicNavbarSignupButton({
+	signUpLabel,
+}: {
+	signUpLabel: string;
+}) {
+	const { isAuthenticated } = useAuth();
+	if (isAuthenticated) {
+		return null;
+	}
+	return (
+		<Link
+			href={routes.auth.signup.page()}
+			aria-label={signUpLabel}
+			className="hidden min-h-10 items-center justify-center rounded-full bg-edule-green px-5 text-xs font-bold text-white shadow-md shadow-emerald-600/25 transition-colors hover:bg-edule-green/90 lg:inline-flex"
+		>
+			{signUpLabel}
 		</Link>
 	);
 }

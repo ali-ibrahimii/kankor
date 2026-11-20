@@ -14,7 +14,7 @@ export default async function HomeLayout({
 	setRequestLocale(locale);
 
 	return (
-		<div className="relative min-h-screen bg-slate-50/50 dark:bg-[#141b2c] flex flex-col">
+		<div className="relative flex min-h-screen flex-col bg-white dark:bg-[#141b2c]">
 			<PublicNavbar />
 			<main className="flex-1 w-full">{children}</main>
 			<PublicFooter />
