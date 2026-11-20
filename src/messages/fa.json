@@ -1226,7 +1226,7 @@
 			"teacherFeature": "ساخت درس و مدیریت شاگرد",
 			"schoolFeature": "مدیریت اعضا و محتوای مکتب",
 			"studentFeature": "یادگیری و دریافت گواهینامه",
-			"ctaHeading": "داستان یادگیری شما از اینجا آغاز می‌شود",
+			"ctaHeading": "داستان یادگیری شما <accent>از اینجا آغاز می‌شود</accent>",
 			"ctaDescription": "چه شاگرد باشید، چه استاد یا مکتب؛ این پلتفرم برای شما جا دارد.",
 			"ctaSecondary": "دیدن کورس‌ها"
 		},
@@ -1258,7 +1258,14 @@
 			"ctaPrimary": "کشف برنامه",
 			"ctaSecondary": "برای مکتب‌ها و استادان",
 			"signInPrompt": "از قبل حساب دارید؟",
-			"signInLink": "ورود"
+			"signInLink": "ورود",
+			"eyebrow": "دوره محبوب خود را شروع کنید",
+			"highlight": "آینده روشن",
+			"ctaCourses": "شروع یک دوره",
+			"badgeCoursesValue": "۱۲۳۵",
+			"badgeCoursesLabel": "دوره‌ها",
+			"ratingTitle": "۴.۸+",
+			"ratingLabel": "اعتبار"
 		},
 		"download": {
 			"heading": "ابزار کانکور را دریافت کنید",
@@ -1341,7 +1348,19 @@
 			"instructorSignup": "ثبت‌نام استاد",
 			"schoolSignup": "ثبت مکتب",
 			"privacy": "سیاست حریم خصوصی",
-			"terms": "شرایط استفاده"
+			"terms": "شرایط استفاده",
+			"otherCourses": "دوره‌های دیگر",
+			"tagline": "معلم خود شوید",
+			"joinHeading": "می‌توانید با ما <accent>به‌عنوان استاد</accent> بپیوندید؟",
+			"joinButton": "ارسال اطلاعات",
+			"followUs": "ما را دنبال کنید"
+		},
+		"topbar": {
+			"promo": "همه دوره‌ها ۲۵٪ تخفیف برای «یادگیرندگان درون‌سازمانی»",
+			"promoLink": "بیشتر بدانید",
+			"phone": "۰۰۹۸-۹۰۱-۲۲۳-۵۵۸۶",
+			"email": "info@abzarkankor.com",
+			"followUs": "ما را دنبال کنید"
 		},
 		"coursesMenu": {
 			"eyebrow": "کورس بعدی خود را پیدا کنید",

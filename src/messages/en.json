@@ -1226,7 +1226,7 @@
 			"teacherFeature": "Build lessons and support learners",
 			"schoolFeature": "Manage your school community",
 			"studentFeature": "Learn and earn certificates",
-			"ctaHeading": "Your learning story starts here",
+			"ctaHeading": "Your learning story <accent>starts here</accent>",
 			"ctaDescription": "Whether you are a student, teacher, or school — there is a place for you here.",
 			"ctaSecondary": "Browse courses"
 		},
@@ -1258,7 +1258,14 @@
 			"ctaPrimary": "Explore the App",
 			"ctaSecondary": "For Schools & Instructors",
 			"signInPrompt": "Already have an account?",
-			"signInLink": "Sign in"
+			"signInLink": "Sign in",
+			"eyebrow": "Start your favourite course",
+			"highlight": "bright career.",
+			"ctaCourses": "Start A Course",
+			"badgeCoursesValue": "1,235",
+			"badgeCoursesLabel": "Courses",
+			"ratingTitle": "4.8+",
+			"ratingLabel": "Rating"
 		},
 		"download": {
 			"heading": "Get Abzar Kankor",
@@ -1341,7 +1348,19 @@
 			"instructorSignup": "Instructor signup",
 			"schoolSignup": "School signup",
 			"privacy": "Privacy Policy",
-			"terms": "Terms of Use"
+			"terms": "Terms of Use",
+			"otherCourses": "Other Courses",
+			"tagline": "Become A Instructor",
+			"joinHeading": "You can join with us <accent>as a instructor?</accent>",
+			"joinButton": "Drop Information",
+			"followUs": "Follow us"
+		},
+		"topbar": {
+			"promo": "All courses 25% off for “in-house learners”",
+			"promoLink": "Learn more",
+			"phone": "+93 901 223 5586",
+			"email": "info@abzarkankor.com",
+			"followUs": "Follow us"
 		},
 		"coursesMenu": {
 			"eyebrow": "Find your next course",

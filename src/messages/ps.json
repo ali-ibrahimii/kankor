@@ -1226,7 +1226,7 @@
 			"teacherFeature": "درس جوړول او زده‌کوونکو سره مرسته",
 			"schoolFeature": "د ښوونځي د غړو اداره",
 			"studentFeature": "زده‌کړه او سند ترلاسه کول",
-			"ctaHeading": "ستاسو د زده‌کړې کیسه له همدې ځایه پیلېږي",
+			"ctaHeading": "ستاسو د زده‌کړې کیسه <accent>له همدې ځایه پیلېږي</accent>",
 			"ctaDescription": "څه وایی شاگرد یا ښوونکی یا ښوونځی؛ دا پلیټفارم تاسو لپاره ځای لري.",
 			"ctaSecondary": "کورسونه وپلټئ"
 		},
@@ -1258,7 +1258,14 @@
 			"ctaPrimary": "اپ وپلټئ",
 			"ctaSecondary": "د ښوونځیو او استادانو لپاره",
 			"signInPrompt": "دمخه حساب لرئ؟",
-			"signInLink": "ننوتل"
+			"signInLink": "ننوتل",
+			"eyebrow": "خپل ګځنده کورس پیل کړئ",
+			"highlight": "روښانه راتلونکې",
+			"ctaCourses": "کورس پیل کړه",
+			"badgeCoursesValue": "۱۲۳۵",
+			"badgeCoursesLabel": "کورسونه",
+			"ratingTitle": "۴.۸+",
+			"ratingLabel": "درجه"
 		},
 		"download": {
 			"heading": "ابزار کانکور ډاونلوډ کړئ",
@@ -1341,7 +1348,19 @@
 			"instructorSignup": "د استاد ثبت‌نام",
 			"schoolSignup": "د ښوونځي ثبت",
 			"privacy": "د رازداري سیاست",
-			"terms": "د کارونې شرایط"
+			"terms": "د کارونې شرایط",
+			"otherCourses": "نور کورسونه",
+			"tagline": "خپل ښوونکی شئ",
+			"joinHeading": "کولای شئ موږ سره <accent>د ښوونکي په توګه</accent> یوځای شئ؟",
+			"joinButton": "معلومات واستوئ",
+			"followUs": "موږ تعقیب کړئ"
+		},
+		"topbar": {
+			"promo": "ټول کورسونه ۲۵٪ تخفیه لرونکي «کورني زده کوونکي» لپاره",
+			"promoLink": "نور معلومات",
+			"phone": "۰۰۹۸-۹۰۱-۲۲۳-۵۵۸۶",
+			"email": "info@abzarkankor.com",
+			"followUs": "موږ تعقیب کړئ"
 		},
 		"coursesMenu": {
 			"eyebrow": "خپل راتلونکی کورس ومومئ",

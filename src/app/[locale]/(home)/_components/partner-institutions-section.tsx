@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 import { resolveEntityCardImage } from "@/components/blocks/shared/card-images";
 import { ratingFromSeed } from "@/components/blocks/shared/entity-card";
 import { Button } from "@/components/ui/button";
+import { EduleArrowDoodle } from "@/components/widgets/edule-sprites";
 import { Link } from "@/i18n/navigation";
 import { isRtl } from "@/i18n/routing";
 import { routes } from "@/lib/routes";
@@ -45,13 +46,18 @@ export function PartnerInstitutionsSection({
 		<section
 			id="partners"
 			data-testid="home-section-partners"
-			className="scroll-mt-24 border-y border-[#e9eaf2] bg-white/75 py-10 sm:py-14 dark:border-white/10 dark:bg-[#1b2438]/65"
+			className="scroll-mt-24 border-y border-[#e7f2ea] bg-[#f7fcf8] py-10 sm:py-14 dark:border-white/10 dark:bg-[#1b2438]/65"
 		>
 			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
 				{/* Clean Section Header — No Category Tabs or Arrow Buttons Above Cards */}
 				<div className="mb-5 max-w-2xl">
-					<h2 className="text-lg font-black tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+					<h2 className="relative inline-block text-lg font-black tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
 						{labels.title}
+
+						<span
+							aria-hidden="true"
+							className="absolute -bottom-1.5 start-0 h-[3px] w-14 rounded-full bg-edule-green/80"
+						/>
 					</h2>
 					<p className="mt-1 text-xs leading-5.5 text-slate-500 sm:text-[13px] dark:text-slate-400">
 						{labels.subtitle}
@@ -116,24 +122,29 @@ export function PartnerInstitutionsSection({
 					})}
 				</div>
 
-				{/* Institutional Collaboration Banner */}
-				<div className="relative mt-7 overflow-hidden rounded-[26px] bg-[radial-gradient(circle_at_100%_0%,rgba(183,244,134,.24),transparent_42%),linear-gradient(135deg,#17233a,#292747)] p-5 text-white shadow-lg sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7">
+				{/* Institutional Collaboration Banner — EduLe mint instructor card */}
+				<div className="relative mt-7 overflow-hidden rounded-[26px] bg-[#eaf6ef] p-5 text-white shadow-lg sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7 dark:bg-[#12241b]">
 					<div className="max-w-2xl">
-						<h3 className="text-base font-extrabold tracking-tight sm:text-lg">
+						<h3 className="text-base font-extrabold tracking-tight text-[#17332b] sm:text-lg dark:text-slate-100">
 							{labels.ctaTitle}
 						</h3>
-						<p className="mt-1 text-xs leading-5.5 text-white/75 sm:text-sm">
+
+						<p className="mt-1 text-xs leading-5.5 text-slate-600 sm:text-sm dark:text-slate-400">
 							{labels.ctaSubtitle}
 						</p>
 					</div>
-					<div className="mt-4 shrink-0 sm:mt-0">
+
+					<div className="mt-4 flex shrink-0 items-center gap-6 sm:mt-0">
+						<EduleArrowDoodle className="hidden text-[#24aa6d] xl:block rtl:-scale-x-100" />
+
 						<Button
 							asChild
 							size="lg"
-							className="h-10 rounded-xl bg-[#b7f486] px-5 text-xs font-extrabold text-[#17233a] shadow-md hover:bg-[#c5f89c]"
+							className="h-10 rounded-xl bg-edule-green px-5 text-xs font-extrabold text-white shadow-md shadow-emerald-600/25 hover:bg-edule-green/90"
 						>
 							<Link href={routes.auth.signup.page()}>
 								{labels.ctaButton}
+
 								<Arrow className="size-4" />
 							</Link>
 						</Button>

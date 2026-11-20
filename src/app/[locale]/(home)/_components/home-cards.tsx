@@ -42,7 +42,7 @@ export function HomeCourseCard({
 	return (
 		<Link
 			href={href}
-			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e7e8f3] bg-white shadow-[0_8px_24px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_36px_-18px_rgba(105,75,210,.28)] sm:w-[298px] dark:border-white/10 dark:bg-[#1b2438]"
+			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e7e8f3] bg-white shadow-[0_8px_24px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_36px_-18px_rgba(35,169,109,.30)] sm:w-[298px] dark:border-white/10 dark:bg-[#1b2438]"
 		>
 			<div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
 				<CoverFillImage
@@ -57,7 +57,7 @@ export function HomeCourseCard({
 				/>
 
 				{course.is_free && (
-					<span className="absolute start-2.5 top-2.5 rounded-full bg-[#b7f486] px-2.5 py-0.5 text-[10px] font-extrabold text-[#17233a] shadow-sm">
+					<span className="absolute start-2.5 top-2.5 rounded-full bg-[#dcf4e7] px-2.5 py-0.5 text-[10px] font-extrabold text-[#1d7a53] shadow-sm">
 						{t("free")}
 					</span>
 				)}
@@ -262,7 +262,7 @@ export function HomeGeneralBookCard({
 						{book.desc}
 					</p>
 				)}
-				<div className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#b7f486]">
+				<div className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#5ee6a2]">
 					<span>{t("open")}</span>
 					<Arrow className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
 				</div>
@@ -320,7 +320,7 @@ export function HomeFlashcardDeckCard({
 					/>
 
 					{deck.is_free && (
-						<span className="absolute start-2.5 top-2.5 rounded-full bg-[#b7f486] px-2.5 py-0.5 text-[10px] font-extrabold text-[#17233a] shadow-sm">
+						<span className="absolute start-2.5 top-2.5 rounded-full bg-[#dcf4e7] px-2.5 py-0.5 text-[10px] font-extrabold text-[#1d7a53] shadow-sm">
 							{t("free")}
 						</span>
 					)}
