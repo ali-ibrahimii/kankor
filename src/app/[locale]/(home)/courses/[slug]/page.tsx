@@ -289,7 +289,7 @@ export default async function CourseDetailPage({
 	// ========================================================
 
 	return (
-		<div className="min-h-screen bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+		<div className="min-h-screen bg-[#faf6ee] text-[#3b2621] dark:bg-[#251c19] dark:text-slate-100">
 			{/* SEO */}
 
 			<script
@@ -319,7 +319,7 @@ export default async function CourseDetailPage({
 			{/* BREADCRUMB */}
 			{/* ================================================= */}
 
-			<div className="border-b border-[#e9eaf2] bg-white/80 dark:border-white/10 dark:bg-[#1b2438]">
+			<div className="border-b border-[#faf6ee] bg-white/80 dark:border-white/10 dark:bg-[#3b2621]">
 				<div className="mx-auto max-w-[1320px] px-4 py-5 sm:px-6 lg:px-8">
 					<Breadcrumb>
 						<BreadcrumbList className="flex flex-wrap items-center gap-2 text-xs">
@@ -327,7 +327,7 @@ export default async function CourseDetailPage({
 								<BreadcrumbLink asChild>
 									<Link
 										href={routes.home.page()}
-										className="font-medium text-slate-500 transition-colors hover:text-[#694bd2] dark:text-slate-400"
+										className="font-medium text-slate-500 transition-colors hover:text-[#02656b] dark:text-slate-400"
 									>
 										{s("home")}
 									</Link>
@@ -340,7 +340,7 @@ export default async function CourseDetailPage({
 								<BreadcrumbLink asChild>
 									<Link
 										href={routes.courses.page()}
-										className="font-medium text-slate-500 transition-colors hover:text-[#694bd2] dark:text-slate-400"
+										className="font-medium text-slate-500 transition-colors hover:text-[#02656b] dark:text-slate-400"
 									>
 										{s("courses")}
 									</Link>
@@ -350,7 +350,7 @@ export default async function CourseDetailPage({
 							<BreadcrumbSeparator />
 
 							<BreadcrumbItem>
-								<BreadcrumbPage className="max-w-[220px] truncate font-bold text-[#694bd2] dark:text-violet-300 sm:max-w-md">
+								<BreadcrumbPage className="max-w-[220px] truncate font-bold text-[#02656b] dark:text-violet-300 sm:max-w-md">
 									{course.title}
 								</BreadcrumbPage>
 							</BreadcrumbItem>
@@ -382,7 +382,7 @@ export default async function CourseDetailPage({
 					course.prerequisites?.length > 0) && (
 					<section className="space-y-7">
 						<div className="flex items-center gap-4">
-							<div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+							<div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-violet-500/15 dark:text-violet-300">
 								<Target className="size-6" />
 							</div>
 
@@ -402,12 +402,12 @@ export default async function CourseDetailPage({
 
 							{course.learning_objectives &&
 								course.learning_objectives.length > 0 && (
-									<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+									<div className="relative overflow-hidden rounded-[24px] border border-[#e8eeea] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#3b2621] sm:p-7">
 										<div className="absolute -end-10 -top-10 size-32 rounded-full bg-violet-100/60 blur-2xl dark:bg-violet-500/10" />
 
 										<div className="relative">
 											<div className="mb-6 flex items-center gap-3">
-												<span className="flex size-11 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+												<span className="flex size-11 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-violet-500/15 dark:text-violet-300">
 													<Target className="size-5" />
 												</span>
 
@@ -436,12 +436,12 @@ export default async function CourseDetailPage({
 							{/* PREREQUISITES */}
 
 							{course.prerequisites && course.prerequisites.length > 0 && (
-								<div className="relative overflow-hidden rounded-[24px] border border-[#e8e5f5] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+								<div className="relative overflow-hidden rounded-[24px] border border-[#e8eeea] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#3b2621] sm:p-7">
 									<div className="absolute -end-10 -top-10 size-32 rounded-full bg-emerald-100/60 blur-2xl dark:bg-emerald-500/10" />
 
 									<div className="relative">
 										<div className="mb-6 flex items-center gap-3">
-											<span className="flex size-11 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+											<span className="flex size-11 items-center justify-center rounded-2xl bg-[#e8eeea] text-[#02656b] dark:bg-emerald-500/10 dark:text-emerald-300">
 												<BookOpen className="size-5" />
 											</span>
 
@@ -453,7 +453,7 @@ export default async function CourseDetailPage({
 										<ul className="space-y-4">
 											{course.prerequisites.map((prerequisite, index) => (
 												<li key={index} className="flex items-start gap-3">
-													<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+													<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#e8eeea] text-[#02656b] dark:bg-emerald-500/10 dark:text-emerald-300">
 														<CheckCircle2 className="size-4" />
 													</span>
 
@@ -478,7 +478,7 @@ export default async function CourseDetailPage({
 					<section className="space-y-7">
 						<div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
 							<div className="flex items-center gap-4">
-								<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#694bd2] dark:bg-violet-500/15 dark:text-violet-300">
+								<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-violet-500/15 dark:text-violet-300">
 									<Layers3 className="size-6" />
 								</span>
 
@@ -493,7 +493,7 @@ export default async function CourseDetailPage({
 								</div>
 							</div>
 
-							<span className="inline-flex self-start items-center gap-2 rounded-full border border-[#e9eaf2] bg-white px-4 py-2 text-xs font-bold text-[#694bd2] dark:border-white/10 dark:bg-white/5 dark:text-violet-300">
+							<span className="inline-flex self-start items-center gap-2 rounded-full border border-[#faf6ee] bg-white px-4 py-2 text-xs font-bold text-[#02656b] dark:border-white/10 dark:bg-white/5 dark:text-violet-300">
 								<BookOpen className="size-4" />
 
 								{relatedDecks.length +
@@ -524,7 +524,7 @@ export default async function CourseDetailPage({
 
 				<section className="space-y-7">
 					<div className="flex items-center gap-4">
-						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#fff4dc] text-[#d99421] dark:bg-amber-500/10 dark:text-amber-300">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#dc7030] dark:bg-amber-500/10 dark:text-amber-300">
 							<Star className="size-6" />
 						</span>
 
@@ -540,7 +540,7 @@ export default async function CourseDetailPage({
 						</div>
 					</div>
 
-					<div className="rounded-[26px] border border-[#e9eaf2] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+					<div className="rounded-[26px] border border-[#faf6ee] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#3b2621] sm:p-7">
 						<ReviewsSection
 							target={{
 								type: "course",
@@ -560,7 +560,7 @@ export default async function CourseDetailPage({
 
 				<section className="space-y-7">
 					<div className="flex items-center gap-4">
-						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#e1f7eb] text-[#248565] dark:bg-emerald-500/10 dark:text-emerald-300">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#e8eeea] text-[#02656b] dark:bg-emerald-500/10 dark:text-emerald-300">
 							<MessageCircle className="size-6" />
 						</span>
 
@@ -577,7 +577,7 @@ export default async function CourseDetailPage({
 						</div>
 					</div>
 
-					<div className="rounded-[26px] border border-[#e9eaf2] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#1c263b] sm:p-7">
+					<div className="rounded-[26px] border border-[#faf6ee] bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#3b2621] sm:p-7">
 						<ResourceDiscussionView
 							resource_type="course"
 							resource_id={course.id}

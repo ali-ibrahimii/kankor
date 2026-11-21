@@ -88,7 +88,7 @@ export function AboutFeaturesSection() {
 	return (
 		<motion.section
 			id="features"
-			className="scroll-mt-32 border-y border-[#e9eaf2] bg-white/75 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24 dark:border-white/10 dark:bg-[#1b2438]/60"
+			className="scroll-mt-32 border-y border-[#faf6ee] bg-white/75 py-16 sm:py-20 lg:scroll-mt-36 lg:py-24 dark:border-white/10 dark:bg-[#3b2621]/60"
 			variants={aboutMotion.section}
 			initial="hidden"
 			whileInView="show"
@@ -96,13 +96,13 @@ export function AboutFeaturesSection() {
 		>
 			<div className="mx-auto grid max-w-[1320px] items-start gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-12 lg:px-8">
 				{/* Sticky Deep-Navy Specs Summary Panel */}
-				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_10%_110%,rgba(94,207,173,.2),transparent_42%),radial-gradient(circle_at_90%_-10%,rgba(137,100,255,.34),transparent_46%),linear-gradient(135deg,#101a2c_0%,#18243d_60%,#212442_100%)] p-6 text-white shadow-[0_28px_68px_-40px_rgba(14,19,49,.65)] sm:p-8 lg:sticky lg:top-36">
+				<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#251c19] bg-[radial-gradient(circle_at_10%_110%,rgba(94,207,173,.2),transparent_42%),radial-gradient(circle_at_90%_-10%,rgba(137,100,255,.34),transparent_46%),linear-gradient(135deg,#251c19_0%,#3b2621_60%,#3b2621_100%)] p-6 text-white shadow-[0_28px_68px_-40px_rgba(14,19,49,.65)] sm:p-8 lg:sticky lg:top-36">
 					<div
 						aria-hidden="true"
 						className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.11)_0.7px,transparent_0.7px)] bg-size-[22px_22px]"
 					/>
 
-					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.08] px-3.5 py-1.5 text-xs font-bold text-[#b7f486]">
+					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.08] px-3.5 py-1.5 text-xs font-bold text-[#afa5a6]">
 						<Sparkles className="size-3.5" />
 						{t("features.badge")}
 					</span>
@@ -144,7 +144,7 @@ export function AboutFeaturesSection() {
 						<motion.article
 							key={key}
 							variants={aboutMotion.card}
-							className="soft-card card-hover border-[#e5e8f3] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]"
+							className="soft-card card-hover border-[#e8eeea] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#3b2621]"
 						>
 							<div
 								className={`flex size-12 items-center justify-center rounded-2xl ${tint}`}
@@ -152,7 +152,7 @@ export function AboutFeaturesSection() {
 								<Icon className="size-5" />
 							</div>
 
-							<h3 className="mt-5 text-base font-extrabold text-[#19243b] sm:text-lg dark:text-slate-100">
+							<h3 className="mt-5 text-base font-extrabold text-[#3b2621] sm:text-lg dark:text-slate-100">
 								{title}
 							</h3>
 

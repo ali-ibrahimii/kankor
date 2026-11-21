@@ -252,7 +252,7 @@ export function SchoolHubView({
 			    HERO — dark panel with search, quick actions and featured course
 			   ════════════════════════════════════════════════════════════════ */}
 			<section className="px-4 pb-2 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-				<div className="relative isolate mx-auto max-w-[1320px] overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_8%_112%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_92%_-8%,rgba(137,100,255,.34),transparent_40%),linear-gradient(125deg,#101a2c_4%,#17233a_58%,#222340_100%)] px-5 py-10 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[34px] sm:px-9 sm:py-12 lg:px-12">
+				<div className="public-inner-hero relative isolate mx-auto max-w-[1320px] overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_8%_112%,rgba(94,207,173,.18),transparent_34%),radial-gradient(circle_at_92%_-8%,rgba(137,100,255,.34),transparent_40%),linear-gradient(125deg,#251c19_4%,#3b2621_58%,#3b2621_100%)] px-5 py-10 text-white shadow-[0_32px_74px_-42px_rgba(14,19,49,.65)] sm:rounded-[34px] sm:px-9 sm:py-12 lg:px-12">
 					<div
 						aria-hidden="true"
 						className="pointer-events-none absolute inset-0 opacity-[.14] [background-image:radial-gradient(rgba(255,255,255,.6)_.7px,transparent_.7px)] [background-size:24px_24px]"
@@ -262,7 +262,7 @@ export function SchoolHubView({
 						<div>
 							<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm">
 								<Sparkles
-									className="size-3.5 text-[#b7f486]"
+									className="size-3.5 text-[#afa5a6]"
 									aria-hidden="true"
 								/>
 								{t("heroBadge")}
@@ -289,7 +289,7 @@ export function SchoolHubView({
 										if (e.target.value) setSelectedPathId(null);
 									}}
 									placeholder={t("searchPlaceholder")}
-									className="h-12 rounded-2xl border-white/15 bg-white/[.07] ps-11 pe-24 text-sm text-white placeholder:text-white/40 focus-visible:border-[#b7f486]/50 focus-visible:ring-[#b7f486]/20"
+									className="h-12 rounded-2xl border-white/15 bg-white/[.07] ps-11 pe-24 text-sm text-white placeholder:text-white/40 focus-visible:border-[#afa5a6]/50 focus-visible:ring-[#afa5a6]/20"
 								/>
 								{search ? (
 									<button
@@ -314,7 +314,7 @@ export function SchoolHubView({
 											.getElementById("course-catalog")
 											?.scrollIntoView({ behavior: "smooth" });
 									}}
-									className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-[#b7f486] px-5 text-sm font-black text-[#17233a] shadow-lg shadow-black/20 transition hover:bg-[#c9f8a2]"
+									className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-[#afa5a6] px-5 text-sm font-black text-[#3b2621] shadow-lg shadow-black/20 transition hover:bg-[#afa5a6]"
 								>
 									<BookOpen className="size-4" aria-hidden="true" />
 									{t("browseCoursesBtn")}
@@ -325,7 +325,7 @@ export function SchoolHubView({
 									className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-white/20 bg-white/[.07] px-5 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/[.16]"
 								>
 									<Sparkles
-										className="size-4 text-[#b7f486]"
+										className="size-4 text-[#afa5a6]"
 										aria-hidden="true"
 									/>
 									{t("publishCourseBtn")}
@@ -354,7 +354,7 @@ export function SchoolHubView({
 										<dd
 											className={cn(
 												"text-xl font-black tabular-nums",
-												stat.accent ? "text-[#b7f486]" : "text-white"
+												stat.accent ? "text-[#afa5a6]" : "text-white"
 											)}
 										>
 											{stat.value}

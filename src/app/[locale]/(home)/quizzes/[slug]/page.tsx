@@ -179,7 +179,7 @@ export default async function QuizDetailPage({
 			label: t("hub.detail.durationLabel"),
 			value: durationValue,
 			iconTint:
-				"bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200",
+				"bg-[#faf6ee] text-[#02656b] dark:bg-violet-400/15 dark:text-violet-200",
 		},
 		{
 			key: "passing",
@@ -187,7 +187,7 @@ export default async function QuizDetailPage({
 			label: t("hub.detail.passingLabel"),
 			value: passingValue,
 			iconTint:
-				"bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200",
+				"bg-[#e8eeea] text-[#02656b] dark:bg-emerald-400/15 dark:text-emerald-200",
 		},
 		{
 			key: "attempts",
@@ -195,12 +195,12 @@ export default async function QuizDetailPage({
 			label: t("hub.detail.attemptsLabel"),
 			value: attemptsValue,
 			iconTint:
-				"bg-[#e6f1ff] text-[#3a79c2] dark:bg-sky-400/15 dark:text-sky-200",
+				"bg-[#faf6ee] text-[#02656b] dark:bg-sky-400/15 dark:text-sky-200",
 		},
 	] as const;
 
 	return (
-		<div className="min-h-screen bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+		<div className="min-h-screen bg-[#faf6ee] text-[#3b2621] dark:bg-[#251c19] dark:text-slate-100">
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
@@ -211,7 +211,7 @@ export default async function QuizDetailPage({
 			/>
 
 			{/* Breadcrumb Strip (matching courses/[slug]) */}
-			<div className="border-b border-[#e9eaf2] bg-white/80 dark:border-white/10 dark:bg-[#1b2438]">
+			<div className="border-b border-[#faf6ee] bg-white/80 dark:border-white/10 dark:bg-[#3b2621]">
 				<div className="mx-auto max-w-[1320px] px-4 py-4 sm:px-6 lg:px-8">
 					<Breadcrumb>
 						<BreadcrumbList className="flex flex-wrap items-center gap-2 text-xs">
@@ -257,7 +257,7 @@ export default async function QuizDetailPage({
 				<div className="flex items-center justify-between gap-4">
 					<Link
 						href={routes.quizzes.page()}
-						className="-ms-2 inline-flex h-10 items-center gap-2 rounded-xl px-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-[#19243b] dark:text-slate-400 dark:hover:bg-white/[.06] dark:hover:text-white"
+						className="-ms-2 inline-flex h-10 items-center gap-2 rounded-xl px-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-[#3b2621] dark:text-slate-400 dark:hover:bg-white/[.06] dark:hover:text-white"
 					>
 						<BackArrow className="size-4" />
 						<span>{t("backToList")}</span>
@@ -271,7 +271,7 @@ export default async function QuizDetailPage({
 					{/* Main Exam Narrative Column */}
 					<div className="min-w-0 space-y-6">
 						{/* Signature Deep-Navy Exam Banner */}
-						<header className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_8%_110%,rgba(94,207,173,.2),transparent_38%),radial-gradient(circle_at_90%_-10%,rgba(137,100,255,.35),transparent_44%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] p-6 text-white shadow-[0_32px_74px_-44px_rgba(14,19,49,.7)] sm:rounded-[32px] sm:p-9 lg:p-10">
+						<header className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#251c19] bg-[radial-gradient(circle_at_8%_110%,rgba(94,207,173,.2),transparent_38%),radial-gradient(circle_at_90%_-10%,rgba(137,100,255,.35),transparent_44%),linear-gradient(125deg,#251c19_4%,#3b2621_58%,#3b2621_100%)] p-6 text-white shadow-[0_32px_74px_-44px_rgba(14,19,49,.7)] sm:rounded-[32px] sm:p-9 lg:p-10">
 							<div
 								aria-hidden="true"
 								className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.12)_0.7px,transparent_0.7px)] bg-size-[24px_24px]"
@@ -283,12 +283,12 @@ export default async function QuizDetailPage({
 
 							<div className="flex flex-wrap items-center gap-2">
 								<span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[.08] px-3 py-1 text-xs font-bold text-white/90">
-									<ClipboardCheck className="size-3.5 text-[#b7f486]" />
+									<ClipboardCheck className="size-3.5 text-[#afa5a6]" />
 									{t("title")}
 								</span>
 
 								{quiz.is_free ? (
-									<span className="inline-flex items-center gap-1 rounded-full bg-[#b7f486] px-3 py-1 text-xs font-extrabold text-[#17233a]">
+									<span className="inline-flex items-center gap-1 rounded-full bg-[#afa5a6] px-3 py-1 text-xs font-extrabold text-[#3b2621]">
 										<Sparkles className="size-3" />
 										{t("free")}
 									</span>
@@ -317,7 +317,7 @@ export default async function QuizDetailPage({
 										className="rounded-2xl border border-white/10 bg-white/[.055] p-4 backdrop-blur-sm"
 									>
 										<dt className="flex items-center gap-2 text-[11px] font-medium text-white/55">
-											<Icon className="size-3.5 text-[#b7f486]" />
+											<Icon className="size-3.5 text-[#afa5a6]" />
 											<span>{label}</span>
 										</dt>
 										<dd className="mt-2 text-sm font-extrabold text-white sm:text-base">
@@ -330,12 +330,12 @@ export default async function QuizDetailPage({
 
 						{/* Instructions Card */}
 						{quiz.instructions && (
-							<section className="soft-card border-[#e5e8f3] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#1b2438]">
+							<section className="soft-card border-[#e8eeea] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#3b2621]">
 								<div className="flex items-center gap-3">
-									<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200">
+									<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-violet-400/15 dark:text-violet-200">
 										<FileText className="size-5" />
 									</span>
-									<h2 className="text-lg font-extrabold text-[#19243b] sm:text-xl dark:text-slate-100">
+									<h2 className="text-lg font-extrabold text-[#3b2621] sm:text-xl dark:text-slate-100">
 										{t("instructions")}
 									</h2>
 								</div>
@@ -347,12 +347,12 @@ export default async function QuizDetailPage({
 						)}
 
 						{/* Passing Criteria & Guidance Card */}
-						<section className="soft-card border-[#e5e8f3] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#1b2438]">
+						<section className="soft-card border-[#e8eeea] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#3b2621]">
 							<div className="flex items-center gap-3">
-								<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#e1f6ec] text-[#258263] dark:bg-emerald-400/15 dark:text-emerald-200">
+								<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#e8eeea] text-[#02656b] dark:bg-emerald-400/15 dark:text-emerald-200">
 									<CheckCircle2 className="size-5" />
 								</span>
-								<h2 className="text-lg font-extrabold text-[#19243b] sm:text-xl dark:text-slate-100">
+								<h2 className="text-lg font-extrabold text-[#3b2621] sm:text-xl dark:text-slate-100">
 									{s("passingCriteria")}
 								</h2>
 							</div>
@@ -367,7 +367,7 @@ export default async function QuizDetailPage({
 								)}
 							</p>
 
-							<div className="mt-5 flex items-start gap-3 rounded-2xl border border-[#e7eaf4] bg-[#f9faff] px-4 py-3.5 text-xs leading-7 text-slate-600 dark:border-white/10 dark:bg-[#141b2c]/75 dark:text-slate-300">
+							<div className="mt-5 flex items-start gap-3 rounded-2xl border border-[#faf6ee] bg-[#faf6ee] px-4 py-3.5 text-xs leading-7 text-slate-600 dark:border-white/10 dark:bg-[#251c19]/75 dark:text-slate-300">
 								<Info className="mt-1 size-4 shrink-0 text-primary dark:text-violet-300" />
 								<span>{t("askInstructorForCode")}</span>
 							</div>
@@ -375,13 +375,13 @@ export default async function QuizDetailPage({
 					</div>
 
 					{/* Sticky Registration Sidebar Card */}
-					<aside className="soft-card border-[#e5e8f3] bg-white p-6 sm:p-7 lg:sticky lg:top-28 dark:border-white/10 dark:bg-[#1b2438]">
+					<aside className="soft-card border-[#e8eeea] bg-white p-6 sm:p-7 lg:sticky lg:top-28 dark:border-white/10 dark:bg-[#3b2621]">
 						<div className="flex items-center justify-between gap-3">
 							<span
 								className={cn(
 									"inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-bold",
 									quiz.registration_open
-										? "border-[#c7eedc] bg-[#eaf9f1] text-[#1f7558] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200"
+										? "border-[#e8eeea] bg-[#faf6ee] text-[#02656b] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200"
 										: "border-slate-200 bg-slate-100 text-slate-600 dark:border-white/10 dark:bg-white/[.06] dark:text-slate-400"
 								)}
 							>
@@ -389,7 +389,7 @@ export default async function QuizDetailPage({
 									className={cn(
 										"size-2 rounded-full",
 										quiz.registration_open
-											? "bg-[#258263] dark:bg-emerald-400"
+											? "bg-[#02656b] dark:bg-emerald-400"
 											: "bg-slate-400"
 									)}
 								/>
@@ -398,14 +398,14 @@ export default async function QuizDetailPage({
 									: t("hub.detail.statusClosed")}
 							</span>
 
-							<span className="text-lg font-black text-[#19243b] dark:text-slate-100">
+							<span className="text-lg font-black text-[#3b2621] dark:text-slate-100">
 								{quiz.is_free
 									? t("free")
 									: t("priceCredits", { count: quiz.price_credits ?? 0 })}
 							</span>
 						</div>
 
-						<h2 className="mt-5 text-base font-extrabold text-[#19243b] dark:text-slate-100">
+						<h2 className="mt-5 text-base font-extrabold text-[#3b2621] dark:text-slate-100">
 							{t("hub.detail.registrationTitle")}
 						</h2>
 
@@ -423,7 +423,7 @@ export default async function QuizDetailPage({
 										</span>
 										<span>{label}</span>
 									</dt>
-									<dd className="font-extrabold text-[#19243b] dark:text-slate-100">
+									<dd className="font-extrabold text-[#3b2621] dark:text-slate-100">
 										{value}
 									</dd>
 								</div>
@@ -438,12 +438,12 @@ export default async function QuizDetailPage({
 
 				{/* Related Courses & Flashcard Decks */}
 				{(relatedCourses.length > 0 || relatedDecks.length > 0) && (
-					<section className="space-y-6 border-t border-[#e7eaf4] pt-12 dark:border-white/10">
+					<section className="space-y-6 border-t border-[#faf6ee] pt-12 dark:border-white/10">
 						<div className="flex items-center gap-3.5">
-							<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#eee8ff] text-[#6b4dd7] dark:bg-violet-400/15 dark:text-violet-200">
+							<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-violet-400/15 dark:text-violet-200">
 								<BookOpen className="size-5" />
 							</span>
-							<h2 className="text-xl font-extrabold tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+							<h2 className="text-xl font-extrabold tracking-tight text-[#3b2621] sm:text-2xl dark:text-slate-100">
 								{s("relatedResources")}
 							</h2>
 						</div>
@@ -466,17 +466,17 @@ export default async function QuizDetailPage({
 				)}
 
 				{/* Public Discussions */}
-				<section className="space-y-6 border-t border-[#e7eaf4] pt-12 dark:border-white/10">
+				<section className="space-y-6 border-t border-[#faf6ee] pt-12 dark:border-white/10">
 					<div className="flex items-center gap-3.5">
-						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#e6f1ff] text-[#3a79c2] dark:bg-sky-400/15 dark:text-sky-200">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#faf6ee] text-[#02656b] dark:bg-sky-400/15 dark:text-sky-200">
 							<MessageCircle className="size-5" />
 						</span>
-						<h2 className="text-xl font-extrabold tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+						<h2 className="text-xl font-extrabold tracking-tight text-[#3b2621] sm:text-2xl dark:text-slate-100">
 							{s("discussions")}
 						</h2>
 					</div>
 
-					<div className="soft-card border-[#e5e8f3] bg-white p-5 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]">
+					<div className="soft-card border-[#e8eeea] bg-white p-5 sm:p-7 dark:border-white/10 dark:bg-[#3b2621]">
 						<ResourceDiscussionView
 							resource_type="quiz"
 							resource_id={quiz.id}

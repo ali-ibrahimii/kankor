@@ -2,8 +2,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function QuizDetailLoading() {
 	return (
-		<div className="min-h-screen bg-[#f9faff] dark:bg-[#141b2c]">
-			<div className="border-b border-[#e9eaf2] bg-white/80 dark:border-white/10 dark:bg-[#1b2438]">
+		<div className="min-h-screen bg-[#faf6ee] dark:bg-[#251c19]">
+			<div className="border-b border-[#faf6ee] bg-white/80 dark:border-white/10 dark:bg-[#3b2621]">
 				<div className="mx-auto max-w-[1320px] px-4 py-4 sm:px-6 lg:px-8">
 					<Skeleton className="h-4 w-56 rounded-md" />
 				</div>
@@ -17,7 +17,7 @@ export default function QuizDetailLoading() {
 
 				<div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_370px] lg:gap-10">
 					<div className="space-y-6">
-						<div className="rounded-[28px] bg-[#0f1a2c] p-6 sm:p-10">
+						<div className="rounded-[28px] bg-[#251c19] p-6 sm:p-10">
 							<Skeleton className="h-6 w-36 rounded-full bg-white/12" />
 							<Skeleton className="mt-5 h-10 w-4/5 rounded-xl bg-white/15" />
 							<Skeleton className="mt-3 h-5 w-full max-w-xl rounded-lg bg-white/10" />
@@ -28,14 +28,14 @@ export default function QuizDetailLoading() {
 							</div>
 						</div>
 
-						<div className="soft-card space-y-3 border-[#e5e8f3] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#1b2438]">
+						<div className="soft-card space-y-3 border-[#e8eeea] bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-[#3b2621]">
 							<Skeleton className="h-7 w-44 rounded-lg" />
 							<Skeleton className="h-4 w-full rounded-md" />
 							<Skeleton className="h-4 w-3/4 rounded-md" />
 						</div>
 					</div>
 
-					<div className="soft-card space-y-5 border-[#e5e8f3] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]">
+					<div className="soft-card space-y-5 border-[#e8eeea] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#3b2621]">
 						<div className="flex items-center justify-between">
 							<Skeleton className="h-6 w-28 rounded-full" />
 							<Skeleton className="h-6 w-16 rounded-md" />

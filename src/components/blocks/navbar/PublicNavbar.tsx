@@ -153,7 +153,7 @@ export async function PublicNavbar() {
 	return (
 		<div className="flex flex-col">
 			{/* EduLe announcement strip */}
-			<div className="hidden border-b border-emerald-900/15 bg-[#dff0e4] lg:block dark:border-white/10 dark:bg-[#12241b]">
+			<div className="public-announcement hidden border-b border-emerald-900/15 bg-[#e8eeea] lg:block dark:border-white/10 dark:bg-[#251c19]">
 				<div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 py-1.5 sm:px-6 lg:px-8">
 					<p className="flex min-w-0 items-center gap-2 text-[11px] font-medium text-emerald-950/85 dark:text-emerald-100/80">
 						<span className="truncate">{t("topbar.promo")}</span>
@@ -214,9 +214,9 @@ export async function PublicNavbar() {
 				<Link
 					href={routes.home.page()}
 					aria-label={ta("name")}
-					className="flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3"
+					className="public-brand flex min-w-0 items-center gap-2.5 sm:gap-3"
 				>
-					<LogoEdule className="size-9 shrink-0 transition-transform hover:-rotate-3 sm:size-11" />
+					<LogoEdule className="public-logo size-9 shrink-0 transition-transform hover:-rotate-3 sm:size-11" />
 
 					<div className="flex min-w-0 flex-col">
 						<span className="truncate font-edule text-sm font-black tracking-tight text-foreground sm:text-base">

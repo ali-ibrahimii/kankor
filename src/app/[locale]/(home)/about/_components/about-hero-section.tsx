@@ -35,7 +35,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 
 	return (
 		<section className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-			<div className="relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] px-5 py-8 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+			<div className="public-inner-hero relative isolate overflow-hidden rounded-[26px] border border-white/10 bg-[#251c19] bg-[radial-gradient(circle_at_6%_112%,rgba(94,207,173,.22),transparent_36%),radial-gradient(circle_at_88%_-10%,rgba(137,100,255,.36),transparent_42%),linear-gradient(125deg,#251c19_4%,#3b2621_58%,#3b2621_100%)] px-5 py-8 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-12 lg:px-14 lg:py-16">
 				{/* Subtle micro-dot grid matching landing hero */}
 				<div
 					aria-hidden="true"
@@ -58,7 +58,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 							variants={aboutMotion.item}
 							className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-xs font-bold text-white/90 backdrop-blur"
 						>
-							<GraduationCap className="size-4 text-[#b7f486]" />
+							<GraduationCap className="size-4 text-[#afa5a6]" />
 							<span>{t("hero.badge")}</span>
 						</motion.div>
 
@@ -68,7 +68,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 						>
 							{t.rich("hero.title", {
 								accent: (chunks) => (
-									<span className="bg-linear-to-l from-[#b7f486] via-[#7ce5d1] to-[#b8a4ff] bg-clip-text text-transparent">
+									<span className="bg-linear-to-l from-[#afa5a6] via-[#afa5a6] to-[#afa5a6] bg-clip-text text-transparent">
 										{chunks}
 									</span>
 								),
@@ -95,7 +95,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 						>
 							<Link
 								href={routes.courses.page()}
-								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 py-3 text-sm font-extrabold text-[#17233a] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#c9f8a2]"
+								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#afa5a6] px-6 py-3 text-sm font-extrabold text-[#3b2621] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#afa5a6]"
 							>
 								<span>{t("hero.cta.primary")}</span>
 								<Arrow className="size-4" />
@@ -105,7 +105,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 								href="#demo"
 								className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[.06] px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:border-white/35 hover:bg-white/[.12]"
 							>
-								<Play className="size-4 fill-current text-[#b7f486]" />
+								<Play className="size-4 fill-current text-[#afa5a6]" />
 								<span>{t("hero.cta.secondary")}</span>
 							</a>
 						</motion.div>
@@ -116,7 +116,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 						>
 							{trustPills.map((pill) => (
 								<li key={pill} className="inline-flex items-center gap-1.5">
-									<span className="inline-flex size-4 items-center justify-center rounded-full bg-[#b7f486]/15 text-[#b7f486]">
+									<span className="inline-flex size-4 items-center justify-center rounded-full bg-[#afa5a6]/15 text-[#afa5a6]">
 										<Check className="size-2.5 stroke-[3]" />
 									</span>
 									<span>{pill}</span>
@@ -139,14 +139,14 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 									<div className="flex items-center gap-1.5" aria-hidden="true">
 										<span className="size-2.5 rounded-full bg-white/20" />
 										<span className="size-2.5 rounded-full bg-white/20" />
-										<span className="size-2.5 rounded-full bg-[#b7f486]/70" />
+										<span className="size-2.5 rounded-full bg-[#afa5a6]/70" />
 									</div>
 									<span className="text-[11px] font-semibold text-white/55">
 										{t("hero.panel.eyebrow")}
 									</span>
 								</div>
 
-								<div className="inline-flex items-center gap-1.5 rounded-full border border-[#b7f486]/25 bg-[#b7f486]/12 px-2.5 py-1 text-[11px] font-bold text-[#b7f486]">
+								<div className="inline-flex items-center gap-1.5 rounded-full border border-[#afa5a6]/25 bg-[#afa5a6]/12 px-2.5 py-1 text-[11px] font-bold text-[#afa5a6]">
 									<Flame className="size-3.5 fill-current" />
 									<span>{t("hero.panel.streakValue")}</span>
 								</div>
@@ -169,7 +169,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 										<span className="font-semibold text-white/85">
 											{t("hero.panel.progressLabel")}
 										</span>
-										<span className="font-black text-[#b7f486]">
+										<span className="font-black text-[#afa5a6]">
 											{t("hero.panel.progressValue")}
 										</span>
 									</div>
@@ -182,7 +182,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 										aria-label={t("hero.panel.progressLabel")}
 									>
 										<motion.div
-											className="h-full rounded-full bg-linear-to-r from-[#b7f486] via-[#7ce5d1] to-[#a58cff]"
+											className="h-full rounded-full bg-linear-to-r from-[#afa5a6] via-[#afa5a6] to-[#afa5a6]"
 											initial={{ width: aboutMotion.reduceMotion ? "76%" : 0 }}
 											animate={{ width: "76%" }}
 											transition={{
@@ -198,7 +198,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 								<div className="mt-3 grid grid-cols-2 gap-3">
 									<div className="rounded-2xl border border-white/10 bg-white/[.04] p-3.5">
 										<div className="flex items-center gap-2 text-white/60">
-											<span className="flex size-7 items-center justify-center rounded-lg bg-[#a58cff]/20 text-[#c9bcff]">
+											<span className="flex size-7 items-center justify-center rounded-lg bg-[#afa5a6]/20 text-[#e8eeea]">
 												<BookOpen className="size-3.5" />
 											</span>
 											<span className="truncate text-[11px] font-medium">
@@ -212,7 +212,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 
 									<div className="rounded-2xl border border-white/10 bg-white/[.04] p-3.5">
 										<div className="flex items-center gap-2 text-white/60">
-											<span className="flex size-7 items-center justify-center rounded-lg bg-[#7ce5d1]/20 text-[#7ce5d1]">
+											<span className="flex size-7 items-center justify-center rounded-lg bg-[#afa5a6]/20 text-[#afa5a6]">
 												<Trophy className="size-3.5" />
 											</span>
 											<span className="truncate text-[11px] font-medium">
@@ -228,9 +228,9 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 								{/* Verified Certificate Strip */}
 								<Link
 									href={routes.verify.page()}
-									className="group mt-3 flex items-center gap-3.5 rounded-2xl border border-[#b7f486]/20 bg-[#b7f486]/[.07] p-3.5 transition hover:border-[#b7f486]/40 hover:bg-[#b7f486]/[.11]"
+									className="group mt-3 flex items-center gap-3.5 rounded-2xl border border-[#afa5a6]/20 bg-[#afa5a6]/[.07] p-3.5 transition hover:border-[#afa5a6]/40 hover:bg-[#afa5a6]/[.11]"
 								>
-									<span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#b7f486] text-[#17233a] shadow-sm">
+									<span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#afa5a6] text-[#3b2621] shadow-sm">
 										<Award className="size-5" />
 									</span>
 									<div className="min-w-0 flex-1">
@@ -241,7 +241,7 @@ export function AboutHeroSection({ isRtl }: AboutHeroSectionProps) {
 											{t("hero.panel.certificateDesc")}
 										</p>
 									</div>
-									<span className="hidden shrink-0 items-center gap-1 rounded-full border border-[#b7f486]/30 bg-[#b7f486]/12 px-2.5 py-1 text-[10px] font-bold text-[#b7f486] sm:inline-flex">
+									<span className="hidden shrink-0 items-center gap-1 rounded-full border border-[#afa5a6]/30 bg-[#afa5a6]/12 px-2.5 py-1 text-[10px] font-bold text-[#afa5a6] sm:inline-flex">
 										<CheckCircle2 className="size-3" />
 										{t("hero.panel.verified")}
 									</span>

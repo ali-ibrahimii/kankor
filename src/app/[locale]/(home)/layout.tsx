@@ -1,3 +1,4 @@
+import "@/styles/public-theme.css";
 import { setRequestLocale } from "next-intl/server";
 import { PublicFooter } from "@/components/blocks/footer/PublicFooter";
 import { PublicNavbar } from "@/components/blocks/navbar/PublicNavbar";
@@ -14,7 +15,7 @@ export default async function HomeLayout({
 	setRequestLocale(locale);
 
 	return (
-		<div className="relative flex min-h-screen flex-col bg-white dark:bg-[#141b2c]">
+		<div className="public-site relative flex min-h-screen flex-col">
 			<PublicNavbar />
 			<main className="flex-1 w-full">{children}</main>
 			<PublicFooter />

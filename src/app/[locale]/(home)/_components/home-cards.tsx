@@ -42,7 +42,7 @@ export function HomeCourseCard({
 	return (
 		<Link
 			href={href}
-			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e7e8f3] bg-white shadow-[0_8px_24px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_36px_-18px_rgba(35,169,109,.30)] sm:w-[298px] dark:border-white/10 dark:bg-[#1b2438]"
+			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e8eeea] bg-white shadow-[0_8px_24px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_36px_-18px_rgba(35,169,109,.30)] sm:w-[298px] dark:border-white/10 dark:bg-[#3b2621]"
 		>
 			<div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
 				<CoverFillImage
@@ -57,7 +57,7 @@ export function HomeCourseCard({
 				/>
 
 				{course.is_free && (
-					<span className="absolute start-2.5 top-2.5 rounded-full bg-[#dcf4e7] px-2.5 py-0.5 text-[10px] font-extrabold text-[#1d7a53] shadow-sm">
+					<span className="absolute start-2.5 top-2.5 rounded-full bg-[#e8eeea] px-2.5 py-0.5 text-[10px] font-extrabold text-[#02656b] shadow-sm">
 						{t("free")}
 					</span>
 				)}
@@ -82,7 +82,7 @@ export function HomeCourseCard({
 					)}
 				</div>
 
-				<h3 className="mt-1 line-clamp-2 text-[14px] font-extrabold leading-5 text-[#19243b] transition-colors group-hover:text-primary dark:text-slate-100">
+				<h3 className="mt-1 line-clamp-2 text-[14px] font-extrabold leading-5 text-[#3b2621] transition-colors group-hover:text-primary dark:text-slate-100">
 					{course.title}
 				</h3>
 
@@ -138,7 +138,7 @@ export function HomeSchoolBookCard({
 	return (
 		<Link
 			href={href}
-			className="group flex h-[164px] w-[312px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#e5e8f4] bg-white shadow-[0_8px_22px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-400/50 hover:shadow-[0_16px_32px_-18px_rgba(37,99,235,.24)] sm:w-[340px] dark:border-white/10 dark:bg-[#1b2438]"
+			className="group flex h-[164px] w-[312px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#e8eeea] bg-white shadow-[0_8px_22px_-14px_rgba(25,36,59,.14)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-400/50 hover:shadow-[0_16px_32px_-18px_rgba(37,99,235,.24)] sm:w-[340px] dark:border-white/10 dark:bg-[#3b2621]"
 		>
 			{/* Book Cover Spine */}
 			<div className="relative h-full w-[112px] shrink-0 overflow-hidden bg-slate-900 sm:w-[118px]">
@@ -171,7 +171,7 @@ export function HomeSchoolBookCard({
 						)}
 					</div>
 
-					<h3 className="mt-1 line-clamp-2 text-[13.5px] font-extrabold leading-5 text-[#19243b] transition-colors group-hover:text-blue-600 dark:text-slate-100 dark:group-hover:text-blue-400">
+					<h3 className="mt-1 line-clamp-2 text-[13.5px] font-extrabold leading-5 text-[#3b2621] transition-colors group-hover:text-blue-600 dark:text-slate-100 dark:group-hover:text-blue-400">
 						{book.title}
 					</h3>
 
@@ -233,7 +233,7 @@ export function HomeGeneralBookCard({
 			/>
 			<div
 				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0d1526]/95 via-[#0d1526]/55 to-black/20"
+				className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#251c19]/95 via-[#251c19]/55 to-black/20"
 			/>
 
 			{/* Top Row: Clean User Rating */}
@@ -262,7 +262,7 @@ export function HomeGeneralBookCard({
 						{book.desc}
 					</p>
 				)}
-				<div className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#5ee6a2]">
+				<div className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#afa5a6]">
 					<span>{t("open")}</span>
 					<Arrow className="size-3.5 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
 				</div>
@@ -304,7 +304,7 @@ export function HomeFlashcardDeckCard({
 
 			<Link
 				href={href}
-				className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#e3ece8] bg-white shadow-[0_8px_22px_-14px_rgba(16,45,35,.15)] transition duration-300 hover:-translate-y-1 hover:border-emerald-500/40 sm:w-full dark:border-white/10 dark:bg-[#1b2438]"
+				className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#e8eeea] bg-white shadow-[0_8px_22px_-14px_rgba(16,45,35,.15)] transition duration-300 hover:-translate-y-1 hover:border-emerald-500/40 sm:w-full dark:border-white/10 dark:bg-[#3b2621]"
 			>
 				{/* Clean Image: Top-Start Free Tag + Top-End Vote Stats, Zero Floating Icons */}
 				<div className="relative h-34 w-full overflow-hidden bg-slate-900">
@@ -320,7 +320,7 @@ export function HomeFlashcardDeckCard({
 					/>
 
 					{deck.is_free && (
-						<span className="absolute start-2.5 top-2.5 rounded-full bg-[#dcf4e7] px-2.5 py-0.5 text-[10px] font-extrabold text-[#1d7a53] shadow-sm">
+						<span className="absolute start-2.5 top-2.5 rounded-full bg-[#e8eeea] px-2.5 py-0.5 text-[10px] font-extrabold text-[#02656b] shadow-sm">
 							{t("free")}
 						</span>
 					)}
@@ -334,7 +334,7 @@ export function HomeFlashcardDeckCard({
 
 				{/* Compact Body */}
 				<div className="flex flex-1 flex-col p-3.5">
-					<h3 className="line-clamp-2 text-[14px] font-extrabold leading-5 text-[#19243b] transition-colors group-hover:text-emerald-700 dark:text-slate-100 dark:group-hover:text-emerald-400">
+					<h3 className="line-clamp-2 text-[14px] font-extrabold leading-5 text-[#3b2621] transition-colors group-hover:text-emerald-700 dark:text-slate-100 dark:group-hover:text-emerald-400">
 						{deck.name}
 					</h3>
 					{deck.description && (
@@ -400,7 +400,7 @@ export function HomeKankorFormCard({
 	return (
 		<Link
 			href={href}
-			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#ebe6dd] bg-white shadow-[0_8px_22px_-14px_rgba(35,28,15,.14)] transition duration-300 hover:-translate-y-1 hover:border-amber-500/45 sm:w-[298px] dark:border-white/10 dark:bg-[#1b2438]"
+			className="group flex h-full w-[282px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#ede1c7] bg-white shadow-[0_8px_22px_-14px_rgba(35,28,15,.14)] transition duration-300 hover:-translate-y-1 hover:border-amber-500/45 sm:w-[298px] dark:border-white/10 dark:bg-[#3b2621]"
 		>
 			<div className="h-1 w-full bg-gradient-to-l from-amber-500 via-orange-500 to-violet-600" />
 
@@ -417,7 +417,7 @@ export function HomeKankorFormCard({
 				/>
 
 				{quiz.exam_zone && (
-					<span className="absolute start-2.5 top-2.5 rounded-full bg-white/92 px-2.5 py-0.5 text-[10px] font-extrabold text-[#19243b] shadow-xs">
+					<span className="absolute start-2.5 top-2.5 rounded-full bg-white/92 px-2.5 py-0.5 text-[10px] font-extrabold text-[#3b2621] shadow-xs">
 						{quiz.exam_zone}
 					</span>
 				)}
@@ -430,7 +430,7 @@ export function HomeKankorFormCard({
 			</div>
 
 			<div className="flex flex-1 flex-col p-3.5">
-				<h3 className="line-clamp-2 text-[14px] font-extrabold leading-5 text-[#19243b] transition-colors group-hover:text-amber-600 dark:text-slate-100 dark:group-hover:text-amber-400">
+				<h3 className="line-clamp-2 text-[14px] font-extrabold leading-5 text-[#3b2621] transition-colors group-hover:text-amber-600 dark:text-slate-100 dark:group-hover:text-amber-400">
 					{quiz.title}
 				</h3>
 

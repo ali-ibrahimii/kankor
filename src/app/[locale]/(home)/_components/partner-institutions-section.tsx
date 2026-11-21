@@ -46,12 +46,12 @@ export function PartnerInstitutionsSection({
 		<section
 			id="partners"
 			data-testid="home-section-partners"
-			className="scroll-mt-24 border-y border-[#e7f2ea] bg-[#f7fcf8] py-10 sm:py-14 dark:border-white/10 dark:bg-[#1b2438]/65"
+			className="scroll-mt-24 border-y border-[#e8eeea] bg-[#faf6ee] py-10 sm:py-14 dark:border-white/10 dark:bg-[#3b2621]/65"
 		>
 			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
 				{/* Clean Section Header — No Category Tabs or Arrow Buttons Above Cards */}
 				<div className="mb-5 max-w-2xl">
-					<h2 className="relative inline-block text-lg font-black tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+					<h2 className="relative inline-block text-lg font-black tracking-tight text-[#3b2621] sm:text-2xl dark:text-slate-100">
 						{labels.title}
 
 						<span
@@ -81,7 +81,7 @@ export function PartnerInstitutionsSection({
 							<Link
 								key={item.id}
 								href={item.href ?? routes.search.page({ q: item.name })}
-								className="group flex w-[264px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e5e8f3] bg-white shadow-[0_8px_22px_-14px_rgba(25,36,59,.13)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/35 sm:w-[278px] dark:border-white/10 dark:bg-[#1b2438]"
+								className="group flex w-[264px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[#e8eeea] bg-white shadow-[0_8px_22px_-14px_rgba(25,36,59,.13)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/35 sm:w-[278px] dark:border-white/10 dark:bg-[#3b2621]"
 							>
 								<div className="relative h-28 w-full overflow-hidden bg-slate-900">
 									<Image
@@ -102,7 +102,7 @@ export function PartnerInstitutionsSection({
 								</div>
 
 								<div className="flex flex-1 flex-col p-3.5">
-									<h3 className="line-clamp-1 text-[14px] font-extrabold text-[#19243b] transition-colors group-hover:text-primary dark:text-slate-100">
+									<h3 className="line-clamp-1 text-[14px] font-extrabold text-[#3b2621] transition-colors group-hover:text-primary dark:text-slate-100">
 										{item.name}
 									</h3>
 
@@ -123,9 +123,9 @@ export function PartnerInstitutionsSection({
 				</div>
 
 				{/* Institutional Collaboration Banner — EduLe mint instructor card */}
-				<div className="relative mt-7 overflow-hidden rounded-[26px] bg-[#eaf6ef] p-5 text-white shadow-lg sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7 dark:bg-[#12241b]">
+				<div className="relative mt-7 overflow-hidden rounded-[26px] bg-[#faf6ee] p-5 text-white shadow-lg sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-7 dark:bg-[#251c19]">
 					<div className="max-w-2xl">
-						<h3 className="text-base font-extrabold tracking-tight text-[#17332b] sm:text-lg dark:text-slate-100">
+						<h3 className="text-base font-extrabold tracking-tight text-[#3b2621] sm:text-lg dark:text-slate-100">
 							{labels.ctaTitle}
 						</h3>
 
@@ -135,7 +135,7 @@ export function PartnerInstitutionsSection({
 					</div>
 
 					<div className="mt-4 flex shrink-0 items-center gap-6 sm:mt-0">
-						<EduleArrowDoodle className="hidden text-[#24aa6d] xl:block rtl:-scale-x-100" />
+						<EduleArrowDoodle className="hidden text-[#02656b] xl:block rtl:-scale-x-100" />
 
 						<Button
 							asChild

@@ -26,7 +26,7 @@ export function AboutDownloadSection() {
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div className="relative isolate overflow-hidden rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_80%_15%,#413c82,transparent_42%),radial-gradient(circle_at_12%_105%,rgba(94,207,173,.18),transparent_38%),linear-gradient(130deg,#141f34,#222a46)] px-6 py-12 text-center text-white shadow-[0_32px_76px_-44px_rgba(14,19,49,.72)] sm:rounded-[34px] sm:px-10 sm:py-16">
+			<div className="relative isolate overflow-hidden rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_80%_15%,#02656b,transparent_42%),radial-gradient(circle_at_12%_105%,rgba(94,207,173,.18),transparent_38%),linear-gradient(130deg,#3b2621,#3b2621)] px-6 py-12 text-center text-white shadow-[0_32px_76px_-44px_rgba(14,19,49,.72)] sm:rounded-[34px] sm:px-10 sm:py-16">
 				<div
 					aria-hidden="true"
 					className="pointer-events-none absolute -start-16 -top-28 size-72 rounded-full border-[45px] border-white/[.035]"
@@ -36,7 +36,7 @@ export function AboutDownloadSection() {
 					className="pointer-events-none absolute -end-20 -bottom-28 size-72 rounded-full border-[40px] border-white/[.03]"
 				/>
 
-				<div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.08] px-3.5 py-1.5 text-xs font-bold text-[#b7f486] backdrop-blur">
+				<div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.08] px-3.5 py-1.5 text-xs font-bold text-[#afa5a6] backdrop-blur">
 					<Sparkles className="size-3.5" />
 					<span>{t("download.badge")}</span>
 				</div>
@@ -52,7 +52,7 @@ export function AboutDownloadSection() {
 				<div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
 					<Link
 						href={routes.courses.page()}
-						className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#b7f486] px-6 py-3.5 text-sm font-extrabold text-[#17233a] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#c9f8a2] sm:w-auto"
+						className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#afa5a6] px-6 py-3.5 text-sm font-extrabold text-[#3b2621] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#afa5a6] sm:w-auto"
 					>
 						<Globe2 className="size-4" />
 						<span>{t("download.webCta")}</span>
@@ -65,7 +65,7 @@ export function AboutDownloadSection() {
 						rel="noopener noreferrer"
 						className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/[.07] px-6 py-2.5 text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[.13] sm:w-auto"
 					>
-						<Play className="size-5 fill-current text-[#b7f486]" />
+						<Play className="size-5 fill-current text-[#afa5a6]" />
 						<div className="text-start">
 							<p className="text-[10px] leading-none text-white/60">
 								{t("download.stores.googlePlay.label")}

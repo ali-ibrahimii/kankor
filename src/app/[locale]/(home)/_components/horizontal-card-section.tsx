@@ -46,16 +46,16 @@ export function HorizontalCardSection({
 			id={id}
 			data-testid={`home-section-${id}`}
 			className={cn(
-				"scroll-mt-24 py-8 sm:py-11",
+				"home-shelf scroll-mt-24 py-8 sm:py-11",
 				surface === "tinted" &&
-					"border-y border-[#e7f2ea] bg-[#f7fcf8] dark:border-white/10 dark:bg-[#1b2438]/65"
+					"border-y border-[#e8eeea] bg-[#faf6ee] dark:border-white/10 dark:bg-[#3b2621]/65"
 			)}
 		>
 			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
 				{/* EduLe Section Header + "دیدن بیشتر" pill + search */}
 				<div className="mb-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
 					<div className="min-w-0 max-w-2xl">
-						<h2 className="relative inline-block text-lg font-black tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+						<h2 className="relative inline-block text-lg font-black tracking-tight text-[#3b2621] sm:text-2xl dark:text-slate-100">
 							{title}
 
 							<span
@@ -91,7 +91,11 @@ export function HorizontalCardSection({
 				{/* Horizontal Card Track */}
 				<div
 					data-testid={`home-row-${id}`}
-					className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-1 pb-3 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-2 lg:px-2 [&::-webkit-scrollbar]:hidden"
+					className={cn(
+						id === "school-courses"
+							? "course-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+							: "-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-1 pb-3 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-2 lg:px-2 [&::-webkit-scrollbar]:hidden"
+					)}
 				>
 					{children}
 				</div>

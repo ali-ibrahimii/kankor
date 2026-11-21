@@ -1198,6 +1198,24 @@
 		}
 	},
 	"landing": {
+		"design": {
+			"trust": "School lessons, smart revision, and exam practice — together.",
+			"stepsEyebrow": "YOUR LEARNING JOURNEY",
+			"stepsTitle": "A brighter future, one step at a time",
+			"stepsDescription": "From your first lesson to exam day, keep everything you need in one place.",
+			"step1": "01",
+			"step2": "02",
+			"step3": "03",
+			"discoverTitle": "Find your starting point",
+			"discoverDescription": "Explore school subjects, courses, and textbooks. Choose what you want to learn next.",
+			"learnTitle": "Learn at your own pace",
+			"learnDescription": "Follow the lessons, review with flashcards, and keep learning with offline resources.",
+			"growTitle": "Put knowledge into practice",
+			"growDescription": "Practice with quizzes and Kankor forms, and get ready for your next challenge.",
+			"explore": "Explore learning",
+			"community": "Learn together",
+			"footerDescription": "Learning that fits your life. School courses, books, flashcards, and Kankor practice for every step of your journey."
+		},
 		"showcase": {
 			"previewCta": "Explore the live demo",
 			"explore": "Explore more",
