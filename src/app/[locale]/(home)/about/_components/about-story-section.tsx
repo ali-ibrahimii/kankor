@@ -48,7 +48,7 @@ export function AboutStorySection() {
 						<Compass className="size-3.5" />
 						{t("story.badge")}
 					</span>
-					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#3b2621] sm:text-3xl lg:text-4xl dark:text-slate-100">
 						{t("story.title")}
 					</h2>
 					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
@@ -60,7 +60,7 @@ export function AboutStorySection() {
 				<div className="relative mt-11 sm:mt-14">
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute inset-x-10 top-[52px] hidden h-px bg-linear-to-r from-[#6b4dd7]/25 via-[#258263]/25 to-[#c87949]/25 lg:block dark:from-violet-400/20 dark:via-emerald-400/20 dark:to-amber-400/20"
+						className="pointer-events-none absolute inset-x-10 top-[52px] hidden h-px bg-linear-to-r from-[#02656b]/25 via-[#02656b]/25 to-[#dc7030]/25 lg:block dark:from-violet-400/20 dark:via-emerald-400/20 dark:to-amber-400/20"
 					/>
 
 					<motion.ol
@@ -79,7 +79,7 @@ export function AboutStorySection() {
 								<motion.li
 									key={`${item.year}-${item.title}`}
 									variants={aboutMotion.card}
-									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#1b2438]"
+									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e8eeea] bg-white p-6 sm:p-7 dark:border-white/10 dark:bg-[#3b2621]"
 								>
 									{/* Top Accent Strip */}
 									<div
@@ -105,7 +105,7 @@ export function AboutStorySection() {
 										</span>
 									</div>
 
-									<h3 className="mt-6 text-lg font-extrabold leading-snug text-[#19243b] dark:text-slate-100">
+									<h3 className="mt-6 text-lg font-extrabold leading-snug text-[#3b2621] dark:text-slate-100">
 										{item.title}
 									</h3>
 

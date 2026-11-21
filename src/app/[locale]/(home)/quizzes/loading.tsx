@@ -3,10 +3,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function QuizzesLoading() {
 	return (
-		<div className="min-h-screen bg-[#f9faff] dark:bg-[#141b2c]">
+		<div className="min-h-screen bg-[#faf6ee] dark:bg-[#251c19]">
 			{/* Hero Skeleton */}
 			<div className="mx-auto max-w-[1320px] px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-				<div className="rounded-[26px] border border-white/10 bg-[#0f1a2c] px-5 py-10 sm:rounded-[34px] sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+				<div className="rounded-[26px] border border-white/10 bg-[#251c19] px-5 py-10 sm:rounded-[34px] sm:px-10 sm:py-12 lg:px-14 lg:py-14">
 					<div className="grid items-center gap-9 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
 						<div className="space-y-4">
 							<Skeleton className="h-7 w-48 rounded-full bg-white/10" />
@@ -26,7 +26,7 @@ export default function QuizzesLoading() {
 
 			{/* Filter Toolbar & Card Grid Skeleton */}
 			<div className="mx-auto flex max-w-[1320px] flex-col gap-6 px-4 pt-8 pb-20 sm:px-6 sm:pt-10 lg:px-8">
-				<div className="soft-card flex flex-wrap items-center justify-between gap-3 border-[#e5e8f3] bg-white p-4 dark:border-white/10 dark:bg-[#1b2438]">
+				<div className="soft-card flex flex-wrap items-center justify-between gap-3 border-[#e8eeea] bg-white p-4 dark:border-white/10 dark:bg-[#3b2621]">
 					<div className="flex gap-2">
 						<Skeleton className="h-8 w-24 rounded-full" />
 						<Skeleton className="h-8 w-20 rounded-full" />

@@ -58,9 +58,9 @@ export default async function SchoolPublicPage({
 				.eq("role", "student"),
 		]);
 	return (
-		<main className="min-h-screen bg-[#f8f9fd] px-4 pt-8 pb-10 text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100 sm:px-6 sm:pt-10 sm:pb-16 lg:px-8">
+		<main className="min-h-screen bg-[#faf6ee] px-4 pt-8 pb-10 text-[#3b2621] dark:bg-[#251c19] dark:text-slate-100 sm:px-6 sm:pt-10 sm:pb-16 lg:px-8">
 			<div className="mx-auto max-w-6xl">
-				<section className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_90%_5%,rgba(139,119,255,.4),transparent_32%),linear-gradient(125deg,#121d32,#252b49)] p-6 text-white shadow-xl sm:p-10 lg:p-12">
+				<section className="relative overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_90%_5%,rgba(139,119,255,.4),transparent_32%),linear-gradient(125deg,#251c19,#3b2621)] p-6 text-white shadow-xl sm:p-10 lg:p-12">
 					{/* School cover from Cloudflare R2, with a readability scrim */}
 					{resolveCoverSrc(school.cover_image_url) ? (
 						<>
@@ -92,7 +92,7 @@ export default async function SchoolPublicPage({
 										/>
 									</span>
 								) : null}
-								<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold text-[#c6f69d]">
+								<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-bold text-[#afa5a6]">
 									<School className="size-4" />
 									{t("schoolLabel")}
 								</span>
@@ -110,7 +110,7 @@ export default async function SchoolPublicPage({
 						</div>
 						<div className="flex gap-3">
 							<div className="rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3">
-								<BookOpen className="mb-2 size-5 text-[#c6f69d]" />
+								<BookOpen className="mb-2 size-5 text-[#afa5a6]" />
 								<strong className="block text-xl">
 									{courses?.length || 0}
 								</strong>
@@ -119,7 +119,7 @@ export default async function SchoolPublicPage({
 								</small>
 							</div>
 							<div className="rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3">
-								<Users className="mb-2 size-5 text-[#b9a8ff]" />
+								<Users className="mb-2 size-5 text-[#afa5a6]" />
 								<strong className="block text-xl">{students || 0}</strong>
 								<small className="text-xs text-white/60">{t("learners")}</small>
 							</div>
@@ -127,7 +127,7 @@ export default async function SchoolPublicPage({
 					</div>
 				</section>
 				<section className="mt-8 grid gap-7 lg:grid-cols-[.8fr_1.2fr]">
-					<article className="h-fit rounded-[26px] border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#1b2438] sm:p-8">
+					<article className="h-fit rounded-[26px] border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#3b2621] sm:p-8">
 						<h2 className="flex items-center gap-2 text-xl font-extrabold">
 							<Sparkles className="size-5 text-violet-600" />
 							{t("about")}
@@ -151,7 +151,7 @@ export default async function SchoolPublicPage({
 										<Link
 											key={course.id}
 											href={`/courses/${course.slug || course.id}`}
-											className="group overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-sm transition dark:border-white/10 dark:bg-[#1b2438] hover:-translate-y-1 hover:shadow-lg"
+											className="group overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-sm transition dark:border-white/10 dark:bg-[#3b2621] hover:-translate-y-1 hover:shadow-lg"
 										>
 											<div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-blue-200 to-emerald-100">
 												{cover && (

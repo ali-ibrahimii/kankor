@@ -272,7 +272,7 @@ export default async function DeckDetailPage({
 								{t("free")}
 							</Badge>
 						) : (
-							<Badge className="gap-1 bg-[#1461B8] font-normal text-white">
+							<Badge className="gap-1 bg-[#02656b] font-normal text-white">
 								{t("priceCredits", { count: deck.price_credits ?? 0 })}
 							</Badge>
 						)}

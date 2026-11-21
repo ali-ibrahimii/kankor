@@ -84,7 +84,7 @@ export function AboutAudienceSection() {
 						<Users className="size-3.5" />
 						{t("audience.badge")}
 					</span>
-					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#3b2621] sm:text-3xl lg:text-4xl dark:text-slate-100">
 						{t("audience.title")}
 					</h2>
 					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
@@ -105,7 +105,7 @@ export function AboutAudienceSection() {
 							<motion.article
 								key={key}
 								variants={aboutMotion.card}
-								className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-7 sm:p-8 dark:border-white/10 dark:bg-[#1b2438]"
+								className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e8eeea] bg-white p-7 sm:p-8 dark:border-white/10 dark:bg-[#3b2621]"
 							>
 								<div
 									aria-hidden="true"
@@ -118,7 +118,7 @@ export function AboutAudienceSection() {
 									<Icon className="size-6" />
 								</div>
 
-								<h3 className="mt-6 text-xl font-extrabold text-[#19243b] dark:text-slate-100">
+								<h3 className="mt-6 text-xl font-extrabold text-[#3b2621] dark:text-slate-100">
 									{title}
 								</h3>
 
@@ -130,9 +130,9 @@ export function AboutAudienceSection() {
 									{points.map((point) => (
 										<li
 											key={point}
-											className="flex items-start gap-2.5 text-xs font-semibold leading-6 text-[#19243b] sm:text-sm dark:text-slate-200"
+											className="flex items-start gap-2.5 text-xs font-semibold leading-6 text-[#3b2621] sm:text-sm dark:text-slate-200"
 										>
-											<Check className="mt-1 size-4 shrink-0 text-[#258263] dark:text-emerald-400" />
+											<Check className="mt-1 size-4 shrink-0 text-[#02656b] dark:text-emerald-400" />
 											<span>{point}</span>
 										</li>
 									))}
@@ -140,7 +140,7 @@ export function AboutAudienceSection() {
 
 								<Link
 									href={href}
-									className="mt-7 inline-flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3.5 text-xs font-bold text-[#19243b] transition hover:border-primary/40 hover:bg-primary/5 hover:text-primary sm:text-sm dark:border-white/12 dark:text-slate-100 dark:hover:border-violet-400/50 dark:hover:bg-violet-400/10 dark:hover:text-violet-200"
+									className="mt-7 inline-flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3.5 text-xs font-bold text-[#3b2621] transition hover:border-primary/40 hover:bg-primary/5 hover:text-primary sm:text-sm dark:border-white/12 dark:text-slate-100 dark:hover:border-violet-400/50 dark:hover:bg-violet-400/10 dark:hover:text-violet-200"
 								>
 									<span>{cta}</span>
 									<Arrow className="size-4" />

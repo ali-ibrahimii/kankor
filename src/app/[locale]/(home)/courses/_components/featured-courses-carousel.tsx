@@ -99,7 +99,7 @@ export function FeaturedCoursesCarousel({
 
 					<Link
 						href={course.href}
-						className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#b7f486] px-4 py-2 text-xs font-black text-[#17233a] transition hover:bg-[#c9f8a2]"
+						className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl bg-[#afa5a6] px-4 py-2 text-xs font-black text-[#3b2621] transition hover:bg-[#afa5a6]"
 					>
 						{t("startCourseBtn")}
 						<NextIcon className="size-4" aria-hidden="true" />
@@ -133,7 +133,7 @@ export function FeaturedCoursesCarousel({
 								className={cn(
 									"h-1.5 rounded-full transition-all",
 									index === activeIndex
-										? "w-5 bg-[#b7f486]"
+										? "w-5 bg-[#afa5a6]"
 										: "w-1.5 bg-white/30 hover:bg-white/60"
 								)}
 							/>

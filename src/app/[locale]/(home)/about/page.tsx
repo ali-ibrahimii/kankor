@@ -106,7 +106,7 @@ export default async function AboutUsPage({
 	return (
 		<div
 			dir={rtl ? "rtl" : "ltr"}
-			className="min-h-screen bg-[#f9faff] text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100"
+			className="min-h-screen bg-[#faf6ee] text-[#3b2621] dark:bg-[#251c19] dark:text-slate-100"
 		>
 			<script
 				type="application/ld+json"

@@ -35,29 +35,30 @@ const FOOTER_SOCIAL_LINKS = [
 
 export async function PublicFooter() {
 	const t = await getTranslations("landing");
+	const app = await getTranslations("app");
 	const instructorUrl = routes.auth.signup.page({ type: "instructor" });
 	const schoolUrl = routes.auth.signup.page({ type: "school" });
 
 	return (
-		<footer className="mt-auto bg-white pb-8 dark:bg-[#141b2c]">
+		<footer className="public-footer mt-auto bg-white pb-8 dark:bg-[#251c19]">
 			{/* EduLe instructor CTA card */}
 			<div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-				<div className="relative overflow-hidden rounded-[26px] bg-[#eaf6ef] px-6 py-10 sm:px-12 dark:bg-[#12241b]">
+				<div className="relative overflow-hidden rounded-[26px] bg-[#faf6ee] px-6 py-10 sm:px-12 dark:bg-[#251c19]">
 					<div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 						<div className="max-w-xl">
 							<p className="text-sm font-bold text-emerald-900/70 dark:text-emerald-300/80">
 								{t("footer.tagline")}
 							</p>
 
-							<h2 className="mt-3 text-[1.45rem] font-black leading-[1.6] text-[#17332b] sm:text-2xl dark:text-slate-100">
+							<h2 className="mt-3 text-[1.45rem] font-black leading-[1.6] text-[#3b2621] sm:text-2xl dark:text-slate-100">
 								{t.rich("footer.joinHeading", {
 									accent: (chunks) => (
-										<span className="relative inline-block text-[#1d9a63] dark:text-emerald-400">
+										<span className="relative inline-block text-[#02656b] dark:text-emerald-400">
 											{chunks}
 
 											<span
 												aria-hidden="true"
-												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#1d9a63]/55 dark:bg-emerald-400/50"
+												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#02656b]/55 dark:bg-emerald-400/50"
 											/>
 										</span>
 									),
@@ -79,11 +80,39 @@ export async function PublicFooter() {
 				</div>
 			</div>
 
+			<div className="footer-links mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+				<div className="footer-brand">
+					<div className="flex items-center gap-3">
+						<LogoEdule className="public-logo size-11" />
+						<h3 className="mb-0! text-xl">{app("name")}</h3>
+					</div>
+					<p className="mt-5 max-w-sm text-sm leading-8 text-muted-foreground">
+						{t("design.footerDescription")}
+					</p>
+				</div>
+				<div>
+					<h3>{t("design.explore")}</h3>
+					<Link href={routes.courses.page()}>{t("header.school")}</Link>
+					<Link href={routes.libraries.page()}>
+						{t("schoolMenu.items.library.title")}
+					</Link>
+					<Link href={routes.decks.page()}>{t("header.decks")}</Link>
+					<Link href={routes.quizzes.page()}>{t("header.quizzes")}</Link>
+				</div>
+				<div>
+					<h3>{t("design.community")}</h3>
+					<Link href={routes.about.page()}>{t("header.aboutUs")}</Link>
+					<Link href={instructorUrl}>{t("footer.instructorSignup")}</Link>
+					<Link href={schoolUrl}>{t("footer.schoolSignup")}</Link>
+					<Link href={routes.verify.page()}>{t("schoolMenu.verify")}</Link>
+				</div>
+			</div>
+
 			{/* Copyright + legal + social row */}
 			<div className="mx-auto mt-8 max-w-[1320px] px-4 sm:px-6 lg:px-8">
 				<div className="flex flex-col items-center justify-between gap-4 border-t border-border/70 pt-6 sm:flex-row">
 					<div className="flex items-center gap-3">
-						<LogoEdule className="size-8 shrink-0" />
+						<LogoEdule className="public-logo size-8 shrink-0" />
 
 						<span className="text-sm text-muted-foreground">
 							{t("footer.copyright", { year: new Date().getFullYear() })}

@@ -52,7 +52,7 @@ export function AboutVideoSection({
 			whileInView="show"
 			viewport={aboutMotion.viewport}
 		>
-			<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#0f1a2c] bg-[radial-gradient(circle_at_8%_108%,rgba(94,207,173,.2),transparent_38%),radial-gradient(circle_at_90%_-8%,rgba(137,100,255,.34),transparent_42%),linear-gradient(125deg,#0f1a2c_4%,#16223a_58%,#20223f_100%)] px-5 py-10 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+			<div className="relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-[#251c19] bg-[radial-gradient(circle_at_8%_108%,rgba(94,207,173,.2),transparent_38%),radial-gradient(circle_at_90%_-8%,rgba(137,100,255,.34),transparent_42%),linear-gradient(125deg,#251c19_4%,#3b2621_58%,#3b2621_100%)] px-5 py-10 text-white shadow-[0_34px_80px_-46px_rgba(14,19,49,.7)] sm:rounded-[34px] sm:px-10 sm:py-14 lg:px-14 lg:py-16">
 				<div
 					aria-hidden="true"
 					className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,.12)_0.7px,transparent_0.7px)] bg-size-[24px_24px]"
@@ -65,7 +65,7 @@ export function AboutVideoSection({
 				{/* Header */}
 				<div className="mx-auto max-w-2xl text-center">
 					<span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-1.5 text-xs font-bold text-white/90 backdrop-blur">
-						<Play className="size-3.5 fill-current text-[#b7f486]" />
+						<Play className="size-3.5 fill-current text-[#afa5a6]" />
 						{t("video.badge")}
 					</span>
 
@@ -80,7 +80,7 @@ export function AboutVideoSection({
 
 				{/* Contained 16:9 Cinema Frame */}
 				<div className="mx-auto mt-9 max-w-4xl sm:mt-11">
-					<div className="overflow-hidden rounded-[22px] border border-white/14 bg-[#09101f] shadow-[0_30px_70px_-32px_rgba(0,0,0,.75)] sm:rounded-[26px]">
+					<div className="overflow-hidden rounded-[22px] border border-white/14 bg-[#251c19] shadow-[0_30px_70px_-32px_rgba(0,0,0,.75)] sm:rounded-[26px]">
 						<div className="relative aspect-video">
 							{!isPlaying ? (
 								<div className="group relative size-full">
@@ -93,26 +93,26 @@ export function AboutVideoSection({
 									/>
 									<div
 										aria-hidden="true"
-										className="absolute inset-0 bg-linear-to-t from-[#09101f]/85 via-[#09101f]/35 to-[#09101f]/25 transition-opacity duration-300 group-hover:opacity-90"
+										className="absolute inset-0 bg-linear-to-t from-[#251c19]/85 via-[#251c19]/35 to-[#251c19]/25 transition-opacity duration-300 group-hover:opacity-90"
 									/>
 
 									<button
 										type="button"
 										onClick={() => setIsPlaying(true)}
 										aria-label={t("video.playButton")}
-										className="absolute inset-0 flex flex-col items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b7f486] focus-visible:ring-inset"
+										className="absolute inset-0 flex flex-col items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#afa5a6] focus-visible:ring-inset"
 									>
-										<span className="flex size-16 items-center justify-center rounded-full bg-[#b7f486] text-[#17233a] shadow-[0_18px_45px_rgba(0,0,0,.45)] ring-8 ring-white/10 transition duration-300 group-hover:scale-105 group-hover:bg-[#c9f8a2] sm:size-20">
+										<span className="flex size-16 items-center justify-center rounded-full bg-[#afa5a6] text-[#3b2621] shadow-[0_18px_45px_rgba(0,0,0,.45)] ring-8 ring-white/10 transition duration-300 group-hover:scale-105 group-hover:bg-[#afa5a6] sm:size-20">
 											<Play className="size-7 translate-x-0.5 fill-current sm:size-8" />
 										</span>
-										<span className="rounded-full border border-white/15 bg-[#0f1a2c]/75 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+										<span className="rounded-full border border-white/15 bg-[#251c19]/75 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-md">
 											{t("video.playButton")}
 										</span>
 									</button>
 
 									{/* Duration Pill */}
-									<div className="pointer-events-none absolute bottom-3.5 start-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#0f1a2c]/80 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur-md sm:bottom-5 sm:start-5">
-										<Clock className="size-3.5 text-[#b7f486]" />
+									<div className="pointer-events-none absolute bottom-3.5 start-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#251c19]/80 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur-md sm:bottom-5 sm:start-5">
+										<Clock className="size-3.5 text-[#afa5a6]" />
 										<span>{t("video.duration")}</span>
 									</div>
 								</div>
@@ -129,7 +129,7 @@ export function AboutVideoSection({
 										type="button"
 										onClick={() => setIsPlaying(false)}
 										aria-label={t("video.closeButton")}
-										className="absolute end-3.5 top-3.5 flex size-9 items-center justify-center rounded-full border border-white/20 bg-[#09101f]/80 text-white backdrop-blur-md transition hover:bg-[#09101f]"
+										className="absolute end-3.5 top-3.5 flex size-9 items-center justify-center rounded-full border border-white/20 bg-[#251c19]/80 text-white backdrop-blur-md transition hover:bg-[#251c19]"
 									>
 										<X className="size-4" />
 									</button>
@@ -147,7 +147,7 @@ export function AboutVideoSection({
 							className="rounded-2xl border border-white/10 bg-white/[.055] p-5 backdrop-blur-sm transition hover:border-white/20 hover:bg-white/[.08]"
 						>
 							<div className="flex items-center gap-3">
-								<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#b7f486]/14 text-[#b7f486]">
+								<span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#afa5a6]/14 text-[#afa5a6]">
 									<Icon className="size-4" />
 								</span>
 								<h3 className="text-sm font-extrabold text-white">{title}</h3>

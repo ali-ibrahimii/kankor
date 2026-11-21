@@ -66,10 +66,10 @@ export function AboutNav() {
 	return (
 		<nav
 			aria-label={t("label")}
-			className="sticky top-[58px] z-30 border-y border-[#e7eaf4] bg-[#f9faff]/88 backdrop-blur-xl lg:top-[72px] dark:border-white/10 dark:bg-[#141b2c]/88"
+			className="sticky top-[58px] z-30 border-y border-[#faf6ee] bg-[#faf6ee]/88 backdrop-blur-xl lg:top-[72px] dark:border-white/10 dark:bg-[#251c19]/88"
 		>
 			<div className="mx-auto flex max-w-[1320px] items-center gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
-				<span className="hidden shrink-0 items-center gap-2 pe-3 border-e border-[#e5e8f3] text-[11px] font-bold text-slate-400 md:inline-flex dark:border-white/10 dark:text-slate-500">
+				<span className="hidden shrink-0 items-center gap-2 pe-3 border-e border-[#e8eeea] text-[11px] font-bold text-slate-400 md:inline-flex dark:border-white/10 dark:text-slate-500">
 					<span className="size-1.5 rounded-full bg-primary" />
 					{t("label")}
 				</span>
@@ -91,7 +91,7 @@ export function AboutNav() {
 										"inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
 										isActive
 											? "bg-primary text-primary-foreground shadow-sm shadow-primary/25"
-											: "text-slate-600 hover:bg-primary/6 hover:text-[#19243b] dark:text-slate-400 dark:hover:bg-white/[.06] dark:hover:text-slate-100"
+											: "text-slate-600 hover:bg-primary/6 hover:text-[#3b2621] dark:text-slate-400 dark:hover:bg-white/[.06] dark:hover:text-slate-100"
 									)}
 								>
 									{t(section.key)}

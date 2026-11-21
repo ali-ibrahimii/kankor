@@ -126,7 +126,7 @@ function TeamMemberAvatar({
 	const showImage = Boolean(member.imageUrl && portraitClass && !failed);
 
 	return (
-		<div className="relative size-20 shrink-0 overflow-hidden rounded-[22px] border-4 border-white bg-white shadow-md shadow-slate-900/8 dark:border-[#1b2438] dark:bg-[#232e47]">
+		<div className="relative size-20 shrink-0 overflow-hidden rounded-[22px] border-4 border-white bg-white shadow-md shadow-slate-900/8 dark:border-[#3b2621] dark:bg-[#3b2621]">
 			{showImage && member.imageUrl ? (
 				<Image
 					src={member.imageUrl}
@@ -177,7 +177,7 @@ export function AboutTeamSection() {
 							<Users className="size-3.5" />
 							{t("team.badge")}
 						</span>
-						<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+						<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#3b2621] sm:text-3xl lg:text-4xl dark:text-slate-100">
 							{t("team.title")}
 						</h2>
 						<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
@@ -185,7 +185,7 @@ export function AboutTeamSection() {
 						</p>
 					</div>
 
-					<div className="soft-card max-w-md border-[#e6e9f4] bg-white px-5 py-4 dark:border-white/10 dark:bg-[#1b2438]">
+					<div className="soft-card max-w-md border-[#e8eeea] bg-white px-5 py-4 dark:border-white/10 dark:bg-[#3b2621]">
 						<div className="flex items-start gap-3">
 							<span
 								className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl ${ABOUT_TONES.violet.icon}`}
@@ -193,7 +193,7 @@ export function AboutTeamSection() {
 								<Sparkles className="size-4" />
 							</span>
 							<div className="min-w-0">
-								<p className="text-xs font-extrabold text-[#19243b] sm:text-sm dark:text-slate-100">
+								<p className="text-xs font-extrabold text-[#3b2621] sm:text-sm dark:text-slate-100">
 									{t("team.panelTitle")}
 								</p>
 								<p className="mt-1 text-xs leading-6 text-slate-500 dark:text-slate-400">
@@ -223,7 +223,7 @@ export function AboutTeamSection() {
 							<motion.article
 								key={member.id}
 								variants={aboutMotion.card}
-								className="soft-card card-hover group flex flex-col overflow-hidden border-[#e5e8f3] bg-white dark:border-white/10 dark:bg-[#1b2438]"
+								className="soft-card card-hover group flex flex-col overflow-hidden border-[#e8eeea] bg-white dark:border-white/10 dark:bg-[#3b2621]"
 							>
 								{/* Soft Pastel Studio Banner */}
 								<div className={`relative h-20 bg-linear-to-br ${tone.banner}`}>
@@ -232,7 +232,7 @@ export function AboutTeamSection() {
 										className={`absolute inset-x-0 top-0 h-1 bg-linear-to-r ${tone.bar} opacity-75`}
 									/>
 									{member.location && (
-										<span className="absolute end-3.5 top-3.5 inline-flex items-center gap-1 rounded-full border border-white/70 bg-white/80 px-2.5 py-1 text-[10px] font-bold text-slate-600 backdrop-blur-sm dark:border-white/10 dark:bg-[#141b2c]/70 dark:text-slate-300">
+										<span className="absolute end-3.5 top-3.5 inline-flex items-center gap-1 rounded-full border border-white/70 bg-white/80 px-2.5 py-1 text-[10px] font-bold text-slate-600 backdrop-blur-sm dark:border-white/10 dark:bg-[#251c19]/70 dark:text-slate-300">
 											<MapPin className="size-3 text-primary" />
 											{member.location}
 										</span>
@@ -264,7 +264,7 @@ export function AboutTeamSection() {
 										)}
 									</div>
 
-									<h3 className="mt-4 text-lg font-extrabold text-[#19243b] dark:text-slate-100">
+									<h3 className="mt-4 text-lg font-extrabold text-[#3b2621] dark:text-slate-100">
 										{member.name}
 									</h3>
 

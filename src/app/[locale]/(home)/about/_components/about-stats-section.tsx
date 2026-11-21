@@ -56,7 +56,7 @@ export function AboutStatsSection() {
 					<motion.div
 						key={key}
 						variants={aboutMotion.item}
-						className="soft-card flex items-center gap-3.5 border-[#e6e9f4] bg-white px-4 py-4 sm:gap-4 sm:px-5 sm:py-5 dark:border-white/10 dark:bg-[#1b2438]"
+						className="soft-card flex items-center gap-3.5 border-[#e8eeea] bg-white px-4 py-4 sm:gap-4 sm:px-5 sm:py-5 dark:border-white/10 dark:bg-[#3b2621]"
 					>
 						<div
 							className={`flex size-11 shrink-0 items-center justify-center rounded-2xl sm:size-12 ${tint}`}
@@ -65,7 +65,7 @@ export function AboutStatsSection() {
 						</div>
 
 						<div className="min-w-0">
-							<dd className="text-xl font-black tracking-tight text-[#19243b] sm:text-2xl dark:text-slate-100">
+							<dd className="text-xl font-black tracking-tight text-[#3b2621] sm:text-2xl dark:text-slate-100">
 								{value}
 							</dd>
 							<dt className="mt-0.5 truncate text-xs font-medium text-slate-500 dark:text-slate-400">

@@ -33,6 +33,7 @@ import {
 } from "./_components/home-cards";
 import type { HomeCatalogData } from "./_components/home-catalog-data";
 import { HorizontalCardSection } from "./_components/horizontal-card-section";
+import { LearningSteps } from "./_components/learning-steps";
 import { PartnerInstitutionsSection } from "./_components/partner-institutions-section";
 import { ShelfChips } from "./_components/shelf-chips";
 import { ShelfSearchBox } from "./_components/shelf-search-box";
@@ -57,25 +58,25 @@ export default async function HomeContent({
 			value: t("stats.flashcards"),
 			label: t("stats.flashcardsLabel"),
 			icon: Zap,
-			tint: "bg-[#eee8ff] text-[#6b4dd7]",
+			tint: "bg-[#faf6ee] text-[#02656b]",
 		},
 		{
 			value: t("stats.offline"),
 			label: t("stats.offlineLabel"),
 			icon: WifiOff,
-			tint: "bg-[#e1f6ec] text-[#258263]",
+			tint: "bg-[#e8eeea] text-[#02656b]",
 		},
 		{
 			value: t("stats.modules"),
 			label: t("stats.modulesLabel"),
 			icon: BookOpen,
-			tint: "bg-[#e6f1ff] text-[#3a79c2]",
+			tint: "bg-[#faf6ee] text-[#02656b]",
 		},
 		{
 			value: t("showcase.statsRoles"),
 			label: t("showcase.statsRolesLabel"),
 			icon: Users,
-			tint: "bg-[#ffeddf] text-[#c87949]",
+			tint: "bg-[#faf6ee] text-[#dc7030]",
 		},
 	] as const;
 
@@ -83,17 +84,17 @@ export default async function HomeContent({
 		{
 			key: "subjectMath",
 			value: 84,
-			color: "#b7f486",
+			color: "#afa5a6",
 		},
 		{
 			key: "subjectPhysics",
 			value: 65,
-			color: "#a58cff",
+			color: "#afa5a6",
 		},
 		{
 			key: "subjectBio",
 			value: 72,
-			color: "#7ce5d1",
+			color: "#afa5a6",
 		},
 	] as const;
 
@@ -105,7 +106,7 @@ export default async function HomeContent({
 			feature: t("showcase.studentFeature"),
 			cta: t("showcase.studentCta"),
 			href: routes.auth.signup.page({ type: "student" }),
-			tint: "bg-[#e8e0ff] text-[#6246be]",
+			tint: "bg-[#faf6ee] text-[#02656b]",
 		},
 		{
 			icon: BookOpen,
@@ -114,7 +115,7 @@ export default async function HomeContent({
 			feature: t("showcase.teacherFeature"),
 			cta: t("instructor.cta"),
 			href: routes.auth.signup.page({ type: "instructor" }),
-			tint: "bg-[#dcf4e7] text-[#268064]",
+			tint: "bg-[#e8eeea] text-[#02656b]",
 		},
 		{
 			icon: School,
@@ -123,7 +124,7 @@ export default async function HomeContent({
 			feature: t("showcase.schoolFeature"),
 			cta: t("school.cta"),
 			href: routes.auth.signup.page({ type: "school" }),
-			tint: "bg-[#e0ecff] text-[#427dc5]",
+			tint: "bg-[#faf6ee] text-[#02656b]",
 		},
 	] as const;
 
@@ -131,10 +132,10 @@ export default async function HomeContent({
 	const offlinePoints = [1, 2, 3] as const;
 
 	return (
-		<div className="min-h-screen overflow-x-clip bg-white text-[#19243b] dark:bg-[#141b2c] dark:text-slate-100">
+		<div className="landing-home min-h-screen overflow-x-clip">
 			{/* Hero — EduLe light-mint template skin */}
-			<section className="bg-[#eaf6ef] dark:bg-[#12241b]">
-				<div className="relative mx-auto max-w-[1320px] px-4 pt-6 pb-12 sm:px-6 sm:pt-8 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-20">
+			<section className="landing-hero">
+				<div className="hero-inner relative mx-auto max-w-[1320px] px-4 pt-6 pb-12 sm:px-6 sm:pt-8 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-20">
 					{/* difyuzel stitches */}
 					<EduleStitch className="absolute start-10 top-10 hidden rotate-[14deg] sm:block" />
 					<EduleStitch className="absolute start-44 top-4 hidden -rotate-6 sm:block" />
@@ -143,19 +144,19 @@ export default async function HomeContent({
 					<div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,44%)] lg:gap-6">
 						{/* Copy */}
 						<div className="relative z-10">
-							<p className="text-[13px] font-bold text-emerald-900/70 sm:text-sm dark:text-emerald-300/80">
+							<p className="hero-eyebrow text-[13px] font-bold text-emerald-900/70 sm:text-sm dark:text-emerald-300/80">
 								{t("hero.eyebrow")}
 							</p>
 
-							<h1 className="mt-3 max-w-[560px] text-[1.85rem] font-black leading-[1.55] tracking-tight text-[#17332b] sm:text-[2.4rem] lg:text-[2.75rem] dark:text-slate-100">
+							<h1 className="hero-title mt-3 max-w-[560px] text-[1.85rem] font-black leading-[1.55] tracking-tight text-[#3b2621] sm:text-[2.4rem] lg:text-[2.75rem] dark:text-slate-100">
 								{t.rich("hero.heading", {
 									accent: (chunks) => (
-										<span className="relative inline-block text-[#1d9a63] dark:text-emerald-400">
+										<span className="relative inline-block text-[#02656b] dark:text-emerald-400">
 											{chunks}
 
 											<span
 												aria-hidden="true"
-												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#1d9a63]/55 dark:bg-emerald-400/50"
+												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#02656b]/55 dark:bg-emerald-400/50"
 											/>
 										</span>
 									),
@@ -166,7 +167,7 @@ export default async function HomeContent({
 								{t("hero.subtitle")}
 							</p>
 
-							<div className="mt-7 flex flex-col gap-3 sm:flex-row">
+							<div className="hero-actions mt-7 flex flex-col gap-3 sm:flex-row">
 								<Link
 									href={routes.courses.page()}
 									className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-edule-green px-7 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/25 transition hover:-translate-y-0.5 hover:bg-edule-green/90"
@@ -183,10 +184,14 @@ export default async function HomeContent({
 									<Arrow className="size-4" />
 								</Link>
 							</div>
+							<p className="hero-trust">
+								<Check className="size-4 shrink-0" aria-hidden="true" />
+								{t("design.trust")}
+							</p>
 						</div>
 
 						{/* Student illustration + floating bubbles */}
-						<div className="relative mx-auto w-full max-w-[440px] lg:max-w-none">
+						<div className="hero-visual relative mx-auto w-full max-w-[440px] lg:max-w-none">
 							<div className="relative aspect-[922/980] w-full">
 								<Image
 									src="/images/hero/hero-cutout.png"
@@ -194,12 +199,12 @@ export default async function HomeContent({
 									fill
 									priority
 									sizes="(max-width: 1024px) 88vw, 44vw"
-									className="object-contain object-bottom"
+									className="hero-portrait object-contain object-bottom"
 								/>
 							</div>
 
 							{/* 1,235 Courses bubble */}
-							<div className="absolute start-1 top-3 flex size-24 flex-col items-center justify-center rounded-full bg-[#17845a] text-center text-white shadow-xl shadow-emerald-900/25 sm:size-28 dark:bg-emerald-700">
+							<div className="hero-course-bubble absolute start-1 top-3 flex size-24 flex-col items-center justify-center rounded-full bg-[#02656b] text-center text-white shadow-xl shadow-emerald-900/25 sm:size-28 dark:bg-emerald-700">
 								<strong className="text-lg font-black sm:text-xl">
 									{t("hero.badgeCoursesValue")}
 								</strong>
@@ -210,13 +215,13 @@ export default async function HomeContent({
 							</div>
 
 							{/* 4.8 Rating bubble */}
-							<div className="absolute end-0 top-0 flex items-center gap-2 rounded-full bg-white/90 py-2 ps-2 pe-3.5 shadow-lg shadow-emerald-900/10 backdrop-blur-sm dark:bg-white/10 sm:-top-1 sm:end-2">
+							<div className="hero-rating absolute end-0 top-0 flex items-center gap-2 rounded-full bg-white/90 py-2 ps-2 pe-3.5 shadow-lg shadow-emerald-900/10 backdrop-blur-sm dark:bg-white/10 sm:-top-1 sm:end-2">
 								<span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-amber-400/20 text-amber-500">
 									<Star className="size-3.5 fill-amber-400" />
 								</span>
 
 								<span className="leading-tight">
-									<strong className="block text-sm font-black text-[#17332b] dark:text-slate-100">
+									<strong className="block text-sm font-black text-[#3b2621] dark:text-slate-100">
 										{t("hero.ratingTitle")}
 									</strong>
 
@@ -234,7 +239,7 @@ export default async function HomeContent({
 			</section>
 
 			{/* Stats */}
-			<section className="mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-6 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
+			<section className="landing-stats mx-auto grid max-w-[1320px] grid-cols-2 gap-3 px-4 pt-6 pb-3 sm:px-6 lg:grid-cols-4 lg:px-8">
 				{stats.map(({ value, label, icon: Icon, tint }) => (
 					<div
 						key={label}
@@ -247,7 +252,7 @@ export default async function HomeContent({
 						</span>
 
 						<div>
-							<p className="text-xl font-extrabold text-[#1d2841] sm:text-2xl dark:text-slate-100">
+							<p className="text-xl font-extrabold text-[#3b2621] sm:text-2xl dark:text-slate-100">
 								{value}
 							</p>
 
@@ -367,37 +372,39 @@ export default async function HomeContent({
 				/>
 			)}
 
+			<LearningSteps />
+
 			{/* Offline Mobile App Highlight */}
 			<section className="py-16 sm:py-22">
 				<div className="mx-auto grid max-w-[1320px] items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
-					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#dcf4e7] p-5 sm:p-8">
+					<div className="relative mx-auto w-full max-w-lg rounded-[30px] bg-[#e8eeea] p-5 sm:p-8">
 						<div className="absolute -start-3 -top-5 flex size-20 items-center justify-center rounded-[26px] bg-edule-green text-white shadow-lg shadow-emerald-600/25">
 							<CloudDownload className="size-9" />
 						</div>
 
 						<div className="rounded-[25px] border border-white/65 bg-white p-5 shadow-[0_24px_50px_-31px_rgba(40,32,96,.35)] sm:p-7">
 							<div className="flex items-center justify-between border-b border-slate-100 pb-4">
-								<span className="flex items-center gap-2 text-sm font-extrabold text-[#19243b]">
-									<WifiOff className="size-5 text-[#1d9a63]" />
+								<span className="flex items-center gap-2 text-sm font-extrabold text-[#3b2621]">
+									<WifiOff className="size-5 text-[#02656b]" />
 
 									{t("offline.badgeLabel")}
 								</span>
 
-								<span className="size-2 rounded-full bg-[#57d4a7]" />
+								<span className="size-2 rounded-full bg-[#02656b]" />
 							</div>
 
 							{offlineModules.map((key, index) => (
 								<div
 									key={key}
-									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#f2faf4] p-3"
+									className="mt-4 flex items-center gap-3 rounded-2xl bg-[#faf6ee] p-3"
 								>
 									<span
 										className={`flex size-10 items-center justify-center rounded-xl ${
 											index === 0
-												? "bg-[#e6ddff] text-violet-600"
+												? "bg-[#faf6ee] text-violet-600"
 												: index === 1
-													? "bg-[#dcf5e7] text-emerald-600"
-													: "bg-[#ffe7d8] text-orange-600"
+													? "bg-[#e8eeea] text-emerald-600"
+													: "bg-[#ede1c7] text-orange-600"
 										}`}
 									>
 										{index === 0 ? (
@@ -420,7 +427,7 @@ export default async function HomeContent({
 					</div>
 
 					<div>
-						<span className="inline-flex rounded-full bg-[#eef9ec] px-3 py-1.5 text-[11px] font-bold text-[#297b58]">
+						<span className="inline-flex rounded-full bg-[#faf6ee] px-3 py-1.5 text-[11px] font-bold text-[#02656b]">
 							{t("showcase.offlineLabel")}
 						</span>
 
@@ -435,7 +442,7 @@ export default async function HomeContent({
 						<div className="mt-7 space-y-5">
 							{offlinePoints.map((num) => (
 								<div key={num} className="flex items-start gap-3">
-									<span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl bg-[#e8f7e7] text-emerald-700">
+									<span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl bg-[#faf6ee] text-emerald-700">
 										<Check className="size-4" />
 									</span>
 
@@ -492,7 +499,7 @@ export default async function HomeContent({
 									<Icon className="size-7" />
 								</span>
 
-								<h3 className="mt-6 text-lg font-extrabold text-[#19243b] dark:text-slate-100">
+								<h3 className="mt-6 text-lg font-extrabold text-[#3b2621] dark:text-slate-100">
 									{title}
 								</h3>
 
@@ -508,7 +515,7 @@ export default async function HomeContent({
 
 								<Link
 									href={href}
-									className="mt-6 inline-flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 text-xs font-bold text-[#19243b] transition hover:border-violet-300 hover:bg-violet-50 dark:border-white/10 dark:text-slate-100 dark:hover:border-violet-400 dark:hover:bg-violet-400/10"
+									className="mt-6 inline-flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 text-xs font-bold text-[#3b2621] transition hover:border-violet-300 hover:bg-violet-50 dark:border-white/10 dark:text-slate-100 dark:hover:border-violet-400 dark:hover:bg-violet-400/10"
 								>
 									{cta}
 
@@ -522,7 +529,7 @@ export default async function HomeContent({
 
 			{/* Final CTA — EduLe mint banner with hand-drawn arrow */}
 			<section className="mx-auto max-w-[1320px] px-4 pt-10 pb-20 sm:px-6 lg:px-8 lg:pb-24">
-				<div className="relative isolate overflow-hidden rounded-[26px] bg-[#eaf6ef] px-6 py-12 sm:px-12 sm:py-14 dark:bg-[#12241b]">
+				<div className="relative isolate overflow-hidden rounded-[26px] bg-[#faf6ee] px-6 py-12 sm:px-12 sm:py-14 dark:bg-[#251c19]">
 					<EduleStitch className="absolute start-8 top-6 hidden rotate-[10deg] sm:block" />
 					<EduleStitch className="absolute bottom-8 start-24 hidden -rotate-6 sm:block" />
 					<EduleStitch className="absolute start-10 top-1/2 hidden rotate-45 lg:block" />
@@ -533,15 +540,15 @@ export default async function HomeContent({
 								{t("footer.tagline")}
 							</p>
 
-							<h2 className="mt-3 text-2xl font-black leading-[1.55] text-[#17332b] sm:text-3xl dark:text-slate-100">
+							<h2 className="mt-3 text-2xl font-black leading-[1.55] text-[#3b2621] sm:text-3xl dark:text-slate-100">
 								{t.rich("showcase.ctaHeading", {
 									accent: (chunks) => (
-										<span className="relative inline-block text-[#1d9a63] dark:text-emerald-400">
+										<span className="relative inline-block text-[#02656b] dark:text-emerald-400">
 											{chunks}
 
 											<span
 												aria-hidden="true"
-												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#1d9a63]/55 dark:bg-emerald-400/50"
+												className="absolute inset-x-0 -bottom-1 h-[3px] rounded-full bg-[#02656b]/55 dark:bg-emerald-400/50"
 											/>
 										</span>
 									),

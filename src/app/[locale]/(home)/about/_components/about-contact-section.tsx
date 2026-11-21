@@ -119,7 +119,7 @@ export function AboutContactSection() {
 						<Send className="size-3.5" />
 						{t("contact.badge")}
 					</span>
-					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#3b2621] sm:text-3xl lg:text-4xl dark:text-slate-100">
 						{t("contact.title")}
 					</h2>
 					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
@@ -161,7 +161,7 @@ export function AboutContactSection() {
 									</p>
 									<p
 										dir={ltr ? "ltr" : undefined}
-										className={`mt-1.5 break-words text-sm font-extrabold leading-7 text-[#19243b] dark:text-slate-100 ${ltr ? "text-start" : ""}`}
+										className={`mt-1.5 break-words text-sm font-extrabold leading-7 text-[#3b2621] dark:text-slate-100 ${ltr ? "text-start" : ""}`}
 									>
 										{value}
 									</p>
@@ -173,7 +173,7 @@ export function AboutContactSection() {
 									key={id}
 									href={href}
 									variants={aboutMotion.card}
-									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 dark:border-white/10 dark:bg-[#1b2438]"
+									className="soft-card card-hover group relative flex flex-col overflow-hidden border-[#e8eeea] bg-white p-6 dark:border-white/10 dark:bg-[#3b2621]"
 								>
 									{body}
 								</motion.a>
@@ -181,7 +181,7 @@ export function AboutContactSection() {
 								<motion.div
 									key={id}
 									variants={aboutMotion.card}
-									className="soft-card group relative flex flex-col overflow-hidden border-[#e5e8f3] bg-white p-6 dark:border-white/10 dark:bg-[#1b2438]"
+									className="soft-card group relative flex flex-col overflow-hidden border-[#e8eeea] bg-white p-6 dark:border-white/10 dark:bg-[#3b2621]"
 								>
 									{body}
 								</motion.div>
@@ -193,14 +193,14 @@ export function AboutContactSection() {
 				{/* Social Community & Response Time Strip */}
 				<motion.div
 					variants={aboutMotion.card}
-					className="soft-card mt-5 flex flex-col justify-between gap-6 border-[#e5e8f3] bg-white p-6 sm:p-8 lg:flex-row lg:items-center dark:border-white/10 dark:bg-[#1b2438]"
+					className="soft-card mt-5 flex flex-col justify-between gap-6 border-[#e8eeea] bg-white p-6 sm:p-8 lg:flex-row lg:items-center dark:border-white/10 dark:bg-[#3b2621]"
 				>
 					<div>
-						<div className="inline-flex items-center gap-2 rounded-full border border-[#c7eedc] bg-[#eaf9f1] px-3 py-1 text-xs font-bold text-[#1f7558] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200">
-							<span className="size-2 rounded-full bg-[#258263] dark:bg-emerald-400" />
+						<div className="inline-flex items-center gap-2 rounded-full border border-[#e8eeea] bg-[#faf6ee] px-3 py-1 text-xs font-bold text-[#02656b] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200">
+							<span className="size-2 rounded-full bg-[#02656b] dark:bg-emerald-400" />
 							{t("contact.responseTime")}
 						</div>
-						<h3 className="mt-3 text-lg font-extrabold text-[#19243b] sm:text-xl dark:text-slate-100">
+						<h3 className="mt-3 text-lg font-extrabold text-[#3b2621] sm:text-xl dark:text-slate-100">
 							{t("contact.socialTitle")}
 						</h3>
 						<p className="mt-1 text-xs leading-7 text-slate-500 sm:text-sm dark:text-slate-400">
@@ -216,7 +216,7 @@ export function AboutContactSection() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label={social.name}
-								className="inline-flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-xs font-bold text-[#19243b] transition hover:-translate-y-0.5 hover:border-primary/35 hover:bg-primary/6 hover:text-primary dark:border-white/10 dark:bg-white/[.04] dark:text-slate-200 dark:hover:border-violet-400/40 dark:hover:bg-violet-400/10 dark:hover:text-violet-200"
+								className="inline-flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-xs font-bold text-[#3b2621] transition hover:-translate-y-0.5 hover:border-primary/35 hover:bg-primary/6 hover:text-primary dark:border-white/10 dark:bg-white/[.04] dark:text-slate-200 dark:hover:border-violet-400/40 dark:hover:bg-violet-400/10 dark:hover:text-violet-200"
 							>
 								{social.icon}
 								<span>{social.name}</span>

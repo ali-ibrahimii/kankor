@@ -1,0 +1,525 @@
+/* Public-site skin only. Dashboard/auth tokens intentionally remain unchanged.
+   Palette sampled from IMG_3388.jpeg (the repeated labels in it are inaccurate). */
+.public-site {
+	--brand-cocoa: #3b2621;
+	--brand-orange: #dc7030;
+	--brand-cream: #ede1c7;
+	--brand-peach: #ecb99e;
+	--brand-stone: #afa5a6;
+	--brand-teal: #02656b;
+	--color-edule-green: var(--brand-teal);
+	--edule-green: var(--brand-teal);
+	--background: #fffcf7;
+	--foreground: #3b2621;
+	--card: #ffffff;
+	--card-foreground: #3b2621;
+	--popover: #fffcf7;
+	--popover-foreground: #3b2621;
+	--primary: #02656b;
+	--primary-foreground: #ffffff;
+	--primary-600: #02656b;
+	--primary-700: #014d52;
+	--secondary: #ede1c7;
+	--secondary-foreground: #3b2621;
+	--muted: #f5eee2;
+	--muted-foreground: #766660;
+	--accent: #f8e7da;
+	--accent-foreground: #3b2621;
+	--border: #e9dfd2;
+	--input: #e0d5c7;
+	--ring: #02656b;
+	background: var(--background);
+	color: var(--foreground);
+	isolation: isolate;
+}
+
+.dark .public-site {
+	--background: #251c19;
+	--foreground: #f6ecdb;
+	--card: #322521;
+	--card-foreground: #f6ecdb;
+	--popover: #322521;
+	--popover-foreground: #f6ecdb;
+	--primary: #85c7c7;
+	--primary-foreground: #182d2c;
+	--secondary: #47332b;
+	--secondary-foreground: #f6ecdb;
+	--muted: #3c2d27;
+	--muted-foreground: #c4b6ae;
+	--accent: #49372f;
+	--accent-foreground: #f6ecdb;
+	--border: #59453a;
+	--input: #59453a;
+	--ring: #85c7c7;
+}
+
+.public-site .site-header {
+	background: color-mix(in srgb, var(--background) 96%, transparent);
+	border-color: var(--border);
+	box-shadow: none;
+}
+
+.public-site .site-header nav {
+	max-width: 1320px;
+	min-height: 96px;
+}
+
+.public-site .public-announcement {
+	background: var(--brand-cocoa);
+	border: 0;
+}
+
+.public-site .public-announcement :is(p, a, svg) {
+	color: #f8ecda;
+}
+
+.public-site .public-announcement > div {
+	min-height: 40px;
+}
+
+.public-site .public-announcement a:hover {
+	color: var(--brand-peach);
+}
+
+.public-site .public-logo :is(rect, path) {
+	stroke: var(--brand-teal);
+}
+.public-site .public-logo g {
+	fill: var(--brand-teal);
+}
+.dark .public-site .public-logo :is(rect, path) {
+	stroke: var(--primary);
+}
+.dark .public-site .public-logo g {
+	fill: var(--primary);
+}
+
+.public-site .edule-arrow-doodle {
+	color: var(--brand-teal);
+}
+.public-site .edule-stitch {
+	color: var(--brand-orange);
+}
+
+.public-site .landing-home {
+	background: var(--background);
+	color: var(--foreground);
+}
+
+.public-site .landing-hero {
+	position: relative;
+	background: #f4ecdc;
+	border-bottom: 1px solid var(--border);
+}
+.dark .public-site .landing-hero {
+	background: #352720;
+}
+.public-site .hero-inner {
+	padding-block: 64px 56px;
+}
+.public-site .hero-title {
+	font-size: clamp(2.15rem, 3.65vw, 3.7rem);
+	line-height: 1.48;
+	font-weight: 800;
+	letter-spacing: -0.035em;
+	color: var(--foreground);
+}
+.public-site .hero-eyebrow {
+	color: var(--primary);
+	font-size: 14px;
+	font-weight: 700;
+}
+.public-site .hero-visual {
+	isolation: isolate;
+}
+.public-site .hero-visual::before {
+	content: "";
+	position: absolute;
+	inset: 12% -2% 0;
+	z-index: -1;
+	border-radius: 50% 50% 42% 42%;
+	background: var(--brand-peach);
+}
+.public-site .hero-visual::after {
+	content: "";
+	position: absolute;
+	inset: 8% -6% 5% 2%;
+	z-index: -2;
+	border: 1px dashed var(--brand-orange);
+	border-radius: 50%;
+	transform: rotate(-14deg);
+}
+.public-site .hero-portrait {
+	filter: drop-shadow(0 18px 12px rgb(59 38 33 / 7%));
+}
+.public-site .hero-course-bubble {
+	background: var(--brand-teal);
+	box-shadow: 0 12px 28px rgb(2 101 107 / 15%);
+}
+.public-site .hero-rating {
+	border: 1px solid var(--border);
+	background: var(--card);
+}
+.public-site .hero-actions > a {
+	min-height: 54px;
+	border-radius: 9px;
+	padding-inline: 28px;
+}
+.public-site .hero-actions > a:first-child {
+	background: var(--brand-teal);
+	box-shadow: none;
+}
+.public-site .hero-actions > a:first-child:hover {
+	background: var(--brand-cocoa);
+}
+.public-site .hero-actions > a:last-child {
+	color: var(--foreground);
+	border-color: #cbbba7;
+	background: transparent;
+}
+.public-site .hero-trust {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 12px;
+	color: var(--muted-foreground);
+}
+.public-site .hero-trust svg {
+	color: var(--primary);
+}
+.public-site .landing-stats {
+	padding-block: 32px;
+	gap: 0;
+	border-bottom: 1px solid var(--border);
+}
+.public-site .landing-stats > div {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+}
+.public-site .landing-stats > div + div {
+	border-inline-start: 1px solid var(--border);
+}
+.public-site .home-shelf {
+	padding-block: 58px;
+}
+.public-site .home-shelf h2 {
+	font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+}
+.public-site .course-grid > a {
+	width: 100%;
+	min-width: 0;
+	border-radius: 14px;
+	padding: 14px;
+	border-color: var(--border);
+	box-shadow: none;
+	background: var(--card);
+}
+.public-site .course-grid > a > div:first-child {
+	border-radius: 9px;
+}
+.public-site .course-grid h3 {
+	font-size: 17px;
+	line-height: 1.85;
+	margin-block: 10px;
+}
+.public-site .course-grid > a:hover {
+	border-color: var(--brand-teal);
+	box-shadow: 0 18px 35px -25px rgb(59 38 33 / 28%);
+}
+.public-site .learning-steps {
+	padding-block: 72px;
+	border-block: 1px solid var(--border);
+	background: var(--muted);
+}
+.public-site .learning-step {
+	position: relative;
+	border-radius: 14px;
+	border: 1px solid var(--border);
+	background: var(--card);
+	padding: 32px;
+}
+.public-site .learning-step-number {
+	position: absolute;
+	inset-inline-end: 24px;
+	top: 22px;
+	font-size: 42px;
+	line-height: 1;
+	font-weight: 800;
+	color: color-mix(in srgb, var(--brand-stone) 30%, transparent);
+}
+.public-site .learning-step-icon {
+	display: grid;
+	place-items: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 18px;
+	background: #f8e7da;
+	color: #9b491c;
+}
+.public-site .learning-step:nth-child(2) .learning-step-icon {
+	background: #e6eeea;
+	color: var(--brand-teal);
+}
+.public-site .learning-step:nth-child(3) .learning-step-icon {
+	background: var(--brand-cream);
+	color: var(--brand-cocoa);
+}
+.public-site .public-footer {
+	padding-top: 32px;
+	background: var(--muted);
+	border-top: 1px solid var(--border);
+}
+.public-site .footer-links {
+	display: grid;
+	grid-template-columns: 1.6fr 1fr 1fr;
+	gap: 48px;
+	padding-block: 48px 16px;
+}
+.public-site .footer-links h3 {
+	font-weight: 800;
+	margin-bottom: 20px;
+}
+.public-site .footer-links a {
+	display: block;
+	width: fit-content;
+	font-size: 13px;
+	line-height: 2;
+	color: var(--muted-foreground);
+	margin-top: 8px;
+}
+.public-site .footer-links a:hover {
+	color: var(--primary);
+}
+.public-site .public-catalog-hero,
+.public-site .public-inner-hero {
+	background: var(--brand-cocoa);
+	box-shadow: none;
+	border-color: var(--brand-cocoa);
+}
+.public-site .public-catalog-hero {
+	border-radius: 18px;
+}
+.public-site a:focus-visible,
+.public-site button:focus-visible {
+	outline: 3px solid var(--brand-orange);
+	outline-offset: 4px;
+}
+@media (min-width: 1024px) {
+	.public-site .hero-visual {
+		max-width: 480px;
+	}
+}
+@media (max-width: 1023px) {
+	.public-site .hero-inner {
+		padding-block: 40px;
+	}
+	.public-site .site-header nav {
+		min-height: 76px;
+	}
+}
+@media (max-width: 639px) {
+	.public-site .hero-title {
+		font-size: 2.1rem;
+	}
+	.public-site .hero-visual {
+		width: 86%;
+	}
+	.public-site .hero-trust {
+		font-size: 11px;
+	}
+	.public-site .landing-stats > div:nth-child(3) {
+		border-inline-start: 0;
+	}
+	.public-site .landing-stats {
+		padding-block: 18px;
+	}
+	.public-site .home-shelf {
+		padding-block: 36px;
+	}
+	.public-site .footer-links {
+		grid-template-columns: 1fr 1fr;
+		gap: 28px;
+	}
+	.public-site .footer-brand {
+		grid-column: 1 / -1;
+	}
+	.public-site .learning-steps {
+		padding-block: 48px;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.public-site *,
+	.public-site *::before,
+	.public-site *::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Reused public cards inherit these utility colors without changing their source. */
+.public-site {
+	--color-emerald-50: #f6f5ed;
+	--color-emerald-100: #e8eeea;
+	--color-emerald-200: #cadcd5;
+	--color-emerald-300: #a3c7c3;
+	--color-emerald-400: #528f8f;
+	--color-emerald-500: #287c7e;
+	--color-emerald-600: #02656b;
+	--color-emerald-700: #02585d;
+	--color-emerald-800: #03494d;
+	--color-emerald-900: #123b3b;
+	--color-emerald-950: #202f2b;
+	--color-green-50: #f6f5ed;
+	--color-green-100: #e8eeea;
+	--color-green-200: #cadcd5;
+	--color-green-300: #a3c7c3;
+	--color-green-400: #528f8f;
+	--color-green-500: #287c7e;
+	--color-green-600: #02656b;
+	--color-green-700: #02585d;
+	--color-green-800: #03494d;
+	--color-green-900: #123b3b;
+	--color-green-950: #202f2b;
+	--color-teal-50: #f6f5ed;
+	--color-teal-100: #e8eeea;
+	--color-teal-200: #cadcd5;
+	--color-teal-300: #a3c7c3;
+	--color-teal-400: #528f8f;
+	--color-teal-500: #287c7e;
+	--color-teal-600: #02656b;
+	--color-teal-700: #02585d;
+	--color-teal-800: #03494d;
+	--color-teal-900: #123b3b;
+	--color-teal-950: #202f2b;
+	--color-cyan-50: #f6f5ed;
+	--color-cyan-100: #e8eeea;
+	--color-cyan-200: #cadcd5;
+	--color-cyan-300: #a3c7c3;
+	--color-cyan-400: #528f8f;
+	--color-cyan-500: #287c7e;
+	--color-cyan-600: #02656b;
+	--color-cyan-700: #02585d;
+	--color-cyan-800: #03494d;
+	--color-cyan-900: #123b3b;
+	--color-cyan-950: #202f2b;
+	--color-blue-50: #f6f5ed;
+	--color-blue-100: #e8eeea;
+	--color-blue-200: #cadcd5;
+	--color-blue-300: #a3c7c3;
+	--color-blue-400: #528f8f;
+	--color-blue-500: #287c7e;
+	--color-blue-600: #02656b;
+	--color-blue-700: #02585d;
+	--color-blue-800: #03494d;
+	--color-blue-900: #123b3b;
+	--color-blue-950: #202f2b;
+	--color-indigo-50: #f6f5ed;
+	--color-indigo-100: #e8eeea;
+	--color-indigo-200: #cadcd5;
+	--color-indigo-300: #a3c7c3;
+	--color-indigo-400: #528f8f;
+	--color-indigo-500: #287c7e;
+	--color-indigo-600: #02656b;
+	--color-indigo-700: #02585d;
+	--color-indigo-800: #03494d;
+	--color-indigo-900: #123b3b;
+	--color-indigo-950: #202f2b;
+	--color-violet-50: #f6f5ed;
+	--color-violet-100: #e8eeea;
+	--color-violet-200: #cadcd5;
+	--color-violet-300: #a3c7c3;
+	--color-violet-400: #528f8f;
+	--color-violet-500: #287c7e;
+	--color-violet-600: #02656b;
+	--color-violet-700: #02585d;
+	--color-violet-800: #03494d;
+	--color-violet-900: #123b3b;
+	--color-violet-950: #202f2b;
+	--color-purple-50: #f6f5ed;
+	--color-purple-100: #e8eeea;
+	--color-purple-200: #cadcd5;
+	--color-purple-300: #a3c7c3;
+	--color-purple-400: #528f8f;
+	--color-purple-500: #287c7e;
+	--color-purple-600: #02656b;
+	--color-purple-700: #02585d;
+	--color-purple-800: #03494d;
+	--color-purple-900: #123b3b;
+	--color-purple-950: #202f2b;
+	--color-sky-50: #f6f5ed;
+	--color-sky-100: #e8eeea;
+	--color-sky-200: #cadcd5;
+	--color-sky-300: #a3c7c3;
+	--color-sky-400: #528f8f;
+	--color-sky-500: #287c7e;
+	--color-sky-600: #02656b;
+	--color-sky-700: #02585d;
+	--color-sky-800: #03494d;
+	--color-sky-900: #123b3b;
+	--color-sky-950: #202f2b;
+	--color-slate-50: #faf7f1;
+	--color-gray-50: #faf7f1;
+	--color-zinc-50: #faf7f1;
+	--color-slate-100: #f2ece3;
+	--color-gray-100: #f2ece3;
+	--color-zinc-100: #f2ece3;
+	--color-slate-200: #e4dbd1;
+	--color-gray-200: #e4dbd1;
+	--color-zinc-200: #e4dbd1;
+	--color-slate-300: #c7bcb4;
+	--color-gray-300: #c7bcb4;
+	--color-zinc-300: #c7bcb4;
+	--color-slate-400: #a4948a;
+	--color-gray-400: #a4948a;
+	--color-zinc-400: #a4948a;
+	--color-slate-500: #766660;
+	--color-gray-500: #766660;
+	--color-zinc-500: #766660;
+	--color-slate-600: #66534a;
+	--color-gray-600: #66534a;
+	--color-zinc-600: #66534a;
+	--color-slate-700: #533d33;
+	--color-gray-700: #533d33;
+	--color-zinc-700: #533d33;
+	--color-slate-800: #402d26;
+	--color-gray-800: #402d26;
+	--color-zinc-800: #402d26;
+	--color-slate-900: #3b2621;
+	--color-gray-900: #3b2621;
+	--color-zinc-900: #3b2621;
+	--color-slate-950: #251c19;
+	--color-gray-950: #251c19;
+	--color-zinc-950: #251c19;
+}
+
+.public-site .public-catalog-hero {
+	background: #f4ecdc;
+	border: 1px solid var(--border);
+}
+.dark .public-site .public-catalog-hero {
+	background: #352720;
+}
+.public-site .catalog-hero-symbol {
+	background: var(--brand-peach);
+	color: var(--brand-cocoa);
+	outline: 1px dashed var(--brand-orange);
+	outline-offset: 12px;
+}
+
+@media (max-width: 639px) {
+	.public-site .public-brand {
+		flex: 1 1 0;
+		max-width: 150px;
+		gap: 7px;
+	}
+	.public-site .public-brand > div {
+		min-width: 0;
+	}
+	.public-site .public-brand .font-edule {
+		font-size: 12px;
+	}
+}

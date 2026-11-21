@@ -38,7 +38,7 @@ export function QuizDetailActions({ quiz }: QuizDetailActionsProps) {
 
 	if (quiz.is_registered) {
 		return (
-			<div className="flex items-center gap-2.5 rounded-2xl border border-[#c7eedc] bg-[#eaf9f1] px-4 py-3.5 text-sm font-bold text-[#1f7558] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200">
+			<div className="flex items-center gap-2.5 rounded-2xl border border-[#e8eeea] bg-[#faf6ee] px-4 py-3.5 text-sm font-bold text-[#02656b] dark:border-emerald-400/25 dark:bg-emerald-400/12 dark:text-emerald-200">
 				<CheckCircle2 className="size-4 shrink-0" />
 				<span>{t("alreadyRegistered")}</span>
 			</div>

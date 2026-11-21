@@ -54,7 +54,7 @@ export function AboutValuesSection() {
 						<Sparkles className="size-3.5" />
 						{t("values.badge")}
 					</span>
-					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#19243b] sm:text-3xl lg:text-4xl dark:text-slate-100">
+					<h2 className="mt-4 text-2xl font-black leading-[1.45] tracking-tight text-[#3b2621] sm:text-3xl lg:text-4xl dark:text-slate-100">
 						{t("values.title")}
 					</h2>
 					<p className="mt-3 text-sm leading-8 text-slate-500 sm:text-base dark:text-slate-400">
@@ -74,7 +74,7 @@ export function AboutValuesSection() {
 						<motion.article
 							key={key}
 							variants={aboutMotion.card}
-							className="soft-card card-hover group relative overflow-hidden border-[#e5e8f3] bg-white p-7 sm:p-8 dark:border-white/10 dark:bg-[#1b2438]"
+							className="soft-card card-hover group relative overflow-hidden border-[#e8eeea] bg-white p-7 sm:p-8 dark:border-white/10 dark:bg-[#3b2621]"
 						>
 							<div
 								aria-hidden="true"
@@ -95,7 +95,7 @@ export function AboutValuesSection() {
 								</span>
 							</div>
 
-							<h3 className="mt-6 text-xl font-extrabold text-[#19243b] dark:text-slate-100">
+							<h3 className="mt-6 text-xl font-extrabold text-[#3b2621] dark:text-slate-100">
 								{title}
 							</h3>
 

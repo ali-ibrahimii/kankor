@@ -19,7 +19,7 @@ export function ShelfChips() {
 
 	return (
 		<div
-			className="mb-6 flex flex-wrap items-center gap-2 rounded-2xl border border-emerald-700/10 bg-[#eef7f0] p-2.5 dark:border-white/10 dark:bg-white/5"
+			className="mb-6 flex flex-wrap items-center gap-2 rounded-2xl border border-emerald-700/10 bg-[#faf6ee] p-2.5 dark:border-white/10 dark:bg-white/5"
 			data-testid="home-shelf-chips"
 		>
 			{CHIP_ITEMS.map(({ key, href }) => (
